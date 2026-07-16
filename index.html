@@ -680,16 +680,13 @@ PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your
  tbl(["Command","What it does"],[
   ['<span class="cmd">!profile</span> · <span class="cmd">!stats</span>',"Your level, XP, Oil Coins and gear"],
   ['<span class="cmd">!profile @user</span>',"Somebody else's profile"],
-  ['<span class="cmd">!top20</span> · <span class="cmd">!top</span> · <span class="cmd">!ranking</span>',"Server leaderboard"],
+  ['<span class="cmd">!top20</span> · <span class="cmd">!top</span> · <span class="cmd">!top3</span>',"Server leaderboard"],
   ['<span class="cmd">!guilds</span> · <span class="cmd">!rep</span>',"Your faction reputation"],
   ['<span class="cmd">!clan</span>',"Clan info and management"],
   ['<span class="cmd">!bonds</span> · <span class="cmd">!bonds_top</span> · <span class="cmd">!bonds_history</span>',"Your relationships with other players"],
   ['<span class="cmd">!travel</span> · <span class="cmd">!hunt</span>',"Move between regions and farm materials"],
   ['<span class="cmd">!my_weapon</span> · <span class="cmd">!weapon_list</span>',"Your equipped weapon and the catalog"],
-  ['<span class="cmd">!equip_weapon</span> · <span class="cmd">!unequip_weapon</span>',"Change your weapon"],
-  ['<span class="cmd">!blackmarket</span>',"Rotating special stock"],
-  ['<span class="cmd">!waroil</span>',"Your War Oil balance"],
-  ['<span class="cmd">!ruleta</span>',"The Salvage Vault — 2,000 OIL a spin"]
+  ['<span class="cmd">!equip_weapon</span> · <span class="cmd">!unequip_weapon</span>',"Change your weapon"]
  ],["k",""])+
  '<h2 class="s">Stat slots and builds</h2>'+
  '<p class="b">You have <strong>3 stat slots</strong>. Each one stores a full build: a STR / AGI / CON spread <em>and</em> two gear pieces. Gear stacks on top of the slot — a slot with STR 8 plus a Strength Ring is STR 9 in combat.</p>'+
@@ -765,7 +762,7 @@ PAGES.consumables={t:"Consumables",e:"The guide",d:"Bought from the Shop panel w
  '<p class="b">Tournament allows exactly four: <strong>Ultra Health Potion, Protective Shield Potion, Mind Cleanser, Power Potion.</strong> One per round.</p>'+
  '<h2 class="s">How to actually use them</h2>'+
  '<p class="b">Pre-load a <strong>Guard Potion</strong> before a hit you can see coming. Heal at 30–40% HP rather than waiting for critical. Stack a <strong>Focus Potion</strong> right after a Rest to reach Ultra Focus in one turn.</p>'+
- '<p class="b">There is also a <strong>Black Market</strong> (<span class="cmd">!blackmarket</span>) with rotating stock, and event panels with their own items.</p>';
+ '<p class="b">There is also a <strong>Black Market</strong> with rotating stock, and event panels with their own items.</p>';
 }};
 
 PAGES.gear={t:"Gear &amp; Forge",e:"The guide",d:"Crafted gear boosts your stats in every mode. Two gear slots, saved per stat slot, enhanced up to +5.",h:function(){
@@ -831,7 +828,7 @@ PAGES.modes={t:"Game Modes",e:"The guide",d:"Which modes are live, what they pay
    }).join("")+"</div>";
  }).join("")+
  '<h2 class="s">Events and drops</h2>'+
- '<p class="b">Timed events drop rewards into a channel; you usually claim by clicking. <strong>Loot / Tag / Triad / Escort Drops</strong> are tied to specific modes, some with a <em>Doppel</em> twist. <strong>Blind Drop</strong> hides the reward. <strong>Traitor Drop</strong> adds a betrayal mechanic. <strong>Airdrops</strong> are promo-code drops with atomic first-come claims. The <strong>Roulette</strong> (<span class="cmd">!ruleta</span>) is a 2,000 OIL spin for withdrawable prizes, tokens and chaos gear.</p>'+
+ '<p class="b">Timed events drop rewards into a channel; you usually claim by clicking. <strong>Loot / Tag / Triad / Escort Drops</strong> are tied to specific modes, some with a <em>Doppel</em> twist. <strong>Blind Drop</strong> hides the reward. <strong>Traitor Drop</strong> adds a betrayal mechanic. <strong>Airdrops</strong> are promo-code drops with atomic first-come claims. The <strong>Roulette</strong> is a 2,000 OIL spin for withdrawable prizes, tokens and chaos gear.</p>'+
  '<h2 class="s">The Marked Hunt</h2>'+
  '<p class="b">A random player gets marked and must face an NPC encounter. It triggers under conditions Max sets.</p>';
 }};
@@ -888,7 +885,7 @@ PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a 
  return '<h2 class="s">Currencies</h2>'+
  '<div class="grid">'+
  '<div class="card"><div class="card__h"><span class="card__n">Oil Coins</span><span class="card__tag">OIL</span></div><div class="card__d">The main currency. Earned from most modes, daily message activity, and events. Spent on potions, crafting, enhancement, the roulette, founding a clan (12,500) and clan upgrades.</div></div>'+
- '<div class="card"><div class="card__h"><span class="card__n">War Oil</span></div><div class="card__d">Secondary currency from large-scale combat — Castle Siege and War. Used for siege and war progression. Check it with <span class="cmd">!waroil</span>.</div></div>'+
+ '<div class="card"><div class="card__h"><span class="card__n">War Oil</span></div><div class="card__d">Secondary currency from large-scale combat — Castle Siege and War. Used for siege and war progression.</div></div>'+
  '</div>'+
  '<h2 class="s">Codex</h2>'+
  '<p class="b">A collection of cards you unlock as you play — enemies, gear, regions, allies and artifacts. Each has a discovery tier and a deeper <strong>tactical note</strong> you only unlock by fighting the thing enough. It is both a reference and a completion goal, and it pays XP and Oil as you fill it.</p>'+
