@@ -275,6 +275,52 @@ tbody tr:hover td{background:var(--brass-soft)}
 .sp__n{color:var(--text-dim)}
 .sp__n b{color:var(--text);font-weight:400}
 
+/* ── PET LAB ── */
+.lab{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:1.2rem 0}
+@media (max-width:820px){.lab{grid-template-columns:1fr}}
+.lab__ctl{background:var(--bg-raised);padding:1.3rem 1.2rem;display:flex;flex-direction:column;gap:1rem}
+.lab__out{background:var(--bg);padding:1.3rem 1.2rem}
+.lab__f{display:flex;flex-direction:column;gap:.4rem}
+.lab__l{font-family:var(--cond);font-weight:600;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);display:flex;justify-content:space-between}
+.lab__l b{color:var(--brass);font-family:var(--mono);letter-spacing:0}
+.lab__sel{font-family:var(--cond);font-size:.94rem;background:var(--bg);color:var(--text);border:1px solid var(--rule-strong);padding:.45rem .5rem;width:100%}
+.lab__rng{width:100%;accent-color:var(--brass);height:20px}
+.lab__genes{display:flex;flex-direction:column;gap:.7rem;border-top:1px solid var(--rule);padding-top:1rem}
+.lab__btns{display:flex;flex-wrap:wrap;gap:.4rem}
+.lab__b{font-family:var(--cond);font-weight:600;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--text-dim);border:1px solid var(--rule-strong);padding:.36rem .6rem;cursor:pointer;transition:all .14s var(--ease)}
+.lab__b:hover{border-color:var(--brass);color:var(--brass)}
+.lab__q{font-family:var(--serif);font-size:.88rem;color:var(--text-faint);line-height:1.5;border-left:2px solid var(--verdigris);padding-left:.7rem;margin:0}
+.lab__id{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;padding-bottom:1rem;border-bottom:1px solid var(--rule);margin-bottom:1.1rem}
+.lab__emo{font-size:2.4rem;line-height:1}
+.lab__nm{font-family:var(--serif);font-weight:600;font-size:1.5rem;line-height:1.1}
+.lab__meta{font-family:var(--mono);font-size:.66rem;color:var(--text-faint);margin-top:.2rem}
+.lab__badges{display:flex;gap:.35rem;margin-left:auto;flex-wrap:wrap}
+.lab__bd{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;border:1px solid var(--verdigris);color:var(--verdigris);padding:.1rem .34rem;white-space:nowrap}
+.lab__bd--t{border-color:var(--brass);color:var(--brass)}
+.lab__desc{font-family:var(--serif);font-size:.94rem;color:var(--text-dim);line-height:1.55;margin:.9rem 0 0;font-style:italic}
+.sb{padding:.5rem 0}
+.sb__t{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.28rem}
+.sb__k{font-family:var(--cond);font-weight:600;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);width:4.5ch}
+.sb__v{font-family:var(--mono);font-size:1.02rem;color:var(--text);font-variant-numeric:tabular-nums}
+.sb__d{font-family:var(--mono);font-size:.66rem;color:var(--brass);margin-left:auto}
+.sb__bar{height:9px;background:var(--bg-sunken);border:1px solid var(--rule);position:relative;overflow:hidden}
+.sb__ghost{position:absolute;inset:0 auto 0 0;background:var(--rule-strong);transition:width .2s var(--ease)}
+.sb__fill{position:absolute;inset:0 auto 0 0;background:var(--brass);transition:width .2s var(--ease)}
+.lab__chain{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--rule)}
+.ev{display:flex;align-items:center;gap:.4rem;font-family:var(--cond);font-size:.86rem;color:var(--text-faint);border:1px solid var(--rule);padding:.28rem .5rem}
+.ev.on{border-color:var(--brass);color:var(--brass);background:var(--brass-soft)}
+.ev b{font-family:var(--mono);font-size:.6rem;font-weight:400;opacity:.75}
+.ev__ar{font-family:var(--mono);font-size:.7rem;color:var(--text-faint)}
+.lab__moves{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.mv{background:var(--bg-raised);padding:.7rem .75rem}
+.mv__h{display:flex;align-items:baseline;gap:.4rem}
+.mv__n{font-family:var(--serif);font-weight:600;font-size:.94rem;color:var(--text)}
+.mv__t{font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;margin-left:auto;color:var(--verdigris);text-transform:uppercase}
+.mv__s{font-family:var(--mono);font-size:.66rem;color:var(--text-faint);margin-top:.28rem}
+.mv__e{font-family:var(--cond);font-size:.8rem;color:var(--text-dim);margin-top:.2rem;line-height:1.35}
+.mv--stab{background:var(--brass-soft)}
+.lab__note{font-family:var(--serif);font-size:.86rem;color:var(--text-faint);line-height:1.5;margin-top:1rem}
+
 /* ── STORY ── */
 .chap{margin:0 0 2.6rem}
 .chap__h{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:.5rem;margin-bottom:.4rem}
@@ -692,6 +738,8 @@ var CODEX=[
  ["Deep Sentinel","rare","Archive Interior Guard","Older than the Wardens in design, and in a way that is harder to explain, more deliberate."]
 ];
 
+var PET_DB={"S":[["ashhound","Ashhound","🐕","fire","crimson_plain","sweeper",2,65,90,56,91,"cinderhound",[[1,"tackle"],[1,"ember"],[7,"quick_strike"],[14,"agility"],[22,"flame_fang"],[31,"body_slam"]]],["blizzard_owl","Blizzard Owl","🦉","ice","rocky_chill_pass","attacker",3,95,118,90,117,"",[[1,"tackle"],[1,"ice_shard"],[8,"agility"],[15,"aerial_ace"],[23,"frost_fang"],[31,"avalanche"],[40,"whiteout"]]],["boulder_beetle","Boulder Beetle","🪲","rock","starter_ruins","wall",3,120,105,140,50,"",[[1,"tackle"],[1,"rock_throw"],[8,"guard_up"],[15,"headbutt"],[23,"rock_slide"],[31,"recover"],[40,"iron_bastion"]]],["boulder_mole","Boulder Mole","🦫","rock","bandit_caves","bulky",3,120,116,116,55,"",[[1,"tackle"],[1,"rock_throw"],[8,"guard_up"],[15,"headbutt"],[23,"rock_slide"],[31,"boulder_crush"],[40,"tunnel_crush"]]],["bramblefox","Bramblefox","🦊","grass","black_lotus_wood","sweeper",3,92,122,85,126,"",[[1,"tackle"],[1,"vine_whip"],[7,"quick_strike"],[14,"agility"],[22,"leech_bite"],[31,"solar_smash"],[40,"thorn_rush"]]],["cavebat","Cavebat","🦇","rock","bandit_caves","sweeper",2,61,84,62,96,"deep_cavebat",[[1,"tackle"],[1,"rock_throw"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"rock_slide"]]],["chit_beetle","Chit Beetle","🪲","rock","starter_ruins","wall",1,55,48,64,23,"shell_beetle",[[1,"tackle"],[1,"rock_throw"],[8,"guard_up"],[15,"headbutt"],[23,"rock_slide"],[31,"recover"]]],["cinderhound","Cinderhound","🐕","fire","crimson_plain","sweeper",3,90,125,78,127,"",[[1,"tackle"],[1,"ember"],[7,"quick_strike"],[14,"agility"],[22,"flame_fang"],[31,"body_slam"],[40,"blaze_rush"]]],["cinderling","Cinderling","🦎","fire","crimson_plain","allrounder",1,48,55,53,51,"embertail",[[1,"tackle"],[1,"ember"],[8,"focus"],[15,"headbutt"],[23,"flame_fang"],[31,"inferno"]]],["craghide_tortoise","Craghide Tortoise","🐢","rock","starter_ruins","wall",2,94,68,104,25,"mountain_tortoise",[[1,"tackle"],[1,"rock_throw"],[9,"guard_up"],[16,"body_slam"],[24,"recover"],[32,"boulder_crush"]]],["deep_cavebat","Deep Cavebat","🦇","rock","bandit_caves","sweeper",3,85,116,86,133,"",[[1,"tackle"],[1,"rock_throw"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"rock_slide"],[40,"echo_strike"]]],["digmole","Digmole","🦫","rock","bandit_caves","bulky",1,55,53,53,25,"tunnelmole",[[1,"tackle"],[1,"rock_throw"],[8,"guard_up"],[15,"headbutt"],[23,"rock_slide"],[31,"boulder_crush"]]],["dimmoth","Dimmoth","🦋","ghost","mist_forest","attacker",1,42,54,44,58,"phantom_moth",[[1,"tackle"],[1,"shadow_touch"],[8,"agility"],[15,"haunt"],[23,"guard_up"],[31,"spectral_blast"]]],["duskbat","Duskbat","🦇","flying","ravencraft","attacker",3,85,116,82,138,"",[[1,"tackle"],[1,"wing_attack"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"leech_bite"],[40,"bloodwing"]]],["duskhound","Duskhound","🐕","dark","dark_knight_sanctum","allrounder",2,79,86,76,79,"shadowhound",[[1,"tackle"],[1,"bite"],[8,"guard_up"],[15,"headbutt"],[23,"night_slash"],[31,"recover"]]],["dusklet","Dusklet","🐦‍⬛","dark","dark_knight_sanctum","wallbreaker",1,48,63,46,44,"duskraven",[[1,"tackle"],[1,"bite"],[8,"focus"],[15,"wing_attack"],[23,"night_slash"],[31,"void_maw"]]],["duskraven","Duskraven","🐦‍⬛","dark","dark_knight_sanctum","wallbreaker",2,76,98,72,69,"voidraven",[[1,"tackle"],[1,"bite"],[8,"focus"],[15,"wing_attack"],[23,"night_slash"],[31,"void_maw"]]],["emberboar","Emberboar","🐗","fire","crimson_plain","wallbreaker",2,86,99,70,43,"magmaboar",[[1,"tackle"],[1,"ember"],[9,"headbutt"],[16,"focus"],[24,"body_slam"],[32,"inferno"]]],["emberpup","Emberpup","🐕","fire","crimson_plain","sweeper",1,41,58,36,58,"ashhound",[[1,"tackle"],[1,"ember"],[7,"quick_strike"],[14,"agility"],[22,"flame_fang"],[31,"body_slam"]]],["embertail","Embertail","🦎","fire","crimson_plain","allrounder",2,76,86,83,79,"magmaw",[[1,"tackle"],[1,"ember"],[8,"focus"],[15,"headbutt"],[23,"flame_fang"],[31,"inferno"]]],["fawnling","Fawnling","🦌","grass","black_lotus_wood","allrounder",1,51,51,47,49,"wooddeer",[[1,"tackle"],[1,"vine_whip"],[8,"guard_up"],[15,"headbutt"],[23,"leech_bite"],[31,"recover"]]],["flickerwisp","Flickerwisp","👻","ghost","mist_forest","sweeper",1,37,63,35,61,"wispflame",[[1,"tackle"],[1,"shadow_touch"],[7,"quick_strike"],[14,"focus"],[22,"haunt"],[31,"spectral_blast"]]],["flutterbat","Flutterbat","🦇","flying","ravencraft","attacker",1,39,53,38,63,"nightbat",[[1,"tackle"],[1,"wing_attack"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"leech_bite"]]],["frostfang","Frostfang","🐺","ice","rocky_chill_pass","sweeper",2,65,94,59,92,"glacierfang",[[1,"tackle"],[1,"ice_shard"],[7,"quick_strike"],[14,"agility"],[22,"frost_fang"],[31,"avalanche"]]],["frostowl","Frostowl","🦉","ice","rocky_chill_pass","attacker",2,68,85,65,84,"blizzard_owl",[[1,"tackle"],[1,"ice_shard"],[8,"agility"],[15,"aerial_ace"],[23,"frost_fang"],[31,"avalanche"]]],["frostpup","Frostpup","🐺","ice","rocky_chill_pass","sweeper",1,41,60,38,59,"frostfang",[[1,"tackle"],[1,"ice_shard"],[7,"quick_strike"],[14,"agility"],[22,"frost_fang"],[31,"avalanche"]]],["ghostfawn","Ghostfawn","🦌","ghost","mist_forest","allrounder",1,53,51,49,46,"wraithdeer",[[1,"tackle"],[1,"shadow_touch"],[8,"guard_up"],[15,"headbutt"],[23,"haunt"],[31,"recover"]]],["glacierfang","Glacierfang","🐺","ice","rocky_chill_pass","sweeper",3,90,130,82,128,"",[[1,"tackle"],[1,"ice_shard"],[7,"quick_strike"],[14,"agility"],[22,"frost_fang"],[31,"avalanche"],[40,"frozen_hunt"]]],["glacierseal","Glacierseal","🦭","ice","rocky_chill_pass","wall",3,130,95,125,50,"",[[1,"tackle"],[1,"ice_shard"],[9,"guard_up"],[16,"body_slam"],[24,"recover"],[32,"avalanche"],[40,"polar_rest"]]],["gloompup","Gloompup","🐕","dark","dark_knight_sanctum","allrounder",1,51,55,49,51,"duskhound",[[1,"tackle"],[1,"bite"],[8,"guard_up"],[15,"headbutt"],[23,"night_slash"],[31,"recover"]]],["granite_armadillo","Granite Armadillo","🦔","rock","starter_ruins","bulky",3,110,125,120,55,"",[[1,"tackle"],[1,"rock_throw"],[7,"quick_strike"],[14,"guard_up"],[22,"rock_slide"],[31,"body_slam"],[40,"granite_roll"]]],["grotto_scorpion","Grotto Scorpion","🦂","rock","bandit_caves","attacker",2,72,94,72,68,"stinger_scorpion",[[1,"tackle"],[1,"rock_throw"],[8,"focus"],[15,"quick_strike"],[23,"rock_slide"],[31,"body_slam"]]],["grottobat","Grottobat","🦇","rock","bandit_caves","sweeper",1,39,53,40,61,"cavebat",[[1,"tackle"],[1,"rock_throw"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"rock_slide"]]],["hatchhawk","Hatchhawk","🦅","flying","ravencraft","sweeper",1,41,58,40,61,"windhawk",[[1,"tackle"],[1,"wing_attack"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"sky_dive"]]],["hollow_wisp","Hollow Wisp","👻","ghost","mist_forest","sweeper",3,80,136,76,133,"",[[1,"tackle"],[1,"shadow_touch"],[7,"quick_strike"],[14,"focus"],[22,"haunt"],[31,"spectral_blast"],[40,"soul_flare"]]],["iceseal","Iceseal","🦭","ice","rocky_chill_pass","wall",2,94,68,90,36,"glacierseal",[[1,"tackle"],[1,"ice_shard"],[9,"guard_up"],[16,"body_slam"],[24,"recover"],[32,"avalanche"]]],["inkspot","Inkspot","🐙","water","stormbay_docks","attacker",1,51,59,46,42,"reef_octopus",[[1,"tackle"],[1,"bubble"],[8,"focus"],[15,"guard_up"],[23,"crush_claw"],[31,"recover"]]],["kraken","Kraken","🐙","water","stormbay_docks","attacker",3,110,128,100,92,"",[[1,"tackle"],[1,"bubble"],[8,"focus"],[15,"guard_up"],[23,"crush_claw"],[31,"recover"],[40,"abyssal_ink"]]],["leafkit","Leafkit","🦊","grass","black_lotus_wood","sweeper",1,42,56,39,58,"thornfox",[[1,"tackle"],[1,"vine_whip"],[7,"quick_strike"],[14,"agility"],[22,"leech_bite"],[31,"solar_smash"]]],["magmaboar","Magmaboar","🐗","fire","crimson_plain","wallbreaker",3,120,138,97,60,"",[[1,"tackle"],[1,"ember"],[9,"headbutt"],[16,"focus"],[24,"body_slam"],[32,"inferno"],[40,"infernal_charge"]]],["magmaw","Magmaw","🦎","fire","crimson_plain","allrounder",3,105,120,115,110,"",[[1,"tackle"],[1,"ember"],[8,"focus"],[15,"headbutt"],[23,"flame_fang"],[31,"inferno"],[40,"molten_roar"]]],["mountain_tortoise","Mountain Tortoise","🐢","rock","starter_ruins","wall",3,130,95,145,35,"",[[1,"tackle"],[1,"rock_throw"],[9,"guard_up"],[16,"body_slam"],[24,"recover"],[32,"boulder_crush"],[40,"ancient_fortress"]]],["nightbat","Nightbat","🦇","flying","ravencraft","attacker",2,61,84,59,99,"duskbat",[[1,"tackle"],[1,"wing_attack"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"leech_bite"]]],["nightpanther","Nightpanther","🐆","dark","dark_knight_sanctum","sweeper",2,72,94,69,91,"voidpanther",[[1,"tackle"],[1,"bite"],[7,"quick_strike"],[14,"agility"],[22,"night_slash"],[31,"void_maw"]]],["pebble_tortoise","Pebble Tortoise","🐢","rock","starter_ruins","wall",1,60,44,67,16,"craghide_tortoise",[[1,"tackle"],[1,"rock_throw"],[9,"guard_up"],[16,"body_slam"],[24,"recover"],[32,"boulder_crush"]]],["pebblecrab","Pebblecrab","🦀","water","stormbay_docks","wall",1,58,51,55,21,"shellclaw",[[1,"tackle"],[1,"bubble"],[8,"guard_up"],[15,"crush_claw"],[23,"recover"],[31,"tidal_slam"]]],["phantom_moth","Phantom Moth","🦋","ghost","mist_forest","attacker",2,66,84,69,90,"shade_moth",[[1,"tackle"],[1,"shadow_touch"],[8,"agility"],[15,"haunt"],[23,"guard_up"],[31,"spectral_blast"]]],["ravenling","Ravenling","🐦‍⬛","flying","ravencraft","allrounder",1,46,53,44,57,"stormraven",[[1,"tackle"],[1,"wing_attack"],[8,"focus"],[15,"aerial_ace"],[23,"agility"],[31,"sky_dive"]]],["reef_octopus","Reef Octopus","🐙","water","stormbay_docks","attacker",2,79,92,72,66,"kraken",[[1,"tackle"],[1,"bubble"],[8,"focus"],[15,"guard_up"],[23,"crush_claw"],[31,"recover"]]],["riverlord_otter","Riverlord Otter","🦦","water","stormbay_docks","allrounder",3,105,108,98,119,"",[[1,"tackle"],[1,"bubble"],[7,"quick_strike"],[14,"focus"],[22,"crush_claw"],[30,"agility"],[40,"river_dance"]]],["rockroll","Rockroll","🦔","rock","starter_ruins","bulky",1,51,58,55,25,"stone_armadillo",[[1,"tackle"],[1,"rock_throw"],[7,"quick_strike"],[14,"guard_up"],[22,"rock_slide"],[31,"body_slam"]]],["sandscorp","Sandscorp","🦂","rock","bandit_caves","attacker",1,46,60,46,44,"grotto_scorpion",[[1,"tackle"],[1,"rock_throw"],[8,"focus"],[15,"quick_strike"],[23,"rock_slide"],[31,"body_slam"]]],["shade_moth","Shade Moth","🦋","ghost","mist_forest","attacker",3,92,117,96,125,"",[[1,"tackle"],[1,"shadow_touch"],[8,"agility"],[15,"haunt"],[23,"guard_up"],[31,"spectral_blast"],[40,"dream_dust"]]],["shadowcub","Shadowcub","🐆","dark","dark_knight_sanctum","sweeper",1,46,60,44,58,"nightpanther",[[1,"tackle"],[1,"bite"],[7,"quick_strike"],[14,"agility"],[22,"night_slash"],[31,"void_maw"]]],["shadowhound","Shadowhound","🐕","dark","dark_knight_sanctum","allrounder",3,110,120,106,110,"",[[1,"tackle"],[1,"bite"],[8,"guard_up"],[15,"headbutt"],[23,"night_slash"],[31,"recover"],[40,"guardian_howl"]]],["shell_beetle","Shell Beetle","🪲","rock","starter_ruins","wall",2,86,76,101,36,"boulder_beetle",[[1,"tackle"],[1,"rock_throw"],[8,"guard_up"],[15,"headbutt"],[23,"rock_slide"],[31,"recover"]]],["shellclaw","Shellclaw","🦀","water","stormbay_docks","wall",2,90,79,86,32,"tidecrusher",[[1,"tackle"],[1,"bubble"],[8,"guard_up"],[15,"crush_claw"],[23,"recover"],[31,"tidal_slam"]]],["skyhawk","Skyhawk","🦅","flying","ravencraft","sweeper",3,90,126,86,133,"",[[1,"tackle"],[1,"wing_attack"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"sky_dive"],[40,"sky_execution"]]],["slushpup","Slushpup","🦭","ice","rocky_chill_pass","wall",1,60,44,58,23,"iceseal",[[1,"tackle"],[1,"ice_shard"],[9,"guard_up"],[16,"body_slam"],[24,"recover"],[32,"avalanche"]]],["snowowlet","Snowowlet","🦉","ice","rocky_chill_pass","attacker",1,44,54,41,54,"frostowl",[[1,"tackle"],[1,"ice_shard"],[8,"agility"],[15,"aerial_ace"],[23,"frost_fang"],[31,"avalanche"]]],["sootboar","Sootboar","🐗","fire","crimson_plain","wallbreaker",1,55,63,45,28,"emberboar",[[1,"tackle"],[1,"ember"],[9,"headbutt"],[16,"focus"],[24,"body_slam"],[32,"inferno"]]],["sparkeel","Sparkeel","🐍","water","stormbay_docks","sweeper",1,39,56,37,61,"voltcoil",[[1,"tackle"],[1,"bubble"],[7,"quick_strike"],[14,"agility"],[22,"crush_claw"],[31,"tidal_slam"]]],["spectral_stag","Spectral Stag","🦌","ghost","mist_forest","allrounder",3,115,110,106,100,"",[[1,"tackle"],[1,"shadow_touch"],[8,"guard_up"],[15,"headbutt"],[23,"haunt"],[31,"recover"],[40,"spirit_mend"]]],["splashpup","Splashpup","🦦","water","stormbay_docks","allrounder",1,48,50,45,55,"streamotter",[[1,"tackle"],[1,"bubble"],[7,"quick_strike"],[14,"focus"],[22,"crush_claw"],[30,"agility"]]],["sporeling","Sporeling","🕷️","grass","black_lotus_wood","attacker",1,44,58,42,52,"webspider",[[1,"tackle"],[1,"vine_whip"],[8,"agility"],[15,"leech_bite"],[23,"focus"],[31,"solar_smash"]]],["stinger_scorpion","Stinger Scorpion","🦂","rock","bandit_caves","attacker",3,100,130,100,95,"",[[1,"tackle"],[1,"rock_throw"],[8,"focus"],[15,"quick_strike"],[23,"rock_slide"],[31,"body_slam"],[40,"royal_venom"]]],["stone_armadillo","Stone Armadillo","🦔","rock","starter_ruins","bulky",2,79,90,86,40,"granite_armadillo",[[1,"tackle"],[1,"rock_throw"],[7,"quick_strike"],[14,"guard_up"],[22,"rock_slide"],[31,"body_slam"]]],["stormraven","Stormraven","🐦‍⬛","flying","ravencraft","allrounder",2,72,84,69,89,"tempest_raven",[[1,"tackle"],[1,"wing_attack"],[8,"focus"],[15,"aerial_ace"],[23,"agility"],[31,"sky_dive"]]],["streamotter","Streamotter","🦦","water","stormbay_docks","allrounder",2,76,78,71,86,"riverlord_otter",[[1,"tackle"],[1,"bubble"],[7,"quick_strike"],[14,"focus"],[22,"crush_claw"],[30,"agility"]]],["tempest_raven","Tempest Raven","🐦‍⬛","flying","ravencraft","allrounder",3,100,116,96,123,"",[[1,"tackle"],[1,"wing_attack"],[8,"focus"],[15,"aerial_ace"],[23,"agility"],[31,"sky_dive"],[40,"storm_omen"]]],["thornfox","Thornfox","🦊","grass","black_lotus_wood","sweeper",2,66,88,61,91,"bramblefox",[[1,"tackle"],[1,"vine_whip"],[7,"quick_strike"],[14,"agility"],[22,"leech_bite"],[31,"solar_smash"]]],["tidecrusher","Tidecrusher","🦀","water","stormbay_docks","wall",3,125,110,120,45,"",[[1,"tackle"],[1,"bubble"],[8,"guard_up"],[15,"crush_claw"],[23,"recover"],[31,"tidal_slam"],[40,"tidal_pincer"]]],["tunnelmole","Tunnelmole","🦫","rock","bandit_caves","bulky",2,86,84,84,40,"boulder_mole",[[1,"tackle"],[1,"rock_throw"],[8,"guard_up"],[15,"headbutt"],[23,"rock_slide"],[31,"boulder_crush"]]],["venomspider","Venomspider","🕷️","grass","black_lotus_wood","attacker",3,95,126,92,112,"",[[1,"tackle"],[1,"vine_whip"],[8,"agility"],[15,"leech_bite"],[23,"focus"],[31,"solar_smash"],[40,"toxic_web"]]],["voidpanther","Voidpanther","🐆","dark","dark_knight_sanctum","sweeper",3,100,130,96,126,"",[[1,"tackle"],[1,"bite"],[7,"quick_strike"],[14,"agility"],[22,"night_slash"],[31,"void_maw"],[40,"shadow_ambush"]]],["voidraven","Voidraven","🐦‍⬛","dark","dark_knight_sanctum","wallbreaker",3,105,136,100,96,"",[[1,"tackle"],[1,"bite"],[8,"focus"],[15,"wing_attack"],[23,"night_slash"],[31,"void_maw"],[40,"final_omen"]]],["voltcoil","Voltcoil","🐍","water","stormbay_docks","sweeper",2,61,88,58,96,"volteel",[[1,"tackle"],[1,"bubble"],[7,"quick_strike"],[14,"agility"],[22,"crush_claw"],[31,"tidal_slam"]]],["volteel","Volteel","🐍","water","stormbay_docks","sweeper",3,85,122,80,133,"",[[1,"tackle"],[1,"bubble"],[7,"quick_strike"],[14,"agility"],[22,"crush_claw"],[31,"tidal_slam"],[40,"voltage_coil"]]],["webspider","Webspider","🕷️","grass","black_lotus_wood","attacker",2,68,91,66,81,"venomspider",[[1,"tackle"],[1,"vine_whip"],[8,"agility"],[15,"leech_bite"],[23,"focus"],[31,"solar_smash"]]],["wildeer","Wildeer","🦌","grass","black_lotus_wood","allrounder",3,110,110,103,107,"",[[1,"tackle"],[1,"vine_whip"],[8,"guard_up"],[15,"headbutt"],[23,"leech_bite"],[31,"recover"],[40,"forest_blessing"]]],["windhawk","Windhawk","🦅","flying","ravencraft","sweeper",2,65,91,62,96,"skyhawk",[[1,"tackle"],[1,"wing_attack"],[7,"quick_strike"],[14,"agility"],[22,"aerial_ace"],[31,"sky_dive"]]],["wispflame","Wispflame","👻","ghost","mist_forest","sweeper",2,58,98,55,96,"hollow_wisp",[[1,"tackle"],[1,"shadow_touch"],[7,"quick_strike"],[14,"focus"],[22,"haunt"],[31,"spectral_blast"]]],["wooddeer","Wooddeer","🦌","grass","black_lotus_wood","allrounder",2,79,79,74,77,"wildeer",[[1,"tackle"],[1,"vine_whip"],[8,"guard_up"],[15,"headbutt"],[23,"leech_bite"],[31,"recover"]]],["wraithdeer","Wraithdeer","🦌","ghost","mist_forest","allrounder",2,83,79,76,72,"spectral_stag",[[1,"tackle"],[1,"shadow_touch"],[8,"guard_up"],[15,"headbutt"],[23,"haunt"],[31,"recover"]]]],"M":[["abyssal_ink","Abyssal Ink","water",75,100,10,0,"35% atk -1"],["aerial_ace","Aerial Ace","flying",60,999,15,0,""],["agility","Agility","neutral",0,100,15,0,"self spd +1"],["ancient_fortress","Ancient Fortress","rock",0,100,5,0,"heals 40% · self def +1"],["avalanche","Avalanche","ice",100,85,8,0,""],["bite","Bite","dark",45,100,25,0,""],["blaze_rush","Blaze Rush","fire",80,95,10,1,""],["bloodwing","Bloodwing","flying",68,100,12,0,"drains 50%"],["body_slam","Body Slam","neutral",80,90,10,0,"20% paralyze"],["boulder_crush","Boulder Crush","rock",90,85,8,0,""],["bubble","Bubble","water",45,100,25,0,""],["crush_claw","Crush Claw","water",65,95,15,0,"20% def -1"],["dream_dust","Dream Dust","ghost",45,90,10,0,"35% sleep"],["echo_strike","Echo Strike","rock",75,999,12,0,"20% flinch"],["ember","Ember","fire",45,100,25,0,"10% burn"],["final_omen","Final Omen","dark",92,88,7,0,"50% def -1"],["flame_fang","Flame Fang","fire",65,95,15,0,"10% burn"],["focus","Focus","neutral",0,100,15,0,"self atk +1"],["forest_blessing","Forest Blessing","grass",0,100,6,0,"heals 40% · self def +1"],["frost_fang","Frost Fang","ice",65,95,15,0,"10% freeze"],["frozen_hunt","Frozen Hunt","ice",78,95,10,1,""],["granite_roll","Granite Roll","rock",82,95,10,0,"25% flinch"],["guard_up","Guard Up","neutral",0,100,15,0,"self def +1"],["guardian_howl","Guardian Howl","dark",0,100,8,0,"self def +1"],["haunt","Haunt","ghost",60,100,15,0,"20% flinch"],["headbutt","Headbutt","neutral",65,95,15,0,"20% flinch"],["ice_shard","Ice Shard","ice",45,100,25,1,""],["infernal_charge","Infernal Charge","fire",110,80,6,0,""],["inferno","Inferno","fire",90,85,8,0,"30% burn"],["iron_bastion","Iron Bastion","rock",0,100,8,0,"self def +2"],["leech_bite","Leech Bite","grass",60,100,15,0,"drains 50%"],["molten_roar","Molten Roar","fire",72,95,12,0,"50% atk -1"],["night_slash","Night Slash","dark",70,95,15,0,""],["polar_rest","Polar Rest","ice",0,100,5,0,"heals 70%"],["quick_strike","Quick Strike","neutral",45,100,25,1,""],["recover","Recover","neutral",0,100,8,0,"heals 50%"],["rest","Rest","neutral",0,100,5,0,"heals 65%"],["river_dance","River Dance","water",0,100,8,0,"self atk +1 · self spd +1"],["rock_slide","Rock Slide","rock",70,90,15,0,"20% flinch"],["rock_throw","Rock Throw","rock",50,95,25,0,""],["royal_venom","Royal Venom","rock",65,95,10,0,"60% poison"],["shadow_ambush","Shadow Ambush","dark",78,95,10,1,""],["shadow_touch","Shadow Touch","ghost",45,100,25,0,""],["sky_dive","Sky Dive","flying",90,85,8,0,""],["sky_execution","Sky Execution","flying",105,82,6,0,""],["solar_smash","Solar Smash","grass",95,85,8,0,""],["soul_flare","Soul Flare","ghost",100,88,7,0,""],["spectral_blast","Spectral Blast","ghost",90,85,8,0,""],["spirit_mend","Spirit Mend","ghost",0,100,6,0,"heals 45% · self atk +1"],["storm_omen","Storm Omen","flying",80,100,10,0,"40% atk -1"],["tackle","Tackle","neutral",40,100,35,0,""],["thorn_rush","Thorn Rush","grass",78,95,10,1,""],["tidal_pincer","Tidal Pincer","water",82,95,10,0,"35% def -1"],["tidal_slam","Tidal Slam","water",90,85,8,0,""],["toxic_web","Toxic Web","grass",55,95,12,0,"50% poison · 50% spd -1"],["tunnel_crush","Tunnel Crush","rock",88,90,8,0,"40% def -1"],["vine_whip","Vine Whip","grass",45,100,25,0,""],["void_maw","Void Maw","dark",95,85,8,0,""],["voltage_coil","Voltage Coil","water",70,95,12,0,"35% paralyze"],["whiteout","Whiteout","ice",72,90,10,0,"18% freeze"],["wing_attack","Wing Attack","flying",45,100,25,0,""]],"D":{"chit_beetle":"A skittish hatchling that burrows under rubble at the first loud noise.","shell_beetle":"Grown bold, it headbutts boulders just to prove that it can.","boulder_beetle":"An immovable sentinel — trainers have been known to use its back as a table.","pebble_tortoise":"Slow, patient, and utterly unbothered by absolutely anything.","craghide_tortoise":"Its scarred shell has survived rockslides and a few impatient trainers.","mountain_tortoise":"Legend says it is older than the ruins it silently guards.","rockroll":"Curls into a tight ball and giggles the whole way down any hill.","stone_armadillo":"Territorial and grumpy, it rams first and asks questions never.","granite_armadillo":"A living battering ram with a surprisingly gentle, rumbling yawn.","cinderling":"A curious little lizard that naps on sun-baked rocks all day long.","embertail":"Flicks its burning tail like a whip whenever it gets excited.","magmaw":"Molten-blooded and proud, it treats every duel as a grand performance.","emberpup":"An eager fireball of a pup that chases its own flying sparks.","ashhound":"Loyal to a fault, it will run itself ragged for its trainer.","cinderhound":"A relentless hunter whose distant howl smells faintly of smoke.","sootboar":"Stubborn and soot-covered, it barrels through anything in its path.","emberboar":"Short-tempered — its tusks glow red the instant before it charges.","magmaboar":"A rampaging furnace that flattens whole hillsides for the fun of it.","inkspot":"A shy little octopus that squirts a cloud of ink when startled.","reef_octopus":"Clever and mischievous, it pockets shiny trinkets from the docks.","kraken":"Ancient terror of the bay; old sailors still whisper its name.","pebblecrab":"Scuttles sideways and pinches anyone who wanders a step too close.","shellclaw":"Its claws can crack a ship's hull — or a very stubborn coconut.","tidecrusher":"A fortress of a crab that simply, flatly refuses to fall over.","sparkeel":"A jittery eel that cannot hold still for even a single second.","voltcoil":"Coils itself tight and springs loose like a loaded trap.","volteel":"Lightning-quick in the shallows and nearly impossible to pin down.","splashpup":"A playful otter that turns every fight into a splashing game.","streamotter":"Nimble and social, happiest with its whole party swimming nearby.","riverlord_otter":"The unspoken king of the docks — calm, poised, and commanding.","frostpup":"A shivering pup that warms right up the moment it starts running.","frostfang":"A swift pack-hunter with a permanent curl of frost on its breath.","glacierfang":"An alpha whose echoing howl freezes the whole pass into silence.","slushpup":"A round, sleepy seal that flops around far more than it fights.","iceseal":"Deceptively tough — really it just wants a nap on the warm ice.","glacierseal":"An immovable mountain of blubber, whiskers, and pure stubbornness.","snowowlet":"A wide-eyed owlet that blinks twice before every single attack.","frostowl":"Utterly silent on the wing; it strikes before you hear a thing.","blizzard_owl":"A phantom of the storm — the last thing its prey never sees.","leafkit":"A playful fox kit that hoards the shiniest fallen leaves.","thornfox":"Quick and cunning, it fights dirty and grins the whole time.","bramblefox":"A trickster whose living bramble-tail lashes out like a whip.","fawnling":"A timid fawn that freezes stock-still the moment it is spotted.","wooddeer":"Sure-footed and watchful, it always guards the herd's flanks.","wildeer":"A noble stag crowned with a living tangle of sharp thorns.","sporeling":"A tiny spider that drifts across the wood on threads of silk.","webspider":"Patient and precise, it never once wastes a strike.","venomspider":"A silent ambusher whose bite lingers long after it lets go.","ravenling":"A clever fledgling that mimics every sound it happens to hear.","stormraven":"Bold and curious, it will steal trinkets mid-battle if it can.","tempest_raven":"A storm-herald whose harsh caw scatters every lesser bird.","hatchhawk":"A brash chick already convinced it rules the entire sky.","windhawk":"Rides the thermals for hours, scanning the ground for a fight.","skyhawk":"A peerless diver that turns sheer altitude into a weapon.","flutterbat":"A jittery little bat that panics at any sudden, loud noise.","nightbat":"Restless and quick, it seems to feed on the night wind itself.","duskbat":"A blur at dusk — you feel it pass long before you see it.","dimmoth":"A faint moth helplessly drawn to any flicker of light.","phantom_moth":"The dust from its wings muddles the senses of anything near.","shade_moth":"Drifts through the fog like a half-forgotten, uneasy dream.","flickerwisp":"A giggling wisp that darts forever just out of arm's reach.","wispflame":"Fragile but fierce, it burns twice as bright to make up for it.","hollow_wisp":"An empty flame that hungers for a warmth it can never hold.","ghostfawn":"A spectral fawn still searching for a herd long, long gone.","wraithdeer":"Calm and mournful, it walks silently between the two worlds.","spectral_stag":"A solemn guardian of the mist's oldest, most forgotten paths.","grottobat":"A twitchy cave bat blinded by even the smallest torchlight.","cavebat":"Navigates absolute darkness with genuinely unnerving ease.","deep_cavebat":"A shrieking shadow born of the very deepest tunnels.","digmole":"A grumpy digger that mostly just wants to be left well alone.","tunnelmole":"Stubborn and sturdy, it tunnels straight through its problems.","boulder_mole":"Reshapes whole caverns when it happens to be in a mood.","sandscorp":"A tiny scorpion hauling around one comically oversized stinger.","grotto_scorpion":"Aggressive and patient at once — a genuinely lethal combination.","stinger_scorpion":"Its venom is the stuff of legend; its temper is somehow worse.","shadowcub":"A playful cub with claws far sharper than it yet realizes.","nightpanther":"Silent, sleek, and always three quiet steps ahead of you.","voidpanther":"An apex predator that hunts the darkness itself for sport.","gloompup":"A clingy shadow-hound that is quietly terrified of being alone.","duskhound":"Steadfast in the dark, it never once loses a scent or a trail.","shadowhound":"A fiercely loyal guardian forged in the Sanctum's deep gloom.","dusklet":"A gloomy little chick that only truly stirs after nightfall.","duskraven":"Watchful and cold, it trusts no one at all but its trainer.","voidraven":"A grim harbinger whose spreading shadow swallows the light."}};
+
 /* ══════════════════════════════════════════════════════════════════
    RENDER HELPERS
    ══════════════════════════════════════════════════════════════════ */
@@ -953,107 +1001,21 @@ PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a 
 }};
 
 PAGES.pets={t:"The Pets System",e:"Pets",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG, sharing none of its combat rules.",h:function(){
- var fams=PET_FAMS.map(function(r){
-  var names={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
-   rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
-   mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum"};
-  var emo={fire:"🔥",water:"💧",grass:"🌿",ice:"❄️",rock:"🪨",flying:"🦅",ghost:"👻",dark:"🌑"}[r[1]];
-  return '<div class="card"><div class="card__h"><span class="card__n">'+E(names[r[0]])+'</span>'+
-   '<span class="card__tag">'+emo+" "+E(r[1])+'</span></div>'+
-   r[2].map(function(f){
-    return '<p class="sp" style="margin-top:.5rem"><span class="sp__a">'+f[0]+" "+E(f[1])+
-     ' · final base '+f[3].join("/")+'</span><span class="sp__n">'+E(f[2])+"</span></p>";
-   }).join("")+"</div>";
- });
- return '<div class="callout callout--warn"><p><strong>Pets is in testing.</strong> The module is finished and wired into the bot, but it is locked to Max while it gets shaken out. You can see the Kiosk button; you cannot play it yet. Everything below is what will go live.</p></div>'+
-
- '<h2 class="s">The idea</h2>'+
- '<p class="b">Pets is a full monster-battler bolted onto the RPG, and it shares nothing with normal combat — no STR/AGI/CON, no Focus, no Parry. A Pet has <strong>four stats</strong>, a <strong>type</strong>, up to <strong>four moves</strong> with limited uses, and it faints. You fight <strong>3 versus 3</strong>.</p>'+
+ return '<div class="callout callout--warn"><p><strong>Pets is in testing.</strong> The module is finished and wired into the bot, but it is locked to Max while it gets shaken out. You can see the Kiosk button; you cannot play it yet. Everything in these pages is what will go live.</p></div>'+
+ '<h2 class="s">A different game</h2>'+
+ '<p class="b">Pets shares <strong>nothing</strong> with normal combat. No STR/AGI/CON, no Focus, no Parry, no gear. A Pet has <strong>four stats</strong>, a <strong>type</strong>, up to <strong>four moves</strong> with limited uses, and it faints. You fight <strong>3 versus 3</strong>.</p>'+
  '<p class="b">You catch them wild in the regions of Valestia. Each region breeds its own type: <strong>84 species</strong> across <strong>28 animal families</strong>, every family a three-stage evolution line.</p>'+
  tbl(["Rule","Value"],[
   ["Level cap","50"],["Evolutions","At level 16 and again at 36"],["Party size","3"],
   ["Moves per Pet","4 — learning a 5th means forgetting one"],["Genes per Pet","4 (HP / ATK / DEF / SPD), each 0–15"],
   ["Safari runs","5 per day"],["Training duels","3 per day"],["Sparring","Unlimited"]
  ],["k","n"])+
-
- '<h2 class="s">Stats and genes</h2>'+
- '<p class="b">Every Pet rolls <strong>four genes</strong> at the moment you catch it — one per stat, each a hidden <strong>0 to 15</strong>. They are permanent, they never change with level, and they are the difference between two Pets of the same species being the same or one being clearly better.</p>'+
- '<span class="fx">max HP = floor(base_hp × level ÷ 50) + level + 10 + gene</span>'+
- '<span class="fx">atk / def / spd = floor(base × level ÷ 50) + 5 + gene</span>'+
- '<p class="b">At level 50 a gene is worth a flat <strong>+15</strong>. That is enormous on a stat that lands around 60 — a perfect-gene Pet is roughly <strong>25% stronger</strong> than a zero-gene one of the same species. This is the entire reason to keep hunting a species you already own.</p>'+
- tbl(["Gene value","Quality"],[["0–4","Poor"],["5–8","Average"],["9–11","Good"],["12–13","Excellent"],["14–15","Exceptional"]],["n","k"])+
- '<div class="callout"><p>Genes are <strong>hidden until you scan them</strong>. A wild Pet looks identical whether it rolled 2s or 15s — the scan is how you find out before you spend a collar.</p></div>'+
-
- '<h2 class="s">Gene Essence</h2>'+
- '<p class="b">A separate currency, and it has exactly one source: <strong>releasing a Pet</strong>. The better its genes, the more it pays.</p>'+
- tbl(["Sum of the 4 genes","Quality","Essence paid"],[
-  ["0–19","Poor","1"],["20–31","Average","2"],["32–43","Good","3"],["44–52","Excellent","4"],["53–60","Exceptional","5"]
- ],["n","k","n"])+
- '<p class="b">You cannot release your last Pet.</p>'+
- tbl(["Operation","Cost","What it does"],PET_GENE_OPS.map(function(o){return [o[0],o[1]+" essence",o[2]];}),["k","n",""])+
- '<div class="callout callout--warn"><p><strong>The economy is deliberately brutal.</strong> A Poor Pet pays 1 essence. Gene Training costs 20 and is capped at 5 per Pet. So perfecting one Pet by hand means releasing <em>twenty</em> bad ones — and it still only buys 5 points. Catching a good roll will always beat grinding a bad one into shape. That is the point.</p></div>'+
-
- '<h2 class="s">The 84 species</h2>'+
- '<p class="b">Each region breeds one type. Below is every family, its role, and the <strong>final stage</strong>\'s base stats as <span class="cmd">HP/ATK/DEF/SPD</span> — the numbers that define what the line is for. The earlier two stages are the same shape scaled down (<strong>46%</strong> and <strong>72%</strong> of the final block).</p>'+
- '<div class="grid grid--wide">'+fams.join("")+"</div>"+
- '<div class="callout"><p><strong>Merchant Crossroads has no native species.</strong> Its encounters are drawn from Starter Ruins, Crimson Plain and Stormbay Docks — it is a crossroads in the literal sense.</p></div>'+
-
- '<h2 class="s">Roles</h2>'+
- '<p class="b">Every family is built to one of six shapes. The count is how many species carry it.</p>'+
- tbl(["Role","Species","What it is for"],PET_ROLES.map(function(r){return [r[0],r[1],r[2]];}),["k","n",""])+
-
- '<h2 class="s">The type chart</h2>'+
- '<p class="b">Eight types. Super effective is <strong>×2</strong>, resisted is <strong>×½</strong>, and there is no immunity — everything can hurt everything.</p>'+
- tbl(["Type","×2 against","Resisted by"],PET_CHART.map(function(c){
-  return [c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1),c[2],c[3]];
- }),["k","",""])+
- '<div class="callout"><p><strong>Rock is the anomaly:</strong> it hits Fire, Flying and Ice for ×2 and <em>nothing resists it</em>. It is also the only type two regions breed — Starter Ruins and Bandit Caves. If you are building one team to fight everything, start there.</p>'+
- '<p><strong>Ghost and Dark are a closed loop:</strong> Ghost only beats Ghost, Dark only beats Ghost, and Dark resists both. A Dark Pet walks through the Mist Forest unopposed.</p></div>'+
-
- '<h2 class="s">Damage</h2>'+
- '<p class="b">A hit starts from the move\'s power, your Pet\'s attack and the target\'s defence, and is then multiplied:</p>'+
- tbl(["Multiplier","Value","When"],[
-  ["STAB","×1.5","The move's type matches the Pet's type"],
-  ["Super effective","×2","See the chart above"],
-  ["Resisted","×0.5","See the chart above"],
-  ["Critical","×1.5","6% chance, every hit"]
- ],["k","n",""])+
- '<p class="b">Pet battles are <strong>short and decisive</strong> by design — every turn is a message in a channel, so fights are tuned to end rather than grind. A super-effective STAB finisher can knock out a frail same-level foe in one hit and a bulky one in two. Type matchups decide fights outright instead of shaving percentages.</p>'+
- '<div class="callout"><p>Stack them and it compounds fast: <strong>STAB × super effective × crit = ×4.5</strong>. Bringing the right type is worth more than bringing the better Pet.</p></div>'+
-
- '<h2 class="s">Moves</h2>'+
- '<p class="b"><strong>61 moves</strong> — 49 that deal damage and 12 that do not. Every move has limited <strong>PP</strong>, and when a Pet runs out of everything it is reduced to <strong>Struggle</strong> (40 power, typeless). Moves carry <strong>priority</strong>: a priority move goes first regardless of speed, which is how a slow Pet steals a kill.</p>'+
- '<p class="b">A Pet holds <strong>four</strong>. Learning a fifth forces a choice, and a forgotten move can be bought back at the <strong>Move Reminder</strong> for <strong>2,000 OIL</strong>.</p>'+
- '<h3 class="t">Status conditions</h3>'+
- tbl(["Status","Effect"],PET_STATUS.map(function(s){return [s[1]+" "+s[0],s[2]];}),["k",""])+
- '<p class="b">Status is not just chip damage — it is <strong>how you catch things</strong>. See below.</p>'+
-
- '<h2 class="s">Catching</h2>'+
- '<p class="b">The formula is the classic one, and every term is something you control:</p>'+
- '<span class="fx">chance = ((3·maxHP − 2·currentHP) × catch_rate × collar × status) ÷ (3·maxHP × 255)</span>'+
- tbl(["What you do","Multiplier"],[
-  ["Basic Collar","×1.0"],["Fine Collar","×1.5"],["Prime Collar","×2.5"],
-  ["Asleep or frozen","×2.0"],["Burned, poisoned or paralysed","×1.5"]
- ],["k","n"])+
- tbl(["Wild Pet","Catch rate","Meaning"],[
-  ["Stage 1","200","Easy"],["Stage 2","120","Awkward"],["Stage 3","60","Hard"],
-  ["Anything in Dark Knight's Sanctum","× 0.5","Half. The endgame region is deliberately miserable."]
- ],["k","n",""])+
- '<div class="callout"><p><strong>The play is always the same:</strong> chip it to a sliver, put it to sleep or freeze it (×2), then throw a Prime Collar (×2.5). That is <strong>×5</strong> on top of a nearly-empty HP bar. Throwing collars at a healthy Pet is how you run out of collars.</p>'+
- '<p>The floor is <strong>3%</strong> — nothing is ever truly impossible. The ceiling is 100%.</p></div>'+
-
- '<h2 class="s">Levelling and evolution</h2>'+
- '<span class="fx">XP to reach the next level = 15 + (current level × 10)</span>'+
- '<p class="b">A linear curve, so the grind never becomes a wall — level 49 to 50 costs 505 XP, not tens of thousands. Battle XP is <span class="cmd">10 + (average foe level × 3)</span>, and the winning trainer also takes <strong>OIL worth double the XP</strong>, which makes Pets a real income stream and not just a side toy.</p>'+
- '<p class="b">Evolution happens automatically at <strong>16</strong> and <strong>36</strong> — no stones, no trades. Each stage jumps the base block: <strong>46% → 72% → 100%</strong>. Evolving mid-fight-chain is the single biggest power spike available to you.</p>'+
- '<div class="callout"><p>Levelling past an evolution keeps teaching moves, and if all four slots are full the new move goes to a <strong>pending queue</strong> rather than being lost. You choose later, in the open.</p></div>'+
-
- '<h2 class="s">The shop</h2>'+
- tbl(["Item","Price","Max held","Effect"],PET_SUPPLIES.map(function(s){
-  return [s[0],s[1].toLocaleString()+" OIL",s[2],s[3]];
- }),["k","n","n",""])+
- '<p class="b">The hold caps are the real constraint. Ten collars of each kind, three revives, two Max Ethers — you cannot stockpile your way out of a bad Safari run.</p>'+
-
+ '<h2 class="s">The loop</h2>'+
+ '<p class="b"><strong>1 — Pick a starter.</strong> <strong>Cinderling</strong> (Fire), <strong>Pebblecrab</strong> (Water) or <strong>Leafkit</strong> (Grass). The classic trio, and the classic triangle — each beats one of the others.</p>'+
+ '<p class="b"><strong>2 — Travel, then Safari.</strong> Safari draws from the region you are physically standing in, so <span class="cmd">!travel</span> is part of the Pets loop. Want an Ice Pet? Go to Rocky Chill Pass. There is no other way.</p>'+
+ '<p class="b"><strong>3 — Chip, status, catch.</strong> Never throw a collar at a healthy Pet. See <a href="#catching">Catching</a>.</p>'+
+ '<p class="b"><strong>4 — Battle to level.</strong> Training duels pay XP to both trainers and OIL to the winner. Evolution is automatic.</p>'+
+ '<p class="b"><strong>5 — Release your rejects</strong> for Gene Essence, and spend it improving the keepers. See <a href="#genes">Genes &amp; Essence</a>.</p>'+
  '<h2 class="s">Playing it</h2>'+
  tbl(["Command","What it does"],[
   ['<span class="cmd">!safari</span>',"Go looking for wild Pets in the region you are standing in. <strong>5 per day.</strong>"],
@@ -1065,16 +1027,148 @@ PAGES.pets={t:"The Pets System",e:"Pets",d:"Catch wild animals across Valestia, 
   ['<span class="cmd">!collars</span> · <span class="cmd">!pet_shop</span>',"Buy collars, potions, revives and ethers."],
   ['<span class="cmd">!petpanel</span>',"The button hub for all of it."]
  ],["k",""])+
- '<p class="b">You start by choosing one of three: <strong>Cinderling</strong> (Fire), <strong>Pebblecrab</strong> (Water) or <strong>Leafkit</strong> (Grass). The classic trio, and the classic triangle — each beats one of the others.</p>'+
  '<p class="b">A Safari encounter runs on a <strong>2 minute turn timer</strong>. Wild Pets use a simple AI that picks its best damage; trainer battles run a smarter one that reads matchups.</p>'+
- '<div class="callout"><p><strong>Where you stand decides what you meet.</strong> Safari draws from the region you are physically in, so <span class="cmd">!travel</span> is part of the Pets loop. Want an Ice Pet? Go to Rocky Chill Pass. There is no other way.</p></div>'+
+ '<h2 class="s">The shop</h2>'+
+ tbl(["Item","Price","Max held","Effect"],PET_SUPPLIES.map(function(s){
+  return [s[0],s[1].toLocaleString()+" OIL",s[2],s[3]];
+ }),["k","n","n",""])+
+ '<p class="b">The hold caps are the real constraint. Ten collars of each kind, three revives, two Max Ethers — you cannot stockpile your way out of a bad Safari run.</p>'+
+ '<h2 class="s">Levelling and evolution</h2>'+
+ '<span class="fx">XP to reach the next level = 15 + (current level × 10)</span>'+
+ '<p class="b">A linear curve, so the grind never becomes a wall — level 49 to 50 costs 505 XP, not tens of thousands. Battle XP is <span class="cmd">10 + (average foe level × 3)</span>, and the winning trainer also takes <strong>OIL worth double the XP</strong>, which makes Pets a real income stream and not just a side toy.</p>'+
+ '<p class="b">Evolution happens automatically at <strong>16</strong> and <strong>36</strong> — no stones, no trades. Each stage jumps the base block: <strong>46% → 72% → 100%</strong>. Watch it happen in the <a href="#lab">Pet Lab</a>.</p>'+
+ '<div class="callout"><p>Levelling past an evolution keeps teaching moves, and if all four slots are full the new move goes to a <strong>pending queue</strong> rather than being lost. You choose later, in the open. A forgotten move can be bought back at the <strong>Move Reminder</strong> for <strong>2,000 OIL</strong>.</p></div>';
+}};
 
- '<h2 class="s">Advice for when it opens</h2>'+
+PAGES.lab={t:"Pet Lab",e:"Pets",d:"Every species, every level, every gene roll. The same formulas the bot runs — pick a Pet apart before you spend a collar on it.",h:function(){
+ return '<div class="lab">'+
+  '<div class="lab__ctl">'+
+   '<div class="lab__f"><label class="lab__l" for="labSp">Species</label>'+
+    '<select class="lab__sel" id="labSp"></select></div>'+
+   '<div class="lab__f"><label class="lab__l" for="labLv">Level <b class="num" id="labLvV">50</b></label>'+
+    '<input class="lab__rng" type="range" id="labLv" min="1" max="50" value="50"></div>'+
+   '<div class="lab__genes" id="labGenes"></div>'+
+   '<div class="lab__btns">'+
+    '<button class="lab__b" id="labPerfect">Perfect 15s</button>'+
+    '<button class="lab__b" id="labRoll">Random roll</button>'+
+    '<button class="lab__b" id="labZero">All zeros</button>'+
+   '</div>'+
+   '<p class="lab__q" id="labQ"></p>'+
+  '</div>'+
+  '<div class="lab__out">'+
+   '<div class="lab__id" id="labId"></div>'+
+   '<div class="ro" id="labStats"></div>'+
+   '<div class="lab__chain" id="labChain"></div>'+
+   '<h3 class="t" style="margin-top:1.4rem">Moves known at this level</h3>'+
+   '<div class="lab__moves" id="labMoves"></div>'+
+   '<p class="lab__note" id="labNote"></p>'+
+  '</div>'+
+ '</div>'+
+ '<h2 class="s">How to read it</h2>'+
+ '<p class="b">The stat bars compare this Pet against the <strong>strongest final-stage Pet in the game</strong> for that stat, so a full bar means nothing else beats it. The grey ghost behind each bar is the same Pet with <strong>zero genes</strong> — the gap is what your roll is worth.</p>'+
+ '<p class="b">Drag the level past <strong>16</strong> and <strong>36</strong> and the Pet evolves in front of you, base stats and all. That is exactly what happens in a battle.</p>'+
+ '<div class="callout"><p>Moves are the <strong>last four learned at or below</strong> the current level — the same rule the bot uses. Raise the level and watch an early move fall off the list.</p></div>';
+}};
+
+PAGES.species={t:"Species &amp; Evolution",e:"Pets",d:"84 species, 28 families, nine regions. Every family is one animal with three stages, and every region breeds one type.",h:function(){
+ var names={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
+  rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
+  mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum"};
+ var fams=PET_FAMS.map(function(r){
+  var emo={fire:"🔥",water:"💧",grass:"🌿",ice:"❄️",rock:"🪨",flying:"🦅",ghost:"👻",dark:"🌑"}[r[1]];
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(names[r[0]])+'</span>'+
+   '<span class="card__tag">'+emo+" "+E(r[1])+'</span></div>'+
+   r[2].map(function(f){
+    return '<p class="sp" style="margin-top:.5rem"><span class="sp__a">'+f[0]+" "+E(f[1])+
+     ' · final base '+f[3].join("/")+'</span><span class="sp__n">'+E(f[2])+"</span></p>";
+   }).join("")+"</div>";
+ });
+ return '<p class="b">Each family is <strong>one animal with three stages</strong>. Below is every family, its role, and the <strong>final stage</strong>\'s base stats as <span class="cmd">HP/ATK/DEF/SPD</span> — the numbers that define what the line is for. The earlier two stages are the same shape scaled down, at <strong>46%</strong> and <strong>72%</strong> of the final block.</p>'+
+ '<p class="b">Pull any of them apart at any level in the <a href="#lab">Pet Lab</a>.</p>'+
+ '<div class="grid grid--wide">'+fams.join("")+"</div>"+
+ '<div class="callout"><p><strong>Merchant Crossroads has no native species.</strong> Its encounters are drawn from Starter Ruins, Crimson Plain and Stormbay Docks — it is a crossroads in the literal sense.</p></div>'+
+ '<h2 class="s">Roles</h2>'+
+ '<p class="b">Every family is built to one of six shapes. The count is how many species carry it.</p>'+
+ tbl(["Role","Species","What it is for"],PET_ROLES.map(function(r){return [r[0],r[1],r[2]];}),["k","n",""])+
+ '<div class="callout"><p><strong>Speed decides fights.</strong> Sweepers hit 133–138 base speed and win the turn. Walls sit at 35–55 and simply never go first — a wall only works if it survives the alpha strike, and against a super-effective STAB hit it will not.</p></div>';
+}};
+
+PAGES.genes={t:"Genes &amp; Essence",e:"Pets",d:"Four hidden numbers rolled the moment you catch a Pet, and the only currency that can move them.",h:function(){
+ return '<h2 class="s">What a gene is</h2>'+
+ '<p class="b">Every Pet rolls <strong>four genes</strong> at the moment you catch it — one per stat, each a hidden <strong>0 to 15</strong>. They are permanent, they never change with level, and they are the difference between two Pets of the same species being identical or one being clearly better.</p>'+
+ '<span class="fx">max HP = floor(base_hp × level ÷ 50) + level + 10 + gene</span>'+
+ '<span class="fx">atk / def / spd = floor(base × level ÷ 50) + 5 + gene</span>'+
+ '<p class="b">At level 50 a gene is worth a flat <strong>+15</strong>. That is enormous on a stat that lands around 60 — a perfect-gene Pet is roughly <strong>25% stronger</strong> than a zero-gene one of the same species. This is the entire reason to keep hunting a species you already own.</p>'+
+ '<p class="b">See the gap for yourself in the <a href="#lab">Pet Lab</a>: set a Pet to level 50 and slide the genes from 0 to 15.</p>'+
+ tbl(["Gene value","Quality"],[["0–4","Poor"],["5–8","Average"],["9–11","Good"],["12–13","Excellent"],["14–15","Exceptional"]],["n","k"])+
+ '<div class="callout"><p>Genes are <strong>hidden until you scan them</strong>. A wild Pet looks identical whether it rolled 2s or 15s — the scan is how you find out before you spend a collar.</p></div>'+
+ '<h2 class="s">Gene Essence</h2>'+
+ '<p class="b">A separate currency, and it has exactly one source: <strong>releasing a Pet</strong>. The better its genes, the more it pays. You cannot release your last Pet.</p>'+
+ tbl(["Sum of the 4 genes","Quality","Essence paid"],[
+  ["0–19","Poor","1"],["20–31","Average","2"],["32–43","Good","3"],["44–52","Excellent","4"],["53–60","Exceptional","5"]
+ ],["n","k","n"])+
+ '<h2 class="s">What you can spend it on</h2>'+
+ tbl(["Operation","Cost","What it does"],PET_GENE_OPS.map(function(o){return [o[0],o[1]+" essence",o[2]];}),["k","n",""])+
+ '<div class="callout callout--warn"><p><strong>The economy is deliberately brutal.</strong> A Poor Pet pays 1 essence. Gene Training costs 20 and is capped at 5 per Pet, ever. So perfecting one Pet by hand means releasing <em>twenty</em> bad ones — and it still only buys 5 points out of a possible 60.</p>'+
+ '<p>Catching a good roll will always beat grinding a bad one into shape. That is the point: the Safari is the game, not the workbench.</p></div>'+
+ '<h2 class="s">Advice</h2>'+
  '<p class="b"><strong>Scan before you throw.</strong> 10 essence is cheap next to a 3,000 OIL Prime Collar spent on a Poor roll.</p>'+
+ '<p class="b"><strong>Release your rejects.</strong> A Poor Pet sitting in your box is 1 essence you have not banked.</p>'+
+ '<p class="b"><strong>Spend Training on the stat that matters</strong>, not evenly. A sweeper wants SPD; a wall wants HP and DEF. Five points into the right stat beats five spread thin.</p>';
+}};
+
+PAGES.petbattle={t:"Pet Battles",e:"Pets",d:"Eight types, 61 moves, five status conditions, and multipliers that stack hard enough to end a fight in one hit.",h:function(){
+ return '<h2 class="s">The type chart</h2>'+
+ '<p class="b">Eight types. Super effective is <strong>×2</strong>, resisted is <strong>×½</strong>, and there is no immunity — everything can hurt everything.</p>'+
+ tbl(["Type","×2 against","Resisted by"],PET_CHART.map(function(c){
+  return [c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1),c[2],c[3]];
+ }),["k","",""])+
+ '<div class="callout"><p><strong>Rock is the anomaly:</strong> it hits Fire, Flying and Ice for ×2 and <em>nothing resists it</em>. It is also the only type two regions breed — Starter Ruins and Bandit Caves. If you are building one team to fight everything, start there.</p>'+
+ '<p><strong>Ghost and Dark are a closed loop:</strong> Ghost only beats Ghost, Dark only beats Ghost, and Dark resists both. A Dark Pet walks through the Mist Forest unopposed.</p></div>'+
+ '<h2 class="s">Damage</h2>'+
+ '<p class="b">A hit starts from the move\'s power, your Pet\'s attack and the target\'s defence, and is then multiplied:</p>'+
+ tbl(["Multiplier","Value","When"],[
+  ["STAB","×1.5","The move's type matches the Pet's type"],
+  ["Super effective","×2","See the chart above"],
+  ["Resisted","×0.5","See the chart above"],
+  ["Critical","×1.5","6% chance, every hit"]
+ ],["k","n",""])+
+ '<p class="b">Pet battles are <strong>short and decisive</strong> by design — every turn is a message in a channel, so fights are tuned to end rather than grind. A super-effective STAB finisher can knock out a frail same-level foe in one hit and a bulky one in two. Type matchups decide fights outright instead of shaving percentages.</p>'+
+ '<div class="callout"><p>Stack them and it compounds fast: <strong>STAB × super effective × crit = ×4.5</strong>. Bringing the right type is worth more than bringing the better Pet.</p></div>'+
+ '<h2 class="s">Moves</h2>'+
+ '<p class="b"><strong>61 moves</strong> — 49 that deal damage and 12 that do not. Every move has limited <strong>PP</strong>, and when a Pet runs out of everything it is reduced to <strong>Struggle</strong> (40 power, typeless). Moves carry <strong>priority</strong>: a priority move goes first regardless of speed, which is how a slow Pet steals a kill.</p>'+
+ '<p class="b">A Pet holds <strong>four</strong>, and they are the last four it learned. Browse any species\' full learnset in the <a href="#lab">Pet Lab</a>.</p>'+
+ '<h3 class="t">Status conditions</h3>'+
+ tbl(["Status","Effect"],PET_STATUS.map(function(s){return [s[1]+" "+s[0],s[2]];}),["k",""])+
+ '<p class="b">Status is not just chip damage — it is <strong>how you catch things</strong>. See <a href="#catching">Catching</a>.</p>'+
+ '<h2 class="s">Building a team</h2>'+
  '<p class="b"><strong>Build for coverage, not for power.</strong> Three Pets, three types that cover each other. A team of three Fire Pets loses to one Water wall.</p>'+
- '<p class="b"><strong>Speed is a stat that decides fights.</strong> Sweepers hit 133–138 base speed and win the turn. Walls sit at 35–55 and simply never go first — a wall only works if it survives the alpha strike, and against a super-effective STAB hit it will not.</p>'+
  '<p class="b"><strong>Rock is the safest first investment</strong> — nothing resists it, and it comes out of the beginner region.</p>'+
- '<p class="b"><strong>Release your rejects.</strong> A Poor Pet in your box is 1 essence you have not banked.</p>';
+ '<p class="b"><strong>Bring one answer to speed.</strong> A priority move, or a Pet fast enough to trade with a sweeper. Otherwise the first hit is always theirs.</p>';
+}};
+
+PAGES.catching={t:"Catching",e:"Pets",d:"The Safari, the collars, and the formula that decides whether the thing you just fought is yours.",h:function(){
+ return '<h2 class="s">The Safari</h2>'+
+ '<p class="b"><span class="cmd">!safari</span> looks for wild Pets in the region you are <strong>physically standing in</strong>. Five runs a day. Each region breeds one type, so where you stand decides what you meet — travel is part of the loop.</p>'+
+ '<h2 class="s">The formula</h2>'+
+ '<p class="b">The classic one, and every term in it is something you control:</p>'+
+ '<span class="fx">chance = ((3·maxHP − 2·currentHP) × catch_rate × collar × status) ÷ (3·maxHP × 255)</span>'+
+ tbl(["What you do","Multiplier"],[
+  ["Basic Collar","×1.0"],["Fine Collar","×1.5"],["Prime Collar","×2.5"],
+  ["Asleep or frozen","×2.0"],["Burned, poisoned or paralysed","×1.5"]
+ ],["k","n"])+
+ tbl(["Wild Pet","Catch rate","Meaning"],[
+  ["Stage 1","200","Easy"],["Stage 2","120","Awkward"],["Stage 3","60","Hard"],
+  ["Anything in Dark Knight's Sanctum","× 0.5","Half. The endgame region is deliberately miserable."]
+ ],["k","n",""])+
+ '<div class="callout"><p><strong>The play is always the same:</strong> chip it to a sliver, put it to sleep or freeze it (×2), then throw a Prime Collar (×2.5). That is <strong>×5</strong> on top of a nearly-empty HP bar. Throwing collars at a healthy Pet is how you run out of collars.</p>'+
+ '<p>The floor is <strong>3%</strong> — nothing is ever truly impossible. The ceiling is 100%.</p></div>'+
+ '<h2 class="s">Collars</h2>'+
+ tbl(["Collar","Price","Max held","Multiplier"],[
+  ["Basic Collar","1,000 OIL","10","×1.0"],["Fine Collar","1,800 OIL","10","×1.5"],["Prime Collar","3,000 OIL","10","×2.5"]
+ ],["k","n","n","n"])+
+ '<p class="b">Ten of each, maximum. A Prime Collar costs three times a Basic and buys you two and a half times the odds — worth it on a stage-3 target, wasteful on a stage-1.</p>'+
+ '<div class="callout"><p><strong>Scan first.</strong> 10 Gene Essence tells you whether the Pet in front of you is worth a 3,000 OIL collar at all. Most are not.</p></div>';
 }};
 
 PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads between them, and the places the story happens. Select any marker on the map.",h:function(){
@@ -1214,9 +1308,9 @@ var NAV=[
  ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
  ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"]]],
  ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]],
- ["Pets",[["pets","The Pets System"]]]
+ ["Pets",[["pets","The Pets System"],["lab","Pet Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pet Battles"],["catching","Catching"]]]
 ];
-var COUNTS={gear:"26",weapons:"16",pets:"84",factions:"15",clans:"9",valestia:"11",story:"31",sides:"50"};
+var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",factions:"15",clans:"9",valestia:"11",story:"31",sides:"50"};
 
 document.getElementById("nav").innerHTML=NAV.map(function(g){
  return '<div class="navgrp"><div class="navgrp__t">'+g[0]+'</div><div class="nav">'+
@@ -1251,6 +1345,7 @@ function route(){
  });
  if(id==="combat"&&!built.combat){built.combat=1;initCalc();}
  if(id==="valestia"&&!built.map){built.map=1;initMap();}
+ if(id==="lab"&&!built.lab){built.lab=1;initLab();}
  closeRail();
  window.scrollTo(0,0);
 }
@@ -1318,6 +1413,159 @@ function initCalc(){
   var i=e.target.closest("[data-inc]"), d=e.target.closest("[data-dec]");
   if(i&&spent()<budget()){S[i.dataset.inc]++;render();}
   if(d&&S[d.dataset.dec]>0){S[d.dataset.dec]--;render();}
+ });
+ render();
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PET LAB — the same formulas pet_data.stats_at_level / default_moves run
+   ══════════════════════════════════════════════════════════════════ */
+function initLab(){
+ /* PET_DB.S rows: [id,name,emoji,type,region,role,stage,hp,atk,def,spd,evolves_to,learnset] */
+ var S={}, byLine={}, MV={};
+ PET_DB.S.forEach(function(r){
+  S[r[0]]={id:r[0],name:r[1],emoji:r[2],type:r[3],region:r[4],role:r[5],stage:r[6],
+           base:{hp:r[7],atk:r[8],def:r[9],spd:r[10]},evo:r[11],learn:r[12]};
+ });
+ PET_DB.M.forEach(function(m){
+  MV[m[0]]={id:m[0],name:m[1],type:m[2],power:m[3],acc:m[4],pp:m[5],pri:m[6],eff:m[7]};
+ });
+ /* rebuild each family chain by walking evolves_to from every stage-1 */
+ Object.keys(S).forEach(function(k){
+  var s=S[k]; if(s.stage!==1) return;
+  var chain=[k], cur=s;
+  while(cur.evo && S[cur.evo]){ chain.push(cur.evo); cur=S[cur.evo]; }
+  chain.forEach(function(id){ byLine[id]=chain; });
+ });
+
+ var REG={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
+  rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
+  mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum"};
+ var TEMO={fire:"🔥",water:"💧",grass:"🌿",ice:"❄️",rock:"🪨",flying:"🦅",ghost:"👻",dark:"🌑",neutral:"⚪"};
+
+ /* engine formulas, verbatim */
+ function statsAt(id,lv,g){
+  var b=S[id].base, o={};
+  o.hp=Math.floor(b.hp*lv/50)+lv+10+(g.hp||0);
+  ["atk","def","spd"].forEach(function(k){ o[k]=Math.floor(b[k]*lv/50)+5+(g[k]||0); });
+  return o;
+ }
+ /* the last four distinct moves learned at or below `lv` */
+ function movesAt(id,lv){
+  var known=[];
+  S[id].learn.forEach(function(p){ if(p[0]<=lv && known.indexOf(p[1])<0) known.push(p[1]); });
+  return known.slice(-4);
+ }
+ /* which stage of the line you are at this level: evolves at 16 and 36 */
+ function stageAt(line,lv){ return lv>=36?Math.min(2,line.length-1):(lv>=16?Math.min(1,line.length-1):0); }
+
+ /* ceilings: strongest final-stage value per stat, for honest bar scaling */
+ var CEIL={hp:0,atk:0,def:0,spd:0};
+ Object.keys(S).forEach(function(k){
+  if(S[k].stage!==3) return;
+  var s=statsAt(k,50,{hp:15,atk:15,def:15,spd:15});
+  ["hp","atk","def","spd"].forEach(function(x){ if(s[x]>CEIL[x]) CEIL[x]=s[x]; });
+ });
+
+ var st={sp:"cinderling",lv:50,g:{hp:15,atk:15,def:15,spd:15}};
+
+ /* species picker, grouped by region */
+ var sel=document.getElementById("labSp"), groups={};
+ PET_DB.S.forEach(function(r){ (groups[r[4]]=groups[r[4]]||[]).push(r[0]); });
+ sel.innerHTML=Object.keys(REG).map(function(rg){
+  var list=(groups[rg]||[]).slice().sort(function(a,b){
+   return S[a].stage-S[b].stage || S[a].name.localeCompare(S[b].name);
+  });
+  return '<optgroup label="'+E(REG[rg])+' · '+E(S[list[0]].type)+'">'+
+   list.map(function(id){
+    return '<option value="'+id+'">'+E(S[id].emoji+" "+S[id].name)+" — stage "+S[id].stage+"</option>";
+   }).join("")+"</optgroup>";
+ }).join("");
+ sel.value=st.sp;
+
+ /* gene sliders */
+ var GK=[["hp","HP"],["atk","ATK"],["def","DEF"],["spd","SPD"]];
+ document.getElementById("labGenes").innerHTML=
+  '<div class="lab__l" style="margin-bottom:-.3rem">Genes <b class="num" id="labGT">60 / 60</b></div>'+
+  GK.map(function(g){
+   return '<div class="lab__f"><label class="lab__l" for="lg_'+g[0]+'">'+g[1]+
+    ' gene <b class="num" data-gv="'+g[0]+'">15</b></label>'+
+    '<input class="lab__rng" type="range" id="lg_'+g[0]+'" data-g="'+g[0]+'" min="0" max="15" value="15"></div>';
+  }).join("");
+
+ function quality(v){ return v<=4?"Poor":v<=8?"Average":v<=11?"Good":v<=13?"Excellent":"Exceptional"; }
+ function totalQuality(t){ return t<=19?["Poor",1]:t<=31?["Average",2]:t<=43?["Good",3]:t<=52?["Excellent",4]:["Exceptional",5]; }
+
+ function render(){
+  var line=byLine[st.sp]||[st.sp];
+  var id=line[stageAt(line,st.lv)];          /* auto-evolve with level */
+  var s=S[id], cur=statsAt(id,st.lv,st.g), zero=statsAt(id,st.lv,{});
+
+  document.getElementById("labLvV").textContent=st.lv;
+  var tot=st.g.hp+st.g.atk+st.g.def+st.g.spd, tq=totalQuality(tot);
+  document.getElementById("labGT").textContent=tot+" / 60";
+  GK.forEach(function(g){ document.querySelector('[data-gv="'+g[0]+'"]').textContent=st.g[g[0]]; });
+
+  document.getElementById("labId").innerHTML=
+   '<span class="lab__emo">'+s.emoji+'</span><div><div class="lab__nm">'+E(s.name)+'</div>'+
+   '<div class="lab__meta">'+E(REG[s.region])+' · stage '+s.stage+' of '+line.length+'</div></div>'+
+   '<div class="lab__badges"><span class="lab__bd lab__bd--t">'+TEMO[s.type]+" "+E(s.type)+'</span>'+
+   '<span class="lab__bd">'+E(s.role)+'</span></div>';
+
+  document.getElementById("labStats").innerHTML=GK.map(function(g){
+   var k=g[0], v=cur[k], z=zero[k], d=v-z;
+   return '<div class="sb" style="grid-column:span 2"><div class="sb__t"><span class="sb__k">'+g[1]+'</span>'+
+    '<span class="sb__v num">'+v+'</span>'+(d>0?'<span class="sb__d">+'+d+' from genes</span>':'')+'</div>'+
+    '<div class="sb__bar"><span class="sb__ghost" style="width:'+Math.min(100,z/CEIL[k]*100)+'%"></span>'+
+    '<span class="sb__fill" style="width:'+Math.min(100,v/CEIL[k]*100)+'%"></span></div></div>';
+  }).join("");
+
+  document.getElementById("labChain").innerHTML=line.map(function(x,i){
+   var at=[1,16,36][i];
+   return (i?'<span class="ev__ar">→</span>':'')+
+    '<span class="ev'+(x===id?" on":"")+'">'+S[x].emoji+" "+E(S[x].name)+
+    (i?' <b>lv'+at+'</b>':'')+"</span>";
+  }).join("");
+
+  var mv=movesAt(id,st.lv);
+  document.getElementById("labMoves").innerHTML=mv.map(function(m){
+   var M=MV[m], stab=(M.type===s.type);
+   return '<div class="mv'+(stab?" mv--stab":"")+'"><div class="mv__h"><span class="mv__n">'+E(M.name)+'</span>'+
+    '<span class="mv__t">'+(TEMO[M.type]||"")+" "+E(M.type)+'</span></div>'+
+    '<div class="mv__s">'+(M.power?"pow "+M.power:"status")+" · acc "+(M.acc>100?"—":M.acc)+" · "+M.pp+" PP"+
+    (M.pri?" · priority +"+M.pri:"")+(stab?" · STAB ×1.5":"")+'</div>'+
+    (M.eff?'<div class="mv__e">'+E(M.eff)+"</div>":"")+"</div>";
+  }).join("");
+
+  var next=null;
+  S[id].learn.forEach(function(p){ if(p[0]>st.lv && next===null) next=p; });
+  document.getElementById("labNote").innerHTML=
+   (PET_DB.D[id]?"<em>"+E(PET_DB.D[id])+"</em><br>":"")+
+   (next?"Next move at level <strong>"+next[0]+"</strong>: "+E(MV[next[1]].name)+". ":"")+
+   (mv.length<4?"Only "+mv.length+" move"+(mv.length>1?"s":"")+" known — it fills to 4 as it levels.":"");
+
+  document.getElementById("labQ").innerHTML=
+   "Gene total <strong>"+tot+"/60</strong> — <strong>"+tq[0]+"</strong>. Releasing this Pet would pay <strong>"+
+   tq[1]+"</strong> Gene Essence."+(tot===60?" A perfect roll; you will not see many.":"");
+ }
+
+ sel.addEventListener("change",function(){ st.sp=sel.value; render(); });
+ document.getElementById("labLv").addEventListener("input",function(e){ st.lv=+e.target.value; render(); });
+ document.getElementById("labGenes").addEventListener("input",function(e){
+  var g=e.target.dataset.g; if(!g) return;
+  st.g[g]=+e.target.value; render();
+ });
+ function setGenes(fn){
+  GK.forEach(function(g){
+   st.g[g[0]]=fn();
+   document.getElementById("lg_"+g[0]).value=st.g[g[0]];
+  });
+  render();
+ }
+ document.getElementById("labPerfect").addEventListener("click",function(){ setGenes(function(){return 15;}); });
+ document.getElementById("labZero").addEventListener("click",function(){ setGenes(function(){return 0;}); });
+ document.getElementById("labRoll").addEventListener("click",function(){
+  setGenes(function(){ return Math.floor(Math.random()*16); });
  });
  render();
 }
