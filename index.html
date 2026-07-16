@@ -952,7 +952,7 @@ PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a 
  '<p class="b">Bonds track <strong>relationships between players</strong>. Playing with — or against — the same people builds a shared history. Check yours with <span class="cmd">!bonds</span>, notable ones with <span class="cmd">!bonds_top</span>, and the log with <span class="cmd">!bonds_history</span>.</p>';
 }};
 
-PAGES.pets={t:"Pets",e:"The guide",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG.",h:function(){
+PAGES.pets={t:"The Pets System",e:"Pets",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG, sharing none of its combat rules.",h:function(){
  var fams=PET_FAMS.map(function(r){
   var names={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
    rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
@@ -1011,15 +1011,14 @@ PAGES.pets={t:"Pets",e:"The guide",d:"Catch wild animals across Valestia, raise 
  '<p><strong>Ghost and Dark are a closed loop:</strong> Ghost only beats Ghost, Dark only beats Ghost, and Dark resists both. A Dark Pet walks through the Mist Forest unopposed.</p></div>'+
 
  '<h2 class="s">Damage</h2>'+
- '<span class="fx">damage = base(level, power, atk, def) × STAB × type × crit × 0.80</span>'+
+ '<p class="b">A hit starts from the move\'s power, your Pet\'s attack and the target\'s defence, and is then multiplied:</p>'+
  tbl(["Multiplier","Value","When"],[
   ["STAB","×1.5","The move's type matches the Pet's type"],
   ["Super effective","×2","See the chart above"],
   ["Resisted","×0.5","See the chart above"],
-  ["Critical","×1.5","6% chance, every hit"],
-  ["Global scale","×0.80","Applied to everything, always"]
+  ["Critical","×1.5","6% chance, every hit"]
  ],["k","n",""])+
- '<p class="b">That <strong>0.80</strong> is a deliberate tuning knob, and the comment in the code says exactly why: Discord battles are a message round-trip per turn, so they have to be <em>short</em>. At this scale a super-effective STAB finisher can one-shot a frail same-level foe and two-shots a bulky one. Type matchups are decisive rather than incremental.</p>'+
+ '<p class="b">Pet battles are <strong>short and decisive</strong> by design — every turn is a message in a channel, so fights are tuned to end rather than grind. A super-effective STAB finisher can knock out a frail same-level foe in one hit and a bulky one in two. Type matchups decide fights outright instead of shaving percentages.</p>'+
  '<div class="callout"><p>Stack them and it compounds fast: <strong>STAB × super effective × crit = ×4.5</strong>. Bringing the right type is worth more than bringing the better Pet.</p></div>'+
 
  '<h2 class="s">Moves</h2>'+
@@ -1212,9 +1211,10 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
    NAV / ROUTER
    ══════════════════════════════════════════════════════════════════ */
 var NAV=[
- ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["pets","Pets"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
+ ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
  ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"]]],
- ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]]
+ ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]],
+ ["Pets",[["pets","The Pets System"]]]
 ];
 var COUNTS={gear:"26",weapons:"16",pets:"84",factions:"15",clans:"9",valestia:"11",story:"31",sides:"50"};
 
