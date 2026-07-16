@@ -1,0 +1,6 @@
+# GitHub Pages reads CNAME byte-for-byte: CRLF there breaks the custom domain.
+* text=auto eol=lf
+CNAME text eol=lf
+*.woff2 binary
+*.webp binary
+*.jpg binary
