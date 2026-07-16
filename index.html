@@ -626,6 +626,59 @@ var ENCOUNTERS=[
  ["The Harbormaster's Ransom",3,"The Stormbay Harbormaster has been seized by a mercenary crew in a locked warehouse on Pier 7. No ransom note. No demands. Just a door that does not open and four armed men inside.","Easy and Hard · Hard recommends level 30+"]
 ];
 
+/* ── PETS ── read out of pet_data.py / pet_engine.py / pet_battle_system.py ── */
+var PET_FAMS=[
+ ["starter_ruins","rock",[["🪲","wall","Chit Beetle · Shell Beetle · Boulder Beetle",[120,105,140,50]],["🐢","wall","Pebble Tortoise · Craghide Tortoise · Mountain Tortoise",[130,95,145,35]],["🦔","bulky","Rockroll · Stone Armadillo · Granite Armadillo",[110,125,120,55]]]],
+ ["crimson_plain","fire",[["🦎","allrounder","Cinderling · Embertail · Magmaw",[105,120,115,110]],["🐕","sweeper","Emberpup · Ashhound · Cinderhound",[90,125,78,127]],["🐗","wallbreaker","Sootboar · Emberboar · Magmaboar",[120,138,97,60]]]],
+ ["stormbay_docks","water",[["🦀","wall","Pebblecrab · Shellclaw · Tidecrusher",[125,110,120,45]],["🦦","allrounder","Splashpup · Streamotter · Riverlord Otter",[105,108,98,119]],["🐍","sweeper","Sparkeel · Voltcoil · Volteel",[85,122,80,133]],["🐙","attacker","Inkspot · Reef Octopus · Kraken",[110,128,100,92]]]],
+ ["rocky_chill_pass","ice",[["🐺","sweeper","Frostpup · Frostfang · Glacierfang",[90,130,82,128]],["🦉","attacker","Snowowlet · Frostowl · Blizzard Owl",[95,118,90,117]],["🦭","wall","Slushpup · Iceseal · Glacierseal",[130,95,125,50]]]],
+ ["black_lotus_wood","grass",[["🦊","sweeper","Leafkit · Thornfox · Bramblefox",[92,122,85,126]],["🦌","allrounder","Fawnling · Wooddeer · Wildeer",[110,110,103,107]],["🕷️","attacker","Sporeling · Webspider · Venomspider",[95,126,92,112]]]],
+ ["ravencraft","flying",[["🐦‍⬛","allrounder","Ravenling · Stormraven · Tempest Raven",[100,116,96,123]],["🦅","sweeper","Hatchhawk · Windhawk · Skyhawk",[90,126,86,133]],["🦇","attacker","Flutterbat · Nightbat · Duskbat",[85,116,82,138]]]],
+ ["mist_forest","ghost",[["🦋","attacker","Dimmoth · Phantom Moth · Shade Moth",[92,117,96,125]],["👻","sweeper","Flickerwisp · Wispflame · Hollow Wisp",[80,136,76,133]],["🦌","allrounder","Ghostfawn · Wraithdeer · Spectral Stag",[115,110,106,100]]]],
+ ["bandit_caves","rock",[["🦇","sweeper","Grottobat · Cavebat · Deep Cavebat",[85,116,86,133]],["🦫","bulky","Digmole · Tunnelmole · Boulder Mole",[120,116,116,55]],["🦂","attacker","Sandscorp · Grotto Scorpion · Stinger Scorpion",[100,130,100,95]]]],
+ ["dark_knight_sanctum","dark",[["🐆","sweeper","Shadowcub · Nightpanther · Voidpanther",[100,130,96,126]],["🐕","allrounder","Gloompup · Duskhound · Shadowhound",[110,120,106,110]],["🐦‍⬛","wallbreaker","Dusklet · Duskraven · Voidraven",[105,136,100,96]]]]
+];
+/* attacker type -> [x2 against, resisted by] */
+var PET_CHART=[
+ ["fire","🔥","grass · ice","fire · rock · water"],
+ ["water","💧","fire · rock","grass · water"],
+ ["grass","🌿","rock · water","fire · flying · grass"],
+ ["ice","❄️","flying · grass","fire · ice"],
+ ["rock","🪨","fire · flying · ice","—"],
+ ["flying","🦅","grass","rock"],
+ ["ghost","👻","ghost","dark"],
+ ["dark","🌑","ghost","dark · ghost"]
+];
+var PET_STATUS=[
+ ["Burn","🔥","Chip damage each turn."],["Poison","🟣","Chip damage each turn."],
+ ["Paralyze","⚡","Cuts speed and can cost you the turn outright."],
+ ["Freeze","❄️","You cannot act until it thaws."],["Sleep","💤","You cannot act until it wakes."]
+];
+var PET_ROLES=[
+ ["Sweeper",24,"Highest speed, thin defence. Moves first, dies first."],
+ ["Attacker",18,"Heavy attack with enough bulk to take one hit back."],
+ ["Allrounder",18,"No hole anywhere, no spike either."],
+ ["Wall",12,"Enormous HP and defence, almost no speed."],
+ ["Bulky",6,"A wall that hits back."],
+ ["Wallbreaker",6,"The biggest attack numbers on the board, slow enough that you see it coming."]
+];
+var PET_SUPPLIES=[
+ ["Basic Collar",1000,10,"Catch multiplier ×1.0"],
+ ["Fine Collar",1800,10,"Catch multiplier ×1.5"],
+ ["Prime Collar",3000,10,"Catch multiplier ×2.5"],
+ ["Pet Potion",300,10,"Restores 25% of max HP"],
+ ["Super Pet Potion",500,5,"Restores 50% of max HP"],
+ ["Pet Revive",2000,3,"Revives a fainted Pet at 25% HP"],
+ ["Ether",400,5,"Restores 10 PP to one move"],
+ ["Max Ether",800,2,"Fully restores PP"]
+];
+var PET_GENE_OPS=[
+ ["Scan Genes",10,"Reveal a wild Pet's genes mid-encounter, before you decide to spend a collar on it."],
+ ["Gene Training",20,"Raise one gene by one point. 5 per Pet, ever."],
+ ["Gene Reroll",40,"Reroll one gene at random. 2 per Pet, ever."],
+ ["Gene Capsule",75,"The expensive one. Set a gene outright instead of gambling."]
+];
+
 var CODEX=[
  ["The Archivist","legendary","Guardian of the Archive","Not a construct and not a mechanism. It predates every civilization anyone in this world has named. It has been below Aldenmoor since before there was an Aldenmoor."],
  ["The Guardian","epic","Varn Seal Sentinel","Built by Varn hands to stand watch over the seal piece beneath Aldenmoor. It held its post far longer than it was ever meant to."],
@@ -899,6 +952,132 @@ PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a 
  '<p class="b">Bonds track <strong>relationships between players</strong>. Playing with — or against — the same people builds a shared history. Check yours with <span class="cmd">!bonds</span>, notable ones with <span class="cmd">!bonds_top</span>, and the log with <span class="cmd">!bonds_history</span>.</p>';
 }};
 
+PAGES.pets={t:"Pets",e:"The guide",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG.",h:function(){
+ var fams=PET_FAMS.map(function(r){
+  var names={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
+   rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
+   mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum"};
+  var emo={fire:"🔥",water:"💧",grass:"🌿",ice:"❄️",rock:"🪨",flying:"🦅",ghost:"👻",dark:"🌑"}[r[1]];
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(names[r[0]])+'</span>'+
+   '<span class="card__tag">'+emo+" "+E(r[1])+'</span></div>'+
+   r[2].map(function(f){
+    return '<p class="sp" style="margin-top:.5rem"><span class="sp__a">'+f[0]+" "+E(f[1])+
+     ' · final base '+f[3].join("/")+'</span><span class="sp__n">'+E(f[2])+"</span></p>";
+   }).join("")+"</div>";
+ });
+ return '<div class="callout callout--warn"><p><strong>Pets is in testing.</strong> The module is finished and wired into the bot, but it is locked to Max while it gets shaken out. You can see the Kiosk button; you cannot play it yet. Everything below is what will go live.</p></div>'+
+
+ '<h2 class="s">The idea</h2>'+
+ '<p class="b">Pets is a full monster-battler bolted onto the RPG, and it shares nothing with normal combat — no STR/AGI/CON, no Focus, no Parry. A Pet has <strong>four stats</strong>, a <strong>type</strong>, up to <strong>four moves</strong> with limited uses, and it faints. You fight <strong>3 versus 3</strong>.</p>'+
+ '<p class="b">You catch them wild in the regions of Valestia. Each region breeds its own type: <strong>84 species</strong> across <strong>28 animal families</strong>, every family a three-stage evolution line.</p>'+
+ tbl(["Rule","Value"],[
+  ["Level cap","50"],["Evolutions","At level 16 and again at 36"],["Party size","3"],
+  ["Moves per Pet","4 — learning a 5th means forgetting one"],["Genes per Pet","4 (HP / ATK / DEF / SPD), each 0–15"],
+  ["Safari runs","5 per day"],["Training duels","3 per day"],["Sparring","Unlimited"]
+ ],["k","n"])+
+
+ '<h2 class="s">Stats and genes</h2>'+
+ '<p class="b">Every Pet rolls <strong>four genes</strong> at the moment you catch it — one per stat, each a hidden <strong>0 to 15</strong>. They are permanent, they never change with level, and they are the difference between two Pets of the same species being the same or one being clearly better.</p>'+
+ '<span class="fx">max HP = floor(base_hp × level ÷ 50) + level + 10 + gene</span>'+
+ '<span class="fx">atk / def / spd = floor(base × level ÷ 50) + 5 + gene</span>'+
+ '<p class="b">At level 50 a gene is worth a flat <strong>+15</strong>. That is enormous on a stat that lands around 60 — a perfect-gene Pet is roughly <strong>25% stronger</strong> than a zero-gene one of the same species. This is the entire reason to keep hunting a species you already own.</p>'+
+ tbl(["Gene value","Quality"],[["0–4","Poor"],["5–8","Average"],["9–11","Good"],["12–13","Excellent"],["14–15","Exceptional"]],["n","k"])+
+ '<div class="callout"><p>Genes are <strong>hidden until you scan them</strong>. A wild Pet looks identical whether it rolled 2s or 15s — the scan is how you find out before you spend a collar.</p></div>'+
+
+ '<h2 class="s">Gene Essence</h2>'+
+ '<p class="b">A separate currency, and it has exactly one source: <strong>releasing a Pet</strong>. The better its genes, the more it pays.</p>'+
+ tbl(["Sum of the 4 genes","Quality","Essence paid"],[
+  ["0–19","Poor","1"],["20–31","Average","2"],["32–43","Good","3"],["44–52","Excellent","4"],["53–60","Exceptional","5"]
+ ],["n","k","n"])+
+ '<p class="b">You cannot release your last Pet.</p>'+
+ tbl(["Operation","Cost","What it does"],PET_GENE_OPS.map(function(o){return [o[0],o[1]+" essence",o[2]];}),["k","n",""])+
+ '<div class="callout callout--warn"><p><strong>The economy is deliberately brutal.</strong> A Poor Pet pays 1 essence. Gene Training costs 20 and is capped at 5 per Pet. So perfecting one Pet by hand means releasing <em>twenty</em> bad ones — and it still only buys 5 points. Catching a good roll will always beat grinding a bad one into shape. That is the point.</p></div>'+
+
+ '<h2 class="s">The 84 species</h2>'+
+ '<p class="b">Each region breeds one type. Below is every family, its role, and the <strong>final stage</strong>\'s base stats as <span class="cmd">HP/ATK/DEF/SPD</span> — the numbers that define what the line is for. The earlier two stages are the same shape scaled down (<strong>46%</strong> and <strong>72%</strong> of the final block).</p>'+
+ '<div class="grid grid--wide">'+fams.join("")+"</div>"+
+ '<div class="callout"><p><strong>Merchant Crossroads has no native species.</strong> Its encounters are drawn from Starter Ruins, Crimson Plain and Stormbay Docks — it is a crossroads in the literal sense.</p></div>'+
+
+ '<h2 class="s">Roles</h2>'+
+ '<p class="b">Every family is built to one of six shapes. The count is how many species carry it.</p>'+
+ tbl(["Role","Species","What it is for"],PET_ROLES.map(function(r){return [r[0],r[1],r[2]];}),["k","n",""])+
+
+ '<h2 class="s">The type chart</h2>'+
+ '<p class="b">Eight types. Super effective is <strong>×2</strong>, resisted is <strong>×½</strong>, and there is no immunity — everything can hurt everything.</p>'+
+ tbl(["Type","×2 against","Resisted by"],PET_CHART.map(function(c){
+  return [c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1),c[2],c[3]];
+ }),["k","",""])+
+ '<div class="callout"><p><strong>Rock is the anomaly:</strong> it hits Fire, Flying and Ice for ×2 and <em>nothing resists it</em>. It is also the only type two regions breed — Starter Ruins and Bandit Caves. If you are building one team to fight everything, start there.</p>'+
+ '<p><strong>Ghost and Dark are a closed loop:</strong> Ghost only beats Ghost, Dark only beats Ghost, and Dark resists both. A Dark Pet walks through the Mist Forest unopposed.</p></div>'+
+
+ '<h2 class="s">Damage</h2>'+
+ '<span class="fx">damage = base(level, power, atk, def) × STAB × type × crit × 0.80</span>'+
+ tbl(["Multiplier","Value","When"],[
+  ["STAB","×1.5","The move's type matches the Pet's type"],
+  ["Super effective","×2","See the chart above"],
+  ["Resisted","×0.5","See the chart above"],
+  ["Critical","×1.5","6% chance, every hit"],
+  ["Global scale","×0.80","Applied to everything, always"]
+ ],["k","n",""])+
+ '<p class="b">That <strong>0.80</strong> is a deliberate tuning knob, and the comment in the code says exactly why: Discord battles are a message round-trip per turn, so they have to be <em>short</em>. At this scale a super-effective STAB finisher can one-shot a frail same-level foe and two-shots a bulky one. Type matchups are decisive rather than incremental.</p>'+
+ '<div class="callout"><p>Stack them and it compounds fast: <strong>STAB × super effective × crit = ×4.5</strong>. Bringing the right type is worth more than bringing the better Pet.</p></div>'+
+
+ '<h2 class="s">Moves</h2>'+
+ '<p class="b"><strong>61 moves</strong> — 49 that deal damage and 12 that do not. Every move has limited <strong>PP</strong>, and when a Pet runs out of everything it is reduced to <strong>Struggle</strong> (40 power, typeless). Moves carry <strong>priority</strong>: a priority move goes first regardless of speed, which is how a slow Pet steals a kill.</p>'+
+ '<p class="b">A Pet holds <strong>four</strong>. Learning a fifth forces a choice, and a forgotten move can be bought back at the <strong>Move Reminder</strong> for <strong>2,000 OIL</strong>.</p>'+
+ '<h3 class="t">Status conditions</h3>'+
+ tbl(["Status","Effect"],PET_STATUS.map(function(s){return [s[1]+" "+s[0],s[2]];}),["k",""])+
+ '<p class="b">Status is not just chip damage — it is <strong>how you catch things</strong>. See below.</p>'+
+
+ '<h2 class="s">Catching</h2>'+
+ '<p class="b">The formula is the classic one, and every term is something you control:</p>'+
+ '<span class="fx">chance = ((3·maxHP − 2·currentHP) × catch_rate × collar × status) ÷ (3·maxHP × 255)</span>'+
+ tbl(["What you do","Multiplier"],[
+  ["Basic Collar","×1.0"],["Fine Collar","×1.5"],["Prime Collar","×2.5"],
+  ["Asleep or frozen","×2.0"],["Burned, poisoned or paralysed","×1.5"]
+ ],["k","n"])+
+ tbl(["Wild Pet","Catch rate","Meaning"],[
+  ["Stage 1","200","Easy"],["Stage 2","120","Awkward"],["Stage 3","60","Hard"],
+  ["Anything in Dark Knight's Sanctum","× 0.5","Half. The endgame region is deliberately miserable."]
+ ],["k","n",""])+
+ '<div class="callout"><p><strong>The play is always the same:</strong> chip it to a sliver, put it to sleep or freeze it (×2), then throw a Prime Collar (×2.5). That is <strong>×5</strong> on top of a nearly-empty HP bar. Throwing collars at a healthy Pet is how you run out of collars.</p>'+
+ '<p>The floor is <strong>3%</strong> — nothing is ever truly impossible. The ceiling is 100%.</p></div>'+
+
+ '<h2 class="s">Levelling and evolution</h2>'+
+ '<span class="fx">XP to reach the next level = 15 + (current level × 10)</span>'+
+ '<p class="b">A linear curve, so the grind never becomes a wall — level 49 to 50 costs 505 XP, not tens of thousands. Battle XP is <span class="cmd">10 + (average foe level × 3)</span>, and the winning trainer also takes <strong>OIL worth double the XP</strong>, which makes Pets a real income stream and not just a side toy.</p>'+
+ '<p class="b">Evolution happens automatically at <strong>16</strong> and <strong>36</strong> — no stones, no trades. Each stage jumps the base block: <strong>46% → 72% → 100%</strong>. Evolving mid-fight-chain is the single biggest power spike available to you.</p>'+
+ '<div class="callout"><p>Levelling past an evolution keeps teaching moves, and if all four slots are full the new move goes to a <strong>pending queue</strong> rather than being lost. You choose later, in the open.</p></div>'+
+
+ '<h2 class="s">The shop</h2>'+
+ tbl(["Item","Price","Max held","Effect"],PET_SUPPLIES.map(function(s){
+  return [s[0],s[1].toLocaleString()+" OIL",s[2],s[3]];
+ }),["k","n","n",""])+
+ '<p class="b">The hold caps are the real constraint. Ten collars of each kind, three revives, two Max Ethers — you cannot stockpile your way out of a bad Safari run.</p>'+
+
+ '<h2 class="s">Playing it</h2>'+
+ tbl(["Command","What it does"],[
+  ['<span class="cmd">!safari</span>',"Go looking for wild Pets in the region you are standing in. <strong>5 per day.</strong>"],
+  ['<span class="cmd">!pets</span>',"Your collection."],
+  ['<span class="cmd">!pet_party</span>',"Set the three that fight."],
+  ['<span class="cmd">!pet_name</span>',"Nickname a Pet."],
+  ['<span class="cmd">!pet_train @user</span>',"A training duel. Both trainers earn XP. <strong>3 per day.</strong>"],
+  ['<span class="cmd">!pet_spar @user</span>',"A friendly fight. No XP, no limit, no cost."],
+  ['<span class="cmd">!collars</span> · <span class="cmd">!pet_shop</span>',"Buy collars, potions, revives and ethers."],
+  ['<span class="cmd">!petpanel</span>',"The button hub for all of it."]
+ ],["k",""])+
+ '<p class="b">You start by choosing one of three: <strong>Cinderling</strong> (Fire), <strong>Pebblecrab</strong> (Water) or <strong>Leafkit</strong> (Grass). The classic trio, and the classic triangle — each beats one of the others.</p>'+
+ '<p class="b">A Safari encounter runs on a <strong>2 minute turn timer</strong>. Wild Pets use a simple AI that picks its best damage; trainer battles run a smarter one that reads matchups.</p>'+
+ '<div class="callout"><p><strong>Where you stand decides what you meet.</strong> Safari draws from the region you are physically in, so <span class="cmd">!travel</span> is part of the Pets loop. Want an Ice Pet? Go to Rocky Chill Pass. There is no other way.</p></div>'+
+
+ '<h2 class="s">Advice for when it opens</h2>'+
+ '<p class="b"><strong>Scan before you throw.</strong> 10 essence is cheap next to a 3,000 OIL Prime Collar spent on a Poor roll.</p>'+
+ '<p class="b"><strong>Build for coverage, not for power.</strong> Three Pets, three types that cover each other. A team of three Fire Pets loses to one Water wall.</p>'+
+ '<p class="b"><strong>Speed is a stat that decides fights.</strong> Sweepers hit 133–138 base speed and win the turn. Walls sit at 35–55 and simply never go first — a wall only works if it survives the alpha strike, and against a super-effective STAB hit it will not.</p>'+
+ '<p class="b"><strong>Rock is the safest first investment</strong> — nothing resists it, and it comes out of the beginner region.</p>'+
+ '<p class="b"><strong>Release your rejects.</strong> A Poor Pet in your box is 1 essence you have not banked.</p>';
+}};
+
 PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads between them, and the places the story happens. Select any marker on the map.",h:function(){
  return '<div class="atlas"><div class="atlas__m" id="map"></div>'+
  '<aside class="atlas__s"><div class="dos" id="dos"></div></aside></div>'+
@@ -1033,11 +1212,11 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
    NAV / ROUTER
    ══════════════════════════════════════════════════════════════════ */
 var NAV=[
- ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["factions","Factions"],["economy","Economy &amp; Progression"]]],
- ["The world",[["valestia","Valestia"],["lore","Lore"]]],
+ ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["pets","Pets"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
+ ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"]]],
  ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]]
 ];
-var COUNTS={gear:"26",weapons:"16",abyss:"",factions:"8",clans:"9",valestia:"11",story:"31",sides:"50"};
+var COUNTS={gear:"26",weapons:"16",pets:"84",factions:"15",clans:"9",valestia:"11",story:"31",sides:"50"};
 
 document.getElementById("nav").innerHTML=NAV.map(function(g){
  return '<div class="navgrp"><div class="navgrp__t">'+g[0]+'</div><div class="nav">'+
