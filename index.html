@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valestia — The Guardians Compendium</title>
+<meta name="description" content="The complete player compendium for The Guardians, a Discord RPG by Max: combat maths, gear, weapons, every game mode, the map of Valestia, the lore, and all 81 story and side missions.">
+<link rel="canonical" href="https://guardiansrpg.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<!-- Open Graph: this is what renders the link card when the URL is pasted in Discord -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Guardians">
+<meta property="og:title" content="Valestia — The Guardians Compendium">
+<meta property="og:description" content="The complete player compendium for The Guardians, a Discord RPG by Max: combat maths, gear, weapons, every game mode, the map of Valestia, the lore, and all 81 story and side missions.">
+<meta property="og:url" content="https://guardiansrpg.com/">
+<meta name="theme-color" content="#0A1416">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Valestia — The Guardians Compendium">
+<meta name="twitter:description" content="The complete player compendium for The Guardians, a Discord RPG by Max: combat maths, gear, weapons, every game mode, the map of Valestia, the lore, and all 81 story and side missions.">
+<meta property="og:image" content="https://guardiansrpg.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The map of Valestia">
+<meta name="twitter:image" content="https://guardiansrpg.com/og.jpg">
+
+<link rel="stylesheet" href="fonts.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-moz-text-size-adjust:none;-webkit-text-size-adjust:none;text-size-adjust:none}
+body,h1,h2,h3,h4,p,figure,blockquote,dl,dd{margin:0}
+ul[role='list'],ol[role='list']{list-style:none}
+img,picture,svg,video,canvas{max-width:100%;display:block}
+input,button,textarea,select{font:inherit}
+table{border-collapse:collapse}
+
+:root{
+  --bg:#D5D8D1; --bg-raised:#DEE0DA; --bg-sunken:#C7CBC3; --bg-rail:#CDD1C9;
+  --rule:rgba(20,45,40,.18); --rule-strong:rgba(20,45,40,.38);
+  --graticule:rgba(47,97,83,.09);
+  --text:#16211F; --text-dim:#455249; --text-faint:#6B7A73;
+  --brass:#8A6522; --brass-soft:rgba(138,101,34,.13);
+  --verdigris:#2F6153; --verdigris-soft:rgba(47,97,83,.10);
+  --corrupt:#8C3A32; --corrupt-soft:rgba(140,58,50,.11);
+  --sea:#9DAAA6; --sea-deep:#7C8C88; --land:#CFD3CB; --void:#0A1416;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --cond:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --rail:266px;
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0A1416; --bg-raised:#111E20; --bg-sunken:#060D0E; --bg-rail:#0C181A;
+    --rule:rgba(160,195,186,.15); --rule-strong:rgba(160,195,186,.32);
+    --graticule:rgba(120,185,168,.06);
+    --text:#DCE3DF; --text-dim:#93A49E; --text-faint:#65766F;
+    --brass:#C79A4B; --brass-soft:rgba(199,154,75,.14);
+    --verdigris:#4E9584; --verdigris-soft:rgba(78,149,132,.12);
+    --corrupt:#B4544A; --corrupt-soft:rgba(180,84,74,.14);
+    --sea:#12262A; --sea-deep:#0B191C; --land:#16282A; --void:#04090A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1416; --bg-raised:#111E20; --bg-sunken:#060D0E; --bg-rail:#0C181A;
+  --rule:rgba(160,195,186,.15); --rule-strong:rgba(160,195,186,.32);
+  --graticule:rgba(120,185,168,.06);
+  --text:#DCE3DF; --text-dim:#93A49E; --text-faint:#65766F;
+  --brass:#C79A4B; --brass-soft:rgba(199,154,75,.14);
+  --verdigris:#4E9584; --verdigris-soft:rgba(78,149,132,.12);
+  --corrupt:#B4544A; --corrupt-soft:rgba(180,84,74,.14);
+  --sea:#12262A; --sea-deep:#0B191C; --land:#16282A; --void:#04090A;
+}
+:root[data-theme="light"]{
+  --bg:#D5D8D1; --bg-raised:#DEE0DA; --bg-sunken:#C7CBC3; --bg-rail:#CDD1C9;
+  --rule:rgba(20,45,40,.18); --rule-strong:rgba(20,45,40,.38);
+  --graticule:rgba(47,97,83,.09);
+  --text:#16211F; --text-dim:#455249; --text-faint:#6B7A73;
+  --brass:#8A6522; --brass-soft:rgba(138,101,34,.13);
+  --verdigris:#2F6153; --verdigris-soft:rgba(47,97,83,.10);
+  --corrupt:#8C3A32; --corrupt-soft:rgba(140,58,50,.11);
+  --sea:#9DAAA6; --sea-deep:#7C8C88; --land:#CFD3CB; --void:#0A1416;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--cond);font-size:1rem;line-height:1.5;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(var(--graticule) 1px,transparent 1px),linear-gradient(90deg,var(--graticule) 1px,transparent 1px);
+  background-size:64px 64px,64px 64px;
+}
+::selection{background:var(--brass);color:var(--bg)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+
+/* ── SHELL ── */
+.app{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);min-height:100vh}
+@media (max-width:940px){.app{grid-template-columns:1fr}}
+
+.rail{
+  background:var(--bg-rail);border-right:1px solid var(--rule);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:1.3rem 0 3rem;
+}
+@media (max-width:940px){
+  .rail{position:fixed;inset:0 auto 0 0;width:min(84vw,300px);z-index:60;transform:translateX(-101%);transition:transform .26s var(--ease);border-right:1px solid var(--rule-strong)}
+  .rail.is-open{transform:none}
+}
+.brand{display:block;padding:0 1.3rem 1.1rem;border-bottom:1px solid var(--rule);text-decoration:none}
+.brand__w{font-family:var(--serif);font-weight:700;font-size:1.32rem;letter-spacing:-.01em;color:var(--text);line-height:1}
+.brand__w em{font-style:italic;font-weight:400;color:var(--brass)}
+.brand__s{font-family:var(--cond);font-weight:600;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-faint);margin-top:.4rem;display:block}
+
+.navgrp{padding:1.15rem 0 .2rem}
+.navgrp__t{font-family:var(--cond);font-weight:600;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--verdigris);padding:0 1.3rem .5rem}
+.nav{display:flex;flex-direction:column}
+.nav a{
+  font-family:var(--cond);font-size:.95rem;color:var(--text-dim);text-decoration:none;
+  padding:.34rem 1.3rem;border-left:2px solid transparent;transition:all .14s var(--ease);
+  display:flex;align-items:baseline;gap:.5rem;
+}
+.nav a:hover{color:var(--text);background:var(--brass-soft)}
+.nav a.is-on{color:var(--brass);border-left-color:var(--brass);background:var(--brass-soft)}
+.nav a i{font-family:var(--mono);font-size:.6rem;font-style:normal;color:var(--text-faint);margin-left:auto}
+.nav a.is-on i{color:var(--brass)}
+
+.scrim{display:none}
+@media (max-width:940px){
+  .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:55;opacity:0;pointer-events:none;transition:opacity .26s var(--ease)}
+  .scrim.is-on{opacity:1;pointer-events:auto}
+}
+.burger{
+  display:none;position:fixed;top:.7rem;left:.7rem;z-index:70;
+  background:var(--bg-raised);border:1px solid var(--rule-strong);color:var(--text);
+  font-family:var(--cond);font-weight:600;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  padding:.5rem .8rem;cursor:pointer;
+}
+@media (max-width:940px){.burger{display:block}}
+
+/* ── MAIN ── */
+.main{min-width:0}
+.page{display:none;padding:clamp(2rem,4vw,3.6rem) clamp(1.1rem,3.4vw,3.4rem) 6rem;max-width:1180px}
+.page.is-on{display:block}
+@media (max-width:940px){.page{padding-top:3.6rem}}
+
+.ph{border-bottom:1px solid var(--rule);padding-bottom:1.5rem;margin-bottom:2.2rem}
+.ph__e{font-family:var(--cond);font-weight:600;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--verdigris)}
+.ph h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.04;letter-spacing:-.02em;margin:.5rem 0 0;text-wrap:balance}
+.ph__d{font-family:var(--serif);font-size:1.04rem;color:var(--text-dim);margin-top:.85rem;max-width:64ch;line-height:1.6}
+
+h2.s{font-family:var(--serif);font-weight:600;font-size:1.5rem;margin:2.8rem 0 .3rem;letter-spacing:-.01em;scroll-margin-top:1rem}
+h2.s:first-of-type{margin-top:0}
+h3.t{font-family:var(--cond);font-weight:600;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin:2rem 0 .8rem}
+p.b{font-family:var(--serif);font-size:1.02rem;line-height:1.62;color:var(--text-dim);max-width:64ch;margin:.75rem 0}
+p.b strong{color:var(--text);font-weight:600}
+p.b em{font-style:italic}
+.cmd{font-family:var(--mono);font-size:.84em;color:var(--brass);background:var(--brass-soft);padding:.08em .36em;white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+.fx{font-family:var(--mono);font-size:.78rem;color:var(--verdigris);background:var(--verdigris-soft);padding:.6rem .75rem;margin:.85rem 0;display:block;overflow-x:auto;white-space:nowrap;max-width:64ch}
+
+.callout{border-left:2px solid var(--brass);background:var(--brass-soft);padding:.85rem 1rem;margin:1.2rem 0;max-width:66ch}
+.callout p{font-family:var(--serif);font-size:.96rem;line-height:1.55;color:var(--text-dim);margin:0}
+.callout p+p{margin-top:.5rem}
+.callout--warn{border-left-color:var(--corrupt);background:var(--corrupt-soft)}
+
+/* ── TABLE ── */
+.tw{overflow-x:auto;border:1px solid var(--rule);margin:1rem 0}
+table{border-collapse:collapse;width:100%;min-width:440px}
+th{
+  font-family:var(--cond);font-weight:600;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-faint);text-align:left;padding:.6rem .8rem;background:var(--bg-raised);
+  border-bottom:1px solid var(--rule-strong);white-space:nowrap;
+}
+td{
+  font-family:var(--cond);font-size:.92rem;color:var(--text-dim);padding:.52rem .8rem;
+  border-bottom:1px solid var(--rule);vertical-align:top;
+}
+tr:last-child td{border-bottom:0}
+td.k{font-family:var(--serif);font-weight:600;color:var(--text);white-space:nowrap}
+td.n{font-family:var(--mono);font-size:.82rem;font-variant-numeric:tabular-nums;color:var(--brass);white-space:nowrap}
+td.m{font-family:var(--mono);font-size:.76rem;color:var(--text-faint)}
+tbody tr:hover td{background:var(--brass-soft)}
+
+/* ── CARD GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:1rem 0}
+.grid--wide{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.card{background:var(--bg);padding:1.15rem 1.1rem}
+.card__h{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.45rem}
+.card__n{font-family:var(--serif);font-weight:600;font-size:1.04rem;color:var(--text)}
+.card__tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;color:var(--brass);border:1px solid var(--brass);padding:.05rem .3rem;margin-left:auto;white-space:nowrap}
+.card__tag--clan{color:var(--corrupt);border-color:var(--corrupt)}
+.card__st{font-family:var(--mono);font-size:.72rem;color:var(--verdigris);margin-bottom:.4rem}
+.card__d{font-family:var(--cond);font-size:.9rem;color:var(--text-dim);line-height:1.5}
+.card__f{font-family:var(--mono);font-size:.66rem;color:var(--text-faint);margin-top:.55rem;padding-top:.5rem;border-top:1px solid var(--rule)}
+
+/* ── CALCULATOR ── */
+.rig{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:1.2rem 0}
+@media (max-width:820px){.rig{grid-template-columns:1fr}}
+.rig__p{background:var(--bg-raised);padding:1.4rem 1.2rem}
+.rig__o{background:var(--bg);padding:1.4rem 1.2rem}
+.lvl{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:1rem;border-bottom:1px solid var(--rule)}
+.lvl__l{font-family:var(--cond);font-weight:600;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
+.lvl__c{display:flex;align-items:center;gap:.45rem}
+.btn{font-family:var(--mono);font-size:.88rem;line-height:1;background:transparent;color:var(--text);border:1px solid var(--rule-strong);width:25px;height:25px;cursor:pointer;display:grid;place-items:center;padding:0;transition:all .14s var(--ease)}
+.btn:hover:not(:disabled){border-color:var(--brass);color:var(--brass)}
+.btn:disabled{opacity:.25;cursor:not-allowed}
+.lvl__v{font-family:var(--mono);font-size:1rem;color:var(--brass);min-width:2.2ch;text-align:center;font-variant-numeric:tabular-nums}
+.bud{display:flex;justify-content:space-between;align-items:baseline;padding:.9rem 0 .2rem}
+.bud__t{font-family:var(--cond);font-weight:600;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
+.bud__v{font-family:var(--mono);font-size:.84rem;font-variant-numeric:tabular-nums}
+.bud__v.over{color:var(--corrupt)}
+.st{padding:.85rem 0;border-top:1px solid var(--rule)}
+.st__t{display:flex;align-items:center;gap:.6rem;margin-bottom:.45rem}
+.st__k{font-family:var(--cond);font-weight:600;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase;width:3.4ch}
+.st__d{font-family:var(--cond);font-size:.8rem;color:var(--text-faint);margin-right:auto;line-height:1.25}
+.st__v{font-family:var(--mono);font-size:.95rem;color:var(--brass);min-width:2.4ch;text-align:right;font-variant-numeric:tabular-nums}
+.st__r{display:flex;align-items:center;gap:.5rem}
+.mtr{flex:1;height:5px;background:var(--bg-sunken);border:1px solid var(--rule);position:relative;overflow:hidden}
+.mtr__f{position:absolute;inset:0 auto 0 0;background:var(--brass);transition:width .2s var(--ease)}
+.ro{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:1.2rem}
+.tl{background:var(--bg-raised);padding:.75rem .8rem;display:flex;flex-direction:column;gap:.22rem}
+.tl__k{font-family:var(--cond);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint)}
+.tl__v{font-family:var(--mono);font-size:1.2rem;color:var(--text);font-variant-numeric:tabular-nums;line-height:1.1}
+.tl__v.br{color:var(--brass)}
+.tl__f{font-family:var(--mono);font-size:.6rem;color:var(--text-faint)}
+.dm{border:1px solid var(--rule);margin-bottom:1.1rem}
+.dm__h{font-family:var(--cond);font-weight:600;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);padding:.6rem .8rem;border-bottom:1px solid var(--rule);background:var(--bg-raised)}
+.dm__r{display:flex;align-items:center;gap:.8rem;padding:.55rem .8rem;border-bottom:1px solid var(--rule)}
+.dm__r:last-child{border-bottom:0}
+.dm__l{font-family:var(--cond);font-size:.86rem;color:var(--text-dim);width:10ch;flex-shrink:0}
+.dm__b{flex:1;height:13px;background:var(--bg-sunken);border:1px solid var(--rule);position:relative;overflow:hidden;min-width:34px}
+.dm__s{position:absolute;top:0;bottom:0;transition:all .2s var(--ease)}
+.dm__n{font-family:var(--mono);font-size:.8rem;width:9ch;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+.vd{font-family:var(--serif);font-size:.92rem;color:var(--text-faint);line-height:1.5;border-left:2px solid var(--verdigris);padding-left:.75rem}
+
+/* ── MAP ── */
+.atlas{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,290px);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:1.2rem 0}
+@media (max-width:940px){.atlas{grid-template-columns:1fr}}
+.atlas__m{background:var(--sea-deep);position:relative;overflow:hidden}
+.mapwrap{position:relative;line-height:0}
+.mapimg{width:100%;height:auto;display:block}
+/* markers sit over the painted map in % so they track it at any width */
+.pin{
+  position:absolute;transform:translate(-50%,-50%);background:none;border:0;padding:10px;
+  cursor:pointer;line-height:0;z-index:2;
+}
+.pin__d{
+  display:block;width:11px;height:11px;border-radius:50%;
+  background:transparent;border:2px solid var(--verdigris);
+  box-shadow:0 0 0 2px rgba(0,0,0,.45);transition:all .16s var(--ease);
+}
+.pin.hunt .pin__d{background:var(--verdigris)}
+.pin.seal .pin__d{border-style:dashed;border-color:var(--corrupt)}
+.pin:hover .pin__d{border-color:var(--brass);background:var(--brass);transform:scale(1.35)}
+.pin.on .pin__d{background:var(--brass);border-color:var(--brass);transform:scale(1.5);box-shadow:0 0 0 3px rgba(0,0,0,.5),0 0 14px 3px var(--brass)}
+.pin__t{
+  position:absolute;left:50%;top:-6px;transform:translate(-50%,-100%);
+  font-family:var(--cond);font-weight:600;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;color:#F2EDE2;background:rgba(6,14,15,.92);border:1px solid var(--brass);
+  padding:.16rem .4rem;line-height:1.3;opacity:0;pointer-events:none;transition:opacity .16s var(--ease);
+}
+.pin:hover .pin__t,.pin:focus-visible .pin__t,.pin.on .pin__t{opacity:1}
+.atlas__s{background:var(--bg-raised);padding:1.3rem 1.2rem}
+.leg{display:flex;flex-wrap:wrap;gap:1rem;padding:.7rem .9rem;border-top:1px solid var(--rule);background:var(--bg-raised)}
+.leg span{font-family:var(--cond);font-size:.74rem;color:var(--text-faint);display:flex;align-items:center;gap:.35rem}
+.leg b{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dos__e{font-family:var(--mono);font-size:.64rem;color:var(--brass)}
+.dos h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:.2rem 0 0;line-height:1.15}
+.dos__r{border-top:1px solid var(--rule);padding-top:.65rem;margin-top:.85rem}
+.dos__k{font-family:var(--cond);font-weight:600;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:.3rem}
+.dos__m{font-family:var(--mono);font-size:.82rem;color:var(--brass)}
+.dos__x{font-family:var(--cond);font-size:.88rem;color:var(--text-dim);line-height:1.45}
+.sp{margin-bottom:.45rem;font-family:var(--cond);font-size:.86rem;line-height:1.35}
+.sp__a{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--verdigris);display:block}
+.sp__n{color:var(--text-dim)}
+.sp__n b{color:var(--text);font-weight:400}
+
+/* ── STORY ── */
+.chap{margin:0 0 2.6rem}
+.chap__h{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:.5rem;margin-bottom:.4rem}
+.chap__h h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;margin:0}
+.chap__id{font-family:var(--mono);font-size:.66rem;color:var(--text-faint)}
+.chap__st{font-family:var(--cond);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;padding:.12rem .4rem;border:1px solid var(--verdigris);color:var(--verdigris);margin-left:auto}
+.chap__st.live{border-color:var(--brass);color:var(--brass)}
+.chap__w{font-family:var(--cond);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--verdigris);margin-bottom:1rem}
+.bt{display:grid;grid-template-columns:5.4ch 1fr;gap:.85rem;padding:.4rem 0;border-bottom:1px dotted var(--rule);align-items:baseline}
+.bt:last-child{border-bottom:0}
+.bt__i{font-family:var(--mono);font-size:.68rem;color:var(--text-faint)}
+.bt__n{font-family:var(--serif);font-size:1rem;color:var(--text-dim)}
+.bt.live .bt__n{color:var(--brass);font-weight:600}
+.bt.live .bt__i{color:var(--brass)}
+.bt__d{font-family:var(--cond);font-size:.85rem;color:var(--text-faint);line-height:1.45;margin-top:.15rem;max-width:70ch}
+
+.arc{border:1px solid var(--rule);margin:1rem 0;background:var(--bg)}
+.arc__h{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;padding:1rem 1.1rem;background:var(--bg-raised);border-bottom:1px solid var(--rule)}
+.arc__h h3{font-family:var(--serif);font-weight:600;font-size:1.14rem;margin:0}
+.arc__c{font-family:var(--mono);font-size:.64rem;color:var(--brass);border:1px solid var(--brass);padding:.05rem .32rem}
+.arc__p{font-family:var(--mono);font-size:.64rem;color:var(--text-faint);margin-left:auto}
+.arc__b{padding:1rem 1.1rem}
+.arc__d{font-family:var(--serif);font-size:.96rem;color:var(--text-dim);line-height:1.58;margin-bottom:.85rem;max-width:70ch}
+.arc__l{display:grid;gap:.1rem}
+.arc__q{display:grid;grid-template-columns:2.2ch 1fr;gap:.6rem;font-family:var(--cond);font-size:.9rem;color:var(--text-dim);padding:.16rem 0;align-items:baseline}
+.arc__q i{font-family:var(--mono);font-size:.62rem;color:var(--text-faint);font-style:normal}
+
+/* ── EXCERPT ── */
+.ex{border:1px solid var(--rule);background:var(--bg-raised);padding:1.4rem 1.3rem;margin:1.4rem 0;max-width:70ch}
+.ex__h{font-family:var(--mono);font-size:.64rem;color:var(--brass);margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--rule)}
+.ex p:not(.ex__h){font-family:var(--serif);font-size:1rem;line-height:1.66;color:var(--text-dim);margin-bottom:.85rem}
+.ex p:last-of-type{margin-bottom:0}
+.ex em{color:var(--text);font-style:italic}
+
+.foot{border-top:1px solid var(--rule);margin-top:3.4rem;padding-top:1.4rem}
+.foot p{font-family:var(--mono);font-size:.66rem;color:var(--text-faint);line-height:1.75;max-width:70ch}
+.foot b{color:var(--brass);font-weight:400}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<button class="burger" id="burger" aria-label="Open navigation">Menu</button>
+<div class="scrim" id="scrim"></div>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <a class="brand" href="#start">
+      <span class="brand__w">The <em>Guardians</em></span>
+      <span class="brand__s">Valestia Compendium</span>
+    </a>
+    <div id="nav"></div>
+  </nav>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+(function(){
+"use strict";
+var E=function(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");};
+
+/* Swapped at build time: a data URI for the artifact, a file path for the site. */
+var MAP_SRC="assets/valestia-map.webp";
+
+/* ══════════════════════════════════════════════════════════════════
+   DATA — read out of the live bot: crafting_system.py, weapons_system.py,
+   region_system.py, codex_cards.py and database_v2.db (quest_templates_v1).
+   ══════════════════════════════════════════════════════════════════ */
+
+var GEAR=[
+ ["Strength Ring","+1 STR",4000,"Forged for duelists who want a clean and reliable power spike.","copper_ore 4 · silver_ore 2"],
+ ["Cardboard Boots","+1 AGI",4000,"Scrappy but effective footwear tuned for faster movement and reactions.","cardboard_scrap 6 · copper_ore 2"],
+ ["Linen Shirt","+1 CON",4000,"Light reinforced fabric that improves toughness without slowing you down.","linen_fiber 6 · cardboard_scrap 2"],
+ ["Life Necklace","+20 HP",4000,"A defensive talisman that adds raw survivability in every fight.","linen_fiber 4 · silver_ore 3"],
+ ["Ravager Badge","+2 STR, −25 HP",4600,"High-risk emblem that boosts attack power at the cost of max vitality.","copper_ore 6 · silver_ore 4"],
+ ["Guardbreaker Gauntlets","+1 STR",7600,"Anti-guard passive: +12% attack damage against PARRY targets.","aegis_shard · stability_spring"],
+ ["Mist Cloak","+1 AGI, +10 HP",7800,"Tactical cloak: after a successful REST, gain +12% dodge for your next incoming attack.","phantom_weave · stride_servo"],
+ ["War Harness","+1 CON, +15 HP",8200,"Frontline harness: starts each combat with a one-time 15-point shield that absorbs damage before HP.","aegis_shard · guard_core"],
+ ["Wildcard","+1 AGI",6000,"Chaos gear. Every 3rd turn it fires one of nine random effects — buff, debuff, or backfire. Granted by the Roulette.","roulette only"],
+ ["Hunter Stride Boots","+2 AGI, −10 HP",8800,"Execute passive: +12% bonus damage when the target is at ≤35% HP, scaling up to +20% at lower HP.","stride_servo · predator_fang"],
+ ["Retaliation Anchor","+1 CON, +10 Parry Def",8600,"Counter-burst passive: after PARRY, your next ATTACK deals +18% and +6 flat bonus damage.","retaliation_rivet · guard_core"],
+ ["Resonance Dagger","+1 STR, +1 AGI",9200,"Combo burst passive: every 3rd attack deals +18% and +8 flat bonus damage.","resonance_shard · pulse_essence"],
+ ["Phase Shard","+1 STR, +5 HP",8000,"Focus pierce passive: when attacking after FOCUS, pierce 20% of the target's flat mitigation.","fracture_prism · focus_prism"],
+ ["Shatter Brace","+1 CON, +5 HP",8200,"Phase/shatter set piece. Pairs into the shatter line.","fracture_prism · stability_spring"],
+ ["Bloodline Ring","+1 STR, +5 HP",11000,"Blood line opener — feeds the lifesteal builds.","bloodsteel_chip · silver_ore"],
+ ["Warden's Vow","+1 CON, +8 HP",10500,"Defensive vow piece for the warden line.","aegis_shard · medic_resin"],
+ ["Blood Pact Seal","+3 STR, −35 HP",9000,"Pay vitality for raw power. The steepest trade in the catalog.","bloodsteel_chip · obsidian_alloy"],
+ ["Null Crown","+1 STR, +1 AGI, +1 CON, +20 HP",20000,"All-round crown. No hole in it anywhere.","null_coil · obsidian_alloy"],
+ ["Blood Pact Reliquary","+2 STR, −30 HP",26000,"Upgraded blood pact: lifesteal with a per-hit cap.","bloodsteel_chip · war_emblem_fragment"],
+ ["Null Crown Apex","+2 STR, +2 AGI, +2 CON, +20 HP",31000,"Apex crown. First hit shreds 20 per enemy.","null_coil · temporal_gear · war_emblem_fragment"]
+];
+
+var CLANFORGE=[
+ ["First Aid Kit","—",5000,"Once per combat, if no consumable can be used, restores up to 35 HP."],
+ ["Aegis Tuner","+10 Parry Def",5600,"Grants +10 Parry Defense only. It does not add STR or CON."],
+ ["Last Pulse Amulet","+1 CON, +20 HP",12500,"Once per combat, on lethal damage, has a 75% chance to revive you at 15% HP."],
+ ["Predictor Lens","+1 AGI, +10 Parry Def",13200,"Anti-pattern passive: deal +12% bonus damage if the target repeats the same action 2 or more times in a row."],
+ ["Breach Core","+1 STR, +1 CON",14800,"First guard-break marks the target; marked targets take +18% team damage for one round."],
+ ["Field Resuscitator","—",22000,"Once per combat, auto-revives one fallen ally at exactly 10% HP."]
+];
+
+var SETS=[
+ ["Siegebreak Protocol","Guardbreaker Gauntlets + Breach Core","Guardbreaker bonus increases from +12% to +15%, and Breach Mark lasts 5 hits instead of 4."],
+ ["Predator Circuit","Hunter Stride Boots + Resonance Dagger","When execute triggers, add +5 flat damage."],
+ ["Bastion Counterloop","War Harness + Retaliation Anchor","War Harness starting shield increases to 20, and Retaliation flat bonus increases to +8."],
+ ["Phantom Oracle","Mist Cloak + Predictor Lens","Post-REST dodge bonus increases to +15%, and Predictor pattern bonus increases to +14%."],
+ ["Last Line Protocol","Last Pulse Amulet + Field Resuscitator","Revives from Last Pulse and Field Resuscitator grant +8 shield to the revived unit."],
+ ["Surgical Breach","Field Resuscitator + Breach Core","Allies revived by Field Resuscitator gain +6% damage on their first ATTACK."],
+ ["Counter Hunt","Retaliation Anchor + Hunter Stride Boots","If counter-burst hits an execute-range target, add +3 flat damage."],
+ ["Sentinel Tempo","War Harness + Predictor Lens","If you defended, your next ATTACK gains +5% damage (one attack)."],
+ ["Crimson Null Pact","Blood Pact Seal + Null Crown","Once per combat, when HP falls to 50% or lower, your next ATTACK gains 25% lifesteal."],
+ ["Hemophage Rite","Blood Pact Reliquary + Resonance Dagger","Blood Pact lifesteal gains +2% (14% → 16%) and per-hit lifesteal cap gains +2."],
+ ["Null Tribunal","Null Crown Apex + Breach Core","Null Crown Apex first-hit shred increases from 20 to 25 per enemy."]
+];
+
+var WEAPONS=[
+ ["Gemini Edge","+1 STR, +1 AGI","Double Strike","Two strikes at 60% damage each; can hit the same or two different targets.","→ 75% at +5",15000,"",""],
+ ["Aegis Bulwark","+1 CON, +10 Parry Def","Guard Surge","PARRY this turn with your Parry Defense multiplied ×1.5 — an almost guaranteed parry.","→ ×1.8 at +5",18000,"",""],
+ ["Concussive Maul","+2 STR","Break Stance","Strip the target's FOCUS, then strike at 80% in AGI order.","→ 100%; at +5 also −10% target dmg",18000,"",""],
+ ["Sunder Pike","+1 STR, +1 AGI","Pierce","A strike that ignores 60% of the target's flat mitigation.","→ 80% ignored at +5",15000,"",""],
+ ["Reaper's Edge","+2 STR, −10 HP","Execute","+65% damage vs targets below 25% HP. Otherwise a normal strike.","→ +85% vs <35% at +5",24000,"",""],
+ ["Whirlwind Axe","+1 STR, +1 CON","Area Strike","Strike every living enemy for 40% damage each.","→ 55% at +5",17500,"",""],
+ ["War Banner","+1 CON, +10 HP","Rally","Strike a target and rally: you and your 2 highest-STR allies deal +15% damage this turn.","→ +25% at +5",18000,"",""],
+ ["Guardian's Oath","+1 CON, +15 HP","Cover Ally","PARRY and redirect onto yourself the attack aimed at your lowest-HP ally this turn.","→ −50% redirected; at +5 redirect 2",18000,"",""],
+ ["Crimson Fang","+1 STR, +5 HP","Vampiric Edge","A normal strike that heals you for 30% of the damage dealt.","→ 45% at +5",15000,"",""],
+ ["Pulse Injector","+1 AGI, +10 HP","Adrenaline","PARRY this turn, gain FOCUS, and restore 15 HP.","→ 40 HP at +5",15000,"",""],
+ ["Mirror Saber","+1 STR, +1 AGI","Riposte Stance","Strike normally and reflect 50% of the FIRST incoming attack this turn.","→ 75% at +5",18000,"",""],
+ ["Hook Chain","+1 STR, +1 AGI","Disarm","Strike at 80% and reduce the target's damage by 20% for 2 turns.","→ −30% at +5",15000,"",""],
+ ["Tracker Bow","+1 STR, +1 AGI","Hunter's Mark","Strike at 90% and mark the target: your team deals +15% to it for 1 round.","→ +25% at +5",15000,"",""],
+ ["Bastion Standard","+2 CON, +5 Parry Def","Aegis Rampart","Shield every living ally for 22 this turn, then strike one enemy for 100%.","→ 42 shield; at +5 team −15% dmg",40000,"clan",""],
+ ["Bulwark Fang","+1 CON, +5 Parry Def","Guarded Strike","PARRY this turn (Parry Def ×1.4) and chip one enemy for 30% — you must break their guard, with no counter risk.","→ 50%; at +5 double chip on parry",37000,"clan",""],
+ ["Trainee's Edge","—","Power Strike","A focused strike that deals 125% damage to one target.","no enhance",0,"quest","Granted by the weapon quest The First Blade — not craftable."]
+];
+
+var POTIONS=[
+ ["Health Potion",100,"Heal 20 HP now"],["Ultra Health Potion",200,"Heal 50 HP now"],
+ ["Critical Potion",100,"Next attack: +25% crit chance"],["Guard Potion",100,"Reduce your next incoming hit by 50%"],
+ ["Power Potion",100,"Next attack: +25% damage"],["Focus Potion",250,"Gain FOCUS now (upgrades to Ultra Focus if already Focused)"],
+ ["Mind Cleanser",200,"Remove Focus / Ultra Focus from your opponent"],["Last Stand Elixir",300,"Once: survive a lethal hit at 15% HP"],
+ ["Protective Shield Potion",300,"Absorb up to 100 damage this turn"],["Resurrection Potion",250,"Revive one fallen ally at 20% HP (team modes)"],
+ ["Team Heal Potion",300,"Heal the 3 lowest allies by 30 HP each (team modes)"],["Raid Entry Ticket",200,"Required to join a Boss Raid (max 1 held)"],
+ ["Guild Contract",200,"Starts a faction contract mission"]
+];
+
+var NPCPASS=[
+ ["Enrage","Deals 1.5× damage below 30% HP"],["Momentum","+10% damage per consecutive Attack (max +30%); resets on Rest/Parry"],
+ ["Thorns","Reflects 15% of damage taken back to the attacker"],["Resilience","Survives one lethal hit at 1 HP (once per fight)"],
+ ["Shield Wall","Defense is 1.5× stronger when it parries"],["Adaptive","+1 STR each time it rests (up to 3 times)"],
+ ["Lifesteal","Heals 20% of damage it deals"],["Spell Shield","Negates the first crit it takes"],
+ ["Regeneration","Heals 5% max HP every round"],["Executioner","+50% damage to targets below 25% HP"],
+ ["Bulwark","Ignores the crit multiplier — crits hit it for normal damage"],["Counter Strike","Reflects 1.5× on a perfect block"]
+];
+
+var CLANPASS=[
+ ["Forager's Covenant","+16% material drop chance","Crafters"],["Guardian Vitality","+15% max HP vs NPCs","PvE survival"],
+ ["Vanguard Edge","+15% damage vs NPCs","PvE damage"],["Bulwark Rites","−12% damage taken from NPCs","PvE tanking"],
+ ["Unshackled Victory","10% chance a daily win doesn't count","Playing past caps"],["Alchemist Oath","25% potion preservation vs NPCs","Potion efficiency"],
+ ["Sentinel's Eye","+12% crit chance vs NPCs","PvE DPS"],["Oathbound Link","−10% all damage taken (needs 3+ clanmates on the team)","Team synergy"],
+ ["Silent Watch","−25% chance to be targeted by Stalker / Marked Hunt","Avoiding NPC threats"]
+];
+
+/* The powers of Valestia, as recorded in the Codex. Card counts are live. */
+var FACTIONS=[
+ ["Korn Army",54,"Disciplined, expansionist, military pressure.","The largest organised force in the Codex and the one you meet most. Siege engineers, ballista crews, sappers, shock troopers — an army that builds before it attacks. Lt. Nyra and War Engineer Mork run it in the field. The Frogst Brothers are affiliated, though the night they came for you at Pier 7 they came personally, not on orders."],
+ ["Bandits",15,"Ambushes, desperation, opportunistic violence.","Not an organisation so much as a condition of the roads. They opened the story — the first thing between Gorim's scroll and Stormbay — and they have never stopped being there."],
+ ["Brute Army",13,"Raw force, shock attacks, intimidation.","No engineering, no patience. They fought through Black Lotus Wood and left it marked."],
+ ["Ancient Ruins",11,"Old sentinels, buried orders, forgotten halls.","Not an army — a category of thing that was left behind and told to keep standing. The Varn seal sentinels, the Compact constructs, the Archive's defensive layers. Some of them have held their post for centuries because nobody ever came to relieve them."],
+ ["Wild Threats",10,"Creatures and hostile things from caves, roads, and ruins.","What lives in the map between the places with names."],
+ ["Dark Knight Army",8,"Fallen chivalry, forbidden magic, corrupted vows.","Knights who kept the forms and dropped the oath. Their sanctum is the deepest hostile region on the map, and the White Knight has spent his life fighting them."],
+ ["Machines",7,"Constructs, droids, experimental weapons.","Sentries, drones, servo-knights. Mostly found in places that were sealed for a reason — Aster Keep, the lab, the forge-sites."],
+ ["Horde Raiders",6,"Wave attackers, nameless pressure, battlefield attrition.","They do not have a plan. They have a number, and the number is larger than yours."],
+ ["Aldenmoor Refugees",6,"Survivors rebuilding inside the ruins, holding on through sheer will.","Garrick's people. They tried three times to reach the underground stores and lost somebody every time, including Garrick's brother. Dren, the oldest of them, signed the original compact forty years ago and never told anyone what was in it."],
+ ["Void Entities",4,"Chaos, shadow, fear, supernatural judgment.","Azroth, leaking through. The Hollow, the Gate Wraiths, the Choir Echoes, the Null Cantors. They are the only faction on this list that is not fighting for territory or money — and the seal that holds them is failing."],
+ ["Stormbay Allies",3,"Port-city contacts, secrets, mercenary favors.","Elric the Scribe, Cara, and the thin network of people in Stormbay who will help you if the reason is good enough or the debt is old enough."],
+ ["Guardians' Allies",3,"Chainers, escorts, recruits, and battlefield companions.","Everyone who has stood next to you and lived. Captain Aldren, Field Medic Elara, and whoever else answers the call."],
+ ["Merchant Guild",2,"Trade routes, guarded cargo, reputation politics.","They own the crossroads and the contracts that run through it."],
+ ["Wealth Hunters",0,"Organized banditry driven by greed and rumor.","The ones who had Jessie surrounded in Black Lotus Wood the day you met her. They have no Codex cards yet."],
+ ["Independent",62,"Unaffiliated duelists, mercenaries, and local threats.","The catch-all: everyone in the Codex who answers to nobody. The single largest group on the board, which says something about Valestia."]
+];
+
+var CLASSES=[
+ ["Devastator","+3 STR, −1 CON","Every 3rd consecutive attack ×2; cannot Rest above 40% HP"],
+ ["Colossus","−1 STR, +3 CON","Perfect parry heals 10 HP; intercept one hit for an ally per battle"],
+ ["Ghost","+3 AGI, −1 CON","On dodge, free counter for 35% damage"],
+ ["Hexblade","+2 STR","+18% damage per active team curse; starts with 1 curse"],
+ ["Bard","—","When an ally heals, the Bard heals 40% of that too"]
+];
+var RELICS=[
+ ["Common","Iron Core (+2 CON) · Swift Step (+2 AGI) · Will of Steel (+15 HP) · Battle Hunger (+4 dmg) · Thorn Skin (reflect 10) · First Strike (first room hit ignores reduction) · Vital Pulse (+8 HP each room) · Stored Rage (+3% dmg per turn not attacking)"],
+ ["Rare","Vampiric Edge (20% lifesteal) · Echo Edge (25% double-attack) · Frost Touch (chill on hit) · Soul Bond (survive one death per run) · Inner Berserker (×2 below 30% HP) · Hourglass (+2 STR per 10 turns) · Cursed Contract (rare relic + a curse) · Death Pact (+25% dmg, no Rest)"],
+ ["Legendary","Abyssal Blade (every 3rd attack ×4) · Soul Devourer (+2 STR per elite kill) · Phoenix Aspect (team revive once) · Obsidian Fortress (first room hit = 0 dmg) · The Black Crown (all curses become buffs) · Eternal Moment (momentum never resets) · Void Pact (all damage doubled) · The Last Bastion (last player standing gets +8 STR/+8 AGI for 5 turns)"]
+];
+var CURSES=[
+ ["Bleed","Lose 5 HP per attack"],["Glass Cannon","+25% damage dealt and taken"],["Ancient Curse","15% chance to deal 0"],
+ ["Parasite","Heals also heal enemies"],["Void Leak","−4% max HP per room"],["Weight of Power","Focus only gives +50%"],
+ ["Marked Target","Enemies target you first"],["Echo Curse","Each curse gives enemies +4% HP"]
+];
+var PACTS=[
+ ["Blood","Start rooms at 85% HP","×1.3"],["Hunt","+25% enemy HP","×1.3"],["Silence","No potions","×1.25"],
+ ["Time","Boss gains +1 STR every 4 turns","×1.3"],["Darkness","No Market room","×1.2"],
+ ["Misery","Start each combat with a curse","×1.35"],["Death","No revives","×1.6"]
+];
+var ABYSSFOES=[
+ ["Brute","Fury below 30% HP"],["Assassin","Deadly Mark"],["Sentinel","Counter-stance at 50%"],
+ ["Summoner","Summons minions; immune while one lives"],["Specter","Immune to normal hits — needs Focus or a crit"],
+ ["Colossus","Huge HP + 60% reduction until its armor breaks; can stun"]
+];
+
+var MODES=[
+ ["Player versus player",[
+  ["Battle Royale","","Open free-for-all, last player standing. You earn in-match XP (Attack +25, Kill +30, Parry/Rest +15) that raises a temporary in-match level for small mid-fight boosts. You can go AFK and the bot plays for you, badly."],
+  ["1v1 Duel","","Both players choose their action simultaneously each turn; the choices reveal together. Pure read-and-react."],
+  ["Tag Duel / Team Duel","","One fighter per team is active at a time. Switch swaps in a benched teammate, costs your turn, and the new fighter enters next round. Rotate fresh bodies in and heal on the bench."],
+  ["Triad","","Three teams of two in one arena until one team survives. All three act each round, so target choice decides it — focus the weakest team and let the other two wear each other down."],
+  ["Free-For-All","","Open multi-player lobby, no teams. A Mindbreak variant can trigger based on channel activity."],
+  ["Tournament","","Structured best-of-3 1v1. Before each round you pick a build worth exactly 20 points plus one permitted consumable — Ultra Health, Protective Shield, Mind Cleanser or Power. Change your build between rounds to counter what you just saw."],
+  ["Bracket","","Multi-round single-elimination, seeding the whole server into one event."]
+ ]],
+ ["Player versus environment",[
+  ["Escort","","A team of 4 protects an escort target through waves of about 5 enemies. If the target dies, the mission fails. Keep somebody watching its HP with Resurrection Potions."],
+  ["Horde","","A 3-player team survives waves of up to 8 enemies, with heal votes between waves. Rewards scale with the wave number. There is also a Horde Hub with NPC companions you can bring."],
+  ["Mission","","Up to ~20 players in teams fight through waves, with NPC allies, story events and human reinforcements that join mid-mission. Some allies have must-survive conditions."],
+  ["Dungeon — Eternal Abyss","","A deep 1–3 player roguelite. It has its own page."],
+  ["Boss Raid","","Bosses with custom stats, traits and mid-fight story events. Requires a Raid Entry Ticket. Some boss traits punish specific actions."],
+  ["Survival","","Solo last-stand with Classic and Qualifier variants. Escalating waves, HP carries over between them, and milestone rewards pay once."],
+  ["Vanguard","","A squad mode used for both PvP and PvE: pick a role and field an army built from templates. It is also the engine behind region liberation."],
+  ["Faction Contracts","","Missions issued by the 8 guilds. Completing one grants Oil, XP and reputation, and may cost you standing with a rival."]
+ ]],
+ ["The world",[
+  ["Hunt","!hunt","Farm a region's enemies for Oil, XP and that region's signature material. 210 named enemies across ten regions, all scaling to your level."],
+  ["Travel","!travel","Move between regions. Regions can be upgraded and may charge entry taxes."],
+  ["Region Liberation","!liberate","A corrupted region loses its drops, its enemies get stronger and gain a Corrupted tag, and its upgrades freeze. Free it by winning a staged Vanguard PvE liberation."],
+  ["Castle Siege","","A large-scale castle defense across an 8-zone, 3-lane castle, with phases from announcement to result. Hold zones to keep enemies from the Throne Room. Objectives: Intercept, Supply, Rescue, Sabotage. Pays War Oil."],
+  ["War","","Multi-team warfare across 5 sectors — North, Center (the most contested), South, Vanguard and Rearguard. Winning a sector grants rewards and an edge in the next."],
+  ["Territory","","A persistent control layer. Clans and players hold territory for passive combat bonuses in the zones they hold."]
+ ]]
+];
+
+/* ── VALESTIA: geography traced from the world map. hunt = huntable region. ── */
+var PLACES={
+ starter_ruins:{n:"Starter Ruins",x:11,y:42,t:"hunt",m:"Sentinel Dust",d:"The westernmost ruins. Where most Guardians take their first swing."},
+ greywood:{n:"The Greywood",x:26,y:33,t:"geo",d:"The forest where Jessie was found as a baby. The couple Maren described came from east of here."},
+ millhaven:{n:"Millhaven",x:35,y:29,t:"side",d:"A besieged village that sent out a plea. Kira holds the gate. Four side missions."},
+ aldenmoor:{n:"Aldenmoor",x:44,y:26,t:"story",d:"Ruined city, north-west. First destination of the scroll and the site of the first seal piece. Now a refugee settlement under Garrick."},
+ tawnholt:{n:"Tawnholt",x:53,y:14,t:"side",d:"Burned for three nights. Not wildfire — one building at a time, in an order that meant something to someone."},
+ second_valley:{n:"Second Valley",x:63,y:13,t:"geo",d:"The approach beneath the Seal Chamber."},
+ dragons_lair:{n:"Dragon's Lair / The Seal Chamber",x:74,y:8,t:"seal",d:"The chamber itself. The Ashen Hunt ends up here."},
+ highlands:{n:"The Highlands",x:78,y:16,t:"geo",d:"High country under the Northern Range. The Titans' Arena circuit runs a bout up here."},
+ valdris_keep:{n:"Valdris Keep",x:88,y:22,t:"story",d:"Valdris's seat. He reached Stormbay four days before you did and has been ahead ever since."},
+ ironhollow:{n:"Ironhollow",x:57,y:30,t:"story",d:"An occupied town. Something happened here the morning the team left, and by now everyone who needed to know it knows it."},
+ rocky_chill_pass:{n:"Rocky Chill Pass",x:63,y:24,t:"hunt",m:"Frost Quartz",d:"The pass. Where the ice sits longest and the wind comes from one side."},
+ veldran:{n:"Veldran",x:78,y:38,t:"story",d:"City in the mountains. Second destination of the scroll. Jessie goes quiet whenever anyone says the name."},
+ dark_knight_sanctum:{n:"Dark Knight's Sanctum",x:92,y:43,t:"hunt",m:"Void Fragment",d:"The deepest region on the map. Void husks, lich adepts and knights of the void."},
+ mist_forest:{n:"The Mist Forest",x:47,y:37,t:"hunt",m:"Wraith Veil",d:"Fog and the things standing in it. Wraiths, gloom tyrants, reaper lords."},
+ ravennor:{n:"Ravennor",x:24,y:52,t:"story",d:"The town two days north of the landing cove. The Stonefish inn. An old man there mentioned travellers who went north and did not come back the same."},
+ black_lotus_wood:{n:"Black Lotus Wood",x:36,y:54,t:"hunt",m:"Lotus Essence",d:"Where you met Jessie, mid-ambush by Wealth Hunters. Shadow stalkers and fae."},
+ ravencraft:{n:"Ravencraft",x:48,y:60,t:"hunt",m:"Raven Steel",d:"Castle region. Iron constructs, deserters and corrupt sentinels."},
+ verdant_fields:{n:"The Verdant Fields",x:58,y:47,t:"geo",d:"Farmland along the Graywater. The quiet part of the map."},
+ bandit_caves:{n:"Bandit Caves",x:69,y:54,t:"hunt",m:"Bandit Mark",d:"Cave ambushers and outlaw warlords, on the road to the Sanctum."},
+ wasteland:{n:"The Wasteland",x:84,y:57,t:"side",d:"Salvageable war material and a cataloging team that stopped reporting six days ago. Ash and Bone runs here."},
+ cape_greyveil:{n:"Cape Greyveil",x:15,y:74,t:"portal",d:"Portal region. No enemies, no hunting — the Mecha Portal is the only thing here."},
+ stormbay:{n:"Stormbay",x:26,y:78,t:"hunt",m:"Storm Pearl",d:"The port city of Chapter One. Valdris holds real political power here. Cara's pawnshop is on the South Docks; the Grey Maren left from Pier 7."},
+ merchant_crossroads:{n:"Merchant Crossroads",x:43,y:74,t:"hunt",m:"Trade Seal",d:"Caravans, highwaymen and sellswords. The trade hub."},
+ crimson_plain:{n:"Crimson Plain",x:58,y:79,t:"hunt",m:"Magma Core",d:"Volcanic. Lava golems, wildfire demons and cinder lords."},
+ mirefall:{n:"Mirefall",x:75,y:73,t:"story",d:"Swamp. Third and final destination named by the scroll. Nobody has said anything about it yet."},
+ seal_1:{n:"Seal Location #1",x:77,y:85,t:"seal",d:"The first of the three seal sites named in the scroll."},
+ titans_arena:{n:"Titans' Arena",x:90,y:91,t:"side",d:"Six bouts, from The First Bell to The Final Bell. The Iron Siblings have never lost."},
+ unnamed_cove:{n:"Unnamed Cove",x:33,y:92,t:"story",d:"Where the Grey Maren made landfall. The dark circle is here too."}
+};
+var ROADS=[["starter_ruins","black_lotus_wood"],["starter_ruins","stormbay"],["stormbay","merchant_crossroads"],
+ ["stormbay","cape_greyveil"],["black_lotus_wood","merchant_crossroads"],["black_lotus_wood","mist_forest"],
+ ["black_lotus_wood","ravencraft"],["merchant_crossroads","ravencraft"],["merchant_crossroads","crimson_plain"],
+ ["ravencraft","mist_forest"],["mist_forest","rocky_chill_pass"],["crimson_plain","bandit_caves"],
+ ["rocky_chill_pass","bandit_caves"],["bandit_caves","dark_knight_sanctum"],["starter_ruins","greywood"],
+ ["greywood","millhaven"],["millhaven","aldenmoor"],["aldenmoor","ironhollow"],["ironhollow","rocky_chill_pass"],
+ ["rocky_chill_pass","second_valley"],["second_valley","dragons_lair"],["dragons_lair","highlands"],
+ ["highlands","valdris_keep"],["valdris_keep","veldran"],["veldran","dark_knight_sanctum"],["tawnholt","second_valley"],
+ ["ravennor","black_lotus_wood"],["ravennor","starter_ruins"],["unnamed_cove","stormbay"],["mirefall","bandit_caves"],
+ ["mirefall","seal_1"],["seal_1","titans_arena"],["bandit_caves","wasteland"],["wasteland","dark_knight_sanctum"],
+ ["verdant_fields","ravencraft"],["verdant_fields","bandit_caves"],["aldenmoor","mist_forest"]];
+var FAUNA={
+ starter_ruins:[["bruiser","Rubble Husk","Titan of the Ruins"],["skirmisher","Dust Mote","Wraith Sovereign"],["balanced","Fallen Squire","Sentinel Lord"]],
+ black_lotus_wood:[["skirmisher","Shadow Whelp","Eclipse Reaper"],["bruiser","Venom Pup","Venom Tyrant"],["balanced","Fae Sprite","Fae Archon"]],
+ stormbay:[["bruiser","Dock Hand","Harbor Warlord"],["skirmisher","Deckhand","Pirate Dread"],["balanced","Runner","Smuggler King"]],
+ rocky_chill_pass:[["bruiser","Frost Shard","Winter Sovereign"],["skirmisher","Frost Pup","Winterborn Terror"],["balanced","Lookout","Mountain King"]],
+ ravencraft:[["bruiser","Iron Husk","Forgelord"],["skirmisher","Recruit","Deserter Captain"],["balanced","Castle Watchman","Raven Commander"]],
+ mist_forest:[["skirmisher","Mist Wisp","Mist Sovereign"],["bruiser","Dusk Cub","Gloom Tyrant"],["balanced","Acolyte","Reaper Lord"]],
+ crimson_plain:[["bruiser","Ember Husk","Magma Tyrant"],["skirmisher","Spark Imp","Inferno Fiend"],["balanced","Scorched Recruit","Cinder Lord"]],
+ merchant_crossroads:[["balanced","Hired Hand","Caravan Marshal"],["skirmisher","Pickpocket","Highway King"],["bruiser","Brawler","Warlord for Hire"]],
+ bandit_caves:[["skirmisher","Sneak","Shadowcave Killer"],["bruiser","Cave Crawler","Grotto Tyrant"],["balanced","Cutthroat","Bandit Overlord"]],
+ dark_knight_sanctum:[["bruiser","Void Husk","Sanctum Tyrant"],["skirmisher","Apprentice of Ruin","Lich Adept"],["balanced","Squire of Ruin","Knight of the Void"]]
+};
+
+/* ── STORY ── */
+var CH1=[["1","A Destined Encounter","Gorim the Old hands you the scroll and tells you to go to Stormbay. Bandits on the road disagree."],
+ ["2","A Destined Encounter",""],["3","The Enemy of my Enemy is my Friend","Black Lotus Wood. A woman is being jumped by Wealth Hunters. You help."],
+ ["4","Jessie, the Mercenary","She confronts you about the scroll instead of thanking you. More bandits arrive. She comes along anyway."],
+ ["5","What's Written in the Scroll","Jessie recognises a black-market symbol on it: The Scribe, in Stormbay."],
+ ["6","Welcome to Stormbay","The guards know Jessie. You fight your way in. Someone watches from a balcony."],
+ ["7","Two Strangers at the Docks","The Salt & Rope. Bertram points you at Cara, and you learn Valdris has been buying loyalties for four days."],
+ ["8","The Woman Who Knows Everything","Cara's pawnshop. She and Jessie have history. The Scribe is Elric, blue door, Clock Tower district. Valdris's guard hits the shop."],
+ ["9","The Blue Door","You find Elric. The scroll names three locations and has two authors: Gorim and the Varn family."],
+ ["10","One Night at Cara's","Elric translates it whole: Aldenmoor, Veldran, Mirefall. Jessie reacts to Veldran and says nothing."],
+ ["11","The Last Varn","Maren Varn, hidden thirty years. The Varns built the seal mechanism. She gives you the key."],
+ ["12","What the Harbor Knows","Jessie's rooftop. She was found in the Greywood as a baby. A thirty-foot circle of still water sits in the harbour and nobody looks at it."],
+ ["13","One Last Night","Arrest warrants. The plan is Pier 7 and a boat called the Grey Maren. Valdris comes early."],
+ ["14","The Grey Maren","You fight to the pier. The Frogst Brothers arrive. Jessie holds them, cuts the rope, and you jump. Last image: Jessie, two pistols, facing both of them."]];
+var CH2=[["15","Landfall","An unnamed cove. Elric explains that Jessie made her own choice. The dark circle is here too."],
+ ["16","Two Days North","The coast road. Elric confesses to thirty years of study. A stretch of coast with no birds on it."],
+ ["17","Ravennor","The Stonefish. An old man mentions travellers who went north and came back different."],
+ ["18","Old Names","Elric finds two names in the archive — travellers from thirty years ago. He does not read them out."],
+ ["19","She'll Find You","Valdris's Lieutenant ambushes the road. Cornered, you finally open Cara's note. Jessie blows the flank open. “Took you long enough to open that.”"],
+ ["20","The Night After","The first night with the team whole. Jessie patches Elric without being asked, and asks where you are going."],
+ ["21","Aldenmoor","The Hollow are on the refugees. You end it before Garrick arrives; he checks his people before he says a word to you."],
+ ["22","The Vault Roads","Garrick comes down himself. Elric stays up top. A Hollow ambush in a bottleneck."],
+ ["23","What the Tunnels Remember","Deeper. Where Garrick's brother died — and a thin trace of the travellers from thirty years ago."],
+ ["24","The Last Ward","A Varn guardian-construct holding the central chamber."],
+ ["25","The Vanguard at the Gate","Valdris does not come for the team. He comes for the settlement."],
+ ["26","The Siege of Aldenmoor","The full siege. End of Chapter Two."]];
+var CH3=[["27","What You Leave Behind","Aldenmoor after the siege. You count what it cost and decide what you are still carrying."],
+ ["28","What the Roads Cost","The road east, and the bill for it."],
+ ["29","Before the Transfer","Ironhollow. Something is being moved, and there is a window before it goes."],
+ ["30","First Light","The convoy job, at dawn."],
+ ["31","The Road Climbs","Ironhollow behind you, the pass ahead. Davan gives Jessie a hand-drawn map of the approach. Ren gives her a nod instead of words."]];
+
+var SIDES=[
+ ["The Aldenmoor Compact","aldenmoor_compact",6,3,"Three workers went into the shaft below the new granary foundation two nights ago. They have not come back. Dren, the oldest person in Aldenmoor, comes to you instead of the settlement leadership, with one instruction: don't seal it.",
+  ["The Third Shift","What Was Here Before","The Compact","The Index","The Archivist's Hand","The New Compact"]],
+ ["The Ashen Hunt","dragon_hunt",6,3,"Tawnholt has been burning for three nights. Not wildfire. One building at a time, in an order that means something to someone. The Harbormaster's courier kept it short: dragon sighted, village burning, pay is good.",
+  ["First Smoke","The Faithful","The Wardens","Threshold","Vareth","Varneth"]],
+ ["The Meridian Pact","meridian",6,3,"An archivist named Osric Vane had his collection burned two nights ago. Forty years of Varn family records. He keeps saying it was just old paper. Professionals do not burn just old paper.",
+  ["Smoke and Ink","The Trading House","The Eastern Ruins","The Man Who Hired You","The Archive Fortress","Edren Soll"]],
+ ["Ash and Bone","wasteland",6,3,"A cataloging team sent into the Wasteland to survey salvageable war material stopped reporting six days ago. A surveyor named Brynn Calder was supposed to meet them. Nobody can find them either.",
+  ["Into the Ash","The Survey Camp","The Buried Line","The Cinder Choir","The Marshal's Vanguard","The Cinder Marshal"]],
+ ["Titans' Arena","titans_arena",6,3,"Your first bout in the Titans' Arena. The crowd is deafening. The Iron Siblings have never lost.",
+  ["The First Bell","The Highlands Bout","The Pale Dance","Blood and Iron","The Unchained","The Final Bell"]],
+ ["Cursed Castle","cursed_castle",4,3,"Aster Keep — a ruined castle fused with dead reactor pylons and corrupted security relics. Enter the grounds, find traces of the missing travellers, and destroy whatever guards the threshold.",
+  ["The Vanishing Gate","The Reactor Chapel","The Mirror Ward","The Crownless Signal"]],
+ ["Millhaven","millhaven",4,1,"A desperate plea from a besieged village. You answer it. Kira has already taken her position at the gate. Opens once you have met Jessie.",
+  ["The First Night","Supply Lines","The Day They Come in Force","Captain Rhen"]],
+ ["Agent K","agentk",3,3,"The map points to an abandoned industrial warehouse on the eastern edge of the sector. The Iron Syndicate is guarding something Agent K never managed to retrieve.",
+  ["The Syndicate Warehouse","The Ashen Tribunal","The Architect"]],
+ ["Secret Lab","secret_lab",2,2,"The facility is marked as decommissioned. The fence line says otherwise. You breach the perimeter and walk into an automated, coordinated and very much active security grid.",
+  ["Breach Protocol","The Formula"]]
+];
+var ENCOUNTERS=[
+ ["Help the White Knight",2,"A knight of unknown identity, known across Valestia for dedicating his life to ending corruption, has been ambushed by the Dark Knight's forces. He needs help to survive.","Easy and Hard"],
+ ["The Sect of Valdris",3,"Frenzied citizens of Stormbay calling themselves the Followers of Valdris are extorting merchants and threatening sailors. A group has been sighted at the docks.","Easy and Hard · Hard recommends level 28+"],
+ ["The Harbormaster's Ransom",3,"The Stormbay Harbormaster has been seized by a mercenary crew in a locked warehouse on Pier 7. No ransom note. No demands. Just a door that does not open and four armed men inside.","Easy and Hard · Hard recommends level 30+"]
+];
+
+var CODEX=[
+ ["The Archivist","legendary","Guardian of the Archive","Not a construct and not a mechanism. It predates every civilization anyone in this world has named. It has been below Aldenmoor since before there was an Aldenmoor."],
+ ["The Guardian","epic","Varn Seal Sentinel","Built by Varn hands to stand watch over the seal piece beneath Aldenmoor. It held its post far longer than it was ever meant to."],
+ ["The Forge Keeper","epic","Original Guardian","The Aldenmoor Weaponsmiths built it as a final test, not a permanent barrier. If a recruit could not beat it, the first blade was not theirs to carry."],
+ ["The Archivist's Hand","epic","Direct Extension","Not a separate system — the Archivist itself, translated into physical action. It descends from the upper sanctum."],
+ ["Archive Enforcer","epic","Sanctum Offensive Layer","The founders negotiated the Enforcers off the table in the original compact. They were never supposed to surface."],
+ ["Dren","rare","Aldenmoor Founder","One of the seven founders who signed the original compact forty years ago. The oldest person in Aldenmoor, before the settlement knew it had a compact at all."],
+ ["Ossa","uncommon","Construction Foreman","One of the three workers who went into the shaft on the third shift. He came back after two days with no memory of the second one, and a calm that does not fit."],
+ ["Trainee's Edge","rare","Aldenmoor First Blade","The Weaponsmiths' Guild had one rule before they taught anything else: one strike, placed correctly, at the moment that matters."],
+ ["Compact Guardian","rare","Deep Archive Layer","They do not move like the outer constructs. They move as though each step is a considered decision, because it is."],
+ ["Deep Sentinel","rare","Archive Interior Guard","Older than the Wardens in design, and in a way that is harder to explain, more deliberate."]
+];
+
+/* ══════════════════════════════════════════════════════════════════
+   RENDER HELPERS
+   ══════════════════════════════════════════════════════════════════ */
+function tbl(head,rows,cls){
+  var h='<div class="tw"><table><thead><tr>'+head.map(function(x){return "<th>"+E(x)+"</th>";}).join("")+"</tr></thead><tbody>";
+  h+=rows.map(function(r){
+    return "<tr>"+r.map(function(c,i){return '<td class="'+((cls&&cls[i])||"")+'">'+c+"</td>";}).join("")+"</tr>";
+  }).join("");
+  return h+"</tbody></table></div>";
+}
+function cards(items){ return '<div class="grid grid--wide">'+items.join("")+"</div>"; }
+
+/* ══════════════════════════════════════════════════════════════════
+   PAGES
+   ══════════════════════════════════════════════════════════════════ */
+var PAGES={};
+
+PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your account is created the first time you make a profile from the Kiosk, or the first time you join a game — whichever happens first.",h:function(){
+ return '<div class="callout"><p><strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the 81 story and side missions, all of it.</p>'+
+ '<p>Everything on this site describes the bot as it actually runs on <strong>the server the bot lives in</strong>. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max, and the defaults listed here are what he starts from.</p></div>'+
+ '<h2 class="s">The Kiosk</h2>'+
+ '<p class="b">The bot uses the <span class="cmd">!</span> prefix for typed commands, but most of the game is <strong>panel-driven</strong>: Max places persistent button panels in the channels and you play by clicking them. The most important one is the <strong>Kiosk</strong> — your personal hub.</p>'+
+ tbl(["Kiosk button","What it does"],[
+  ["Create / Edit Profile","Creates your account and sets your starting build"],
+  ["My Stats","Your live stats, including every gear bonus"],
+  ["My Bag","Your potions and consumables"],
+  ["Stat Slots","Save and switch between up to 3 builds"],
+  ["Gear Slots","Equip crafted gear into your 2 gear slots"],
+  ["Codex","Your collection of cards — enemies, gear, regions, allies"],
+  ["Link Chainers Wallet","Connects an external wallet for redeemable rewards"]
+ ],["k",""])+
+ '<h2 class="s">Your first hour</h2>'+
+ '<p class="b"><strong>1 — Make a profile.</strong> Open the Kiosk, create your character, and spend your points. You start with 10.</p>'+
+ '<p class="b"><strong>2 — Set up two builds.</strong> It is free. Put an attacker in slot 1 and a tank in slot 2. Apply the right one before a fight.</p>'+
+ '<p class="b"><strong>3 — Fight something.</strong> <span class="cmd">!duel @player</span> for a duel, <span class="cmd">!hunt</span> to farm a region, or whatever panel is up on the server.</p>'+
+ '<p class="b"><strong>4 — Craft one starter piece.</strong> A Strength Ring or Cardboard Boots costs 4,000 OIL and changes every fight you take afterwards.</p>'+
+ '<div class="callout"><p><strong>Open My Stats before any fight.</strong> It shows your build <em>after</em> gear and enhancement are applied. It is the only number that matters, and it is not the number in your stat slot.</p></div>'+
+ '<h2 class="s">Commands worth knowing</h2>'+
+ tbl(["Command","What it does"],[
+  ['<span class="cmd">!profile</span> · <span class="cmd">!stats</span>',"Your level, XP, Oil Coins and gear"],
+  ['<span class="cmd">!profile @user</span>',"Somebody else's profile"],
+  ['<span class="cmd">!top20</span> · <span class="cmd">!top</span> · <span class="cmd">!ranking</span>',"Server leaderboard"],
+  ['<span class="cmd">!guilds</span> · <span class="cmd">!rep</span>',"Your faction reputation"],
+  ['<span class="cmd">!clan</span>',"Clan info and management"],
+  ['<span class="cmd">!bonds</span> · <span class="cmd">!bonds_top</span> · <span class="cmd">!bonds_history</span>',"Your relationships with other players"],
+  ['<span class="cmd">!travel</span> · <span class="cmd">!hunt</span>',"Move between regions and farm materials"],
+  ['<span class="cmd">!my_weapon</span> · <span class="cmd">!weapon_list</span>',"Your equipped weapon and the catalog"],
+  ['<span class="cmd">!equip_weapon</span> · <span class="cmd">!unequip_weapon</span>',"Change your weapon"],
+  ['<span class="cmd">!blackmarket</span>',"Rotating special stock"],
+  ['<span class="cmd">!waroil</span>',"Your War Oil balance"],
+  ['<span class="cmd">!ruleta</span>',"The Salvage Vault — 2,000 OIL a spin"]
+ ],["k",""])+
+ '<h2 class="s">Stat slots and builds</h2>'+
+ '<p class="b">You have <strong>3 stat slots</strong>. Each one stores a full build: a STR / AGI / CON spread <em>and</em> two gear pieces. Gear stacks on top of the slot — a slot with STR 8 plus a Strength Ring is STR 9 in combat.</p>'+
+ '<div class="callout"><p><strong>A working set:</strong> slot 1 STR/AGI for duels and FFA · slot 2 CON parry tank for Horde, Missions and sieges · slot 3 high-AGI dodge build.</p></div>';
+}};
+
+PAGES.combat={t:"Combat",e:"The guide",d:"Every turn, against players and NPCs alike, runs on four actions and the arithmetic below. These are the real formulas the bot runs.",h:function(){
+ return '<h2 class="s">The three stats</h2>'+
+ '<p class="b">Your point budget grows with your level and is never unlimited:</p>'+
+ '<span class="fx">total stat points = 10 + (global level − 1)</span>'+
+ '<h3 class="t">STR — Strength</h3>'+
+ '<p class="b">Raw damage. Each point adds <strong>+4</strong> to your base attack on top of a random 5–15 roll, and it strengthens both halves of your Parry.</p>'+
+ '<span class="fx">base damage = (STR × 4) + random(5–15)</span>'+
+ '<h3 class="t">AGI — Agility</h3>'+
+ '<p class="b">The strongest stat in the game, because it does <strong>four</strong> things at once: it multiplies your damage (Overcrit), sets your crit chance, sets your dodge chance, and removes flat damage from every hit you take.</p>'+
+ '<span class="fx">overcrit ≈ 1 + 0.5 × (AGI ÷ 29)   ·   flat reduction = AGI × 2.5</span>'+
+ tbl(["AGI","Crit &amp; dodge chance"],[["0","0%"],["5","5%"],["10","10%"],["13","11%"],["16","12%"],["20","13%"],["40","20%"]],["n",""])+
+ '<p class="b">Up to AGI 10 each point is +1%. Above 10 it slows to roughly +1% per 3 AGI.</p>'+
+ '<h3 class="t">CON — Constitution</h3>'+
+ '<span class="fx">max HP = 50 + (CON × 15)   ·   rest heal = 20 + (CON × 3)</span>'+
+ tbl(["CON","Max HP","Rest heals"],[["0","50","20"],["5","125","35"],["10","200","50"],["15","275","65"],["20","350","80"]],["n","n","n"])+
+ '<h2 class="s">Build calculator</h2>'+
+ '<p class="b">Move the numbers. Everything below is computed with the formulas above, not an approximation of them.</p>'+
+ '<div class="rig">'+
+  '<div class="rig__p">'+
+   '<div class="lvl"><span class="lvl__l">Global level</span><div class="lvl__c">'+
+   '<button class="btn" id="lvD" aria-label="Lower level">−</button><span class="lvl__v num" id="lvV">20</span>'+
+   '<button class="btn" id="lvU" aria-label="Raise level">+</button></div></div>'+
+   '<div class="bud"><span class="bud__t">Points spent</span><span class="bud__v num" id="bud">0 / 29</span></div>'+
+   '<div id="stats"></div>'+
+  '</div>'+
+  '<div class="rig__o">'+
+   '<div class="ro" id="ro"></div>'+
+   '<div class="dm"><div class="dm__h">One attack, against an unarmoured target</div>'+
+    '<div class="dm__r"><span class="dm__l">Normal</span><span class="dm__b"><span class="dm__s" id="sN"></span></span><span class="dm__n" id="nN">—</span></div>'+
+    '<div class="dm__r"><span class="dm__l">Critical</span><span class="dm__b"><span class="dm__s" id="sC"></span></span><span class="dm__n" id="nC">—</span></div>'+
+    '<div class="dm__r"><span class="dm__l">Focus</span><span class="dm__b"><span class="dm__s" id="sF"></span></span><span class="dm__n" id="nF">—</span></div>'+
+   '</div><p class="vd" id="vd"></p>'+
+  '</div>'+
+ '</div>'+
+ '<h2 class="s">The four actions</h2>'+
+ tbl(["Action","What it does"],[
+  ["Attack","Deal damage to your target. Can crit, from AGI."],
+  ["Parry","Brace to block and counter the next hit. Not a flat reduction — see below."],
+  ["Rest","Heal 20 + CON×3 <em>and</em> gain Focus for your next attack."],
+  ["Use Consumable","Use a potion from your bag on your turn."],
+  ["Switch","Team and tag modes only: swap your active fighter for a benched one. Uses your turn."]
+ ],["k",""])+
+ '<h2 class="s">Parry is a wager, not a shield</h2>'+
+ '<span class="fx">block value = (CON × 5) + STR   ·   counter value = (CON × 3) + STR</span>'+
+ '<p class="b"><strong>Perfect Block</strong> — if your block value is greater than or equal to the incoming attack, you take <strong>zero</strong> damage and reflect your counter value back.</p>'+
+ '<p class="b"><strong>Guard Break</strong> — if the attack is bigger than your block value, you break: you take only the <em>overflow</em> above your block, and your AGI flat reduction then applies to that overflow.</p>'+
+ '<div class="callout"><p>This is why a high-CON parry punishes attackers, and why a hard enough hitter breaks one anyway. Do not parry a guaranteed guard-breaker — you just eat the difference.</p></div>'+
+ '<h2 class="s">Focus and Ultra Focus</h2>'+
+ '<p class="b"><strong>Focus</strong> comes from Resting, or a Focus Potion. Your next Attack deals <strong>×2</strong>. It carries turn to turn until you spend it, and it can still be dodged, reduced or parried.</p>'+
+ '<p class="b"><strong>Ultra Focus</strong> comes from gaining Focus again while already Focused. Your next attack is a guaranteed ×2 that <strong>cannot be dodged, cannot be reduced by AGI, and cannot be parried.</strong></p>'+
+ '<div class="callout"><p>Ultra Focus is the answer to every defensive build in the game. If your opponent is about to parry, or is a high-dodge AGI build, build it and punish them.</p></div>'+
+ '<h2 class="s">Crits, dodge and reduction</h2>'+
+ '<p class="b">A crit multiplies final damage by <strong>×1.5</strong>. Base crit is 0% with no AGI. A Critical Potion adds +25% to your next attack; clan passives and badges add more. Dodge is passive and takes you to zero damage. Flat reduction applies to every hit that lands — and Ultra Focus ignores it entirely.</p>'+
+ '<h2 class="s">NPC passives</h2>'+
+ '<p class="b">Most NPCs and every boss carry passives that change how the fight works.</p>'+
+ tbl(["Passive","Effect"],NPCPASS.map(function(r){return [r[0],r[1]];}),["k",""])+
+ '<h2 class="s">The Stalker</h2>'+
+ '<p class="b">A special NPC that challenges you to 1v1 and runs a <strong>predictive AI</strong>. It reads your last several actions, your HP percentage, your stat spread, whether you have Focus, and whether you just rested or parried repeatedly.</p>'+
+ '<p class="b">Spam Attack and it parries more. Spam Parry and it waits for the guard break. Low HP on you and it presses; low HP on itself and it gets aggressive.</p>'+
+ '<div class="callout callout--warn"><p><strong>Never repeat an action more than twice.</strong> The clan passive Silent Watch cuts your chance of being targeted by the Stalker and the Marked Hunt by up to 25%.</p></div>';
+}};
+
+PAGES.consumables={t:"Consumables",e:"The guide",d:"Bought from the Shop panel with Oil Coins, stored in your bag, used on your turn. Prices are set by Max — these are the standard defaults.",h:function(){
+ return tbl(["Item","Typical price","Effect"],POTIONS.map(function(r){return [r[0],r[1]?r[1]+" OIL":"—",r[2]];}),["k","n",""])+
+ '<div class="callout"><p>The <strong>Guard Potion</strong> is the flat &minus;50% next hit. The <strong>Parry action</strong> is a separate block-and-counter mechanic — they are not the same thing.</p></div>'+
+ '<h2 class="s">Tournament restrictions</h2>'+
+ '<p class="b">Tournament allows exactly four: <strong>Ultra Health Potion, Protective Shield Potion, Mind Cleanser, Power Potion.</strong> One per round.</p>'+
+ '<h2 class="s">How to actually use them</h2>'+
+ '<p class="b">Pre-load a <strong>Guard Potion</strong> before a hit you can see coming. Heal at 30–40% HP rather than waiting for critical. Stack a <strong>Focus Potion</strong> right after a Rest to reach Ultra Focus in one turn.</p>'+
+ '<p class="b">There is also a <strong>Black Market</strong> (<span class="cmd">!blackmarket</span>) with rotating stock, and event panels with their own items.</p>';
+}};
+
+PAGES.gear={t:"Gear &amp; Forge",e:"The guide",d:"Crafted gear boosts your stats in every mode. Two gear slots, saved per stat slot, enhanced up to +5.",h:function(){
+ var g=GEAR.map(function(r){
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(r[0])+'</span></div>'+
+   '<div class="card__st">'+E(r[1])+'</div><div class="card__d">'+E(r[3])+'</div>'+
+   '<div class="card__f">'+(r[2]?r[2].toLocaleString()+" OIL · ":"")+E(r[4])+'</div></div>';
+ });
+ var cf=CLANFORGE.map(function(r){
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(r[0])+'</span><span class="card__tag card__tag--clan">Clan Forge</span></div>'+
+   '<div class="card__st">'+E(r[1])+'</div><div class="card__d">'+E(r[3])+'</div>'+
+   '<div class="card__f">'+r[2].toLocaleString()+' OIL · clan must unlock the recipe</div></div>';
+ });
+ return '<h2 class="s">Materials</h2>'+
+ '<p class="b">Materials drop from finishing game modes — higher-stakes modes drop more — and from <strong>hunting regions</strong>. Four are your starter stock:</p>'+
+ tbl(["Starter material","Common sources"],[
+  ["Copper Ore","Duels, training, raids, dungeons"],["Silver Ore","Contracts, missions, raids, dungeons"],
+  ["Linen Fiber","Missions, escort, contracts, dungeons"],["Cardboard Scrap","Loot drops, triad, escort, FFA"]
+ ],["k",""])+
+ '<p class="b">Above those sit uncommon, rare and very rare tiers, plus <strong>10 region signature materials</strong> that only drop from hunting one specific region, and two <strong>legendary</strong> weapon mats — Void-Tempered Core and Ascendant Ember — that no region drops at all.</p>'+
+ '<h2 class="s">The catalog</h2>'+
+ '<p class="b">Twenty-six pieces. Many carry a real combat passive, not just a stat line.</p>'+cards(g)+
+ '<h2 class="s">Clan Forge</h2>'+
+ '<p class="b">Six pieces your <strong>clan</strong> must unlock the recipe for before any member can craft them.</p>'+cards(cf)+
+ '<h2 class="s">Set bonuses</h2>'+
+ '<p class="b">Wearing the right two pieces together upgrades their passives. Eleven pairs are defined.</p>'+
+ tbl(["Set","The two pieces","What it changes"],SETS.map(function(r){return [r[0],'<span style="font-family:var(--mono);font-size:.76rem">'+E(r[1])+"</span>",r[2]];}),["k","",""])+
+ '<h2 class="s">Enhancement · +1 to +5</h2>'+
+ '<p class="b">Equipped gear enhances from +1 to +5, making its bonus stronger each level, and it applies in every combat mode. Cost scales hard: the oil curve runs <strong>20% → 35% → 60% → 100% → 150%</strong> of the item\'s base price per level, about 365% of the item\'s cost in total to reach +5.</p>'+
+ '<div class="callout callout--warn"><p><strong>The +4 and +5 wall is deliberate.</strong> Those two steps demand rare materials the earlier ones do not. Take your best piece to +3 before you even think about the last two.</p></div>'+
+ '<h2 class="s">Order of operations</h2>'+
+ '<span class="fx">stat slot → gear bonuses → enhancement → set bonus → combat</span>'+
+ '<p class="b">Everything stacks and applies automatically. <strong>My Stats</strong> shows the number that actually enters the fight.</p>';
+}};
+
+PAGES.weapons={t:"Weapons",e:"The guide",d:"A separate equipment slot from gear, with its own catalog, its own materials, and an active skill you fire in combat.",h:function(){
+ var w=WEAPONS.map(function(r){
+  var tag=r[6]==="clan"?'<span class="card__tag card__tag--clan">Clan Forge</span>':(r[6]==="quest"?'<span class="card__tag">Quest</span>':"");
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(r[0])+'</span>'+tag+'</div>'+
+   '<div class="card__st">'+E(r[1])+'</div>'+
+   '<div class="card__d"><strong style="font-family:var(--serif);color:var(--text)">'+E(r[2])+'</strong> — '+E(r[3])+'</div>'+
+   '<div class="card__f">'+(r[5]?r[5].toLocaleString()+" OIL · ":"")+E(r[4])+(r[7]?" · "+E(r[7]):"")+'</div></div>';
+ });
+ return '<h2 class="s">How weapons work</h2>'+
+ '<p class="b">Every weapon gives a <strong>passive</strong> that is always on, <strong>plus</strong> an <strong>active skill</strong> you fire with the skill button — it appears once you have a weapon equipped. You can only have <strong>one active skill in play per fight</strong>, and each one is <strong>once per combat</strong>.</p>'+
+ '<p class="b">Weapons enhance to <strong>+5</strong> like gear, using their own recipes and materials, and every recipe needs a <strong>region signature material</strong> — so every region on the map feeds a particular weapon.</p>'+
+ '<div class="callout"><p>Active skills are <strong>disabled in equalized modes</strong> — Blind Drop and Airdrop combat — where everyone fights on identical footing by design.</p></div>'+
+ '<h2 class="s">The sixteen</h2>'+cards(w)+
+ '<h2 class="s">Matching a weapon to a build</h2>'+
+ '<p class="b">Burst skills reward STR/AGI attackers: <strong>Reaper\'s Edge</strong> if you can push targets under 25%, <strong>Gemini Edge</strong> to split damage, <strong>Sunder Pike</strong> against high-AGI targets whose flat mitigation is the problem.</p>'+
+ '<p class="b">Sustain and defense suit a CON parry tank: <strong>Aegis Bulwark</strong> for a near-guaranteed parry, <strong>Guardian\'s Oath</strong> to eat the hit aimed at your weakest ally, <strong>Pulse Injector</strong> to parry, heal and gain Focus in one turn.</p>'+
+ '<p class="b">In team modes, <strong>War Banner</strong>, <strong>Tracker Bow</strong> and <strong>Bastion Standard</strong> multiply across the whole squad instead of one target.</p>'+
+ '<div class="callout"><p><strong>Trainee\'s Edge</strong> comes from the weapon quest <em>The First Blade</em>, where Elric finds a sealed forge-site outside Aldenmoor and the constructs that sealed it. It has no passive and cannot be enhanced — it exists to teach the active-skill flow.</p></div>';
+}};
+
+PAGES.modes={t:"Game Modes",e:"The guide",d:"Which modes are live, what they pay and the daily caps are set by Max. The mechanics are not.",h:function(){
+ return MODES.map(function(g){
+  return '<h2 class="s">'+E(g[0])+"</h2>"+
+   '<div class="grid grid--wide">'+g[1].map(function(m){
+     return '<div class="card"><div class="card__h"><span class="card__n">'+E(m[0])+'</span></div>'+
+      (m[1]?'<div class="card__st">'+m[1].split(" · ").map(function(c){return '<span class="cmd">'+E(c)+"</span>";}).join(" ")+"</div>":"")+
+      '<div class="card__d">'+E(m[2])+"</div></div>";
+   }).join("")+"</div>";
+ }).join("")+
+ '<h2 class="s">Events and drops</h2>'+
+ '<p class="b">Timed events drop rewards into a channel; you usually claim by clicking. <strong>Loot / Tag / Triad / Escort Drops</strong> are tied to specific modes, some with a <em>Doppel</em> twist. <strong>Blind Drop</strong> hides the reward. <strong>Traitor Drop</strong> adds a betrayal mechanic. <strong>Airdrops</strong> are promo-code drops with atomic first-come claims. The <strong>Roulette</strong> (<span class="cmd">!ruleta</span>) is a 2,000 OIL spin for withdrawable prizes, tokens and chaos gear.</p>'+
+ '<h2 class="s">The Marked Hunt</h2>'+
+ '<p class="b">A random player gets marked and must face an NPC encounter. It triggers under conditions Max sets.</p>';
+}};
+
+PAGES.abyss={t:"The Eternal Abyss",e:"The dungeon",d:"A 1–3 player roguelite, and the deepest single mode in the game. Every run is different.",h:function(){
+ return '<h2 class="s">Structure</h2>'+
+ '<span class="fx">class pick → rooms → partial heal → choice events → final boss</span>'+
+ '<p class="b">Multiple rooms with a partial heal between them, narrative <strong>choice events</strong> with real consequences, and a boss at the end. You collect relics on the way and pick up curses you did not ask for.</p>'+
+ '<h2 class="s">Classes</h2>'+
+ tbl(["Class","Stat change","Passive"],CLASSES.map(function(r){return [r[0],r[1],r[2]];}),["k","n",""])+
+ '<h2 class="s">Relics</h2>'+
+ RELICS.map(function(r){return '<h3 class="t">'+E(r[0])+'</h3><p class="b">'+E(r[1])+"</p>";}).join("")+
+ '<h2 class="s">Curses</h2>'+
+ '<p class="b">Team penalties you accumulate — and the Hexblade\'s entire power source, at <strong>+18% damage per active curse</strong>.</p>'+
+ tbl(["Curse","Effect"],CURSES.map(function(r){return [r[0],r[1]];}),["k",""])+
+ '<h2 class="s">Pacts and Heat</h2>'+
+ '<p class="b">Optional difficulty you turn on <em>before</em> entering, for a bigger reward multiplier. <strong>Heat</strong> is simply how many pacts you took.</p>'+
+ tbl(["Pact","What it does","Multiplier"],PACTS.map(function(r){return [r[0],r[1],r[2]];}),["k","","n"])+
+ tbl(["Heat","Total reward multiplier"],[["1","×1.4"],["2","—"],["3","—"],["4","—"],["5","×4.0 · <em>Abyss Legend</em>"]],["n",""])+
+ '<h2 class="s">What lives down there</h2>'+
+ tbl(["Enemy","What makes it a problem"],ABYSSFOES.map(function(r){return [r[0],r[1]];}),["k",""])+
+ '<div class="callout"><p><strong>The run-winning combo:</strong> Hexblade plus <em>The Black Crown</em> turns every curse into a buff. Bring <em>Soul Bond</em> on Death Pact runs. Save Focus for Specters — normal hits do nothing to them.</p></div>';
+}};
+
+PAGES.clans={t:"Clans",e:"The guide",d:"Permanent groups that grant collective passive bonuses, hold territory, and unlock their own forge recipes.",h:function(){
+ return '<h2 class="s">Founding one</h2>'+
+ tbl(["Rule","Value"],[["Creation cost","12,500 Oil Coins"],["Max members","15"],["Re-join cooldown after leaving","72 hours"],["Invite expiry","72 hours"],["Active passives at once","2 of 9"],["Upgrade levels per passive","5"]],["k","n"])+
+ '<div class="callout"><p><strong>Join a clan before you found one.</strong> Enjoy the passives for a while before you spend 12,500 OIL finding out which two you actually want.</p></div>'+
+ '<h2 class="s">Roles</h2>'+
+ tbl(["Role","Permissions"],[["Owner","Full control — passives, invites and kicks, treasury"],["Sub Leader","Invite, manage daily missions"],["Member","Participate and benefit from passives"]],["k",""])+
+ '<h2 class="s">The nine passives</h2>'+
+ '<p class="b">Only <strong>two are active at once</strong>. Each has 5 upgrade levels paid from the clan treasury; the values below are at level 5.</p>'+
+ tbl(["Passive","At level 5","Best for"],CLANPASS.map(function(r){return [r[0],r[1],r[2]];}),["k","",""])+
+ '<div class="callout"><p><strong>Oathbound Link</strong> only fires with <strong>3+ members of the same clan on the same team</strong>. It is worthless unless you coordinate who queues together.</p></div>'+
+ '<h2 class="s">Treasury, missions and forge</h2>'+
+ '<p class="b">Your clan has shared <strong>daily objectives</strong> — win X of a mode, earn X Oil collectively — that pay the treasury in Oil and members in XP. The treasury funds passive upgrades and <strong>Clan Forge</strong> recipe unlocks, which gate six gear pieces and two weapons behind the clan rather than the player.</p>'+
+ '<p class="b">Clans also hold <strong>territory</strong>, which grants passive combat bonuses inside the zones they control.</p>';
+}};
+
+PAGES.factions={t:"Factions",e:"The world",d:"The powers of Valestia, as the Codex records them. Ranked by how much of the board each one actually occupies.",h:function(){
+ return '<p class="b">Every enemy, ally and artifact you meet is filed under a faction in your <strong>Codex</strong>. The counts below are live — they are how many cards each power currently holds, which is a fair measure of how much of Valestia belongs to it.</p>'+
+ '<div class="grid grid--wide">'+FACTIONS.map(function(f){
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(f[0])+'</span>'+
+   (f[1]?'<span class="card__tag">'+f[1]+' cards</span>':'<span class="card__tag card__tag--clan">no cards yet</span>')+'</div>'+
+   '<div class="card__st">'+E(f[2])+'</div><div class="card__d">'+E(f[3])+"</div></div>";
+ }).join("")+"</div>"+
+ '<h2 class="s">Reputation and contracts</h2>'+
+ '<p class="b">Separate from the Codex, a handful of guilds track your <strong>reputation</strong> and issue <strong>contracts</strong>. Completing one grants Oil, XP and standing, and may cost you standing with a rival. Contracts have minimum reputation requirements, and some need a Guild Contract item to start.</p>'+
+ '<p class="b">Three are in real use right now: the <strong>Guardians of the Order</strong>, the <strong>Merchants Guild</strong> and the <strong>Bandits Guild</strong>. Check where you stand with <span class="cmd">!guilds</span>.</p>'+
+ '<div class="callout"><p>The <strong>Guardians of the Order</strong> are the order your own title comes from. Gorim called you one of the Guardians before you had done a single thing to earn it.</p></div>';
+}};
+
+PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a card collection, achievements that pay, and seasons that take nothing away from you.",h:function(){
+ return '<h2 class="s">Currencies</h2>'+
+ '<div class="grid">'+
+ '<div class="card"><div class="card__h"><span class="card__n">Oil Coins</span><span class="card__tag">OIL</span></div><div class="card__d">The main currency. Earned from most modes, daily message activity, and events. Spent on potions, crafting, enhancement, the roulette, founding a clan (12,500) and clan upgrades.</div></div>'+
+ '<div class="card"><div class="card__h"><span class="card__n">War Oil</span></div><div class="card__d">Secondary currency from large-scale combat — Castle Siege and War. Used for siege and war progression. Check it with <span class="cmd">!waroil</span>.</div></div>'+
+ '</div>'+
+ '<h2 class="s">Codex</h2>'+
+ '<p class="b">A collection of cards you unlock as you play — enemies, gear, regions, allies and artifacts. Each has a discovery tier and a deeper <strong>tactical note</strong> you only unlock by fighting the thing enough. It is both a reference and a completion goal, and it pays XP and Oil as you fill it.</p>'+
+ '<h2 class="s">Badges</h2>'+
+ '<p class="b">Achievements for hitting milestones — crit counts, wins, and other tracked stats. Some grant small combat bonuses such as crit or dodge chance.</p>'+
+ '<h2 class="s">Seasons and medals</h2>'+
+ '<p class="b">When a season changes, the server takes a <strong>snapshot</strong> and awards medals for the level milestones you crossed.</p>'+
+ tbl(["Level reached","Medal"],[["10","Bronze"],["20","Silver"],["30","Gold"],["40","Diamond"]],["n","k"])+
+ '<div class="callout"><p><strong>A season change does not reset your character.</strong> Nothing is wiped, nothing is taken. It records where you finished and rewards the milestones you crossed. View a season card with <span class="cmd">!profile @user s1</span>.</p></div>'+
+ '<h2 class="s">Bonds</h2>'+
+ '<p class="b">Bonds track <strong>relationships between players</strong>. Playing with — or against — the same people builds a shared history. Check yours with <span class="cmd">!bonds</span>, notable ones with <span class="cmd">!bonds_top</span>, and the log with <span class="cmd">!bonds_history</span>.</p>';
+}};
+
+PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads between them, and the places the story happens. Select any marker on the map.",h:function(){
+ return '<div class="atlas"><div class="atlas__m" id="map"></div>'+
+ '<aside class="atlas__s"><div class="dos" id="dos"></div></aside></div>'+
+ '<div class="leg">'+
+ '<span><b style="background:var(--verdigris)"></b>Huntable region</span>'+
+ '<span><b style="background:transparent;border:2px solid var(--verdigris)"></b>Story location</span>'+
+ '<span><b style="background:transparent;border:2px dashed var(--corrupt)"></b>Seal site</span>'+
+ '<span><b style="background:var(--brass)"></b>Selected</span>'+
+ '</div>'+
+ '<h2 class="s">Travel and hunt</h2>'+
+ '<p class="b"><span class="cmd">!travel</span> moves you between regions. <span class="cmd">!hunt</span> farms the region you are standing in for <strong>Oil, XP and that region\'s signature material</strong>. Each region has its own roster and its own drop table.</p>'+
+ '<p class="b">There are <strong>210 named enemies</strong> across ten regions — 3 species × 7 tiers each. Their stats are <strong>generated from level</strong>, so a hunted enemy always matches you; the tier name is just flavour for the band you are in. Max may cap hunts per day.</p>'+
+ '<div class="callout"><p>Hunting the right region is how you farm the exact material your next piece needs, instead of grinding random modes and hoping. Every weapon recipe needs a signature material.</p></div>'+
+ '<h2 class="s">Signature materials</h2>'+
+ tbl(["Region","Signature material"],Object.keys(PLACES).filter(function(k){return PLACES[k].m;}).map(function(k){return [PLACES[k].n,PLACES[k].m];}),["k","n"])+
+ '<h2 class="s">Region upgrades and taxes</h2>'+
+ '<p class="b">Regions can be <strong>upgraded</strong> for bonuses and may charge entry <strong>taxes</strong>. Both are set by Max on the server the bot lives in.</p>'+
+ '<h2 class="s">Large-scale war</h2>'+
+ '<p class="b">Three systems sit on top of the map, and they all feed each other.</p>'+
+ '<h3 class="t">Corruption and liberation battles</h3>'+
+ '<p class="b">A region can fall <strong>Corrupted</strong>, and it is the closest thing the world has to losing ground. When it happens:</p>'+
+ '<div class="tw"><table><tbody>'+
+ '<tr><td class="k">Drops</td><td>Turn off completely. No materials, no signature material, nothing.</td></tr>'+
+ '<tr><td class="k">Enemies</td><td>Gain a <strong>Corrupted</strong> tag and a hard stat increase — roughly +35% and +30% on their numbers.</td></tr>'+
+ '<tr><td class="k">Upgrades</td><td>Freeze. Whatever the region had built up stops progressing.</td></tr>'+
+ '</tbody></table></div>'+
+ '<p class="b">The only way back is a <strong>liberation battle</strong> — a staged <strong>Vanguard PvE</strong> campaign fought in sequence with <span class="cmd">!liberate</span>. You do not win it in one fight: you clear the stages, and winning the last one lifts the corruption, turns the drops back on and unfreezes everything the region had.</p>'+
+ '<div class="callout callout--warn"><p>A corrupted region is dead economy. If the one you farm goes dark, the signature material you need goes with it — and no other region drops it. Liberating it is not optional content, it is how you get your supply line back.</p></div>'+
+ '<h3 class="t">Castle Siege</h3>'+
+ '<p class="b">An 8-zone, 3-lane castle fought in phases — announced, preparation, combat window, result. Hold zones to keep enemies away from the Throne Room, with <strong>Intercept, Supply, Rescue</strong> and <strong>Sabotage</strong> objectives. Pays War Oil and XP.</p>'+
+ '<div class="callout"><p><strong>Hold the Main Gate.</strong> It feeds the centre and connects all three lanes. Everything else is negotiable.</p></div>'+
+ '<h3 class="t">War</h3>'+
+ '<p class="b">Multi-team control of 5 sectors: North, Center (the most contested), South, Vanguard and Rearguard. Winning a sector pays Oil, War Oil, XP and materials — and buys you an edge in the next one, so the sectors are not independent.</p>'+
+ '<h3 class="t">Territory</h3>'+
+ '<p class="b">The persistent layer underneath all of it. Clans and players <strong>hold</strong> zones and get passive combat bonuses inside them — extra parry, dodge, mitigation, post-crit damage. It does not reset between events; it is simply who owns what right now.</p>';
+}};
+
+PAGES.lore={t:"Lore",e:"The world",d:"What the scroll says, what is under Aldenmoor, and what is happening to the water in Stormbay harbour.",h:function(){
+ return '<h2 class="s">Azroth</h2>'+
+ '<p class="b">A malign being, sealed. The seal is <strong>failing</strong>. The three locations named in the scroll all connect to the original seal, and the seal needs <strong>three pieces</strong> to be repaired — one in each place.</p>'+
+ '<h2 class="s">The Scroll</h2>'+
+ '<p class="b">Written in a dead script and co-authored by <strong>Gorim</strong> and the <strong>Varn family</strong>. It describes the road to three places: <strong>Aldenmoor</strong> (ruins, north-west), <strong>Veldran</strong> (a city in the mountains) and <strong>Mirefall</strong> (a swamp). Elric spent thirty years on the script before he ever met you.</p>'+
+ '<h2 class="s">The Seal and the Varns</h2>'+
+ '<p class="b">The Varns <strong>built the mechanism</strong>. Maren Varn — the last of them, hidden for thirty years — had the key, and gave it to you. The old maps of the tunnels have <strong>intentional errors</strong>: the original builders did not trust outsiders.</p>'+
+ '<h2 class="s">The dark circle</h2>'+
+ '<div class="ex"><p class="ex__h">What the Harbor Knows</p>'+
+ '<p>Thirty feet across. The water inside it is completely still. Absolutely nobody on the docks looks at it.</p></div>'+
+ '<p class="b">It appeared in Stormbay harbour, and then again at the cove where the Grey Maren made landfall. It is Azroth, leaking through.</p>'+
+ '<h2 class="s">The Hollow</h2>'+
+ '<p class="b">Creatures born from Azroth\'s seepage into Aldenmoor. Distorted humanoid shapes with <strong>no eyes</strong>, that dissolve into smoke when they die. They come up from the old underground entrances. They were the first thing in this story that was not human.</p>'+
+ '<h2 class="s">The Archive</h2>'+
+ '<p class="b">Below Aldenmoor there is something older than Aldenmoor. The refugees dug a granary foundation and found a shaft; three workers went down and one came back wrong.</p>'+
+ '<div class="grid grid--wide">'+CODEX.map(function(c){
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(c[0])+'</span><span class="card__tag">'+E(c[1])+'</span></div>'+
+   '<div class="card__st">'+E(c[2])+'</div><div class="card__d">'+E(c[3])+"</div></div>";
+ }).join("")+"</div>"+
+ '<h2 class="s">The cast</h2>'+
+ '<div class="grid grid--wide">'+[
+  ["The Guardian","You","Chosen by prophecy — Gorim\'s word, not yours. You carry the scroll and Maren\'s key."],
+  ["Jessie","“Two Irons” · Mercenary","Hard on the outside, deliberately: she keeps the reputation and the distance as armour. Underneath she is loyal and kind and almost never shows it. Found as a baby in the Greywood; she has never known who her parents were. She goes quiet when anyone says Veldran."],
+  ["Elric","The Scribe · Scholar","Shy, quiet, very smart. Reads dead languages. Wants to belong with the group and feels like an academic among people of action. When he does speak he is usually right."],
+  ["Cara","Broker","Pawnshop on the South Docks, crossbow always loaded, knows everything and everyone. She and Jessie have a history neither of them will explain. She stayed in Stormbay."],
+  ["Valdris","The antagonist","Buys loyalties. Reached Stormbay four days ahead of you and has never once been behind since. He issued arrest warrants through the city\'s own legal channels, which tells you what he owns."],
+  ["Gorim the Old","Keeper of the Scroll","Guarded it for years and co-wrote it. He knew who you were before you did. He has not appeared in person since."],
+  ["Maren Varn","The last Varn","Thirty years hidden. Gave you the key. Described a couple who went to Aldenmoor thirty years ago: <em>she had hands like a fighter and eyes that didn\'t trust easily; he talked too much.</em>"],
+  ["Garrick","Leader of the Aldenmoor refugees","Strong, charismatic, gives everything for his people, still optimistic despite the losses. He lost his brother on the second failed attempt to reach the underground stores."],
+  ["The Frogst Brothers","Barrel and Hammer","Korn Army, but they came for you personally the night of the escape. Jessie faced both of them alone."]
+ ].map(function(c){
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(c[0])+'</span></div>'+
+   '<div class="card__st">'+E(c[1])+'</div><div class="card__d">'+c[2]+"</div></div>";
+ }).join("")+"</div>"+
+ '<h2 class="s">Open threads</h2>'+
+ '<p class="b"><strong>Who were Jessie\'s parents?</strong> They were looking for the same thing and walked the same road you are walking. That is all anyone knows. Elric found two names in the Ravennor archive and would not read them out.</p>'+
+ '<p class="b"><strong>What does Valdris actually want?</strong> The scroll, obviously. Whether he wants to repair the seal or break it has never been said.</p>'+
+ '<p class="b"><strong>Veldran.</strong> Second location. Jessie has a connection to it that she has not explained to anybody.</p>'+
+ '<p class="b"><strong>Cara.</strong> She stayed. Jessie believes she is fine, and needs to.</p>'+
+ '<p class="b"><strong>Gorim.</strong> Still gone.</p>';
+}};
+
+PAGES.story={t:"The Main Story",e:"Campaign",d:"A co-op story campaign that runs inside the combat engine. Thirty-one missions across three chapters, and it is still going.",h:function(){
+ function beats(rows,liveId){
+  return rows.map(function(r){
+   var live=(r[0]===liveId);
+   return '<div class="bt'+(live?" live":"")+'"><span class="bt__i">'+E(r[0])+'</span><div><span class="bt__n">'+E(r[1])+(live?" — latest":"")+'</span>'+
+    (r[2]?'<div class="bt__d">'+E(r[2])+"</div>":"")+"</div></div>";
+  }).join("");
+ }
+ return '<p class="b">Each mission is a real fight with story beats woven through it. They run in order — every one requires the one before it — and most of Chapter One is playable with a partner.</p>'+
+ '<div class="chap"><div class="chap__h"><h2>Chapter One</h2><span class="chap__id">14 missions</span><span class="chap__st">Complete</span></div>'+
+ '<p class="chap__w">Stormbay</p>'+beats(CH1)+"</div>"+
+ '<div class="ex"><p class="ex__h">The Grey Maren — the last image of Chapter One</p>'+
+ '<p>Jessie cuts the rope. You jump. The boat pulls away from Pier 7 and the last thing you see of her is her back, two pistols out, facing Barrel and Hammer Frogst at the same time.</p></div>'+
+ '<div class="chap"><div class="chap__h"><h2>Chapter Two</h2><span class="chap__id">12 missions</span><span class="chap__st">Complete</span></div>'+
+ '<p class="chap__w">The coast road · Ravennor · Aldenmoor</p>'+beats(CH2)+"</div>"+
+ '<div class="ex"><p class="ex__h">She\'ll Find You</p>'+
+ '<p>Cornered, with Elric behind you and more of them coming, you finally open the note Cara left you.</p>'+
+ '<p><em>"She\'ll find you. She always finds what she\'s looking for. — C"</em></p>'+
+ '<p>Jessie takes the flank apart on her own. Half of them go down before the rest run. She says one thing.</p>'+
+ '<p><em>"Took you long enough to open that."</em></p></div>'+
+ '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">5 missions so far</span><span class="chap__st live">In progress</span></div>'+
+ '<p class="chap__w">Ironhollow · the pass</p>'+beats(CH3,"31")+"</div>"+
+ '<div class="ex"><p class="ex__h">The Road Climbs — the current front of the story</p>'+
+ '<p>Davan finds them before they pack. He has a folded piece of paper in his hand, old, edges soft from being kept somewhere for a long time. <em>"A friend of mine worked the pass eight years ago. He drew the approach from memory when he came back. The narrow stretch, where the ice sits longest, where the wind comes from."</em></p>'+
+ '<p>He holds it out to Jessie. <em>"It is not much."</em></p>'+
+ '<p>Jessie takes it and folds it once more and puts it in her coat pocket, not her pack. <em>"It is exactly enough."</em></p></div>'+
+ '<h2 class="s">Where it is going</h2>'+
+ '<p class="b">The scroll named three places. <strong>Aldenmoor</strong> is done and its seal piece is accounted for. <strong>Veldran</strong> is in the mountains, past the pass the team is climbing now, and Jessie has never explained why the name stops her. <strong>Mirefall</strong> is a swamp in the south-east and nobody has said one word about it yet.</p>';
+}};
+
+PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arcs, separate from the main line. Most run 3-player; each arc is a chain you play in order.",h:function(){
+ var arcs=SIDES.map(function(a){
+  return '<div class="arc"><div class="arc__h"><h3>'+E(a[0])+'</h3><span class="arc__c">'+a[2]+' missions</span><span class="arc__p">up to '+a[3]+' player'+(a[3]>1?"s":"")+'</span></div>'+
+   '<div class="arc__b"><p class="arc__d">'+E(a[4])+'</p><div class="arc__l">'+
+   a[5].map(function(q,i){return '<div class="arc__q"><i>'+(i+1)+'</i><span>'+E(q)+"</span></div>";}).join("")+
+   "</div></div></div>";
+ }).join("");
+ return '<p class="b">Side stories are their own chains — each one requires the previous mission in its arc, and none of them require the main story except <strong>Millhaven</strong>, which opens once you have met Jessie.</p>'+
+ arcs+
+ '<h2 class="s">Encounters</h2>'+
+ '<p class="b">One-off fights rather than chains. Each comes in an <strong>Easy</strong> and a <strong>Hard</strong> version, so you can run them well below the recommended level if you bring the right team.</p>'+
+ '<div class="grid grid--wide">'+ENCOUNTERS.map(function(e){
+  return '<div class="card"><div class="card__h"><span class="card__n">'+E(e[0])+'</span><span class="card__tag">'+e[1]+'P</span></div>'+
+   '<div class="card__d">'+E(e[2])+'</div><div class="card__f">'+E(e[3])+"</div></div>";
+ }).join("")+"</div>"+
+ '<h2 class="s">The weapon quest</h2>'+
+ '<div class="arc"><div class="arc__h"><h3>The First Blade</h3><span class="arc__c">1 mission</span><span class="arc__p">solo</span></div>'+
+ '<div class="arc__b"><p class="arc__d">Elric the Scribe found a sealed forge-site outside Aldenmoor. He also found the constructs that sealed it. He told you plainly that he cannot fight — but he does think you are brave enough to pass their trial.</p>'+
+ '<p class="b" style="margin:0"><strong>Reward:</strong> Trainee\'s Edge, the starter weapon. The Aldenmoor Weaponsmiths\' Guild had one rule before they taught anything else: <em>one strike, placed correctly, at the moment that matters.</em></p></div></div>';
+}};
+
+/* ══════════════════════════════════════════════════════════════════
+   NAV / ROUTER
+   ══════════════════════════════════════════════════════════════════ */
+var NAV=[
+ ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["factions","Factions"],["economy","Economy &amp; Progression"]]],
+ ["The world",[["valestia","Valestia"],["lore","Lore"]]],
+ ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]]
+];
+var COUNTS={gear:"26",weapons:"16",abyss:"",factions:"8",clans:"9",valestia:"11",story:"31",sides:"50"};
+
+document.getElementById("nav").innerHTML=NAV.map(function(g){
+ return '<div class="navgrp"><div class="navgrp__t">'+g[0]+'</div><div class="nav">'+
+  g[1].map(function(p){
+   return '<a href="#'+p[0]+'" data-p="'+p[0]+'">'+p[1]+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
+  }).join("")+"</div></div>";
+}).join("");
+
+document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
+ var p=PAGES[k];
+ return '<section class="page" id="pg-'+k+'"><div class="ph"><div class="ph__e">'+p.e+'</div><h1>'+p.t+'</h1>'+
+  (p.d?'<p class="ph__d">'+p.d+"</p>":"")+"</div>"+p.h()+
+  '<div class="foot"><p><b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. Every formula, item, region, quest and line of prose here was read out of the live bot. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.</p></div></section>';
+}).join("");
+
+var rail=document.getElementById("rail"), scrim=document.getElementById("scrim");
+function closeRail(){rail.classList.remove("is-open");scrim.classList.remove("is-on");}
+document.getElementById("burger").addEventListener("click",function(){
+ rail.classList.toggle("is-open");scrim.classList.toggle("is-on");
+});
+scrim.addEventListener("click",closeRail);
+
+var built={};
+function route(){
+ var id=(location.hash||"#start").slice(1);
+ if(!PAGES[id]) id="start";
+ Object.keys(PAGES).forEach(function(k){
+  document.getElementById("pg-"+k).classList.toggle("is-on",k===id);
+ });
+ document.querySelectorAll(".nav a").forEach(function(a){
+  a.classList.toggle("is-on",a.dataset.p===id);
+ });
+ if(id==="combat"&&!built.combat){built.combat=1;initCalc();}
+ if(id==="valestia"&&!built.map){built.map=1;initMap();}
+ closeRail();
+ window.scrollTo(0,0);
+}
+addEventListener("hashchange",route);
+
+/* ══════════════════════════════════════════════════════════════════
+   CALCULATOR
+   ══════════════════════════════════════════════════════════════════ */
+function initCalc(){
+ var S={lvl:20,str:10,agi:9,con:10};
+ var DEF=[["str","STR","Damage per hit, and the spine of your parry"],
+          ["agi","AGI","Damage multiplier, crit, dodge, flat reduction"],
+          ["con","CON","Max HP, rest healing, block and counter"]];
+ var budget=function(){return 10+(S.lvl-1);}, spent=function(){return S.str+S.agi+S.con;};
+ function crit(a){return a<=10?a:10+Math.floor((a-10)/3);}
+ function oc(a){return 1+0.5*(a/29);}
+ var sEl=document.getElementById("stats");
+ sEl.innerHTML=DEF.map(function(d){
+  return '<div class="st"><div class="st__t"><span class="st__k">'+d[1]+'</span><span class="st__d">'+d[2]+'</span>'+
+   '<span class="st__v num" data-v="'+d[0]+'">0</span></div><div class="st__r">'+
+   '<button class="btn" data-dec="'+d[0]+'" aria-label="Lower '+d[1]+'">−</button>'+
+   '<span class="mtr"><span class="mtr__f" data-m="'+d[0]+'"></span></span>'+
+   '<button class="btn" data-inc="'+d[0]+'" aria-label="Raise '+d[1]+'">+</button></div></div>';
+ }).join("");
+ var TL=[["hp","Max HP","50 + CON×15",1],["rest","Rest heals","20 + CON×3"],["crit","Crit / Dodge","from AGI"],
+         ["red","Flat reduction","AGI × 2.5"],["blk","Parry block","CON×5 + STR"],["ctr","Parry counter","CON×3 + STR"]];
+ document.getElementById("ro").innerHTML=TL.map(function(t){
+  return '<div class="tl"><span class="tl__k">'+t[1]+'</span><span class="tl__v num'+(t[3]?" br":"")+'" data-t="'+t[0]+'">—</span><span class="tl__f">'+t[2]+"</span></div>";
+ }).join("");
+ function verdict(){
+  var a=S.agi,c=S.con,s=S.str,tot=spent()||1,left=budget()-spent();
+  if(left>0) return "You have <strong>"+left+"</strong> unspent point"+(left>1?"s":"")+".";
+  if(c/tot>=.5) return "A parry tank. You block <strong>"+(c*5+s)+"</strong> and counter for <strong>"+(c*3+s)+"</strong> — and Ultra Focus walks straight through all of it.";
+  if(a/tot>=.45) return "A dodge build. <strong>"+crit(a)+"%</strong> to avoid the hit outright and <strong>"+(a*2.5)+"</strong> off whatever lands.";
+  if(s/tot>=.5) return "A hitter. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> on an average swing, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> with Focus. A tank who rests will bury you.";
+  return "Balanced. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> crit, no glaring hole — and nothing that scares anyone.";
+ }
+ function render(){
+  var b=budget(),sp=spent();
+  document.getElementById("lvV").textContent=S.lvl;
+  var bd=document.getElementById("bud"); bd.textContent=sp+" / "+b; bd.classList.toggle("over",sp>b);
+  DEF.forEach(function(d){
+   document.querySelector('[data-v="'+d[0]+'"]').textContent=S[d[0]];
+   document.querySelector('[data-m="'+d[0]+'"]').style.width=Math.min(100,(S[d[0]]/40)*100)+"%";
+   document.querySelector('[data-inc="'+d[0]+'"]').disabled=(sp>=b);
+   document.querySelector('[data-dec="'+d[0]+'"]').disabled=(S[d[0]]<=0);
+  });
+  document.getElementById("lvD").disabled=(S.lvl<=1);
+  var set={hp:50+S.con*15,rest:20+S.con*3,crit:crit(S.agi)+"%",red:S.agi*2.5,blk:S.con*5+S.str,ctr:S.con*3+S.str};
+  Object.keys(set).forEach(function(k){document.querySelector('[data-t="'+k+'"]').textContent=set[k];});
+  var m=oc(S.agi), lo=Math.round((S.str*4+5)*m), hi=Math.round((S.str*4+15)*m), sc=Math.max(1,hi*2);
+  function bar(si,ni,l,h,col){
+   var e=document.getElementById(si);
+   e.style.left=(l/sc*100)+"%"; e.style.width=Math.max(1.5,(h-l)/sc*100)+"%"; e.style.background=col;
+   document.getElementById(ni).textContent=l+"–"+h;
+  }
+  bar("sN","nN",lo,hi,"var(--verdigris)");
+  bar("sC","nC",Math.round(lo*1.5),Math.round(hi*1.5),"var(--brass)");
+  bar("sF","nF",lo*2,hi*2,"var(--corrupt)");
+  document.getElementById("vd").innerHTML=verdict();
+ }
+ document.getElementById("lvU").addEventListener("click",function(){if(S.lvl<70){S.lvl++;render();}});
+ document.getElementById("lvD").addEventListener("click",function(){if(S.lvl>1){S.lvl--;render();}});
+ sEl.addEventListener("click",function(e){
+  var i=e.target.closest("[data-inc]"), d=e.target.closest("[data-dec]");
+  if(i&&spent()<budget()){S[i.dataset.inc]++;render();}
+  if(d&&S[d.dataset.dec]>0){S[d.dataset.dec]--;render();}
+ });
+ render();
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MAP OF VALESTIA
+   ══════════════════════════════════════════════════════════════════ */
+function initMap(){
+ /* The painted map is the real artwork; markers are positioned over it in
+    percentages, so they track the image at every width. */
+ var s='<div class="mapwrap"><img class="mapimg" src="'+MAP_SRC+'" alt="Map of Valestia" width="1485" height="810" loading="lazy" decoding="async">';
+ Object.keys(PLACES).forEach(function(id){
+  var p=PLACES[id]; if(p.t==="geo") return;
+  s+='<button class="pin '+(p.t==="hunt"?"hunt":"")+(p.t==="seal"?" seal":"")+'" data-n="'+id+'"'+
+     ' style="left:'+p.x+'%;top:'+p.y+'%" aria-label="'+E(p.n)+'"><span class="pin__d"></span>'+
+     '<span class="pin__t">'+E(p.n)+'</span></button>';
+ });
+ s+="</div>";
+ document.getElementById("map").innerHTML=s;
+
+ var dos=document.getElementById("dos");
+ function sel(id){
+  var p=PLACES[id];
+  document.querySelectorAll(".pin").forEach(function(n){n.classList.toggle("on",n.dataset.n===id);});
+  var kind={hunt:"Huntable region",story:"Story location",side:"Side story",seal:"Seal site",portal:"Portal region"}[p.t]||"Location";
+  var h='<p class="dos__e">'+kind.toUpperCase()+'</p><h3>'+E(p.n)+"</h3>";
+  h+='<div class="dos__r"><p class="dos__x">'+E(p.d)+"</p></div>";
+  if(p.m){
+   h+='<div class="dos__r"><p class="dos__k">Signature material</p><p class="dos__m">'+E(p.m)+'</p>'+
+      '<p class="dos__x" style="margin-top:.3rem">Only drops here. Feeds this region\'s gear and one weapon recipe.</p></div>';
+  }
+  if(FAUNA[id]){
+   h+='<div class="dos__r"><p class="dos__k">Species — tier 1 → 7</p>';
+   FAUNA[id].forEach(function(f){
+    h+='<p class="sp"><span class="sp__a">'+f[0]+'</span><span class="sp__n"><b>'+E(f[1])+"</b> → <b>"+E(f[2])+"</b></span></p>";
+   });
+   h+="</div>";
+  }
+  var links=ROADS.filter(function(r){return r[0]===id||r[1]===id;})
+    .map(function(r){var o=r[0]===id?r[1]:r[0];return PLACES[o]?PLACES[o].n:null;}).filter(Boolean);
+  if(links.length) h+='<div class="dos__r"><p class="dos__k">Connects to</p><p class="dos__x">'+links.join(" · ")+"</p></div>";
+  dos.innerHTML=h;
+ }
+ /* <button> already fires on Enter/Space, so click alone covers the keyboard */
+ document.getElementById("map").addEventListener("click",function(e){
+  var n=e.target.closest("[data-n]"); if(n) sel(n.dataset.n);
+ });
+ sel("stormbay");
+}
+
+route();
+})();
+</script>
+</body>
+</html>
