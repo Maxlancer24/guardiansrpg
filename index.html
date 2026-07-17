@@ -1023,7 +1023,7 @@ PAGES.modes={t:"Game Modes",e:"The guide",d:"Which modes are live, what they pay
  '<p class="b">A random player gets marked and must face an NPC encounter. It triggers under conditions Max sets.</p>';
 }};
 
-PAGES.screens={t:"What It Looks Like",e:"The guide",d:"The actual combat screens, as the bot draws them in Discord. Every layout below is reproduced from the code that builds it — the same HP bars, stat lines and turn prompts you will see live.",h:function(){
+PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens, as the bot draws them in Discord. Every layout below is reproduced from the code that builds it — the same HP bars, stat lines and turn prompts you will see live.",h:function(){
  var g="#f0b232", red="#ed4245", blue="#5865f2", brown="#a0693e", teal="#3ba55d", purple="#9b59b6";
 
  // ── shared team engine — the canonical screen (story_32 cast) ──
@@ -1409,28 +1409,89 @@ PAGES.catching={t:"Catching",e:"Pets",d:"The Safari, the collars, and the formul
 }};
 
 PAGES.mechas={t:"The Mecha System",e:"Mechas",d:"Front Mission in a Discord channel: pilot a wanzer built from four destructible parts, spend Action Points instead of taking free turns, and win by dismantling the enemy machine one limb at a time.",h:function(){
- return '<h2 class="s">Unlocking it — Cape Greyveil</h2>'+
- '<p class="b">Mechas are gated behind a portal region. <strong>Cape Greyveil</strong> has no enemies and no hunting — the only thing there is the <strong>Mecha Portal</strong>, and opening it is a deliberate endgame commitment. You reach the Cape from Stormbay Docks with <span class="cmd">!travel</span>.</p>'+
- '<p class="b">Opening the portal costs a haul of materials from all over Valestia, then a fight:</p>'+
- tbl(["The portal toll","Amount"],[
-  ["Every region signature material","×5 of each of the 10"],
-  ["Rare materials","×10 each — Temporal Gear, Obsidian Alloy, War Emblem Fragment, Null Coil"],
-  ["Oil","30,000"],
-  ["Lyra's initiation","A mecha duel you have to win"]
- ],["k","n"])+
- '<div class="callout"><p><strong>Lyra lends you a wanzer for the initiation — and lets you keep it when you win.</strong> A Mk1 Striker frame with a Machinegun and a Rifle, a Repair Kit and an AP Cell in the backpack. Passing pays back <strong>20,000 Oil</strong> and the Pilot role. You are not building your first mecha from nothing; you are earning your way into the hangar.</p></div>'+
- '<p class="b">The signature materials come from <span class="cmd">!hunt</span> in each region, so the portal is a reason to have travelled the whole map. It is the one system that asks you to have played everything else first.</p>'+
-
- '<h2 class="s">A different fight, again</h2>'+
- '<p class="b">Like Pets, mechas share nothing with normal combat — no STR/AGI/CON, no Focus. A wanzer is <strong>four separate parts</strong>, each with its own HP and armor: <strong>body, left arm, right arm, legs.</strong> You do not have one health bar; you have four, and the fight is about which one breaks first.</p>'+
+ return '<h2 class="s">A different fight, again</h2>'+
+ '<p class="b">Like Pets, mechas share nothing with normal combat — no STR/AGI/CON, no Focus, no gear. A <strong>wanzer</strong> is four separate parts, each with its own HP and armor: <strong>body, left arm, right arm, legs.</strong> You do not have one health bar; you have four, and the fight is about which one breaks first.</p>'+
  tbl(["Break this part","And…"],[
   ["An arm","The weapon it holds goes offline. Disarm the enemy by shooting the arm, not the body."],
   ["The legs","Evasion collapses — every shot after that lands far more often."],
   ["The body","The wanzer is destroyed. This is the kill, but it is usually the best-armored part."]
  ],["k",""])+
  '<div class="callout"><p><strong>You rarely win by going for the body.</strong> You win by crippling — take the arms so it cannot shoot back, take the legs so it cannot dodge, then finish at your leisure. A mecha with both arms gone is a loss waiting to happen, even at full body HP.</p></div>'+
+ '<h2 class="s">The loop</h2>'+
+ '<p class="b"><strong>1 — Open the portal at <a href="#portal">Cape Greyveil</a>.</strong> Mechas are the one system that asks you to have played everything else first — the toll is materials from all over Valestia.</p>'+
+ '<p class="b"><strong>2 — <a href="#hangar">Build a wanzer</a></strong> from a body, two arms and legs, staying under your weight budget.</p>'+
+ '<p class="b"><strong>3 — Hang two <a href="#mechawpn">weapons</a></strong>, one per arm, and pack two backpack items.</p>'+
+ '<p class="b"><strong>4 — <a href="#mechafight">Fight</a></strong> by spending Action Points: cripple the enemy frame part by part.</p>'+
+ '<p class="b"><strong>5 — Win to earn <a href="#pilot">Pilot XP</a></strong>, which raises your rank and unlocks higher Marks of parts to build.</p>'+
+ tbl(["Rule","Value"],[
+  ["Parts per wanzer","4 — body, 2 arms, legs, each destructible"],
+  ["Marks (upgrade tiers)","Mk1 → Mk5"],
+  ["Weapons equipped","2 — one per arm"],
+  ["Backpack slots","2"],
+  ["Turn actions","Fire · Guard · Rest · Consumable"]
+ ],["k","n"])+
+ '<div class="callout"><p>See a mecha duel drawn live on the <a href="#screens">What It Looks Like</a> page — the four-part panel is a screen unlike anything else in the game.</p></div>';
+}};
 
- '<h2 class="s">Action Points — the whole game</h2>'+
+PAGES.portal={t:"The Greyveil Portal",e:"Mechas",d:"Mechas are gated behind Cape Greyveil. Opening the portal is a deliberate endgame commitment — a haul of materials from the whole map, then a duel.",h:function(){
+ return '<h2 class="s">Cape Greyveil</h2>'+
+ '<p class="b"><strong>Cape Greyveil</strong> has no enemies and no hunting — the only thing there is the <strong>Mecha Portal</strong>. You reach the Cape from Stormbay Docks with <span class="cmd">!travel</span>. It is a portal region, not a place you fight in.</p>'+
+ '<h2 class="s">The toll</h2>'+
+ '<p class="b">Opening the portal costs materials from all over Valestia, then a fight:</p>'+
+ tbl(["The portal toll","Amount"],[
+  ["Every region signature material","×5 of each of the 10"],
+  ["Rare materials","×10 each — Temporal Gear, Obsidian Alloy, War Emblem Fragment, Null Coil"],
+  ["Oil","30,000"],
+  ["Lyra's initiation","A mecha duel you have to win"]
+ ],["k","n"])+
+ '<p class="b">The signature materials come from <span class="cmd">!hunt</span> in each region, so the portal is a reason to have travelled the whole map. It is the one system that asks you to have played everything else first.</p>'+
+ '<h2 class="s">Lyra\x27s initiation</h2>'+
+ '<div class="callout"><p><strong>Lyra lends you a wanzer for the initiation — and lets you keep it when you win.</strong> A Mk1 Striker frame with a Machinegun and a Rifle, a Repair Kit and an AP Cell in the backpack. Passing pays back <strong>20,000 Oil</strong> and the Pilot role. You are not building your first mecha from nothing; you are earning your way into the hangar.</p></div>'+
+ '<p class="b">That starter frame is a Striker — the balanced all-rounder — so your first duel is fought on even, forgiving footing before you start specialising. Once you own it, the <a href="#hangar">hangar</a> is open.</p>';
+}};
+
+PAGES.hangar={t:"Building a Wanzer",e:"Mechas",d:"Four parts — a body, two arms, legs — each in an archetype and a Mark, all under a weight budget the frame sets.",h:function(){
+ return '<p class="b">You assemble four parts, and each comes in an archetype and a Mark (Mk1–Mk5). The numbers below span <strong>Mk1 → Mk5</strong>; the shape of each archetype stays the same as it upgrades.</p>'+
+ '<h2 class="s">Bodies — the frame, your AP ceiling</h2>'+
+ tbl(["Body","HP","Armor","Guard %","Output","Max AP"],MECHA_BODIES.map(function(b){
+  return ['<strong>'+E(b[0])+'</strong><div class="mode__d">'+E(b[1])+'</div>',b[2],b[3],b[4],b[5],b[6]];
+ }),["k","n","n","n","n","n"])+
+ '<p class="b"><strong>Output</strong> is your weight budget — a heavier frame hauls heavier weapons. <strong>Max AP</strong> is your ceiling; a Scout thinks faster than a Bastion but folds faster too.</p>'+
+ '<h2 class="s">Arms — they hold the weapons, and they break</h2>'+
+ tbl(["Arm","HP","Armor","Aim","Weight","Melee"],MECHA_ARMS.map(function(a){
+  return ['<strong>'+E(a[0])+'</strong><div class="mode__d">'+E(a[1])+'</div>',a[2],a[3],a[4],a[5],a[6]];
+ }),["k","n","n","n","n","n"])+
+ '<p class="b">Each arm carries one weapon. <strong>Aim</strong> raises that weapon\x27s hit chance, so a Marksman Arm turns an inaccurate Grenade Launcher into a threat. Lose the arm and you lose the gun — armored arms keep it in the fight longer.</p>'+
+ '<h2 class="s">Legs — mobility and footing</h2>'+
+ tbl(["Legs","HP","Armor","Evasion","Weight"],MECHA_LEGS.map(function(l){
+  return ['<strong>'+E(l[0])+'</strong><div class="mode__d">'+E(l[1])+'</div>',l[2],l[3],l[4],l[5]];
+ }),["k","n","n","n"])+
+ '<p class="b">Legs are your <strong>evasion</strong> — Scout Legs dodge more than three times as often as Bastion Legs. It is also why blowing off the enemy\x27s legs is such a strong opening: it turns their whole frame into an easy target.</p>'+
+ '<h2 class="s">Weight and evasion</h2>'+
+ '<p class="b">Everything you bolt on has weight, and your body\x27s <strong>output</strong> is the budget. Pack the frame past its limit and it slows down; pack it past 100% and it simply <strong>will not equip</strong>.</p>'+
+ tbl(["Weight vs output","Evasion"],[
+  ["Up to 70%","Full — no penalty"],["70% – 85%","×0.80"],["85% – 100%","×0.60"],["Over 100%","Cannot equip"]
+ ],["n","n"])+
+ '<div class="callout"><p>This is the build puzzle: a Bastion frame can carry the heaviest guns but barely dodges to begin with, so loading it further costs little. A Scout lives on evasion — hang a Maul off it and you throw away the one thing keeping it alive.</p></div>'+
+ '<div class="callout"><p><strong>Build to the frame.</strong> Heavy frames want heavy guns and do not miss the evasion; light frames want to stay light and win the turn. Match your <a href="#mechawpn">weapons</a> to the body, not the other way around.</p></div>';
+}};
+
+PAGES.mechawpn={t:"Mecha Weapons",e:"Mechas",d:"Seven weapon families, each a different answer to the same question: how do you break four parts before they break yours.",h:function(){
+ return '<h2 class="s">The seven families</h2>'+
+ '<p class="b">Each arm holds one. Values span Mk1 → Mk5.</p>'+
+ tbl(["Weapon","Power","Hits","Accuracy","AP","Ammo","Weight"],MECHA_WEAPONS.map(function(w){
+  return [w[0]+' <strong>'+E(w[1])+'</strong><div class="mode__d">'+E(w[2])+'</div>',w[3],w[4],w[5],w[6],w[7],w[8]];
+ }),["k","n","n","n","n","n","n"])+
+ '<div class="callout"><p><strong>Hits vs Power is the whole design.</strong> The Flamethrower throws six weak jets that scatter across the frame — it shreds several parts at once but bounces off armor. The Maul is one 199-damage swing that breaks anything it touches, if you can afford the 6 AP and it connects. Many-hit weapons cripple; single-hit weapons execute. Most pilots run one of each.</p></div>'+
+ '<h2 class="s">Match aim to weapon</h2>'+
+ '<p class="b">A weapon\x27s hit chance is its own accuracy plus the <strong>aim</strong> of the arm holding it. A <strong>Marksman Arm</strong> rescues the inaccurate heavy hitters — a Grenade Launcher on a Marksman Arm is a real threat; on a Guardian Arm it whiffs. A steady <strong>Guardian Arm</strong> instead keeps a reliable gun firing after the arm itself has been shot at.</p>'+
+ '<h2 class="s">Backpack consumables</h2>'+
+ '<p class="b">Two backpack slots. Using one spends your whole turn, so they are emergency tools, not free value.</p>'+
+ tbl(["Item","Effect"],MECHA_CONS.map(function(c){return [c[0],c[1]];}),["k",""]);
+}};
+
+PAGES.mechafight={t:"Mecha Combat",e:"Mechas",d:"No free turns. Every action spends Action Points, and firing gives none back — the whole fight is an AP economy fought across four destructible parts.",h:function(){
+ return '<h2 class="s">Action Points — the whole game</h2>'+
  '<p class="b">This is what makes it Front Mission and not a shooter. You do not get a free turn: every action spends <strong>Action Points</strong>, and firing does not give any back. Your four choices each turn:</p>'+
  tbl(["Action","AP","What it does"],[
   ["Fire","costs AP","Shoot a weapon at a chosen part. Heavy weapons cost more AP than light ones."],
@@ -1438,57 +1499,31 @@ PAGES.mechas={t:"The Mecha System",e:"Mechas",d:"Front Mission in a Discord chan
   ["Rest","+6 AP","Recover the most AP — but no defense, so you eat whatever comes."],
   ["Consumable","costs the turn","Use a backpack item: repair a part, dump in AP, pop smoke, clear a burn."]
  ],["k","n",""])+
- '<span class="fx">AP: Fire spends · Guard +3 (defended) · Rest +6 (exposed) · start capped by your body frame</span>'+
+ '<span class="fx">AP: Fire spends · Guard +3 (defended) · Rest +6 (exposed) · ceiling set by your body frame</span>'+
  '<div class="callout"><p><strong>The core tension:</strong> your best weapons are the ones you cannot afford to fire every turn. A Maul costs 6 AP a swing; a Machinegun costs 3. Spend a turn resting to load up for a big hit and you are open for that turn. Guard banks less but keeps you covered. Every turn is that trade.</p></div>'+
-
- '<h2 class="s">Building a wanzer</h2>'+
- '<p class="b">You assemble four parts, and each comes in an archetype and a Mark (Mk1–Mk5). The numbers below span <strong>Mk1 → Mk5</strong> — the shape of each archetype stays the same as it upgrades.</p>'+
- '<h3 class="t">Bodies — the frame, your AP ceiling</h3>'+
- tbl(["Body","HP","Armor","Guard %","Output","Max AP"],MECHA_BODIES.map(function(b){
-  return ['<strong>'+E(b[0])+'</strong><div class="mode__d">'+E(b[1])+'</div>',b[2],b[3],b[4],b[5],b[6]];
- }),["k","n","n","n","n","n"])+
- '<p class="b"><strong>Output</strong> is your weight budget — a heavier frame hauls heavier weapons. <strong>Max AP</strong> is your ceiling; a Scout thinks faster than a Bastion but folds faster too.</p>'+
- '<h3 class="t">Arms — they hold the weapons, and they break</h3>'+
- tbl(["Arm","HP","Armor","Aim","Weight","Melee"],MECHA_ARMS.map(function(a){
-  return ['<strong>'+E(a[0])+'</strong><div class="mode__d">'+E(a[1])+'</div>',a[2],a[3],a[4],a[5],a[6]];
- }),["k","n","n","n","n","n"])+
- '<p class="b">Each arm carries one weapon. <strong>Aim</strong> raises that weapon\'s hit chance, so a Marksman Arm turns an inaccurate Grenade Launcher into a threat. Lose the arm and you lose the gun — armored arms keep it in the fight longer.</p>'+
- '<h3 class="t">Legs — mobility and footing</h3>'+
- tbl(["Legs","HP","Armor","Evasion","Weight"],MECHA_LEGS.map(function(l){
-  return ['<strong>'+E(l[0])+'</strong><div class="mode__d">'+E(l[1])+'</div>',l[2],l[3],l[4],l[5]];
- }),["k","n","n","n"])+
- '<p class="b">Legs are your <strong>evasion</strong> — Scout Legs dodge more than three times as often as Bastion Legs. It is also why blowing off the enemy\'s legs is such a strong opening: it turns their whole frame into an easy target.</p>'+
-
- '<h2 class="s">Weight and evasion</h2>'+
- '<p class="b">Everything you bolt on has weight, and your body\'s <strong>output</strong> is the budget. Pack the frame past its limit and it slows down; pack it past 100% and it simply <strong>will not equip</strong>.</p>'+
- tbl(["Weight vs output","Evasion"],[
-  ["Up to 70%","Full — no penalty"],["70% – 85%","×0.80"],["85% – 100%","×0.60"],["Over 100%","Cannot equip"]
- ],["n","n"])+
- '<div class="callout"><p>This is the build puzzle: a Bastion frame can carry the heaviest guns but barely dodges to begin with, so loading it further costs little. A Scout lives on evasion — hang a Maul off it and you throw away the one thing keeping it alive.</p></div>'+
-
- '<h2 class="s">Weapons</h2>'+
- '<p class="b">Seven families, each with a different answer to the same question: how do you break four parts before they break yours. Values span Mk1 → Mk5.</p>'+
- tbl(["Weapon","Power","Hits","Accuracy","AP","Ammo","Weight"],MECHA_WEAPONS.map(function(w){
-  return [w[0]+' <strong>'+E(w[1])+'</strong><div class="mode__d">'+E(w[2])+'</div>',w[3],w[4],w[5],w[6],w[7],w[8]];
- }),["k","n","n","n","n","n","n"])+
- '<div class="callout"><p><strong>Hits vs Power is the whole design.</strong> The Flamethrower throws six weak jets that scatter across the frame — it shreds several parts at once but bounces off armor. The Maul is one 199-damage swing that breaks anything it touches, if you can afford the 6 AP and it connects. Many-hit weapons cripple; single-hit weapons execute. Most pilots run one of each.</p></div>'+
-
- '<h2 class="s">Backpack consumables</h2>'+
- '<p class="b">Two backpack slots. Using one spends your whole turn, so they are emergency tools, not free value.</p>'+
- tbl(["Item","Effect"],MECHA_CONS.map(function(c){return [c[0],c[1]];}),["k",""])+
-
- '<h2 class="s">Pilot rank and progression</h2>'+
- '<p class="b">You earn <strong>Pilot XP</strong> from wins, and your rank gates the highest Mark of parts you can build and equip. You do not buy your way to Mk5 — you fight your way there.</p>'+
- tbl(["Rank","Pilot XP","Max build","Unlocks"],MECHA_RANKS.map(function(r){
-  return [r[0],r[1],r[2],r[3]];
- }),["k","n","n",""])+
- '<div class="callout"><p>Parts evolve up a <strong>two-branch Mk recipe chain</strong> that <em>consumes</em> the part below it — upgrading a Mk3 arm to Mk4 eats the Mk3. And the last two ranks, <strong>Ace</strong> and <strong>Wanzer Lord</strong>, unlock <strong>signature Mk5 frames</strong> that lower ranks cannot field at all. The ceiling is a status symbol you have to earn twice: once in XP, once in materials.</p></div>'+
-
+ '<h2 class="s">Target the part, not the mecha</h2>'+
+ '<p class="b">You do not shoot "the enemy" — you shoot a <strong>part</strong>. Each has its own HP and armor, and breaking each one does something different.</p>'+
+ tbl(["Break this part","And…"],[
+  ["An arm","The weapon it holds goes offline — this is how you disarm."],
+  ["The legs","Evasion collapses; your later shots land far more often."],
+  ["The body","The wanzer is destroyed — the kill, but usually the best-armored part."]
+ ],["k",""])+
  '<h2 class="s">How to think about it</h2>'+
  '<p class="b"><strong>Cripple, do not brawl.</strong> Two arms down beats half a body bar. Open on whatever keeps them dangerous — the arm holding their heavy gun, or the legs holding their evasion.</p>'+
  '<p class="b"><strong>Match aim to weapon.</strong> A Marksman Arm rescues the inaccurate heavy hitters; a steady Guardian Arm keeps a reliable gun firing after it has been shot at.</p>'+
  '<p class="b"><strong>Respect the AP economy.</strong> Never fire yourself empty in front of a fresh enemy. Bank with Guard when pressured, Rest only when you can afford the exposure.</p>'+
- '<p class="b"><strong>Build to the frame.</strong> Heavy frames want heavy guns and do not miss the evasion; light frames want to stay light and win the turn.</p>';
+ '<div class="callout"><p>See the four-part panel drawn live on <a href="#screens">What It Looks Like</a> — a wanzer mid-fight with a destroyed arm and failing legs reads the whole story at a glance.</p></div>';
+}};
+
+PAGES.pilot={t:"Pilot Ranks",e:"Mechas",d:"You do not buy your way to Mk5 — you fight your way there. Pilot XP from wins gates the highest Mark you can build and equip.",h:function(){
+ return '<h2 class="s">The seven ranks</h2>'+
+ '<p class="b">You earn <strong>Pilot XP</strong> from wins, and your rank gates the highest Mark of parts you can build and equip.</p>'+
+ tbl(["Rank","Pilot XP","Max build","Unlocks"],MECHA_RANKS.map(function(r){
+  return [r[0],r[1],r[2],r[3]];
+ }),["k","n","n",""])+
+ '<h2 class="s">The Mk recipe chain</h2>'+
+ '<p class="b">Parts evolve up a <strong>two-branch Mk recipe chain</strong> that <em>consumes</em> the part below it — upgrading a Mk3 arm to Mk4 eats the Mk3. You are always trading up, never hoarding a ladder of spares.</p>'+
+ '<div class="callout"><p>The last two ranks, <strong>Ace</strong> and <strong>Wanzer Lord</strong>, unlock <strong>signature Mk5 frames</strong> that lower ranks cannot field at all. The ceiling is a status symbol you have to earn twice: once in XP, once in materials.</p></div>';
 }};
 
 PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads between them, and the places the story happens. Select any marker on the map.",h:function(){
@@ -1625,13 +1660,14 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
    NAV / ROUTER
    ══════════════════════════════════════════════════════════════════ */
 var NAV=[
- ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["screens","What It Looks Like"],["abyss","The Eternal Abyss"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
+ ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
  ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"]]],
  ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]],
  ["Pets",[["pets","The Pets System"],["lab","Pet Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pet Battles"],["catching","Catching"]]],
- ["Mechas",[["mechas","The Mecha System"]]]
+ ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
+ ["Reference",[["screens","What It Looks Like"]]]
 ];
-var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",factions:"15",clans:"9",valestia:"11",story:"31",sides:"50"};
+var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"31",sides:"50"};
 
 document.getElementById("nav").innerHTML=NAV.map(function(g){
  return '<div class="navgrp"><div class="navgrp__t">'+g[0]+'</div><div class="nav">'+
