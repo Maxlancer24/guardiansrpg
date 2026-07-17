@@ -834,6 +834,11 @@ function hpbar(cur,max,len){
  len=len||12; var f=Math.floor(len*Math.max(0,Math.min(1,cur/max)));
  return "["+"█".repeat(f)+"░".repeat(len-f)+"]";
 }
+/* pet hp_bar: ▰ filled, ▱ empty, width 10, round() — pet_battle_system.hp_bar */
+function petbar(cur,max){
+ var f=Math.max(0,Math.min(10,Math.round(10*cur/Math.max(1,max))));
+ return "▰".repeat(f)+"▱".repeat(10-f);
+}
 /* a Discord embed card: accent color, title, pre-built body HTML, footer */
 function dsc(accent,title,body,footer){
  return '<div class="dsc" style="--dsc-accent:'+accent+'">'+
@@ -1017,6 +1022,31 @@ PAGES.modes={t:"Game Modes",e:"The guide",d:"Which modes are live, what they pay
       '<div class="card__d">'+E(m[2])+"</div></div>";
    }).join("")+"</div>";
  }).join("")+
+ '<h2 class="s">Vanguard — the siege battle</h2>'+
+ '<p class="b">Vanguard is the deepest team mode: a <strong>siege-style battle</strong> where two teams of 4–10 fight through <strong>phases</strong> to reach and kill the enemy <strong>Commander</strong>. It is the only mode where your <em>position</em> matters as much as your build — and it is the same engine that powers region <a href="#valestia">liberation</a> against NPC armies.</p>'+
+ '<p class="b">Teams are auto-balanced by total power, then each side assigns <strong>three roles</strong>. How many of each depends on team size:</p>'+
+ tbl(["Team size","Front","Rear","Commander"],[
+  ["4","2","1","1"],["5","3","1","1"],["6","3","2","1"],["7","4","2","1"],["8","5","2","1"],["9","6","2","1"],["10","7","2","1"]
+ ],["n","n","n","n"])+
+ '<h3 class="t">The three roles</h3>'+
+ tbl(["Role","What they do"],[
+  ['<strong>Front</strong>',"The line that fights first. Everyone not a Rear or Commander is Front."],
+  ['<strong>Rear Guard</strong>',"Held back until the front breaks. Enters with <strong>+15% STR and +10% CON</strong> — fresh reinforcements, not fodder."],
+  ['<strong>Commander</strong>',"One per team, and the target. Protected until the very end, then enters with <strong>+50% HP, +25% STR, +20% CON</strong> if never touched. The team whose Commander dies loses."]
+ ],["k",""])+
+ '<h3 class="t">The phase cycle</h3>'+
+ '<p class="b">Each cycle runs the attack through the enemy formation in order:</p>'+
+ tbl(["Phase","The fight"],[
+  ["Phase 1","Front line versus front line, everyone at once."],
+  ["Phase 2","The survivors push into the enemy Rear Guard, who are now buffed."],
+  ["Phase 2B","If that push is repelled, Rear fights Rear directly."],
+  ["Phase 3","Whoever is left reaches the defending Commander."]
+ ],["k",""])+
+ '<p class="b">If the Commander survives Phase 3, a <strong>new cycle</strong> begins: every player resets to full HP, but <strong>the Commander keeps its current HP</strong> — it is never healed back up. Chip it down across cycles and it stays down.</p>'+
+ '<div class="callout"><p><strong>Two mechanics keep it from stalling.</strong> <strong>Wear:</strong> if a Commander takes <em>zero</em> damage in a cycle, it loses 10% of its max HP anyway — you cannot turtle forever. <strong>Sudden Death:</strong> if no Commander has fallen by the sixth cycle, both Commanders and their Rears fight directly to the death, no more cycles.</p></div>'+
+ '<h3 class="t">Commanding from the front</h3>'+
+ '<p class="b">A Commander does not have to wait. They can <strong>Rush</strong> — enter the fight early — but a Mobilized Commander gets smaller bonuses (<strong>+40% HP, +15% STR, +10% CON</strong>) than one who stayed intact, and after rushing they must hold for <strong>2 rounds</strong> before they can Withdraw. Once you commit the Commander, you commit.</p>'+
+ '<div class="callout"><p><strong>Vanguard rewards reading the board, not just hitting hardest.</strong> Who you put Front decides who absorbs Phase 1; a strong Rear turns a lost front into a counter-punch; and a Commander pushed too early — or held too timidly into Sudden Death — loses games a better team should win.</p></div>'+
  '<h2 class="s">Events and drops</h2>'+
  '<p class="b">Timed events drop rewards into a channel; you usually claim by clicking. <strong>Loot / Tag / Triad / Escort Drops</strong> are tied to specific modes, some with a <em>Doppel</em> twist. <strong>Blind Drop</strong> hides the reward. <strong>Traitor Drop</strong> adds a betrayal mechanic. <strong>Airdrops</strong> are promo-code drops with atomic first-come claims. The <strong>Roulette</strong> is a 2,000 OIL spin for withdrawable prizes, tokens and chaos gear.</p>'+
  '<h2 class="s">The Marked Hunt</h2>'+
@@ -1134,20 +1164,22 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
  '<p class="embcap">The class icon (⚔️ Devastator, 🛡️ Colossus, 👻 Ghost…) sits on every name. <code>⚡×2</code> is a Devastator\'s momentum stack; a downed player has a countdown before death that a revive can still beat.</p>'+
 
  '<h2 class="s">Pet battles</h2>'+
- '<p class="b">Pets get their own brown embed — no STR/AGI/CON here. Each side shows its active Pet\'s <strong>level, type and HP</strong>, with a turn log and your move list underneath.</p>'+
- dsc(brown,"🐾 Pet Battle — Safari",
-  '<p class="dsc__fn">Max\'s Team</p>'+
-  '<p class="dsc__row"><span class="dsc__nm">🦎 Ember</span>  Lv.24  🔥 Fire'+
-   '<span class="dsc__sub">HP <span class="bar">'+hpbar(88,88)+'</span>  88/88</span></p>'+
-  '<p class="dsc__fn">Wild</p>'+
-  '<p class="dsc__row"><span class="dsc__nm">🦀 Pebblecrab</span>  Lv.22  💧 Water  💤 Sleep'+
-   '<span class="dsc__sub">HP <span class="bar">'+hpbar(14,120)+'</span>  14/120</span></p>'+
+ '<p class="b">Pets get their own brown embed — no STR/AGI/CON here. Each side shows its active Pet\'s <strong>level, type and HP</strong>. The public panel carries the turn log, both rosters and who has locked their move; you pick from private controls.</p>'+
+ dsc(brown,"⚔️ Safari — Round 1",
+  '<p class="dsc__fn">Max</p>'+
+  '<p class="dsc__row"><span class="dsc__nm">🦎 Cinderling</span>  Lv.5  🔥Fire'+
+   '<span class="dsc__sub">HP <span class="bar">'+petbar(33,33)+'</span>  33/33</span></p>'+
+  '<p class="dsc__fn">🌿 Wild</p>'+
+  '<p class="dsc__row"><span class="dsc__nm">🐕 Emberpup</span>  Lv.5  🔥Fire'+
+   '<span class="dsc__sub">HP <span class="bar">'+petbar(24,24)+'</span>  24/24</span></p>'+
   '<p class="dsc__fn">📜 Turn Log</p>'+
-  '<p class="dsc__row" style="color:#b5bac1;font-size:.82rem">Ember used Ember. It\'s super effective! (×2)<br>Pebblecrab fell asleep.</p>'+
-  '<p class="dsc__fn">Your moves</p>'+
-  '<p class="dsc__row"><code>1</code> 🔥 Ember (18/25) · <code>2</code> Tackle (30/35) · <code>3</code> 🔥 Flame Fang (9/10) · <code>4</code> Focus (15/15)</p>',
-  "Pick a move — or throw a collar while it sleeps.")+
- '<p class="embcap">This is the catch setup in one frame: the Pebblecrab is chipped to 14 HP and asleep (×2 catch), so a Prime Collar now is a near-certain catch. The <code>(18/25)</code> after each move is its remaining PP.</p>'+
+  '<p class="dsc__row" style="color:#b5bac1;font-size:.82rem">A wild 🐕 Emberpup (Lv.5) appeared!<br>Launch grace period: your Pet party enters fully restored, and battle wear is not saved.</p>'+
+  '<p class="dsc__fn">Teams</p>'+
+  '<p class="dsc__row" style="font-size:.84rem"><span class="dsc__nm">Max</span><br>▶ 🦎 Cinderling · 33/33 HP</p>'+
+  '<p class="dsc__fn">Turn status</p>'+
+  '<p class="dsc__row" style="font-size:.84rem"><span class="dsc__nm">Max:</span> ⚙️ Resolving</p>',
+  "Open your private controls. You have 120 seconds to choose or lose by AFK.")+
+ '<p class="embcap">The bar is <code>▰▱</code> at width 10, not the block bar the rest of the game uses. <code>▶</code> in the Teams roster marks your active Pet; a benched one shows <code>•</code>, and a fainted one reads <em>fainted</em>. Your four moves and their PP live in the private controls, not on this public panel.</p>'+
 
  '<h2 class="s">Mecha duels</h2>'+
  '<p class="b">Wanzers drop the bar-per-fighter layout for a <strong>Front Mission panel</strong>: four parts stacked body-over-arms-over-legs, each with its own HP, plus your <strong>AP</strong> and the weapon each arm is holding.</p>'+
