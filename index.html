@@ -684,16 +684,17 @@ var PET_FAMS=[
  ["bandit_caves","rock",[["🦇","sweeper","Grottobat · Cavebat · Deep Cavebat",[85,116,86,133]],["🦫","bulky","Digmole · Tunnelmole · Boulder Mole",[120,116,116,55]],["🦂","attacker","Sandscorp · Grotto Scorpion · Stinger Scorpion",[100,130,100,95]]]],
  ["dark_knight_sanctum","dark",[["🐆","sweeper","Shadowcub · Nightpanther · Voidpanther",[100,130,96,126]],["🐕","allrounder","Gloompup · Duskhound · Shadowhound",[110,120,106,110]],["🐦‍⬛","wallbreaker","Dusklet · Duskraven · Voidraven",[105,136,100,96]]]]
 ];
-/* attacker type -> [x2 against, resisted by] */
+/* type -> [emoji, hits x2, takes x2 from, resists x0.5].
+   Verified against pet_data.effectiveness(atk, def) — the engine's own function. */
 var PET_CHART=[
- ["fire","🔥","grass · ice","fire · rock · water"],
- ["water","💧","fire · rock","grass · water"],
- ["grass","🌿","rock · water","fire · flying · grass"],
- ["ice","❄️","flying · grass","fire · ice"],
- ["rock","🪨","fire · flying · ice","—"],
- ["flying","🦅","grass","rock"],
- ["ghost","👻","ghost","dark"],
- ["dark","🌑","ghost","dark · ghost"]
+ ["fire","🔥","grass · ice","water · rock","fire · grass · ice"],
+ ["water","💧","fire · rock","grass","fire · water"],
+ ["grass","🌿","water · rock","fire · ice · flying","water · grass"],
+ ["ice","❄️","grass · flying","fire · rock","ice"],
+ ["rock","🪨","fire · ice · flying","water · grass","fire · flying"],
+ ["flying","🦅","grass","ice · rock","grass"],
+ ["ghost","👻","ghost","ghost · dark","—"],
+ ["dark","🌑","ghost","—","ghost · dark"]
 ];
 var PET_STATUS=[
  ["Burn","🔥","Chip damage each turn."],["Poison","🟣","Chip damage each turn."],
@@ -1119,12 +1120,12 @@ PAGES.genes={t:"Genes &amp; Essence",e:"Pets",d:"Four hidden numbers rolled the 
 
 PAGES.petbattle={t:"Pet Battles",e:"Pets",d:"Eight types, 61 moves, five status conditions, and multipliers that stack hard enough to end a fight in one hit.",h:function(){
  return '<h2 class="s">The type chart</h2>'+
- '<p class="b">Eight types. Super effective is <strong>×2</strong>, resisted is <strong>×½</strong>, and there is no immunity — everything can hurt everything.</p>'+
- tbl(["Type","×2 against","Resisted by"],PET_CHART.map(function(c){
-  return [c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1),c[2],c[3]];
- }),["k","",""])+
- '<div class="callout"><p><strong>Rock is the anomaly:</strong> it hits Fire, Flying and Ice for ×2 and <em>nothing resists it</em>. It is also the only type two regions breed — Starter Ruins and Bandit Caves. If you are building one team to fight everything, start there.</p>'+
- '<p><strong>Ghost and Dark are a closed loop:</strong> Ghost only beats Ghost, Dark only beats Ghost, and Dark resists both. A Dark Pet walks through the Mist Forest unopposed.</p></div>'+
+ '<p class="b">Eight types. Super effective is <strong>×2</strong>, resisted is <strong>×½</strong>, and there is no immunity — everything can hurt everything. Read a row as: what this type <strong>deals</strong>, what it is <strong>weak to</strong>, and what it shrugs off.</p>'+
+ tbl(["Type","Hits ×2","Takes ×2 from","Resists ×½"],PET_CHART.map(function(c){
+  return [c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1),c[2],c[3],c[4]];
+ }),["k","","",""])+
+ '<div class="callout"><p><strong>Rock is the offensive anomaly:</strong> it hits Fire, Ice and Flying for ×2 and <em>nothing resists it</em> — every Rock move lands at full value or better. But it is no fortress: <strong>Water and Grass both hit Rock for ×2</strong>, so lead with it, do not tank with it. It is also the only type two regions breed — Starter Ruins and Bandit Caves.</p>'+
+ '<p><strong>Dark is the defensive anomaly:</strong> <em>nothing</em> hits Dark for ×2, and Dark resists both itself and Ghost. Paired with the closed Ghost/Dark loop — Ghost only beats Ghost, Dark only beats Ghost — a Dark Pet walks through the Mist Forest unopposed.</p></div>'+
  '<h2 class="s">Damage</h2>'+
  '<p class="b">A hit starts from the move\'s power, your Pet\'s attack and the target\'s defence, and is then multiplied:</p>'+
  tbl(["Multiplier","Value","When"],[
@@ -1143,7 +1144,7 @@ PAGES.petbattle={t:"Pet Battles",e:"Pets",d:"Eight types, 61 moves, five status 
  '<p class="b">Status is not just chip damage — it is <strong>how you catch things</strong>. See <a href="#catching">Catching</a>.</p>'+
  '<h2 class="s">Building a team</h2>'+
  '<p class="b"><strong>Build for coverage, not for power.</strong> Three Pets, three types that cover each other. A team of three Fire Pets loses to one Water wall.</p>'+
- '<p class="b"><strong>Rock is the safest first investment</strong> — nothing resists it, and it comes out of the beginner region.</p>'+
+ '<p class="b"><strong>Rock is the strongest opener</strong> — nothing resists it and it comes out of the beginner region — but keep a second Pet for the Water and Grass types that hit it back for ×2. Rock leads; it does not soak.</p>'+
  '<p class="b"><strong>Bring one answer to speed.</strong> A priority move, or a Pet fast enough to trade with a sweeper. Otherwise the first hit is always theirs.</p>';
 }};
 
