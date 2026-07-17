@@ -739,19 +739,19 @@ var PET_ROLES=[
  ["Wallbreaker",6,"The biggest attack numbers on the board, slow enough that you see it coming."]
 ];
 var PET_SUPPLIES=[
- ["Basic Collar",1000,10,"Catch multiplier ×1.0"],
- ["Fine Collar",1800,10,"Catch multiplier ×1.5"],
- ["Prime Collar",3000,10,"Catch multiplier ×2.5"],
- ["Pet Potion",300,10,"Restores 25% of max HP"],
- ["Super Pet Potion",500,5,"Restores 50% of max HP"],
- ["Pet Revive",2000,3,"Revives a fainted Pet at 25% HP"],
+ ["🎀 Basic OILball",1000,10,"Catch multiplier ×1.0"],
+ ["🎀 Fine OILball",1800,10,"Catch multiplier ×1.5"],
+ ["🎀 Prime OILball",3000,10,"Catch multiplier ×2.5"],
+ ["Pokemax Potion",300,10,"Restores 25% of max HP"],
+ ["Super Pokemax Potion",500,5,"Restores 50% of max HP"],
+ ["Pokemax Revive",2000,3,"Revives a fainted Pokemax at 25% HP"],
  ["Ether",400,5,"Restores 10 PP to one move"],
  ["Max Ether",800,2,"Fully restores PP"]
 ];
 var PET_GENE_OPS=[
- ["Scan Genes",10,"Reveal a wild Pet's genes mid-encounter, before you decide to spend a collar on it."],
- ["Gene Training",20,"Raise one gene by one point. 5 per Pet, ever."],
- ["Gene Reroll",40,"Reroll one gene at random. 2 per Pet, ever."],
+ ["Scan Genes",10,"Reveal a wild Pokemax's genes mid-encounter, before you decide to spend an OILball on it."],
+ ["Gene Training",20,"Raise one gene by one point. 5 per Pokemax, ever."],
+ ["Gene Reroll",40,"Reroll one gene at random. 2 per Pokemax, ever."],
  ["Gene Capsule",75,"The expensive one. Set a gene outright instead of gambling."]
 ];
 
@@ -1163,8 +1163,8 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
   "Choose your move carefully.\n⏰ 2 Minutes to choose.")+
  '<p class="embcap">The class icon (⚔️ Devastator, 🛡️ Colossus, 👻 Ghost…) sits on every name. <code>⚡×2</code> is a Devastator\'s momentum stack; a downed player has a countdown before death that a revive can still beat.</p>'+
 
- '<h2 class="s">Pet battles</h2>'+
- '<p class="b">Pets get their own brown embed — no STR/AGI/CON here. Each side shows its active Pet\'s <strong>level, type and HP</strong>. The public panel carries the turn log, both rosters and who has locked their move; you pick from private controls.</p>'+
+ '<h2 class="s">Pokemax battles</h2>'+
+ '<p class="b">Pokemax get their own brown embed — no STR/AGI/CON here. Each side shows its active Pokemax\'s <strong>level, type and HP</strong>. The public panel carries the turn log, both rosters and who has locked their move; you pick from private controls.</p>'+
  dsc(brown,"⚔️ Safari — Round 1",
   '<p class="dsc__fn">Max</p>'+
   '<p class="dsc__row"><span class="dsc__nm">🦎 Cinderling</span>  Lv.5  🔥Fire'+
@@ -1173,13 +1173,13 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
   '<p class="dsc__row"><span class="dsc__nm">🐕 Emberpup</span>  Lv.5  🔥Fire'+
    '<span class="dsc__sub">HP <span class="bar">'+petbar(24,24)+'</span>  24/24</span></p>'+
   '<p class="dsc__fn">📜 Turn Log</p>'+
-  '<p class="dsc__row" style="color:#b5bac1;font-size:.82rem">A wild 🐕 Emberpup (Lv.5) appeared!<br>Launch grace period: your Pet party enters fully restored, and battle wear is not saved.</p>'+
+  '<p class="dsc__row" style="color:#b5bac1;font-size:.82rem">A wild 🐕 Emberpup (Lv.5) appeared!<br>Launch grace period: your Pokemax party enters fully restored, and battle wear is not saved.</p>'+
   '<p class="dsc__fn">Teams</p>'+
   '<p class="dsc__row" style="font-size:.84rem"><span class="dsc__nm">Max</span><br>▶ 🦎 Cinderling · 33/33 HP</p>'+
   '<p class="dsc__fn">Turn status</p>'+
   '<p class="dsc__row" style="font-size:.84rem"><span class="dsc__nm">Max:</span> ⚙️ Resolving</p>',
   "Open your private controls. You have 120 seconds to choose or lose by AFK.")+
- '<p class="embcap">The bar is <code>▰▱</code> at width 10, not the block bar the rest of the game uses. <code>▶</code> in the Teams roster marks your active Pet; a benched one shows <code>•</code>, and a fainted one reads <em>fainted</em>. Your four moves and their PP live in the private controls, not on this public panel.</p>'+
+ '<p class="embcap">The bar is <code>▰▱</code> at width 10, not the block bar the rest of the game uses. <code>▶</code> in the Teams roster marks your active Pokemax; a benched one shows <code>•</code>, and a fainted one reads <em>fainted</em>. Your four moves and their PP live in the private controls, not on this public panel.</p>'+
 
  '<h2 class="s">Mecha duels</h2>'+
  '<p class="b">Wanzers drop the bar-per-fighter layout for a <strong>Front Mission panel</strong>: four parts stacked body-over-arms-over-legs, each with its own HP, plus your <strong>AP</strong> and the weapon each arm is holding.</p>'+
@@ -1270,46 +1270,46 @@ PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a 
  '<p class="b">Bonds track <strong>relationships between players</strong>. Playing with — or against — the same people builds a shared history. Check yours with <span class="cmd">!bonds</span>, notable ones with <span class="cmd">!bonds_top</span>, and the log with <span class="cmd">!bonds_history</span>.</p>';
 }};
 
-PAGES.pets={t:"The Pets System",e:"Pets",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG, sharing none of its combat rules.",h:function(){
+PAGES.pets={t:"The Pokemax System",e:"Pokemax",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG, sharing none of its combat rules.",h:function(){
  return '<h2 class="s">A different game</h2>'+
- '<p class="b">Pets shares <strong>nothing</strong> with normal combat. No STR/AGI/CON, no Focus, no Parry, no gear. A Pet has <strong>four stats</strong>, a <strong>type</strong>, up to <strong>four moves</strong> with limited uses, and it faints. You fight <strong>3 versus 3</strong>.</p>'+
+ '<p class="b">Pokemax shares <strong>nothing</strong> with normal combat. No STR/AGI/CON, no Focus, no Parry, no gear. A Pokemax has <strong>four stats</strong>, a <strong>type</strong>, up to <strong>four moves</strong> with limited uses, and it faints. You fight <strong>3 versus 3</strong>.</p>'+
  '<p class="b">You catch them wild in the regions of Valestia. Each region breeds its own type: <strong>84 species</strong> across <strong>28 animal families</strong>, every family a three-stage evolution line.</p>'+
  tbl(["Rule","Value"],[
   ["Level cap","50"],["Evolutions","At level 16 and again at 36"],["Party size","3"],
-  ["Moves per Pet","4 — learning a 5th means forgetting one"],["Genes per Pet","4 (HP / ATK / DEF / SPD), each 0–15"],
+  ["Moves per Pokemax","4 — learning a 5th means forgetting one"],["Genes per Pokemax","4 (HP / ATK / DEF / SPD), each 0–15"],
   ["Safari runs","5 per day"],["Training duels","3 per day"],["Sparring","Unlimited"]
  ],["k","n"])+
  '<h2 class="s">The loop</h2>'+
  '<p class="b"><strong>1 — Pick a starter.</strong> <strong>Cinderling</strong> (Fire), <strong>Pebblecrab</strong> (Water) or <strong>Leafkit</strong> (Grass). The classic trio, and the classic triangle — each beats one of the others.</p>'+
- '<p class="b"><strong>2 — Travel, then Safari.</strong> Safari draws from the region you are physically standing in, so <span class="cmd">!travel</span> is part of the Pets loop. Want an Ice Pet? Go to Rocky Chill Pass. There is no other way.</p>'+
- '<p class="b"><strong>3 — Chip, status, catch.</strong> Never throw a collar at a healthy Pet. See <a href="#catching">Catching</a>.</p>'+
+ '<p class="b"><strong>2 — Travel, then Safari.</strong> Safari draws from the region you are physically standing in, so <span class="cmd">!travel</span> is part of the Pokemax loop. Want an Ice Pokemax? Go to Rocky Chill Pass. There is no other way.</p>'+
+ '<p class="b"><strong>3 — Chip, status, catch.</strong> Never throw an OILball at a healthy Pokemax. See <a href="#catching">Catching</a>.</p>'+
  '<p class="b"><strong>4 — Battle to level.</strong> Training duels pay XP to both trainers and OIL to the winner. Evolution is automatic.</p>'+
  '<p class="b"><strong>5 — Release your rejects</strong> for Gene Essence, and spend it improving the keepers. See <a href="#genes">Genes &amp; Essence</a>.</p>'+
  '<h2 class="s">Playing it</h2>'+
  tbl(["Command","What it does"],[
-  ['<span class="cmd">!safari</span>',"Go looking for wild Pets in the region you are standing in. <strong>5 per day.</strong>"],
+  ['<span class="cmd">!safari</span>',"Go looking for wild Pokemax in the region you are standing in. <strong>5 per day.</strong>"],
   ['<span class="cmd">!pets</span>',"Your collection."],
   ['<span class="cmd">!pet_party</span>',"Set the three that fight."],
-  ['<span class="cmd">!pet_name</span>',"Nickname a Pet."],
+  ['<span class="cmd">!pet_name</span>',"Nickname a Pokemax."],
   ['<span class="cmd">!pet_train @user</span>',"A training duel. Both trainers earn XP. <strong>3 per day.</strong>"],
   ['<span class="cmd">!pet_spar @user</span>',"A friendly fight. No XP, no limit, no cost."],
-  ['<span class="cmd">!collars</span> · <span class="cmd">!pet_shop</span>',"Buy collars, potions, revives and ethers."],
+  ['<span class="cmd">!collars</span> · <span class="cmd">!pet_shop</span>',"Buy OILballs, potions, revives and ethers."],
   ['<span class="cmd">!petpanel</span>',"The button hub for all of it."]
  ],["k",""])+
- '<p class="b">A Safari encounter runs on a <strong>2 minute turn timer</strong>. Wild Pets use a simple AI that picks its best damage; trainer battles run a smarter one that reads matchups.</p>'+
+ '<p class="b">A Safari encounter runs on a <strong>2 minute turn timer</strong>. Wild Pokemax use a simple AI that picks its best damage; trainer battles run a smarter one that reads matchups.</p>'+
  '<h2 class="s">The shop</h2>'+
  tbl(["Item","Price","Max held","Effect"],PET_SUPPLIES.map(function(s){
   return [s[0],s[1].toLocaleString()+" OIL",s[2],s[3]];
  }),["k","n","n",""])+
- '<p class="b">The hold caps are the real constraint. Ten collars of each kind, three revives, two Max Ethers — you cannot stockpile your way out of a bad Safari run.</p>'+
+ '<p class="b">The hold caps are the real constraint. Ten OILballs of each kind, three revives, two Max Ethers — you cannot stockpile your way out of a bad Safari run.</p>'+
  '<h2 class="s">Levelling and evolution</h2>'+
  '<span class="fx">XP to reach the next level = 15 + (current level × 10)</span>'+
- '<p class="b">A linear curve, so the grind never becomes a wall — level 49 to 50 costs 505 XP, not tens of thousands. Battle XP is <span class="cmd">10 + (average foe level × 3)</span>, and the winning trainer also takes <strong>OIL worth double the XP</strong>, which makes Pets a real income stream and not just a side toy.</p>'+
- '<p class="b">Evolution happens automatically at <strong>16</strong> and <strong>36</strong> — no stones, no trades. Each stage jumps the base block: <strong>46% → 72% → 100%</strong>. Watch it happen in the <a href="#lab">Pet Lab</a>.</p>'+
+ '<p class="b">A linear curve, so the grind never becomes a wall — level 49 to 50 costs 505 XP, not tens of thousands. Battle XP is <span class="cmd">10 + (average foe level × 3)</span>, and the winning trainer also takes <strong>OIL worth double the XP</strong>, which makes Pokemax a real income stream and not just a side toy.</p>'+
+ '<p class="b">Evolution happens automatically at <strong>16</strong> and <strong>36</strong> — no stones, no trades. Each stage jumps the base block: <strong>46% → 72% → 100%</strong>. Watch it happen in the <a href="#lab">Pokemax Lab</a>.</p>'+
  '<div class="callout"><p>Levelling past an evolution keeps teaching moves, and if all four slots are full the new move goes to a <strong>pending queue</strong> rather than being lost. You choose later, in the open. A forgotten move can be bought back at the <strong>Move Reminder</strong> for <strong>2,000 OIL</strong>.</p></div>';
 }};
 
-PAGES.lab={t:"Pet Lab",e:"Pets",d:"Every species, every level, every gene roll. The same formulas the bot runs — pick a Pet apart before you spend a collar on it.",h:function(){
+PAGES.lab={t:"Pokemax Lab",e:"Pokemax",d:"Every species, every level, every gene roll. The same formulas the bot runs — pick a Pokemax apart before you spend an OILball on it.",h:function(){
  return '<div class="lab">'+
   '<div class="lab__ctl">'+
    '<div class="lab__f"><label class="lab__l" for="labSp">Species</label>'+
@@ -1334,12 +1334,12 @@ PAGES.lab={t:"Pet Lab",e:"Pets",d:"Every species, every level, every gene roll. 
   '</div>'+
  '</div>'+
  '<h2 class="s">How to read it</h2>'+
- '<p class="b">The stat bars compare this Pet against the <strong>strongest final-stage Pet in the game</strong> for that stat, so a full bar means nothing else beats it. The grey ghost behind each bar is the same Pet with <strong>zero genes</strong> — the gap is what your roll is worth.</p>'+
- '<p class="b">Drag the level past <strong>16</strong> and <strong>36</strong> and the Pet evolves in front of you, base stats and all. That is exactly what happens in a battle.</p>'+
+ '<p class="b">The stat bars compare this Pokemax against the <strong>strongest final-stage Pokemax in the game</strong> for that stat, so a full bar means nothing else beats it. The grey ghost behind each bar is the same Pokemax with <strong>zero genes</strong> — the gap is what your roll is worth.</p>'+
+ '<p class="b">Drag the level past <strong>16</strong> and <strong>36</strong> and the Pokemax evolves in front of you, base stats and all. That is exactly what happens in a battle.</p>'+
  '<div class="callout"><p>Moves are the <strong>last four learned at or below</strong> the current level — the same rule the bot uses. Raise the level and watch an early move fall off the list.</p></div>';
 }};
 
-PAGES.species={t:"Species &amp; Evolution",e:"Pets",d:"84 species, 28 families, nine regions. Every family is one animal with three stages, and every region breeds one type.",h:function(){
+PAGES.species={t:"Species &amp; Evolution",e:"Pokemax",d:"84 species, 28 families, nine regions. Every family is one animal with three stages, and every region breeds one type.",h:function(){
  var names={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
   rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
   mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum"};
@@ -1353,7 +1353,7 @@ PAGES.species={t:"Species &amp; Evolution",e:"Pets",d:"84 species, 28 families, 
    }).join("")+"</div>";
  });
  return '<p class="b">Each family is <strong>one animal with three stages</strong>. Below is every family, its role, and the <strong>final stage</strong>\'s base stats as <span class="cmd">HP/ATK/DEF/SPD</span> — the numbers that define what the line is for. The earlier two stages are the same shape scaled down, at <strong>46%</strong> and <strong>72%</strong> of the final block.</p>'+
- '<p class="b">Pull any of them apart at any level in the <a href="#lab">Pet Lab</a>.</p>'+
+ '<p class="b">Pull any of them apart at any level in the <a href="#lab">Pokemax Lab</a>.</p>'+
  '<div class="grid grid--wide">'+fams.join("")+"</div>"+
  '<div class="callout"><p><strong>Merchant Crossroads has no native species.</strong> Its encounters are drawn from Starter Ruins, Crimson Plain and Stormbay Docks — it is a crossroads in the literal sense.</p></div>'+
  '<h2 class="s">Roles</h2>'+
@@ -1362,87 +1362,87 @@ PAGES.species={t:"Species &amp; Evolution",e:"Pets",d:"84 species, 28 families, 
  '<div class="callout"><p><strong>Speed decides fights.</strong> Sweepers hit 133–138 base speed and win the turn. Walls sit at 35–55 and simply never go first — a wall only works if it survives the alpha strike, and against a super-effective STAB hit it will not.</p></div>';
 }};
 
-PAGES.genes={t:"Genes &amp; Essence",e:"Pets",d:"Four hidden numbers rolled the moment you catch a Pet, and the only currency that can move them.",h:function(){
+PAGES.genes={t:"Genes &amp; Essence",e:"Pokemax",d:"Four hidden numbers rolled the moment you catch a Pokemax, and the only currency that can move them.",h:function(){
  return '<h2 class="s">What a gene is</h2>'+
- '<p class="b">Every Pet rolls <strong>four genes</strong> at the moment you catch it — one per stat, each a hidden <strong>0 to 15</strong>. They are permanent, they never change with level, and they are the difference between two Pets of the same species being identical or one being clearly better.</p>'+
+ '<p class="b">Every Pokemax rolls <strong>four genes</strong> at the moment you catch it — one per stat, each a hidden <strong>0 to 15</strong>. They are permanent, they never change with level, and they are the difference between two Pokemax of the same species being identical or one being clearly better.</p>'+
  '<span class="fx">max HP = floor(base_hp × level ÷ 50) + level + 10 + gene</span>'+
  '<span class="fx">atk / def / spd = floor(base × level ÷ 50) + 5 + gene</span>'+
- '<p class="b">At level 50 a gene is worth a flat <strong>+15</strong>. That is enormous on a stat that lands around 60 — a perfect-gene Pet is roughly <strong>25% stronger</strong> than a zero-gene one of the same species. This is the entire reason to keep hunting a species you already own.</p>'+
- '<p class="b">See the gap for yourself in the <a href="#lab">Pet Lab</a>: set a Pet to level 50 and slide the genes from 0 to 15.</p>'+
+ '<p class="b">At level 50 a gene is worth a flat <strong>+15</strong>. That is enormous on a stat that lands around 60 — a perfect-gene Pokemax is roughly <strong>25% stronger</strong> than a zero-gene one of the same species. This is the entire reason to keep hunting a species you already own.</p>'+
+ '<p class="b">See the gap for yourself in the <a href="#lab">Pokemax Lab</a>: set a Pokemax to level 50 and slide the genes from 0 to 15.</p>'+
  tbl(["Gene value","Quality"],[["0–4","Poor"],["5–8","Average"],["9–11","Good"],["12–13","Excellent"],["14–15","Exceptional"]],["n","k"])+
- '<div class="callout"><p>Genes are <strong>hidden until you scan them</strong>. A wild Pet looks identical whether it rolled 2s or 15s — the scan is how you find out before you spend a collar.</p></div>'+
+ '<div class="callout"><p>Genes are <strong>hidden until you scan them</strong>. A wild Pokemax looks identical whether it rolled 2s or 15s — the scan is how you find out before you spend an OILball.</p></div>'+
  '<h2 class="s">Gene Essence</h2>'+
- '<p class="b">A separate currency, and it has exactly one source: <strong>releasing a Pet</strong>. The better its genes, the more it pays. You cannot release your last Pet.</p>'+
+ '<p class="b">A separate currency, and it has exactly one source: <strong>releasing a Pokemax</strong>. The better its genes, the more it pays. You cannot release your last Pokemax.</p>'+
  tbl(["Sum of the 4 genes","Quality","Essence paid"],[
   ["0–19","Poor","1"],["20–31","Average","2"],["32–43","Good","3"],["44–52","Excellent","4"],["53–60","Exceptional","5"]
  ],["n","k","n"])+
  '<h2 class="s">What you can spend it on</h2>'+
  tbl(["Operation","Cost","What it does"],PET_GENE_OPS.map(function(o){return [o[0],o[1]+" essence",o[2]];}),["k","n",""])+
- '<div class="callout callout--warn"><p><strong>The economy is deliberately brutal.</strong> A Poor Pet pays 1 essence. Gene Training costs 20 and is capped at 5 per Pet, ever. So perfecting one Pet by hand means releasing <em>twenty</em> bad ones — and it still only buys 5 points out of a possible 60.</p>'+
+ '<div class="callout callout--warn"><p><strong>The economy is deliberately brutal.</strong> A Poor Pokemax pays 1 essence. Gene Training costs 20 and is capped at 5 per Pokemax, ever. So perfecting one Pokemax by hand means releasing <em>twenty</em> bad ones — and it still only buys 5 points out of a possible 60.</p>'+
  '<p>Catching a good roll will always beat grinding a bad one into shape. That is the point: the Safari is the game, not the workbench.</p></div>'+
  '<h2 class="s">Advice</h2>'+
- '<p class="b"><strong>Scan before you throw.</strong> 10 essence is cheap next to a 3,000 OIL Prime Collar spent on a Poor roll.</p>'+
- '<p class="b"><strong>Release your rejects.</strong> A Poor Pet sitting in your box is 1 essence you have not banked.</p>'+
+ '<p class="b"><strong>Scan before you throw.</strong> 10 essence is cheap next to a 3,000 OIL Prime OILball spent on a Poor roll.</p>'+
+ '<p class="b"><strong>Release your rejects.</strong> A Poor Pokemax sitting in your box is 1 essence you have not banked.</p>'+
  '<p class="b"><strong>Spend Training on the stat that matters</strong>, not evenly. A sweeper wants SPD; a wall wants HP and DEF. Five points into the right stat beats five spread thin.</p>';
 }};
 
-PAGES.petbattle={t:"Pet Battles",e:"Pets",d:"Eight types, 61 moves, five status conditions, and multipliers that stack hard enough to end a fight in one hit.",h:function(){
+PAGES.petbattle={t:"Pokemax Battles",e:"Pokemax",d:"Eight types, 61 moves, five status conditions, and multipliers that stack hard enough to end a fight in one hit.",h:function(){
  return '<h2 class="s">The type chart</h2>'+
  '<p class="b">Eight types. Super effective is <strong>×2</strong>, resisted is <strong>×½</strong>, and there is no immunity — everything can hurt everything. Read a row as: what this type <strong>deals</strong>, what it is <strong>weak to</strong>, and what it shrugs off.</p>'+
  tbl(["Type","Hits ×2","Takes ×2 from","Resists ×½"],PET_CHART.map(function(c){
   return [c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1),c[2],c[3],c[4]];
  }),["k","","",""])+
  '<div class="callout"><p><strong>Rock is the offensive anomaly:</strong> it hits Fire, Ice and Flying for ×2 and <em>nothing resists it</em> — every Rock move lands at full value or better. But it is no fortress: <strong>Water and Grass both hit Rock for ×2</strong>, so lead with it, do not tank with it. It is also the only type two regions breed — Starter Ruins and Bandit Caves.</p>'+
- '<p><strong>Dark is the defensive anomaly:</strong> <em>nothing</em> hits Dark for ×2, and Dark resists both itself and Ghost. Paired with the closed Ghost/Dark loop — Ghost only beats Ghost, Dark only beats Ghost — a Dark Pet walks through the Mist Forest unopposed.</p></div>'+
+ '<p><strong>Dark is the defensive anomaly:</strong> <em>nothing</em> hits Dark for ×2, and Dark resists both itself and Ghost. Paired with the closed Ghost/Dark loop — Ghost only beats Ghost, Dark only beats Ghost — a Dark Pokemax walks through the Mist Forest unopposed.</p></div>'+
  '<h2 class="s">Damage</h2>'+
- '<p class="b">A hit starts from the move\'s power, your Pet\'s attack and the target\'s defence, and is then multiplied:</p>'+
+ '<p class="b">A hit starts from the move\'s power, your Pokemax\'s attack and the target\'s defence, and is then multiplied:</p>'+
  tbl(["Multiplier","Value","When"],[
-  ["STAB","×1.5","The move's type matches the Pet's type"],
+  ["STAB","×1.5","The move's type matches the Pokemax's type"],
   ["Super effective","×2","See the chart above"],
   ["Resisted","×0.5","See the chart above"],
   ["Critical","×1.5","6% chance, every hit"]
  ],["k","n",""])+
- '<p class="b">Pet battles are <strong>short and decisive</strong> by design — every turn is a message in a channel, so fights are tuned to end rather than grind. A super-effective STAB finisher can knock out a frail same-level foe in one hit and a bulky one in two. Type matchups decide fights outright instead of shaving percentages.</p>'+
- '<div class="callout"><p>Stack them and it compounds fast: <strong>STAB × super effective × crit = ×4.5</strong>. Bringing the right type is worth more than bringing the better Pet.</p></div>'+
+ '<p class="b">Pokemax battles are <strong>short and decisive</strong> by design — every turn is a message in a channel, so fights are tuned to end rather than grind. A super-effective STAB finisher can knock out a frail same-level foe in one hit and a bulky one in two. Type matchups decide fights outright instead of shaving percentages.</p>'+
+ '<div class="callout"><p>Stack them and it compounds fast: <strong>STAB × super effective × crit = ×4.5</strong>. Bringing the right type is worth more than bringing the better Pokemax.</p></div>'+
  '<h2 class="s">Moves</h2>'+
- '<p class="b"><strong>61 moves</strong> — 49 that deal damage and 12 that do not. Every move has limited <strong>PP</strong>, and when a Pet runs out of everything it is reduced to <strong>Struggle</strong> (40 power, typeless). Moves carry <strong>priority</strong>: a priority move goes first regardless of speed, which is how a slow Pet steals a kill.</p>'+
- '<p class="b">A Pet holds <strong>four</strong>, and they are the last four it learned. Browse any species\' full learnset in the <a href="#lab">Pet Lab</a>.</p>'+
+ '<p class="b"><strong>61 moves</strong> — 49 that deal damage and 12 that do not. Every move has limited <strong>PP</strong>, and when a Pokemax runs out of everything it is reduced to <strong>Struggle</strong> (40 power, typeless). Moves carry <strong>priority</strong>: a priority move goes first regardless of speed, which is how a slow Pokemax steals a kill.</p>'+
+ '<p class="b">A Pokemax holds <strong>four</strong>, and they are the last four it learned. Browse any species\' full learnset in the <a href="#lab">Pokemax Lab</a>.</p>'+
  '<h3 class="t">Status conditions</h3>'+
  tbl(["Status","Effect"],PET_STATUS.map(function(s){return [s[1]+" "+s[0],s[2]];}),["k",""])+
  '<p class="b">Status is not just chip damage — it is <strong>how you catch things</strong>. See <a href="#catching">Catching</a>.</p>'+
  '<h2 class="s">Building a team</h2>'+
- '<p class="b"><strong>Build for coverage, not for power.</strong> Three Pets, three types that cover each other. A team of three Fire Pets loses to one Water wall.</p>'+
- '<p class="b"><strong>Rock is the strongest opener</strong> — nothing resists it and it comes out of the beginner region — but keep a second Pet for the Water and Grass types that hit it back for ×2. Rock leads; it does not soak.</p>'+
- '<p class="b"><strong>Bring one answer to speed.</strong> A priority move, or a Pet fast enough to trade with a sweeper. Otherwise the first hit is always theirs.</p>';
+ '<p class="b"><strong>Build for coverage, not for power.</strong> Three Pokemax, three types that cover each other. A team of three Fire Pokemax loses to one Water wall.</p>'+
+ '<p class="b"><strong>Rock is the strongest opener</strong> — nothing resists it and it comes out of the beginner region — but keep a second Pokemax for the Water and Grass types that hit it back for ×2. Rock leads; it does not soak.</p>'+
+ '<p class="b"><strong>Bring one answer to speed.</strong> A priority move, or a Pokemax fast enough to trade with a sweeper. Otherwise the first hit is always theirs.</p>';
 }};
 
-PAGES.catching={t:"Catching",e:"Pets",d:"The Safari, the collars, and the formula that decides whether the thing you just fought is yours.",h:function(){
+PAGES.catching={t:"Catching",e:"Pokemax",d:"The Safari, the OILballs, and the formula that decides whether the thing you just fought is yours.",h:function(){
  return '<h2 class="s">The Safari</h2>'+
- '<p class="b"><span class="cmd">!safari</span> looks for wild Pets in the region you are <strong>physically standing in</strong>. Five runs a day. Each region breeds one type, so where you stand decides what you meet — travel is part of the loop.</p>'+
+ '<p class="b"><span class="cmd">!safari</span> looks for wild Pokemax in the region you are <strong>physically standing in</strong>. Five runs a day. Each region breeds one type, so where you stand decides what you meet — travel is part of the loop.</p>'+
  '<h2 class="s">The formula</h2>'+
  '<p class="b">The classic one, and every term in it is something you control:</p>'+
- '<span class="fx">chance = ((3·maxHP − 2·currentHP) × catch_rate × collar × status) ÷ (3·maxHP × 255)</span>'+
+ '<span class="fx">chance = ((3·maxHP − 2·currentHP) × catch_rate × OILball × status) ÷ (3·maxHP × 255)</span>'+
  tbl(["What you do","Multiplier"],[
-  ["Basic Collar","×1.0"],["Fine Collar","×1.5"],["Prime Collar","×2.5"],
+  ["Basic OILball","×1.0"],["Fine OILball","×1.5"],["Prime OILball","×2.5"],
   ["Asleep or frozen","×2.0"],["Burned, poisoned or paralysed","×1.5"]
  ],["k","n"])+
- tbl(["Wild Pet","Catch rate","Meaning"],[
+ tbl(["Wild Pokemax","Catch rate","Meaning"],[
   ["Stage 1","200","Easy"],["Stage 2","120","Awkward"],["Stage 3","60","Hard"],
   ["Anything in Dark Knight's Sanctum","× 0.5","Half. The endgame region is deliberately miserable."]
  ],["k","n",""])+
- '<div class="callout"><p><strong>The play is always the same:</strong> chip it to a sliver, put it to sleep or freeze it (×2), then throw a Prime Collar (×2.5). That is <strong>×5</strong> on top of a nearly-empty HP bar. Throwing collars at a healthy Pet is how you run out of collars.</p>'+
+ '<div class="callout"><p><strong>The play is always the same:</strong> chip it to a sliver, put it to sleep or freeze it (×2), then throw a Prime OILball (×2.5). That is <strong>×5</strong> on top of a nearly-empty HP bar. Throwing OILballs at a healthy Pokemax is how you run out of OILballs.</p>'+
  '<p>The floor is <strong>3%</strong> — nothing is ever truly impossible. The ceiling is 100%.</p></div>'+
- '<h2 class="s">Collars</h2>'+
- tbl(["Collar","Price","Max held","Multiplier"],[
-  ["Basic Collar","1,000 OIL","10","×1.0"],["Fine Collar","1,800 OIL","10","×1.5"],["Prime Collar","3,000 OIL","10","×2.5"]
+ '<h2 class="s">OILballs</h2>'+
+ tbl(["OILball","Price","Max held","Multiplier"],[
+  ["🎀 Basic OILball","1,000 OIL","10","×1.0"],["🎀 Fine OILball","1,800 OIL","10","×1.5"],["🎀 Prime OILball","3,000 OIL","10","×2.5"]
  ],["k","n","n","n"])+
- '<p class="b">Ten of each, maximum. A Prime Collar costs three times a Basic and buys you two and a half times the odds — worth it on a stage-3 target, wasteful on a stage-1.</p>'+
- '<div class="callout"><p><strong>Scan first.</strong> 10 Gene Essence tells you whether the Pet in front of you is worth a 3,000 OIL collar at all. Most are not.</p></div>';
+ '<p class="b">Ten of each, maximum. A Prime OILball costs three times a Basic and buys you two and a half times the odds — worth it on a stage-3 target, wasteful on a stage-1.</p>'+
+ '<div class="callout"><p><strong>Scan first.</strong> 10 Gene Essence tells you whether the Pokemax in front of you is worth a 3,000 OIL OILball at all. Most are not.</p></div>';
 }};
 
 PAGES.mechas={t:"The Mecha System",e:"Mechas",d:"Front Mission in a Discord channel: pilot a wanzer built from four destructible parts, spend Action Points instead of taking free turns, and win by dismantling the enemy machine one limb at a time.",h:function(){
  return '<h2 class="s">A different fight, again</h2>'+
- '<p class="b">Like Pets, mechas share nothing with normal combat — no STR/AGI/CON, no Focus, no gear. A <strong>wanzer</strong> is four separate parts, each with its own HP and armor: <strong>body, left arm, right arm, legs.</strong> You do not have one health bar; you have four, and the fight is about which one breaks first.</p>'+
+ '<p class="b">Like Pokemax, mechas share nothing with normal combat — no STR/AGI/CON, no Focus, no gear. A <strong>wanzer</strong> is four separate parts, each with its own HP and armor: <strong>body, left arm, right arm, legs.</strong> You do not have one health bar; you have four, and the fight is about which one breaks first.</p>'+
  tbl(["Break this part","And…"],[
   ["An arm","The weapon it holds goes offline. Disarm the enemy by shooting the arm, not the body."],
   ["The legs","Evasion collapses — every shot after that lands far more often."],
@@ -1695,7 +1695,7 @@ var NAV=[
  ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
  ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"]]],
  ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]],
- ["Pets",[["pets","The Pets System"],["lab","Pet Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pet Battles"],["catching","Catching"]]],
+ ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"]]],
  ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
  ["Reference",[["screens","What It Looks Like"]]]
 ];
@@ -1934,7 +1934,7 @@ function initLab(){
    (mv.length<4?"Only "+mv.length+" move"+(mv.length>1?"s":"")+" known — it fills to 4 as it levels.":"");
 
   document.getElementById("labQ").innerHTML=
-   "Gene total <strong>"+tot+"/60</strong> — <strong>"+tq[0]+"</strong>. Releasing this Pet would pay <strong>"+
+   "Gene total <strong>"+tot+"/60</strong> — <strong>"+tq[0]+"</strong>. Releasing this Pokemax would pay <strong>"+
    tq[1]+"</strong> Gene Essence."+(tot===60?" A perfect roll; you will not see many.":"");
  }
 
