@@ -24,6 +24,12 @@
 <meta property="og:image:alt" content="The map of Valestia">
 <meta name="twitter:image" content="https://guardiansrpg.com/og.jpg">
 
+<!-- GoatCounter analytics (cookieless). no_onload: we count each hash section manually in route(). -->
+<script>window.goatcounter={no_onload:true}</script>
+<script data-goatcounter="https://maxlancer.goatcounter.com/count" async
+        src="//gc.zgo.at/count.js"
+        onload="window.__gcReady=1;if(window.__gcInit)goatcounter.count(window.__gcInit)"></script>
+
 <link rel="stylesheet" href="fonts.css">
 <style>
 *,*::before,*::after{box-sizing:border-box}
@@ -1737,6 +1743,11 @@ function route(){
  if(id==="lab"&&!built.lab){built.lab=1;initLab();}
  closeRail();
  window.scrollTo(0,0);
+ /* GoatCounter: register one pageview per section. Async-safe — if count.js is
+    not loaded yet, stash it and its onload flushes __gcInit. No-op in the artifact. */
+ var gp=(location.hash.slice(1)||"start"), gt=(PAGES[id]?PAGES[id].t:"");
+ if(window.goatcounter&&window.goatcounter.count) window.goatcounter.count({path:gp,title:gt});
+ else if(window.goatcounter) window.__gcInit={path:gp,title:gt};
 }
 addEventListener("hashchange",route);
 
