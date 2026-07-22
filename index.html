@@ -1311,7 +1311,7 @@ PAGES.pets={t:"The Pokemax System",e:"Pokemax",d:"Catch wild animals across Vale
  '<p class="b">The hold caps are the real constraint. Ten OILballs of each kind, three revives, two Max Ethers — you cannot stockpile your way out of a bad Safari run.</p>'+
  '<h2 class="s">Levelling and evolution</h2>'+
  '<span class="fx">XP to reach the next level = 15 + (current level × 10)</span>'+
- '<p class="b">A linear curve, so the grind never becomes a wall — level 49 to 50 costs 505 XP, not tens of thousands. Battle XP is <span class="cmd">10 + (average foe level × 3)</span>, and the winning trainer also takes <strong>OIL worth double the XP</strong>, which makes Pokemax a real income stream and not just a side toy.</p>'+
+ '<p class="b">A linear curve, so the grind never becomes a wall — level 49 to 50 costs 505 XP, not tens of thousands. Battle XP is <span class="cmd">10 + (average foe level × 3)</span>, and the winning trainer also takes <strong>OIL worth triple the XP</strong>, which makes Pokemax a real income stream and not just a side toy.</p>'+
  '<p class="b">Evolution happens automatically at <strong>16</strong> and <strong>36</strong> — no stones, no trades. Each stage jumps the base block: <strong>46% → 72% → 100%</strong>. Watch it happen in the <a href="#lab">Pokemax Lab</a>.</p>'+
  '<div class="callout"><p>Levelling past an evolution keeps teaching moves, and if all four slots are full the new move goes to a <strong>pending queue</strong> rather than being lost. You choose later, in the open. A forgotten move can be bought back at the <strong>Move Reminder</strong> for <strong>2,000 OIL</strong>.</p></div>';
 }};
@@ -1444,7 +1444,30 @@ PAGES.catching={t:"Catching",e:"Pokemax",d:"The Safari, the OILballs, and the fo
   ["🎀 Basic OILball","1,000 OIL","10","×1.0"],["🎀 Fine OILball","1,800 OIL","10","×1.5"],["🎀 Prime OILball","3,000 OIL","10","×2.5"]
  ],["k","n","n","n"])+
  '<p class="b">Ten of each, maximum. A Prime OILball costs three times a Basic and buys you two and a half times the odds — worth it on a stage-3 target, wasteful on a stage-1.</p>'+
- '<div class="callout"><p><strong>Scan first.</strong> 10 Gene Essence tells you whether the Pokemax in front of you is worth a 3,000 OIL OILball at all. Most are not.</p></div>';
+ '<div class="callout"><p><strong>Scan first.</strong> 10 Gene Essence tells you whether the Pokemax in front of you is worth a 3,000 OIL OILball at all. Most are not.</p></div>'+
+ '<h2 class="s">Route Trainers — the encounter after a Safari</h2>'+
+ '<p class="b">The Safari is not the only thing on the route. When you finish a Safari encounter — caught, won or fled — a <strong>wandering trainer</strong> may step out in the region\'s channel and challenge you to a real <strong>3-versus-3 Pokemax battle</strong>. It is the one PvE fight your Pokemax get outside of catching, and there is <strong>one per day</strong>.</p>'+
+ '<p class="b">You accept from the offer with <span class="cmd">!route_trainer</span> in that region\'s channel. Decline, and the day\'s offer is gone.</p>'+
+ '<h2 class="s">The more you Safari, the surer it gets</h2>'+
+ '<p class="b">A trainer is not guaranteed on your first Safari of the day — but the chance climbs with every Safari you run, and by your fifth it is certain:</p>'+
+ tbl(["Safari of the day","Trainer appears"],[
+  ["1st","15%"],["2nd","30%"],["3rd","45%"],["4th","65%"],["5th","100% — guaranteed"]
+ ],["n","n"])+
+ '<div class="callout"><p>So the Route Trainer rewards the same habit the Safari does: run all five Safari attempts and you are guaranteed the encounter, on top of five shots at wild Pokemax.</p></div>'+
+ '<h2 class="s">Fifty trainers, five per region</h2>'+
+ '<p class="b">Each of the ten huntable regions has <strong>five</strong> Route Trainers — <strong>50</strong> in all — and each has a name, a title, a personality and their own Pokemax lineup. Their team <strong>scales to your party\'s average level</strong>, shifted up or down by their difficulty. Meet Milo the Rubble Scout in the Starter Ruins, Bram the Stone Roller, Ordo the Last Sentinel; every region has its own cast.</p>'+
+ tbl(["Difficulty","Their team","Level vs you"],[
+  ['<strong>Rookie</strong>',"1 Pokemax","Below your average — a warm-up"],
+  ['<strong>Specialist</strong>',"3 Pokemax","Around your average — a real fight"],
+  ['<strong>Ace</strong>',"3 Pokemax","Above your average — the hard ones"]
+ ],["k","n",""])+
+ '<h2 class="s">What it pays</h2>'+
+ tbl(["Outcome","Reward"],[
+  ["Win",'XP = <span class="cmd">12 + (their team\'s average level × 3)</span>, and OIL worth <strong>3×</strong> that XP.'],
+  ["First win vs a given trainer",'The same, plus a <strong>+50% OIL bonus</strong> — a one-time reward for each trainer you beat.'],
+  ["Loss","You still take <strong>50%</strong> of the XP. Nothing is wasted."]
+ ],["k",""])+
+ '<div class="callout"><p><strong>This is the Pokemax income engine.</strong> The fifth Safari guarantees a trainer, and the first win over each of a region\'s five trainers pays bonus OIL — so working through a region\'s roster, one trainer a day, is a steady, repeatable payday your creatures earn on their own.</p></div>';
 }};
 
 PAGES.mechas={t:"The Mecha System",e:"Mechas",d:"Front Mission in a Discord channel: pilot a wanzer built from four destructible parts, spend Action Points instead of taking free turns, and win by dismantling the enemy machine one limb at a time.",h:function(){
