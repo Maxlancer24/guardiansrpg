@@ -680,7 +680,8 @@ var CH3=[["27","What You Leave Behind","Aldenmoor after the siege. You count wha
  ["30","First Light","The convoy job, at dawn."],
  ["31","The Road Climbs","Ironhollow behind you, the pass ahead. Davan gives Jessie a hand-drawn map of the approach. Ren gives her a nod instead of words."],
  ["32","Rocky Chill Pass","The pass, and fresh boot marks in the ice that are not theirs. Valdris scouts, a letter meant for a Councilor in Veldran, and — with the city finally in sight below — Jessie saying, for the first time, why the name stops her."],
- ["33","The East Gate","Down out of the mountains and into Veldran at last. A Valdris unit takes the long way round to catch them on the flat, and past it the city opens up: a council of five, a founding relic nobody has ever questioned — and Jessie walking the streets like someone who used to live here, because she did."]];
+ ["33","The East Gate","Down out of the mountains and into Veldran at last. A Valdris unit takes the long way round to catch them on the flat, and past it the city opens up: a council of five, a founding relic nobody has ever questioned — and Jessie walking the streets like someone who used to live here, because she did."],
+ ["34","Home","Jessie leads them into the council district, to the door of the man who raised her — Bren Valos, one of Veldran's five senators, watched already by Valdris's agents. The relic plot and Jessie's past turn out to be the same man. He takes them in, feeds them, and watches."]];
 
 var SIDES=[
  ["The Aldenmoor Compact","aldenmoor_compact",6,3,"Three workers went into the shaft below the new granary foundation two nights ago. They have not come back. Dren, the oldest person in Aldenmoor, comes to you instead of the settlement leadership, with one instruction: don't seal it.",
@@ -1687,14 +1688,14 @@ PAGES.story={t:"The Main Story",e:"Campaign",d:"A co-op story campaign that runs
  '<p><em>"She\'ll find you. She always finds what she\'s looking for. — C"</em></p>'+
  '<p>Jessie takes the flank apart on her own. Half of them go down before the rest run. She says one thing.</p>'+
  '<p><em>"Took you long enough to open that."</em></p></div>'+
- '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">7 missions so far</span><span class="chap__st live">In progress</span></div>'+
- '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+beats(CH3,"33")+"</div>"+
- '<div class="ex"><p class="ex__h">The East Gate — the current front of the story</p>'+
- '<p>Through the east gate, and Veldran hits all at once: market noise, coal fires, a cart argument blocking the intersection thirty metres in. You fall in beside Jessie. <em>"You know this city."</em></p>'+
- '<p>She navigates around a produce stall without looking at it. <em>"I knew it. People move things around."</em> A beat. <em>"The bakery on the corner is new. The cobbler two streets over is definitely still there, because nothing kills a cobbler in a mountain city."</em></p>'+
- '<p>She says it lightly, easy — the way you talk about a place that is complicated but yours anyway. <em>"Come on. The main street loops. Stay left."</em></p></div>'+
+ '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">8 missions so far</span><span class="chap__st live">In progress</span></div>'+
+ '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+beats(CH3,"34")+"</div>"+
+ '<div class="ex"><p class="ex__h">Home — the current front of the story</p>'+
+ '<p>Jessie has gone upstairs. Bren watches the stairs a moment, then looks at you — direct, unhurried, the look of someone who has already decided something and is simply confirming it.</p>'+
+ '<p><em>"She does not talk about where she has been,"</em> he says. <em>"She never has."</em> A pause. <em>"But she came back. And she did not come back alone."</em></p>'+
+ '<p>He looks at you a moment longer. <em>"That tells me something."</em></p></div>'+
  '<h2 class="s">Where it is going</h2>'+
- '<p class="b">The scroll named three places. <strong>Aldenmoor</strong> is done and its seal piece is accounted for. The team has now walked in through the east gate of <strong>Veldran</strong>, the second — and the shape of the arc is clear. The city is run by a <strong>council of five</strong>, and its <strong>founding relic</strong> has sat in the council hall since the city\'s third decade as a symbol nobody has ever thought to question. Valdris does not mean to storm those walls; he means to <strong>buy</strong> the relic through a Councilor, which is why the team is walking in while it is still a negotiation. And Jessie moves through it all like someone who used to live here — because she did. <strong>Mirefall</strong> is a swamp in the south-east, and nobody has said one word about it yet.</p>';
+ '<p class="b">The scroll named three places. <strong>Aldenmoor</strong> is done and its seal piece is accounted for. In <strong>Veldran</strong>, the second, the two threads the story has been carrying have just closed into one. The city is run by a <strong>council of five</strong>, and its <strong>founding relic</strong> — the thing Valdris means to <em>buy</em> rather than take — sits with them. And the man who raised Jessie, <strong>Bren Valos</strong>, turns out to be one of those five senators, his house already watched by Valdris\'s agents. Jessie\'s past and Valdris\'s plot are the same man. The team now has a senator on their side, and Bren has quietly noticed that Jessie did not come back alone. <strong>Mirefall</strong> is a swamp in the south-east, and nobody has said one word about it yet.</p>';
 }};
 
 PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arcs, separate from the main line. Most run 3-player; each arc is a chain you play in order.",h:function(){
@@ -1729,7 +1730,7 @@ var NAV=[
  ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
  ["Reference",[["screens","What It Looks Like"]]]
 ];
-var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"33",sides:"50"};
+var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"34",sides:"50"};
 
 document.getElementById("nav").innerHTML=NAV.map(function(g){
  return '<div class="navgrp"><div class="navgrp__t">'+g[0]+'</div><div class="nav">'+
