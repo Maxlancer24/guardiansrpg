@@ -681,7 +681,8 @@ var CH3=[["27","What You Leave Behind","Aldenmoor after the siege. You count wha
  ["31","The Road Climbs","Ironhollow behind you, the pass ahead. Davan gives Jessie a hand-drawn map of the approach. Ren gives her a nod instead of words."],
  ["32","Rocky Chill Pass","The pass, and fresh boot marks in the ice that are not theirs. Valdris scouts, a letter meant for a Councilor in Veldran, and — with the city finally in sight below — Jessie saying, for the first time, why the name stops her."],
  ["33","The East Gate","Down out of the mountains and into Veldran at last. A Valdris unit takes the long way round to catch them on the flat, and past it the city opens up: a council of five, a founding relic nobody has ever questioned — and Jessie walking the streets like someone who used to live here, because she did."],
- ["34","Home","Jessie leads them into the council district, to the door of the man who raised her — Bren Valos, one of Veldran's five senators, watched already by Valdris's agents. The relic plot and Jessie's past turn out to be the same man. He takes them in, feeds them, and watches."]];
+ ["34","Home","Jessie leads them into the council district, to the door of the man who raised her — Bren Valos, one of Veldran's five senators, watched already by Valdris's agents. The relic plot and Jessie's past turn out to be the same man. He takes them in, feeds them, and watches."],
+ ["35","The Auction","Bren makes calls and comes back with the shape of it: the relic is not being stolen, it is being sold. An official auction at a council reception, three nights out, with the bidding already quietly fixed for Valdris. The plan becomes a heist in eveningwear — get into the room as Bren's guests and make the sale impossible before the gavel falls."]];
 
 var SIDES=[
  ["The Aldenmoor Compact","aldenmoor_compact",6,3,"Three workers went into the shaft below the new granary foundation two nights ago. They have not come back. Dren, the oldest person in Aldenmoor, comes to you instead of the settlement leadership, with one instruction: don't seal it.",
@@ -1589,6 +1590,58 @@ PAGES.pilot={t:"Pilot Ranks",e:"Mechas",d:"You do not buy your way to Mk5 — yo
  '<div class="callout"><p>The last two ranks, <strong>Ace</strong> and <strong>Wanzer Lord</strong>, unlock <strong>signature Mk5 frames</strong> that lower ranks cannot field at all. The ceiling is a status symbol you have to earn twice: once in XP, once in materials.</p></div>';
 }};
 
+PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"Ten gyms, one per region, each with a medal to win — and each one a seat a player can take, hold, and lose. The endgame territory layer for Pokemax.",h:function(){
+ var G=[
+  ["Starter Ruins","🏺 Relic Medal","Curator Aster"],
+  ["Black Lotus Wood","🪷 Black Lotus Medal","Warden Ilyra"],
+  ["Stormbay Docks","🌊 Tide Medal","Captain Maren"],
+  ["Rocky Chill Pass","❄️ Summit Medal","Summit Keeper Orik"],
+  ["Ravencraft","🐦‍⬛ Raven Medal","Ravenmaster Veyr"],
+  ["The Mist Forest","🌫️ Mist Medal","Seer Nyx"],
+  ["Crimson Plain","🔥 Ember Medal","Ash Champion Kael"],
+  ["Merchant Crossroads","⚖️ Caravan Medal","Marshal Tessa"],
+  ["Bandit Caves","💀 Outlaw Medal","Grotto King Brakk"],
+  ["Dark Knight's Sanctum","🔮 Abyss Medal","Abyssal Knight Morcant"]
+ ];
+ return '<h2 class="s">Ten gyms, ten medals</h2>'+
+ '<p class="b">Every huntable region has a <strong>Gym</strong> — a 3-versus-3 Pokemax battle with a <strong>medal</strong> on the line. But a Gym is more than a badge to collect: it is a <strong>seat</strong>. When no player holds it, a named <strong>NPC leader</strong> defends it. Beat them and <strong>you become the leader</strong> — until someone stronger comes to take it from you.</p>'+
+ tbl(["Region","Medal","Default NPC leader"],G.map(function(g){return [g[0],g[1],g[2]];}),["k","k",""])+
+ '<p class="b">List them all with <span class="cmd">!gyms</span>, inspect one with <span class="cmd">!gym</span>. The NPC defenders field teams at level <strong>42 / 45 / 48</strong> — this is <strong>endgame</strong> content, meant for a Pokemax stable you have already built up.</p>'+
+
+ '<h2 class="s">Conquering a Gym</h2>'+
+ '<p class="b">Challenge the current holder — NPC or player — with <span class="cmd">!gym_challenge</span>. Win, and you take the seat: you become the region\'s Gym Leader and the <strong>medal is yours</strong>. You get <strong>3 attacks per day</strong> across all Gyms, so choosing which door to knock on matters.</p>'+
+ '<div class="callout"><p>Taking a Gym off another <strong>player</strong> is the real prize. NPC leaders are a wall to climb; player-held Gyms are a standing you took from someone who now wants it back.</p></div>'+
+
+ '<h2 class="s">Holding it — defence and rent</h2>'+
+ '<p class="b">As leader you set the team that defends for you with <span class="cmd">!gym_team</span> (changeable once every <strong>24 hours</strong>, so pick a real wall, not a whim). While you hold a region\'s Gym, you earn <strong>rent</strong> — a passive cut tied to the Safari activity happening in your region. A held Gym is an income stream, not a trophy on a shelf.</p>'+
+ '<div class="callout callout--warn"><p><strong>You have to show up.</strong> A leader who goes quiet for <strong>14 days</strong> is treated as inactive and loses the Gym. The seat belongs to whoever is still playing for it.</p></div>'+
+
+ '<h2 class="s">The windows that keep it fair</h2>'+
+ '<p class="b">Conquest is not a revolving door. A set of timers stops a Gym from being farmed back and forth in one sitting:</p>'+
+ tbl(["Window","What it does"],[
+  ["Conquest protection · 12h","A freshly taken Gym cannot be attacked again for 12 hours — you get to actually hold it."],
+  ["Failed-attack protection · 4h","Lose a challenge and that Gym is off-limits to you for 4 hours. No spam."],
+  ["Revenge · 48h","Lost your Gym? You have a 48-hour window to challenge back and take it from the one who took it."],
+  ["Team change · 24h","A leader can only reshape their defending team once a day."]
+ ],["k",""])+
+ '<div class="callout"><p><strong>The rhythm this creates:</strong> take a Gym, hold it protected for half a day, defend it against challengers, and keep an eye on the clock when yours falls — the revenge window is short, and after it closes the medal is well and truly theirs.</p></div>'+
+
+ '<h2 class="s">How to think about it</h2>'+
+ '<p class="b"><strong>Build the stable first.</strong> NPC leaders sit at 42–48; do not knock until your best Pokemax can trade with that.</p>'+
+ '<p class="b"><strong>Defend with a wall, attack with coverage.</strong> Your <a href="#genes">gene</a> keepers earn their genes here — a defending team that dodges the common attackers holds a Gym for days.</p>'+
+ '<p class="b"><strong>Hold the region you Safari.</strong> Rent follows Safari activity, so the Gym in your home region pays you the most.</p>';
+}};
+
+PAGES.mysteries={t:"Mysteries",e:"The world",d:"Valestia keeps secrets. Some of them are waiting for a player who does the right thing in the right place — and no two are alike.",h:function(){
+ return '<h2 class="s">There are secrets in here</h2>'+
+ '<p class="b">Scattered across Valestia and the systems that run on top of it are <strong>hidden mysteries</strong> — things the game never tells you are there. Nobody hands you a quest for them. They are <strong>found</strong>, by playing: by going somewhere, trying something, noticing a detail, doing the unexpected.</p>'+
+ '<p class="b">Each one is <strong>one of a kind</strong>, and each pays off in its own way — a reward, a reveal, a surprise that exists nowhere else in the game. Some are small. Some are not.</p>'+
+ '<h2 class="s">Your journal</h2>'+
+ '<p class="b"><span class="cmd">!mystery</span> (also <span class="cmd">!mistery</span>) opens your <strong>mystery journal</strong>: what you have uncovered so far, and the unique things it earned you. It fills in as you find them.</p>'+
+ '<div class="callout"><p><strong>No list here — on purpose.</strong> Half the point of a secret is not knowing it was there until you trip over it. This page will not tell you what to look for or where. Play, stay curious, and let Valestia surprise you.</p></div>'+
+ '<p class="b">If you find one, you will know. That is rather the idea.</p>';
+}};
+
 PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads between them, and the places the story happens. Select any marker on the map.",h:function(){
  return '<div class="atlas"><div class="atlas__m" id="map"></div>'+
  '<aside class="atlas__s"><div class="dos" id="dos"></div></aside></div>'+
@@ -1688,14 +1741,14 @@ PAGES.story={t:"The Main Story",e:"Campaign",d:"A co-op story campaign that runs
  '<p><em>"She\'ll find you. She always finds what she\'s looking for. — C"</em></p>'+
  '<p>Jessie takes the flank apart on her own. Half of them go down before the rest run. She says one thing.</p>'+
  '<p><em>"Took you long enough to open that."</em></p></div>'+
- '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">8 missions so far</span><span class="chap__st live">In progress</span></div>'+
- '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+beats(CH3,"34")+"</div>"+
- '<div class="ex"><p class="ex__h">Home — the current front of the story</p>'+
- '<p>Jessie has gone upstairs. Bren watches the stairs a moment, then looks at you — direct, unhurried, the look of someone who has already decided something and is simply confirming it.</p>'+
- '<p><em>"She does not talk about where she has been,"</em> he says. <em>"She never has."</em> A pause. <em>"But she came back. And she did not come back alone."</em></p>'+
- '<p>He looks at you a moment longer. <em>"That tells me something."</em></p></div>'+
+ '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">9 missions so far</span><span class="chap__st live">In progress</span></div>'+
+ '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+beats(CH3,"35")+"</div>"+
+ '<div class="ex"><p class="ex__h">The Auction — the current front of the story</p>'+
+ '<p>Bren looks at the letter on the table rather than at Jessie. <em>"Your parents would have been glad you found people worth walking this road with."</em></p>'+
+ '<p>He says it like a fact he decided to set down. Then he stands and changes the subject before she can answer. Jessie does not answer. She is very still for a moment.</p>'+
+ '<p class="embcap" style="margin:.6rem 0 0">He knew them. The oldest question in the story just found a man who can answer it — if he chooses to.</p></div>'+
  '<h2 class="s">Where it is going</h2>'+
- '<p class="b">The scroll named three places. <strong>Aldenmoor</strong> is done and its seal piece is accounted for. In <strong>Veldran</strong>, the second, the two threads the story has been carrying have just closed into one. The city is run by a <strong>council of five</strong>, and its <strong>founding relic</strong> — the thing Valdris means to <em>buy</em> rather than take — sits with them. And the man who raised Jessie, <strong>Bren Valos</strong>, turns out to be one of those five senators, his house already watched by Valdris\'s agents. Jessie\'s past and Valdris\'s plot are the same man. The team now has a senator on their side, and Bren has quietly noticed that Jessie did not come back alone. <strong>Mirefall</strong> is a swamp in the south-east, and nobody has said one word about it yet.</p>';
+ '<p class="b">The scroll named three places. <strong>Aldenmoor</strong> is done and its seal piece is accounted for. In <strong>Veldran</strong>, the second, the plan has a shape now — and it is not a robbery. The <strong>founding relic</strong> is being <strong>sold at auction</strong> at a council reception three nights out, with the bidding quietly <strong>fixed for Valdris</strong> by someone inside the council. You cannot outbid an army\'s treasury or take it by force in a room full of witnesses, so the job becomes a heist in eveningwear: get in as senator <strong>Bren Valos</strong>\'s guests and make the sale impossible before the gavel. Two things linger under it — Bren <em>recognised</em> the relic when Elric described it, and he <strong>knew Jessie\'s parents</strong>, the oldest open question in the story. <strong>Mirefall</strong> is a swamp in the south-east, and nobody has said one word about it yet.</p>';
 }};
 
 PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arcs, separate from the main line. Most run 3-player; each arc is a chain you play in order.",h:function(){
@@ -1724,13 +1777,13 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
    ══════════════════════════════════════════════════════════════════ */
 var NAV=[
  ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
- ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"]]],
+ ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"],["mysteries","Mysteries"]]],
  ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]],
- ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"]]],
+ ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"],["gyms","Pokemax Gyms"]]],
  ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
  ["Reference",[["screens","What It Looks Like"]]]
 ];
-var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"34",sides:"50"};
+var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"35",sides:"50"};
 
 document.getElementById("nav").innerHTML=NAV.map(function(g){
  return '<div class="navgrp"><div class="navgrp__t">'+g[0]+'</div><div class="nav">'+
