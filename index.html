@@ -498,6 +498,32 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.anim,.reveal{opacity:1!important;transform:none!important;animation:none!important}}
+
+/* ═══ CHARACTER SHOWCASE ═══ */
+.charwrap{display:flex;flex-direction:column;gap:1.6rem;margin:1.6rem 0}
+.charcard{display:flex;background:var(--bg-raised);border:1px solid var(--rule);border-radius:16px;overflow:hidden;box-shadow:var(--elev);transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)}
+.charcard:hover{transform:translateY(-3px);box-shadow:var(--elev-lift);border-color:var(--ca)}
+.charcard--r{flex-direction:row-reverse}
+.charcard__art{flex:0 0 clamp(220px,30%,320px);position:relative;background:#0a1522;min-height:100%}
+.charcard__art img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.charcard__glow{position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg, color-mix(in srgb,var(--bg-raised) 92%,transparent) 0%, transparent 22%), radial-gradient(120% 60% at 50% 0%, color-mix(in srgb,var(--ca) 26%,transparent), transparent 70%)}
+.charcard--r .charcard__glow{background:linear-gradient(0deg, color-mix(in srgb,var(--bg-raised) 92%,transparent) 0%, transparent 22%), radial-gradient(120% 60% at 50% 0%, color-mix(in srgb,var(--ca) 26%,transparent), transparent 70%)}
+.charcard__body{flex:1;min-width:0;padding:clamp(1.4rem,3vw,2.2rem)}
+.charcard__role{font-family:var(--cond);font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ca);margin:0}
+.charcard__name{font-family:var(--serif);font-weight:700;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1;letter-spacing:-.02em;color:var(--text);margin:.35rem 0 0}
+.charcard__alias{font-family:var(--serif);font-style:italic;font-weight:400;font-size:.6em;color:var(--ca);margin-left:.3em}
+.charcard__facts{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 0}
+.cfact{background:color-mix(in srgb,var(--ca) 12%,transparent);border:1px solid color-mix(in srgb,var(--ca) 40%,transparent);border-radius:999px;padding:.28rem .8rem;display:flex;flex-direction:column;line-height:1.15}
+.cfact__k{font-family:var(--cond);font-weight:600;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ca)}
+.cfact__v{font-family:var(--cond);font-size:.82rem;color:var(--text)}
+.charcard__q{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,1.8vw,1.35rem);line-height:1.4;color:var(--text);margin:1.2rem 0 0;padding-left:1rem;border-left:3px solid var(--ca)}
+.charcard__d{font-family:var(--serif);font-size:1rem;line-height:1.62;color:var(--text-dim);margin:.9rem 0 0;max-width:60ch}
+.charcard__d strong{color:var(--text);font-weight:600}
+@media(max-width:720px){
+  .charcard,.charcard--r{flex-direction:column}
+  .charcard__art{flex:none;height:clamp(340px,70vw,460px)}
+  .charcard__glow{background:linear-gradient(0deg, color-mix(in srgb,var(--bg-raised) 96%,transparent) 0%, transparent 30%), radial-gradient(120% 40% at 50% 0%, color-mix(in srgb,var(--ca) 24%,transparent), transparent 70%)}
+}
 </style>
 </head>
 <body>
@@ -522,6 +548,8 @@ var E=function(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
 var MAP_SRC="assets/valestia-map.webp";
+var IMG_JESSIE="assets/char-jessie.webp";
+var IMG_GARRICK="assets/char-garrick.webp";
 
 /* ══════════════════════════════════════════════════════════════════
    DATA — read out of the live bot: crafting_system.py, weapons_system.py,
@@ -1738,6 +1766,38 @@ PAGES.pilot={t:"Pilot Ranks",e:"Mechas",d:"You do not buy your way to Mk5 — yo
  '<div class="callout"><p>The last two ranks, <strong>Ace</strong> and <strong>Wanzer Lord</strong>, unlock <strong>signature Mk5 frames</strong> that lower ranks cannot field at all. The ceiling is a status symbol you have to earn twice: once in XP, once in materials.</p></div>';
 }};
 
+PAGES.characters={t:"Characters",e:"Campaign",d:"The people walking the road with you. Portraits and the truth behind them — more will join as the story grows.",h:function(){
+ var C=[
+  {img:IMG_JESSIE,side:"l",ca:"#4E8FC4",name:"Jessie",role:"Mercenary · Gunslinger",alias:"",
+   facts:[["Weapon","A matched pair of revolvers"],["Allegiance","Herself, mostly"],["First seen","Black Lotus Wood"]],
+   quote:"Took you long enough to open that.",
+   desc:["Hard on the outside, deliberately. Jessie keeps the reputation and the distance as armour — the sharp remark, the loaded pistols, the refusal to explain herself. Underneath it she is loyal and kind and almost never lets it show; her warmth arrives in brief, near-accidental moments she cuts off fast.",
+    "She was found as a baby in the Greywood and never learned who her parents were. She grew up hard and left young, and she goes quiet whenever anyone says <strong>Veldran</strong> — the city that raised her, and the man in it who did.",
+    "She met the Guardian mid-ambush and has been at their side, more or less on her own terms, ever since. When the fighting is worst, she is the one who blows the flank open — and says one dry line about it afterwards."]},
+  {img:IMG_GARRICK,side:"r",ca:"#C88A3C",name:"Garrick",role:"Refugee Leader · Aldenmoor",alias:"",
+   facts:[["Weapon","A two-handed maul"],["Allegiance","The people of Aldenmoor"],["First seen","Aldenmoor"]],
+   quote:"Fourteen taverns.",
+   desc:["Strong, charismatic, and stubbornly optimistic despite everything the road has taken from him. Garrick leads the refugees of Aldenmoor the way a good captain does — from the front, giving everything for his people and expecting to.",
+    "He lost his brother on the second failed attempt to reach the city's sealed underground stores, and he still went down into the vault roads himself when it counted. He reads a room like a man sizing up a fight, and he decided he liked Jessie roughly the moment she cut his guilt short with a joke.",
+    "He carries a maul most men could not lift and a warmth that survives a settlement full of loss. When the team first walked into Veldran, the loudest city any of them had seen in years, the first thing he did was count the taverns."]}
+ ];
+ return '<p class="b">These are the people at the Guardian\'s side through the main story. Two of them are here now; the rest of the cast joins as the campaign is written.</p>'+
+ '<div class="charwrap">'+C.map(function(c){
+  return '<article class="charcard charcard--'+c.side+' reveal" style="--ca:'+c.ca+'">'+
+   '<div class="charcard__art"><img src="'+c.img+'" alt="'+E(c.name)+'" width="720" height="1080" loading="lazy"><span class="charcard__glow"></span></div>'+
+   '<div class="charcard__body">'+
+    '<p class="charcard__role">'+E(c.role)+'</p>'+
+    '<h2 class="charcard__name">'+E(c.name)+(c.alias?' <span class="charcard__alias">'+E(c.alias)+'</span>':'')+'</h2>'+
+    '<div class="charcard__facts">'+c.facts.map(function(f){
+      return '<div class="cfact"><span class="cfact__k">'+E(f[0])+'</span><span class="cfact__v">'+E(f[1])+'</span></div>';
+    }).join("")+'</div>'+
+    '<blockquote class="charcard__q">“'+E(c.quote)+'”</blockquote>'+
+    c.desc.map(function(p){return '<p class="charcard__d">'+p+'</p>';}).join("")+
+   '</div></article>';
+ }).join("")+'</div>'+
+ '<div class="callout"><p><strong>More faces are coming.</strong> Elric the Scribe, Cara, Bren Valos, Valdris — the story\'s full cast will land here as their art is finished. Meet them in the meantime on the <a href="#story">Main Story</a> and <a href="#lore">Lore</a> pages.</p></div>';
+}};
+
 PAGES.diplomacy={t:"Clan Diplomacy",e:"The guide",d:"Clans that own regions charge outsiders to hunt there. Diplomacy lets two clans sign a treaty that trades discounted access for OIL — a deal that, once signed, cannot be broken.",h:function(){
  return '<h2 class="s">Why it exists</h2>'+
  '<p class="b">A clan that controls a region taxes everyone else who wants to <span class="cmd">!hunt</span> there: an <strong>entry toll</strong> to set foot in it and a <strong>hunt tax</strong> (up to 20%) on what you earn. <strong>Clan Diplomacy</strong> is the negotiating table on top of that — a clan can <strong>sell or gift access</strong> to its region: a reduction, or a full waiver, of that toll and tax, for an agreed number of days, in exchange for <strong>OIL</strong> from the other clan\'s treasury.</p>'+
@@ -1879,7 +1939,7 @@ PAGES.lore={t:"Lore",e:"The world",d:"What the scroll says, what is under Aldenm
  '<h2 class="s">The cast</h2>'+
  '<div class="grid grid--wide">'+[
   ["The Guardian","You","Chosen by prophecy — Gorim\'s word, not yours. You carry the scroll and Maren\'s key."],
-  ["Jessie","“Two Irons” · Mercenary","Hard on the outside, deliberately: she keeps the reputation and the distance as armour. Underneath she is loyal and kind and almost never shows it. Found as a baby in the Greywood; she has never known who her parents were. She goes quiet when anyone says Veldran."],
+  ["Jessie","Mercenary · Gunslinger","Hard on the outside, deliberately: she keeps the reputation and the distance as armour. Underneath she is loyal and kind and almost never shows it. Found as a baby in the Greywood; she has never known who her parents were. She goes quiet when anyone says Veldran."],
   ["Elric","The Scribe · Scholar","Shy, quiet, very smart. Reads dead languages. Wants to belong with the group and feels like an academic among people of action. When he does speak he is usually right."],
   ["Cara","Broker","Pawnshop on the South Docks, crossbow always loaded, knows everything and everyone. She and Jessie have a history neither of them will explain. She stayed in Stormbay."],
   ["Valdris","The antagonist","Buys loyalties. Reached Stormbay four days ahead of you and has never once been behind since. He issued arrest warrants through the city\'s own legal channels, which tells you what he owns."],
@@ -1956,7 +2016,7 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
 var NAV=[
  ["The guide",[["home","Home"],["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["diplomacy","Clan Diplomacy"],["economy","Economy &amp; Progression"]]],
  ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"],["mysteries","Mysteries"]]],
- ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]],
+ ["Campaign",[["characters","Characters"],["story","The Main Story"],["sides","Side Stories"]]],
  ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"],["gyms","Pokemax Gyms"]]],
  ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
  ["Reference",[["screens","What It Looks Like"]]]
@@ -2009,13 +2069,16 @@ function initHome(){
   }
   el.textContent="0"; requestAnimationFrame(step);
  });
- /* reveal system cards on scroll (or immediately if reduced motion / no IO) */
- var cards=document.querySelectorAll("#pg-home .reveal");
- if(_reduceMotion||!("IntersectionObserver" in window)){ cards.forEach(function(c){c.classList.add("in");}); return; }
+}
+/* reveal any .reveal elements inside the active page (home cards, character cards…) */
+function revealIn(id){
+ var host=document.getElementById("pg-"+id); if(!host) return;
+ var els=host.querySelectorAll(".reveal:not(.in)");
+ if(_reduceMotion||!("IntersectionObserver" in window)){ els.forEach(function(e){e.classList.add("in");}); return; }
  var io=new IntersectionObserver(function(es){
   es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
- },{rootMargin:"0px 0px -8% 0px"});
- cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.05)+"s"; io.observe(c); });
+ },{rootMargin:"0px 0px -6% 0px"});
+ els.forEach(function(e,i){ e.style.transitionDelay=(Math.min(i,8)*0.05)+"s"; io.observe(e); });
 }
 function route(){
  var id=(location.hash||"#home").slice(1);
@@ -2030,6 +2093,7 @@ function route(){
  if(id==="valestia"&&!built.map){built.map=1;initMap();}
  if(id==="lab"&&!built.lab){built.lab=1;initLab();}
  if(id==="home"){initHome();}
+ revealIn(id);
  closeRail();
  window.scrollTo(0,0);
  /* GoatCounter: register one pageview per section. Async-safe — if count.js is
