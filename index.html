@@ -394,6 +394,110 @@ tbody tr:hover td{background:var(--brass-soft)}
 .foot b{color:var(--brass);font-weight:400}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GAME-FORWARD LAYER — richer colour, depth, motion. Layered on top of the
+   base chart identity; the world's own hues (brass, verdigris, corruption,
+   Pokemax types), never generic neon.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* Pokemax type accents — read on both grounds */
+  --t-fire:#D65A3A; --t-water:#3B87C4; --t-grass:#4F9E52; --t-ice:#5FB0C6;
+  --t-rock:#A98545; --t-flying:#7E86C0; --t-ghost:#8E6BB0; --t-dark:#5A5468;
+  --accent:var(--brass);
+  --elev:0 1px 2px rgba(8,16,14,.06);
+  --elev-lift:0 12px 30px -10px rgba(8,16,14,.30), 0 3px 8px -4px rgba(8,16,14,.16);
+}
+/* subtle ground depth — a warm brass bloom top-left, cool verdigris pool bottom-right */
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(70vw 55vh at 8% -8%, var(--brass-soft), transparent 60%),
+    radial-gradient(60vw 60vh at 108% 108%, var(--verdigris-soft), transparent 62%);
+}
+
+/* ── nav: active/hover in each item's own group colour ── */
+.nav a:hover{color:var(--text);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.nav a.is-on{color:var(--accent);border-left-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);box-shadow:inset 3px 0 0 var(--accent), inset 0 0 30px -18px var(--accent)}
+.nav a.is-on i{color:var(--accent)}
+.navgrp__t{position:relative}
+
+/* ── page header: bigger, with an accent tick under the eyebrow ── */
+.ph h1{font-size:clamp(2.1rem,4.2vw,3.4rem)}
+.ph__e{display:inline-block;color:var(--accent)}
+.ph__e::after{content:"";display:block;width:2.2rem;height:2px;background:var(--accent);margin-top:.5rem;border-radius:2px;opacity:.8}
+
+/* ── cards become a rounded "deck": own surface, radius, elevation, accent rail ── */
+.grid{gap:.72rem;background:none;border:0;padding:0}
+.card{position:relative;overflow:hidden;background:var(--bg-raised);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--elev);transition:transform .16s var(--ease),box-shadow .16s var(--ease),border-color .16s var(--ease)}
+.card::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--accent);opacity:0;transition:opacity .16s var(--ease)}
+.card:hover{transform:translateY(-3px);box-shadow:var(--elev-lift);border-color:var(--accent);z-index:2}
+.card:hover::before{opacity:.9}
+.card__n{transition:color .16s var(--ease)}
+.card:hover .card__n{color:var(--accent)}
+.card__tag{color:var(--accent);border-color:var(--accent)}
+
+/* ── section subheads + tables adopt the page's accent colour ── */
+h3.t{color:var(--accent)}
+.ph__d{max-width:70ch}
+.tw{border-radius:10px}
+th{border-bottom:2px solid var(--accent)}
+tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
+
+/* ── callouts: a touch more presence ── */
+.callout{border-left-width:3px;border-radius:0 6px 6px 0;border-left-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.callout--warn{border-left-color:var(--corrupt);background:var(--corrupt-soft)}
+
+/* ── type chips (Pokemax): coloured badges instead of plain text ── */
+.tychip{display:inline-flex;align-items:center;gap:.28em;font-family:var(--cond);font-weight:600;font-size:.82rem;letter-spacing:.04em;padding:.08em .5em .1em;border-radius:999px;color:#fff;white-space:nowrap;box-shadow:var(--elev)}
+.tychip--fire{background:var(--t-fire)} .tychip--water{background:var(--t-water)}
+.tychip--grass{background:var(--t-grass)} .tychip--ice{background:var(--t-ice)}
+.tychip--rock{background:var(--t-rock)} .tychip--flying{background:var(--t-flying)}
+.tychip--ghost{background:var(--t-ghost)} .tychip--dark{background:var(--t-dark)}
+
+/* ═══ HOME / HERO ═══ */
+/* Hero is a self-contained cinematic dark banner over the map — legible and
+   consistent in BOTH themes; the themed page starts below its bottom border. */
+.hero{position:relative;margin:calc(-1 * clamp(2rem,4vw,3.6rem)) calc(-1 * clamp(1.1rem,3.4vw,3.4rem)) 0;overflow:hidden;border-bottom:1px solid var(--rule-strong);min-height:min(82vh,660px);display:flex;align-items:center;background:#070d0c}
+.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 42%;opacity:.9;filter:saturate(1.08) contrast(1.03)}
+.hero__scrim{position:absolute;inset:0;background:
+  linear-gradient(94deg, rgba(6,12,11,.86) 0%, rgba(6,12,11,.62) 40%, rgba(6,12,11,.28) 72%, rgba(6,12,11,.42) 100%),
+  linear-gradient(0deg, rgba(6,12,11,.7) 0%, rgba(6,12,11,0) 32%)}
+.hero__in{position:relative;padding:clamp(2.6rem,6vw,4.6rem) clamp(1.3rem,3.4vw,3.4rem);max-width:1120px;width:100%}
+.hero__eyebrow{font-family:var(--cond);font-weight:600;font-size:.76rem;letter-spacing:.28em;text-transform:uppercase;color:#D9A84E;margin:0}
+.hero__t{margin:.7rem 0 0}
+.hero__the{display:block;font-family:var(--cond);font-weight:600;font-size:clamp(.9rem,2.4vw,1.15rem);letter-spacing:.5em;text-transform:uppercase;color:#D9A84E;margin:0 0 .15rem;padding-left:.15em}
+.hero__big{display:block;font-family:var(--serif);font-weight:700;font-size:clamp(3.2rem,11vw,7rem);line-height:.86;letter-spacing:-.022em;color:#F5F0E4;text-shadow:0 6px 50px rgba(0,0,0,.6)}
+.hero__sub{font-family:var(--serif);font-size:clamp(1.04rem,1.7vw,1.28rem);color:rgba(238,235,226,.82);margin:1.3rem 0 0;max-width:52ch;line-height:1.55}
+.hero__stats{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.8rem 0 0}
+.stat{background:rgba(255,255,255,.06);border:1px solid rgba(238,235,226,.24);border-radius:999px;padding:.42rem 1rem;display:flex;align-items:baseline;gap:.42rem;backdrop-filter:blur(4px)}
+.stat b{font-family:var(--mono);font-size:1.08rem;color:#E3B45C;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--cond);font-weight:600;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,235,226,.72)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.75rem;margin:2rem 0 0}
+.hbtn{display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap;line-height:1;font-family:var(--cond);font-weight:600;font-size:.84rem;letter-spacing:.14em;text-transform:uppercase;padding:.8rem 1.6rem;border-radius:7px;text-decoration:none;cursor:pointer;transition:transform .14s var(--ease),box-shadow .14s var(--ease),background .14s var(--ease),border-color .14s var(--ease);border:1px solid transparent}
+.hbtn--primary{background:#C79A4B;color:#1a130a;box-shadow:0 8px 24px -8px rgba(199,154,75,.6)}
+.hbtn--primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(199,154,75,.7);background:#D3A85A}
+.hbtn--ghost{background:rgba(255,255,255,.05);color:#F5F0E4;border-color:rgba(238,235,226,.34);backdrop-filter:blur(4px)}
+.hbtn--ghost:hover{border-color:#D9A84E;color:#E3B45C;transform:translateY(-2px)}
+
+.home__lead{font-family:var(--serif);font-size:1.1rem;line-height:1.62;color:var(--text-dim);max-width:64ch;margin:2.4rem 0 0}
+.syswrap{margin:2rem 0 0}
+.sysgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.9rem;margin:1rem 0 0}
+.syscard{position:relative;display:block;text-decoration:none;background:var(--bg-raised);border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.2rem 1.3rem;overflow:hidden;transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease);box-shadow:var(--elev)}
+.syscard::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--sc,var(--brass))}
+.syscard:hover{transform:translateY(-4px);box-shadow:var(--elev-lift);border-color:var(--sc,var(--brass))}
+.syscard__i{font-size:1.7rem;line-height:1}
+.syscard__t{font-family:var(--serif);font-weight:600;font-size:1.18rem;color:var(--text);margin:.6rem 0 0}
+.syscard__d{font-family:var(--cond);font-size:.9rem;color:var(--text-dim);line-height:1.45;margin:.3rem 0 0}
+.syscard__go{font-family:var(--cond);font-weight:600;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sc,var(--brass));margin:.8rem 0 0;display:inline-block}
+
+/* ── entry motion (hero + reveal) ── */
+@keyframes riseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.anim{opacity:0;animation:riseIn .6s var(--ease) forwards}
+.anim.d1{animation-delay:.06s} .anim.d2{animation-delay:.14s} .anim.d3{animation-delay:.24s} .anim.d4{animation-delay:.34s} .anim.d5{animation-delay:.44s}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.anim,.reveal{opacity:1!important;transform:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -402,7 +506,7 @@ tbody tr:hover td{background:var(--brass-soft)}
 
 <div class="app">
   <nav class="rail" id="rail">
-    <a class="brand" href="#start">
+    <a class="brand" href="#home">
       <span class="brand__w">The <em>Guardians</em></span>
       <span class="brand__s">Valestia Compendium</span>
     </a>
@@ -859,6 +963,49 @@ function dsc(accent,title,body,footer){
    PAGES
    ══════════════════════════════════════════════════════════════════ */
 var PAGES={};
+
+PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
+ var sys=[
+  ["⚔️","Combat","combat","var(--brass)","Four buttons, real maths — Focus, Parry, and the arithmetic every fight runs on."],
+  ["🗺️","Valestia","valestia","var(--verdigris)","Eleven regions, 210 named enemies, and the roads between them. Travel and hunt."],
+  ["🐾","Pokemax","pets","var(--t-grass)","Catch 84 species, raise them to 50, and battle 3-versus-3 — a whole monster-battler inside the RPG."],
+  ["🤖","Mechas","mechas","var(--t-water)","Front Mission in a channel: pilot a four-part wanzer and dismantle the enemy limb by limb."],
+  ["📜","The Story","story","var(--brass)","A co-op campaign, 35 missions and counting, that runs inside the combat engine."],
+  ["🏛️","Clans &amp; Gyms","clans","var(--t-rock)","Found a clan, hold territory, sign treaties, and conquer the ten regional Gyms."],
+  ["🎲","Game Modes","modes","var(--t-ghost)","Duels, Triad, Horde, the Eternal Abyss, sieges, Vanguard — nineteen ways to fight."],
+  ["🔮","Mysteries","mysteries","var(--corrupt)","Hidden secrets scattered across the world, each with a surprise found nowhere else."]
+ ];
+ return '<section class="hero">'+
+  '<img class="hero__bg" src="'+MAP_SRC+'" alt="The map of Valestia" width="1485" height="810">'+
+  '<div class="hero__scrim"></div>'+
+  '<div class="hero__in">'+
+   '<p class="hero__eyebrow anim">A Discord RPG · Valestia</p>'+
+   '<h1 class="hero__t anim d1"><span class="hero__the">The</span><span class="hero__big">Guardians</span></h1>'+
+   '<p class="hero__sub anim d2">The seal on Azroth is failing, the scroll names three places, and the road only goes one way. A deep, living RPG played entirely in Discord — combat, a whole map to hunt, monster-catching, mechas, clans, and a story that keeps being written.</p>'+
+   '<div class="hero__stats anim d3">'+
+    '<span class="stat"><b class="num" data-to="11">0</b><span>Regions</span></span>'+
+    '<span class="stat"><b class="num" data-to="84">0</b><span>Pokemax</span></span>'+
+    '<span class="stat"><b class="num" data-to="35">0</b><span>Story missions</span></span>'+
+    '<span class="stat"><b class="num" data-to="50">0</b><span>Side quests</span></span>'+
+    '<span class="stat"><b class="num" data-to="19">0</b><span>Game modes</span></span>'+
+   '</div>'+
+   '<div class="hero__cta anim d4">'+
+    '<a class="hbtn hbtn--primary" href="#start">Start playing →</a>'+
+    '<a class="hbtn hbtn--ghost" href="#valestia">Explore Valestia</a>'+
+   '</div>'+
+  '</div></section>'+
+  '<p class="home__lead">Everything on this site is read straight from the live bot — every number, region, item, formula and line of story. Pick a thread and pull.</p>'+
+  '<div class="syswrap"><div class="sysgrid">'+
+   sys.map(function(s){
+    return '<a class="syscard reveal" href="#'+s[2]+'" style="--sc:'+s[3]+'">'+
+     '<span class="syscard__i">'+s[0]+'</span>'+
+     '<div class="syscard__t">'+s[1]+'</div>'+
+     '<div class="syscard__d">'+s[4]+'</div>'+
+     '<span class="syscard__go">Open →</span></a>';
+   }).join("")+
+  '</div></div>'+
+  '<div class="foot"><p><b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.</p></div>';
+}};
 
 PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your account is created the first time you make a profile from the Kiosk, or the first time you join a game — whichever happens first.",h:function(){
  return '<div class="callout"><p><strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the 81 story and side missions, all of it.</p>'+
@@ -1399,8 +1546,9 @@ PAGES.petbattle={t:"Pokemax Battles",e:"Pokemax",d:"Eight types, 61 moves, five 
  return '<h2 class="s">The type chart</h2>'+
  '<p class="b">Eight types. Super effective is <strong>×2</strong>, resisted is <strong>×½</strong>, and there is no immunity — everything can hurt everything. Read a row as: what this type <strong>deals</strong>, what it is <strong>weak to</strong>, and what it shrugs off.</p>'+
  tbl(["Type","Hits ×2","Takes ×2 from","Resists ×½"],PET_CHART.map(function(c){
-  return [c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1),c[2],c[3],c[4]];
- }),["k","","",""])+
+  var chip='<span class="tychip tychip--'+c[0]+'">'+c[1]+" "+c[0].charAt(0).toUpperCase()+c[0].slice(1)+'</span>';
+  return [chip,c[2],c[3],c[4]];
+ }),["","","",""])+
  '<div class="callout"><p><strong>Rock is the offensive anomaly:</strong> it hits Fire, Ice and Flying for ×2 and <em>nothing resists it</em> — every Rock move lands at full value or better. But it is no fortress: <strong>Water and Grass both hit Rock for ×2</strong>, so lead with it, do not tank with it. It is also the only type two regions breed — Starter Ruins and Bandit Caves.</p>'+
  '<p><strong>Dark is the defensive anomaly:</strong> <em>nothing</em> hits Dark for ×2, and Dark resists both itself and Ghost. Paired with the closed Ghost/Dark loop — Ghost only beats Ghost, Dark only beats Ghost — a Dark Pokemax walks through the Mist Forest unopposed.</p></div>'+
  '<h2 class="s">Damage</h2>'+
@@ -1590,6 +1738,36 @@ PAGES.pilot={t:"Pilot Ranks",e:"Mechas",d:"You do not buy your way to Mk5 — yo
  '<div class="callout"><p>The last two ranks, <strong>Ace</strong> and <strong>Wanzer Lord</strong>, unlock <strong>signature Mk5 frames</strong> that lower ranks cannot field at all. The ceiling is a status symbol you have to earn twice: once in XP, once in materials.</p></div>';
 }};
 
+PAGES.diplomacy={t:"Clan Diplomacy",e:"The guide",d:"Clans that own regions charge outsiders to hunt there. Diplomacy lets two clans sign a treaty that trades discounted access for OIL — a deal that, once signed, cannot be broken.",h:function(){
+ return '<h2 class="s">Why it exists</h2>'+
+ '<p class="b">A clan that controls a region taxes everyone else who wants to <span class="cmd">!hunt</span> there: an <strong>entry toll</strong> to set foot in it and a <strong>hunt tax</strong> (up to 20%) on what you earn. <strong>Clan Diplomacy</strong> is the negotiating table on top of that — a clan can <strong>sell or gift access</strong> to its region: a reduction, or a full waiver, of that toll and tax, for an agreed number of days, in exchange for <strong>OIL</strong> from the other clan\'s treasury.</p>'+
+ '<p class="b">Open it with <span class="cmd">!diplomacy</span>; see every standing treaty with <span class="cmd">!diplomacy_board</span>. Only a clan\'s <strong>leaders and sub-leaders</strong> can propose or sign.</p>'+
+ '<h2 class="s">Three kinds of treaty</h2>'+
+ tbl(["Direction","Who gets access"],[
+  ['<strong>Grant</strong>',"You open <em>your</em> region to them — you are selling access to what you hold."],
+  ['<strong>Request</strong>',"You ask for access to <em>their</em> region — you are buying your way in."],
+  ['<strong>Mutual</strong>',"Both clans open their regions to each other on the same terms."]
+ ],["k",""])+
+ '<h2 class="s">The terms</h2>'+
+ '<p class="b">Every treaty sets three things, and the discounts are stored as <strong>percentages, not frozen prices</strong> — if the region owner later raises their tax, your discount still applies to the new rate.</p>'+
+ tbl(["Term","Range"],[
+  ["Entry-toll discount","0–100% (100% = free entry)"],
+  ["Hunt-tax discount","0–100% (100% = tax-free hunting)"],
+  ["Duration","1–90 days"],
+  ["Price","Paid up front in OIL from the buyer's treasury"]
+ ],["k","n"])+
+ '<div class="callout"><p>The other clan\'s treasury is <strong>private</strong>. You never see how much they hold, and if a signer cannot actually afford the deal, only they are told — you just see it fail.</p></div>'+
+ '<h2 class="s">Negotiating</h2>'+
+ '<p class="b">A proposal is an opening offer, not a final one. The other side can <strong>counter</strong>, and you can counter back — up to <strong>3 rounds</strong> of haggling before a deal has to be taken or left. An offer nobody answers <strong>expires on its own after 48 hours</strong>, and every active treaty warns both clans <strong>24 hours</strong> before it lapses.</p>'+
+ '<h2 class="s">The one rule that changes everything</h2>'+
+ '<div class="callout callout--warn"><p><strong>A signed treaty cannot be broken.</strong> It runs to term, full stop. There is no notice period, no buy-out, no betrayal — the <em>duration is the commitment</em>. That is what makes a treaty worth the OIL: the other clan cannot take your money and slam the gate a day later.</p></div>'+
+ '<p class="b">The flip side is that signing <strong>ties you down</strong>. A clan that has granted access to its region <strong>cannot relocate</strong> to a different one while the treaty is live — you sold entry to that land, so you have to keep holding it. And a clan can carry at most <strong>5 active treaties</strong> at once, so you cannot simply ally with everyone.</p>'+
+ '<h2 class="s">How to use it</h2>'+
+ '<p class="b"><strong>If you own a rich hunting region</strong>, your access is a product. Sell short, expensive waivers to clans grinding materials and turn your territory into treasury income.</p>'+
+ '<p class="b"><strong>If your clan is farming a region you do not hold</strong>, do the math: a 30-day tax waiver often costs less than the tax you would pay hunting it raw.</p>'+
+ '<p class="b"><strong>Sign for a term you are sure of.</strong> You cannot undo it — a 90-day grant is 90 days you have committed that region, treaty and all.</p>';
+}};
+
 PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"Ten gyms, one per region, each with a medal to win — and each one a seat a player can take, hold, and lose. The endgame territory layer for Pokemax.",h:function(){
  var G=[
   ["Starter Ruins","🏺 Relic Medal","Curator Aster"],
@@ -1776,7 +1954,7 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
    NAV / ROUTER
    ══════════════════════════════════════════════════════════════════ */
 var NAV=[
- ["The guide",[["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["economy","Economy &amp; Progression"]]],
+ ["The guide",[["home","Home"],["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["diplomacy","Clan Diplomacy"],["economy","Economy &amp; Progression"]]],
  ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"],["mysteries","Mysteries"]]],
  ["Campaign",[["story","The Main Story"],["sides","Side Stories"]]],
  ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"],["gyms","Pokemax Gyms"]]],
@@ -1785,16 +1963,24 @@ var NAV=[
 ];
 var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"35",sides:"50"};
 
+/* Per-group accent colour — gives each area of the site its own identity. */
+var GACC={"The guide":"var(--brass)","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Reference":"#8E6BB0"};
+var PACC={};
+NAV.forEach(function(g){ (g[1]||[]).forEach(function(p){ PACC[p[0]]=GACC[g[0]]||"var(--brass)"; }); });
+
 document.getElementById("nav").innerHTML=NAV.map(function(g){
- return '<div class="navgrp"><div class="navgrp__t">'+g[0]+'</div><div class="nav">'+
+ var acc=GACC[g[0]]||"var(--verdigris)";
+ return '<div class="navgrp"><div class="navgrp__t" style="color:'+acc+'">'+g[0]+'</div><div class="nav">'+
   g[1].map(function(p){
-   return '<a href="#'+p[0]+'" data-p="'+p[0]+'">'+p[1]+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
+   return '<a href="#'+p[0]+'" data-p="'+p[0]+'" style="--accent:'+(PACC[p[0]]||"var(--brass)")+'">'+p[1]+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
   }).join("")+"</div></div>";
 }).join("");
 
 document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
  var p=PAGES[k];
- return '<section class="page" id="pg-'+k+'"><div class="ph"><div class="ph__e">'+p.e+'</div><h1>'+p.t+'</h1>'+
+ var acc=PACC[k]||"var(--brass)";
+ if(p.nohead) return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'">'+p.h()+'</section>';
+ return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'"><div class="ph"><div class="ph__e">'+p.e+'</div><h1>'+p.t+'</h1>'+
   (p.d?'<p class="ph__d">'+p.d+"</p>":"")+"</div>"+p.h()+
   '<div class="foot"><p><b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. Every formula, item, region, quest and line of prose here was read out of the live bot. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.</p></div></section>';
 }).join("");
@@ -1807,9 +1993,33 @@ document.getElementById("burger").addEventListener("click",function(){
 scrim.addEventListener("click",closeRail);
 
 var built={};
+var _reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function initHome(){
+ /* count-up the hero stat chips, once per visit */
+ var nums=document.querySelectorAll("#pg-home .stat b[data-to]");
+ nums.forEach(function(el){
+  var to=+el.getAttribute("data-to")||0;
+  if(_reduceMotion){el.textContent=to;return;}
+  var start=null, dur=900;
+  function step(ts){
+   if(start===null) start=ts;
+   var p=Math.min(1,(ts-start)/dur), e=1-Math.pow(1-p,3);
+   el.textContent=Math.round(to*e);
+   if(p<1) requestAnimationFrame(step);
+  }
+  el.textContent="0"; requestAnimationFrame(step);
+ });
+ /* reveal system cards on scroll (or immediately if reduced motion / no IO) */
+ var cards=document.querySelectorAll("#pg-home .reveal");
+ if(_reduceMotion||!("IntersectionObserver" in window)){ cards.forEach(function(c){c.classList.add("in");}); return; }
+ var io=new IntersectionObserver(function(es){
+  es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+ },{rootMargin:"0px 0px -8% 0px"});
+ cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.05)+"s"; io.observe(c); });
+}
 function route(){
- var id=(location.hash||"#start").slice(1);
- if(!PAGES[id]) id="start";
+ var id=(location.hash||"#home").slice(1);
+ if(!PAGES[id]) id="home";
  Object.keys(PAGES).forEach(function(k){
   document.getElementById("pg-"+k).classList.toggle("is-on",k===id);
  });
@@ -1819,6 +2029,7 @@ function route(){
  if(id==="combat"&&!built.combat){built.combat=1;initCalc();}
  if(id==="valestia"&&!built.map){built.map=1;initMap();}
  if(id==="lab"&&!built.lab){built.lab=1;initLab();}
+ if(id==="home"){initHome();}
  closeRail();
  window.scrollTo(0,0);
  /* GoatCounter: register one pageview per section. Async-safe — if count.js is
