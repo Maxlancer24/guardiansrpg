@@ -550,6 +550,7 @@ var E=function(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g
 var MAP_SRC="assets/valestia-map.webp";
 var IMG_JESSIE="assets/char-jessie.webp";
 var IMG_GARRICK="assets/char-garrick.webp";
+var IMG_ZOE="assets/char-zoe.webp";
 
 /* ══════════════════════════════════════════════════════════════════
    DATA — read out of the live bot: crafting_system.py, weapons_system.py,
@@ -814,7 +815,8 @@ var CH3=[["27","What You Leave Behind","Aldenmoor after the siege. You count wha
  ["32","Rocky Chill Pass","The pass, and fresh boot marks in the ice that are not theirs. Valdris scouts, a letter meant for a Councilor in Veldran, and — with the city finally in sight below — Jessie saying, for the first time, why the name stops her."],
  ["33","The East Gate","Down out of the mountains and into Veldran at last. A Valdris unit takes the long way round to catch them on the flat, and past it the city opens up: a council of five, a founding relic nobody has ever questioned — and Jessie walking the streets like someone who used to live here, because she did."],
  ["34","Home","Jessie leads them into the council district, to the door of the man who raised her — Bren Valos, one of Veldran's five senators, watched already by Valdris's agents. The relic plot and Jessie's past turn out to be the same man. He takes them in, feeds them, and watches."],
- ["35","The Auction","Bren makes calls and comes back with the shape of it: the relic is not being stolen, it is being sold. An official auction at a council reception, three nights out, with the bidding already quietly fixed for Valdris. The plan becomes a heist in eveningwear — get into the room as Bren's guests and make the sale impossible before the gavel falls."]];
+ ["35","The Auction","Bren makes calls and comes back with the shape of it: the relic is not being stolen, it is being sold. An official auction at a council reception, three nights out, with the bidding already quietly fixed for Valdris. The plan becomes a heist in eveningwear — get into the room as Bren's guests and make the sale impossible before the gavel falls."],
+ ["36","Zoe","Bren sends for the one person who knows the council receptions cold — Zoe, Jessie's childhood friend, cheerful and fearless and impossible to un-invite. She maps the whole reception from memory, runs headlong at an ambush in the market, and comes out grinning. Jessie fights her joining every step, and lets her stay anyway."]];
 
 var SIDES=[
  ["The Aldenmoor Compact","aldenmoor_compact",6,3,"Three workers went into the shaft below the new granary foundation two nights ago. They have not come back. Dren, the oldest person in Aldenmoor, comes to you instead of the settlement leadership, with one instruction: don't seal it.",
@@ -1779,9 +1781,15 @@ PAGES.characters={t:"Characters",e:"Campaign",d:"The people walking the road wit
    quote:"Fourteen taverns.",
    desc:["Strong, charismatic, and stubbornly optimistic despite everything the road has taken from him. Garrick leads the refugees of Aldenmoor the way a good captain does — from the front, giving everything for his people and expecting to.",
     "He lost his brother on the second failed attempt to reach the city's sealed underground stores, and he still went down into the vault roads himself when it counted. He reads a room like a man sizing up a fight, and he decided he liked Jessie roughly the moment she cut his guilt short with a joke.",
-    "He carries a maul most men could not lift and a warmth that survives a settlement full of loss. When the team first walked into Veldran, the loudest city any of them had seen in years, the first thing he did was count the taverns."]}
+    "He carries a maul most men could not lift and a warmth that survives a settlement full of loss. When the team first walked into Veldran, the loudest city any of them had seen in years, the first thing he did was count the taverns."]},
+  {img:IMG_ZOE,side:"l",ca:"#E0663C",name:"Zoe",role:"Jessie's Childhood Friend · Knives",alias:"",
+   facts:[["Weapon","Throwing knives — hurled and up close"],["Allegiance","Jessie, absolutely"],["First seen","Veldran"]],
+   quote:"That was exciting!",
+   desc:["Bright, unhurried and completely fearless, Zoe is already talking before she is through the door and rarely stops. She gets into trouble the way other people breathe — she once ran straight at two armed men in a market and came out of it with a torn sleeve and a look of pure delight.",
+    "She is also the most useful person in any room she walks into. Zoe grew up in <strong>Veldran</strong> alongside Jessie and knows the city cold — the council hall's staff and layout, the guest list for the reception, which door from the service hall gets you closest to where it matters. She pays attention to everything, and she is friends with everyone.",
+    "She loves Jessie without reservation, and Jessie loves her back and is quietly terrified for her — because Zoe never sees anything coming, and one day she will run at something that does not work out. Jessie fights her joining every step, and lets her stay anyway. That is the whole story of the two of them."]}
  ];
- return '<p class="b">These are the people at the Guardian\'s side through the main story. Two of them are here now; the rest of the cast joins as the campaign is written.</p>'+
+ return '<p class="b">These are the people at the Guardian\'s side through the main story. Three of them are here now; the rest of the cast joins as the campaign is written.</p>'+
  '<div class="charwrap">'+C.map(function(c){
   return '<article class="charcard charcard--'+c.side+' reveal" style="--ca:'+c.ca+'">'+
    '<div class="charcard__art"><img src="'+c.img+'" alt="'+E(c.name)+'" width="720" height="1080" loading="lazy"><span class="charcard__glow"></span></div>'+
@@ -1946,6 +1954,7 @@ PAGES.lore={t:"Lore",e:"The world",d:"What the scroll says, what is under Aldenm
   ["Gorim the Old","Keeper of the Scroll","Guarded it for years and co-wrote it. He knew who you were before you did. He has not appeared in person since."],
   ["Maren Varn","The last Varn","Thirty years hidden. Gave you the key. Described a couple who went to Aldenmoor thirty years ago: <em>she had hands like a fighter and eyes that didn\'t trust easily; he talked too much.</em>"],
   ["Garrick","Leader of the Aldenmoor refugees","Strong, charismatic, gives everything for his people, still optimistic despite the losses. He lost his brother on the second failed attempt to reach the underground stores."],
+  ["Zoe","Jessie's childhood friend","Cheerful, fearless and forever getting into trouble. Grew up in Veldran with Jessie and knows the city — and its council receptions — inside out. Loves Jessie unconditionally; Jessie loves her back and is quietly terrified of the day she runs at something that does not work out."],
   ["The Frogst Brothers","Barrel and Hammer","Korn Army, but they came for you personally the night of the escape. Jessie faced both of them alone."]
  ].map(function(c){
   return '<div class="card"><div class="card__h"><span class="card__n">'+E(c[0])+'</span></div>'+
@@ -1979,14 +1988,14 @@ PAGES.story={t:"The Main Story",e:"Campaign",d:"A co-op story campaign that runs
  '<p><em>"She\'ll find you. She always finds what she\'s looking for. — C"</em></p>'+
  '<p>Jessie takes the flank apart on her own. Half of them go down before the rest run. She says one thing.</p>'+
  '<p><em>"Took you long enough to open that."</em></p></div>'+
- '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">9 missions so far</span><span class="chap__st live">In progress</span></div>'+
- '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+beats(CH3,"35")+"</div>"+
- '<div class="ex"><p class="ex__h">The Auction — the current front of the story</p>'+
- '<p>Bren looks at the letter on the table rather than at Jessie. <em>"Your parents would have been glad you found people worth walking this road with."</em></p>'+
- '<p>He says it like a fact he decided to set down. Then he stands and changes the subject before she can answer. Jessie does not answer. She is very still for a moment.</p>'+
- '<p class="embcap" style="margin:.6rem 0 0">He knew them. The oldest question in the story just found a man who can answer it — if he chooses to.</p></div>'+
+ '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">10 missions so far</span><span class="chap__st live">In progress</span></div>'+
+ '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+beats(CH3,"36")+"</div>"+
+ '<div class="ex"><p class="ex__h">Zoe — the current front of the story</p>'+
+ '<p>You find Jessie at the window. <em>"She seems fine,"</em> you say. Jessie: <em>"She is always fine. That is the most terrifying part."</em></p>'+
+ '<p><em>"She does not understand that one day she is going to run at something that does not work out, and she will not have seen it coming — because she never sees anything coming."</em> She watches the street below. <em>"And I will not be there."</em></p>'+
+ '<p class="embcap" style="margin:.6rem 0 0">Zoe has joined the team. Jessie fought it the whole way, and loves her too much to win.</p></div>'+
  '<h2 class="s">Where it is going</h2>'+
- '<p class="b">The scroll named three places. <strong>Aldenmoor</strong> is done and its seal piece is accounted for. In <strong>Veldran</strong>, the second, the plan has a shape now — and it is not a robbery. The <strong>founding relic</strong> is being <strong>sold at auction</strong> at a council reception three nights out, with the bidding quietly <strong>fixed for Valdris</strong> by someone inside the council. You cannot outbid an army\'s treasury or take it by force in a room full of witnesses, so the job becomes a heist in eveningwear: get in as senator <strong>Bren Valos</strong>\'s guests and make the sale impossible before the gavel. Two things linger under it — Bren <em>recognised</em> the relic when Elric described it, and he <strong>knew Jessie\'s parents</strong>, the oldest open question in the story. <strong>Mirefall</strong> is a swamp in the south-east, and nobody has said one word about it yet.</p>';
+ '<p class="b">The scroll named three places. <strong>Aldenmoor</strong> is done and its seal piece is accounted for. In <strong>Veldran</strong>, the second, the plan has a shape now — and it is not a robbery. The <strong>founding relic</strong> is being <strong>sold at auction</strong> at a council reception three nights out, with the bidding quietly <strong>fixed for Valdris</strong> by someone inside the council. You cannot outbid an army\'s treasury or take it by force in a room full of witnesses, so the job becomes a heist in eveningwear: get in as senator <strong>Bren Valos</strong>\'s guests and make the sale impossible before the gavel. To pull it off the team has gained a fourth — <strong>Zoe</strong>, Jessie\'s childhood friend, who knows the reception hall and its guests cold and is now, to Jessie\'s quiet dread, staying. The plan is as solid as it will get and the gala is <strong>one night away</strong>. Two things still linger — Bren <em>recognised</em> the relic when Elric described it, and he <strong>knew Jessie\'s parents</strong>, the oldest open question in the story. <strong>Mirefall</strong> is a swamp in the south-east, and nobody has said one word about it yet.</p>';
 }};
 
 PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arcs, separate from the main line. Most run 3-player; each arc is a chain you play in order.",h:function(){
@@ -2021,7 +2030,7 @@ var NAV=[
  ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
  ["Reference",[["screens","What It Looks Like"]]]
 ];
-var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"35",sides:"50"};
+var COUNTS={gear:"26",weapons:"16",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"36",sides:"50"};
 
 /* Per-group accent colour — gives each area of the site its own identity. */
 var GACC={"The guide":"var(--brass)","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Reference":"#8E6BB0"};
