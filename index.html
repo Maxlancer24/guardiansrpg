@@ -1000,7 +1000,7 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
   ["🗺️","Valestia","valestia","var(--verdigris)","Eleven regions, 210 named enemies, and the roads between them. Travel and hunt."],
   ["🐾","Pokemax","pets","var(--t-grass)","Catch 84 species, raise them to 50, and battle 3-versus-3 — a whole monster-battler inside the RPG."],
   ["🤖","Mechas","mechas","var(--t-water)","Front Mission in a channel: pilot a four-part wanzer and dismantle the enemy limb by limb."],
-  ["📜","The Story","story","var(--brass)","A co-op campaign, 35 missions and counting, that runs inside the combat engine."],
+  ["📜","The Story","story","var(--brass)","A story campaign, "+COUNTS.story+" missions and counting, that runs inside the combat engine at your party's side."],
   ["🏛️","Clans &amp; Gyms","clans","var(--t-rock)","Found a clan, hold territory, sign treaties, and conquer the ten regional Gyms."],
   ["🎲","Game Modes","modes","var(--t-ghost)","Duels, Triad, Horde, the Eternal Abyss, sieges, Vanguard — nineteen ways to fight."],
   ["🔮","Mysteries","mysteries","var(--corrupt)","Hidden secrets scattered across the world, each with a surprise found nowhere else."]
@@ -1015,7 +1015,7 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
    '<div class="hero__stats anim d3">'+
     '<span class="stat"><b class="num" data-to="11">0</b><span>Regions</span></span>'+
     '<span class="stat"><b class="num" data-to="84">0</b><span>Pokemax</span></span>'+
-    '<span class="stat"><b class="num" data-to="35">0</b><span>Story missions</span></span>'+
+    '<span class="stat"><b class="num" data-to="'+COUNTS.story+'">0</b><span>Story missions</span></span>'+
     '<span class="stat"><b class="num" data-to="50">0</b><span>Side quests</span></span>'+
     '<span class="stat"><b class="num" data-to="19">0</b><span>Game modes</span></span>'+
    '</div>'+
@@ -1968,7 +1968,7 @@ PAGES.lore={t:"Lore",e:"The world",d:"What the scroll says, what is under Aldenm
  '<p class="b"><strong>Gorim.</strong> Still gone.</p>';
 }};
 
-PAGES.story={t:"The Main Story",e:"Campaign",d:"A co-op story campaign that runs inside the combat engine. Thirty-one missions across three chapters, and it is still going.",h:function(){
+PAGES.story={t:"The Main Story",e:"Campaign",d:"A story campaign that runs inside the combat engine — you and a party of NPC companions, three chapters deep and still being written.",h:function(){
  function beats(rows,liveId){
   return rows.map(function(r){
    var live=(r[0]===liveId);
