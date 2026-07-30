@@ -363,6 +363,14 @@ tbody tr:hover td{background:var(--brass-soft)}
 .chap__st{font-family:var(--cond);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;padding:.12rem .4rem;border:1px solid var(--verdigris);color:var(--verdigris);margin-left:auto}
 .chap__st.live{border-color:var(--brass);color:var(--brass)}
 .chap__w{font-family:var(--cond);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--verdigris);margin-bottom:1rem}
+.chap__body{display:flex;gap:1.7rem;align-items:flex-start}
+.chap__beats{flex:1 1 55%;min-width:0}
+.chap__scene{flex:1 1 45%;margin:0;position:sticky;top:1.4rem}
+.chap__scene img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--rule);box-shadow:0 14px 38px rgba(0,0,0,.30)}
+.chap__scene figcaption{margin-top:.6rem;line-height:1.5}
+.chap__scene .scap__t{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--brass);margin-bottom:.3rem}
+.chap__scene .scap__d{font-family:var(--serif);font-style:italic;font-size:.86rem;color:var(--text-faint)}
+@media(max-width:840px){.chap__body{flex-direction:column;gap:1.1rem}.chap__scene{position:static;width:100%}}
 .bt{display:grid;grid-template-columns:5.4ch 1fr;gap:.85rem;padding:.4rem 0;border-bottom:1px dotted var(--rule);align-items:baseline}
 .bt:last-child{border-bottom:0}
 .bt__i{font-family:var(--mono);font-size:.68rem;color:var(--text-faint)}
@@ -551,6 +559,9 @@ var MAP_SRC="assets/valestia-map.webp";
 var IMG_JESSIE="assets/char-jessie.webp";
 var IMG_GARRICK="assets/char-garrick.webp";
 var IMG_ZOE="assets/char-zoe.webp";
+var SCENE1="assets/scene-ch1.webp";
+var SCENE2="assets/scene-ch2.webp";
+var SCENE3="assets/scene-ch3.webp";
 
 /* ══════════════════════════════════════════════════════════════════
    DATA — read out of the live bot: crafting_system.py, weapons_system.py,
@@ -2017,20 +2028,33 @@ PAGES.story={t:"The Main Story",e:"Campaign",d:"A story campaign that runs insid
     (r[2]?'<div class="bt__d">'+E(r[2])+"</div>":"")+"</div></div>";
   }).join("");
  }
+ function scene(src,ttl,cap){
+  return '<figure class="chap__scene"><img src="'+src+'" alt="'+E(ttl)+'" width="1672" height="941" loading="lazy" decoding="async">'+
+   '<figcaption><span class="scap__t">'+E(ttl)+'</span><span class="scap__d">'+E(cap)+'</span></figcaption></figure>';
+ }
  return '<p class="b">Each mission is a real fight with story beats woven through it. They run in order — every one requires the one before it — and most of Chapter One is playable with a partner.</p>'+
  '<div class="chap"><div class="chap__h"><h2>Chapter One</h2><span class="chap__id">14 missions</span><span class="chap__st">Complete</span></div>'+
- '<p class="chap__w">Stormbay</p>'+beats(CH1)+"</div>"+
+ '<p class="chap__w">Stormbay</p>'+
+ '<div class="chap__body"><div class="chap__beats">'+beats(CH1)+'</div>'+
+ scene(SCENE1,"Stormbay · Pier 7","Jessie cuts the rope and covers your escape alone — two pistols, both Frogst brothers, her back to the water.")+
+ '</div></div>'+
  '<div class="ex"><p class="ex__h">The Grey Maren — the last image of Chapter One</p>'+
  '<p>Jessie cuts the rope. You jump. The boat pulls away from Pier 7 and the last thing you see of her is her back, two pistols out, facing Barrel and Hammer Frogst at the same time.</p></div>'+
  '<div class="chap"><div class="chap__h"><h2>Chapter Two</h2><span class="chap__id">12 missions</span><span class="chap__st">Complete</span></div>'+
- '<p class="chap__w">The coast road · Ravennor · Aldenmoor</p>'+beats(CH2)+"</div>"+
+ '<p class="chap__w">The coast road · Ravennor · Aldenmoor</p>'+
+ '<div class="chap__body"><div class="chap__beats">'+beats(CH2)+'</div>'+
+ scene(SCENE2,"The Siege of Aldenmoor","The siege at its height — Garrick\'s maul, Jessie\'s pistols, your blade, and the Korn army pouring through the walls.")+
+ '</div></div>'+
  '<div class="ex"><p class="ex__h">She\'ll Find You</p>'+
  '<p>Cornered, with Elric behind you and more of them coming, you finally open the note Cara left you.</p>'+
  '<p><em>"She\'ll find you. She always finds what she\'s looking for. — C"</em></p>'+
  '<p>Jessie takes the flank apart on her own. Half of them go down before the rest run. She says one thing.</p>'+
  '<p><em>"Took you long enough to open that."</em></p></div>'+
  '<div class="chap"><div class="chap__h"><h2>Chapter Three</h2><span class="chap__id">11 missions so far</span><span class="chap__st live">In progress</span></div>'+
- '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+beats(CH3,"37")+"</div>"+
+ '<p class="chap__w">Ironhollow · the pass · Veldran</p>'+
+ '<div class="chap__body"><div class="chap__beats">'+beats(CH3,"37")+'</div>'+
+ scene(SCENE3,"The Gala · Veldran","Zoe leads you in, Garrick works the floor, Jessie moves to the bidding — and the auction bell waits on the table.")+
+ '</div></div>'+
  '<div class="ex"><p class="ex__h">The Gala — the current front of the story</p>'+
  '<p>Positions. Garrick out on the floor, Elric in his corner with a clear line to the corridor door, Zoe beside you, and Jessie moving toward the bidding without looking back. The auction bell sounds from somewhere inside the building — a single clean tone through the stone and the candles.</p>'+
  '<p><em>...and the two hundred people who have no idea what is about to happen.</em></p>'+
