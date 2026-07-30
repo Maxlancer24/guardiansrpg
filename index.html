@@ -371,6 +371,16 @@ tbody tr:hover td{background:var(--brass-soft)}
 .chap__scene .scap__t{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--brass);margin-bottom:.3rem}
 .chap__scene .scap__d{font-family:var(--serif);font-style:italic;font-size:.86rem;color:var(--text-faint)}
 @media(max-width:840px){.chap__body{flex-direction:column;gap:1.1rem}.chap__scene{position:static;width:100%}}
+.proto{display:flex;gap:1.9rem;align-items:center;margin:0 0 2.4rem;flex-wrap:wrap}
+.proto__fig{flex:1 1 480px;margin:0;min-width:0}
+.proto__fig img{width:100%;height:auto;display:block;border-radius:16px;border:1px solid var(--rule);box-shadow:0 20px 50px rgba(0,0,0,.36)}
+.proto__body{flex:1 1 300px;min-width:0}
+.proto__k{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin-bottom:.55rem}
+.proto__h{font-family:var(--serif);font-weight:600;font-size:1.55rem;line-height:1.15;margin:0 0 .75rem}
+.proto__d{font-size:.98rem;line-height:1.62;color:var(--text-dim)}
+.proto__d b{color:var(--text)}
+.proto__d .pl{color:var(--brass);font-weight:600}
+@media(max-width:720px){.proto{gap:1.15rem}.proto__h{font-size:1.35rem}}
 .bt{display:grid;grid-template-columns:5.4ch 1fr;gap:.85rem;padding:.4rem 0;border-bottom:1px dotted var(--rule);align-items:baseline}
 .bt:last-child{border-bottom:0}
 .bt__i{font-family:var(--mono);font-size:.68rem;color:var(--text-faint)}
@@ -562,6 +572,7 @@ var IMG_ZOE="assets/char-zoe.webp";
 var SCENE1="assets/scene-ch1.webp";
 var SCENE2="assets/scene-ch2.webp";
 var SCENE3="assets/scene-ch3.webp";
+var COVER="assets/cover.webp";
 
 /* ══════════════════════════════════════════════════════════════════
    DATA — read out of the live bot: crafting_system.py, weapons_system.py,
@@ -1036,6 +1047,14 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
     '<a class="hbtn hbtn--ghost" href="#valestia">Explore Valestia</a>'+
    '</div>'+
   '</div></section>'+
+  '<section class="proto">'+
+   '<figure class="proto__fig"><img src="'+COVER+'" alt="The four protagonists of The Guardians" width="1672" height="941" loading="lazy" decoding="async"></figure>'+
+   '<div class="proto__body">'+
+    '<p class="proto__k">The protagonists</p>'+
+    '<h2 class="proto__h">The four the story follows</h2>'+
+    '<p class="proto__d">At the center, <b>Jessie</b> — the gunslinger who has been at your side since Stormbay. Beside her, <b>Garrick</b> and his maul, and <b>Zoe</b> with her throwing knives. The swordsman is <b>Max</b> — and Max is <span class="pl">you</span>, the player, written into the main story as the Guardian. This is your party.</p>'+
+   '</div>'+
+  '</section>'+
   '<p class="home__lead">Everything on this site is read straight from the live bot — every number, region, item, formula and line of story. Pick a thread and pull.</p>'+
   '<div class="syswrap"><div class="sysgrid">'+
    sys.map(function(s){
