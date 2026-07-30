@@ -645,12 +645,13 @@ var WEAPONS=[
 ];
 
 var POTIONS=[
- ["Health Potion",100,"Heal 20 HP now"],["Ultra Health Potion",200,"Heal 50 HP now"],
+ ["Health Potion",100,"Heal 30 HP now"],["Ultra Health Potion",200,"Heal 75 HP now"],
+ ["Regen Potion",280,"Heal 40 HP now, then 30 HP on each of the next 2 turns (100 total)"],
  ["Critical Potion",100,"Next attack: +25% crit chance"],["Guard Potion",100,"Reduce your next incoming hit by 50%"],
- ["Power Potion",100,"Next attack: +25% damage"],["Focus Potion",250,"Gain FOCUS now (upgrades to Ultra Focus if already Focused)"],
+ ["Power Potion",100,"Next attack: +25% damage"],["Focus Potion",250,"Queue FOCUS for your next turn — plain Focus only; blocked if you are already Focused"],
  ["Mind Cleanser",200,"Remove Focus / Ultra Focus from your opponent"],["Last Stand Elixir",300,"Once: survive a lethal hit at 15% HP"],
  ["Protective Shield Potion",300,"Absorb up to 100 damage this turn"],["Resurrection Potion",250,"Revive one fallen ally at 20% HP (team modes)"],
- ["Team Heal Potion",300,"Heal the 3 lowest allies by 30 HP each (team modes)"],["Raid Entry Ticket",200,"Required to join a Boss Raid (max 1 held)"],
+ ["Team Heal Potion",300,"Heal the 3 lowest allies by 45 HP each (heals you if you have no ally)"],["Raid Entry Ticket",200,"Required to join a Boss Raid (max 1 held)"],
  ["Guild Contract",200,"Starts a faction contract mission"]
 ];
 
@@ -1173,7 +1174,7 @@ PAGES.consumables={t:"Consumables",e:"The guide",d:"Bought from the Shop panel w
  '<h2 class="s">Tournament restrictions</h2>'+
  '<p class="b">Tournament allows exactly four: <strong>Ultra Health Potion, Protective Shield Potion, Mind Cleanser, Power Potion.</strong> One per round.</p>'+
  '<h2 class="s">How to actually use them</h2>'+
- '<p class="b">Pre-load a <strong>Guard Potion</strong> before a hit you can see coming. Heal at 30–40% HP rather than waiting for critical. Stack a <strong>Focus Potion</strong> right after a Rest to reach Ultra Focus in one turn.</p>'+
+ '<p class="b">Pre-load a <strong>Guard Potion</strong> before a hit you can see coming. Heal at 30–40% HP rather than waiting for critical. To reach <strong>Ultra Focus</strong> you <strong>Rest twice</strong> — a second Rest while already Focused upgrades you; a Focus Potion only ever grants plain Focus and is blocked if you already have it.</p>'+
  '<p class="b">There is also a <strong>Black Market</strong> with rotating stock, and event panels with their own items.</p>';
 }};
 
