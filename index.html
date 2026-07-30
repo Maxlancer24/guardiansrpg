@@ -499,6 +499,11 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
 .hbtn--ghost:hover{border-color:#D9A84E;color:#E3B45C;transform:translateY(-2px)}
 
 .home__lead{font-family:var(--serif);font-size:1.1rem;line-height:1.62;color:var(--text-dim);max-width:64ch;margin:2.4rem 0 0}
+.newbie{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1.2rem;margin:1.5rem 0 0;padding:1.05rem 1.25rem;border:1px solid var(--rule);border-left:3px solid #2FA3A3;border-radius:12px;background:var(--bg-raised)}
+.newbie__t{font-family:var(--serif);font-size:1.02rem;line-height:1.5;color:var(--text-dim);margin:0;flex:1 1 260px}
+.newbie__t b{color:var(--text)}
+.newbie a{font-family:var(--cond);font-size:.82rem;letter-spacing:.03em;text-transform:uppercase;color:#2FA3A3;border:1px solid #2FA3A3;padding:.4rem .7rem;border-radius:8px;white-space:nowrap;text-decoration:none;transition:background .15s,color .15s}
+.newbie a:hover{background:#2FA3A3;color:#08201F}
 .syswrap{margin:2rem 0 0}
 .sysgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.9rem;margin:1rem 0 0}
 .syscard{position:relative;display:block;text-decoration:none;background:var(--bg-raised);border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.2rem 1.3rem;overflow:hidden;transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease);box-shadow:var(--elev)}
@@ -1060,6 +1065,8 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
    '</div>'+
   '</section>'+
   '<p class="home__lead">Everything on this site is read straight from the live bot — every number, region, item, formula and line of story. Pick a thread and pull.</p>'+
+  '<div class="newbie"><p class="newbie__t">🌱 <b>New to the game?</b> Start with the beginner tutorials — a first fight explained one turn at a time.</p>'+
+   '<a href="#tut-combat">Combat Basics →</a><a href="#tut-pokemax">Pokemax Basics →</a></div>'+
   '<div class="syswrap"><div class="sysgrid">'+
    sys.map(function(s){
     return '<a class="syscard reveal" href="#'+s[2]+'" style="--sc:'+s[3]+'">'+
@@ -1070,6 +1077,64 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
    }).join("")+
   '</div></div>'+
   '<div class="foot"><p><b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.</p></div>';
+}};
+
+PAGES["tut-combat"]={t:"Combat Basics",e:"Tutorial",d:"Your very first fight, explained one turn at a time — with a full worked example. No maths needed.",h:function(){
+ return '<h2 class="s">What a fight is</h2>'+
+ '<p class="b">Every fighter has <strong>HP</strong> — that is their health. When a fighter\'s HP reaches <strong>0</strong>, they are knocked out. Your job is simple: bring the enemy\'s HP to 0 before they bring yours to 0.</p>'+
+ '<p class="b">A fight is <strong>turn-based</strong>, like a board game. You take a turn, then the enemy takes a turn, then you again — over and over. On <strong>your</strong> turn you press <strong>one</strong> button, and that is your whole move.</p>'+
+ '<h2 class="s">Your four buttons</h2>'+
+ tbl(["Button","What it does"],[
+  ['⚔️ <strong>Attack</strong>',"Hit the enemy and take away some of their HP."],
+  ['💤 <strong>Rest</strong>',"Heal some of your <em>own</em> HP — and charge up <strong>Focus</strong>, a power-up for your next attack."],
+  ['🛡️ <strong>Parry</strong>',"Get ready to block. If the enemy attacks you this turn, you block it and hit them back."],
+  ['🧪 <strong>Item</strong>',"Use a potion from your bag, like a Health Potion to heal."]
+ ],["k",""])+
+ '<div class="callout"><p>🔆 <strong>Focus is your super-punch.</strong> After you Rest, your <strong>next</strong> attack does <strong>double (×2) damage</strong>. So Resting heals you <em>and</em> loads up a big hit for later. Save it for a moment that counts!</p></div>'+
+ '<h2 class="s">A whole fight, step by step</h2>'+
+ '<p class="b">Meet the two fighters. We will use easy round numbers:</p>'+
+ '<div class="callout"><p>🦸 <strong>You</strong> — 120 HP · your attacks do about <strong>30</strong> damage.<br>👹 <strong>Goblin</strong> — 90 HP · its attacks do about <strong>20</strong> damage.</p></div>'+
+ tbl(["Turn","You press","What happens"],[
+  ["1",'⚔️ <strong>Attack</strong>',"You hit the Goblin for 30. <strong>Goblin: 90 → 60.</strong> Then the Goblin hits you for 20. <strong>You: 120 → 100.</strong>"],
+  ["2",'💤 <strong>Rest</strong>',"You heal back up to full <em>and</em> gain Focus 🔆. The Goblin hits you for 20. <strong>You: 120 → 100.</strong>"],
+  ["3",'⚔️ <strong>Attack</strong> (with Focus!)',"Focus <strong>doubles</strong> your hit: 30 × 2 = <strong>60</strong>. <strong>Goblin: 60 → 0.</strong> You win! 🎉"]
+ ],["n","k",""])+
+ '<p class="b">See the trick? Resting on turn 2 did <strong>two jobs at once</strong> — it healed you <em>and</em> charged your Focus. Two turns later that Focus turned a normal 30 hit into a <strong>60</strong> hit, and that is what finished the fight.</p>'+
+ '<h2 class="s">Three simple tips</h2>'+
+ tbl(["Tip","Why"],[
+  ["Heal early, not late","Rest when you are around half HP — do not wait until one more hit would knock you out."],
+  ["Spend Focus on a big hit","A doubled attack is your strongest move. Line it up when the enemy cannot dodge or block it."],
+  ["Only Parry when a hit is coming","If you Parry and the enemy does not attack, you wasted your turn. Read what they are doing."]
+ ],["k",""])+
+ '<div class="callout"><p>🎓 That is the entire game! Everything else — your stats, your gear, your weapon — just changes these numbers up or down. When you want the real formulas behind the damage and healing, read the full <a href="#combat">Combat</a> page.</p></div>';
+}};
+
+PAGES["tut-pokemax"]={t:"Pokemax Basics",e:"Tutorial",d:"Your first Pokemax battle, step by step — types, HP, and how to catch one. Beginner friendly.",h:function(){
+ return '<h2 class="s">What a Pokemax battle is</h2>'+
+ '<p class="b">You bring a team of up to <strong>three Pokemax</strong>, but only <strong>one fights at a time</strong> — like a tag-team. Each Pokemax has its own <strong>HP</strong>. When a Pokemax\'s HP reaches <strong>0</strong> it <strong>faints</strong> and leaves the battle.</p>'+
+ '<p class="b">You <strong>win</strong> when all three of the enemy\'s Pokemax have fainted. It is still turn-based: you pick a move, they pick a move, and the faster Pokemax goes first.</p>'+
+ '<h2 class="s">Types beat each other (like rock-paper-scissors)</h2>'+
+ '<p class="b">Every Pokemax — and every move — has a <strong>type</strong>. Some types beat others. When your move\'s type beats the enemy\'s type, it is <strong>super effective</strong> and does <strong>double (×2) damage</strong>. Here is the simplest circle to remember:</p>'+
+ '<div class="callout"><p>🔥 <strong>Fire</strong> beats 🌿 <strong>Grass</strong> &nbsp;→&nbsp; 🌿 <strong>Grass</strong> beats 🌊 <strong>Water</strong> &nbsp;→&nbsp; 🌊 <strong>Water</strong> beats 🔥 <strong>Fire</strong> &nbsp;→&nbsp; and back to the start.</p></div>'+
+ '<p class="b">So a Fire move against a Grass Pokemax hits for double. But that same Fire Pokemax is weak to Water. <strong>Bringing the right type matters more than being a higher level.</strong></p>'+
+ '<h2 class="s">Moves run out</h2>'+
+ '<p class="b">Each Pokemax knows up to <strong>four moves</strong>, and every move has <strong>PP</strong> — the number of times you can use it. Use a move and its PP drops by one. If every move runs out, your Pokemax can only do a weak <strong>Struggle</strong>, so do not waste your strong move on an easy foe.</p>'+
+ '<h2 class="s">A battle, step by step</h2>'+
+ '<div class="callout"><p>🔥 <strong>Your Cinderling</strong> (Fire) — 33 HP · knows <strong>Ember</strong>, a Fire move.<br>🌿 <strong>Wild Grass Pokemax</strong> — 30 HP.</p></div>'+
+ tbl(["Turn","You choose","What happens"],[
+  ["1",'🔥 <strong>Ember</strong>',"Fire beats Grass, so it is <strong>super effective</strong> — a normal ~10 hit becomes <strong>~20</strong>. <strong>Wild: 30 → 10.</strong>"],
+  ["2",'🔥 <strong>Ember</strong> again',"Another ×2 hit. <strong>Wild: 10 → 0.</strong> It faints — you win the battle! 🎉"]
+ ],["n","k",""])+
+ '<p class="b">Two moves, because you picked the type that wins. A wrong-type move might have taken five or six.</p>'+
+ '<h2 class="s">Catching a wild Pokemax</h2>'+
+ '<p class="b">If a Pokemax is <strong>wild</strong> and you want to keep it, do <strong>not</strong> knock it out — a fainted Pokemax cannot be caught. Instead:</p>'+
+ tbl(["Step","Do this"],[
+  ["1","<strong>Weaken it.</strong> Chip its HP down low — but leave it alive."],
+  ["2","<strong>Add a Status.</strong> Put it to Sleep or Freeze it — that makes catching much easier."],
+  ["3","<strong>Throw an OILball.</strong> The lower its HP and the better your OILball, the higher your chance to catch it."]
+ ],["n",""])+
+ '<div class="callout"><p>🎣 Throwing an OILball at a <strong>full-health</strong> Pokemax almost never works — always weaken it first. The full catching maths is on the <a href="#catching">Catching</a> page.</p></div>'+
+ '<div class="callout"><p>🎓 Ready for more? The <a href="#petbattle">Pokemax Battles</a> page has every type, all the moves and the status effects. This same fight, with the full rules.</p></div>';
 }};
 
 PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your account is created the first time you make a profile from the Kiosk, or the first time you join a game — whichever happens first.",h:function(){
@@ -2114,6 +2179,7 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
    ══════════════════════════════════════════════════════════════════ */
 var NAV=[
  ["The guide",[["home","Home"],["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["diplomacy","Clan Diplomacy"],["sabotage","Clan Sabotage"],["economy","Economy &amp; Progression"]]],
+ ["Tutorials",[["tut-combat","Combat Basics"],["tut-pokemax","Pokemax Basics"]]],
  ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"],["mysteries","Mysteries"]]],
  ["Campaign",[["characters","Characters"],["story","The Main Story"],["sides","Side Stories"]]],
  ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"],["gyms","Pokemax Gyms"]]],
@@ -2123,7 +2189,7 @@ var NAV=[
 var COUNTS={gear:"27",weapons:"18",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"37",sides:"50"};
 
 /* Per-group accent colour — gives each area of the site its own identity. */
-var GACC={"The guide":"var(--brass)","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Reference":"#8E6BB0"};
+var GACC={"The guide":"var(--brass)","Tutorials":"#2FA3A3","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Reference":"#8E6BB0"};
 var PACC={};
 NAV.forEach(function(g){ (g[1]||[]).forEach(function(p){ PACC[p[0]]=GACC[g[0]]||"var(--brass)"; }); });
 
