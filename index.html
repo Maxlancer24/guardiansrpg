@@ -1086,23 +1086,26 @@ PAGES["tut-combat"]={t:"Combat Basics",e:"Tutorial",d:"Your very first fight, ex
  '<h2 class="s">Your four buttons</h2>'+
  tbl(["Button","What it does"],[
   ['⚔️ <strong>Attack</strong>',"Hit the enemy and take away some of their HP."],
-  ['💤 <strong>Rest</strong>',"Heal some of your <em>own</em> HP — and charge up <strong>Focus</strong>, a power-up for your next attack."],
+  ['💤 <strong>Rest</strong>',"Heal some of your <em>own</em> HP and charge up <strong>Focus</strong> — <em>but only if no enemy hits you this turn</em> (see the warning below)."],
   ['🛡️ <strong>Parry</strong>',"Get ready to block. If the enemy attacks you this turn, you block it and hit them back."],
   ['🧪 <strong>Item</strong>',"Use a potion from your bag, like a Health Potion to heal."]
  ],["k",""])+
- '<div class="callout"><p>🔆 <strong>Focus is your super-punch.</strong> After you Rest, your <strong>next</strong> attack does <strong>double (×2) damage</strong>. So Resting heals you <em>and</em> loads up a big hit for later. Save it for a moment that counts!</p></div>'+
+ '<div class="callout"><p>🔆 <strong>Focus is your super-punch.</strong> A <em>successful</em> Rest gives you Focus, and your <strong>next</strong> attack then does <strong>double (×2) damage</strong>. Save it for a moment that counts!</p></div>'+
+ '<div class="callout callout--warn"><p>⚠️ <strong>Resting is risky — do not Rest into a hit!</strong> If an enemy attacks you on the turn you Rest, you get <strong>caught off guard</strong>: your Rest <strong>fails completely</strong> — <strong>no heal, no Focus</strong> — <em>and</em> they hit you for <strong>extra</strong> damage (about 50% more) for catching you resting. Only Rest when you are <strong>safe</strong> from a hit.</p></div>'+
  '<h2 class="s">A whole fight, step by step</h2>'+
  '<p class="b">Meet the two fighters. We will use easy round numbers:</p>'+
- '<div class="callout"><p>🦸 <strong>You</strong> — 120 HP · your attacks do about <strong>30</strong> damage.<br>👹 <strong>Goblin</strong> — 90 HP · its attacks do about <strong>20</strong> damage.</p></div>'+
+ '<div class="callout"><p>🦸 <strong>You</strong> — 120 HP · your attacks do about <strong>30</strong> damage · a safe Rest heals about <strong>35</strong>.<br>👹 <strong>Goblin</strong> — 90 HP · its attacks do about <strong>20</strong> damage.</p></div>'+
  tbl(["Turn","You press","What happens"],[
-  ["1",'⚔️ <strong>Attack</strong>',"You hit the Goblin for 30. <strong>Goblin: 90 → 60.</strong> Then the Goblin hits you for 20. <strong>You: 120 → 100.</strong>"],
-  ["2",'💤 <strong>Rest</strong>',"You heal back up to full <em>and</em> gain Focus 🔆. The Goblin hits you for 20. <strong>You: 120 → 100.</strong>"],
-  ["3",'⚔️ <strong>Attack</strong> (with Focus!)',"Focus <strong>doubles</strong> your hit: 30 × 2 = <strong>60</strong>. <strong>Goblin: 60 → 0.</strong> You win! 🎉"]
+  ["1",'⚔️ <strong>Attack</strong>',"You hit the Goblin for 30. <strong>Goblin: 90 → 60.</strong> It swings back: <strong>You: 120 → 100.</strong>"],
+  ["2",'💤 <strong>Rest</strong> — bad timing!',"The Goblin attacks while you rest, so it <strong>catches you off guard</strong>: your Rest fails — <strong>no heal, no Focus</strong> — and it hits you for <strong>30</strong> (50% more than usual). <strong>You: 100 → 70.</strong>"],
+  ["3",'⚔️ <strong>Attack</strong>',"You hit for 30. <strong>Goblin: 60 → 30.</strong> Now the Goblin is hurt and <em>it</em> Rests to heal itself."],
+  ["4",'💤 <strong>Rest</strong> — safe now!',"The Goblin is resting, not attacking, so you are safe. You heal ~35 <em>and</em> gain Focus 🔆. <strong>You: 70 → 105.</strong> (The Goblin heals a little: 30 → 45.)"],
+  ["5",'⚔️ <strong>Attack</strong> (with Focus!)',"Focus <strong>doubles</strong> your hit: 30 × 2 = <strong>60</strong>. <strong>Goblin: 45 → 0.</strong> You win! 🎉"]
  ],["n","k",""])+
- '<p class="b">See the trick? Resting on turn 2 did <strong>two jobs at once</strong> — it healed you <em>and</em> charged your Focus. Two turns later that Focus turned a normal 30 hit into a <strong>60</strong> hit, and that is what finished the fight.</p>'+
+ '<p class="b">The whole lesson is in <strong>turns 2 and 4</strong>. Resting is powerful — a free heal <em>plus</em> a Focus power-up — but only if <strong>no one hits you</strong> that turn. Rest into an attack (turn 2) and you get nothing and take extra damage. Wait for a safe moment (turn 4, while the enemy is resting too), then Rest, then unleash your Focus hit.</p>'+
  '<h2 class="s">Three simple tips</h2>'+
  tbl(["Tip","Why"],[
-  ["Heal early, not late","Rest when you are around half HP — do not wait until one more hit would knock you out."],
+  ["Only Rest when it is safe","Never Rest into an attack — you get no heal, no Focus, and take extra damage. Rest when the enemy is low, busy with someone else, or resting too."],
   ["Spend Focus on a big hit","A doubled attack is your strongest move. Line it up when the enemy cannot dodge or block it."],
   ["Only Parry when a hit is coming","If you Parry and the enemy does not attack, you wasted your turn. Read what they are doing."]
  ],["k",""])+
@@ -1212,10 +1215,11 @@ PAGES.combat={t:"Combat",e:"The guide",d:"Every turn, against players and NPCs a
  tbl(["Action","What it does"],[
   ["Attack","Deal damage to your target. Can crit, from AGI."],
   ["Parry","Brace to block and counter the next hit. Not a flat reduction — see below."],
-  ["Rest","Heal 20 + CON×3 <em>and</em> gain Focus for your next attack."],
+  ["Rest","Heal 20 + CON×3 <em>and</em> gain Focus — but only if no enemy attacks you this turn (see below)."],
   ["Use Consumable","Use a potion from your bag on your turn."],
   ["Switch","Team and tag modes only: swap your active fighter for a benched one. Uses your turn."]
  ],["k",""])+
+ '<div class="callout callout--warn"><p><strong>Rest is interruptible.</strong> If any enemy attacks you on the turn you Rest, your Rest fails — <strong>no heal and no Focus</strong> — and you are <strong>caught resting</strong>: the attacker deals bonus damage (<strong>×1.5</strong> in a duel). Only Rest when you are safe from a hit; a resting fighter is the most punishable target on the board.</p></div>'+
  '<h2 class="s">Parry is a wager, not a shield</h2>'+
  '<span class="fx">block value = (CON × 5) + STR   ·   counter value = (CON × 3) + STR</span>'+
  '<p class="b"><strong>Perfect Block</strong> — if your block value is greater than or equal to the incoming attack, you take <strong>zero</strong> damage and reflect your counter value back.</p>'+
