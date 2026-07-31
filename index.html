@@ -589,6 +589,36 @@ var E=function(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g
    Any string not given an `es` falls back to English, so the site never breaks. */
 var LANG=(function(){try{return localStorage.getItem("glang")==="es"?"es":"en";}catch(e){return "en";}})();
 function L(en,es){return (LANG==="es"&&es!=null&&es!=="")?es:en;}
+/* DTR: Spanish for shared data-array cells, keyed by the exact English string.
+   Renders use L(cell, DTR[cell]) so anything not in DTR falls back to English. */
+var DTR={
+ "Deals 1.5× damage below 30% HP":"Hace 1.5× de daño por debajo del 30% de HP",
+ "+10% damage per consecutive Attack (max +30%); resets on Rest/Parry":"+10% de daño por cada Attack consecutivo (máx +30%); se reinicia al hacer Rest/Parry",
+ "Reflects 15% of damage taken back to the attacker":"Refleja el 15% del daño recibido al atacante",
+ "Survives one lethal hit at 1 HP (once per fight)":"Sobrevive un golpe letal con 1 HP (una vez por pelea)",
+ "Defense is 1.5× stronger when it parries":"La defensa es 1.5× más fuerte cuando hace parry",
+ "+1 STR each time it rests (up to 3 times)":"+1 STR cada vez que descansa (hasta 3 veces)",
+ "Heals 20% of damage it deals":"Cura el 20% del daño que hace",
+ "Negates the first crit it takes":"Anula el primer crítico que recibe",
+ "Heals 5% max HP every round":"Cura 5% del HP máx cada ronda",
+ "+50% damage to targets below 25% HP":"+50% de daño a objetivos por debajo del 25% de HP",
+ "Ignores the crit multiplier — crits hit it for normal damage":"Ignora el multiplicador de crítico — los críticos le hacen daño normal",
+ "Reflects 1.5× on a perfect block":"Refleja 1.5× en un bloqueo perfecto",
+ "Heal 30 HP now":"Cura 30 HP ahora",
+ "Heal 75 HP now":"Cura 75 HP ahora",
+ "Heal 40 HP now, then 30 HP on each of the next 2 turns (100 total)":"Cura 40 HP ahora, luego 30 HP en cada uno de los siguientes 2 turnos (100 total)",
+ "Next attack: +25% crit chance":"Siguiente ataque: +25% de prob. de crítico",
+ "Reduce your next incoming hit by 50%":"Reduce en 50% el próximo golpe que recibas",
+ "Next attack: +25% damage":"Siguiente ataque: +25% de daño",
+ "Queue FOCUS for your next turn — plain Focus only; blocked if you are already Focused":"Prepara FOCUS para tu próximo turno — solo Focus normal; bloqueado si ya tienes Focus",
+ "Remove Focus / Ultra Focus from your opponent":"Quita Focus / Ultra Focus a tu rival",
+ "Once: survive a lethal hit at 15% HP":"Una vez: sobrevive un golpe letal con 15% de HP",
+ "Absorb up to 100 damage this turn":"Absorbe hasta 100 de daño este turno",
+ "Revive one fallen ally at 20% HP (team modes)":"Revive a un aliado caído con 20% de HP (modos de equipo)",
+ "Heal the 3 lowest allies by 45 HP each (heals you if you have no ally)":"Cura a los 3 aliados más bajos 45 HP cada uno (te cura a ti si no tienes aliado)",
+ "Required to join a Boss Raid (max 1 held)":"Necesario para unirte a una Boss Raid (máx 1 en posesión)",
+ "Starts a faction contract mission":"Inicia una misión de contrato de facción"
+};
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
 var MAP_SRC="assets/valestia-map.webp";
@@ -1187,11 +1217,19 @@ PAGES["tut-pokemax"]={t:"Pokemax Basics",e:"Tutorial",d:"Your first Pokemax batt
 }};
 
 PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your account is created the first time you make a profile from the Kiosk, or the first time you join a game — whichever happens first.",h:function(){
- return '<div class="callout"><p><strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the 81 story and side missions, all of it.</p>'+
- '<p>Everything on this site describes the bot as it actually runs on <strong>the server the bot lives in</strong>. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max, and the defaults listed here are what he starts from.</p></div>'+
- '<h2 class="s">The Kiosk</h2>'+
- '<p class="b">The bot uses the <span class="cmd">!</span> prefix for typed commands, but most of the game is <strong>panel-driven</strong>: Max places persistent button panels in the channels and you play by clicking them. The most important one is the <strong>Kiosk</strong> — your personal hub.</p>'+
- tbl(["Kiosk button","What it does"],[
+ return '<div class="callout"><p>'+L("<strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the 81 story and side missions, all of it.","<strong>The Guardians</strong> es un RPG de Discord creado y gestionado por <strong>Max</strong> — el motor de combate, el mundo de Valestia, las 81 misiones de historia y secundarias, todo.")+'</p>'+
+ '<p>'+L("Everything on this site describes the bot as it actually runs on <strong>the server the bot lives in</strong>. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max, and the defaults listed here are what he starts from.","Todo en este sitio describe el bot tal como funciona en <strong>el servidor donde vive el bot</strong>. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max, y los valores por defecto listados aquí son de los que él parte.")+'</p></div>'+
+ '<h2 class="s">'+L("The Kiosk","El Kiosco")+'</h2>'+
+ '<p class="b">'+L("The bot uses the <span class=\"cmd\">!</span> prefix for typed commands, but most of the game is <strong>panel-driven</strong>: Max places persistent button panels in the channels and you play by clicking them. The most important one is the <strong>Kiosk</strong> — your personal hub.","El bot usa el prefijo <span class=\"cmd\">!</span> para comandos escritos, pero la mayor parte del juego es <strong>por paneles</strong>: Max coloca paneles de botones persistentes en los canales y juegas haciendo clic. El más importante es el <strong>Kiosco</strong> — tu centro personal.")+'</p>'+
+ tbl(L(["Kiosk button","What it does"],["Botón del Kiosco","Qué hace"]),LANG==="es"?[
+  ["Create / Edit Profile","Crea tu cuenta y fija tu build inicial"],
+  ["My Stats","Tus stats en vivo, incluyendo cada bono de equipo"],
+  ["My Bag","Tus pociones y consumibles"],
+  ["Stat Slots","Guarda y cambia entre hasta 3 builds"],
+  ["Gear Slots","Equipa gear crafteado en tus 2 ranuras de equipo"],
+  ["Codex","Tu colección de cartas — enemigos, gear, regiones, aliados"],
+  ["Link Chainers Wallet","Conecta una wallet externa para recompensas canjeables"]
+ ]:[
   ["Create / Edit Profile","Creates your account and sets your starting build"],
   ["My Stats","Your live stats, including every gear bonus"],
   ["My Bag","Your potions and consumables"],
@@ -1200,14 +1238,24 @@ PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your
   ["Codex","Your collection of cards — enemies, gear, regions, allies"],
   ["Link Chainers Wallet","Connects an external wallet for redeemable rewards"]
  ],["k",""])+
- '<h2 class="s">Your first hour</h2>'+
- '<p class="b"><strong>1 — Make a profile.</strong> Open the Kiosk, create your character, and spend your points. You start with 10.</p>'+
- '<p class="b"><strong>2 — Set up two builds.</strong> It is free. Put an attacker in slot 1 and a tank in slot 2. Apply the right one before a fight.</p>'+
- '<p class="b"><strong>3 — Fight something.</strong> <span class="cmd">!duel @player</span> for a duel, <span class="cmd">!hunt</span> to farm a region, or whatever panel is up on the server.</p>'+
- '<p class="b"><strong>4 — Craft one starter piece.</strong> A Strength Ring or Cardboard Boots costs 4,000 OIL and changes every fight you take afterwards.</p>'+
- '<div class="callout"><p><strong>Open My Stats before any fight.</strong> It shows your build <em>after</em> gear and enhancement are applied. It is the only number that matters, and it is not the number in your stat slot.</p></div>'+
- '<h2 class="s">Commands worth knowing</h2>'+
- tbl(["Command","What it does"],[
+ '<h2 class="s">'+L("Your first hour","Tu primera hora")+'</h2>'+
+ '<p class="b">'+L("<strong>1 — Make a profile.</strong> Open the Kiosk, create your character, and spend your points. You start with 10.","<strong>1 — Haz un perfil.</strong> Abre el Kiosco, crea tu personaje y gasta tus puntos. Empiezas con 10.")+'</p>'+
+ '<p class="b">'+L("<strong>2 — Set up two builds.</strong> It is free. Put an attacker in slot 1 and a tank in slot 2. Apply the right one before a fight.","<strong>2 — Prepara dos builds.</strong> Es gratis. Pon un atacante en la ranura 1 y un tanque en la 2. Aplica el correcto antes de una pelea.")+'</p>'+
+ '<p class="b">'+L("<strong>3 — Fight something.</strong> <span class=\"cmd\">!duel @player</span> for a duel, <span class=\"cmd\">!hunt</span> to farm a region, or whatever panel is up on the server.","<strong>3 — Pelea contra algo.</strong> <span class=\"cmd\">!duel @player</span> para un duelo, <span class=\"cmd\">!hunt</span> para farmear una región, o cualquier panel que esté activo en el servidor.")+'</p>'+
+ '<p class="b">'+L("<strong>4 — Craft one starter piece.</strong> A Strength Ring or Cardboard Boots costs 4,000 OIL and changes every fight you take afterwards.","<strong>4 — Craftea una pieza inicial.</strong> Un Strength Ring o unas Cardboard Boots cuestan 4,000 OIL y cambian cada pelea que tengas después.")+'</p>'+
+ '<div class="callout"><p>'+L("<strong>Open My Stats before any fight.</strong> It shows your build <em>after</em> gear and enhancement are applied. It is the only number that matters, and it is not the number in your stat slot.","<strong>Abre My Stats antes de cualquier pelea.</strong> Muestra tu build <em>después</em> de aplicar el gear y las mejoras. Es el único número que importa, y no es el número de tu stat slot.")+'</p></div>'+
+ '<h2 class="s">'+L("Commands worth knowing","Comandos que vale la pena conocer")+'</h2>'+
+ tbl(L(["Command","What it does"],["Comando","Qué hace"]),LANG==="es"?[
+  ['<span class="cmd">!profile</span> · <span class="cmd">!stats</span>',"Tu nivel, XP, Oil Coins y gear"],
+  ['<span class="cmd">!profile @user</span>',"El perfil de otra persona"],
+  ['<span class="cmd">!top20</span> · <span class="cmd">!top</span> · <span class="cmd">!top3</span>',"Tabla de líderes del servidor"],
+  ['<span class="cmd">!guilds</span> · <span class="cmd">!rep</span>',"Tu reputación de facción"],
+  ['<span class="cmd">!clan</span>',"Info y gestión de clan"],
+  ['<span class="cmd">!bonds</span> · <span class="cmd">!bonds_top</span> · <span class="cmd">!bonds_history</span>',"Tus relaciones con otros jugadores"],
+  ['<span class="cmd">!travel</span> · <span class="cmd">!hunt</span>',"Muévete entre regiones y farmea materiales"],
+  ['<span class="cmd">!my_weapon</span> · <span class="cmd">!weapon_list</span>',"Tu arma equipada y el catálogo"],
+  ['<span class="cmd">!equip_weapon</span> · <span class="cmd">!unequip_weapon</span>',"Cambia tu arma"]
+ ]:[
   ['<span class="cmd">!profile</span> · <span class="cmd">!stats</span>',"Your level, XP, Oil Coins and gear"],
   ['<span class="cmd">!profile @user</span>',"Somebody else's profile"],
   ['<span class="cmd">!top20</span> · <span class="cmd">!top</span> · <span class="cmd">!top3</span>',"Server leaderboard"],
@@ -1218,82 +1266,88 @@ PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your
   ['<span class="cmd">!my_weapon</span> · <span class="cmd">!weapon_list</span>',"Your equipped weapon and the catalog"],
   ['<span class="cmd">!equip_weapon</span> · <span class="cmd">!unequip_weapon</span>',"Change your weapon"]
  ],["k",""])+
- '<h2 class="s">Stat slots and builds</h2>'+
- '<p class="b">You have <strong>3 stat slots</strong>. Each one stores a full build: a STR / AGI / CON spread <em>and</em> two gear pieces. Gear stacks on top of the slot — a slot with STR 8 plus a Strength Ring is STR 9 in combat.</p>'+
- '<div class="callout"><p><strong>A working set:</strong> slot 1 STR/AGI for duels and FFA · slot 2 CON parry tank for Horde, Missions and sieges · slot 3 high-AGI dodge build.</p></div>';
+ '<h2 class="s">'+L("Stat slots and builds","Stat slots y builds")+'</h2>'+
+ '<p class="b">'+L("You have <strong>3 stat slots</strong>. Each one stores a full build: a STR / AGI / CON spread <em>and</em> two gear pieces. Gear stacks on top of the slot — a slot with STR 8 plus a Strength Ring is STR 9 in combat.","Tienes <strong>3 stat slots</strong>. Cada uno guarda una build completa: un reparto de STR / AGI / CON <em>y</em> dos piezas de gear. El gear se suma encima de la ranura — una ranura con STR 8 más un Strength Ring es STR 9 en combate.")+'</p>'+
+ '<div class="callout"><p>'+L("<strong>A working set:</strong> slot 1 STR/AGI for duels and FFA · slot 2 CON parry tank for Horde, Missions and sieges · slot 3 high-AGI dodge build.","<strong>Un juego que funciona:</strong> ranura 1 STR/AGI para duelos y FFA · ranura 2 tanque de parry con CON para Horda, Misiones y asedios · ranura 3 build de esquiva con AGI alta.")+'</p></div>';
 }};
 
 PAGES.combat={t:"Combat",e:"The guide",d:"Every turn, against players and NPCs alike, runs on four actions and the arithmetic below. These are the real formulas the bot runs.",h:function(){
- return '<h2 class="s">The three stats</h2>'+
- '<p class="b">Your point budget grows with your level and is never unlimited:</p>'+
- '<span class="fx">total stat points = 10 + (global level − 1)</span>'+
- '<h3 class="t">STR — Strength</h3>'+
- '<p class="b">Raw damage. Each point adds <strong>+4</strong> to your base attack on top of a random 5–15 roll, and it strengthens both halves of your Parry.</p>'+
- '<span class="fx">base damage = (STR × 4) + random(5–15)</span>'+
- '<h3 class="t">AGI — Agility</h3>'+
- '<p class="b">The strongest stat in the game, because it does <strong>four</strong> things at once: it multiplies your damage (Overcrit), sets your crit chance, sets your dodge chance, and removes flat damage from every hit you take.</p>'+
- '<span class="fx">overcrit ≈ 1 + 0.5 × (AGI ÷ 29)   ·   flat reduction = AGI × 2.5</span>'+
- tbl(["AGI","Crit &amp; dodge chance"],[["0","0%"],["5","5%"],["10","10%"],["13","11%"],["16","12%"],["20","13%"],["40","20%"]],["n",""])+
- '<p class="b">Up to AGI 10 each point is +1%. Above 10 it slows to roughly +1% per 3 AGI.</p>'+
- '<h3 class="t">CON — Constitution</h3>'+
- '<span class="fx">max HP = 50 + (CON × 15)   ·   rest heal = 20 + (CON × 3)</span>'+
- tbl(["CON","Max HP","Rest heals"],[["0","50","20"],["5","125","35"],["10","200","50"],["15","275","65"],["20","350","80"]],["n","n","n"])+
- '<h2 class="s">Build calculator</h2>'+
- '<p class="b">Move the numbers. Everything below is computed with the formulas above, not an approximation of them.</p>'+
+ return '<h2 class="s">'+L("The three stats","Los tres stats")+'</h2>'+
+ '<p class="b">'+L("Your point budget grows with your level and is never unlimited:","Tu presupuesto de puntos crece con tu nivel y nunca es ilimitado:")+'</p>'+
+ '<span class="fx">'+L("total stat points = 10 + (global level − 1)","puntos de stat totales = 10 + (nivel global − 1)")+'</span>'+
+ '<h3 class="t">'+L("STR — Strength","STR — Fuerza")+'</h3>'+
+ '<p class="b">'+L("Raw damage. Each point adds <strong>+4</strong> to your base attack on top of a random 5–15 roll, and it strengthens both halves of your Parry.","Daño puro. Cada punto suma <strong>+4</strong> a tu ataque base sobre una tirada aleatoria de 5–15, y refuerza ambas mitades de tu Parry.")+'</p>'+
+ '<span class="fx">'+L("base damage = (STR × 4) + random(5–15)","daño base = (STR × 4) + aleatorio(5–15)")+'</span>'+
+ '<h3 class="t">'+L("AGI — Agility","AGI — Agilidad")+'</h3>'+
+ '<p class="b">'+L("The strongest stat in the game, because it does <strong>four</strong> things at once: it multiplies your damage (Overcrit), sets your crit chance, sets your dodge chance, and removes flat damage from every hit you take.","El stat más fuerte del juego, porque hace <strong>cuatro</strong> cosas a la vez: multiplica tu daño (Overcrit), fija tu probabilidad de crítico, fija tu probabilidad de esquiva, y quita daño plano de cada golpe que recibes.")+'</p>'+
+ '<span class="fx">'+L("overcrit ≈ 1 + 0.5 × (AGI ÷ 29)   ·   flat reduction = AGI × 2.5","overcrit ≈ 1 + 0.5 × (AGI ÷ 29)   ·   reducción plana = AGI × 2.5")+'</span>'+
+ tbl(L(["AGI","Crit &amp; dodge chance"],["AGI","Prob. de crítico y esquiva"]),[["0","0%"],["5","5%"],["10","10%"],["13","11%"],["16","12%"],["20","13%"],["40","20%"]],["n",""])+
+ '<p class="b">'+L("Up to AGI 10 each point is +1%. Above 10 it slows to roughly +1% per 3 AGI.","Hasta AGI 10, cada punto es +1%. Por encima de 10 baja a aproximadamente +1% por cada 3 de AGI.")+'</p>'+
+ '<h3 class="t">'+L("CON — Constitution","CON — Constitución")+'</h3>'+
+ '<span class="fx">'+L("max HP = 50 + (CON × 15)   ·   rest heal = 20 + (CON × 3)","HP máx = 50 + (CON × 15)   ·   cura de Rest = 20 + (CON × 3)")+'</span>'+
+ tbl(L(["CON","Max HP","Rest heals"],["CON","HP máx","Cura de Rest"]),[["0","50","20"],["5","125","35"],["10","200","50"],["15","275","65"],["20","350","80"]],["n","n","n"])+
+ '<h2 class="s">'+L("Build calculator","Calculadora de build")+'</h2>'+
+ '<p class="b">'+L("Move the numbers. Everything below is computed with the formulas above, not an approximation of them.","Mueve los números. Todo lo de abajo se calcula con las fórmulas de arriba, no una aproximación de ellas.")+'</p>'+
  '<div class="rig">'+
   '<div class="rig__p">'+
-   '<div class="lvl"><span class="lvl__l">Global level</span><div class="lvl__c">'+
+   '<div class="lvl"><span class="lvl__l">'+L("Global level","Nivel global")+'</span><div class="lvl__c">'+
    '<button class="btn" id="lvD" aria-label="Lower level">−</button><span class="lvl__v num" id="lvV">20</span>'+
    '<button class="btn" id="lvU" aria-label="Raise level">+</button></div></div>'+
-   '<div class="bud"><span class="bud__t">Points spent</span><span class="bud__v num" id="bud">0 / 29</span></div>'+
+   '<div class="bud"><span class="bud__t">'+L("Points spent","Puntos gastados")+'</span><span class="bud__v num" id="bud">0 / 29</span></div>'+
    '<div id="stats"></div>'+
   '</div>'+
   '<div class="rig__o">'+
    '<div class="ro" id="ro"></div>'+
-   '<div class="dm"><div class="dm__h">One attack, against an unarmoured target</div>'+
-    '<div class="dm__r"><span class="dm__l">Normal</span><span class="dm__b"><span class="dm__s" id="sN"></span></span><span class="dm__n" id="nN">—</span></div>'+
-    '<div class="dm__r"><span class="dm__l">Critical</span><span class="dm__b"><span class="dm__s" id="sC"></span></span><span class="dm__n" id="nC">—</span></div>'+
+   '<div class="dm"><div class="dm__h">'+L("One attack, against an unarmoured target","Un ataque, contra un objetivo sin armadura")+'</div>'+
+    '<div class="dm__r"><span class="dm__l">'+L("Normal","Normal")+'</span><span class="dm__b"><span class="dm__s" id="sN"></span></span><span class="dm__n" id="nN">—</span></div>'+
+    '<div class="dm__r"><span class="dm__l">'+L("Critical","Crítico")+'</span><span class="dm__b"><span class="dm__s" id="sC"></span></span><span class="dm__n" id="nC">—</span></div>'+
     '<div class="dm__r"><span class="dm__l">Focus</span><span class="dm__b"><span class="dm__s" id="sF"></span></span><span class="dm__n" id="nF">—</span></div>'+
    '</div><p class="vd" id="vd"></p>'+
   '</div>'+
  '</div>'+
- '<h2 class="s">The four actions</h2>'+
- tbl(["Action","What it does"],[
+ '<h2 class="s">'+L("The four actions","Las cuatro acciones")+'</h2>'+
+ tbl(L(["Action","What it does"],["Acción","Qué hace"]),LANG==="es"?[
+  ["Attack","Haces daño a tu objetivo. Puede ser crítico, según AGI."],
+  ["Parry","Te preparas para bloquear y contraatacar el próximo golpe. No es una reducción plana — mira abajo."],
+  ["Rest","Curas 20 + CON×3 <em>y</em> ganas Focus — pero solo si ningún enemigo te ataca este turno (mira abajo)."],
+  ["Use Consumable","Usas una poción de tu bolsa en tu turno."],
+  ["Switch","Solo en modos de equipo y tag: cambias tu luchador activo por uno del banco. Gasta tu turno."]
+ ]:[
   ["Attack","Deal damage to your target. Can crit, from AGI."],
   ["Parry","Brace to block and counter the next hit. Not a flat reduction — see below."],
   ["Rest","Heal 20 + CON×3 <em>and</em> gain Focus — but only if no enemy attacks you this turn (see below)."],
   ["Use Consumable","Use a potion from your bag on your turn."],
   ["Switch","Team and tag modes only: swap your active fighter for a benched one. Uses your turn."]
  ],["k",""])+
- '<div class="callout callout--warn"><p><strong>Rest is interruptible.</strong> If any enemy attacks you on the turn you Rest, your Rest fails — <strong>no heal and no Focus</strong> — and you are <strong>caught resting</strong>: the attacker deals bonus damage (<strong>×1.5</strong> in a duel). Only Rest when you are safe from a hit; a resting fighter is the most punishable target on the board.</p></div>'+
- '<h2 class="s">Parry is a wager, not a shield</h2>'+
- '<span class="fx">block value = (CON × 5) + STR   ·   counter value = (CON × 3) + STR</span>'+
- '<p class="b"><strong>Perfect Block</strong> — if your block value is greater than or equal to the incoming attack, you take <strong>zero</strong> damage and reflect your counter value back.</p>'+
- '<p class="b"><strong>Guard Break</strong> — if the attack is bigger than your block value, you break: you take only the <em>overflow</em> above your block, and your AGI flat reduction then applies to that overflow.</p>'+
- '<div class="callout"><p>This is why a high-CON parry punishes attackers, and why a hard enough hitter breaks one anyway. Do not parry a guaranteed guard-breaker — you just eat the difference.</p></div>'+
- '<h2 class="s">Focus and Ultra Focus</h2>'+
- '<p class="b"><strong>Focus</strong> comes from Resting, or a Focus Potion. Your next Attack deals <strong>×2</strong>. It carries turn to turn until you spend it, and it can still be dodged, reduced or parried.</p>'+
- '<p class="b"><strong>Ultra Focus</strong> comes from gaining Focus again while already Focused. Your next attack is a guaranteed ×2 that <strong>cannot be dodged, cannot be reduced by AGI, and cannot be parried.</strong></p>'+
- '<div class="callout"><p>Ultra Focus is the answer to every defensive build in the game. If your opponent is about to parry, or is a high-dodge AGI build, build it and punish them.</p></div>'+
- '<h2 class="s">Crits, dodge and reduction</h2>'+
- '<p class="b">A crit multiplies final damage by <strong>×1.5</strong>. Base crit is 0% with no AGI. A Critical Potion adds +25% to your next attack; clan passives and badges add more. Dodge is passive and takes you to zero damage. Flat reduction applies to every hit that lands — and Ultra Focus ignores it entirely.</p>'+
- '<h2 class="s">NPC passives</h2>'+
- '<p class="b">Most NPCs and every boss carry passives that change how the fight works.</p>'+
- tbl(["Passive","Effect"],NPCPASS.map(function(r){return [r[0],r[1]];}),["k",""])+
- '<h2 class="s">The Stalker</h2>'+
- '<p class="b">A special NPC that challenges you to 1v1 and runs a <strong>predictive AI</strong>. It reads your last several actions, your HP percentage, your stat spread, whether you have Focus, and whether you just rested or parried repeatedly.</p>'+
- '<p class="b">Spam Attack and it parries more. Spam Parry and it waits for the guard break. Low HP on you and it presses; low HP on itself and it gets aggressive.</p>'+
- '<div class="callout callout--warn"><p><strong>Never repeat an action more than twice.</strong> The clan passive Silent Watch cuts your chance of being targeted by the Stalker and the Marked Hunt by up to 25%.</p></div>';
+ '<div class="callout callout--warn"><p>'+L("<strong>Rest is interruptible.</strong> If any enemy attacks you on the turn you Rest, your Rest fails — <strong>no heal and no Focus</strong> — and you are <strong>caught resting</strong>: the attacker deals bonus damage (<strong>×1.5</strong> in a duel). Only Rest when you are safe from a hit; a resting fighter is the most punishable target on the board.","<strong>El Rest es interrumpible.</strong> Si cualquier enemigo te ataca en el turno que haces Rest, tu Rest falla — <strong>sin cura y sin Focus</strong> — y te pillan <strong>descansando</strong>: el atacante hace daño extra (<strong>×1.5</strong> en un duelo). Solo descansa cuando estés a salvo de un golpe; un luchador descansando es el objetivo más castigable del tablero.")+'</p></div>'+
+ '<h2 class="s">'+L("Parry is a wager, not a shield","Parry es una apuesta, no un escudo")+'</h2>'+
+ '<span class="fx">'+L("block value = (CON × 5) + STR   ·   counter value = (CON × 3) + STR","valor de bloqueo = (CON × 5) + STR   ·   valor de contra = (CON × 3) + STR")+'</span>'+
+ '<p class="b">'+L("<strong>Perfect Block</strong> — if your block value is greater than or equal to the incoming attack, you take <strong>zero</strong> damage and reflect your counter value back.","<strong>Bloqueo perfecto</strong> — si tu valor de bloqueo es mayor o igual al ataque entrante, recibes <strong>cero</strong> daño y reflejas tu valor de contra.")+'</p>'+
+ '<p class="b">'+L("<strong>Guard Break</strong> — if the attack is bigger than your block value, you break: you take only the <em>overflow</em> above your block, and your AGI flat reduction then applies to that overflow.","<strong>Rotura de guardia</strong> — si el ataque supera tu valor de bloqueo, te rompen: recibes solo el <em>exceso</em> por encima de tu bloqueo, y tu reducción plana de AGI se aplica luego a ese exceso.")+'</p>'+
+ '<div class="callout"><p>'+L("This is why a high-CON parry punishes attackers, and why a hard enough hitter breaks one anyway. Do not parry a guaranteed guard-breaker — you just eat the difference.","Por eso un parry de CON alta castiga a los atacantes, y por eso un golpeador lo bastante fuerte lo rompe igual. No hagas parry ante una rotura de guardia garantizada — solo te comes la diferencia.")+'</p></div>'+
+ '<h2 class="s">'+L("Focus and Ultra Focus","Focus y Ultra Focus")+'</h2>'+
+ '<p class="b">'+L("<strong>Focus</strong> comes from Resting, or a Focus Potion. Your next Attack deals <strong>×2</strong>. It carries turn to turn until you spend it, and it can still be dodged, reduced or parried.","<strong>Focus</strong> viene de hacer Rest, o de una Focus Potion. Tu siguiente Attack hace <strong>×2</strong>. Se conserva turno a turno hasta que lo gastas, y aún se puede esquivar, reducir o parar.")+'</p>'+
+ '<p class="b">'+L("<strong>Ultra Focus</strong> comes from gaining Focus again while already Focused. Your next attack is a guaranteed ×2 that <strong>cannot be dodged, cannot be reduced by AGI, and cannot be parried.</strong>","<strong>Ultra Focus</strong> viene de ganar Focus otra vez cuando ya tienes Focus. Tu siguiente ataque es un ×2 garantizado que <strong>no se puede esquivar, no lo reduce la AGI, y no se puede parar.</strong>")+'</p>'+
+ '<div class="callout"><p>'+L("Ultra Focus is the answer to every defensive build in the game. If your opponent is about to parry, or is a high-dodge AGI build, build it and punish them.","Ultra Focus es la respuesta a toda build defensiva del juego. Si tu rival va a hacer parry, o es una build de AGI con mucha esquiva, cárgalo y castígalo.")+'</p></div>'+
+ '<h2 class="s">'+L("Crits, dodge and reduction","Críticos, esquiva y reducción")+'</h2>'+
+ '<p class="b">'+L("A crit multiplies final damage by <strong>×1.5</strong>. Base crit is 0% with no AGI. A Critical Potion adds +25% to your next attack; clan passives and badges add more. Dodge is passive and takes you to zero damage. Flat reduction applies to every hit that lands — and Ultra Focus ignores it entirely.","Un crítico multiplica el daño final por <strong>×1.5</strong>. El crítico base es 0% sin AGI. Una Critical Potion suma +25% a tu siguiente ataque; las pasivas de clan y las insignias suman más. La esquiva es pasiva y te lleva a cero daño. La reducción plana se aplica a cada golpe que acierta — y Ultra Focus la ignora por completo.")+'</p>'+
+ '<h2 class="s">'+L("NPC passives","Pasivas de NPC")+'</h2>'+
+ '<p class="b">'+L("Most NPCs and every boss carry passives that change how the fight works.","La mayoría de los NPCs y todos los jefes llevan pasivas que cambian cómo funciona la pelea.")+'</p>'+
+ tbl(L(["Passive","Effect"],["Pasiva","Efecto"]),NPCPASS.map(function(r){return [r[0],L(r[1],(DTR[r[1]]||null))];}),["k",""])+
+ '<h2 class="s">'+L("The Stalker","The Stalker")+'</h2>'+
+ '<p class="b">'+L("A special NPC that challenges you to 1v1 and runs a <strong>predictive AI</strong>. It reads your last several actions, your HP percentage, your stat spread, whether you have Focus, and whether you just rested or parried repeatedly.","Un NPC especial que te reta a un 1v1 y corre una <strong>IA predictiva</strong>. Lee tus últimas acciones, tu porcentaje de HP, tu reparto de stats, si tienes Focus, y si acabas de descansar o parar repetidamente.")+'</p>'+
+ '<p class="b">'+L("Spam Attack and it parries more. Spam Parry and it waits for the guard break. Low HP on you and it presses; low HP on itself and it gets aggressive.","Si haces spam de Attack, para más. Si haces spam de Parry, espera la rotura de guardia. Si tú estás bajo de HP, aprieta; si él está bajo de HP, se vuelve agresivo.")+'</p>'+
+ '<div class="callout callout--warn"><p>'+L("<strong>Never repeat an action more than twice.</strong> The clan passive Silent Watch cuts your chance of being targeted by the Stalker and the Marked Hunt by up to 25%.","<strong>Nunca repitas una acción más de dos veces.</strong> La pasiva de clan Silent Watch reduce hasta un 25% tu probabilidad de ser objetivo del Stalker y de la Marked Hunt.")+'</p></div>';
 }};
 
 PAGES.consumables={t:"Consumables",e:"The guide",d:"Bought from the Shop panel with Oil Coins, stored in your bag, used on your turn. Prices are set by Max — these are the standard defaults.",h:function(){
- return tbl(["Item","Typical price","Effect"],POTIONS.map(function(r){return [r[0],r[1]?r[1]+" OIL":"—",r[2]];}),["k","n",""])+
- '<div class="callout"><p>The <strong>Guard Potion</strong> is the flat &minus;50% next hit. The <strong>Parry action</strong> is a separate block-and-counter mechanic — they are not the same thing.</p></div>'+
- '<h2 class="s">Tournament restrictions</h2>'+
- '<p class="b">Tournament allows exactly four: <strong>Ultra Health Potion, Protective Shield Potion, Mind Cleanser, Power Potion.</strong> One per round.</p>'+
- '<h2 class="s">How to actually use them</h2>'+
- '<p class="b">Pre-load a <strong>Guard Potion</strong> before a hit you can see coming. Heal at 30–40% HP rather than waiting for critical. To reach <strong>Ultra Focus</strong> you <strong>Rest twice</strong> — a second Rest while already Focused upgrades you; a Focus Potion only ever grants plain Focus and is blocked if you already have it.</p>'+
- '<p class="b">There is also a <strong>Black Market</strong> with rotating stock, and event panels with their own items.</p>';
+ return tbl(L(["Item","Typical price","Effect"],["Objeto","Precio típico","Efecto"]),POTIONS.map(function(r){return [r[0],r[1]?r[1]+" OIL":"—",L(r[2],DTR[r[2]])];}),["k","n",""])+
+ '<div class="callout"><p>'+L("The <strong>Guard Potion</strong> is the flat &minus;50% next hit. The <strong>Parry action</strong> is a separate block-and-counter mechanic — they are not the same thing.","La <strong>Guard Potion</strong> es el &minus;50% plano al próximo golpe. La <strong>acción Parry</strong> es una mecánica aparte de bloqueo-y-contra — no son lo mismo.")+'</p></div>'+
+ '<h2 class="s">'+L("Tournament restrictions","Restricciones de torneo")+'</h2>'+
+ '<p class="b">'+L("Tournament allows exactly four: <strong>Ultra Health Potion, Protective Shield Potion, Mind Cleanser, Power Potion.</strong> One per round.","El torneo permite exactamente cuatro: <strong>Ultra Health Potion, Protective Shield Potion, Mind Cleanser, Power Potion.</strong> Una por ronda.")+'</p>'+
+ '<h2 class="s">'+L("How to actually use them","Cómo usarlas de verdad")+'</h2>'+
+ '<p class="b">'+L("Pre-load a <strong>Guard Potion</strong> before a hit you can see coming. Heal at 30–40% HP rather than waiting for critical. To reach <strong>Ultra Focus</strong> you <strong>Rest twice</strong> — a second Rest while already Focused upgrades you; a Focus Potion only ever grants plain Focus and is blocked if you already have it.","Prepara una <strong>Guard Potion</strong> antes de un golpe que veas venir. Cúrate al 30–40% de HP en vez de esperar al momento crítico. Para llegar a <strong>Ultra Focus</strong> haces <strong>Rest dos veces</strong> — un segundo Rest cuando ya tienes Focus te sube; una Focus Potion solo da Focus normal y se bloquea si ya lo tienes.")+'</p>'+
+ '<p class="b">'+L("There is also a <strong>Black Market</strong> with rotating stock, and event panels with their own items.","También hay un <strong>Mercado Negro</strong> con stock rotativo, y paneles de evento con sus propios objetos.")+'</p>';
 }};
 
 PAGES.gear={t:"Gear &amp; Forge",e:"The guide",d:"Crafted gear boosts your stats in every mode. Two gear slots, saved per stat slot, enhanced up to +5.",h:function(){
