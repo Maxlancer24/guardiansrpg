@@ -116,6 +116,10 @@ h1,h2,h3,h4,p,ul,ol{margin:0}
 .brand__w{font-family:var(--serif);font-weight:700;font-size:1.32rem;letter-spacing:-.01em;color:var(--text);line-height:1}
 .brand__w em{font-style:italic;font-weight:400;color:var(--brass)}
 .brand__s{font-family:var(--cond);font-weight:600;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-faint);margin-top:.4rem;display:block}
+.langsw{display:flex;gap:.35rem;margin:0 1.3rem 1rem;padding-bottom:1.05rem;border-bottom:1px solid var(--rule)}
+.langsw__b{flex:1;font-family:var(--cond);font-weight:700;font-size:.7rem;letter-spacing:.12em;color:var(--text-faint);background:transparent;border:1px solid var(--rule);border-radius:6px;padding:.34rem 0;cursor:pointer;transition:color .15s,background .15s,border-color .15s}
+.langsw__b:hover{color:var(--text);border-color:var(--rule-strong)}
+.langsw__b.on{color:#231800;background:var(--brass);border-color:var(--brass)}
 
 .navgrp{padding:1.15rem 0 .2rem}
 .navgrp__t{font-family:var(--cond);font-weight:600;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--verdigris);padding:0 1.3rem .5rem}
@@ -567,6 +571,10 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
       <span class="brand__w">The <em>Guardians</em></span>
       <span class="brand__s">Valestia Compendium</span>
     </a>
+    <div class="langsw" id="langsw" role="group" aria-label="Language">
+      <button class="langsw__b" data-lang="en" type="button">EN</button>
+      <button class="langsw__b" data-lang="es" type="button">ES</button>
+    </div>
     <div id="nav"></div>
   </nav>
   <main class="main" id="main"></main>
@@ -576,6 +584,11 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
 (function(){
 "use strict";
 var E=function(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");};
+
+/* ── i18n: two languages, English is the source; Spanish overlays via L(en,es).
+   Any string not given an `es` falls back to English, so the site never breaks. */
+var LANG=(function(){try{return localStorage.getItem("glang")==="es"?"es":"en";}catch(e){return "en";}})();
+function L(en,es){return (LANG==="es"&&es!=null&&es!=="")?es:en;}
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
 var MAP_SRC="assets/valestia-map.webp";
@@ -1038,117 +1051,139 @@ var PAGES={};
 
 PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
  var sys=[
-  ["⚔️","Combat","combat","var(--brass)","Four buttons, real maths — Focus, Parry, and the arithmetic every fight runs on."],
-  ["🗺️","Valestia","valestia","var(--verdigris)","Eleven regions, 210 named enemies, and the roads between them. Travel and hunt."],
-  ["🐾","Pokemax","pets","var(--t-grass)","Catch 84 species, raise them to 50, and battle 3-versus-3 — a whole monster-battler inside the RPG."],
-  ["🤖","Mechas","mechas","var(--t-water)","Front Mission in a channel: pilot a four-part wanzer and dismantle the enemy limb by limb."],
-  ["📜","The Story","story","var(--brass)","A story campaign, "+COUNTS.story+" missions and counting, that runs inside the combat engine at your party's side."],
-  ["🏛️","Clans &amp; Gyms","clans","var(--t-rock)","Found a clan, hold territory, sign treaties, and conquer the ten regional Gyms."],
-  ["🎲","Game Modes","modes","var(--t-ghost)","Duels, Triad, Horde, the Eternal Abyss, sieges, Vanguard — nineteen ways to fight."],
-  ["🔮","Mysteries","mysteries","var(--corrupt)","Hidden secrets scattered across the world, each with a surprise found nowhere else."],
-  ["🧭","Expeditions","expeditions","#0E9CB8","Timed sea voyages from Ravennor to island regions with their own tides, currency and exclusive loot."]
+  ["⚔️","Combat","combat","var(--brass)","Four buttons, real maths — Focus, Parry, and the arithmetic every fight runs on.","Combate","Cuatro botones, matemática real — Focus, Parry y la aritmética que corre en cada pelea."],
+  ["🗺️","Valestia","valestia","var(--verdigris)","Eleven regions, 210 named enemies, and the roads between them. Travel and hunt.","Valestia","Once regiones, 210 enemigos con nombre, y los caminos entre ellas. Viaja y caza."],
+  ["🐾","Pokemax","pets","var(--t-grass)","Catch 84 species, raise them to 50, and battle 3-versus-3 — a whole monster-battler inside the RPG.","Pokemax","Captura 84 especies, súbelas a 50 y pelea 3 contra 3 — todo un juego de monstruos dentro del RPG."],
+  ["🤖","Mechas","mechas","var(--t-water)","Front Mission in a channel: pilot a four-part wanzer and dismantle the enemy limb by limb.","Mechas","Front Mission en un canal: pilota un wanzer de cuatro partes y desmóntalo miembro a miembro."],
+  ["📜","The Story","story","var(--brass)","A story campaign, "+COUNTS.story+" missions and counting, that runs inside the combat engine at your party's side.","La Historia","Una campaña de "+COUNTS.story+" misiones y contando, que corre dentro del motor de combate junto a tu grupo."],
+  ["🏛️","Clans &amp; Gyms","clans","var(--t-rock)","Found a clan, hold territory, sign treaties, and conquer the ten regional Gyms.","Clanes y Gimnasios","Funda un clan, controla territorio, firma tratados y conquista los diez Gimnasios regionales."],
+  ["🎲","Game Modes","modes","var(--t-ghost)","Duels, Triad, Horde, the Eternal Abyss, sieges, Vanguard — nineteen ways to fight.","Modos de juego","Duelos, Tríada, Horda, el Abismo Eterno, asedios, Vanguard — diecinueve formas de pelear."],
+  ["🔮","Mysteries","mysteries","var(--corrupt)","Hidden secrets scattered across the world, each with a surprise found nowhere else.","Misterios","Secretos ocultos por todo el mundo, cada uno con una sorpresa que no está en ningún otro lado."],
+  ["🧭","Expeditions","expeditions","#0E9CB8","Timed sea voyages from Ravennor to island regions with their own tides, currency and exclusive loot.","Expediciones","Viajes marítimos temporales desde Ravennor a regiones-isla con sus mareas, moneda y botín exclusivo."]
  ];
  return '<section class="hero">'+
   '<img class="hero__bg" src="'+MAP_SRC+'" alt="The map of Valestia" width="1485" height="810">'+
   '<div class="hero__scrim"></div>'+
   '<div class="hero__in">'+
-   '<p class="hero__eyebrow anim">A Discord RPG · Valestia</p>'+
+   '<p class="hero__eyebrow anim">'+L("A Discord RPG · Valestia","Un RPG de Discord · Valestia")+'</p>'+
    '<h1 class="hero__t anim d1"><span class="hero__the">The</span><span class="hero__big">Guardians</span></h1>'+
-   '<p class="hero__sub anim d2">The seal on Azroth is failing, the scroll names three places, and the road only goes one way. A deep, living RPG played entirely in Discord — combat, a whole map to hunt, monster-catching, mechas, clans, and a story that keeps being written.</p>'+
+   '<p class="hero__sub anim d2">'+L("The seal on Azroth is failing, the scroll names three places, and the road only goes one way. A deep, living RPG played entirely in Discord — combat, a whole map to hunt, monster-catching, mechas, clans, and a story that keeps being written.","El sello sobre Azroth se está debilitando, el pergamino nombra tres lugares, y el camino solo va en una dirección. Un RPG profundo y vivo jugado enteramente en Discord — combate, todo un mapa para cazar, captura de monstruos, mechas, clanes, y una historia que se sigue escribiendo.")+'</p>'+
    '<div class="hero__stats anim d3">'+
-    '<span class="stat"><b class="num" data-to="11">0</b><span>Regions</span></span>'+
+    '<span class="stat"><b class="num" data-to="11">0</b><span>'+L("Regions","Regiones")+'</span></span>'+
     '<span class="stat"><b class="num" data-to="84">0</b><span>Pokemax</span></span>'+
-    '<span class="stat"><b class="num" data-to="'+COUNTS.story+'">0</b><span>Story missions</span></span>'+
-    '<span class="stat"><b class="num" data-to="50">0</b><span>Side quests</span></span>'+
-    '<span class="stat"><b class="num" data-to="19">0</b><span>Game modes</span></span>'+
+    '<span class="stat"><b class="num" data-to="'+COUNTS.story+'">0</b><span>'+L("Story missions","Misiones de historia")+'</span></span>'+
+    '<span class="stat"><b class="num" data-to="50">0</b><span>'+L("Side quests","Misiones secundarias")+'</span></span>'+
+    '<span class="stat"><b class="num" data-to="19">0</b><span>'+L("Game modes","Modos de juego")+'</span></span>'+
    '</div>'+
    '<div class="hero__cta anim d4">'+
-    '<a class="hbtn hbtn--primary" href="#start">Start playing →</a>'+
-    '<a class="hbtn hbtn--ghost" href="#valestia">Explore Valestia</a>'+
+    '<a class="hbtn hbtn--primary" href="#start">'+L("Start playing →","Empezar a jugar →")+'</a>'+
+    '<a class="hbtn hbtn--ghost" href="#valestia">'+L("Explore Valestia","Explorar Valestia")+'</a>'+
    '</div>'+
   '</div></section>'+
   '<section class="proto">'+
    '<figure class="proto__fig"><img src="'+COVER+'" alt="The four protagonists of The Guardians" width="1672" height="941" loading="lazy" decoding="async"></figure>'+
    '<div class="proto__body">'+
-    '<p class="proto__k">The protagonists</p>'+
-    '<h2 class="proto__h">The four the story follows</h2>'+
-    '<p class="proto__d">At the center, <b>Jessie</b> — the gunslinger who has been at your side since Stormbay. Beside her, <b>Garrick</b> and his maul, and <b>Zoe</b> with her throwing knives. The swordsman is <b>the Guardian</b> — and the Guardian is <span class="pl">you</span>, the player, written into the main story. This is your party.</p>'+
+    '<p class="proto__k">'+L("The protagonists","Los protagonistas")+'</p>'+
+    '<h2 class="proto__h">'+L("The four the story follows","Los cuatro que sigue la historia")+'</h2>'+
+    '<p class="proto__d">'+L('At the center, <b>Jessie</b> — the gunslinger who has been at your side since Stormbay. Beside her, <b>Garrick</b> and his maul, and <b>Zoe</b> with her throwing knives. The swordsman is <b>the Guardian</b> — and the Guardian is <span class="pl">you</span>, the player, written into the main story. This is your party.','En el centro, <b>Jessie</b> — la pistolera que te acompaña desde Stormbay. A su lado, <b>Garrick</b> y su maza, y <b>Zoe</b> con sus dagas arrojadizas. El espadachín es <b>el Guardian</b> — y el Guardian eres <span class="pl">tú</span>, el jugador, escrito en la historia principal. Este es tu grupo.')+'</p>'+
    '</div>'+
   '</section>'+
-  '<p class="home__lead">Everything on this site is read straight from the live bot — every number, region, item, formula and line of story. Pick a thread and pull.</p>'+
-  '<div class="newbie"><p class="newbie__t">🌱 <b>New to the game?</b> Start with the beginner tutorials — a first fight explained one turn at a time.</p>'+
-   '<a href="#tut-combat">Combat Basics →</a><a href="#tut-pokemax">Pokemax Basics →</a></div>'+
+  '<p class="home__lead">'+L("Everything on this site is read straight from the live bot — every number, region, item, formula and line of story. Pick a thread and pull.","Todo en este sitio se lee directamente del bot en vivo — cada número, región, objeto, fórmula y línea de historia. Elige un hilo y tira de él.")+'</p>'+
+  '<div class="newbie"><p class="newbie__t">'+L("🌱 <b>New to the game?</b> Start with the beginner tutorials — a first fight explained one turn at a time.","🌱 <b>¿Nuevo en el juego?</b> Empieza por los tutoriales para principiantes — una primera pelea explicada turno a turno.")+'</p>'+
+   '<a href="#tut-combat">'+L("Combat Basics →","Combate básico →")+'</a><a href="#tut-pokemax">'+L("Pokemax Basics →","Pokemax básico →")+'</a></div>'+
   '<div class="syswrap"><div class="sysgrid">'+
    sys.map(function(s){
     return '<a class="syscard reveal" href="#'+s[2]+'" style="--sc:'+s[3]+'">'+
      '<span class="syscard__i">'+s[0]+'</span>'+
-     '<div class="syscard__t">'+s[1]+'</div>'+
-     '<div class="syscard__d">'+s[4]+'</div>'+
-     '<span class="syscard__go">Open →</span></a>';
+     '<div class="syscard__t">'+L(s[1],s[5])+'</div>'+
+     '<div class="syscard__d">'+L(s[4],s[6])+'</div>'+
+     '<span class="syscard__go">'+L("Open →","Abrir →")+'</span></a>';
    }).join("")+
   '</div></div>'+
-  '<div class="foot"><p><b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.</p></div>';
+  '<div class="foot"><p>'+L("<b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.","<b>The Guardians</b> — un RPG de Discord creado y gestionado por <b>Max</b>. Este compendio se genera del bot en vivo; las recompensas, tasas de drop y qué paneles están activos los define Max en el servidor donde vive el bot.")+'</p></div>';
 }};
 
 PAGES["tut-combat"]={t:"Combat Basics",e:"Tutorial",d:"Your very first fight, explained one turn at a time — with a full worked example. No maths needed.",h:function(){
- return '<h2 class="s">What a fight is</h2>'+
- '<p class="b">Every fighter has <strong>HP</strong> — that is their health. When a fighter\'s HP reaches <strong>0</strong>, they are knocked out. Your job is simple: bring the enemy\'s HP to 0 before they bring yours to 0.</p>'+
- '<p class="b">A fight is <strong>turn-based</strong>, like a board game. You take a turn, then the enemy takes a turn, then you again — over and over. On <strong>your</strong> turn you press <strong>one</strong> button, and that is your whole move.</p>'+
- '<h2 class="s">Your four buttons</h2>'+
- tbl(["Button","What it does"],[
+ return '<h2 class="s">'+L("What a fight is","Qué es una pelea")+'</h2>'+
+ '<p class="b">'+L("Every fighter has <strong>HP</strong> — that is their health. When a fighter\'s HP reaches <strong>0</strong>, they are knocked out. Your job is simple: bring the enemy\'s HP to 0 before they bring yours to 0.","Cada luchador tiene <strong>HP</strong> — su salud. Cuando el HP de un luchador llega a <strong>0</strong>, queda fuera de combate. Tu objetivo es simple: llevar el HP del enemigo a 0 antes de que lleve el tuyo a 0.")+'</p>'+
+ '<p class="b">'+L("A fight is <strong>turn-based</strong>, like a board game. You take a turn, then the enemy takes a turn, then you again — over and over. On <strong>your</strong> turn you press <strong>one</strong> button, and that is your whole move.","Una pelea es <strong>por turnos</strong>, como un juego de mesa. Tú juegas un turno, luego el enemigo, luego tú otra vez — una y otra vez. En <strong>tu</strong> turno pulsas <strong>un</strong> botón, y ese es todo tu movimiento.")+'</p>'+
+ '<h2 class="s">'+L("Your four buttons","Tus cuatro botones")+'</h2>'+
+ tbl(L(["Button","What it does"],["Botón","Qué hace"]),LANG==="es"?[
+  ['⚔️ <strong>Attack</strong>',"Golpeas al enemigo y le quitas algo de HP."],
+  ['💤 <strong>Rest</strong>',"Te curas algo de tu <em>propio</em> HP y cargas <strong>Focus</strong> — <em>pero solo si ningún enemigo te golpea este turno</em> (mira la advertencia de abajo)."],
+  ['🛡️ <strong>Parry</strong>',"Te preparas para bloquear. Si el enemigo te ataca este turno, lo bloqueas y le devuelves el golpe."],
+  ['🧪 <strong>Item</strong>',"Usas una poción de tu bolsa, como una Health Potion para curarte."]
+ ]:[
   ['⚔️ <strong>Attack</strong>',"Hit the enemy and take away some of their HP."],
   ['💤 <strong>Rest</strong>',"Heal some of your <em>own</em> HP and charge up <strong>Focus</strong> — <em>but only if no enemy hits you this turn</em> (see the warning below)."],
   ['🛡️ <strong>Parry</strong>',"Get ready to block. If the enemy attacks you this turn, you block it and hit them back."],
   ['🧪 <strong>Item</strong>',"Use a potion from your bag, like a Health Potion to heal."]
  ],["k",""])+
- '<div class="callout"><p>🔆 <strong>Focus is your super-punch.</strong> A <em>successful</em> Rest gives you Focus, and your <strong>next</strong> attack then does <strong>double (×2) damage</strong>. Save it for a moment that counts!</p></div>'+
- '<div class="callout callout--warn"><p>⚠️ <strong>Resting is risky — do not Rest into a hit!</strong> If an enemy attacks you on the turn you Rest, you get <strong>caught off guard</strong>: your Rest <strong>fails completely</strong> — <strong>no heal, no Focus</strong> — <em>and</em> they hit you for <strong>extra</strong> damage (about 50% more) for catching you resting. Only Rest when you are <strong>safe</strong> from a hit.</p></div>'+
- '<h2 class="s">A whole fight, step by step</h2>'+
- '<p class="b">Meet the two fighters. We will use easy round numbers:</p>'+
- '<div class="callout"><p>🦸 <strong>You</strong> — 120 HP · your attacks do about <strong>30</strong> damage · a safe Rest heals about <strong>35</strong>.<br>👹 <strong>Goblin</strong> — 90 HP · its attacks do about <strong>20</strong> damage.</p></div>'+
- tbl(["Turn","You press","What happens"],[
+ '<div class="callout"><p>'+L("🔆 <strong>Focus is your super-punch.</strong> A <em>successful</em> Rest gives you Focus, and your <strong>next</strong> attack then does <strong>double (×2) damage</strong>. Save it for a moment that counts!","🔆 <strong>Focus es tu súper-golpe.</strong> Un Rest <em>exitoso</em> te da Focus, y tu <strong>siguiente</strong> ataque hace <strong>el doble (×2) de daño</strong>. ¡Guárdalo para un momento que cuente!")+'</p></div>'+
+ '<div class="callout callout--warn"><p>'+L("⚠️ <strong>Resting is risky — do not Rest into a hit!</strong> If an enemy attacks you on the turn you Rest, you get <strong>caught off guard</strong>: your Rest <strong>fails completely</strong> — <strong>no heal, no Focus</strong> — <em>and</em> they hit you for <strong>extra</strong> damage (about 50% more) for catching you resting. Only Rest when you are <strong>safe</strong> from a hit.","⚠️ <strong>Descansar es arriesgado — ¡no hagas Rest ante un golpe!</strong> Si un enemigo te ataca en el turno que haces Rest, te pillan <strong>con la guardia baja</strong>: tu Rest <strong>falla por completo</strong> — <strong>sin cura, sin Focus</strong> — <em>y</em> te pegan con daño <strong>extra</strong> (un 50% más) por pillarte descansando. Solo descansa cuando estés <strong>a salvo</strong> de un golpe.")+'</p></div>'+
+ '<h2 class="s">'+L("A whole fight, step by step","Una pelea completa, paso a paso")+'</h2>'+
+ '<p class="b">'+L("Meet the two fighters. We will use easy round numbers:","Te presento a los dos luchadores. Usaremos números redondos y fáciles:")+'</p>'+
+ '<div class="callout"><p>'+L("🦸 <strong>You</strong> — 120 HP · your attacks do about <strong>30</strong> damage · a safe Rest heals about <strong>35</strong>.<br>👹 <strong>Goblin</strong> — 90 HP · its attacks do about <strong>20</strong> damage.","🦸 <strong>Tú</strong> — 120 HP · tus ataques hacen unos <strong>30</strong> de daño · un Rest seguro cura unos <strong>35</strong>.<br>👹 <strong>Goblin</strong> — 90 HP · sus ataques hacen unos <strong>20</strong> de daño.")+'</p></div>'+
+ tbl(L(["Turn","You press","What happens"],["Turno","Pulsas","Qué pasa"]),LANG==="es"?[
+  ["1",'⚔️ <strong>Attack</strong>',"Golpeas al Goblin por 30. <strong>Goblin: 90 → 60.</strong> Contraataca: <strong>Tú: 120 → 100.</strong>"],
+  ["2",'💤 <strong>Rest</strong> — ¡mal momento!',"El Goblin ataca mientras descansas, así que te pilla <strong>con la guardia baja</strong>: tu Rest falla — <strong>sin cura, sin Focus</strong> — y te pega por <strong>30</strong> (50% más de lo normal). <strong>Tú: 100 → 70.</strong>"],
+  ["3",'⚔️ <strong>Attack</strong>',"Golpeas por 30. <strong>Goblin: 60 → 30.</strong> Ahora el Goblin está herido y <em>él</em> hace Rest para curarse."],
+  ["4",'💤 <strong>Rest</strong> — ¡ahora sí!',"El Goblin está descansando, no atacando, así que estás a salvo. Te curas ~35 <em>y</em> ganas Focus 🔆. <strong>Tú: 70 → 105.</strong> (El Goblin se cura un poco: 30 → 45.)"],
+  ["5",'⚔️ <strong>Attack</strong> (¡con Focus!)',"Focus <strong>duplica</strong> tu golpe: 30 × 2 = <strong>60</strong>. <strong>Goblin: 45 → 0.</strong> ¡Ganas! 🎉"]
+ ]:[
   ["1",'⚔️ <strong>Attack</strong>',"You hit the Goblin for 30. <strong>Goblin: 90 → 60.</strong> It swings back: <strong>You: 120 → 100.</strong>"],
   ["2",'💤 <strong>Rest</strong> — bad timing!',"The Goblin attacks while you rest, so it <strong>catches you off guard</strong>: your Rest fails — <strong>no heal, no Focus</strong> — and it hits you for <strong>30</strong> (50% more than usual). <strong>You: 100 → 70.</strong>"],
   ["3",'⚔️ <strong>Attack</strong>',"You hit for 30. <strong>Goblin: 60 → 30.</strong> Now the Goblin is hurt and <em>it</em> Rests to heal itself."],
   ["4",'💤 <strong>Rest</strong> — safe now!',"The Goblin is resting, not attacking, so you are safe. You heal ~35 <em>and</em> gain Focus 🔆. <strong>You: 70 → 105.</strong> (The Goblin heals a little: 30 → 45.)"],
   ["5",'⚔️ <strong>Attack</strong> (with Focus!)',"Focus <strong>doubles</strong> your hit: 30 × 2 = <strong>60</strong>. <strong>Goblin: 45 → 0.</strong> You win! 🎉"]
  ],["n","k",""])+
- '<p class="b">The whole lesson is in <strong>turns 2 and 4</strong>. Resting is powerful — a free heal <em>plus</em> a Focus power-up — but only if <strong>no one hits you</strong> that turn. Rest into an attack (turn 2) and you get nothing and take extra damage. Wait for a safe moment (turn 4, while the enemy is resting too), then Rest, then unleash your Focus hit.</p>'+
- '<h2 class="s">Three simple tips</h2>'+
- tbl(["Tip","Why"],[
+ '<p class="b">'+L("The whole lesson is in <strong>turns 2 and 4</strong>. Resting is powerful — a free heal <em>plus</em> a Focus power-up — but only if <strong>no one hits you</strong> that turn. Rest into an attack (turn 2) and you get nothing and take extra damage. Wait for a safe moment (turn 4, while the enemy is resting too), then Rest, then unleash your Focus hit.","Toda la lección está en los <strong>turnos 2 y 4</strong>. Descansar es poderoso — cura gratis <em>más</em> el power-up de Focus — pero solo si <strong>nadie te golpea</strong> ese turno. Descansa ante un ataque (turno 2) y no consigues nada y recibes daño extra. Espera un momento seguro (turno 4, mientras el enemigo también descansa), luego haz Rest, y suelta tu golpe con Focus.")+'</p>'+
+ '<h2 class="s">'+L("Three simple tips","Tres consejos simples")+'</h2>'+
+ tbl(L(["Tip","Why"],["Consejo","Por qué"]),LANG==="es"?[
+  ["Descansa solo cuando sea seguro","Nunca hagas Rest ante un ataque — no te curas, no ganas Focus, y recibes daño extra. Descansa cuando el enemigo esté bajo, ocupado con otro, o también descansando."],
+  ["Gasta Focus en un golpe grande","Un ataque duplicado es tu mejor jugada. Prepáralo cuando el enemigo no pueda esquivar ni bloquear."],
+  ["Haz Parry solo si viene un golpe","Si haces Parry y el enemigo no ataca, malgastaste tu turno. Lee lo que está haciendo."]
+ ]:[
   ["Only Rest when it is safe","Never Rest into an attack — you get no heal, no Focus, and take extra damage. Rest when the enemy is low, busy with someone else, or resting too."],
   ["Spend Focus on a big hit","A doubled attack is your strongest move. Line it up when the enemy cannot dodge or block it."],
   ["Only Parry when a hit is coming","If you Parry and the enemy does not attack, you wasted your turn. Read what they are doing."]
  ],["k",""])+
- '<div class="callout"><p>🎓 That is the entire game! Everything else — your stats, your gear, your weapon — just changes these numbers up or down. When you want the real formulas behind the damage and healing, read the full <a href="#combat">Combat</a> page.</p></div>';
+ '<div class="callout"><p>'+L("🎓 That is the entire game! Everything else — your stats, your gear, your weapon — just changes these numbers up or down. When you want the real formulas behind the damage and healing, read the full <a href=\"#combat\">Combat</a> page.","🎓 ¡Ese es todo el juego! Todo lo demás — tus stats, tu equipo, tu arma — solo sube o baja estos números. Cuando quieras las fórmulas reales del daño y la cura, lee la página completa de <a href=\"#combat\">Combate</a>.")+'</p></div>';
 }};
 
 PAGES["tut-pokemax"]={t:"Pokemax Basics",e:"Tutorial",d:"Your first Pokemax battle, step by step — types, HP, and how to catch one. Beginner friendly.",h:function(){
- return '<h2 class="s">What a Pokemax battle is</h2>'+
- '<p class="b">You bring a team of up to <strong>three Pokemax</strong>, but only <strong>one fights at a time</strong> — like a tag-team. Each Pokemax has its own <strong>HP</strong>. When a Pokemax\'s HP reaches <strong>0</strong> it <strong>faints</strong> and leaves the battle.</p>'+
- '<p class="b">You <strong>win</strong> when all three of the enemy\'s Pokemax have fainted. It is still turn-based: you pick a move, they pick a move, and the faster Pokemax goes first.</p>'+
- '<h2 class="s">Types beat each other (like rock-paper-scissors)</h2>'+
- '<p class="b">Every Pokemax — and every move — has a <strong>type</strong>. Some types beat others. When your move\'s type beats the enemy\'s type, it is <strong>super effective</strong> and does <strong>double (×2) damage</strong>. Here is the simplest circle to remember:</p>'+
- '<div class="callout"><p>🔥 <strong>Fire</strong> beats 🌿 <strong>Grass</strong> &nbsp;→&nbsp; 🌿 <strong>Grass</strong> beats 🌊 <strong>Water</strong> &nbsp;→&nbsp; 🌊 <strong>Water</strong> beats 🔥 <strong>Fire</strong> &nbsp;→&nbsp; and back to the start.</p></div>'+
- '<p class="b">So a Fire move against a Grass Pokemax hits for double. But that same Fire Pokemax is weak to Water. <strong>Bringing the right type matters more than being a higher level.</strong></p>'+
- '<h2 class="s">Moves run out</h2>'+
- '<p class="b">Each Pokemax knows up to <strong>four moves</strong>, and every move has <strong>PP</strong> — the number of times you can use it. Use a move and its PP drops by one. If every move runs out, your Pokemax can only do a weak <strong>Struggle</strong>, so do not waste your strong move on an easy foe.</p>'+
- '<h2 class="s">A battle, step by step</h2>'+
- '<div class="callout"><p>🔥 <strong>Your Cinderling</strong> (Fire) — 33 HP · knows <strong>Ember</strong>, a Fire move.<br>🌿 <strong>Wild Grass Pokemax</strong> — 30 HP.</p></div>'+
- tbl(["Turn","You choose","What happens"],[
+ return '<h2 class="s">'+L("What a Pokemax battle is","Qué es un combate Pokemax")+'</h2>'+
+ '<p class="b">'+L("You bring a team of up to <strong>three Pokemax</strong>, but only <strong>one fights at a time</strong> — like a tag-team. Each Pokemax has its own <strong>HP</strong>. When a Pokemax\'s HP reaches <strong>0</strong> it <strong>faints</strong> and leaves the battle.","Llevas un equipo de hasta <strong>tres Pokemax</strong>, pero solo <strong>uno pelea a la vez</strong> — como un relevo. Cada Pokemax tiene su propio <strong>HP</strong>. Cuando el HP de un Pokemax llega a <strong>0</strong> se <strong>debilita</strong> y sale del combate.")+'</p>'+
+ '<p class="b">'+L("You <strong>win</strong> when all three of the enemy\'s Pokemax have fainted. It is still turn-based: you pick a move, they pick a move, and the faster Pokemax goes first.","<strong>Ganas</strong> cuando los tres Pokemax del enemigo se han debilitado. Sigue siendo por turnos: eliges un movimiento, ellos eligen uno, y el Pokemax más rápido va primero.")+'</p>'+
+ '<h2 class="s">'+L("Types beat each other (like rock-paper-scissors)","Los tipos se ganan entre sí (como piedra-papel-tijera)")+'</h2>'+
+ '<p class="b">'+L("Every Pokemax — and every move — has a <strong>type</strong>. Some types beat others. When your move\'s type beats the enemy\'s type, it is <strong>super effective</strong> and does <strong>double (×2) damage</strong>. Here is the simplest circle to remember:","Cada Pokemax — y cada movimiento — tiene un <strong>tipo</strong>. Algunos tipos ganan a otros. Cuando el tipo de tu movimiento gana al del enemigo, es <strong>súper eficaz</strong> y hace <strong>el doble (×2) de daño</strong>. Este es el círculo más fácil de recordar:")+'</p>'+
+ '<div class="callout"><p>'+L("🔥 <strong>Fire</strong> beats 🌿 <strong>Grass</strong> &nbsp;→&nbsp; 🌿 <strong>Grass</strong> beats 🌊 <strong>Water</strong> &nbsp;→&nbsp; 🌊 <strong>Water</strong> beats 🔥 <strong>Fire</strong> &nbsp;→&nbsp; and back to the start.","🔥 <strong>Fire</strong> gana a 🌿 <strong>Grass</strong> &nbsp;→&nbsp; 🌿 <strong>Grass</strong> gana a 🌊 <strong>Water</strong> &nbsp;→&nbsp; 🌊 <strong>Water</strong> gana a 🔥 <strong>Fire</strong> &nbsp;→&nbsp; y de vuelta al inicio.")+'</p></div>'+
+ '<p class="b">'+L("So a Fire move against a Grass Pokemax hits for double. But that same Fire Pokemax is weak to Water. <strong>Bringing the right type matters more than being a higher level.</strong>","Así, un movimiento de tipo Fire contra un Pokemax Grass pega el doble. Pero ese mismo Pokemax Fire es débil a Water. <strong>Llevar el tipo correcto importa más que tener más nivel.</strong>")+'</p>'+
+ '<h2 class="s">'+L("Moves run out","Los movimientos se agotan")+'</h2>'+
+ '<p class="b">'+L("Each Pokemax knows up to <strong>four moves</strong>, and every move has <strong>PP</strong> — the number of times you can use it. Use a move and its PP drops by one. If every move runs out, your Pokemax can only do a weak <strong>Struggle</strong>, so do not waste your strong move on an easy foe.","Cada Pokemax conoce hasta <strong>cuatro movimientos</strong>, y cada uno tiene <strong>PP</strong> — la cantidad de veces que puedes usarlo. Usa un movimiento y su PP baja en uno. Si se agotan todos, tu Pokemax solo puede hacer un débil <strong>Struggle</strong>, así que no gastes tu movimiento fuerte en un rival fácil.")+'</p>'+
+ '<h2 class="s">'+L("A battle, step by step","Un combate, paso a paso")+'</h2>'+
+ '<div class="callout"><p>'+L("🔥 <strong>Your Cinderling</strong> (Fire) — 33 HP · knows <strong>Ember</strong>, a Fire move.<br>🌿 <strong>Wild Grass Pokemax</strong> — 30 HP.","🔥 <strong>Tu Cinderling</strong> (Fire) — 33 HP · conoce <strong>Ember</strong>, un movimiento de Fire.<br>🌿 <strong>Pokemax Grass salvaje</strong> — 30 HP.")+'</p></div>'+
+ tbl(L(["Turn","You choose","What happens"],["Turno","Eliges","Qué pasa"]),LANG==="es"?[
+  ["1",'🔥 <strong>Ember</strong>',"Fire gana a Grass, así que es <strong>súper eficaz</strong> — un golpe normal de ~10 se vuelve <strong>~20</strong>. <strong>Salvaje: 30 → 10.</strong>"],
+  ["2",'🔥 <strong>Ember</strong> otra vez',"Otro golpe ×2. <strong>Salvaje: 10 → 0.</strong> Se debilita — ¡ganas el combate! 🎉"]
+ ]:[
   ["1",'🔥 <strong>Ember</strong>',"Fire beats Grass, so it is <strong>super effective</strong> — a normal ~10 hit becomes <strong>~20</strong>. <strong>Wild: 30 → 10.</strong>"],
   ["2",'🔥 <strong>Ember</strong> again',"Another ×2 hit. <strong>Wild: 10 → 0.</strong> It faints — you win the battle! 🎉"]
  ],["n","k",""])+
- '<p class="b">Two moves, because you picked the type that wins. A wrong-type move might have taken five or six.</p>'+
- '<h2 class="s">Catching a wild Pokemax</h2>'+
- '<p class="b">If a Pokemax is <strong>wild</strong> and you want to keep it, do <strong>not</strong> knock it out — a fainted Pokemax cannot be caught. Instead:</p>'+
- tbl(["Step","Do this"],[
+ '<p class="b">'+L("Two moves, because you picked the type that wins. A wrong-type move might have taken five or six.","Dos movimientos, porque elegiste el tipo que gana. Un movimiento de tipo equivocado habría tardado cinco o seis.")+'</p>'+
+ '<h2 class="s">'+L("Catching a wild Pokemax","Capturar un Pokemax salvaje")+'</h2>'+
+ '<p class="b">'+L("If a Pokemax is <strong>wild</strong> and you want to keep it, do <strong>not</strong> knock it out — a fainted Pokemax cannot be caught. Instead:","Si un Pokemax es <strong>salvaje</strong> y quieres quedártelo, <strong>no</strong> lo dejes fuera de combate — un Pokemax debilitado no se puede capturar. En su lugar:")+'</p>'+
+ tbl(L(["Step","Do this"],["Paso","Haz esto"]),LANG==="es"?[
+  ["1","<strong>Debilítalo.</strong> Bájale el HP — pero déjalo con vida."],
+  ["2","<strong>Añade un Estado.</strong> Duérmelo o congélalo — eso hace la captura mucho más fácil."],
+  ["3","<strong>Lanza una OILball.</strong> Cuanto más bajo su HP y mejor tu OILball, mayor tu probabilidad de capturarlo."]
+ ]:[
   ["1","<strong>Weaken it.</strong> Chip its HP down low — but leave it alive."],
   ["2","<strong>Add a Status.</strong> Put it to Sleep or Freeze it — that makes catching much easier."],
   ["3","<strong>Throw an OILball.</strong> The lower its HP and the better your OILball, the higher your chance to catch it."]
  ],["n",""])+
- '<div class="callout"><p>🎣 Throwing an OILball at a <strong>full-health</strong> Pokemax almost never works — always weaken it first. The full catching maths is on the <a href="#catching">Catching</a> page.</p></div>'+
- '<div class="callout"><p>🎓 Ready for more? The <a href="#petbattle">Pokemax Battles</a> page has every type, all the moves and the status effects. This same fight, with the full rules.</p></div>';
+ '<div class="callout"><p>'+L("🎣 Throwing an OILball at a <strong>full-health</strong> Pokemax almost never works — always weaken it first. The full catching maths is on the <a href=\"#catching\">Catching</a> page.","🎣 Lanzar una OILball a un Pokemax a <strong>HP completo</strong> casi nunca funciona — debilítalo primero. Toda la matemática de captura está en la página de <a href=\"#catching\">Captura</a>.")+'</p></div>'+
+ '<div class="callout"><p>'+L("🎓 Ready for more? The <a href=\"#petbattle\">Pokemax Battles</a> page has every type, all the moves and the status effects. This same fight, with the full rules.","🎓 ¿Listo para más? La página de <a href=\"#petbattle\">Combates Pokemax</a> tiene todos los tipos, todos los movimientos y los estados. Esta misma pelea, con las reglas completas.")+'</p></div>';
 }};
 
 PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your account is created the first time you make a profile from the Kiosk, or the first time you join a game — whichever happens first.",h:function(){
@@ -2243,15 +2278,16 @@ PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The fir
 /* ══════════════════════════════════════════════════════════════════
    NAV / ROUTER
    ══════════════════════════════════════════════════════════════════ */
+/* NAV group: [enTitle, items, esTitle]; item: [id, enLabel, esLabel]. */
 var NAV=[
- ["The guide",[["home","Home"],["start","Getting Started"],["combat","Combat"],["consumables","Consumables"],["gear","Gear &amp; Forge"],["weapons","Weapons"],["modes","Game Modes"],["abyss","The Eternal Abyss"],["clans","Clans"],["diplomacy","Clan Diplomacy"],["sabotage","Clan Sabotage"],["economy","Economy &amp; Progression"]]],
- ["Tutorials",[["tut-combat","Combat Basics"],["tut-pokemax","Pokemax Basics"]]],
- ["The world",[["valestia","Valestia"],["factions","Factions"],["lore","Lore"],["mysteries","Mysteries"]]],
- ["Campaign",[["characters","Characters"],["story","The Main Story"],["sides","Side Stories"]]],
- ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"],["gyms","Pokemax Gyms"]]],
- ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
- ["Expeditions",[["expeditions","How Expeditions Work"],["sunken-fang","Sunken Fang Archipelago"]]],
- ["Reference",[["screens","What It Looks Like"]]]
+ ["The guide",[["home","Home","Inicio"],["start","Getting Started","Primeros pasos"],["combat","Combat","Combate"],["consumables","Consumables","Consumibles"],["gear","Gear &amp; Forge","Equipo y Forja"],["weapons","Weapons","Armas"],["modes","Game Modes","Modos de juego"],["abyss","The Eternal Abyss","El Abismo Eterno"],["clans","Clans","Clanes"],["diplomacy","Clan Diplomacy","Diplomacia de clanes"],["sabotage","Clan Sabotage","Sabotaje de clanes"],["economy","Economy &amp; Progression","Economía y progresión"]],"La guía"],
+ ["Tutorials",[["tut-combat","Combat Basics","Combate básico"],["tut-pokemax","Pokemax Basics","Pokemax básico"]],"Tutoriales"],
+ ["The world",[["valestia","Valestia","Valestia"],["factions","Factions","Facciones"],["lore","Lore","Lore"],["mysteries","Mysteries","Misterios"]],"El mundo"],
+ ["Campaign",[["characters","Characters","Personajes"],["story","The Main Story","La Historia Principal"],["sides","Side Stories","Historias secundarias"]],"Campaña"],
+ ["Pokemax",[["pets","The Pokemax System","El sistema Pokemax"],["lab","Pokemax Lab","Laboratorio Pokemax"],["species","Species &amp; Evolution","Especies y evolución"],["genes","Genes &amp; Essence","Genes y Esencia"],["petbattle","Pokemax Battles","Combates Pokemax"],["catching","Catching","Captura"],["gyms","Pokemax Gyms","Gimnasios Pokemax"]],"Pokemax"],
+ ["Mechas",[["mechas","The Mecha System","El sistema Mecha"],["portal","The Greyveil Portal","El Portal de Greyveil"],["hangar","Building a Wanzer","Construir un Wanzer"],["mechawpn","Mecha Weapons","Armas de Mecha"],["mechafight","Mecha Combat","Combate Mecha"],["pilot","Pilot Ranks","Rangos de piloto"]],"Mechas"],
+ ["Expeditions",[["expeditions","How Expeditions Work","Cómo funcionan"],["sunken-fang","Sunken Fang Archipelago","Archipiélago del Colmillo Hundido"]],"Expediciones"],
+ ["Reference",[["screens","What It Looks Like","Cómo se ve"]],"Referencia"]
 ];
 var COUNTS={gear:"27",weapons:"18",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"38",sides:"50"};
 
@@ -2260,22 +2296,82 @@ var GACC={"The guide":"var(--brass)","Tutorials":"#2FA3A3","The world":"var(--ve
 var PACC={};
 NAV.forEach(function(g){ (g[1]||[]).forEach(function(p){ PACC[p[0]]=GACC[g[0]]||"var(--brass)"; }); });
 
-document.getElementById("nav").innerHTML=NAV.map(function(g){
- var acc=GACC[g[0]]||"var(--verdigris)";
- return '<div class="navgrp"><div class="navgrp__t" style="color:'+acc+'">'+g[0]+'</div><div class="nav">'+
-  g[1].map(function(p){
-   return '<a href="#'+p[0]+'" data-p="'+p[0]+'" style="--accent:'+(PACC[p[0]]||"var(--brass)")+'">'+p[1]+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
-  }).join("")+"</div></div>";
-}).join("");
+/* Spanish page headers (eyebrow / title / subtitle), keyed by page id. Bodies
+   fall back to English until translated; headers all live here. */
+var TR_HEAD={
+ "tut-combat":{e:"Tutorial",t:"Combate básico",d:"Tu primera pelea, explicada turno a turno — con un ejemplo completo. Sin matemáticas."},
+ "tut-pokemax":{e:"Tutorial",t:"Pokemax básico",d:"Tu primer combate Pokemax, paso a paso — tipos, HP y cómo capturar uno. Para principiantes."},
+ start:{e:"La guía",t:"Primeros pasos",d:"No hay registro. Tu cuenta se crea la primera vez que haces un perfil en el Kiosco, o la primera vez que entras a una partida — lo que ocurra primero."},
+ combat:{e:"La guía",t:"Combate",d:"Cada turno, contra jugadores y NPCs por igual, funciona con cuatro acciones y la aritmética de abajo. Estas son las fórmulas reales del bot."},
+ consumables:{e:"La guía",t:"Consumibles",d:"Se compran en el panel de Tienda con Oil Coins, se guardan en tu bolsa y se usan en tu turno. Los precios los pone Max — estos son los valores estándar."},
+ gear:{e:"La guía",t:"Equipo y Forja",d:"El equipo crafteado sube tus stats en todos los modos. Dos ranuras de equipo, guardadas por ranura de stat, mejorables hasta +5."},
+ weapons:{e:"La guía",t:"Armas",d:"Una ranura de equipo aparte del gear, con su propio catálogo, sus materiales y una habilidad activa que disparas en combate."},
+ modes:{e:"La guía",t:"Modos de juego",d:"Qué modos están activos, cuánto pagan y los límites diarios los pone Max. Las mecánicas no."},
+ screens:{e:"Referencia",t:"Cómo se ve",d:"Las pantallas de combate reales, tal como las dibuja el bot en Discord. Cada diseño está reproducido del código que lo genera — las mismas barras de HP, líneas de stats y avisos de turno que verás en vivo."},
+ abyss:{e:"La mazmorra",t:"El Abismo Eterno",d:"Un roguelite de 1–3 jugadores, y el modo individual más profundo del juego. Cada run es distinta."},
+ clans:{e:"La guía",t:"Clanes",d:"Grupos permanentes que otorgan bonos pasivos colectivos, controlan territorio y desbloquean sus propias recetas de forja."},
+ factions:{e:"El mundo",t:"Facciones",d:"Los poderes de Valestia, tal como los registra el Códice. Ordenados por cuánto del tablero ocupa cada uno realmente."},
+ economy:{e:"La guía",t:"Economía y progresión",d:"Dos monedas, una colección de cartas, logros que pagan, y temporadas que no te quitan nada."},
+ pets:{e:"Pokemax",t:"El sistema Pokemax",d:"Captura animales salvajes por toda Valestia, súbelos a nivel 50 con dos evoluciones y pelea 3 contra 3. Todo un juego de monstruos dentro del RPG, sin compartir ninguna de sus reglas de combate."},
+ lab:{e:"Pokemax",t:"Laboratorio Pokemax",d:"Cada especie por nombre — su tipo, rol, stats exactos a cualquier nivel y tirada de genes, su línea evolutiva y su movepool completo. Las mismas fórmulas del bot."},
+ species:{e:"Pokemax",t:"Especies y evolución",d:"84 especies, 28 familias, nueve regiones. Cada familia es un animal con tres etapas, y cada región cría un tipo."},
+ genes:{e:"Pokemax",t:"Genes y Esencia",d:"Cuatro números ocultos que se tiran al capturar un Pokemax, y la única moneda capaz de moverlos."},
+ petbattle:{e:"Pokemax",t:"Combates Pokemax",d:"Ocho tipos, 61 movimientos, cinco estados alterados, y multiplicadores que se acumulan tanto como para terminar una pelea de un golpe."},
+ catching:{e:"Pokemax",t:"Captura",d:"El Safari, las OILballs, y la fórmula que decide si lo que acabas de pelear es tuyo."},
+ mechas:{e:"Mechas",t:"El sistema Mecha",d:"Front Mission en un canal de Discord: pilota un wanzer de cuatro partes destructibles, gasta Puntos de Acción en vez de turnos gratis, y gana desmontando la máquina enemiga miembro a miembro."},
+ portal:{e:"Mechas",t:"El Portal de Greyveil",d:"Los mechas están detrás del Cabo Greyveil. Abrir el portal es un compromiso de endgame deliberado — un botín de materiales de todo el mapa, y luego un duelo."},
+ hangar:{e:"Mechas",t:"Construir un Wanzer",d:"Cuatro partes — un cuerpo, dos brazos, piernas — cada una con un arquetipo y una Marca, todas bajo el presupuesto de peso que fija el chasis."},
+ mechawpn:{e:"Mechas",t:"Armas de Mecha",d:"Siete familias de armas, cada una una respuesta distinta a la misma pregunta: cómo romper cuatro partes antes de que rompan las tuyas."},
+ mechafight:{e:"Mechas",t:"Combate Mecha",d:"Sin turnos gratis. Cada acción gasta Puntos de Acción, y disparar no devuelve ninguno — toda la pelea es una economía de PA librada sobre cuatro partes destructibles."},
+ pilot:{e:"Mechas",t:"Rangos de piloto",d:"No compras tu camino al Mk5 — lo peleas. La XP de piloto de tus victorias limita la Marca más alta que puedes construir y equipar."},
+ characters:{e:"Campaña",t:"Personajes",d:"La gente que recorre el camino contigo. Retratos y la verdad detrás de ellos — más se unirán a medida que crece la historia."},
+ diplomacy:{e:"La guía",t:"Diplomacia de clanes",d:"Los clanes que poseen regiones cobran a los de fuera por cazar allí. La diplomacia deja que dos clanes firmen un tratado que cambia acceso con descuento por OIL — un trato que, una vez firmado, no se puede romper."},
+ sabotage:{e:"La guía",t:"Sabotaje de clanes",d:"Incursiones encubiertas clan-contra-clan que plantan una maldición temporal en la región de un rival — sin conquista, sin cambio de propiedad, solo un cuchillo en la oscuridad que el dueño y sus aliados tienen una ventana para frenar."},
+ gyms:{e:"Pokemax",t:"Gimnasios Pokemax",d:"Diez gimnasios, uno por región, cada uno con una medalla por ganar — y cada uno un asiento que un jugador puede tomar, defender y perder. La capa de territorio de endgame para Pokemax."},
+ mysteries:{e:"El mundo",t:"Misterios",d:"Valestia guarda secretos. Algunos esperan a un jugador que haga lo correcto en el lugar correcto — y no hay dos iguales."},
+ valestia:{e:"El mundo",t:"Valestia",d:"Diez regiones cazables, los caminos entre ellas, y los lugares donde ocurre la historia. Selecciona cualquier marcador del mapa."},
+ lore:{e:"El mundo",t:"Lore",d:"Lo que dice el pergamino, lo que hay bajo Aldenmoor, y lo que le está pasando al agua en el puerto de Stormbay."},
+ story:{e:"Campaña",t:"La Historia Principal",d:"Una campaña que corre dentro del motor de combate — tú y los propios protagonistas de la historia peleando a tu lado, tres capítulos de profundidad y todavía escribiéndose."},
+ sides:{e:"Campaña",t:"Historias secundarias",d:"Cincuenta misiones más en diez arcos, aparte de la línea principal. La mayoría son de 3 jugadores; cada arco es una cadena que juegas en orden."},
+ expeditions:{e:"Expediciones",t:"Cómo funcionan las expediciones",d:"Viajes marítimos temporales a regiones-isla que están aparte del mapa normal — cada una con sus mareas, moneda, fauna y botín exclusivo. Zarpas desde Ravennor y vuelves."},
+ "sunken-fang":{e:"Expediciones",t:"El Archipiélago del Colmillo Hundido",d:"El primer destino de expedición — una corona rota de islas más allá del Sable Sea, donde una marea de seis horas cambia la caza, la fauna y los senderos."}
+};
 
-document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
- var p=PAGES[k];
- var acc=PACC[k]||"var(--brass)";
- if(p.nohead) return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'">'+p.h()+'</section>';
- return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'"><div class="ph"><div class="ph__e">'+p.e+'</div><h1>'+p.t+'</h1>'+
-  (p.d?'<p class="ph__d">'+p.d+"</p>":"")+"</div>"+p.h()+
-  '<div class="foot"><p><b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. Every formula, item, region, quest and line of prose here was read out of the live bot. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.</p></div></section>';
-}).join("");
+function renderNav(){
+ document.getElementById("nav").innerHTML=NAV.map(function(g){
+  var acc=GACC[g[0]]||"var(--verdigris)";
+  return '<div class="navgrp"><div class="navgrp__t" style="color:'+acc+'">'+E(L(g[0],g[2]))+'</div><div class="nav">'+
+   g[1].map(function(p){
+    return '<a href="#'+p[0]+'" data-p="'+p[0]+'" style="--accent:'+(PACC[p[0]]||"var(--brass)")+'">'+L(p[1],p[2])+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
+   }).join("")+"</div></div>";
+ }).join("");
+}
+function renderMain(){
+ var foot=L('<b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. Every formula, item, region, quest and line of prose here was read out of the live bot. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.',
+  '<b>The Guardians — Compendio.</b> Un RPG de Discord creado y gestionado por <b>Max</b>. Cada fórmula, objeto, región, misión y línea de texto aquí se lee del bot en vivo. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max en el servidor donde vive el bot.');
+ document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
+  var p=PAGES[k], acc=PACC[k]||"var(--brass)", th=(TR_HEAD[k]||{});
+  if(p.nohead) return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'">'+p.h()+'</section>';
+  return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'"><div class="ph"><div class="ph__e">'+L(p.e,th.e)+'</div><h1>'+L(p.t,th.t)+'</h1>'+
+   (p.d?'<p class="ph__d">'+L(p.d,th.d)+"</p>":"")+"</div>"+p.h()+
+   '<div class="foot"><p>'+foot+'</p></div></section>';
+ }).join("");
+}
+renderNav();
+renderMain();
+function syncLang(){
+ document.documentElement.lang=LANG;
+ Array.prototype.forEach.call(document.querySelectorAll(".langsw__b"),function(b){ b.classList.toggle("on",b.dataset.lang===LANG); });
+}
+function setLang(l){
+ l=(l==="es"?"es":"en"); if(l===LANG) return;
+ LANG=l; try{ localStorage.setItem("glang",l); }catch(e){}
+ built={}; renderNav(); renderMain(); route(); syncLang();
+}
+document.getElementById("langsw").addEventListener("click",function(e){
+ var b=e.target.closest("[data-lang]"); if(b) setLang(b.dataset.lang);
+});
+syncLang();
 
 var rail=document.getElementById("rail"), scrim=document.getElementById("scrim");
 function closeRail(){rail.classList.remove("is-open");scrim.classList.remove("is-on");}
