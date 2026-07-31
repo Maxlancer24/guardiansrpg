@@ -702,7 +702,16 @@ var DTR={
  "A corrupted region loses its drops, its enemies get stronger and gain a Corrupted tag, and its upgrades freeze. Free it by winning a staged Vanguard PvE liberation.":"Una región corrupta pierde sus drops, sus enemigos se vuelven más fuertes y ganan la etiqueta Corrupted, y sus mejoras se congelan. Libérala ganando una liberación Vanguard PvE por etapas.",
  "A large-scale castle defense across an 8-zone, 3-lane castle, with phases from announcement to result. Hold zones to keep enemies from the Throne Room. Objectives: Intercept, Supply, Rescue, Sabotage. Pays War Oil.":"Una defensa de castillo a gran escala en un castillo de 8 zonas y 3 carriles, con fases desde el anuncio hasta el resultado. Mantén zonas para alejar a los enemigos de la Sala del Trono. Objetivos: Intercept, Supply, Rescue, Sabotage. Paga War Oil.",
  "Multi-team warfare across 5 sectors — North, Center (the most contested), South, Vanguard and Rearguard. Winning a sector grants rewards and an edge in the next.":"Guerra de varios equipos en 5 sectores — Norte, Centro (el más disputado), Sur, Vanguardia y Retaguardia. Ganar un sector da recompensas y ventaja en el siguiente.",
- "A persistent control layer. Clans and players hold territory for passive combat bonuses in the zones they hold.":"Una capa de control persistente. Clanes y jugadores controlan territorio por bonos pasivos de combate en las zonas que tienen."
+ "A persistent control layer. Clans and players hold territory for passive combat bonuses in the zones they hold.":"Una capa de control persistente. Clanes y jugadores controlan territorio por bonos pasivos de combate en las zonas que tienen.",
+ "+16% material drop chance":"+16% de prob. de drop de materiales","Crafters":"Crafteadores",
+ "+15% max HP vs NPCs":"+15% de HP máx vs NPCs","PvE survival":"Supervivencia PvE",
+ "+15% damage vs NPCs":"+15% de daño vs NPCs","PvE damage":"Daño PvE",
+ "−12% damage taken from NPCs":"−12% de daño recibido de NPCs","PvE tanking":"Tanqueo PvE",
+ "10% chance a daily win doesn't count":"10% de prob. de que una victoria diaria no cuente","Playing past caps":"Jugar más allá de los topes",
+ "25% potion preservation vs NPCs":"25% de conservación de pociones vs NPCs","Potion efficiency":"Eficiencia de pociones",
+ "+12% crit chance vs NPCs":"+12% de prob. de crítico vs NPCs","PvE DPS":"DPS PvE",
+ "−10% all damage taken (needs 3+ clanmates on the team)":"−10% de todo el daño recibido (necesita 3+ del clan en el equipo)","Team synergy":"Sinergia de equipo",
+ "−25% chance to be targeted by Stalker / Marked Hunt":"−25% de prob. de ser objetivo del Stalker / Marked Hunt","Avoiding NPC threats":"Evitar amenazas de NPC"
 };
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
@@ -1713,18 +1722,18 @@ PAGES.abyss={t:"The Eternal Abyss",e:"The dungeon",d:"A 1–3 player roguelite, 
 }};
 
 PAGES.clans={t:"Clans",e:"The guide",d:"Permanent groups that grant collective passive bonuses, hold territory, and unlock their own forge recipes.",h:function(){
- return '<h2 class="s">Founding one</h2>'+
- tbl(["Rule","Value"],[["Creation cost","12,500 Oil Coins"],["Max members","15"],["Re-join cooldown after leaving","72 hours"],["Invite expiry","72 hours"],["Active passives at once","2 of 9"],["Upgrade levels per passive","5"]],["k","n"])+
- '<div class="callout"><p><strong>Join a clan before you found one.</strong> Enjoy the passives for a while before you spend 12,500 OIL finding out which two you actually want.</p></div>'+
- '<h2 class="s">Roles</h2>'+
- tbl(["Role","Permissions"],[["Owner","Full control — passives, invites and kicks, treasury"],["Sub Leader","Invite, manage daily missions"],["Member","Participate and benefit from passives"]],["k",""])+
- '<h2 class="s">The nine passives</h2>'+
- '<p class="b">Only <strong>two are active at once</strong>. Each has 5 upgrade levels paid from the clan treasury; the values below are at level 5.</p>'+
- tbl(["Passive","At level 5","Best for"],CLANPASS.map(function(r){return [r[0],r[1],r[2]];}),["k","",""])+
- '<div class="callout"><p><strong>Oathbound Link</strong> only fires with <strong>3+ members of the same clan on the same team</strong>. It is worthless unless you coordinate who queues together.</p></div>'+
- '<h2 class="s">Treasury, missions and forge</h2>'+
- '<p class="b">Your clan has shared <strong>daily objectives</strong> — win X of a mode, earn X Oil collectively — that pay the treasury in Oil and members in XP. The treasury funds passive upgrades and <strong>Clan Forge</strong> recipe unlocks, which gate six gear pieces and two weapons behind the clan rather than the player.</p>'+
- '<p class="b">Clans also hold <strong>territory</strong>, which grants passive combat bonuses inside the zones they control.</p>';
+ return '<h2 class="s">'+L("Founding one","Fundar uno")+'</h2>'+
+ tbl(L(["Rule","Value"],["Regla","Valor"]),LANG==="es"?[["Costo de creación","12,500 Oil Coins"],["Máx. miembros","15"],["Cooldown para reingresar tras salir","72 horas"],["Caducidad de invitación","72 horas"],["Pasivas activas a la vez","2 de 9"],["Niveles de mejora por pasiva","5"]]:[["Creation cost","12,500 Oil Coins"],["Max members","15"],["Re-join cooldown after leaving","72 hours"],["Invite expiry","72 hours"],["Active passives at once","2 of 9"],["Upgrade levels per passive","5"]],["k","n"])+
+ '<div class="callout"><p>'+L("<strong>Join a clan before you found one.</strong> Enjoy the passives for a while before you spend 12,500 OIL finding out which two you actually want.","<strong>Únete a un clan antes de fundar uno.</strong> Disfruta las pasivas un rato antes de gastar 12,500 OIL para descubrir qué dos quieres de verdad.")+'</p></div>'+
+ '<h2 class="s">'+L("Roles","Roles")+'</h2>'+
+ tbl(L(["Role","Permissions"],["Rol","Permisos"]),LANG==="es"?[["Owner","Control total — pasivas, invitar y expulsar, tesoro"],["Sub Leader","Invitar, gestionar misiones diarias"],["Member","Participar y beneficiarse de las pasivas"]]:[["Owner","Full control — passives, invites and kicks, treasury"],["Sub Leader","Invite, manage daily missions"],["Member","Participate and benefit from passives"]],["k",""])+
+ '<h2 class="s">'+L("The nine passives","Las nueve pasivas")+'</h2>'+
+ '<p class="b">'+L("Only <strong>two are active at once</strong>. Each has 5 upgrade levels paid from the clan treasury; the values below are at level 5.","Solo <strong>dos están activas a la vez</strong>. Cada una tiene 5 niveles de mejora pagados del tesoro del clan; los valores de abajo son a nivel 5.")+'</p>'+
+ tbl(L(["Passive","At level 5","Best for"],["Pasiva","A nivel 5","Ideal para"]),CLANPASS.map(function(r){return [r[0],L(r[1],DTR[r[1]]),L(r[2],DTR[r[2]])];}),["k","",""])+
+ '<div class="callout"><p>'+L("<strong>Oathbound Link</strong> only fires with <strong>3+ members of the same clan on the same team</strong>. It is worthless unless you coordinate who queues together.","<strong>Oathbound Link</strong> solo se activa con <strong>3+ miembros del mismo clan en el mismo equipo</strong>. No sirve de nada si no coordinas quién entra junto.")+'</p></div>'+
+ '<h2 class="s">'+L("Treasury, missions and forge","Tesoro, misiones y forja")+'</h2>'+
+ '<p class="b">'+L("Your clan has shared <strong>daily objectives</strong> — win X of a mode, earn X Oil collectively — that pay the treasury in Oil and members in XP. The treasury funds passive upgrades and <strong>Clan Forge</strong> recipe unlocks, which gate six gear pieces and two weapons behind the clan rather than the player.","Tu clan tiene <strong>objetivos diarios</strong> compartidos — ganar X de un modo, ganar X Oil en conjunto — que pagan al tesoro en Oil y a los miembros en XP. El tesoro financia las mejoras de pasivas y los desbloqueos de recetas de <strong>Clan Forge</strong>, que ponen seis piezas de gear y dos armas detrás del clan en vez del jugador.")+'</p>'+
+ '<p class="b">'+L("Clans also hold <strong>territory</strong>, which grants passive combat bonuses inside the zones they control.","Los clanes también controlan <strong>territorio</strong>, que otorga bonos pasivos de combate dentro de las zonas que dominan.")+'</p>';
 }};
 
 PAGES.factions={t:"Factions",e:"The world",d:"The powers of Valestia, as the Codex records them. Ranked by how much of the board each one actually occupies.",h:function(){
@@ -1741,22 +1750,22 @@ PAGES.factions={t:"Factions",e:"The world",d:"The powers of Valestia, as the Cod
 }};
 
 PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a card collection, achievements that pay, and seasons that take nothing away from you.",h:function(){
- return '<h2 class="s">Currencies</h2>'+
+ return '<h2 class="s">'+L("Currencies","Monedas")+'</h2>'+
  '<div class="grid">'+
- '<div class="card"><div class="card__h"><span class="card__n">Oil Coins</span><span class="card__tag">OIL</span></div><div class="card__d">The main currency. Earned from most modes, daily message activity, and events. Spent on potions, crafting, enhancement, the roulette, founding a clan (12,500) and clan upgrades.</div></div>'+
- '<div class="card"><div class="card__h"><span class="card__n">War Oil</span></div><div class="card__d">Secondary currency from large-scale combat — Castle Siege and War. Used for siege and war progression.</div></div>'+
+ '<div class="card"><div class="card__h"><span class="card__n">Oil Coins</span><span class="card__tag">OIL</span></div><div class="card__d">'+L("The main currency. Earned from most modes, daily message activity, and events. Spent on potions, crafting, enhancement, the roulette, founding a clan (12,500) and clan upgrades.","La moneda principal. Se gana en la mayoría de los modos, por actividad diaria de mensajes, y en eventos. Se gasta en pociones, crafteo, mejoras, la ruleta, fundar un clan (12,500) y mejoras de clan.")+'</div></div>'+
+ '<div class="card"><div class="card__h"><span class="card__n">War Oil</span></div><div class="card__d">'+L("Secondary currency from large-scale combat — Castle Siege and War. Used for siege and war progression.","Moneda secundaria del combate a gran escala — Castle Siege y War. Se usa para la progresión de asedio y guerra.")+'</div></div>'+
  '</div>'+
  '<h2 class="s">Codex</h2>'+
- '<p class="b">A collection of cards you unlock as you play — enemies, gear, regions, allies and artifacts. Each has a discovery tier and a deeper <strong>tactical note</strong> you only unlock by fighting the thing enough. It is both a reference and a completion goal, and it pays XP and Oil as you fill it.</p>'+
+ '<p class="b">'+L("A collection of cards you unlock as you play — enemies, gear, regions, allies and artifacts. Each has a discovery tier and a deeper <strong>tactical note</strong> you only unlock by fighting the thing enough. It is both a reference and a completion goal, and it pays XP and Oil as you fill it.","Una colección de cartas que desbloqueas al jugar — enemigos, gear, regiones, aliados y artefactos. Cada una tiene un tier de descubrimiento y una <strong>nota táctica</strong> más profunda que solo desbloqueas peleando lo suficiente contra ella. Es a la vez una referencia y un objetivo de completado, y paga XP y Oil a medida que la llenas.")+'</p>'+
  '<h2 class="s">Badges</h2>'+
- '<p class="b">Achievements for hitting milestones — crit counts, wins, and other tracked stats. Some grant small combat bonuses such as crit or dodge chance.</p>'+
- '<h2 class="s">Seasons and medals</h2>'+
- '<p class="b">When a season changes, the server takes a <strong>snapshot</strong> and awards medals for the level milestones you crossed.</p>'+
- tbl(["Level reached","Medal"],[["10","Bronze"],["20","Silver"],["30","Gold"],["40","Diamond"]],["n","k"])+
- '<div class="callout"><p><strong>A season change does not reset your character.</strong> Nothing is wiped, nothing is taken. It records where you finished and rewards the milestones you crossed. View a season card with <span class="cmd">!profile @user s1</span>.</p></div>'+
+ '<p class="b">'+L("Achievements for hitting milestones — crit counts, wins, and other tracked stats. Some grant small combat bonuses such as crit or dodge chance.","Logros por alcanzar hitos — cantidad de críticos, victorias, y otras stats registradas. Algunos dan pequeños bonos de combate como prob. de crítico o esquiva.")+'</p>'+
+ '<h2 class="s">'+L("Seasons and medals","Temporadas y medallas")+'</h2>'+
+ '<p class="b">'+L("When a season changes, the server takes a <strong>snapshot</strong> and awards medals for the level milestones you crossed.","Cuando cambia una temporada, el servidor toma una <strong>instantánea</strong> y otorga medallas por los hitos de nivel que cruzaste.")+'</p>'+
+ tbl(L(["Level reached","Medal"],["Nivel alcanzado","Medalla"]),[["10","Bronze"],["20","Silver"],["30","Gold"],["40","Diamond"]],["n","k"])+
+ '<div class="callout"><p>'+L("<strong>A season change does not reset your character.</strong> Nothing is wiped, nothing is taken. It records where you finished and rewards the milestones you crossed. View a season card with <span class=\"cmd\">!profile @user s1</span>.","<strong>Un cambio de temporada no reinicia tu personaje.</strong> Nada se borra, nada se quita. Registra dónde terminaste y premia los hitos que cruzaste. Mira una carta de temporada con <span class=\"cmd\">!profile @user s1</span>.")+'</p></div>'+
  '<h2 class="s">Bonds</h2>'+
- '<p class="b">Bonds track <strong>relationships between players</strong>. Playing with — or against — the same people builds a shared history. Check yours with <span class="cmd">!bonds</span>, notable ones with <span class="cmd">!bonds_top</span>, and the log with <span class="cmd">!bonds_history</span>.</p>'+
- '<p class="b">Bonds are also a currency. At the <strong>Weapon Forge</strong>, <strong>100 Bonds</strong> permanently unlocks either of two weapon recipes — <a href="#weapons"><strong>Revenant Edge</strong></a> and <strong>Requiem Aegis</strong> — both built around a fallen ally\'s spirit. Unlock once, then craft and enhance them like any other weapon.</p>';
+ '<p class="b">'+L("Bonds track <strong>relationships between players</strong>. Playing with — or against — the same people builds a shared history. Check yours with <span class=\"cmd\">!bonds</span>, notable ones with <span class=\"cmd\">!bonds_top</span>, and the log with <span class=\"cmd\">!bonds_history</span>.","Los Bonds registran <strong>relaciones entre jugadores</strong>. Jugar con — o contra — la misma gente construye una historia compartida. Mira los tuyos con <span class=\"cmd\">!bonds</span>, los notables con <span class=\"cmd\">!bonds_top</span>, y el registro con <span class=\"cmd\">!bonds_history</span>.")+'</p>'+
+ '<p class="b">'+L("Bonds are also a currency. At the <strong>Weapon Forge</strong>, <strong>100 Bonds</strong> permanently unlocks either of two weapon recipes — <a href=\"#weapons\"><strong>Revenant Edge</strong></a> and <strong>Requiem Aegis</strong> — both built around a fallen ally\'s spirit. Unlock once, then craft and enhance them like any other weapon.","Los Bonds también son una moneda. En la <strong>Forja de Armas</strong>, <strong>100 Bonds</strong> desbloquean para siempre una de dos recetas de arma — <a href=\"#weapons\"><strong>Revenant Edge</strong></a> y <strong>Requiem Aegis</strong> — ambas construidas en torno al espíritu de un aliado caído. Desbloquea una vez, luego craftea y mejora como cualquier otra arma.")+'</p>';
 }};
 
 PAGES.pets={t:"The Pokemax System",e:"Pokemax",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG, sharing none of its combat rules.",h:function(){
