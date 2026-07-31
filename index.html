@@ -1037,7 +1037,8 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
   ["📜","The Story","story","var(--brass)","A story campaign, "+COUNTS.story+" missions and counting, that runs inside the combat engine at your party's side."],
   ["🏛️","Clans &amp; Gyms","clans","var(--t-rock)","Found a clan, hold territory, sign treaties, and conquer the ten regional Gyms."],
   ["🎲","Game Modes","modes","var(--t-ghost)","Duels, Triad, Horde, the Eternal Abyss, sieges, Vanguard — nineteen ways to fight."],
-  ["🔮","Mysteries","mysteries","var(--corrupt)","Hidden secrets scattered across the world, each with a surprise found nowhere else."]
+  ["🔮","Mysteries","mysteries","var(--corrupt)","Hidden secrets scattered across the world, each with a surprise found nowhere else."],
+  ["🧭","Expeditions","expeditions","#0E9CB8","Timed sea voyages from Ravennor to island regions with their own tides, currency and exclusive loot."]
  ];
  return '<section class="hero">'+
   '<img class="hero__bg" src="'+MAP_SRC+'" alt="The map of Valestia" width="1485" height="810">'+
@@ -2180,6 +2181,55 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
  '<p class="b" style="margin:0"><strong>Reward:</strong> Trainee\'s Edge, the starter weapon. The Aldenmoor Weaponsmiths\' Guild had one rule before they taught anything else: <em>one strike, placed correctly, at the moment that matters.</em></p></div></div>';
 }};
 
+PAGES.expeditions={t:"How Expeditions Work",e:"Expeditions",d:"Timed sea voyages to island regions that sit apart from the normal map — each with its own tides, currency, wildlife and exclusive loot. You sail out from Ravennor and back.",h:function(){
+ return '<h2 class="s">What an expedition is</h2>'+
+ '<p class="b">An <strong>expedition</strong> is a <strong>timed, repeatable voyage</strong> to a special region that is not on the normal Valestia map. Each destination has its own <strong>tides, wildlife, regional currency and exclusive rewards</strong>, and it is reached only by <strong>ship from Ravennor</strong>. Expeditions run in scheduled windows — a launch opens boarding, the seas stay open for a set time, and then it closes.</p>'+
+ '<p class="b">Open the permanent <strong>Ravennor Expedition Hall</strong> once you are in Ravennor. It lists every destination, your voyages, and a short how-it-works panel — new expeditions appear here over time without replacing the ones before them.</p>'+
+ '<h2 class="s">The voyage — step by step</h2>'+
+ tbl(["Step","What you do"],[
+  ["1 · Reach Ravennor","Travel the normal Valestia map to <strong>Ravennor</strong> and open its <strong>Expedition Hall</strong>."],
+  ["2 · Browse &amp; board","Pick a destination, read its guide, and press <strong>Board Ship</strong>. The sea crossing takes <strong>45 real minutes</strong> and <strong>cannot be skipped</strong> — not even by a clan teleport."],
+  ["3 · Land &amp; play","On arrival your regional access swaps to the expedition. Use <span class=\"cmd\">!hunt</span> and <span class=\"cmd\">!safari</span> in the expedition channel only."],
+  ["4 · Spend &amp; sail home","Trade your regional currency at the destination\'s own exchange, then press <strong>Return to Ravennor</strong> — another <strong>45-minute</strong> voyage."]
+ ],["k",""])+
+ '<div class="callout"><p>⏳ The 45-minute timers are <strong>real time</strong> and survive a bot restart, so a voyage is never skipped or lost. Even after a launch <em>ends</em>, anyone already on the islands can still sail back.</p></div>'+
+ '<h2 class="s">Currency &amp; rewards</h2>'+
+ '<p class="b">While you are on an expedition, a successful <span class="cmd">!hunt</span> pays a <strong>regional currency</strong> instead of the usual crafting materials, and <span class="cmd">!safari</span> finds <strong>Pokemax that live only there</strong>. You spend the currency at the destination\'s own <strong>exchange</strong> on exclusive gear, a weapon, catch items and a permanent title — none of it craftable back at the mainland forge.</p>'+
+ '<div class="callout"><p>🧭 <strong>Destinations live in their own section.</strong> The first one is open now — see <a href="#sunken-fang">The Sunken Fang Archipelago</a>.</p></div>';
+}};
+
+PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The first expedition destination — a broken crown of islands beyond the Sable Sea, where a six-hour tide changes the hunt, the wildlife and the trails.",h:function(){
+ return '<p class="b">The first expedition destination. <em>A broken crown of islands built over the ribs of an ancient leviathan, out beyond the Sable Sea.</em> Twice a day the ocean swallows the reefs and reveals them again, and every den, trail and hunting ground changes with it. Sail here from <a href="#expeditions">Ravennor</a> — 45 minutes each way.</p>'+
+ '<h2 class="s">The tides</h2>'+
+ '<p class="b">A <strong>tide</strong> flips between <strong>High</strong> and <strong>Low</strong> every <strong>6 hours</strong> (a live countdown shows the next change). The tide decides what your hunts pay and which Pokemax the Safari turns up:</p>'+
+ tbl(["Tide","Hunts pay","Safari Pokemax (tide-only)"],[
+  ['🌊 <strong>High Tide</strong>',"1–4 Fang Doubloons","The <strong>Driftfin</strong> line (→ Gale Ray → Tempest Manta) and the <strong>Shellwisp</strong> line (→ Lantern Hermit → Abyssal Hermit)."],
+  ['🏝️ <strong>Low Tide</strong>',"2–3 Fang Doubloons","The <strong>Coralisk</strong> line (→ Reef Basilisk → Tidereef Leviathan) and the <strong>Mangrove Sprout</strong> line (→ Tidegrove Strider → Tideroot Colossus)."]
+ ],["k","n",""])+
+ '<p class="b">That is <strong>four evolution lines found nowhere else in Valestia</strong>, split across the two tides — so catching them all means staying long enough to see the water turn.</p>'+
+ '<h2 class="s">Hunting the islands</h2>'+
+ '<p class="b"><span class="cmd">!hunt</span> works on the normal enemy, XP, OIL and daily Hunt Energy rules — but instead of materials it drops <strong>Fang Doubloons</strong>, the archipelago\'s own currency. The things you fight here are <strong>Drowned Corsairs</strong>, <strong>Reefbound Guardians</strong> and <strong>Brine Wraiths</strong>, scaled to your level.</p>'+
+ '<h2 class="s">The Fang Exchange</h2>'+
+ '<p class="b">Spend your Fang Doubloons at the islands\' shop. Prices are in Doubloons; several items are capped per voyage.</p>'+
+ tbl(["Item","Cost","What it does"],[
+  ['💎 Tideglass Shard',"3","Enhancement material for the Tideglass Compass (+4 and +5). Limit 5."],
+  ['🐉 Leviathan Scale',"4","Enhancement material for the Leviathan Harpoon (+4 and +5). Limit 5."],
+  ['🧪 Regen Potion',"5","Heals 40 HP now, then 30 HP on each of the next 2 turns."],
+  ['🔵 Tideglass OILball',"6","×3.5 catch power here (basic power elsewhere). Limit 5."],
+  ['🛢️ 1,000 OIL Cache',"8","Instantly adds 1,000 OIL to your balance."],
+  ['🌊 Tidal Mending Elixir',"10","Heals your 3 lowest-HP allies and leaves a healing afterglow."],
+  ['🔱 Sunken Fang Insignia',"15","Permanently unlocks the equippable title <strong>The Tidebound</strong>. Limit 1."],
+  ['🧭 Tideglass Compass',"55","Exclusive gear — see below. Limit 1."],
+  ['🎟️ Promo Code',"60","A Chainers promo code, delivered privately by DM. Limited stock."],
+  ['🗡️ Leviathan Harpoon',"70","Exclusive weapon — see below. Limit 1."]
+ ],["k","n",""])+
+ '<h2 class="s">Exclusive gear &amp; weapon</h2>'+
+ '<div class="callout"><p>🧭 <strong>Tideglass Compass</strong> (gear) — <strong>+1 CON, +10 max HP</strong>. Your <strong>ATTACK</strong> and <strong>REST</strong> alternate <em>Ebb</em> and <em>Flow</em> bonuses, so it rewards switching between offence and recovery. Enhance it to +4 and +5 with <strong>Tideglass Shards</strong> from the exchange.</p>'+
+ '<p>🗡️ <strong>Leviathan Harpoon</strong> (weapon) — <strong>+1 STR, +1 CON</strong>. Its active, <strong>Returning Tide</strong>, strikes now and then <strong>returns to strike again next round</strong>. Enhance it to +4 and +5 with <strong>Leviathan Scales</strong>.</p></div>'+
+ '<p class="b">Both are <strong>expedition-exclusive</strong> — you cannot forge them on the mainland, and their final two enhancement steps need materials that only the Fang Exchange sells. Wear the <strong>Insignia</strong> once and the <strong>The Tidebound</strong> title is yours to equip for good.</p>'+
+ '<div class="callout"><p>🌊 This is the <strong>first</strong> expedition destination. The Ravennor Hall is built to add more over time — this section will grow with them.</p></div>';
+}};
+
 /* ══════════════════════════════════════════════════════════════════
    NAV / ROUTER
    ══════════════════════════════════════════════════════════════════ */
@@ -2190,12 +2240,13 @@ var NAV=[
  ["Campaign",[["characters","Characters"],["story","The Main Story"],["sides","Side Stories"]]],
  ["Pokemax",[["pets","The Pokemax System"],["lab","Pokemax Lab"],["species","Species &amp; Evolution"],["genes","Genes &amp; Essence"],["petbattle","Pokemax Battles"],["catching","Catching"],["gyms","Pokemax Gyms"]]],
  ["Mechas",[["mechas","The Mecha System"],["portal","The Greyveil Portal"],["hangar","Building a Wanzer"],["mechawpn","Mecha Weapons"],["mechafight","Mecha Combat"],["pilot","Pilot Ranks"]]],
+ ["Expeditions",[["expeditions","How Expeditions Work"],["sunken-fang","Sunken Fang Archipelago"]]],
  ["Reference",[["screens","What It Looks Like"]]]
 ];
 var COUNTS={gear:"27",weapons:"18",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"38",sides:"50"};
 
 /* Per-group accent colour — gives each area of the site its own identity. */
-var GACC={"The guide":"var(--brass)","Tutorials":"#2FA3A3","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Reference":"#8E6BB0"};
+var GACC={"The guide":"var(--brass)","Tutorials":"#2FA3A3","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Expeditions":"#0E9CB8","Reference":"#8E6BB0"};
 var PACC={};
 NAV.forEach(function(g){ (g[1]||[]).forEach(function(p){ PACC[p[0]]=GACC[g[0]]||"var(--brass)"; }); });
 
