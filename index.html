@@ -353,6 +353,14 @@ tbody tr:hover td{background:var(--brass-soft)}
 .mv__s{font-family:var(--mono);font-size:.66rem;color:var(--text-faint);margin-top:.28rem}
 .mv__e{font-family:var(--cond);font-size:.8rem;color:var(--text-dim);margin-top:.2rem;line-height:1.35}
 .mv--stab{background:var(--brass-soft)}
+.lab__learn{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.lrn{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .55rem;background:var(--bg-raised);padding:.45rem .65rem}
+.lrn--stab{background:var(--brass-soft)}
+.lrn__lv{font-family:var(--mono);font-size:.6rem;letter-spacing:.03em;color:var(--brass);min-width:3rem}
+.lrn__n{font-family:var(--serif);font-weight:600;font-size:.9rem;color:var(--text)}
+.lrn__t{font-family:var(--mono);font-size:.55rem;letter-spacing:.05em;text-transform:uppercase;color:var(--verdigris)}
+.lrn__m{font-family:var(--mono);font-size:.62rem;color:var(--text-faint);margin-left:auto}
+.lrn__e{flex-basis:100%;font-family:var(--cond);font-size:.78rem;color:var(--text-dim);line-height:1.3;padding-left:3.25rem}
 .lab__note{font-family:var(--serif);font-size:.86rem;color:var(--text-faint);line-height:1.5;margin-top:1rem}
 
 /* ── STORY ── */
@@ -1604,7 +1612,7 @@ PAGES.pets={t:"The Pokemax System",e:"Pokemax",d:"Catch wild animals across Vale
  '<div class="callout"><p>Levelling past an evolution keeps teaching moves, and if all four slots are full the new move goes to a <strong>pending queue</strong> rather than being lost. You choose later, in the open. A forgotten move can be bought back at the <strong>Move Reminder</strong> for <strong>2,000 OIL</strong>.</p></div>';
 }};
 
-PAGES.lab={t:"Pokemax Lab",e:"Pokemax",d:"Every species, every level, every gene roll. The same formulas the bot runs — pick a Pokemax apart before you spend an OILball on it.",h:function(){
+PAGES.lab={t:"Pokemax Lab",e:"Pokemax",d:"Every species by name — its type, role, exact stats at any level and gene roll, evolution line, and full moveset. The same formulas the bot runs.",h:function(){
  return '<div class="lab">'+
   '<div class="lab__ctl">'+
    '<div class="lab__f"><label class="lab__l" for="labSp">Species</label>'+
@@ -1626,12 +1634,14 @@ PAGES.lab={t:"Pokemax Lab",e:"Pokemax",d:"Every species, every level, every gene
    '<h3 class="t" style="margin-top:1.4rem">Moves known at this level</h3>'+
    '<div class="lab__moves" id="labMoves"></div>'+
    '<p class="lab__note" id="labNote"></p>'+
+   '<h3 class="t" style="margin-top:1.4rem">Full learnset — every ability it can learn</h3>'+
+   '<div class="lab__learn" id="labLearn"></div>'+
   '</div>'+
  '</div>'+
  '<h2 class="s">How to read it</h2>'+
  '<p class="b">The stat bars compare this Pokemax against the <strong>strongest final-stage Pokemax in the game</strong> for that stat, so a full bar means nothing else beats it. The grey ghost behind each bar is the same Pokemax with <strong>zero genes</strong> — the gap is what your roll is worth.</p>'+
  '<p class="b">Drag the level past <strong>16</strong> and <strong>36</strong> and the Pokemax evolves in front of you, base stats and all. That is exactly what happens in a battle.</p>'+
- '<div class="callout"><p>Moves are the <strong>last four learned at or below</strong> the current level — the same rule the bot uses. Raise the level and watch an early move fall off the list.</p></div>';
+ '<div class="callout"><p>Moves known are the <strong>last four learned at or below</strong> the current level — the same rule the bot uses. Raise the level and watch an early move fall off the list. The <strong>Full learnset</strong> below it lists <em>every</em> move the Pokemax can learn and the level it comes at, with power, PP and effect — dimmed rows are ones it has not reached yet.</p></div>';
 }};
 
 PAGES.species={t:"Species &amp; Evolution",e:"Pokemax",d:"84 species, 28 families, nine regions. Every family is one animal with three stages, and every region breeds one type.",h:function(){
@@ -1648,7 +1658,7 @@ PAGES.species={t:"Species &amp; Evolution",e:"Pokemax",d:"84 species, 28 familie
    }).join("")+"</div>";
  });
  return '<p class="b">Each family is <strong>one animal with three stages</strong>. Below is every family, its role, and the <strong>final stage</strong>\'s base stats as <span class="cmd">HP/ATK/DEF/SPD</span> — the numbers that define what the line is for. The earlier two stages are the same shape scaled down, at <strong>46%</strong> and <strong>72%</strong> of the final block.</p>'+
- '<p class="b">Pull any of them apart at any level in the <a href="#lab">Pokemax Lab</a>.</p>'+
+ '<div class="callout"><p>🔬 <strong>Want one Pokemax\'s full profile?</strong> The <a href="#lab">Pokemax Lab</a> shows any species by <strong>name</strong>, with its <strong>type, role and exact stats</strong> at any level and gene roll, its <strong>evolution line</strong>, and its <strong>complete learnset — every move it learns and when</strong>, with each move\'s power, PP and effect.</p></div>'+
  '<div class="grid grid--wide">'+fams.join("")+"</div>"+
  '<div class="callout"><p><strong>Merchant Crossroads has no native species.</strong> Its encounters are drawn from Starter Ruins, Crimson Plain and Stormbay Docks — it is a crossroads in the literal sense.</p></div>'+
  '<h2 class="s">Roles</h2>'+
@@ -2510,6 +2520,17 @@ function initLab(){
     '<div class="mv__s">'+(M.power?"pow "+M.power:"status")+" · acc "+(M.acc>100?"—":M.acc)+" · "+M.pp+" PP"+
     (M.pri?" · priority +"+M.pri:"")+(stab?" · STAB ×1.5":"")+'</div>'+
     (M.eff?'<div class="mv__e">'+E(M.eff)+"</div>":"")+"</div>";
+  }).join("");
+
+  document.getElementById("labLearn").innerHTML=S[id].learn.map(function(p){
+   var M=MV[p[1]]; if(!M) return "";
+   var stab=(M.type===s.type), known=(p[0]<=st.lv);
+   return '<div class="lrn'+(stab?" lrn--stab":"")+'" style="'+(known?"":"opacity:.62")+'">'+
+    '<span class="lrn__lv">Lv '+p[0]+'</span>'+
+    '<span class="lrn__n">'+E(M.name)+'</span>'+
+    '<span class="lrn__t">'+(TEMO[M.type]||"")+" "+E(M.type)+(stab?" · STAB":"")+'</span>'+
+    '<span class="lrn__m">'+(M.power?"pow "+M.power:"status")+" · "+M.pp+" PP"+(M.pri?" · pri +"+M.pri:"")+'</span>'+
+    (M.eff?'<span class="lrn__e">'+E(M.eff)+"</span>":"")+"</div>";
   }).join("");
 
   var next=null;
