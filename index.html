@@ -1731,17 +1731,17 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
    '<span class="dsc__sub"><span class="bar">'+hpbar(275,275)+'</span> <code>275/275 HP</code></span>'+
    '<span class="dsc__sub"><code>STR:19 AGI:7 CON:15</code></span></p>';
 
- return '<p class="b">There is no mystery to what a fight looks like. The bot draws a text embed each round with everyone\'s HP, stats and chosen action, then waits for you to press a button. Below is every screen in the game, drawn exactly as the code builds it.</p>'+
- '<div class="callout"><p>The bars are literal: <code style="font-family:var(--mono)">█</code> is HP you have, <code style="font-family:var(--mono)">░</code> is HP you have lost. <strong>✅</strong> next to a name means that fighter has locked their action this round; <strong>⏳</strong> means the round is still waiting on them.</p></div>'+
+ return '<p class="b">'+L("There is no mystery to what a fight looks like. The bot draws a text embed each round with everyone\'s HP, stats and chosen action, then waits for you to press a button. Below is every screen in the game, drawn exactly as the code builds it.","No hay misterio en cómo se ve una pelea. El bot dibuja un embed de texto cada ronda con el HP, stats y acción elegida de todos, y luego espera a que pulses un botón. Abajo está cada pantalla del juego, dibujada exactamente como la construye el código.")+'</p>'+
+ '<div class="callout"><p>'+L("The bars are literal: <code style=\"font-family:var(--mono)\">█</code> is HP you have, <code style=\"font-family:var(--mono)\">░</code> is HP you have lost. <strong>✅</strong> next to a name means that fighter has locked their action this round; <strong>⏳</strong> means the round is still waiting on them.","Las barras son literales: <code style=\"font-family:var(--mono)\">█</code> es el HP que tienes, <code style=\"font-family:var(--mono)\">░</code> es el HP que perdiste. <strong>✅</strong> junto a un nombre significa que ese luchador ya fijó su acción esta ronda; <strong>⏳</strong> significa que la ronda todavía lo está esperando.")+'</p></div>'+
 
- '<h2 class="s">Team battles</h2>'+
- '<p class="b">One engine draws the screen for almost every group fight — <strong>Duels, Team &amp; Tag, Triad, Free-For-All, Escort, Horde, Mission, Vanguard, War and Boss Raids</strong>. What changes between them is the footer and a couple of extra fields, shown further down. This is the core layout:</p>'+
+ '<h2 class="s">'+L("Team battles","Batallas por equipos")+'</h2>'+
+ '<p class="b">'+L("One engine draws the screen for almost every group fight — <strong>Duels, Team &amp; Tag, Triad, Free-For-All, Escort, Horde, Mission, Vanguard, War and Boss Raids</strong>. What changes between them is the footer and a couple of extra fields, shown further down. This is the core layout:","Un motor dibuja la pantalla de casi toda pelea grupal — <strong>Duelos, Team y Tag, Triad, Free-For-All, Escort, Horde, Mission, Vanguard, War y Boss Raids</strong>. Lo que cambia entre ellas es el pie y un par de campos extra, mostrados más abajo. Este es el diseño base:")+'</p>'+
  dsc(g,"⚔️ Combat Phase - Choose Action",teamBody,
   "Select the name of the enemy you want to ATTACK.\n⏰ 2 Minutes to choose.")+
- '<p class="embcap">The 🟦/🟥 headers are the team names. <code>Item:</code> shows the consumable you have queued for the turn, or <code>Used</code> once spent. The ⚡🩸 after the Pathfinder are its NPC passives — Momentum and Lifesteal — shown as icons so you know what it does before it does it.</p>'+
+ '<p class="embcap">'+L("The 🟦/🟥 headers are the team names. <code>Item:</code> shows the consumable you have queued for the turn, or <code>Used</code> once spent. The ⚡🩸 after the Pathfinder are its NPC passives — Momentum and Lifesteal — shown as icons so you know what it does before it does it.","Los encabezados 🟦/🟥 son los nombres de equipo. <code>Item:</code> muestra el consumible que tienes preparado para el turno, o <code>Used</code> una vez gastado. Los ⚡🩸 tras el Pathfinder son sus pasivas de NPC — Momentum y Lifesteal — mostradas como íconos para que sepas qué hace antes de que lo haga.")+'</p>'+
 
- '<h2 class="s">1v1 Duel</h2>'+
- '<p class="b">Same engine, two fighters, and both of you pick <strong>at the same time</strong> — the choices reveal together. The only tell is the footer: no target to select, so it just says to choose carefully.</p>'+
+ '<h2 class="s">'+L("1v1 Duel","Duelo 1v1")+'</h2>'+
+ '<p class="b">'+L("Same engine, two fighters, and both of you pick <strong>at the same time</strong> — the choices reveal together. The only tell is the footer: no target to select, so it just says to choose carefully.","Mismo motor, dos luchadores, y ambos eligen <strong>al mismo tiempo</strong> — las elecciones se revelan juntas. La única pista es el pie: no hay objetivo que seleccionar, así que solo dice que elijas con cuidado.")+'</p>'+
  dsc(g,"⚔️ Combat Phase - Choose Action",
   '<p class="dsc__row"><span class="dsc__nm">• Max</span> ✅'+
    '<span class="dsc__sub"><span class="bar">'+hpbar(180,230)+'</span> <code>180/230 HP</code> [🔥 FOCUS]</span>'+
@@ -1752,10 +1752,10 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
    '<span class="dsc__sub"><code>STR:20 AGI:18 CON:8</code></span>'+
    '<span class="dsc__sub"><code>Item:Used</code></span></p>',
   "Choose your move carefully.\n⏰ 2 Minutes to choose.")+
- '<p class="embcap"><span style="color:var(--brass)">🔥 FOCUS</span> next to Max means his next attack is a guaranteed ×2 — the flag turns into 🌟 ULTRA FOCUS once it is unreducible. Rival still shows ⏳: the round is waiting on their pick.</p>'+
+ '<p class="embcap">'+L("<span style=\"color:var(--brass)\">🔥 FOCUS</span> next to Max means his next attack is a guaranteed ×2 — the flag turns into 🌟 ULTRA FOCUS once it is unreducible. Rival still shows ⏳: the round is waiting on their pick.","<span style=\"color:var(--brass)\">🔥 FOCUS</span> junto a Max significa que su próximo ataque es un ×2 garantizado — la marca se vuelve 🌟 ULTRA FOCUS una vez que es irreducible. Rival aún muestra ⏳: la ronda espera su elección.")+'</p>'+
 
- '<h2 class="s">Tag Duel</h2>'+
- '<p class="b">Tag fights split the screen into who is <strong>in</strong> and who is <strong>on the bench</strong>. The active lane shows full stats; benched fighters are one compact line each, and a fainted one is struck through.</p>'+
+ '<h2 class="s">'+L("Tag Duel","Duelo Tag")+'</h2>'+
+ '<p class="b">'+L("Tag fights split the screen into who is <strong>in</strong> and who is <strong>on the bench</strong>. The active lane shows full stats; benched fighters are one compact line each, and a fainted one is struck through.","Las peleas Tag dividen la pantalla entre quién está <strong>dentro</strong> y quién está <strong>en el banco</strong>. El carril activo muestra stats completos; los del banco son una línea compacta cada uno, y uno debilitado va tachado.")+'</p>'+
  dsc(g,"🏷️ Tag Team Combat - Choose Action",
   '<p class="dsc__hd">⚔️ ACTIVE LANE</p>'+
   '<p class="dsc__row"><span class="dsc__nm">🔵 Max</span> ✅'+
@@ -1768,10 +1768,10 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
   '<p class="dsc__row"><span class="dsc__nm">🔵 Ally</span> <code>210/210 HP</code> <code>STR:12 AGI:9 CON:20</code></p>'+
   '<p class="dsc__row"><span style="color:#949ba4;text-decoration:line-through">🔴 Straggler</span> 💀</p>',
   "Select the name of the enemy you want to ATTACK.\n⏰ 2 Minutes to choose.")+
- '<p class="embcap">Switching a benched fighter in costs your turn, so the bench view is deliberately compact — you are reading it to decide who to rotate, not to fight from it.</p>'+
+ '<p class="embcap">'+L("Switching a benched fighter in costs your turn, so the bench view is deliberately compact — you are reading it to decide who to rotate, not to fight from it.","Meter a un luchador del banco cuesta tu turno, así que la vista del banco es deliberadamente compacta — la lees para decidir a quién rotar, no para pelear desde ahí.")+'</p>'+
 
  '<h2 class="s">Battle Royale</h2>'+
- '<p class="b">The training free-for-all tracks a temporary <strong>match level</strong> and in-match XP that climb as you act — its screen shows both instead of gear consumables.</p>'+
+ '<p class="b">'+L("The training free-for-all tracks a temporary <strong>match level</strong> and in-match XP that climb as you act — its screen shows both instead of gear consumables.","El todos-contra-todos de entrenamiento lleva un <strong>nivel de partida</strong> temporal y XP en partida que suben a medida que actúas — su pantalla muestra ambos en vez de los consumibles de gear.")+'</p>'+
  dsc(g,"🔥 Round Active - Choose Action",
   '<p class="dsc__row" style="color:#b5bac1;font-style:italic">The arena narrows. Only one walks out.</p>'+
   '<p class="dsc__row"><span class="dsc__nm">Max</span> (Match Lvl 3) <code>STR:32 AGI:13 CON:12</code>'+
@@ -1779,10 +1779,10 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
   '<p class="dsc__row"><span class="dsc__nm">Contender</span> (Match Lvl 2) <code>STR:18 AGI:15 CON:10</code>'+
    '<span class="dsc__sub"><span class="bar">'+hpbar(90,180)+'</span> <code>90/180 HP</code> | ⚡ XP: <code>25/100</code></span></p>',
   "💤 Rest: Heal for +15 HP +15 XP\n⏰ 2 Minutes to choose.")+
- '<p class="embcap">Attacking and killing feed the XP bar; hit 100 and your match level ticks up for a small mid-fight boost. It resets when the match ends — only the winner keeps global XP.</p>'+
+ '<p class="embcap">'+L("Attacking and killing feed the XP bar; hit 100 and your match level ticks up for a small mid-fight boost. It resets when the match ends — only the winner keeps global XP.","Atacar y matar alimentan la barra de XP; llega a 100 y tu nivel de partida sube para un pequeño boost a mitad de pelea. Se reinicia cuando termina la partida — solo el ganador conserva XP global.")+'</p>'+
 
- '<h2 class="s">Horde &amp; the shared-engine extras</h2>'+
- '<p class="b">The modes that field NPC allies or waves add fields <em>onto</em> the team screen. Horde shows both an <strong>Ally Plan</strong> (what the NPCs intend this round) and <strong>Horde Progress</strong> (the wave counter). Escort and Mission add the same Ally Plan plus a <strong>🛡️ Protect NPC</strong> action.</p>'+
+ '<h2 class="s">'+L("Horde &amp; the shared-engine extras","Horde y los extras del motor compartido")+'</h2>'+
+ '<p class="b">'+L("The modes that field NPC allies or waves add fields <em>onto</em> the team screen. Horde shows both an <strong>Ally Plan</strong> (what the NPCs intend this round) and <strong>Horde Progress</strong> (the wave counter). Escort and Mission add the same Ally Plan plus a <strong>🛡️ Protect NPC</strong> action.","Los modos que despliegan aliados NPC u oleadas agregan campos <em>sobre</em> la pantalla de equipo. Horde muestra tanto un <strong>Ally Plan</strong> (lo que los NPCs pretenden esta ronda) como <strong>Horde Progress</strong> (el contador de oleadas). Escort y Mission agregan el mismo Ally Plan más una acción <strong>🛡️ Protect NPC</strong>.")+'</p>'+
  dsc(teal,"⚔️ Combat Phase - Choose Action",
   '<p class="dsc__hd">🟦 Survivors</p>'+
   '<p class="dsc__row"><span class="dsc__nm">• Max</span> ⏳'+
@@ -1799,10 +1799,10 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
   '<p class="dsc__fn">⚡ Enemy NPC Passive Abilities</p>'+
   '<p class="dsc__row" style="color:#b5bac1;font-size:.82rem">🔥 Enrage — deals 1.5× damage below 30% HP</p>',
   "Select the name of the enemy you want to ATTACK.\n⏰ 2 Minutes to choose.")+
- '<p class="embcap">These extra fields are the only real difference between the group modes. Underneath, it is the same combatant rows as the team screen at the top.</p>'+
+ '<p class="embcap">'+L("These extra fields are the only real difference between the group modes. Underneath, it is the same combatant rows as the team screen at the top.","Estos campos extra son la única diferencia real entre los modos grupales. Por debajo, son las mismas filas de combatientes que la pantalla de equipo de arriba.")+'</p>'+
 
- '<h2 class="s">The Eternal Abyss</h2>'+
- '<p class="b">The dungeon draws its own screen: a <strong>score and gold</strong> header, the run\'s class icons on each player, and dungeon-only status like momentum stacks and stun.</p>'+
+ '<h2 class="s">'+L("The Eternal Abyss","El Abismo Eterno")+'</h2>'+
+ '<p class="b">'+L("The dungeon draws its own screen: a <strong>score and gold</strong> header, the run\'s class icons on each player, and dungeon-only status like momentum stacks and stun.","La mazmorra dibuja su propia pantalla: un encabezado de <strong>puntaje y oro</strong>, los íconos de clase de la run en cada jugador, y estados solo de mazmorra como stacks de momentum y aturdimiento.")+'</p>'+
  dsc(purple,"⚔️ Ossuary — Turn 5",
   '<p class="dsc__row" style="font-size:.84rem">📊 <strong style="color:#f2f3f5">12,400</strong> pts  ×1.4  |  💰 <strong style="color:#f2f3f5">850</strong> Gold</p>'+
   '<p class="dsc__row" style="color:#b5bac1;font-size:.82rem;font-style:italic">The Specter takes the hit and does not flinch. Only Focus bites it.</p>'+
@@ -1813,10 +1813,10 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
    '<span class="dsc__sub"><code>STR:10 AGI:6 CON:20</code>  [💤 STUNNED(1)]</span></p>'+
   '<p class="dsc__row"><span style="color:#949ba4">🔴 Ghost — DOWNED, 2 turns before death</span></p>',
   "Choose your move carefully.\n⏰ 2 Minutes to choose.")+
- '<p class="embcap">The class icon (⚔️ Devastator, 🛡️ Colossus, 👻 Ghost…) sits on every name. <code>⚡×2</code> is a Devastator\'s momentum stack; a downed player has a countdown before death that a revive can still beat.</p>'+
+ '<p class="embcap">'+L("The class icon (⚔️ Devastator, 🛡️ Colossus, 👻 Ghost…) sits on every name. <code>⚡×2</code> is a Devastator\'s momentum stack; a downed player has a countdown before death that a revive can still beat.","El ícono de clase (⚔️ Devastator, 🛡️ Colossus, 👻 Ghost…) va en cada nombre. <code>⚡×2</code> es un stack de momentum de un Devastator; un jugador caído tiene una cuenta atrás antes de morir que un revive aún puede ganar.")+'</p>'+
 
- '<h2 class="s">Pokemax battles</h2>'+
- '<p class="b">Pokemax get their own brown embed — no STR/AGI/CON here. Each side shows its active Pokemax\'s <strong>level, type and HP</strong>. The public panel carries the turn log, both rosters and who has locked their move; you pick from private controls.</p>'+
+ '<h2 class="s">'+L("Pokemax battles","Batallas Pokemax")+'</h2>'+
+ '<p class="b">'+L("Pokemax get their own brown embed — no STR/AGI/CON here. Each side shows its active Pokemax\'s <strong>level, type and HP</strong>. The public panel carries the turn log, both rosters and who has locked their move; you pick from private controls.","Los Pokemax tienen su propio embed marrón — aquí no hay STR/AGI/CON. Cada lado muestra el <strong>nivel, tipo y HP</strong> de su Pokemax activo. El panel público lleva el registro de turnos, ambos rosters y quién ha fijado su movimiento; tú eliges desde los controles privados.")+'</p>'+
  dsc(brown,"⚔️ Safari — Round 1",
   '<p class="dsc__fn">Max</p>'+
   '<p class="dsc__row"><span class="dsc__nm">🦎 Cinderling</span>  Lv.5  🔥Fire'+
@@ -1831,10 +1831,10 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
   '<p class="dsc__fn">Turn status</p>'+
   '<p class="dsc__row" style="font-size:.84rem"><span class="dsc__nm">Max:</span> ⚙️ Resolving</p>',
   "Open your private controls. You have 120 seconds to choose or lose by AFK.")+
- '<p class="embcap">The bar is <code>▰▱</code> at width 10, not the block bar the rest of the game uses. <code>▶</code> in the Teams roster marks your active Pokemax; a benched one shows <code>•</code>, and a fainted one reads <em>fainted</em>. Your four moves and their PP live in the private controls, not on this public panel.</p>'+
+ '<p class="embcap">'+L("The bar is <code>▰▱</code> at width 10, not the block bar the rest of the game uses. <code>▶</code> in the Teams roster marks your active Pokemax; a benched one shows <code>•</code>, and a fainted one reads <em>fainted</em>. Your four moves and their PP live in the private controls, not on this public panel.","La barra es <code>▰▱</code> a ancho 10, no la barra de bloques que usa el resto del juego. <code>▶</code> en el roster de Teams marca tu Pokemax activo; uno en banco muestra <code>•</code>, y uno debilitado dice <em>fainted</em>. Tus cuatro movimientos y su PP viven en los controles privados, no en este panel público.")+'</p>'+
 
- '<h2 class="s">Mecha duels</h2>'+
- '<p class="b">Wanzers drop the bar-per-fighter layout for a <strong>Front Mission panel</strong>: four parts stacked body-over-arms-over-legs, each with its own HP, plus your <strong>AP</strong> and the weapon each arm is holding.</p>'+
+ '<h2 class="s">'+L("Mecha duels","Duelos de mecha")+'</h2>'+
+ '<p class="b">'+L("Wanzers drop the bar-per-fighter layout for a <strong>Front Mission panel</strong>: four parts stacked body-over-arms-over-legs, each with its own HP, plus your <strong>AP</strong> and the weapon each arm is holding.","Los wanzers cambian el diseño de barra-por-luchador por un <strong>panel Front Mission</strong>: cuatro partes apiladas cuerpo-sobre-brazos-sobre-piernas, cada una con su propio HP, más tu <strong>AP</strong> y el arma que sostiene cada brazo.")+'</p>'+
  dsc(blue,"⚙️ Mecha Duel — Choose Action",
   '<div class="dsc__pre">🤖 Striker-01            AP 8/10\n'+
   '━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'+
@@ -1851,9 +1851,9 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
   'LEGS  '+hpbar(40,132,14)+' 40/132   EVA 18%\n'+
   '━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>',
   "Fire · Guard (+3 AP) · Rest (+6 AP) · Consumable\n⏰ 2 Minutes to choose.")+
- '<p class="embcap">Raider-X is already losing the right way to lose: its left arm is <strong>✕ DESTROYED</strong> so that weapon is gone, and its legs are nearly off, dropping evasion to 18%. Take the other arm next and it cannot fight back at all.</p>'+
+ '<p class="embcap">'+L("Raider-X is already losing the right way to lose: its left arm is <strong>✕ DESTROYED</strong> so that weapon is gone, and its legs are nearly off, dropping evasion to 18%. Take the other arm next and it cannot fight back at all.","Raider-X ya está perdiendo de la forma correcta de perder: su brazo izquierdo está <strong>✕ DESTROYED</strong> así que esa arma se fue, y sus piernas están casi fuera, bajando la evasión a 18%. Quítale el otro brazo y no puede contraatacar en absoluto.")+'</p>'+
 
- '<div class="callout"><p>Every value on this page — the bar lengths, the stat lines, the field names, the footers — is drawn the way the bot\'s own code draws it. The names and numbers are illustrative; the layout is not.</p></div>';
+ '<div class="callout"><p>'+L("Every value on this page — the bar lengths, the stat lines, the field names, the footers — is drawn the way the bot\'s own code draws it. The names and numbers are illustrative; the layout is not.","Cada valor de esta página — el largo de las barras, las líneas de stats, los nombres de campo, los pies — está dibujado como lo dibuja el propio código del bot. Los nombres y números son ilustrativos; el diseño no.")+'</p></div>';
 }};
 
 PAGES.abyss={t:"The Eternal Abyss",e:"The dungeon",d:"A 1–3 player roguelite, and the deepest single mode in the game. Every run is different.",h:function(){
@@ -2634,36 +2634,55 @@ PAGES.sides={t:"Side Stories",e:"Campaign",d:"Fifty more missions across ten arc
 }};
 
 PAGES.expeditions={t:"How Expeditions Work",e:"Expeditions",d:"Timed sea voyages to island regions that sit apart from the normal map — each with its own tides, currency, wildlife and exclusive loot. You sail out from Ravennor and back.",h:function(){
- return '<h2 class="s">What an expedition is</h2>'+
- '<p class="b">An <strong>expedition</strong> is a <strong>timed, repeatable voyage</strong> to a special region that is not on the normal Valestia map. Each destination has its own <strong>tides, wildlife, regional currency and exclusive rewards</strong>, and it is reached only by <strong>ship from Ravennor</strong>. Expeditions run in scheduled windows — a launch opens boarding, the seas stay open for a set time, and then it closes.</p>'+
- '<p class="b">Open the permanent <strong>Ravennor Expedition Hall</strong> once you are in Ravennor. It lists every destination, your voyages, and a short how-it-works panel — new expeditions appear here over time without replacing the ones before them.</p>'+
- '<h2 class="s">The voyage — step by step</h2>'+
- tbl(["Step","What you do"],[
+ return '<h2 class="s">'+L("What an expedition is","Qué es una expedición")+'</h2>'+
+ '<p class="b">'+L("An <strong>expedition</strong> is a <strong>timed, repeatable voyage</strong> to a special region that is not on the normal Valestia map. Each destination has its own <strong>tides, wildlife, regional currency and exclusive rewards</strong>, and it is reached only by <strong>ship from Ravennor</strong>. Expeditions run in scheduled windows — a launch opens boarding, the seas stay open for a set time, and then it closes.","Una <strong>expedición</strong> es un <strong>viaje temporizado y repetible</strong> a una región especial que no está en el mapa normal de Valestia. Cada destino tiene sus propias <strong>mareas, fauna, moneda regional y recompensas exclusivas</strong>, y solo se llega por <strong>barco desde Ravennor</strong>. Las expediciones corren en ventanas programadas — un lanzamiento abre el embarque, los mares quedan abiertos por un tiempo fijo, y luego cierra.")+'</p>'+
+ '<p class="b">'+L("Open the permanent <strong>Ravennor Expedition Hall</strong> once you are in Ravennor. It lists every destination, your voyages, and a short how-it-works panel — new expeditions appear here over time without replacing the ones before them.","Abre el permanente <strong>Ravennor Expedition Hall</strong> una vez estás en Ravennor. Lista cada destino, tus viajes, y un breve panel de cómo funciona — las expediciones nuevas aparecen aquí con el tiempo sin reemplazar a las anteriores.")+'</p>'+
+ '<h2 class="s">'+L("The voyage — step by step","El viaje — paso a paso")+'</h2>'+
+ tbl(L(["Step","What you do"],["Paso","Qué haces"]),LANG==="es"?[
+  ["1 · Llega a Ravennor","Viaja por el mapa normal de Valestia hasta <strong>Ravennor</strong> y abre su <strong>Expedition Hall</strong>."],
+  ["2 · Explora y embarca","Elige un destino, lee su guía, y pulsa <strong>Board Ship</strong>. La travesía toma <strong>45 minutos reales</strong> y <strong>no se puede saltar</strong> — ni siquiera con un teletransporte de clan."],
+  ["3 · Desembarca y juega","Al llegar, tu acceso regional cambia a la expedición. Usa <span class=\"cmd\">!hunt</span> y <span class=\"cmd\">!safari</span> solo en el canal de la expedición."],
+  ["4 · Gasta y regresa","Cambia tu moneda regional en el intercambio propio del destino, luego pulsa <strong>Return to Ravennor</strong> — otro viaje de <strong>45 minutos</strong>."]
+ ]:[
   ["1 · Reach Ravennor","Travel the normal Valestia map to <strong>Ravennor</strong> and open its <strong>Expedition Hall</strong>."],
   ["2 · Browse &amp; board","Pick a destination, read its guide, and press <strong>Board Ship</strong>. The sea crossing takes <strong>45 real minutes</strong> and <strong>cannot be skipped</strong> — not even by a clan teleport."],
   ["3 · Land &amp; play","On arrival your regional access swaps to the expedition. Use <span class=\"cmd\">!hunt</span> and <span class=\"cmd\">!safari</span> in the expedition channel only."],
-  ["4 · Spend &amp; sail home","Trade your regional currency at the destination\'s own exchange, then press <strong>Return to Ravennor</strong> — another <strong>45-minute</strong> voyage."]
+  ["4 · Spend &amp; sail home","Trade your regional currency at the destination's own exchange, then press <strong>Return to Ravennor</strong> — another <strong>45-minute</strong> voyage."]
  ],["k",""])+
- '<div class="callout"><p>⏳ The 45-minute timers are <strong>real time</strong> and survive a bot restart, so a voyage is never skipped or lost. Even after a launch <em>ends</em>, anyone already on the islands can still sail back.</p></div>'+
- '<h2 class="s">Currency &amp; rewards</h2>'+
- '<p class="b">While you are on an expedition, a successful <span class="cmd">!hunt</span> pays a <strong>regional currency</strong> instead of the usual crafting materials, and <span class="cmd">!safari</span> finds <strong>Pokemax that live only there</strong>. You spend the currency at the destination\'s own <strong>exchange</strong> on exclusive gear, a weapon, catch items and a permanent title — none of it craftable back at the mainland forge.</p>'+
- '<div class="callout"><p>🧭 <strong>Destinations live in their own section.</strong> The first one is open now — see <a href="#sunken-fang">The Sunken Fang Archipelago</a>.</p></div>';
+ '<div class="callout"><p>'+L("⏳ The 45-minute timers are <strong>real time</strong> and survive a bot restart, so a voyage is never skipped or lost. Even after a launch <em>ends</em>, anyone already on the islands can still sail back.","⏳ Los temporizadores de 45 minutos son <strong>tiempo real</strong> y sobreviven a un reinicio del bot, así que un viaje nunca se salta ni se pierde. Incluso después de que un lanzamiento <em>termina</em>, quien ya esté en las islas puede volver navegando.")+'</p></div>'+
+ '<h2 class="s">'+L("Currency &amp; rewards","Moneda y recompensas")+'</h2>'+
+ '<p class="b">'+L("While you are on an expedition, a successful <span class=\"cmd\">!hunt</span> pays a <strong>regional currency</strong> instead of the usual crafting materials, and <span class=\"cmd\">!safari</span> finds <strong>Pokemax that live only there</strong>. You spend the currency at the destination\'s own <strong>exchange</strong> on exclusive gear, a weapon, catch items and a permanent title — none of it craftable back at the mainland forge.","Mientras estás en una expedición, un <span class=\"cmd\">!hunt</span> exitoso paga una <strong>moneda regional</strong> en vez de los materiales de crafteo habituales, y <span class=\"cmd\">!safari</span> encuentra <strong>Pokemax que solo viven ahí</strong>. Gastas la moneda en el <strong>intercambio</strong> propio del destino en gear exclusivo, un arma, objetos de captura y un título permanente — nada de eso se craftea de vuelta en la forja del continente.")+'</p>'+
+ '<div class="callout"><p>'+L("🧭 <strong>Destinations live in their own section.</strong> The first one is open now — see <a href=\"#sunken-fang\">The Sunken Fang Archipelago</a>.","🧭 <strong>Los destinos viven en su propia sección.</strong> El primero está abierto ahora — ve <a href=\"#sunken-fang\">El Archipiélago del Colmillo Hundido</a>.")+'</p></div>';
 }};
 
 PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The first expedition destination — a broken crown of islands beyond the Sable Sea, where a six-hour tide changes the hunt, the wildlife and the trails.",h:function(){
- return '<p class="b">The first expedition destination. <em>A broken crown of islands built over the ribs of an ancient leviathan, out beyond the Sable Sea.</em> Twice a day the ocean swallows the reefs and reveals them again, and every den, trail and hunting ground changes with it. Sail here from <a href="#expeditions">Ravennor</a> — 45 minutes each way.</p>'+
- '<h2 class="s">The tides</h2>'+
- '<p class="b">A <strong>tide</strong> flips between <strong>High</strong> and <strong>Low</strong> every <strong>6 hours</strong> (a live countdown shows the next change). The tide decides what your hunts pay and which Pokemax the Safari turns up:</p>'+
- tbl(["Tide","Hunts pay","Safari Pokemax (tide-only)"],[
+ return '<p class="b">'+L("The first expedition destination. <em>A broken crown of islands built over the ribs of an ancient leviathan, out beyond the Sable Sea.</em> Twice a day the ocean swallows the reefs and reveals them again, and every den, trail and hunting ground changes with it. Sail here from <a href=\"#expeditions\">Ravennor</a> — 45 minutes each way.","El primer destino de expedición. <em>Una corona rota de islas construida sobre las costillas de un leviatán antiguo, más allá del Sable Sea.</em> Dos veces al día el océano se traga los arrecifes y los revela de nuevo, y cada guarida, sendero y coto de caza cambia con él. Navega hasta aquí desde <a href=\"#expeditions\">Ravennor</a> — 45 minutos por trayecto.")+'</p>'+
+ '<h2 class="s">'+L("The tides","Las mareas")+'</h2>'+
+ '<p class="b">'+L("A <strong>tide</strong> flips between <strong>High</strong> and <strong>Low</strong> every <strong>6 hours</strong> (a live countdown shows the next change). The tide decides what your hunts pay and which Pokemax the Safari turns up:","Una <strong>marea</strong> alterna entre <strong>Alta</strong> y <strong>Baja</strong> cada <strong>6 horas</strong> (una cuenta atrás en vivo muestra el próximo cambio). La marea decide lo que pagan tus cazas y qué Pokemax saca el Safari:")+'</p>'+
+ tbl(L(["Tide","Hunts pay","Safari Pokemax (tide-only)"],["Marea","Las cazas pagan","Pokemax de Safari (solo por marea)"]),LANG==="es"?[
+  ['🌊 <strong>Marea alta</strong>',"1–4 Fang Doubloons","La línea <strong>Driftfin</strong> (→ Gale Ray → Tempest Manta) y la línea <strong>Shellwisp</strong> (→ Lantern Hermit → Abyssal Hermit)."],
+  ['🏝️ <strong>Marea baja</strong>',"2–3 Fang Doubloons","La línea <strong>Coralisk</strong> (→ Reef Basilisk → Tidereef Leviathan) y la línea <strong>Mangrove Sprout</strong> (→ Tidegrove Strider → Tideroot Colossus)."]
+ ]:[
   ['🌊 <strong>High Tide</strong>',"1–4 Fang Doubloons","The <strong>Driftfin</strong> line (→ Gale Ray → Tempest Manta) and the <strong>Shellwisp</strong> line (→ Lantern Hermit → Abyssal Hermit)."],
   ['🏝️ <strong>Low Tide</strong>',"2–3 Fang Doubloons","The <strong>Coralisk</strong> line (→ Reef Basilisk → Tidereef Leviathan) and the <strong>Mangrove Sprout</strong> line (→ Tidegrove Strider → Tideroot Colossus)."]
  ],["k","n",""])+
- '<p class="b">That is <strong>four evolution lines found nowhere else in Valestia</strong>, split across the two tides — so catching them all means staying long enough to see the water turn.</p>'+
- '<h2 class="s">Hunting the islands</h2>'+
- '<p class="b"><span class="cmd">!hunt</span> works on the normal enemy, XP, OIL and daily Hunt Energy rules — but instead of materials it drops <strong>Fang Doubloons</strong>, the archipelago\'s own currency. The things you fight here are <strong>Drowned Corsairs</strong>, <strong>Reefbound Guardians</strong> and <strong>Brine Wraiths</strong>, scaled to your level.</p>'+
- '<h2 class="s">The Fang Exchange</h2>'+
- '<p class="b">Spend your Fang Doubloons at the islands\' shop. Prices are in Doubloons; several items are capped per voyage.</p>'+
- tbl(["Item","Cost","What it does"],[
+ '<p class="b">'+L("That is <strong>four evolution lines found nowhere else in Valestia</strong>, split across the two tides — so catching them all means staying long enough to see the water turn.","Eso son <strong>cuatro líneas evolutivas que no se encuentran en ninguna otra parte de Valestia</strong>, repartidas entre las dos mareas — así que capturarlas todas significa quedarse lo suficiente para ver cambiar el agua.")+'</p>'+
+ '<h2 class="s">'+L("Hunting the islands","Cazar en las islas")+'</h2>'+
+ '<p class="b">'+L("<span class=\"cmd\">!hunt</span> works on the normal enemy, XP, OIL and daily Hunt Energy rules — but instead of materials it drops <strong>Fang Doubloons</strong>, the archipelago\'s own currency. The things you fight here are <strong>Drowned Corsairs</strong>, <strong>Reefbound Guardians</strong> and <strong>Brine Wraiths</strong>, scaled to your level.","<span class=\"cmd\">!hunt</span> funciona con las reglas normales de enemigo, XP, OIL y Hunt Energy diaria — pero en vez de materiales suelta <strong>Fang Doubloons</strong>, la moneda propia del archipiélago. Lo que peleas aquí son <strong>Drowned Corsairs</strong>, <strong>Reefbound Guardians</strong> y <strong>Brine Wraiths</strong>, escalados a tu nivel.")+'</p>'+
+ '<h2 class="s">'+L("The Fang Exchange","El Fang Exchange")+'</h2>'+
+ '<p class="b">'+L("Spend your Fang Doubloons at the islands\' shop. Prices are in Doubloons; several items are capped per voyage.","Gasta tus Fang Doubloons en la tienda de las islas. Los precios son en Doubloons; varios objetos están topados por viaje.")+'</p>'+
+ tbl(L(["Item","Cost","What it does"],["Objeto","Costo","Qué hace"]),LANG==="es"?[
+  ['💎 Tideglass Shard',"3","Material de mejora para el Tideglass Compass (+4 y +5). Límite 5."],
+  ['🐉 Leviathan Scale',"4","Material de mejora para el Leviathan Harpoon (+4 y +5). Límite 5."],
+  ['🧪 Regen Potion',"5","Cura 40 HP ahora, luego 30 HP en cada uno de los siguientes 2 turnos."],
+  ['🔵 Tideglass OILball',"6","×3.5 de poder de captura aquí (poder básico en otro lado). Límite 5."],
+  ['🛢️ 1,000 OIL Cache',"8","Agrega 1,000 OIL a tu saldo al instante."],
+  ['🌊 Tidal Mending Elixir',"10","Cura a tus 3 aliados con menos HP y deja un resplandor curativo."],
+  ['🔱 Sunken Fang Insignia',"15","Desbloquea para siempre el título equipable <strong>The Tidebound</strong>. Límite 1."],
+  ['🧭 Tideglass Compass',"55","Gear exclusivo — ver abajo. Límite 1."],
+  ['🎟️ Promo Code',"60","Un código promo de Chainers, entregado en privado por DM. Stock limitado."],
+  ['🗡️ Leviathan Harpoon',"70","Arma exclusiva — ver abajo. Límite 1."]
+ ]:[
   ['💎 Tideglass Shard',"3","Enhancement material for the Tideglass Compass (+4 and +5). Limit 5."],
   ['🐉 Leviathan Scale',"4","Enhancement material for the Leviathan Harpoon (+4 and +5). Limit 5."],
   ['🧪 Regen Potion',"5","Heals 40 HP now, then 30 HP on each of the next 2 turns."],
@@ -2675,11 +2694,11 @@ PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The fir
   ['🎟️ Promo Code',"60","A Chainers promo code, delivered privately by DM. Limited stock."],
   ['🗡️ Leviathan Harpoon',"70","Exclusive weapon — see below. Limit 1."]
  ],["k","n",""])+
- '<h2 class="s">Exclusive gear &amp; weapon</h2>'+
- '<div class="callout"><p>🧭 <strong>Tideglass Compass</strong> (gear) — <strong>+1 CON, +10 max HP</strong>. Your <strong>ATTACK</strong> and <strong>REST</strong> alternate <em>Ebb</em> and <em>Flow</em> bonuses, so it rewards switching between offence and recovery. Enhance it to +4 and +5 with <strong>Tideglass Shards</strong> from the exchange.</p>'+
- '<p>🗡️ <strong>Leviathan Harpoon</strong> (weapon) — <strong>+1 STR, +1 CON</strong>. Its active, <strong>Returning Tide</strong>, strikes now and then <strong>returns to strike again next round</strong>. Enhance it to +4 and +5 with <strong>Leviathan Scales</strong>.</p></div>'+
- '<p class="b">Both are <strong>expedition-exclusive</strong> — you cannot forge them on the mainland, and their final two enhancement steps need materials that only the Fang Exchange sells. Wear the <strong>Insignia</strong> once and the <strong>The Tidebound</strong> title is yours to equip for good.</p>'+
- '<div class="callout"><p>🌊 This is the <strong>first</strong> expedition destination. The Ravennor Hall is built to add more over time — this section will grow with them.</p></div>';
+ '<h2 class="s">'+L("Exclusive gear &amp; weapon","Gear y arma exclusivos")+'</h2>'+
+ '<div class="callout"><p>'+L("🧭 <strong>Tideglass Compass</strong> (gear) — <strong>+1 CON, +10 max HP</strong>. Your <strong>ATTACK</strong> and <strong>REST</strong> alternate <em>Ebb</em> and <em>Flow</em> bonuses, so it rewards switching between offence and recovery. Enhance it to +4 and +5 with <strong>Tideglass Shards</strong> from the exchange.","🧭 <strong>Tideglass Compass</strong> (gear) — <strong>+1 CON, +10 HP máx</strong>. Tu <strong>ATTACK</strong> y <strong>REST</strong> alternan bonos <em>Ebb</em> y <em>Flow</em>, así que premia alternar entre ofensiva y recuperación. Mejóralo a +4 y +5 con <strong>Tideglass Shards</strong> del intercambio.")+'</p>'+
+ '<p>'+L("🗡️ <strong>Leviathan Harpoon</strong> (weapon) — <strong>+1 STR, +1 CON</strong>. Its active, <strong>Returning Tide</strong>, strikes now and then <strong>returns to strike again next round</strong>. Enhance it to +4 and +5 with <strong>Leviathan Scales</strong>.","🗡️ <strong>Leviathan Harpoon</strong> (arma) — <strong>+1 STR, +1 CON</strong>. Su activa, <strong>Returning Tide</strong>, golpea ahora y luego <strong>vuelve a golpear la siguiente ronda</strong>. Mejórala a +4 y +5 con <strong>Leviathan Scales</strong>.")+'</p></div>'+
+ '<p class="b">'+L("Both are <strong>expedition-exclusive</strong> — you cannot forge them on the mainland, and their final two enhancement steps need materials that only the Fang Exchange sells. Wear the <strong>Insignia</strong> once and the <strong>The Tidebound</strong> title is yours to equip for good.","Ambos son <strong>exclusivos de expedición</strong> — no puedes forjarlos en el continente, y sus dos últimos pasos de mejora necesitan materiales que solo vende el Fang Exchange. Usa la <strong>Insignia</strong> una vez y el título <strong>The Tidebound</strong> es tuyo para equipar para siempre.")+'</p>'+
+ '<div class="callout"><p>'+L("🌊 This is the <strong>first</strong> expedition destination. The Ravennor Hall is built to add more over time — this section will grow with them.","🌊 Este es el <strong>primer</strong> destino de expedición. El Ravennor Hall está hecho para agregar más con el tiempo — esta sección crecerá con ellos.")+'</p></div>';
 }};
 
 /* ══════════════════════════════════════════════════════════════════
