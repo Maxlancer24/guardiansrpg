@@ -866,7 +866,11 @@ var DTR={
  "Gain +4 AP immediately.":"Gana +4 AP de inmediato.",
  "+25% evasion next turn.":"+25% de evasión el próximo turno.",
  "Clear Burn and restore 40 HP.":"Limpia Burn y restaura 40 HP.",
- "up to Mk1":"hasta Mk1","up to Mk2":"hasta Mk2","up to Mk3":"hasta Mk3","up to Mk4":"hasta Mk4","up to Mk5":"hasta Mk5","Mk5 signature frames":"Chasis Mk5 de firma"
+ "up to Mk1":"hasta Mk1","up to Mk2":"hasta Mk2","up to Mk3":"hasta Mk3","up to Mk4":"hasta Mk4","up to Mk5":"hasta Mk5","Mk5 signature frames":"Chasis Mk5 de firma",
+ "Damage per hit, and the spine of your parry":"Daño por golpe, y la columna de tu parry",
+ "Damage multiplier, crit, dodge, flat reduction":"Multiplicador de daño, crítico, esquiva, reducción plana",
+ "Max HP, rest healing, block and counter":"HP máx, cura de rest, bloqueo y contra",
+ "Max HP":"HP máx","Rest heals":"Cura de Rest","Crit / Dodge":"Crítico / Esquiva","from AGI":"de AGI","Flat reduction":"Reducción plana","Parry block":"Bloqueo de parry","Parry counter":"Contra de parry"
 };
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
@@ -2871,7 +2875,7 @@ function initCalc(){
  function oc(a){return 1+0.5*(a/29);}
  var sEl=document.getElementById("stats");
  sEl.innerHTML=DEF.map(function(d){
-  return '<div class="st"><div class="st__t"><span class="st__k">'+d[1]+'</span><span class="st__d">'+d[2]+'</span>'+
+  return '<div class="st"><div class="st__t"><span class="st__k">'+d[1]+'</span><span class="st__d">'+L(d[2],DTR[d[2]])+'</span>'+
    '<span class="st__v num" data-v="'+d[0]+'">0</span></div><div class="st__r">'+
    '<button class="btn" data-dec="'+d[0]+'" aria-label="Lower '+d[1]+'">−</button>'+
    '<span class="mtr"><span class="mtr__f" data-m="'+d[0]+'"></span></span>'+
@@ -2880,15 +2884,15 @@ function initCalc(){
  var TL=[["hp","Max HP","50 + CON×15",1],["rest","Rest heals","20 + CON×3"],["crit","Crit / Dodge","from AGI"],
          ["red","Flat reduction","AGI × 2.5"],["blk","Parry block","CON×5 + STR"],["ctr","Parry counter","CON×3 + STR"]];
  document.getElementById("ro").innerHTML=TL.map(function(t){
-  return '<div class="tl"><span class="tl__k">'+t[1]+'</span><span class="tl__v num'+(t[3]?" br":"")+'" data-t="'+t[0]+'">—</span><span class="tl__f">'+t[2]+"</span></div>";
+  return '<div class="tl"><span class="tl__k">'+L(t[1],DTR[t[1]])+'</span><span class="tl__v num'+(t[3]?" br":"")+'" data-t="'+t[0]+'">—</span><span class="tl__f">'+L(t[2],DTR[t[2]])+"</span></div>";
  }).join("");
  function verdict(){
   var a=S.agi,c=S.con,s=S.str,tot=spent()||1,left=budget()-spent();
-  if(left>0) return "You have <strong>"+left+"</strong> unspent point"+(left>1?"s":"")+".";
-  if(c/tot>=.5) return "A parry tank. You block <strong>"+(c*5+s)+"</strong> and counter for <strong>"+(c*3+s)+"</strong> — and Ultra Focus walks straight through all of it.";
-  if(a/tot>=.45) return "A dodge build. <strong>"+crit(a)+"%</strong> to avoid the hit outright and <strong>"+(a*2.5)+"</strong> off whatever lands.";
-  if(s/tot>=.5) return "A hitter. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> on an average swing, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> with Focus. A tank who rests will bury you.";
-  return "Balanced. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> crit, no glaring hole — and nothing that scares anyone.";
+  if(left>0) return L("You have <strong>"+left+"</strong> unspent point"+(left>1?"s":"")+".","Te quedan <strong>"+left+"</strong> punto"+(left>1?"s":"")+" sin gastar.");
+  if(c/tot>=.5) return L("A parry tank. You block <strong>"+(c*5+s)+"</strong> and counter for <strong>"+(c*3+s)+"</strong> — and Ultra Focus walks straight through all of it.","Un tanque de parry. Bloqueas <strong>"+(c*5+s)+"</strong> y contraatacas por <strong>"+(c*3+s)+"</strong> — y Ultra Focus atraviesa todo eso de largo.");
+  if(a/tot>=.45) return L("A dodge build. <strong>"+crit(a)+"%</strong> to avoid the hit outright and <strong>"+(a*2.5)+"</strong> off whatever lands.","Una build de esquiva. <strong>"+crit(a)+"%</strong> de evitar el golpe por completo y <strong>"+(a*2.5)+"</strong> menos de lo que acierte.");
+  if(s/tot>=.5) return L("A hitter. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> on an average swing, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> with Focus. A tank who rests will bury you.","Un golpeador. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> en un golpe promedio, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> con Focus. Un tanque que descansa te entierra.");
+  return L("Balanced. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> crit, no glaring hole — and nothing that scares anyone.","Equilibrado. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> de crítico, sin agujero evidente — y nada que asuste a nadie.");
  }
  function render(){
   var b=budget(),sp=spent();
@@ -2985,7 +2989,7 @@ function initLab(){
   });
   return '<optgroup label="'+E(REG[rg])+' · '+E(S[list[0]].type)+'">'+
    list.map(function(id){
-    return '<option value="'+id+'">'+E(S[id].emoji+" "+S[id].name)+" — stage "+S[id].stage+"</option>";
+    return '<option value="'+id+'">'+E(S[id].emoji+" "+S[id].name)+" — "+L("stage","etapa")+" "+S[id].stage+"</option>";
    }).join("")+"</optgroup>";
  }).join("");
  sel.value=st.sp;
@@ -2996,12 +3000,12 @@ function initLab(){
   '<div class="lab__l" style="margin-bottom:-.3rem">Genes <b class="num" id="labGT">60 / 60</b></div>'+
   GK.map(function(g){
    return '<div class="lab__f"><label class="lab__l" for="lg_'+g[0]+'">'+g[1]+
-    ' gene <b class="num" data-gv="'+g[0]+'">15</b></label>'+
+    ' '+L("gene","gen")+' <b class="num" data-gv="'+g[0]+'">15</b></label>'+
     '<input class="lab__rng" type="range" id="lg_'+g[0]+'" data-g="'+g[0]+'" min="0" max="15" value="15"></div>';
   }).join("");
 
- function quality(v){ return v<=4?"Poor":v<=8?"Average":v<=11?"Good":v<=13?"Excellent":"Exceptional"; }
- function totalQuality(t){ return t<=19?["Poor",1]:t<=31?["Average",2]:t<=43?["Good",3]:t<=52?["Excellent",4]:["Exceptional",5]; }
+ function quality(v){ return v<=4?L("Poor","Pobre"):v<=8?L("Average","Promedio"):v<=11?L("Good","Buena"):v<=13?L("Excellent","Excelente"):L("Exceptional","Excepcional"); }
+ function totalQuality(t){ return t<=19?[L("Poor","Pobre"),1]:t<=31?[L("Average","Promedio"),2]:t<=43?[L("Good","Buena"),3]:t<=52?[L("Excellent","Excelente"),4]:[L("Exceptional","Excepcional"),5]; }
 
  function render(){
   var line=byLine[st.sp]||[st.sp];
@@ -3015,14 +3019,14 @@ function initLab(){
 
   document.getElementById("labId").innerHTML=
    '<span class="lab__emo">'+s.emoji+'</span><div><div class="lab__nm">'+E(s.name)+'</div>'+
-   '<div class="lab__meta">'+E(REG[s.region])+' · stage '+s.stage+' of '+line.length+'</div></div>'+
+   '<div class="lab__meta">'+E(REG[s.region])+' · '+L("stage","etapa")+' '+s.stage+' '+L("of","de")+' '+line.length+'</div></div>'+
    '<div class="lab__badges"><span class="lab__bd lab__bd--t">'+TEMO[s.type]+" "+E(s.type)+'</span>'+
    '<span class="lab__bd">'+E(s.role)+'</span></div>';
 
   document.getElementById("labStats").innerHTML=GK.map(function(g){
    var k=g[0], v=cur[k], z=zero[k], d=v-z;
    return '<div class="sb" style="grid-column:span 2"><div class="sb__t"><span class="sb__k">'+g[1]+'</span>'+
-    '<span class="sb__v num">'+v+'</span>'+(d>0?'<span class="sb__d">+'+d+' from genes</span>':'')+'</div>'+
+    '<span class="sb__v num">'+v+'</span>'+(d>0?'<span class="sb__d">+'+d+' '+L("from genes","de genes")+'</span>':'')+'</div>'+
     '<div class="sb__bar"><span class="sb__ghost" style="width:'+Math.min(100,z/CEIL[k]*100)+'%"></span>'+
     '<span class="sb__fill" style="width:'+Math.min(100,v/CEIL[k]*100)+'%"></span></div></div>';
   }).join("");
@@ -3039,8 +3043,8 @@ function initLab(){
    var M=MV[m], stab=(M.type===s.type);
    return '<div class="mv'+(stab?" mv--stab":"")+'"><div class="mv__h"><span class="mv__n">'+E(M.name)+'</span>'+
     '<span class="mv__t">'+(TEMO[M.type]||"")+" "+E(M.type)+'</span></div>'+
-    '<div class="mv__s">'+(M.power?"pow "+M.power:"status")+" · acc "+(M.acc>100?"—":M.acc)+" · "+M.pp+" PP"+
-    (M.pri?" · priority +"+M.pri:"")+(stab?" · STAB ×1.5":"")+'</div>'+
+    '<div class="mv__s">'+(M.power?L("pow","pod")+" "+M.power:L("status","estado"))+" · "+L("acc","prec")+" "+(M.acc>100?"—":M.acc)+" · "+M.pp+" PP"+
+    (M.pri?" · "+L("priority","prioridad")+" +"+M.pri:"")+(stab?" · STAB ×1.5":"")+'</div>'+
     (M.eff?'<div class="mv__e">'+E(M.eff)+"</div>":"")+"</div>";
   }).join("");
 
@@ -3051,7 +3055,7 @@ function initLab(){
     '<span class="lrn__lv">Lv '+p[0]+'</span>'+
     '<span class="lrn__n">'+E(M.name)+'</span>'+
     '<span class="lrn__t">'+(TEMO[M.type]||"")+" "+E(M.type)+(stab?" · STAB":"")+'</span>'+
-    '<span class="lrn__m">'+(M.power?"pow "+M.power:"status")+" · "+M.pp+" PP"+(M.pri?" · pri +"+M.pri:"")+'</span>'+
+    '<span class="lrn__m">'+(M.power?L("pow","pod")+" "+M.power:L("status","estado"))+" · "+M.pp+" PP"+(M.pri?" · pri +"+M.pri:"")+'</span>'+
     (M.eff?'<span class="lrn__e">'+E(M.eff)+"</span>":"")+"</div>";
   }).join("");
 
@@ -3059,12 +3063,11 @@ function initLab(){
   S[id].learn.forEach(function(p){ if(p[0]>st.lv && next===null) next=p; });
   document.getElementById("labNote").innerHTML=
    (PET_DB.D[id]?"<em>"+E(PET_DB.D[id])+"</em><br>":"")+
-   (next?"Next move at level <strong>"+next[0]+"</strong>: "+E(MV[next[1]].name)+". ":"")+
-   (mv.length<4?"Only "+mv.length+" move"+(mv.length>1?"s":"")+" known — it fills to 4 as it levels.":"");
+   (next?L("Next move at level <strong>"+next[0]+"</strong>: ","Próximo movimiento al nivel <strong>"+next[0]+"</strong>: ")+E(MV[next[1]].name)+". ":"")+
+   (mv.length<4?L("Only "+mv.length+" move"+(mv.length>1?"s":"")+" known — it fills to 4 as it levels.","Solo "+mv.length+" movimiento"+(mv.length>1?"s":"")+" conocido"+(mv.length>1?"s":"")+" — se llena a 4 al subir de nivel."):"");
 
   document.getElementById("labQ").innerHTML=
-   "Gene total <strong>"+tot+"/60</strong> — <strong>"+tq[0]+"</strong>. Releasing this Pokemax would pay <strong>"+
-   tq[1]+"</strong> Gene Essence."+(tot===60?" A perfect roll; you will not see many.":"");
+   L("Gene total <strong>"+tot+"/60</strong> — <strong>"+tq[0]+"</strong>. Releasing this Pokemax would pay <strong>"+tq[1]+"</strong> Gene Essence.","Total de genes <strong>"+tot+"/60</strong> — <strong>"+tq[0]+"</strong>. Liberar este Pokemax pagaría <strong>"+tq[1]+"</strong> Gene Essence.")+(tot===60?L(" A perfect roll; you will not see many."," Una tirada perfecta; no verás muchas."):"");
  }
 
  sel.addEventListener("change",function(){ st.sp=sel.value; render(); });
@@ -3108,15 +3111,17 @@ function initMap(){
  function sel(id){
   var p=PLACES[id];
   document.querySelectorAll(".pin").forEach(function(n){n.classList.toggle("on",n.dataset.n===id);});
-  var kind={hunt:"Huntable region",story:"Story location",side:"Side story",seal:"Seal site",portal:"Portal region"}[p.t]||"Location";
+  var kind=LANG==="es"
+    ?({hunt:"Región de caza",story:"Locación de historia",side:"Historia secundaria",seal:"Sitio de sello",portal:"Región de portal"}[p.t]||"Locación")
+    :({hunt:"Huntable region",story:"Story location",side:"Side story",seal:"Seal site",portal:"Portal region"}[p.t]||"Location");
   var h='<p class="dos__e">'+kind.toUpperCase()+'</p><h3>'+E(p.n)+"</h3>";
-  h+='<div class="dos__r"><p class="dos__x">'+E(p.d)+"</p></div>";
+  h+='<div class="dos__r"><p class="dos__x">'+E(L(p.d,DTR[p.d]))+"</p></div>";
   if(p.m){
-   h+='<div class="dos__r"><p class="dos__k">Signature material</p><p class="dos__m">'+E(p.m)+'</p>'+
-      '<p class="dos__x" style="margin-top:.3rem">Only drops here. Feeds this region\'s gear and one weapon recipe.</p></div>';
+   h+='<div class="dos__r"><p class="dos__k">'+L("Signature material","Material distintivo")+'</p><p class="dos__m">'+E(p.m)+'</p>'+
+      '<p class="dos__x" style="margin-top:.3rem">'+L("Only drops here. Feeds this region's gear and one weapon recipe.","Solo cae aquí. Alimenta el gear de esta región y una receta de arma.")+'</p></div>';
   }
   if(FAUNA[id]){
-   h+='<div class="dos__r"><p class="dos__k">Species — tier 1 → 7</p>';
+   h+='<div class="dos__r"><p class="dos__k">'+L("Species — tier 1 → 7","Especies — nivel 1 → 7")+'</p>';
    FAUNA[id].forEach(function(f){
     h+='<p class="sp"><span class="sp__a">'+f[0]+'</span><span class="sp__n"><b>'+E(f[1])+"</b> → <b>"+E(f[2])+"</b></span></p>";
    });
@@ -3124,7 +3129,7 @@ function initMap(){
   }
   var links=ROADS.filter(function(r){return r[0]===id||r[1]===id;})
     .map(function(r){var o=r[0]===id?r[1]:r[0];return PLACES[o]?PLACES[o].n:null;}).filter(Boolean);
-  if(links.length) h+='<div class="dos__r"><p class="dos__k">Connects to</p><p class="dos__x">'+links.join(" · ")+"</p></div>";
+  if(links.length) h+='<div class="dos__r"><p class="dos__k">'+L("Connects to","Conecta con")+'</p><p class="dos__x">'+links.join(" · ")+"</p></div>";
   dos.innerHTML=h;
  }
  /* <button> already fires on Enter/Space, so click alone covers the keyboard */
