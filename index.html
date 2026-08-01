@@ -711,7 +711,34 @@ var DTR={
  "25% potion preservation vs NPCs":"25% de conservación de pociones vs NPCs","Potion efficiency":"Eficiencia de pociones",
  "+12% crit chance vs NPCs":"+12% de prob. de crítico vs NPCs","PvE DPS":"DPS PvE",
  "−10% all damage taken (needs 3+ clanmates on the team)":"−10% de todo el daño recibido (necesita 3+ del clan en el equipo)","Team synergy":"Sinergia de equipo",
- "−25% chance to be targeted by Stalker / Marked Hunt":"−25% de prob. de ser objetivo del Stalker / Marked Hunt","Avoiding NPC threats":"Evitar amenazas de NPC"
+ "−25% chance to be targeted by Stalker / Marked Hunt":"−25% de prob. de ser objetivo del Stalker / Marked Hunt","Avoiding NPC threats":"Evitar amenazas de NPC",
+ "Every 3rd consecutive attack ×2; cannot Rest above 40% HP":"Cada 3er ataque consecutivo ×2; no puede hacer Rest por encima del 40% de HP",
+ "Perfect parry heals 10 HP; intercept one hit for an ally per battle":"El parry perfecto cura 10 HP; intercepta un golpe por un aliado por batalla",
+ "On dodge, free counter for 35% damage":"Al esquivar, contra gratis por 35% de daño",
+ "+18% damage per active team curse; starts with 1 curse":"+18% de daño por maldición de equipo activa; empieza con 1 maldición",
+ "When an ally heals, the Bard heals 40% of that too":"Cuando un aliado se cura, el Bard cura el 40% de eso también",
+ "Common":"Común","Rare":"Raro","Legendary":"Legendario",
+ "Lose 5 HP per attack":"Pierdes 5 HP por ataque",
+ "+25% damage dealt and taken":"+25% de daño hecho y recibido",
+ "15% chance to deal 0":"15% de prob. de hacer 0",
+ "Heals also heal enemies":"Las curas también curan a los enemigos",
+ "−4% max HP per room":"−4% de HP máx por sala",
+ "Focus only gives +50%":"Focus solo da +50%",
+ "Enemies target you first":"Los enemigos te atacan a ti primero",
+ "Each curse gives enemies +4% HP":"Cada maldición da a los enemigos +4% de HP",
+ "Start rooms at 85% HP":"Empiezas las salas al 85% de HP",
+ "+25% enemy HP":"+25% de HP enemigo",
+ "No potions":"Sin pociones",
+ "Boss gains +1 STR every 4 turns":"El jefe gana +1 STR cada 4 turnos",
+ "No Market room":"Sin sala de Mercado",
+ "Start each combat with a curse":"Empiezas cada combate con una maldición",
+ "No revives":"Sin revividas",
+ "Fury below 30% HP":"Furia por debajo del 30% de HP",
+ "Deadly Mark":"Marca Mortal",
+ "Counter-stance at 50%":"Postura de contra al 50%",
+ "Summons minions; immune while one lives":"Invoca secuaces; inmune mientras uno viva",
+ "Immune to normal hits — needs Focus or a crit":"Inmune a golpes normales — necesita Focus o un crítico",
+ "Huge HP + 60% reduction until its armor breaks; can stun":"HP enorme + 60% de reducción hasta que su armadura se rompe; puede aturdir"
 };
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
@@ -1702,23 +1729,23 @@ PAGES.screens={t:"What It Looks Like",e:"Reference",d:"The actual combat screens
 }};
 
 PAGES.abyss={t:"The Eternal Abyss",e:"The dungeon",d:"A 1–3 player roguelite, and the deepest single mode in the game. Every run is different.",h:function(){
- return '<h2 class="s">Structure</h2>'+
- '<span class="fx">class pick → rooms → partial heal → choice events → final boss</span>'+
- '<p class="b">Multiple rooms with a partial heal between them, narrative <strong>choice events</strong> with real consequences, and a boss at the end. You collect relics on the way and pick up curses you did not ask for.</p>'+
- '<h2 class="s">Classes</h2>'+
- tbl(["Class","Stat change","Passive"],CLASSES.map(function(r){return [r[0],r[1],r[2]];}),["k","n",""])+
- '<h2 class="s">Relics</h2>'+
- RELICS.map(function(r){return '<h3 class="t">'+E(r[0])+'</h3><p class="b">'+E(r[1])+"</p>";}).join("")+
- '<h2 class="s">Curses</h2>'+
- '<p class="b">Team penalties you accumulate — and the Hexblade\'s entire power source, at <strong>+18% damage per active curse</strong>.</p>'+
- tbl(["Curse","Effect"],CURSES.map(function(r){return [r[0],r[1]];}),["k",""])+
- '<h2 class="s">Pacts and Heat</h2>'+
- '<p class="b">Optional difficulty you turn on <em>before</em> entering, for a bigger reward multiplier. <strong>Heat</strong> is simply how many pacts you took.</p>'+
- tbl(["Pact","What it does","Multiplier"],PACTS.map(function(r){return [r[0],r[1],r[2]];}),["k","","n"])+
- tbl(["Heat","Total reward multiplier"],[["1","×1.4"],["2","—"],["3","—"],["4","—"],["5","×4.0 · <em>Abyss Legend</em>"]],["n",""])+
- '<h2 class="s">What lives down there</h2>'+
- tbl(["Enemy","What makes it a problem"],ABYSSFOES.map(function(r){return [r[0],r[1]];}),["k",""])+
- '<div class="callout"><p><strong>The run-winning combo:</strong> Hexblade plus <em>The Black Crown</em> turns every curse into a buff. Bring <em>Soul Bond</em> on Death Pact runs. Save Focus for Specters — normal hits do nothing to them.</p></div>';
+ return '<h2 class="s">'+L("Structure","Estructura")+'</h2>'+
+ '<span class="fx">'+L("class pick → rooms → partial heal → choice events → final boss","elegir clase → salas → cura parcial → eventos de elección → jefe final")+'</span>'+
+ '<p class="b">'+L("Multiple rooms with a partial heal between them, narrative <strong>choice events</strong> with real consequences, and a boss at the end. You collect relics on the way and pick up curses you did not ask for.","Varias salas con una cura parcial entre ellas, <strong>eventos de elección</strong> narrativos con consecuencias reales, y un jefe al final. Recoges reliquias por el camino y te llevas maldiciones que no pediste.")+'</p>'+
+ '<h2 class="s">'+L("Classes","Clases")+'</h2>'+
+ tbl(L(["Class","Stat change","Passive"],["Clase","Cambio de stats","Pasiva"]),CLASSES.map(function(r){return [r[0],r[1],L(r[2],DTR[r[2]])];}),["k","n",""])+
+ '<h2 class="s">'+L("Relics","Reliquias")+'</h2>'+
+ RELICS.map(function(r){return '<h3 class="t">'+E(L(r[0],DTR[r[0]]))+'</h3><p class="b">'+E(r[1])+"</p>";}).join("")+
+ '<h2 class="s">'+L("Curses","Maldiciones")+'</h2>'+
+ '<p class="b">'+L("Team penalties you accumulate — and the Hexblade\'s entire power source, at <strong>+18% damage per active curse</strong>.","Penalizaciones de equipo que acumulas — y toda la fuente de poder del Hexblade, con <strong>+18% de daño por maldición activa</strong>.")+'</p>'+
+ tbl(L(["Curse","Effect"],["Maldición","Efecto"]),CURSES.map(function(r){return [r[0],L(r[1],DTR[r[1]])];}),["k",""])+
+ '<h2 class="s">'+L("Pacts and Heat","Pactos y Heat")+'</h2>'+
+ '<p class="b">'+L("Optional difficulty you turn on <em>before</em> entering, for a bigger reward multiplier. <strong>Heat</strong> is simply how many pacts you took.","Dificultad opcional que activas <em>antes</em> de entrar, por un mayor multiplicador de recompensa. <strong>Heat</strong> es simplemente cuántos pactos tomaste.")+'</p>'+
+ tbl(L(["Pact","What it does","Multiplier"],["Pacto","Qué hace","Multiplicador"]),PACTS.map(function(r){return [r[0],L(r[1],DTR[r[1]]),r[2]];}),["k","","n"])+
+ tbl(L(["Heat","Total reward multiplier"],["Heat","Multiplicador total de recompensa"]),[["1","×1.4"],["2","—"],["3","—"],["4","—"],["5","×4.0 · <em>Abyss Legend</em>"]],["n",""])+
+ '<h2 class="s">'+L("What lives down there","Lo que vive ahí abajo")+'</h2>'+
+ tbl(L(["Enemy","What makes it a problem"],["Enemigo","Qué lo hace un problema"]),ABYSSFOES.map(function(r){return [r[0],L(r[1],DTR[r[1]])];}),["k",""])+
+ '<div class="callout"><p>'+L("<strong>The run-winning combo:</strong> Hexblade plus <em>The Black Crown</em> turns every curse into a buff. Bring <em>Soul Bond</em> on Death Pact runs. Save Focus for Specters — normal hits do nothing to them.","<strong>El combo que gana runs:</strong> Hexblade más <em>The Black Crown</em> convierte cada maldición en un buff. Lleva <em>Soul Bond</em> en runs con Death Pact. Guarda el Focus para los Specters — los golpes normales no les hacen nada.")+'</p></div>';
 }};
 
 PAGES.clans={t:"Clans",e:"The guide",d:"Permanent groups that grant collective passive bonuses, hold territory, and unlock their own forge recipes.",h:function(){
@@ -2129,65 +2156,85 @@ PAGES.characters={t:"Characters",e:"Campaign",d:"The people walking the road wit
 }};
 
 PAGES.diplomacy={t:"Clan Diplomacy",e:"The guide",d:"Clans that own regions charge outsiders to hunt there. Diplomacy lets two clans sign a treaty that trades discounted access for OIL — a deal that, once signed, cannot be broken.",h:function(){
- return '<h2 class="s">Why it exists</h2>'+
- '<p class="b">A clan that controls a region taxes everyone else who wants to <span class="cmd">!hunt</span> there: an <strong>entry toll</strong> to set foot in it and a <strong>hunt tax</strong> (up to 20%) on what you earn. <strong>Clan Diplomacy</strong> is the negotiating table on top of that — a clan can <strong>sell or gift access</strong> to its region: a reduction, or a full waiver, of that toll and tax, for an agreed number of days, in exchange for <strong>OIL</strong> from the other clan\'s treasury.</p>'+
- '<p class="b">Open it with <span class="cmd">!diplomacy</span>; see every standing treaty with <span class="cmd">!diplomacy_board</span>. Only a clan\'s <strong>leaders and sub-leaders</strong> can propose or sign.</p>'+
- '<h2 class="s">Three kinds of treaty</h2>'+
- tbl(["Direction","Who gets access"],[
+ return '<h2 class="s">'+L("Why it exists","Por qué existe")+'</h2>'+
+ '<p class="b">'+L("A clan that controls a region taxes everyone else who wants to <span class=\"cmd\">!hunt</span> there: an <strong>entry toll</strong> to set foot in it and a <strong>hunt tax</strong> (up to 20%) on what you earn. <strong>Clan Diplomacy</strong> is the negotiating table on top of that — a clan can <strong>sell or gift access</strong> to its region: a reduction, or a full waiver, of that toll and tax, for an agreed number of days, in exchange for <strong>OIL</strong> from the other clan\'s treasury.","Un clan que controla una región cobra a todos los demás que quieren <span class=\"cmd\">!hunt</span> ahí: un <strong>peaje de entrada</strong> para pisarla y un <strong>impuesto de caza</strong> (hasta 20%) sobre lo que ganas. La <strong>Diplomacia de clanes</strong> es la mesa de negociación sobre eso — un clan puede <strong>vender o regalar acceso</strong> a su región: una reducción, o una exención total, de ese peaje e impuesto, por un número de días acordado, a cambio de <strong>OIL</strong> del tesoro del otro clan.")+'</p>'+
+ '<p class="b">'+L("Open it with <span class=\"cmd\">!diplomacy</span>; see every standing treaty with <span class=\"cmd\">!diplomacy_board</span>. Only a clan\'s <strong>leaders and sub-leaders</strong> can propose or sign.","Ábrela con <span class=\"cmd\">!diplomacy</span>; ve todos los tratados vigentes con <span class=\"cmd\">!diplomacy_board</span>. Solo los <strong>líderes y sublíderes</strong> de un clan pueden proponer o firmar.")+'</p>'+
+ '<h2 class="s">'+L("Three kinds of treaty","Tres tipos de tratado")+'</h2>'+
+ tbl(L(["Direction","Who gets access"],["Dirección","Quién obtiene acceso"]),LANG==="es"?[
+  ['<strong>Grant</strong>',"Abres <em>tu</em> región a ellos — vendes acceso a lo que posees."],
+  ['<strong>Request</strong>',"Pides acceso a <em>su</em> región — compras tu entrada."],
+  ['<strong>Mutual</strong>',"Ambos clanes se abren sus regiones bajo los mismos términos."]
+ ]:[
   ['<strong>Grant</strong>',"You open <em>your</em> region to them — you are selling access to what you hold."],
   ['<strong>Request</strong>',"You ask for access to <em>their</em> region — you are buying your way in."],
   ['<strong>Mutual</strong>',"Both clans open their regions to each other on the same terms."]
  ],["k",""])+
- '<h2 class="s">The terms</h2>'+
- '<p class="b">Every treaty sets three things, and the discounts are stored as <strong>percentages, not frozen prices</strong> — if the region owner later raises their tax, your discount still applies to the new rate.</p>'+
- tbl(["Term","Range"],[
+ '<h2 class="s">'+L("The terms","Los términos")+'</h2>'+
+ '<p class="b">'+L("Every treaty sets three things, and the discounts are stored as <strong>percentages, not frozen prices</strong> — if the region owner later raises their tax, your discount still applies to the new rate.","Cada tratado fija tres cosas, y los descuentos se guardan como <strong>porcentajes, no precios congelados</strong> — si el dueño de la región sube luego su impuesto, tu descuento sigue aplicando a la nueva tarifa.")+'</p>'+
+ tbl(L(["Term","Range"],["Término","Rango"]),LANG==="es"?[
+  ["Descuento de peaje","0–100% (100% = entrada gratis)"],
+  ["Descuento de impuesto de caza","0–100% (100% = caza sin impuesto)"],
+  ["Duración","1–90 días"],
+  ["Precio","Pagado por adelantado en OIL del tesoro del comprador"]
+ ]:[
   ["Entry-toll discount","0–100% (100% = free entry)"],
   ["Hunt-tax discount","0–100% (100% = tax-free hunting)"],
   ["Duration","1–90 days"],
   ["Price","Paid up front in OIL from the buyer's treasury"]
  ],["k","n"])+
- '<div class="callout"><p>The other clan\'s treasury is <strong>private</strong>. You never see how much they hold, and if a signer cannot actually afford the deal, only they are told — you just see it fail.</p></div>'+
- '<h2 class="s">Negotiating</h2>'+
- '<p class="b">A proposal is an opening offer, not a final one. The other side can <strong>counter</strong>, and you can counter back — up to <strong>3 rounds</strong> of haggling before a deal has to be taken or left. An offer nobody answers <strong>expires on its own after 48 hours</strong>, and every active treaty warns both clans <strong>24 hours</strong> before it lapses.</p>'+
- '<h2 class="s">The one rule that changes everything</h2>'+
- '<div class="callout callout--warn"><p><strong>A signed treaty cannot be broken.</strong> It runs to term, full stop. There is no notice period, no buy-out, no betrayal — the <em>duration is the commitment</em>. That is what makes a treaty worth the OIL: the other clan cannot take your money and slam the gate a day later.</p></div>'+
- '<p class="b">The flip side is that signing <strong>ties you down</strong>. A clan that has granted access to its region <strong>cannot relocate</strong> to a different one while the treaty is live — you sold entry to that land, so you have to keep holding it. And a clan can carry at most <strong>5 active treaties</strong> at once, so you cannot simply ally with everyone.</p>'+
- '<h2 class="s">How to use it</h2>'+
- '<p class="b"><strong>If you own a rich hunting region</strong>, your access is a product. Sell short, expensive waivers to clans grinding materials and turn your territory into treasury income.</p>'+
- '<p class="b"><strong>If your clan is farming a region you do not hold</strong>, do the math: a 30-day tax waiver often costs less than the tax you would pay hunting it raw.</p>'+
- '<p class="b"><strong>Sign for a term you are sure of.</strong> You cannot undo it — a 90-day grant is 90 days you have committed that region, treaty and all.</p>'+
- '<h2 class="s">A second kind of pact</h2>'+
- '<p class="b">The same <span class="cmd">!diplomacy</span> panel signs one other deal type: a <strong>Defense Alliance</strong>. It trades no regional access — it is a mutual-defense pact, and it only matters when another clan comes to <a href="#sabotage">sabotage</a> your territory. When that happens your ally is summoned to the defense and can fight it at your side. See <a href="#sabotage">Clan Sabotage</a>.</p>';
+ '<div class="callout"><p>'+L("The other clan\'s treasury is <strong>private</strong>. You never see how much they hold, and if a signer cannot actually afford the deal, only they are told — you just see it fail.","El tesoro del otro clan es <strong>privado</strong>. Nunca ves cuánto tienen, y si un firmante no puede pagar el trato, solo a él se le avisa — tú solo ves que falla.")+'</p></div>'+
+ '<h2 class="s">'+L("Negotiating","Negociar")+'</h2>'+
+ '<p class="b">'+L("A proposal is an opening offer, not a final one. The other side can <strong>counter</strong>, and you can counter back — up to <strong>3 rounds</strong> of haggling before a deal has to be taken or left. An offer nobody answers <strong>expires on its own after 48 hours</strong>, and every active treaty warns both clans <strong>24 hours</strong> before it lapses.","Una propuesta es una oferta inicial, no final. El otro lado puede <strong>contraofertar</strong>, y tú también — hasta <strong>3 rondas</strong> de regateo antes de que un trato haya que tomarlo o dejarlo. Una oferta que nadie responde <strong>caduca sola tras 48 horas</strong>, y cada tratado activo avisa a ambos clanes <strong>24 horas</strong> antes de expirar.")+'</p>'+
+ '<h2 class="s">'+L("The one rule that changes everything","La regla que lo cambia todo")+'</h2>'+
+ '<div class="callout callout--warn"><p>'+L("<strong>A signed treaty cannot be broken.</strong> It runs to term, full stop. There is no notice period, no buy-out, no betrayal — the <em>duration is the commitment</em>. That is what makes a treaty worth the OIL: the other clan cannot take your money and slam the gate a day later.","<strong>Un tratado firmado no se puede romper.</strong> Corre hasta su término, punto. No hay preaviso, ni recompra, ni traición — la <em>duración es el compromiso</em>. Eso es lo que hace que un tratado valga el OIL: el otro clan no puede quedarse tu dinero y cerrarte la puerta al día siguiente.")+'</p></div>'+
+ '<p class="b">'+L("The flip side is that signing <strong>ties you down</strong>. A clan that has granted access to its region <strong>cannot relocate</strong> to a different one while the treaty is live — you sold entry to that land, so you have to keep holding it. And a clan can carry at most <strong>5 active treaties</strong> at once, so you cannot simply ally with everyone.","La otra cara es que firmar <strong>te ata</strong>. Un clan que concedió acceso a su región <strong>no puede reubicarse</strong> a otra mientras el tratado esté vivo — vendiste la entrada a esa tierra, así que tienes que seguir manteniéndola. Y un clan puede llevar como máximo <strong>5 tratados activos</strong> a la vez, así que no puedes aliarte con todos.")+'</p>'+
+ '<h2 class="s">'+L("How to use it","Cómo usarla")+'</h2>'+
+ '<p class="b">'+L("<strong>If you own a rich hunting region</strong>, your access is a product. Sell short, expensive waivers to clans grinding materials and turn your territory into treasury income.","<strong>Si posees una región rica de caza</strong>, tu acceso es un producto. Vende exenciones cortas y caras a clanes que farmean materiales y convierte tu territorio en ingresos para el tesoro.")+'</p>'+
+ '<p class="b">'+L("<strong>If your clan is farming a region you do not hold</strong>, do the math: a 30-day tax waiver often costs less than the tax you would pay hunting it raw.","<strong>Si tu clan farmea una región que no posees</strong>, haz la cuenta: una exención de impuesto de 30 días suele costar menos que el impuesto que pagarías cazándola sin más.")+'</p>'+
+ '<p class="b">'+L("<strong>Sign for a term you are sure of.</strong> You cannot undo it — a 90-day grant is 90 days you have committed that region, treaty and all.","<strong>Firma por un plazo del que estés seguro.</strong> No puedes deshacerlo — una concesión de 90 días son 90 días que has comprometido esa región, con tratado y todo.")+'</p>'+
+ '<h2 class="s">'+L("A second kind of pact","Un segundo tipo de pacto")+'</h2>'+
+ '<p class="b">'+L("The same <span class=\"cmd\">!diplomacy</span> panel signs one other deal type: a <strong>Defense Alliance</strong>. It trades no regional access — it is a mutual-defense pact, and it only matters when another clan comes to <a href=\"#sabotage\">sabotage</a> your territory. When that happens your ally is summoned to the defense and can fight it at your side. See <a href=\"#sabotage\">Clan Sabotage</a>.","El mismo panel <span class=\"cmd\">!diplomacy</span> firma otro tipo de trato: una <strong>Alianza Defensiva</strong>. No intercambia acceso regional — es un pacto de defensa mutua, y solo importa cuando otro clan viene a <a href=\"#sabotage\">sabotear</a> tu territorio. Cuando pasa, tu aliado es convocado a la defensa y puede pelear a tu lado. Ver <a href=\"#sabotage\">Sabotaje de clanes</a>.")+'</p>';
 }};
 
 PAGES.sabotage={t:"Clan Sabotage",e:"The guide",d:"Covert clan-versus-clan raids that plant a temporary curse on a rival's region — no conquest, no ownership change, just a knife in the dark that the owner and their allies get one window to stop.",h:function(){
- return '<h2 class="s">Raids, not conquest</h2>'+
- '<p class="b"><strong>Clan Sabotage</strong> is how you hurt a rival clan without trying to take their land. A sabotage <strong>never changes who owns a region</strong> — it slips in, plants a <strong>temporary effect</strong>, and slips out. It is the aggressive counterpart to <a href="#diplomacy">Clan Diplomacy</a>: diplomacy buys your way into someone\'s region, sabotage forces it.</p>'+
- '<p class="b">Open the panel with <span class="cmd">!sabotage</span> — pick the target region, then the effect. See every raid currently in play with <span class="cmd">!sabotages</span>. <strong>Any clan member</strong> can call a Smuggle run; only <strong>leaders and sub-leaders</strong> can order the three damaging effects.</p>'+
- '<h2 class="s">The four effects</h2>'+
- '<p class="b">A raid carries exactly <strong>one</strong> effect, and the effect sets how many raiders you bring:</p>'+
- tbl(["Effect","Raiders","What it does"],[
+ return '<h2 class="s">'+L("Raids, not conquest","Incursiones, no conquista")+'</h2>'+
+ '<p class="b">'+L("<strong>Clan Sabotage</strong> is how you hurt a rival clan without trying to take their land. A sabotage <strong>never changes who owns a region</strong> — it slips in, plants a <strong>temporary effect</strong>, and slips out. It is the aggressive counterpart to <a href=\"#diplomacy\">Clan Diplomacy</a>: diplomacy buys your way into someone\'s region, sabotage forces it.","El <strong>Sabotaje de clanes</strong> es cómo dañas a un clan rival sin intentar tomar su tierra. Un sabotaje <strong>nunca cambia quién posee una región</strong> — se cuela, planta un <strong>efecto temporal</strong>, y se escabulle. Es la contraparte agresiva de la <a href=\"#diplomacy\">Diplomacia de clanes</a>: la diplomacia compra tu entrada a la región de alguien, el sabotaje la fuerza.")+'</p>'+
+ '<p class="b">'+L("Open the panel with <span class=\"cmd\">!sabotage</span> — pick the target region, then the effect. See every raid currently in play with <span class=\"cmd\">!sabotages</span>. <strong>Any clan member</strong> can call a Smuggle run; only <strong>leaders and sub-leaders</strong> can order the three damaging effects.","Abre el panel con <span class=\"cmd\">!sabotage</span> — elige la región objetivo, luego el efecto. Ve todas las incursiones en curso con <span class=\"cmd\">!sabotages</span>. <strong>Cualquier miembro del clan</strong> puede llamar a un contrabando; solo los <strong>líderes y sublíderes</strong> pueden ordenar los tres efectos dañinos.")+'</p>'+
+ '<h2 class="s">'+L("The four effects","Los cuatro efectos")+'</h2>'+
+ '<p class="b">'+L("A raid carries exactly <strong>one</strong> effect, and the effect sets how many raiders you bring:","Una incursión lleva exactamente <strong>un</strong> efecto, y el efecto fija cuántos raiders traes:")+'</p>'+
+ tbl(L(["Effect","Raiders","What it does"],["Efecto","Raiders","Qué hace"]),LANG==="es"?[
+  ['🚪 <strong>Smuggle</strong>',"1–3","Tu grupo de incursión caza esa región <strong>sin el peaje de entrada</strong> el resto del día — fuerzas tu entrada sin un tratado."],
+  ['📉 <strong>Drop Sabotage</strong>',"3","<strong>−50% a los drops de caza de la región</strong> durante 12 horas. Todo el que cace ahí, dueños incluidos, recibe la mitad del botín."],
+  ['🧬 <strong>Passive Sabotage</strong>',"3","<strong>−50% al pasivo de territorio de la región</strong> durante 12 horas — reduces a la mitad el bono de combate que los dueños obtienen por tener la tierra."],
+  ['💰 <strong>Treasury Raid</strong>',"4","Roba el <strong>5% del tesoro del clan enemigo</strong> directo al tuyo, al instante, con la victoria. Un clan solo puede ser robado <strong>una vez cada 12 horas</strong>."]
+ ]:[
   ['🚪 <strong>Smuggle</strong>',"1–3","Your raiding party hunts that region <strong>free of the entry toll</strong> for the rest of the day — you force your own way in without a treaty."],
-  ['📉 <strong>Drop Sabotage</strong>',"3","<strong>−50% to the region\'s hunt drops</strong> for 12 hours. Everyone hunting there, owners included, gets half the loot."],
-  ['🧬 <strong>Passive Sabotage</strong>',"3","<strong>−50% to the region\'s territory passive</strong> for 12 hours — you halve the combat bonus the owners get from holding the land."],
-  ['💰 <strong>Treasury Raid</strong>',"4","Steal <strong>5% of the enemy clan\'s treasury</strong> straight into yours, instantly, on the win. A clan can only be robbed <strong>once every 12 hours</strong>."]
+  ['📉 <strong>Drop Sabotage</strong>',"3","<strong>−50% to the region's hunt drops</strong> for 12 hours. Everyone hunting there, owners included, gets half the loot."],
+  ['🧬 <strong>Passive Sabotage</strong>',"3","<strong>−50% to the region's territory passive</strong> for 12 hours — you halve the combat bonus the owners get from holding the land."],
+  ['💰 <strong>Treasury Raid</strong>',"4","Steal <strong>5% of the enemy clan's treasury</strong> straight into yours, instantly, on the win. A clan can only be robbed <strong>once every 12 hours</strong>."]
  ],["k","n",""])+
- '<h2 class="s">The defense window</h2>'+
- '<p class="b">Sabotage is not a sneak attack you cannot answer. The moment you launch, a <strong>defense window opens</strong> — its length is how long it takes your raiders to <em>travel</em> to the region (raid from next door and the window is short; raid from across Valestia and the defenders get real time to muster). A live countdown shows both sides exactly when the fighting starts.</p>'+
- '<p class="b">The defending clan — <strong>and any clan it holds a Defense Alliance with</strong> — gets a lobby to put bodies on the wall. Whatever slots the defenders leave empty are <strong>filled by the region\'s garrison NPCs</strong>. Then a public thread opens in the region and the two sides fight it out as a <strong>team battle in the normal combat engine</strong>, with the garrison playing to win — no passive defending.</p>'+
- '<h2 class="s">The garrison</h2>'+
- '<p class="b">A region\'s <strong>garrison</strong> is a clan upgrade, bought from the region\'s own upgrade panel and levelled from <strong>0 to 10</strong>. It is your standing defense for when your members are offline — the higher the level, the harder the NPCs that fill your empty defense slots:</p>'+
- tbl(["Garrison level","What the defenders get"],[
-  ["0–3","Baseline NPC defenders, scaled to the raiders\' level."],
+ '<h2 class="s">'+L("The defense window","La ventana de defensa")+'</h2>'+
+ '<p class="b">'+L("Sabotage is not a sneak attack you cannot answer. The moment you launch, a <strong>defense window opens</strong> — its length is how long it takes your raiders to <em>travel</em> to the region (raid from next door and the window is short; raid from across Valestia and the defenders get real time to muster). A live countdown shows both sides exactly when the fighting starts.","El sabotaje no es un ataque furtivo que no puedas responder. En cuanto lanzas, se abre una <strong>ventana de defensa</strong> — su duración es lo que tardan tus raiders en <em>viajar</em> a la región (saquea desde al lado y la ventana es corta; saquea desde el otro extremo de Valestia y los defensores tienen tiempo real de reunirse). Una cuenta atrás en vivo muestra a ambos bandos exactamente cuándo empieza la pelea.")+'</p>'+
+ '<p class="b">'+L("The defending clan — <strong>and any clan it holds a Defense Alliance with</strong> — gets a lobby to put bodies on the wall. Whatever slots the defenders leave empty are <strong>filled by the region\'s garrison NPCs</strong>. Then a public thread opens in the region and the two sides fight it out as a <strong>team battle in the normal combat engine</strong>, with the garrison playing to win — no passive defending.","El clan defensor — <strong>y cualquier clan con el que tenga una Alianza Defensiva</strong> — recibe un lobby para poner cuerpos en el muro. Las ranuras que los defensores dejen vacías se <strong>llenan con los NPCs de guarnición de la región</strong>. Luego se abre un hilo público en la región y ambos bandos lo resuelven como una <strong>batalla por equipos en el motor de combate normal</strong>, con la guarnición jugando para ganar — sin defensa pasiva.")+'</p>'+
+ '<h2 class="s">'+L("The garrison","La guarnición")+'</h2>'+
+ '<p class="b">'+L("A region\'s <strong>garrison</strong> is a clan upgrade, bought from the region\'s own upgrade panel and levelled from <strong>0 to 10</strong>. It is your standing defense for when your members are offline — the higher the level, the harder the NPCs that fill your empty defense slots:","La <strong>guarnición</strong> de una región es una mejora de clan, comprada desde el propio panel de mejoras de la región y subida de <strong>0 a 10</strong>. Es tu defensa permanente para cuando tus miembros están offline — a mayor nivel, más duros los NPCs que llenan tus ranuras de defensa vacías:")+'</p>'+
+ tbl(L(["Garrison level","What the defenders get"],["Nivel de guarnición","Qué obtienen los defensores"]),LANG==="es"?[
+  ["0–3","Defensores NPC base, escalados al nivel de los raiders."],
+  ["4+","Los NPCs de guarnición empiezan a llevar <strong>pasivas</strong> de combate."],
+  ["8+","Un defensor <strong>extra</strong> se une a la línea (hasta cuatro)."],
+  ["9","Ese cuerpo extra se vuelve un <strong>Captain</strong> — un NPC más duro, de nivel jefe."],
+  ["10","El Captain se reemplaza por un <strong>doppelgänger de un miembro del clan que designes</strong> — una instantánea congelada que pelea con su gear real y la Habilidad Activa de su arma."]
+ ]:[
+  ["0–3","Baseline NPC defenders, scaled to the raiders' level."],
   ["4+","The garrison NPCs start carrying combat <strong>passives</strong>."],
   ["8+","An <strong>extra</strong> defender joins the line (up to four)."],
   ["9","That extra body becomes a <strong>Captain</strong> — a tougher, boss-tier NPC."],
-  ["10","The Captain is replaced by a <strong>doppelgänger of a clan member you designate</strong> — a frozen snapshot that fights with their real gear and their weapon\'s Active Skill."]
+  ["10","The Captain is replaced by a <strong>doppelgänger of a clan member you designate</strong> — a frozen snapshot that fights with their real gear and their weapon's Active Skill."]
  ],["k",""])+
- '<div class="callout"><p>The Lv.10 doppelgänger is the point of the whole track: a copy of your best-geared member standing guard around the clock, swinging their actual weapon and spending its Active exactly as they would.</p></div>'+
- '<h2 class="s">Win, lose, and cooldowns</h2>'+
- '<p class="b"><strong>Raiders win</strong> → the effect lands: the debuff is planted, the smuggling waiver is granted, or the OIL is moved. <strong>Raiders lose</strong> → they come away <strong>wounded</strong>, locked out of starting or joining <em>any</em> sabotage for the rest of the day, and the defenders are paid a <strong>bounty</strong> for holding the line. A failed <strong>Smuggle</strong> is worse still: the whole party is <strong>barred from entering that region</strong> for the day — you were caught at the gate.</p>'+
- '<p class="b">You cannot grind a single rival into the ground, either. The damaging effects sit on a <strong>cooldown against a given clan</strong>, and smuggling a given region is capped at <strong>once a day per raider</strong>. Sabotage is a scalpel, not a siege — for the fights that actually take and hold ground, see the <a href="#modes">large-scale modes</a>.</p>';
+ '<div class="callout"><p>'+L("The Lv.10 doppelgänger is the point of the whole track: a copy of your best-geared member standing guard around the clock, swinging their actual weapon and spending its Active exactly as they would.","El doppelgänger de nivel 10 es el sentido de todo el track: una copia de tu miembro mejor equipado montando guardia las 24 horas, blandiendo su arma real y gastando su Activa exactamente como él lo haría.")+'</p></div>'+
+ '<h2 class="s">'+L("Win, lose, and cooldowns","Ganar, perder y cooldowns")+'</h2>'+
+ '<p class="b">'+L("<strong>Raiders win</strong> → the effect lands: the debuff is planted, the smuggling waiver is granted, or the OIL is moved. <strong>Raiders lose</strong> → they come away <strong>wounded</strong>, locked out of starting or joining <em>any</em> sabotage for the rest of the day, and the defenders are paid a <strong>bounty</strong> for holding the line. A failed <strong>Smuggle</strong> is worse still: the whole party is <strong>barred from entering that region</strong> for the day — you were caught at the gate.","<strong>Los raiders ganan</strong> → el efecto se aplica: se planta el debuff, se concede la exención de contrabando, o se mueve el OIL. <strong>Los raiders pierden</strong> → salen <strong>heridos</strong>, bloqueados de iniciar o unirse a <em>cualquier</em> sabotaje el resto del día, y los defensores cobran una <strong>recompensa</strong> por aguantar la línea. Un <strong>Smuggle</strong> fallido es aún peor: todo el grupo queda <strong>vetado de entrar a esa región</strong> ese día — te pillaron en la puerta.")+'</p>'+
+ '<p class="b">'+L("You cannot grind a single rival into the ground, either. The damaging effects sit on a <strong>cooldown against a given clan</strong>, and smuggling a given region is capped at <strong>once a day per raider</strong>. Sabotage is a scalpel, not a siege — for the fights that actually take and hold ground, see the <a href=\"#modes\">large-scale modes</a>.","Tampoco puedes machacar a un solo rival hasta el suelo. Los efectos dañinos tienen un <strong>cooldown contra un clan dado</strong>, y contrabandear una región dada está limitado a <strong>una vez al día por raider</strong>. El sabotaje es un bisturí, no un asedio — para las peleas que de verdad toman y mantienen terreno, mira los <a href=\"#modes\">modos a gran escala</a>.")+'</p>';
 }};
 
 PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"Ten gyms, one per region, each with a medal to win — and each one a seat a player can take, hold, and lose. The endgame territory layer for Pokemax.",h:function(){
