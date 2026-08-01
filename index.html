@@ -838,7 +838,35 @@ var DTR={
  "Reveal a wild Pokemax's genes mid-encounter, before you decide to spend an OILball on it.":"Revela los genes de un Pokemax salvaje a mitad del encuentro, antes de decidir gastar una OILball en él.",
  "Raise one gene by one point. 5 per Pokemax, ever.":"Sube un gen un punto. 5 por Pokemax, para siempre.",
  "Reroll one gene at random. 2 per Pokemax, ever.":"Vuelve a tirar un gen al azar. 2 por Pokemax, para siempre.",
- "The expensive one. Set a gene outright instead of gambling.":"La cara. Fija un gen directamente en vez de apostar."
+ "The expensive one. Set a gene outright instead of gambling.":"La cara. Fija un gen directamente en vez de apostar.",
+ "Light frame. Thin armor but the highest evasion and AP — survives by dodging, not soaking.":"Chasis ligero. Armadura fina pero la mayor evasión y AP — sobrevive esquivando, no aguantando.",
+ "Balanced all-rounder. No weakness, no extreme.":"Todoterreno equilibrado. Sin debilidad, sin extremo.",
+ "Heavy frame. Strong armor and guard, low evasion — soaks hits.":"Chasis pesado. Armadura y guard fuertes, poca evasión — aguanta golpes.",
+ "Fortress. Max armor & guard, lowest AP & evasion — the immovable wall.":"Fortaleza. Máxima armadura y guard, mínimo AP y evasión — el muro inamovible.",
+ "Weapons platform. Highest power_output to haul heavy ordnance.":"Plataforma de armas. El mayor power_output para cargar artillería pesada.",
+ "Light, steady aim, moderately fragile.":"Ligero, aim estable, moderadamente frágil.",
+ "Balanced durability and aim.":"Durabilidad y aim equilibrados.",
+ "Heavily armored, protects its weapon, poor aim.":"Muy blindado, protege su arma, aim pobre.",
+ "Sniper arm. Highest aim, fragile.":"Brazo de francotirador. El aim más alto, frágil.",
+ "Built for melee — boosts melee weapon damage.":"Hecho para el melee — aumenta el daño de armas cuerpo a cuerpo.",
+ "Nimble. High evasion, low HP, light.":"Ágil. Alta evasión, poco HP, ligero.",
+ "Balanced footing.":"Estabilidad equilibrada.",
+ "Heavy stance. High HP, low evasion.":"Postura pesada. Alto HP, poca evasión.",
+ "Planted. Max HP/armor, barely dodges.":"Plantado. Máximo HP/armadura, apenas esquiva.",
+ "Rapid spray of weak shots that scatter across the frame — great at crippling arms and legs, poor against heavy armor.":"Ráfaga rápida de disparos débiles que se dispersan por el chasis — genial para mutilar brazos y piernas, mala contra armadura pesada.",
+ "A reliable three-pellet burst — solid, accurate mid-range damage.":"Una ráfaga fiable de tres perdigones — daño sólido y preciso a media distancia.",
+ "A precise two-round punch. The highest accuracy — strong against evasive and armored frames alike.":"Un golpe preciso de dos disparos. La mayor precisión — fuerte contra chasis evasivos y blindados por igual.",
+ "A single devastating impact — the biggest hit in the game, but the heaviest and most AP-hungry. All or nothing.":"Un solo impacto devastador — el mayor golpe del juego, pero el más pesado y hambriento de AP. Todo o nada.",
+ "A heavy four-missile volley that scatters across the frame. Expensive and swingy, but breaks multiple parts at once.":"Una andanada pesada de cuatro misiles que se dispersa por el chasis. Cara e inconstante, pero rompe varias partes a la vez.",
+ "A six-jet spread — the widest coverage of any weapon. Many weak hits, ideal for shredding several parts at once.":"Un abanico de seis chorros — la cobertura más amplia de cualquier arma. Muchos golpes débiles, ideal para destrozar varias partes a la vez.",
+ "Two heavy, inaccurate shells — punishing hits when they connect, frequent misses when they don't.":"Dos proyectiles pesados e imprecisos — golpes castigadores cuando conectan, fallos frecuentes cuando no.",
+ "Restore 60 HP to the most-damaged part.":"Restaura 60 HP a la parte más dañada.",
+ "Restore 120 HP to the most-damaged part.":"Restaura 120 HP a la parte más dañada.",
+ "Restore 200 HP to the most-damaged part.":"Restaura 200 HP a la parte más dañada.",
+ "Gain +4 AP immediately.":"Gana +4 AP de inmediato.",
+ "+25% evasion next turn.":"+25% de evasión el próximo turno.",
+ "Clear Burn and restore 40 HP.":"Limpia Burn y restaura 40 HP.",
+ "up to Mk1":"hasta Mk1","up to Mk2":"hasta Mk2","up to Mk3":"hasta Mk3","up to Mk4":"hasta Mk4","up to Mk5":"hasta Mk5","Mk5 signature frames":"Chasis Mk5 de firma"
 };
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
@@ -2139,121 +2167,147 @@ PAGES.catching={t:"Catching",e:"Pokemax",d:"The Safari, the OILballs, and the fo
 }};
 
 PAGES.mechas={t:"The Mecha System",e:"Mechas",d:"Front Mission in a Discord channel: pilot a wanzer built from four destructible parts, spend Action Points instead of taking free turns, and win by dismantling the enemy machine one limb at a time.",h:function(){
- return '<h2 class="s">A different fight, again</h2>'+
- '<p class="b">Like Pokemax, mechas share nothing with normal combat — no STR/AGI/CON, no Focus, no gear. A <strong>wanzer</strong> is four separate parts, each with its own HP and armor: <strong>body, left arm, right arm, legs.</strong> You do not have one health bar; you have four, and the fight is about which one breaks first.</p>'+
- tbl(["Break this part","And…"],[
+ return '<h2 class="s">'+L("A different fight, again","Otra pelea distinta, de nuevo")+'</h2>'+
+ '<p class="b">'+L("Like Pokemax, mechas share nothing with normal combat — no STR/AGI/CON, no Focus, no gear. A <strong>wanzer</strong> is four separate parts, each with its own HP and armor: <strong>body, left arm, right arm, legs.</strong> You do not have one health bar; you have four, and the fight is about which one breaks first.","Como Pokemax, los mechas no comparten nada con el combate normal — sin STR/AGI/CON, sin Focus, sin gear. Un <strong>wanzer</strong> son cuatro partes separadas, cada una con su propio HP y armadura: <strong>cuerpo, brazo izquierdo, brazo derecho, piernas.</strong> No tienes una barra de vida; tienes cuatro, y la pelea es sobre cuál se rompe primero.")+'</p>'+
+ tbl(L(["Break this part","And…"],["Rompe esta parte","Y…"]),LANG==="es"?[
+  ["Un brazo","El arma que sostiene queda fuera de línea. Desarma al enemigo disparando al brazo, no al cuerpo."],
+  ["Las piernas","La evasión se derrumba — cada disparo después acierta mucho más seguido."],
+  ["El cuerpo","El wanzer es destruido. Esta es la baja, pero suele ser la parte mejor blindada."]
+ ]:[
   ["An arm","The weapon it holds goes offline. Disarm the enemy by shooting the arm, not the body."],
   ["The legs","Evasion collapses — every shot after that lands far more often."],
   ["The body","The wanzer is destroyed. This is the kill, but it is usually the best-armored part."]
  ],["k",""])+
- '<div class="callout"><p><strong>You rarely win by going for the body.</strong> You win by crippling — take the arms so it cannot shoot back, take the legs so it cannot dodge, then finish at your leisure. A mecha with both arms gone is a loss waiting to happen, even at full body HP.</p></div>'+
- '<h2 class="s">The loop</h2>'+
- '<p class="b"><strong>1 — Open the portal at <a href="#portal">Cape Greyveil</a>.</strong> Mechas are the one system that asks you to have played everything else first — the toll is materials from all over Valestia.</p>'+
- '<p class="b"><strong>2 — <a href="#hangar">Build a wanzer</a></strong> from a body, two arms and legs, staying under your weight budget.</p>'+
- '<p class="b"><strong>3 — Hang two <a href="#mechawpn">weapons</a></strong>, one per arm, and pack two backpack items.</p>'+
- '<p class="b"><strong>4 — <a href="#mechafight">Fight</a></strong> by spending Action Points: cripple the enemy frame part by part.</p>'+
- '<p class="b"><strong>5 — Win to earn <a href="#pilot">Pilot XP</a></strong>, which raises your rank and unlocks higher Marks of parts to build.</p>'+
- tbl(["Rule","Value"],[
+ '<div class="callout"><p>'+L("<strong>You rarely win by going for the body.</strong> You win by crippling — take the arms so it cannot shoot back, take the legs so it cannot dodge, then finish at your leisure. A mecha with both arms gone is a loss waiting to happen, even at full body HP.","<strong>Rara vez ganas yendo al cuerpo.</strong> Ganas mutilando — quita los brazos para que no dispare de vuelta, quita las piernas para que no esquive, luego remata con calma. Un mecha con ambos brazos fuera es una derrota esperando a pasar, aun a HP de cuerpo completo.")+'</p></div>'+
+ '<h2 class="s">'+L("The loop","El bucle")+'</h2>'+
+ '<p class="b">'+L("<strong>1 — Open the portal at <a href=\"#portal\">Cape Greyveil</a>.</strong> Mechas are the one system that asks you to have played everything else first — the toll is materials from all over Valestia.","<strong>1 — Abre el portal en <a href=\"#portal\">Cape Greyveil</a>.</strong> Los mechas son el único sistema que te pide haber jugado todo lo demás primero — el peaje son materiales de toda Valestia.")+'</p>'+
+ '<p class="b">'+L("<strong>2 — <a href=\"#hangar\">Build a wanzer</a></strong> from a body, two arms and legs, staying under your weight budget.","<strong>2 — <a href=\"#hangar\">Construye un wanzer</a></strong> con un cuerpo, dos brazos y piernas, sin pasarte de tu presupuesto de peso.")+'</p>'+
+ '<p class="b">'+L("<strong>3 — Hang two <a href=\"#mechawpn\">weapons</a></strong>, one per arm, and pack two backpack items.","<strong>3 — Cuelga dos <a href=\"#mechawpn\">armas</a></strong>, una por brazo, y lleva dos objetos de mochila.")+'</p>'+
+ '<p class="b">'+L("<strong>4 — <a href=\"#mechafight\">Fight</a></strong> by spending Action Points: cripple the enemy frame part by part.","<strong>4 — <a href=\"#mechafight\">Pelea</a></strong> gastando Puntos de Acción: mutila el chasis enemigo parte por parte.")+'</p>'+
+ '<p class="b">'+L("<strong>5 — Win to earn <a href=\"#pilot\">Pilot XP</a></strong>, which raises your rank and unlocks higher Marks of parts to build.","<strong>5 — Gana para conseguir <a href=\"#pilot\">Pilot XP</a></strong>, que sube tu rango y desbloquea Marcas más altas de partes para construir.")+'</p>'+
+ tbl(L(["Rule","Value"],["Regla","Valor"]),LANG==="es"?[
+  ["Partes por wanzer","4 — cuerpo, 2 brazos, piernas, cada una destructible"],
+  ["Marcas (tiers de mejora)","Mk1 → Mk5"],
+  ["Armas equipadas","2 — una por brazo"],
+  ["Ranuras de mochila","2"],
+  ["Acciones de turno","Fire · Guard · Rest · Consumable"]
+ ]:[
   ["Parts per wanzer","4 — body, 2 arms, legs, each destructible"],
   ["Marks (upgrade tiers)","Mk1 → Mk5"],
   ["Weapons equipped","2 — one per arm"],
   ["Backpack slots","2"],
   ["Turn actions","Fire · Guard · Rest · Consumable"]
  ],["k","n"])+
- '<div class="callout"><p>See a mecha duel drawn live on the <a href="#screens">What It Looks Like</a> page — the four-part panel is a screen unlike anything else in the game.</p></div>';
+ '<div class="callout"><p>'+L("See a mecha duel drawn live on the <a href=\"#screens\">What It Looks Like</a> page — the four-part panel is a screen unlike anything else in the game.","Mira un duelo de mecha dibujado en vivo en la página <a href=\"#screens\">Cómo se ve</a> — el panel de cuatro partes es una pantalla como ninguna otra del juego.")+'</p></div>';
 }};
 
 PAGES.portal={t:"The Greyveil Portal",e:"Mechas",d:"Mechas are gated behind Cape Greyveil. Opening the portal is a deliberate endgame commitment — a haul of materials from the whole map, then a duel.",h:function(){
  return '<h2 class="s">Cape Greyveil</h2>'+
- '<p class="b"><strong>Cape Greyveil</strong> has no enemies and no hunting — the only thing there is the <strong>Mecha Portal</strong>. You reach the Cape from Stormbay Docks with <span class="cmd">!travel</span>. It is a portal region, not a place you fight in.</p>'+
- '<h2 class="s">The toll</h2>'+
- '<p class="b">Opening the portal costs materials from all over Valestia, then a fight:</p>'+
- tbl(["The portal toll","Amount"],[
+ '<p class="b">'+L("<strong>Cape Greyveil</strong> has no enemies and no hunting — the only thing there is the <strong>Mecha Portal</strong>. You reach the Cape from Stormbay Docks with <span class=\"cmd\">!travel</span>. It is a portal region, not a place you fight in.","<strong>Cape Greyveil</strong> no tiene enemigos ni caza — lo único ahí es el <strong>Portal de Mecha</strong>. Llegas al Cabo desde Stormbay Docks con <span class=\"cmd\">!travel</span>. Es una región portal, no un lugar donde peleas.")+'</p>'+
+ '<h2 class="s">'+L("The toll","El peaje")+'</h2>'+
+ '<p class="b">'+L("Opening the portal costs materials from all over Valestia, then a fight:","Abrir el portal cuesta materiales de toda Valestia, y luego una pelea:")+'</p>'+
+ tbl(L(["The portal toll","Amount"],["El peaje del portal","Cantidad"]),LANG==="es"?[
+  ["Cada material de firma de región","×5 de cada uno de los 10"],
+  ["Materiales raros","×10 cada uno — Temporal Gear, Obsidian Alloy, War Emblem Fragment, Null Coil"],
+  ["Oil","30,000"],
+  ["Iniciación de Lyra","Un duelo de mecha que tienes que ganar"]
+ ]:[
   ["Every region signature material","×5 of each of the 10"],
   ["Rare materials","×10 each — Temporal Gear, Obsidian Alloy, War Emblem Fragment, Null Coil"],
   ["Oil","30,000"],
   ["Lyra's initiation","A mecha duel you have to win"]
  ],["k","n"])+
- '<p class="b">The signature materials come from <span class="cmd">!hunt</span> in each region, so the portal is a reason to have travelled the whole map. It is the one system that asks you to have played everything else first.</p>'+
- '<h2 class="s">Lyra\x27s initiation</h2>'+
- '<div class="callout"><p><strong>Lyra lends you a wanzer for the initiation — and lets you keep it when you win.</strong> A Mk1 Striker frame with a Machinegun and a Rifle, a Repair Kit and an AP Cell in the backpack. Passing pays back <strong>20,000 Oil</strong> and the Pilot role. You are not building your first mecha from nothing; you are earning your way into the hangar.</p></div>'+
- '<p class="b">That starter frame is a Striker — the balanced all-rounder — so your first duel is fought on even, forgiving footing before you start specialising. Once you own it, the <a href="#hangar">hangar</a> is open.</p>';
+ '<p class="b">'+L("The signature materials come from <span class=\"cmd\">!hunt</span> in each region, so the portal is a reason to have travelled the whole map. It is the one system that asks you to have played everything else first.","Los materiales de firma vienen de <span class=\"cmd\">!hunt</span> en cada región, así que el portal es una razón para haber recorrido todo el mapa. Es el único sistema que te pide haber jugado todo lo demás primero.")+'</p>'+
+ '<h2 class="s">'+L("Lyra's initiation","La iniciación de Lyra")+'</h2>'+
+ '<div class="callout"><p>'+L("<strong>Lyra lends you a wanzer for the initiation — and lets you keep it when you win.</strong> A Mk1 Striker frame with a Machinegun and a Rifle, a Repair Kit and an AP Cell in the backpack. Passing pays back <strong>20,000 Oil</strong> and the Pilot role. You are not building your first mecha from nothing; you are earning your way into the hangar.","<strong>Lyra te presta un wanzer para la iniciación — y te deja quedártelo cuando ganas.</strong> Un chasis Striker Mk1 con una Machinegun y un Rifle, un Repair Kit y una AP Cell en la mochila. Pasar paga de vuelta <strong>20,000 Oil</strong> y el rol de Piloto. No estás construyendo tu primer mecha de la nada; te estás ganando la entrada al hangar.")+'</p></div>'+
+ '<p class="b">'+L("That starter frame is a Striker — the balanced all-rounder — so your first duel is fought on even, forgiving footing before you start specialising. Once you own it, the <a href=\"#hangar\">hangar</a> is open.","Ese chasis inicial es un Striker — el equilibrado todoterreno — así que tu primer duelo se pelea en igualdad y con margen antes de empezar a especializarte. Una vez es tuyo, el <a href=\"#hangar\">hangar</a> está abierto.")+'</p>';
 }};
 
 PAGES.hangar={t:"Building a Wanzer",e:"Mechas",d:"Four parts — a body, two arms, legs — each in an archetype and a Mark, all under a weight budget the frame sets.",h:function(){
- return '<p class="b">You assemble four parts, and each comes in an archetype and a Mark (Mk1–Mk5). The numbers below span <strong>Mk1 → Mk5</strong>; the shape of each archetype stays the same as it upgrades.</p>'+
- '<h2 class="s">Bodies — the frame, your AP ceiling</h2>'+
- tbl(["Body","HP","Armor","Guard %","Output","Max AP"],MECHA_BODIES.map(function(b){
-  return ['<strong>'+E(b[0])+'</strong><div class="mode__d">'+E(b[1])+'</div>',b[2],b[3],b[4],b[5],b[6]];
+ return '<p class="b">'+L("You assemble four parts, and each comes in an archetype and a Mark (Mk1–Mk5). The numbers below span <strong>Mk1 → Mk5</strong>; the shape of each archetype stays the same as it upgrades.","Ensamblas cuatro partes, y cada una viene en un arquetipo y una Marca (Mk1–Mk5). Los números de abajo van de <strong>Mk1 → Mk5</strong>; la forma de cada arquetipo se mantiene igual al mejorar.")+'</p>'+
+ '<h2 class="s">'+L("Bodies — the frame, your AP ceiling","Cuerpos — el chasis, tu techo de AP")+'</h2>'+
+ tbl(L(["Body","HP","Armor","Guard %","Output","Max AP"],["Cuerpo","HP","Armadura","Guard %","Output","AP máx"]),MECHA_BODIES.map(function(b){
+  return ['<strong>'+E(b[0])+'</strong><div class="mode__d">'+E(L(b[1],DTR[b[1]]))+'</div>',b[2],b[3],b[4],b[5],b[6]];
  }),["k","n","n","n","n","n"])+
- '<p class="b"><strong>Output</strong> is your weight budget — a heavier frame hauls heavier weapons. <strong>Max AP</strong> is your ceiling; a Scout thinks faster than a Bastion but folds faster too.</p>'+
- '<h2 class="s">Arms — they hold the weapons, and they break</h2>'+
- tbl(["Arm","HP","Armor","Aim","Weight","Melee"],MECHA_ARMS.map(function(a){
-  return ['<strong>'+E(a[0])+'</strong><div class="mode__d">'+E(a[1])+'</div>',a[2],a[3],a[4],a[5],a[6]];
+ '<p class="b">'+L("<strong>Output</strong> is your weight budget — a heavier frame hauls heavier weapons. <strong>Max AP</strong> is your ceiling; a Scout thinks faster than a Bastion but folds faster too.","<strong>Output</strong> es tu presupuesto de peso — un chasis más pesado carga armas más pesadas. <strong>AP máx</strong> es tu techo; un Scout piensa más rápido que un Bastion pero también cae más rápido.")+'</p>'+
+ '<h2 class="s">'+L("Arms — they hold the weapons, and they break","Brazos — sostienen las armas, y se rompen")+'</h2>'+
+ tbl(L(["Arm","HP","Armor","Aim","Weight","Melee"],["Brazo","HP","Armadura","Aim","Peso","Melee"]),MECHA_ARMS.map(function(a){
+  return ['<strong>'+E(a[0])+'</strong><div class="mode__d">'+E(L(a[1],DTR[a[1]]))+'</div>',a[2],a[3],a[4],a[5],a[6]];
  }),["k","n","n","n","n","n"])+
- '<p class="b">Each arm carries one weapon. <strong>Aim</strong> raises that weapon\x27s hit chance, so a Marksman Arm turns an inaccurate Grenade Launcher into a threat. Lose the arm and you lose the gun — armored arms keep it in the fight longer.</p>'+
- '<h2 class="s">Legs — mobility and footing</h2>'+
- tbl(["Legs","HP","Armor","Evasion","Weight"],MECHA_LEGS.map(function(l){
-  return ['<strong>'+E(l[0])+'</strong><div class="mode__d">'+E(l[1])+'</div>',l[2],l[3],l[4],l[5]];
+ '<p class="b">'+L("Each arm carries one weapon. <strong>Aim</strong> raises that weapon\x27s hit chance, so a Marksman Arm turns an inaccurate Grenade Launcher into a threat. Lose the arm and you lose the gun — armored arms keep it in the fight longer.","Cada brazo carga un arma. <strong>Aim</strong> sube la probabilidad de acierto de esa arma, así que un Marksman Arm convierte un Grenade Launcher impreciso en una amenaza. Pierde el brazo y pierdes el arma — los brazos blindados la mantienen en la pelea más tiempo.")+'</p>'+
+ '<h2 class="s">'+L("Legs — mobility and footing","Piernas — movilidad y estabilidad")+'</h2>'+
+ tbl(L(["Legs","HP","Armor","Evasion","Weight"],["Piernas","HP","Armadura","Evasión","Peso"]),MECHA_LEGS.map(function(l){
+  return ['<strong>'+E(l[0])+'</strong><div class="mode__d">'+E(L(l[1],DTR[l[1]]))+'</div>',l[2],l[3],l[4],l[5]];
  }),["k","n","n","n"])+
- '<p class="b">Legs are your <strong>evasion</strong> — Scout Legs dodge more than three times as often as Bastion Legs. It is also why blowing off the enemy\x27s legs is such a strong opening: it turns their whole frame into an easy target.</p>'+
- '<h2 class="s">Weight and evasion</h2>'+
- '<p class="b">Everything you bolt on has weight, and your body\x27s <strong>output</strong> is the budget. Pack the frame past its limit and it slows down; pack it past 100% and it simply <strong>will not equip</strong>.</p>'+
- tbl(["Weight vs output","Evasion"],[
+ '<p class="b">'+L("Legs are your <strong>evasion</strong> — Scout Legs dodge more than three times as often as Bastion Legs. It is also why blowing off the enemy\x27s legs is such a strong opening: it turns their whole frame into an easy target.","Las piernas son tu <strong>evasión</strong> — las Scout Legs esquivan más de tres veces más seguido que las Bastion Legs. También es por eso que volar las piernas del enemigo es una apertura tan fuerte: convierte todo su chasis en un blanco fácil.")+'</p>'+
+ '<h2 class="s">'+L("Weight and evasion","Peso y evasión")+'</h2>'+
+ '<p class="b">'+L("Everything you bolt on has weight, and your body\x27s <strong>output</strong> is the budget. Pack the frame past its limit and it slows down; pack it past 100% and it simply <strong>will not equip</strong>.","Todo lo que atornillas tiene peso, y el <strong>output</strong> de tu cuerpo es el presupuesto. Carga el chasis más allá de su límite y se ralentiza; cárgalo más allá del 100% y simplemente <strong>no se equipa</strong>.")+'</p>'+
+ tbl(L(["Weight vs output","Evasion"],["Peso vs output","Evasión"]),LANG==="es"?[
+  ["Hasta 70%","Completa — sin penalización"],["70% – 85%","×0.80"],["85% – 100%","×0.60"],["Más de 100%","No se puede equipar"]
+ ]:[
   ["Up to 70%","Full — no penalty"],["70% – 85%","×0.80"],["85% – 100%","×0.60"],["Over 100%","Cannot equip"]
  ],["n","n"])+
- '<div class="callout"><p>This is the build puzzle: a Bastion frame can carry the heaviest guns but barely dodges to begin with, so loading it further costs little. A Scout lives on evasion — hang a Maul off it and you throw away the one thing keeping it alive.</p></div>'+
- '<div class="callout"><p><strong>Build to the frame.</strong> Heavy frames want heavy guns and do not miss the evasion; light frames want to stay light and win the turn. Match your <a href="#mechawpn">weapons</a> to the body, not the other way around.</p></div>';
+ '<div class="callout"><p>'+L("This is the build puzzle: a Bastion frame can carry the heaviest guns but barely dodges to begin with, so loading it further costs little. A Scout lives on evasion — hang a Maul off it and you throw away the one thing keeping it alive.","Este es el rompecabezas de la build: un chasis Bastion puede cargar las armas más pesadas pero apenas esquiva de entrada, así que cargarlo más cuesta poco. Un Scout vive de la evasión — cuélgale un Maul y tiras a la basura lo único que lo mantiene vivo.")+'</p></div>'+
+ '<div class="callout"><p>'+L("<strong>Build to the frame.</strong> Heavy frames want heavy guns and do not miss the evasion; light frames want to stay light and win the turn. Match your <a href=\"#mechawpn\">weapons</a> to the body, not the other way around.","<strong>Construye para el chasis.</strong> Los chasis pesados quieren armas pesadas y no extrañan la evasión; los ligeros quieren mantenerse ligeros y ganar el turno. Ajusta tus <a href=\"#mechawpn\">armas</a> al cuerpo, no al revés.")+'</p></div>';
 }};
 
 PAGES.mechawpn={t:"Mecha Weapons",e:"Mechas",d:"Seven weapon families, each a different answer to the same question: how do you break four parts before they break yours.",h:function(){
- return '<h2 class="s">The seven families</h2>'+
- '<p class="b">Each arm holds one. Values span Mk1 → Mk5.</p>'+
- tbl(["Weapon","Power","Hits","Accuracy","AP","Ammo","Weight"],MECHA_WEAPONS.map(function(w){
-  return [w[0]+' <strong>'+E(w[1])+'</strong><div class="mode__d">'+E(w[2])+'</div>',w[3],w[4],w[5],w[6],w[7],w[8]];
+ return '<h2 class="s">'+L("The seven families","Las siete familias")+'</h2>'+
+ '<p class="b">'+L("Each arm holds one. Values span Mk1 → Mk5.","Cada brazo sostiene una. Los valores van de Mk1 → Mk5.")+'</p>'+
+ tbl(L(["Weapon","Power","Hits","Accuracy","AP","Ammo","Weight"],["Arma","Poder","Golpes","Precisión","AP","Munición","Peso"]),MECHA_WEAPONS.map(function(w){
+  return [w[0]+' <strong>'+E(w[1])+'</strong><div class="mode__d">'+E(L(w[2],DTR[w[2]]))+'</div>',w[3],w[4],w[5],w[6],w[7],w[8]];
  }),["k","n","n","n","n","n","n"])+
- '<div class="callout"><p><strong>Hits vs Power is the whole design.</strong> The Flamethrower throws six weak jets that scatter across the frame — it shreds several parts at once but bounces off armor. The Maul is one 199-damage swing that breaks anything it touches, if you can afford the 6 AP and it connects. Many-hit weapons cripple; single-hit weapons execute. Most pilots run one of each.</p></div>'+
- '<h2 class="s">Match aim to weapon</h2>'+
- '<p class="b">A weapon\x27s hit chance is its own accuracy plus the <strong>aim</strong> of the arm holding it. A <strong>Marksman Arm</strong> rescues the inaccurate heavy hitters — a Grenade Launcher on a Marksman Arm is a real threat; on a Guardian Arm it whiffs. A steady <strong>Guardian Arm</strong> instead keeps a reliable gun firing after the arm itself has been shot at.</p>'+
- '<h2 class="s">Backpack consumables</h2>'+
- '<p class="b">Two backpack slots. Using one spends your whole turn, so they are emergency tools, not free value.</p>'+
- tbl(["Item","Effect"],MECHA_CONS.map(function(c){return [c[0],c[1]];}),["k",""]);
+ '<div class="callout"><p>'+L("<strong>Hits vs Power is the whole design.</strong> The Flamethrower throws six weak jets that scatter across the frame — it shreds several parts at once but bounces off armor. The Maul is one 199-damage swing that breaks anything it touches, if you can afford the 6 AP and it connects. Many-hit weapons cripple; single-hit weapons execute. Most pilots run one of each.","<strong>Golpes vs Poder es todo el diseño.</strong> El Flamethrower lanza seis chorros débiles que se dispersan por el chasis — destroza varias partes a la vez pero rebota en la armadura. El Maul es un solo golpe de 199 de daño que rompe cualquier cosa que toca, si puedes pagar los 6 AP y conecta. Las armas de muchos golpes mutilan; las de un golpe ejecutan. La mayoría de los pilotos llevan una de cada.")+'</p></div>'+
+ '<h2 class="s">'+L("Match aim to weapon","Ajusta el aim al arma")+'</h2>'+
+ '<p class="b">'+L("A weapon\x27s hit chance is its own accuracy plus the <strong>aim</strong> of the arm holding it. A <strong>Marksman Arm</strong> rescues the inaccurate heavy hitters — a Grenade Launcher on a Marksman Arm is a real threat; on a Guardian Arm it whiffs. A steady <strong>Guardian Arm</strong> instead keeps a reliable gun firing after the arm itself has been shot at.","La probabilidad de acierto de un arma es su propia precisión más el <strong>aim</strong> del brazo que la sostiene. Un <strong>Marksman Arm</strong> rescata a los pesados imprecisos — un Grenade Launcher en un Marksman Arm es una amenaza real; en un Guardian Arm falla. Un <strong>Guardian Arm</strong> firme, en cambio, mantiene un arma fiable disparando después de que le hayan disparado al brazo.")+'</p>'+
+ '<h2 class="s">'+L("Backpack consumables","Consumibles de mochila")+'</h2>'+
+ '<p class="b">'+L("Two backpack slots. Using one spends your whole turn, so they are emergency tools, not free value.","Dos ranuras de mochila. Usar una gasta todo tu turno, así que son herramientas de emergencia, no valor gratis.")+'</p>'+
+ tbl(L(["Item","Effect"],["Objeto","Efecto"]),MECHA_CONS.map(function(c){return [c[0],L(c[1],DTR[c[1]])];}),["k",""]);
 }};
 
 PAGES.mechafight={t:"Mecha Combat",e:"Mechas",d:"No free turns. Every action spends Action Points, and firing gives none back — the whole fight is an AP economy fought across four destructible parts.",h:function(){
- return '<h2 class="s">Action Points — the whole game</h2>'+
- '<p class="b">This is what makes it Front Mission and not a shooter. You do not get a free turn: every action spends <strong>Action Points</strong>, and firing does not give any back. Your four choices each turn:</p>'+
- tbl(["Action","AP","What it does"],[
+ return '<h2 class="s">'+L("Action Points — the whole game","Puntos de Acción — todo el juego")+'</h2>'+
+ '<p class="b">'+L("This is what makes it Front Mission and not a shooter. You do not get a free turn: every action spends <strong>Action Points</strong>, and firing does not give any back. Your four choices each turn:","Esto es lo que lo hace Front Mission y no un shooter. No tienes un turno gratis: cada acción gasta <strong>Puntos de Acción</strong>, y disparar no devuelve ninguno. Tus cuatro opciones cada turno:")+'</p>'+
+ tbl(L(["Action","AP","What it does"],["Acción","AP","Qué hace"]),LANG==="es"?[
+  ["Fire","gasta AP","Dispara un arma a una parte elegida. Las armas pesadas cuestan más AP que las ligeras."],
+  ["Guard","+3 AP","Cúbrete: reduce el daño entrante este turno y guarda AP para después."],
+  ["Rest","+6 AP","Recupera más AP — pero sin defensa, así que te comes lo que venga."],
+  ["Consumable","gasta el turno","Usa un objeto de mochila: repara una parte, mete AP, suelta humo, limpia una quemadura."]
+ ]:[
   ["Fire","costs AP","Shoot a weapon at a chosen part. Heavy weapons cost more AP than light ones."],
   ["Guard","+3 AP","Brace: reduce incoming damage this turn and bank AP for later."],
   ["Rest","+6 AP","Recover the most AP — but no defense, so you eat whatever comes."],
   ["Consumable","costs the turn","Use a backpack item: repair a part, dump in AP, pop smoke, clear a burn."]
  ],["k","n",""])+
- '<span class="fx">AP: Fire spends · Guard +3 (defended) · Rest +6 (exposed) · ceiling set by your body frame</span>'+
- '<div class="callout"><p><strong>The core tension:</strong> your best weapons are the ones you cannot afford to fire every turn. A Maul costs 6 AP a swing; a Machinegun costs 3. Spend a turn resting to load up for a big hit and you are open for that turn. Guard banks less but keeps you covered. Every turn is that trade.</p></div>'+
- '<h2 class="s">Target the part, not the mecha</h2>'+
- '<p class="b">You do not shoot "the enemy" — you shoot a <strong>part</strong>. Each has its own HP and armor, and breaking each one does something different.</p>'+
- tbl(["Break this part","And…"],[
+ '<span class="fx">'+L("AP: Fire spends · Guard +3 (defended) · Rest +6 (exposed) · ceiling set by your body frame","AP: Fire gasta · Guard +3 (defendido) · Rest +6 (expuesto) · techo fijado por tu chasis")+'</span>'+
+ '<div class="callout"><p>'+L("<strong>The core tension:</strong> your best weapons are the ones you cannot afford to fire every turn. A Maul costs 6 AP a swing; a Machinegun costs 3. Spend a turn resting to load up for a big hit and you are open for that turn. Guard banks less but keeps you covered. Every turn is that trade.","<strong>La tensión central:</strong> tus mejores armas son las que no puedes permitirte disparar cada turno. Un Maul cuesta 6 AP por golpe; una Machinegun cuesta 3. Gasta un turno descansando para cargar un golpe grande y quedas expuesto ese turno. Guard guarda menos pero te mantiene cubierto. Cada turno es ese trueque.")+'</p></div>'+
+ '<h2 class="s">'+L("Target the part, not the mecha","Apunta a la parte, no al mecha")+'</h2>'+
+ '<p class="b">'+L("You do not shoot \"the enemy\" — you shoot a <strong>part</strong>. Each has its own HP and armor, and breaking each one does something different.","No disparas a \"el enemigo\" — disparas a una <strong>parte</strong>. Cada una tiene su propio HP y armadura, y romper cada una hace algo distinto.")+'</p>'+
+ tbl(L(["Break this part","And…"],["Rompe esta parte","Y…"]),LANG==="es"?[
+  ["Un brazo","El arma que sostiene queda fuera de línea — así desarmas."],
+  ["Las piernas","La evasión se derrumba; tus disparos posteriores aciertan mucho más seguido."],
+  ["El cuerpo","El wanzer es destruido — la baja, pero suele ser la parte mejor blindada."]
+ ]:[
   ["An arm","The weapon it holds goes offline — this is how you disarm."],
   ["The legs","Evasion collapses; your later shots land far more often."],
   ["The body","The wanzer is destroyed — the kill, but usually the best-armored part."]
  ],["k",""])+
- '<h2 class="s">How to think about it</h2>'+
- '<p class="b"><strong>Cripple, do not brawl.</strong> Two arms down beats half a body bar. Open on whatever keeps them dangerous — the arm holding their heavy gun, or the legs holding their evasion.</p>'+
- '<p class="b"><strong>Match aim to weapon.</strong> A Marksman Arm rescues the inaccurate heavy hitters; a steady Guardian Arm keeps a reliable gun firing after it has been shot at.</p>'+
- '<p class="b"><strong>Respect the AP economy.</strong> Never fire yourself empty in front of a fresh enemy. Bank with Guard when pressured, Rest only when you can afford the exposure.</p>'+
- '<div class="callout"><p>See the four-part panel drawn live on <a href="#screens">What It Looks Like</a> — a wanzer mid-fight with a destroyed arm and failing legs reads the whole story at a glance.</p></div>';
+ '<h2 class="s">'+L("How to think about it","Cómo pensarlo")+'</h2>'+
+ '<p class="b">'+L("<strong>Cripple, do not brawl.</strong> Two arms down beats half a body bar. Open on whatever keeps them dangerous — the arm holding their heavy gun, or the legs holding their evasion.","<strong>Mutila, no te agarres a golpes.</strong> Dos brazos fuera valen más que media barra de cuerpo. Abre con lo que los mantiene peligrosos — el brazo que sostiene su arma pesada, o las piernas que sostienen su evasión.")+'</p>'+
+ '<p class="b">'+L("<strong>Match aim to weapon.</strong> A Marksman Arm rescues the inaccurate heavy hitters; a steady Guardian Arm keeps a reliable gun firing after it has been shot at.","<strong>Ajusta el aim al arma.</strong> Un Marksman Arm rescata a los pesados imprecisos; un Guardian Arm firme mantiene un arma fiable disparando después de que le hayan disparado.")+'</p>'+
+ '<p class="b">'+L("<strong>Respect the AP economy.</strong> Never fire yourself empty in front of a fresh enemy. Bank with Guard when pressured, Rest only when you can afford the exposure.","<strong>Respeta la economía de AP.</strong> Nunca te dispares hasta vaciarte frente a un enemigo fresco. Guarda con Guard cuando te presionen, haz Rest solo cuando puedas pagar la exposición.")+'</p>'+
+ '<div class="callout"><p>'+L("See the four-part panel drawn live on <a href=\"#screens\">What It Looks Like</a> — a wanzer mid-fight with a destroyed arm and failing legs reads the whole story at a glance.","Mira el panel de cuatro partes dibujado en vivo en <a href=\"#screens\">Cómo se ve</a> — un wanzer a mitad de pelea con un brazo destruido y las piernas fallando cuenta toda la historia de un vistazo.")+'</p></div>';
 }};
 
 PAGES.pilot={t:"Pilot Ranks",e:"Mechas",d:"You do not buy your way to Mk5 — you fight your way there. Pilot XP from wins gates the highest Mark you can build and equip.",h:function(){
- return '<h2 class="s">The seven ranks</h2>'+
- '<p class="b">You earn <strong>Pilot XP</strong> from wins, and your rank gates the highest Mark of parts you can build and equip.</p>'+
- tbl(["Rank","Pilot XP","Max build","Unlocks"],MECHA_RANKS.map(function(r){
-  return [r[0],r[1],r[2],r[3]];
+ return '<h2 class="s">'+L("The seven ranks","Los siete rangos")+'</h2>'+
+ '<p class="b">'+L("You earn <strong>Pilot XP</strong> from wins, and your rank gates the highest Mark of parts you can build and equip.","Ganas <strong>Pilot XP</strong> con las victorias, y tu rango limita la Marca más alta de partes que puedes construir y equipar.")+'</p>'+
+ tbl(L(["Rank","Pilot XP","Max build","Unlocks"],["Rango","Pilot XP","Build máx","Desbloquea"]),MECHA_RANKS.map(function(r){
+  return [r[0],r[1],r[2],L(r[3],DTR[r[3]])];
  }),["k","n","n",""])+
- '<h2 class="s">The Mk recipe chain</h2>'+
- '<p class="b">Parts evolve up a <strong>two-branch Mk recipe chain</strong> that <em>consumes</em> the part below it — upgrading a Mk3 arm to Mk4 eats the Mk3. You are always trading up, never hoarding a ladder of spares.</p>'+
- '<div class="callout"><p>The last two ranks, <strong>Ace</strong> and <strong>Wanzer Lord</strong>, unlock <strong>signature Mk5 frames</strong> that lower ranks cannot field at all. The ceiling is a status symbol you have to earn twice: once in XP, once in materials.</p></div>';
+ '<h2 class="s">'+L("The Mk recipe chain","La cadena de recetas Mk")+'</h2>'+
+ '<p class="b">'+L("Parts evolve up a <strong>two-branch Mk recipe chain</strong> that <em>consumes</em> the part below it — upgrading a Mk3 arm to Mk4 eats the Mk3. You are always trading up, never hoarding a ladder of spares.","Las partes evolucionan por una <strong>cadena de recetas Mk de dos ramas</strong> que <em>consume</em> la parte de abajo — mejorar un brazo Mk3 a Mk4 se come el Mk3. Siempre estás cambiando hacia arriba, nunca acumulando una escalera de repuestos.")+'</p>'+
+ '<div class="callout"><p>'+L("The last two ranks, <strong>Ace</strong> and <strong>Wanzer Lord</strong>, unlock <strong>signature Mk5 frames</strong> that lower ranks cannot field at all. The ceiling is a status symbol you have to earn twice: once in XP, once in materials.","Los dos últimos rangos, <strong>Ace</strong> y <strong>Wanzer Lord</strong>, desbloquean <strong>chasis Mk5 de firma</strong> que los rangos inferiores no pueden desplegar en absoluto. El techo es un símbolo de estatus que tienes que ganarte dos veces: una en XP, otra en materiales.")+'</p></div>';
 }};
 
 PAGES.characters={t:"Characters",e:"Campaign",d:"The people walking the road with you. Portraits and the truth behind them — more will join as the story grows.",h:function(){
