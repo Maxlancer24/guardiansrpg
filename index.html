@@ -2340,50 +2340,50 @@ PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"Ten gyms, one per region, each with 
 }};
 
 PAGES.mysteries={t:"Mysteries",e:"The world",d:"Valestia keeps secrets. Some of them are waiting for a player who does the right thing in the right place — and no two are alike.",h:function(){
- return '<h2 class="s">There are secrets in here</h2>'+
- '<p class="b">Scattered across Valestia and the systems that run on top of it are <strong>hidden mysteries</strong> — things the game never tells you are there. Nobody hands you a quest for them. They are <strong>found</strong>, by playing: by going somewhere, trying something, noticing a detail, doing the unexpected.</p>'+
- '<p class="b">Each one is <strong>one of a kind</strong>, and each pays off in its own way — a reward, a reveal, a surprise that exists nowhere else in the game. Some are small. Some are not.</p>'+
- '<h2 class="s">Your journal</h2>'+
- '<p class="b"><span class="cmd">!mystery</span> (also <span class="cmd">!mistery</span>) opens your <strong>mystery journal</strong>: what you have uncovered so far, and the unique things it earned you. It fills in as you find them.</p>'+
- '<div class="callout"><p><strong>No list here — on purpose.</strong> Half the point of a secret is not knowing it was there until you trip over it. This page will not tell you what to look for or where. Play, stay curious, and let Valestia surprise you.</p></div>'+
- '<p class="b">If you find one, you will know. That is rather the idea.</p>';
+ return '<h2 class="s">'+L("There are secrets in here","Aquí dentro hay secretos")+'</h2>'+
+ '<p class="b">'+L("Scattered across Valestia and the systems that run on top of it are <strong>hidden mysteries</strong> — things the game never tells you are there. Nobody hands you a quest for them. They are <strong>found</strong>, by playing: by going somewhere, trying something, noticing a detail, doing the unexpected.","Repartidos por Valestia y los sistemas que corren sobre ella hay <strong>misterios ocultos</strong> — cosas que el juego nunca te dice que están ahí. Nadie te da una misión por ellos. Se <strong>encuentran</strong>, jugando: yendo a algún lugar, probando algo, notando un detalle, haciendo lo inesperado.")+'</p>'+
+ '<p class="b">'+L("Each one is <strong>one of a kind</strong>, and each pays off in its own way — a reward, a reveal, a surprise that exists nowhere else in the game. Some are small. Some are not.","Cada uno es <strong>único en su tipo</strong>, y cada uno recompensa a su manera — un premio, una revelación, una sorpresa que no existe en ningún otro lado del juego. Algunos son pequeños. Otros no.")+'</p>'+
+ '<h2 class="s">'+L("Your journal","Tu diario")+'</h2>'+
+ '<p class="b">'+L("<span class=\"cmd\">!mystery</span> (also <span class=\"cmd\">!mistery</span>) opens your <strong>mystery journal</strong>: what you have uncovered so far, and the unique things it earned you. It fills in as you find them.","<span class=\"cmd\">!mystery</span> (también <span class=\"cmd\">!mistery</span>) abre tu <strong>diario de misterios</strong>: lo que has descubierto hasta ahora, y las cosas únicas que te ganó. Se va llenando a medida que los encuentras.")+'</p>'+
+ '<div class="callout"><p>'+L("<strong>No list here — on purpose.</strong> Half the point of a secret is not knowing it was there until you trip over it. This page will not tell you what to look for or where. Play, stay curious, and let Valestia surprise you.","<strong>Aquí no hay lista — a propósito.</strong> La mitad de la gracia de un secreto es no saber que estaba ahí hasta que tropiezas con él. Esta página no te dirá qué buscar ni dónde. Juega, mantén la curiosidad, y deja que Valestia te sorprenda.")+'</p></div>'+
+ '<p class="b">'+L("If you find one, you will know. That is rather the idea.","Si encuentras uno, lo sabrás. Esa es más o menos la idea.")+'</p>';
 }};
 
 PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads between them, and the places the story happens. Select any marker on the map.",h:function(){
  return '<div class="atlas"><div class="atlas__m" id="map"></div>'+
  '<aside class="atlas__s"><div class="dos" id="dos"></div></aside></div>'+
  '<div class="leg">'+
- '<span><b style="background:var(--verdigris)"></b>Huntable region</span>'+
- '<span><b style="background:transparent;border:2px solid var(--verdigris)"></b>Story location</span>'+
- '<span><b style="background:transparent;border:2px dashed var(--corrupt)"></b>Seal site</span>'+
- '<span><b style="background:var(--brass)"></b>Selected</span>'+
+ '<span><b style="background:var(--verdigris)"></b>'+L("Huntable region","Región cazable")+'</span>'+
+ '<span><b style="background:transparent;border:2px solid var(--verdigris)"></b>'+L("Story location","Locación de historia")+'</span>'+
+ '<span><b style="background:transparent;border:2px dashed var(--corrupt)"></b>'+L("Seal site","Sitio del sello")+'</span>'+
+ '<span><b style="background:var(--brass)"></b>'+L("Selected","Seleccionado")+'</span>'+
  '</div>'+
- '<h2 class="s">Travel and hunt</h2>'+
- '<p class="b"><span class="cmd">!travel</span> moves you between regions. <span class="cmd">!hunt</span> farms the region you are standing in for <strong>Oil, XP and that region\'s signature material</strong>. Each region has its own roster and its own drop table.</p>'+
- '<p class="b">There are <strong>210 named enemies</strong> across ten regions — 3 species × 7 tiers each. Their stats are <strong>generated from level</strong>, so a hunted enemy always matches you; the tier name is just flavour for the band you are in. Max may cap hunts per day.</p>'+
- '<div class="callout"><p>Hunting the right region is how you farm the exact material your next piece needs, instead of grinding random modes and hoping. Every weapon recipe needs a signature material.</p></div>'+
- '<h2 class="s">Signature materials</h2>'+
- tbl(["Region","Signature material"],Object.keys(PLACES).filter(function(k){return PLACES[k].m;}).map(function(k){return [PLACES[k].n,PLACES[k].m];}),["k","n"])+
- '<h2 class="s">Region upgrades and taxes</h2>'+
- '<p class="b">Regions can be <strong>upgraded</strong> for bonuses and may charge entry <strong>taxes</strong>. Both are set by Max on the server the bot lives in.</p>'+
- '<h2 class="s">Large-scale war</h2>'+
- '<p class="b">Three systems sit on top of the map, and they all feed each other.</p>'+
- '<h3 class="t">Corruption and liberation battles</h3>'+
- '<p class="b">A region can fall <strong>Corrupted</strong>, and it is the closest thing the world has to losing ground. When it happens:</p>'+
+ '<h2 class="s">'+L("Travel and hunt","Viajar y cazar")+'</h2>'+
+ '<p class="b">'+L("<span class=\"cmd\">!travel</span> moves you between regions. <span class=\"cmd\">!hunt</span> farms the region you are standing in for <strong>Oil, XP and that region\'s signature material</strong>. Each region has its own roster and its own drop table.","<span class=\"cmd\">!travel</span> te mueve entre regiones. <span class=\"cmd\">!hunt</span> farmea la región donde estás por <strong>Oil, XP y el material de firma de esa región</strong>. Cada región tiene su propia lista de enemigos y su propia tabla de drops.")+'</p>'+
+ '<p class="b">'+L("There are <strong>210 named enemies</strong> across ten regions — 3 species × 7 tiers each. Their stats are <strong>generated from level</strong>, so a hunted enemy always matches you; the tier name is just flavour for the band you are in. Max may cap hunts per day.","Hay <strong>210 enemigos con nombre</strong> en diez regiones — 3 especies × 7 tiers cada una. Sus stats se <strong>generan desde el nivel</strong>, así que un enemigo cazado siempre te iguala; el nombre del tier es solo saborcito para la banda en la que estás. Max puede limitar las cazas por día.")+'</p>'+
+ '<div class="callout"><p>'+L("Hunting the right region is how you farm the exact material your next piece needs, instead of grinding random modes and hoping. Every weapon recipe needs a signature material.","Cazar en la región correcta es cómo farmeas el material exacto que necesita tu próxima pieza, en vez de moler modos al azar y esperar. Toda receta de arma necesita un material de firma.")+'</p></div>'+
+ '<h2 class="s">'+L("Signature materials","Materiales de firma")+'</h2>'+
+ tbl(L(["Region","Signature material"],["Región","Material de firma"]),Object.keys(PLACES).filter(function(k){return PLACES[k].m;}).map(function(k){return [PLACES[k].n,PLACES[k].m];}),["k","n"])+
+ '<h2 class="s">'+L("Region upgrades and taxes","Mejoras e impuestos de región")+'</h2>'+
+ '<p class="b">'+L("Regions can be <strong>upgraded</strong> for bonuses and may charge entry <strong>taxes</strong>. Both are set by Max on the server the bot lives in.","Las regiones se pueden <strong>mejorar</strong> por bonos y pueden cobrar <strong>impuestos</strong> de entrada. Ambos los fija Max en el servidor donde vive el bot.")+'</p>'+
+ '<h2 class="s">'+L("Large-scale war","Guerra a gran escala")+'</h2>'+
+ '<p class="b">'+L("Three systems sit on top of the map, and they all feed each other.","Tres sistemas se asientan sobre el mapa, y todos se alimentan entre sí.")+'</p>'+
+ '<h3 class="t">'+L("Corruption and liberation battles","Corrupción y batallas de liberación")+'</h3>'+
+ '<p class="b">'+L("A region can fall <strong>Corrupted</strong>, and it is the closest thing the world has to losing ground. When it happens:","Una región puede caer <strong>Corrupted</strong>, y es lo más parecido que tiene el mundo a perder terreno. Cuando pasa:")+'</p>'+
  '<div class="tw"><table><tbody>'+
- '<tr><td class="k">Drops</td><td>Turn off completely. No materials, no signature material, nothing.</td></tr>'+
- '<tr><td class="k">Enemies</td><td>Gain a <strong>Corrupted</strong> tag and a hard stat increase — roughly +35% and +30% on their numbers.</td></tr>'+
- '<tr><td class="k">Upgrades</td><td>Freeze. Whatever the region had built up stops progressing.</td></tr>'+
+ '<tr><td class="k">'+L("Drops","Drops")+'</td><td>'+L("Turn off completely. No materials, no signature material, nothing.","Se apagan por completo. Sin materiales, sin material de firma, nada.")+'</td></tr>'+
+ '<tr><td class="k">'+L("Enemies","Enemigos")+'</td><td>'+L("Gain a <strong>Corrupted</strong> tag and a hard stat increase — roughly +35% and +30% on their numbers.","Ganan una etiqueta <strong>Corrupted</strong> y un fuerte aumento de stats — más o menos +35% y +30% en sus números.")+'</td></tr>'+
+ '<tr><td class="k">'+L("Upgrades","Mejoras")+'</td><td>'+L("Freeze. Whatever the region had built up stops progressing.","Se congelan. Todo lo que la región había construido deja de progresar.")+'</td></tr>'+
  '</tbody></table></div>'+
- '<p class="b">The only way back is a <strong>liberation battle</strong> — a staged <strong>Vanguard PvE</strong> campaign fought in sequence with <span class="cmd">!liberate</span>. You do not win it in one fight: you clear the stages, and winning the last one lifts the corruption, turns the drops back on and unfreezes everything the region had.</p>'+
- '<div class="callout callout--warn"><p>A corrupted region is dead economy. If the one you farm goes dark, the signature material you need goes with it — and no other region drops it. Liberating it is not optional content, it is how you get your supply line back.</p></div>'+
+ '<p class="b">'+L("The only way back is a <strong>liberation battle</strong> — a staged <strong>Vanguard PvE</strong> campaign fought in sequence with <span class=\"cmd\">!liberate</span>. You do not win it in one fight: you clear the stages, and winning the last one lifts the corruption, turns the drops back on and unfreezes everything the region had.","La única vuelta es una <strong>batalla de liberación</strong> — una campaña <strong>Vanguard PvE</strong> por etapas peleada en secuencia con <span class=\"cmd\">!liberate</span>. No la ganas en una pelea: limpias las etapas, y ganar la última levanta la corrupción, vuelve a encender los drops y descongela todo lo que la región tenía.")+'</p>'+
+ '<div class="callout callout--warn"><p>'+L("A corrupted region is dead economy. If the one you farm goes dark, the signature material you need goes with it — and no other region drops it. Liberating it is not optional content, it is how you get your supply line back.","Una región corrupta es economía muerta. Si la que farmeas se apaga, el material de firma que necesitas se va con ella — y ninguna otra región lo suelta. Liberarla no es contenido opcional, es cómo recuperas tu línea de suministro.")+'</p></div>'+
  '<h3 class="t">Castle Siege</h3>'+
- '<p class="b">An 8-zone, 3-lane castle fought in phases — announced, preparation, combat window, result. Hold zones to keep enemies away from the Throne Room, with <strong>Intercept, Supply, Rescue</strong> and <strong>Sabotage</strong> objectives. Pays War Oil and XP.</p>'+
- '<div class="callout"><p><strong>Hold the Main Gate.</strong> It feeds the centre and connects all three lanes. Everything else is negotiable.</p></div>'+
+ '<p class="b">'+L("An 8-zone, 3-lane castle fought in phases — announced, preparation, combat window, result. Hold zones to keep enemies away from the Throne Room, with <strong>Intercept, Supply, Rescue</strong> and <strong>Sabotage</strong> objectives. Pays War Oil and XP.","Un castillo de 8 zonas y 3 carriles peleado por fases — anuncio, preparación, ventana de combate, resultado. Mantén zonas para alejar a los enemigos de la Sala del Trono, con objetivos <strong>Intercept, Supply, Rescue</strong> y <strong>Sabotage</strong>. Paga War Oil y XP.")+'</p>'+
+ '<div class="callout"><p>'+L("<strong>Hold the Main Gate.</strong> It feeds the centre and connects all three lanes. Everything else is negotiable.","<strong>Mantén la Puerta Principal.</strong> Alimenta el centro y conecta los tres carriles. Todo lo demás es negociable.")+'</p></div>'+
  '<h3 class="t">War</h3>'+
- '<p class="b">Multi-team control of 5 sectors: North, Center (the most contested), South, Vanguard and Rearguard. Winning a sector pays Oil, War Oil, XP and materials — and buys you an edge in the next one, so the sectors are not independent.</p>'+
- '<h3 class="t">Territory</h3>'+
- '<p class="b">The persistent layer underneath all of it. Clans and players <strong>hold</strong> zones and get passive combat bonuses inside them — extra parry, dodge, mitigation, post-crit damage. It does not reset between events; it is simply who owns what right now.</p>';
+ '<p class="b">'+L("Multi-team control of 5 sectors: North, Center (the most contested), South, Vanguard and Rearguard. Winning a sector pays Oil, War Oil, XP and materials — and buys you an edge in the next one, so the sectors are not independent.","Control de varios equipos sobre 5 sectores: Norte, Centro (el más disputado), Sur, Vanguardia y Retaguardia. Ganar un sector paga Oil, War Oil, XP y materiales — y te compra ventaja en el siguiente, así que los sectores no son independientes.")+'</p>'+
+ '<h3 class="t">'+L("Territory","Territorio")+'</h3>'+
+ '<p class="b">'+L("The persistent layer underneath all of it. Clans and players <strong>hold</strong> zones and get passive combat bonuses inside them — extra parry, dodge, mitigation, post-crit damage. It does not reset between events; it is simply who owns what right now.","La capa persistente debajo de todo. Clanes y jugadores <strong>controlan</strong> zonas y obtienen bonos pasivos de combate dentro de ellas — parry extra, esquiva, mitigación, daño post-crítico. No se reinicia entre eventos; es simplemente quién posee qué ahora mismo.")+'</p>';
 }};
 
 PAGES.lore={t:"Lore",e:"The world",d:"What the scroll says, what is under Aldenmoor, and what is happening to the water in Stormbay harbour.",h:function(){
