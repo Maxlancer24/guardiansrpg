@@ -781,9 +781,9 @@ var FAQ=[
   "¿Quién hace y gestiona el juego?",
   "The Guardians está creado y gestionado por Max en su servidor de Discord. Las recompensas, tasas de drop, precios y qué funciones están activas los define Max; este sitio solo refleja el bot en vivo."],
  ["How do I get in touch?",
-  "For questions, feedback or business proposals, email contact@guardiansrpg.com.",
+  "For questions, feedback or proposals, email contact@guardiansrpg.com.",
   "¿Cómo puedo contactar?",
-  "Para preguntas, comentarios o propuestas de negocio, escribe a contact@guardiansrpg.com."]
+  "Para preguntas, comentarios o propuestas, escribe a contact@guardiansrpg.com."]
 ];
 var PAGES={};
 
@@ -2296,8 +2296,8 @@ function renderNav(){
 function renderMain(){
  var foot=L('<b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. Every formula, item, region, quest and line of prose here was read out of the live bot. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.',
   '<b>The Guardians — Compendio.</b> Un RPG de Discord creado y gestionado por <b>Max</b>. Cada fórmula, objeto, región, misión y línea de texto aquí se lee del bot en vivo. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max en el servidor donde vive el bot.')+
-  L(' <br><b>Contact:</b> questions, feedback, or business proposals → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a>.',
-    ' <br><b>Contacto:</b> preguntas, comentarios o propuestas de negocio → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a>.');
+  L(' <br><b>Contact:</b> questions, feedback, or proposals → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a>.',
+    ' <br><b>Contacto:</b> preguntas, comentarios o propuestas → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a>.');
  document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
   var p=PAGES[k], acc=PACC[k]||"var(--brass)", th=(TR_HEAD[k]||{});
   if(p.nohead) return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'">'+p.h()+'</section>';
