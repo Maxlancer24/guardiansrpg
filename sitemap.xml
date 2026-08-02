@@ -1,4 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
  <url><loc>https://guardiansrpg.com/</loc></url>
+ <url><loc>https://guardiansrpg.com/abyss/</loc></url>
+ <url><loc>https://guardiansrpg.com/catching/</loc></url>
+ <url><loc>https://guardiansrpg.com/characters/</loc></url>
+ <url><loc>https://guardiansrpg.com/clans/</loc></url>
+ <url><loc>https://guardiansrpg.com/combat/</loc></url>
+ <url><loc>https://guardiansrpg.com/consumables/</loc></url>
+ <url><loc>https://guardiansrpg.com/diplomacy/</loc></url>
+ <url><loc>https://guardiansrpg.com/economy/</loc></url>
+ <url><loc>https://guardiansrpg.com/expeditions/</loc></url>
+ <url><loc>https://guardiansrpg.com/factions/</loc></url>
+ <url><loc>https://guardiansrpg.com/gear/</loc></url>
+ <url><loc>https://guardiansrpg.com/genes/</loc></url>
+ <url><loc>https://guardiansrpg.com/gyms/</loc></url>
+ <url><loc>https://guardiansrpg.com/hangar/</loc></url>
+ <url><loc>https://guardiansrpg.com/lab/</loc></url>
+ <url><loc>https://guardiansrpg.com/lore/</loc></url>
+ <url><loc>https://guardiansrpg.com/mechafight/</loc></url>
+ <url><loc>https://guardiansrpg.com/mechas/</loc></url>
+ <url><loc>https://guardiansrpg.com/mechawpn/</loc></url>
+ <url><loc>https://guardiansrpg.com/modes/</loc></url>
+ <url><loc>https://guardiansrpg.com/mysteries/</loc></url>
+ <url><loc>https://guardiansrpg.com/petbattle/</loc></url>
+ <url><loc>https://guardiansrpg.com/pets/</loc></url>
+ <url><loc>https://guardiansrpg.com/pilot/</loc></url>
+ <url><loc>https://guardiansrpg.com/portal/</loc></url>
+ <url><loc>https://guardiansrpg.com/sabotage/</loc></url>
+ <url><loc>https://guardiansrpg.com/screens/</loc></url>
+ <url><loc>https://guardiansrpg.com/sides/</loc></url>
+ <url><loc>https://guardiansrpg.com/species/</loc></url>
+ <url><loc>https://guardiansrpg.com/start/</loc></url>
+ <url><loc>https://guardiansrpg.com/story/</loc></url>
+ <url><loc>https://guardiansrpg.com/sunken-fang/</loc></url>
+ <url><loc>https://guardiansrpg.com/tut-combat/</loc></url>
+ <url><loc>https://guardiansrpg.com/tut-pokemax/</loc></url>
+ <url><loc>https://guardiansrpg.com/valestia/</loc></url>
+ <url><loc>https://guardiansrpg.com/weapons/</loc></url>
 </urlset>
