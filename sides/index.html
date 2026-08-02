@@ -6,6 +6,9 @@
 <title>Side Stories — The Guardians</title>
 <meta name="description" content="Fifty more missions across ten arcs, separate from the main line. Most run 3-player; each arc is a chain you play in order.">
 <link rel="canonical" href="https://guardiansrpg.com/sides/">
+<link rel="alternate" hreflang="en" href="https://guardiansrpg.com/sides/">
+<link rel="alternate" hreflang="es" href="https://guardiansrpg.com/es/sides/">
+<link rel="alternate" hreflang="x-default" href="https://guardiansrpg.com/sides/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="google-site-verification" content="FCRcYEMc1tReUHbWQyZuEODHdu8JnWuyvdNoyt67j2A">
 <meta property="og:type" content="website">
@@ -13,6 +16,7 @@
 <meta property="og:title" content="Side Stories — The Guardians">
 <meta property="og:description" content="Fifty more missions across ten arcs, separate from the main line. Most run 3-player; each arc is a chain you play in order.">
 <meta property="og:url" content="https://guardiansrpg.com/sides/">
+<meta property="og:locale" content="en_US">
 <meta name="theme-color" content="#0A1416">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Side Stories — The Guardians">
@@ -23,7 +27,7 @@
 <meta property="og:image:alt" content="The map of Valestia">
 <meta name="twitter:image" content="https://guardiansrpg.com/og.jpg">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Guardians","url":"https://guardiansrpg.com/","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"The Guardians","url":"https://guardiansrpg.com/","gamePlatform":"Discord","applicationCategory":"Game","operatingSystem":"Discord","description":"The complete player compendium for The Guardians, a Discord RPG by Max: combat maths, gear, weapons, every game mode, the map of Valestia, the lore, and all 81 story and side missions."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"The Guardians","url":"https://guardiansrpg.com/","gamePlatform":"Discord","applicationCategory":"Game","operatingSystem":"Discord","inLanguage":"en","description":"The complete player compendium for The Guardians, a Discord RPG by Max: combat maths, gear, weapons, every game mode, the map of Valestia, the lore, and all 81 story and side missions."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://guardiansrpg.com/"},{"@type":"ListItem","position":2,"name":"Side Stories","item":"https://guardiansrpg.com/sides/"}]}</script>
 
 <script>window.goatcounter={no_onload:true}</script>
@@ -587,11 +591,17 @@ var E=function(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g
 
 /* ── i18n: two languages, English is the source; Spanish overlays via L(en,es).
    Any string not given an `es` falls back to English, so the site never breaks. */
-var LANG=(function(){try{return localStorage.getItem("glang")==="es"?"es":"en";}catch(e){return "en";}})();
-function L(en,es){return (LANG==="es"&&es!=null&&es!=="")?es:en;}
-/* SITE_MODE: true only in the GitHub Pages build (real /paths/). The single-file
-   claude.ai artifact leaves it false and keeps hash routing. Set at build time. */
+/* SITE_MODE: true only in the GitHub Pages build (real /paths/, incl. /es/…). The
+   single-file claude.ai artifact leaves it false and keeps hash routing. Set at build. */
 var SITE_MODE=true;
+/* Language: in SITE_MODE the URL is authoritative (/es/… = Spanish, everything else
+   English), so pre-rendered content, canonical and hreflang always agree. In the
+   artifact, fall back to the saved preference. */
+var LANG=(function(){try{
+  if(SITE_MODE) return /^\/es(\/|$)/.test(location.pathname)?"es":"en";
+  return localStorage.getItem("glang")==="es"?"es":"en";
+}catch(e){return "en";}})();
+function L(en,es){return (LANG==="es"&&es!=null&&es!=="")?es:en;}
 /* DTR: Spanish for shared data-array cells, keyed by the exact English string.
    Renders use L(cell, DTR[cell]) so anything not in DTR falls back to English. */
 var DTR={
@@ -2835,7 +2845,10 @@ function syncLang(){
 }
 function setLang(l){
  l=(l==="es"?"es":"en"); if(l===LANG) return;
+ var id=(typeof currentId==="function")?currentId():"home";
  LANG=l; try{ localStorage.setItem("glang",l); }catch(e){}
+ /* on the site, the language IS the URL — move to the same page's other-language URL */
+ if(SITE_MODE){ history.pushState({},"",(l==="es"?"/es/":"/")+(id==="home"?"":id+"/")); }
  built={}; renderNav(); renderMain(); route(); syncLang();
 }
 document.getElementById("langsw").addEventListener("click",function(e){
@@ -2878,19 +2891,24 @@ function revealIn(id){
  },{rootMargin:"0px 0px -6% 0px"});
  els.forEach(function(e,i){ e.style.transitionDelay=(Math.min(i,8)*0.05)+"s"; io.observe(e); });
 }
-/* resolve the current page id: from the URL path in SITE_MODE, else the hash */
+/* resolve the current page id: from the URL path (minus any /es prefix) in SITE_MODE, else the hash */
 function currentId(){
  var id;
- if(SITE_MODE){ id=location.pathname.replace(/^\/+|\/+$/g,"")||"home"; }
+ if(SITE_MODE){ id=location.pathname.replace(/^\/es(?=\/|$)/,"").replace(/^\/+|\/+$/g,"")||"home"; }
  else { id=(location.hash||"#home").slice(1); }
  return PAGES[id]?id:"home";
 }
-/* resolve a page id from a link href ("#id" or "/id/"); null if not an internal page link */
+/* build the URL for a page id in the current language (Spanish lives under /es/) */
+function pageUrl(id){
+ var pre=(SITE_MODE&&LANG==="es")?"/es/":"/";
+ return pre+(id==="home"?"":id+"/");
+}
+/* resolve a page id from a link href ("#id", "/id/" or "/es/id/"); null if not an internal page link */
 function navId(href){
  if(!href) return null;
  var m=null;
  if(href.charAt(0)==="#") m=href.slice(1);
- else if(href.charAt(0)==="/") m=href.replace(/^\/+|\/+$/g,"")||"home";
+ else if(href.charAt(0)==="/") m=href.replace(/^\/es(?=\/|$)/,"").replace(/^\/+|\/+$/g,"")||"home";
  else return null;
  return PAGES[m]?m:null;
 }
@@ -2903,10 +2921,15 @@ function updateMeta(id){
  var md=document.querySelector('meta[name="description"]'); if(md&&d) md.setAttribute("content",d);
  if(SITE_MODE){
   var cn=document.querySelector('link[rel="canonical"]');
-  if(cn) cn.setAttribute("href","https://guardiansrpg.com/"+(id==="home"?"":id+"/"));
+  if(cn) cn.setAttribute("href","https://guardiansrpg.com"+pageUrl(id));
  }
 }
 function route(){
+ /* browser back/forward can cross the EN↔ES boundary — reconcile LANG to the URL */
+ if(SITE_MODE){
+  var want=/^\/es(\/|$)/.test(location.pathname)?"es":"en";
+  if(want!==LANG){ LANG=want; try{localStorage.setItem("glang",want);}catch(e){} built={}; renderNav(); renderMain(); syncLang(); }
+ }
  var id=currentId();
  Object.keys(PAGES).forEach(function(k){
   document.getElementById("pg-"+k).classList.toggle("is-on",k===id);
@@ -2930,13 +2953,13 @@ function route(){
 }
 if(SITE_MODE){
  /* upgrade any old #hash deep-link to a real path, then intercept internal clicks */
- if(location.hash){ var _h=navId(location.hash); if(_h) history.replaceState({},"","/"+(_h==="home"?"":_h+"/")); }
+ if(location.hash){ var _h=navId(location.hash); if(_h) history.replaceState({},"",pageUrl(_h)); }
  document.addEventListener("click",function(e){
   if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
   var a=e.target.closest&&e.target.closest("a"); if(!a||a.target==="_blank") return;
   var id=navId(a.getAttribute("href")); if(id==null) return;
   e.preventDefault();
-  history.pushState({},"","/"+(id==="home"?"":id+"/"));
+  history.pushState({},"",pageUrl(id));
   route();
  });
  addEventListener("popstate",route);
