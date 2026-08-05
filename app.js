@@ -2066,7 +2066,7 @@ PAGES.story={t:"The Main Story",e:"Campaign",d:"A story campaign that runs insid
  }
  var C1=L("Chapter One","Capítulo Uno"), C2=L("Chapter Two","Capítulo Dos"), C3=L("Chapter Three","Capítulo Tres");
  var DONE=L("Complete","Completo"), PROG=L("In progress","En curso");
- return '<p class="b">'+L("Each mission is a real fight with story beats woven through it. They run in order — every one requires the one before it — and most of Chapter One is playable with a partner.","Cada misión es una pelea real con momentos de historia entretejidos. Corren en orden — cada una requiere la anterior — y casi todo el Capítulo Uno se puede jugar con un compañero.")+'</p>'+
+ return '<p class="b">'+L("Each mission is a real fight with story beats woven through it. Every one is <strong>single-player</strong> — you fight solo, with the story's own characters at your side as NPC allies — and they run in strict order, each requiring the one before it, across three chapters and counting.","Cada misión es una pelea real con momentos de historia entretejidos. Todas son <strong>para un jugador</strong> — peleas en solitario, con los propios personajes de la historia a tu lado como aliados NPC — y van en orden estricto, cada una requiere la anterior, a lo largo de tres capítulos y contando.")+'</p>'+
  '<div class="chap"><div class="chap__h"><h2>'+C1+'</h2><span class="chap__id">'+L("14 missions","14 misiones")+'</span><span class="chap__st">'+DONE+'</span></div>'+
  '<p class="chap__w">Stormbay</p>'+
  '<div class="chap__body"><div class="chap__beats">'+beats(CH1)+'</div>'+
