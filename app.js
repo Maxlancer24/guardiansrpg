@@ -812,7 +812,7 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
    '<p class="hero__sub anim d2">'+L("The seal on Azroth is failing, the scroll names three places, and the road only goes one way. A deep, living RPG played entirely in Discord — combat, a whole map to hunt, monster-catching, mechas, clans, and a story that keeps being written.","El sello sobre Azroth se está debilitando, el pergamino nombra tres lugares, y el camino solo va en una dirección. Un RPG profundo y vivo jugado enteramente en Discord — combate, todo un mapa para cazar, captura de monstruos, mechas, clanes, y una historia que se sigue escribiendo.")+'</p>'+
    '<div class="hero__stats anim d3">'+
     '<span class="stat"><b class="num" data-to="11">0</b><span>'+L("Regions","Regiones")+'</span></span>'+
-    '<span class="stat"><b class="num" data-to="84">0</b><span>Pokemax</span></span>'+
+    '<span class="stat"><b class="num" data-to="96">0</b><span>Pokemax</span></span>'+
     '<span class="stat"><b class="num" data-to="'+COUNTS.story+'">0</b><span>'+L("Story missions","Misiones de historia")+'</span></span>'+
     '<span class="stat"><b class="num" data-to="50">0</b><span>'+L("Side quests","Misiones secundarias")+'</span></span>'+
     '<span class="stat"><b class="num" data-to="19">0</b><span>'+L("Game modes","Modos de juego")+'</span></span>'+
@@ -929,7 +929,7 @@ PAGES["tut-pokemax"]={t:"Pokemax Basics",e:"Tutorial",d:"Your first Pokemax batt
 }};
 
 PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your account is created the first time you make a profile from the Kiosk, or the first time you join a game — whichever happens first.",h:function(){
- return '<div class="callout"><p>'+L("<strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the 85 story and side missions, all of it.","<strong>The Guardians</strong> es un RPG de Discord creado y gestionado por <strong>Max</strong> — el motor de combate, el mundo de Valestia, las 85 misiones de historia y secundarias, todo.")+'</p>'+
+ return '<div class="callout"><p>'+L("<strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the 91 story and side missions, all of it.","<strong>The Guardians</strong> es un RPG de Discord creado y gestionado por <strong>Max</strong> — el motor de combate, el mundo de Valestia, las 91 misiones de historia y secundarias, todo.")+'</p>'+
  '<p>'+L("Everything on this site describes the bot as it actually runs on <strong>the server the bot lives in</strong>. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max, and the defaults listed here are what he starts from.","Todo en este sitio describe el bot tal como funciona en <strong>el servidor donde vive el bot</strong>. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max, y los valores por defecto listados aquí son de los que él parte.")+'</p></div>'+
  '<h2 class="s">'+L("The Kiosk","El Kiosco")+'</h2>'+
  '<p class="b">'+L("The bot uses the <span class=\"cmd\">!</span> prefix for typed commands, but most of the game is <strong>panel-driven</strong>: Max places persistent button panels in the channels and you play by clicking them. The most important one is the <strong>Kiosk</strong> — your personal hub.","El bot usa el prefijo <span class=\"cmd\">!</span> para comandos escritos, pero la mayor parte del juego es <strong>por paneles</strong>: Max coloca paneles de botones persistentes en los canales y juegas haciendo clic. El más importante es el <strong>Kiosco</strong> — tu centro personal.")+'</p>'+
@@ -2275,7 +2275,7 @@ var NAV=[
  ["Expeditions",[["expeditions","How Expeditions Work","Cómo funcionan"],["sunken-fang","Sunken Fang Archipelago","Archipiélago del Colmillo Hundido"]],"Expediciones"],
  ["Reference",[["screens","What It Looks Like","Cómo se ve"]],"Referencia"]
 ];
-var COUNTS={gear:"27",weapons:"18",species:"84",petbattle:"61",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"38",sides:"50"};
+var COUNTS={gear:"27",weapons:"18",species:"96",petbattle:"62",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"41",sides:"50"};
 
 /* Per-group accent colour — gives each area of the site its own identity. */
 var GACC={"The guide":"var(--brass)","Tutorials":"#2FA3A3","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Expeditions":"#0E9CB8","Reference":"#8E6BB0"};
