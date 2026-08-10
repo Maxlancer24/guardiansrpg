@@ -113,6 +113,13 @@
   <xhtml:link rel="alternate" hreflang="x-default" href="https://guardiansrpg.com/hangar/"/>
  </url>
  <url>
+  <loc>https://guardiansrpg.com/hollowstar-crater/</loc>
+  <lastmod>2026-08-10</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="https://guardiansrpg.com/hollowstar-crater/"/>
+  <xhtml:link rel="alternate" hreflang="es" href="https://guardiansrpg.com/es/hollowstar-crater/"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://guardiansrpg.com/hollowstar-crater/"/>
+ </url>
+ <url>
   <loc>https://guardiansrpg.com/lab/</loc>
   <lastmod>2026-08-10</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://guardiansrpg.com/lab/"/>
@@ -377,6 +384,13 @@
   <xhtml:link rel="alternate" hreflang="en" href="https://guardiansrpg.com/hangar/"/>
   <xhtml:link rel="alternate" hreflang="es" href="https://guardiansrpg.com/es/hangar/"/>
   <xhtml:link rel="alternate" hreflang="x-default" href="https://guardiansrpg.com/hangar/"/>
+ </url>
+ <url>
+  <loc>https://guardiansrpg.com/es/hollowstar-crater/</loc>
+  <lastmod>2026-08-10</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="https://guardiansrpg.com/hollowstar-crater/"/>
+  <xhtml:link rel="alternate" hreflang="es" href="https://guardiansrpg.com/es/hollowstar-crater/"/>
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://guardiansrpg.com/hollowstar-crater/"/>
  </url>
  <url>
   <loc>https://guardiansrpg.com/es/lab/</loc>
