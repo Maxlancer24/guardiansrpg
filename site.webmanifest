@@ -9,9 +9,9 @@
  "description": "The complete player compendium for The Guardians, a Discord RPG by Max: combat maths, gear, weapons, every game mode, the map of Valestia, the lore, and all 94 story and side missions.",
  "icons": [
   {
-   "src": "/favicon.svg",
-   "sizes": "any",
-   "type": "image/svg+xml"
+   "src": "/favicon.png",
+   "sizes": "128x128",
+   "type": "image/png"
   }
  ]
 }
