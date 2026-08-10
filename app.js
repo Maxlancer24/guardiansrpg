@@ -2281,7 +2281,7 @@ PAGES["hollowstar-crater"]={t:"The Hollowstar Crater",e:"Expeditions",d:"The sec
  '<p class="b">'+L("Spend your Starseals at the crater's shop. Prices are in Starseals; several items are capped per voyage.","Gasta tus Starseals en la tienda del cráter. Los precios son en Starseals; varios objetos están topados por viaje.")+'</p>'+
  tbl(L(["Item","Cost","What it does"],["Objeto","Costo","Qué hace"]),LANG==="es"?[
   ['🧪 Regen Potion',"5","Cura 40 HP ahora, luego 30 HP en cada uno de los siguientes 2 turnos."],
-  ['☄️ Craterglass Tonic',"10","Otorga un Escudo Protector de 100 HP durante el turno al usarlo en combate."],
+  ['☄️ Craterglass Tonic',"10","Te da el Void Aegis Draught — un escudo de 300 puntos que dura 2 turnos en combate."],
   ['🛢️ 1,000 OIL Cache',"8","Agrega 1,000 OIL a tu saldo al instante."],
   ['🌠 Starglass OILball',"6","×3.5 de poder de captura durante Starfall (poder básico si no). Límite 5."],
   ['💎 Craterglass Fragment',"3","Material de mejora para el Craterglass Bracer (+4 y +5). Límite 5."],
@@ -2292,7 +2292,7 @@ PAGES["hollowstar-crater"]={t:"The Hollowstar Crater",e:"Expeditions",d:"The sec
   ['⚓ Meteor Anchor',"70","Arma exclusiva — ver abajo. Límite 1."]
  ]:[
   ['🧪 Regen Potion',"5","Heals 40 HP now, then 30 HP on each of the next 2 turns."],
-  ['☄️ Craterglass Tonic',"10","Grants a 100 HP Protective Shield for the turn when used in combat."],
+  ['☄️ Craterglass Tonic',"10","Gives the Void Aegis Draught — a 300-point shield that lasts 2 turns in combat."],
   ['🛢️ 1,000 OIL Cache',"8","Instantly adds 1,000 OIL to your balance."],
   ['🌠 Starglass OILball',"6","×3.5 catch power during Starfall (basic power otherwise). Limit 5."],
   ['💎 Craterglass Fragment',"3","Enhancement material for the Craterglass Bracer (+4 and +5). Limit 5."],
