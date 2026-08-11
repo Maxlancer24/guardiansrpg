@@ -543,3 +543,12 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
 .search__r em{font-style:normal;color:var(--brass);font-weight:600}
 .search__r span{display:block;font-family:var(--cond);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-top:.05rem}
 .search__empty{padding:.6rem .7rem;color:var(--text-faint);font-size:.82rem}
+
+/* ── legal / privacy policy ── */
+.legal p,.legal li{max-width:72ch}
+.legal h3{font-family:var(--cond);font-weight:600;font-size:1.02rem;letter-spacing:.01em;color:var(--text);margin:1.15rem 0 .35rem}
+.legal ul{margin:.35rem 0 .9rem;padding-left:1.25rem;list-style:disc}
+.legal li{margin:.28rem 0;color:var(--text-faint)}
+.legal li::marker{color:var(--brass)}
+.legal a{color:var(--brass);text-decoration:underline;text-underline-offset:2px}
+.legal .legal__meta{color:var(--text-faint);font-size:.86rem;margin-bottom:.4rem}
