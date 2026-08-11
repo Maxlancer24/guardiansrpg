@@ -844,7 +844,8 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
      '<span class="syscard__go">'+L("Open →","Abrir →")+'</span></a>';
    }).join("")+
   '</div></div>'+
-  '<div class="foot"><p>'+L("<b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.","<b>The Guardians</b> — un RPG de Discord creado y gestionado por <b>Max</b>. Este compendio se genera del bot en vivo; las recompensas, tasas de drop y qué paneles están activos los define Max en el servidor donde vive el bot.")+'</p></div>';
+  '<div class="foot"><p>'+L("<b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.","<b>The Guardians</b> — un RPG de Discord creado y gestionado por <b>Max</b>. Este compendio se genera del bot en vivo; las recompensas, tasas de drop y qué paneles están activos los define Max en el servidor donde vive el bot.")+
+  '<br>'+L("Contact: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"#privacy\">Privacy Policy</a>","Contacto: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"#privacy\">Política de privacidad</a>")+'</p></div>';
 }};
 
 PAGES["tut-combat"]={t:"Combat Basics",e:"Tutorial",d:"Your very first fight, explained one turn at a time — with a full worked example. No maths needed.",h:function(){
