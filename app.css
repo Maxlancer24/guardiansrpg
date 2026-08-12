@@ -552,3 +552,32 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
 .legal li::marker{color:var(--brass)}
 .legal a{color:var(--brass);text-decoration:underline;text-underline-offset:2px}
 .legal .legal__meta{color:var(--text-faint);font-size:.86rem;margin-bottom:.4rem}
+
+/* ══ aesthetic pass (subtle) ══ */
+/* theme toggle (sun/moon) shares the langsw button styling */
+.themesw{font-size:.92rem;line-height:1}
+.themesw:hover{color:var(--text)}
+/* atmosphere: faint film grain + soft vignette over the whole page */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+  radial-gradient(135% 125% at 50% -8%, transparent 58%, rgba(0,0,0,.18));
+ background-size:120px 120px, cover; opacity:.5; mix-blend-mode:soft-light}
+:root[data-theme="light"] body::after,:root:not([data-theme="dark"]) body::after{opacity:.32}
+/* hero: soft accent glow behind the title */
+.hero__in::before{content:"";position:absolute;left:-6%;top:-8%;width:58%;height:72%;pointer-events:none;z-index:0;
+ background:radial-gradient(58% 58% at 32% 34%, color-mix(in srgb,var(--brass) 20%,transparent), transparent 72%);filter:blur(34px);opacity:.55}
+/* section-heading ornament (a short brass rule above each section) */
+h2.s::before{content:"";display:block;width:32px;height:2px;border-radius:2px;background:var(--brass);opacity:.6;margin:0 0 .55rem}
+h2.s:first-of-type::before{display:none}
+/* pull-quotes: story excerpts get an accent edge + a hanging quote mark */
+.ex{position:relative;border-left:3px solid var(--brass);overflow:hidden}
+.ex::before{content:"“";position:absolute;top:.05rem;right:.7rem;font-family:var(--serif);font-weight:700;font-size:3.3rem;line-height:1;color:var(--brass);opacity:.16;pointer-events:none}
+.ex p:not(.ex__h){font-size:1.06rem}
+/* illuminated drop cap for lore / chapter openers */
+.dropcap::first-letter{float:left;font-family:var(--serif);font-weight:700;font-size:3.1em;line-height:.78;padding:.02em .1em 0 0;color:var(--brass)}
+/* prose links: always-underlined, brightening on hover */
+.b a,.ex a,.callout a,.chap__body a,.qa a{color:var(--brass);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:color-mix(in srgb,var(--brass) 42%,transparent);transition:text-decoration-color .2s var(--ease)}
+.b a:hover,.ex a:hover,.callout a:hover,.chap__body a:hover,.qa a:hover{text-decoration-color:var(--brass)}
+/* smoother active-nav accent */
+.nav a{transition:color .16s var(--ease),background .16s var(--ease),border-color .16s var(--ease),box-shadow .16s var(--ease)}
+@media (prefers-reduced-motion:reduce){body::after{display:none}}

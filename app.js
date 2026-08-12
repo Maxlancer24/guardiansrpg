@@ -2035,7 +2035,7 @@ PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads be
 
 PAGES.lore={t:"Lore",e:"The world",d:"What the scroll says, what is under Aldenmoor, and what is happening to the water in Stormbay harbour.",h:function(){
  return '<h2 class="s">Azroth</h2>'+
- '<p class="b">'+L("A malign being, sealed. The seal is <strong>failing</strong>. The three locations named in the scroll all connect to the original seal, and the seal needs <strong>three pieces</strong> to be repaired — one in each place.","Un ser maligno, sellado. El sello está <strong>fallando</strong>. Las tres locaciones nombradas en el pergamino conectan todas con el sello original, y el sello necesita <strong>tres piezas</strong> para repararse — una en cada lugar.")+'</p>'+
+ '<p class="b dropcap">'+L("A malign being, sealed. The seal is <strong>failing</strong>. The three locations named in the scroll all connect to the original seal, and the seal needs <strong>three pieces</strong> to be repaired — one in each place.","Un ser maligno, sellado. El sello está <strong>fallando</strong>. Las tres locaciones nombradas en el pergamino conectan todas con el sello original, y el sello necesita <strong>tres piezas</strong> para repararse — una en cada lugar.")+'</p>'+
  '<h2 class="s">'+L("The Scroll","El Pergamino")+'</h2>'+
  '<p class="b">'+L("Written in a dead script and co-authored by <strong>Gorim</strong> and the <strong>Varn family</strong>. It describes the road to three places: <strong>Aldenmoor</strong> (ruins, north-west), <strong>Veldran</strong> (a city in the mountains) and <strong>Mirefall</strong> (a swamp). Elric spent thirty years on the script before he ever met you.","Escrito en un script muerto y coescrito por <strong>Gorim</strong> y la <strong>familia Varn</strong>. Describe el camino a tres lugares: <strong>Aldenmoor</strong> (ruinas, noroeste), <strong>Veldran</strong> (una ciudad en las montañas) y <strong>Mirefall</strong> (un pantano). Elric pasó treinta años con el script antes de conocerte.")+'</p>'+
  '<h2 class="s">'+L("The Seal and the Varns","El Sello y los Varn")+'</h2>'+
@@ -2090,7 +2090,7 @@ PAGES.story={t:"The Main Story",e:"Campaign",d:"A story campaign that runs insid
  }
  var C1=L("Chapter One","Capítulo Uno"), C2=L("Chapter Two","Capítulo Dos"), C3=L("Chapter Three","Capítulo Tres");
  var DONE=L("Complete","Completo"), PROG=L("In progress","En curso");
- return '<p class="b">'+L("Each mission is a real fight with story beats woven through it. Every one is <strong>single-player</strong> — you fight solo, with the story's own characters at your side as NPC allies — and they run in strict order, each requiring the one before it, across three chapters and counting.","Cada misión es una pelea real con momentos de historia entretejidos. Todas son <strong>para un jugador</strong> — peleas en solitario, con los propios personajes de la historia a tu lado como aliados NPC — y van en orden estricto, cada una requiere la anterior, a lo largo de tres capítulos y contando.")+'</p>'+
+ return '<p class="b dropcap">'+L("Each mission is a real fight with story beats woven through it. Every one is <strong>single-player</strong> — you fight solo, with the story's own characters at your side as NPC allies — and they run in strict order, each requiring the one before it, across three chapters and counting.","Cada misión es una pelea real con momentos de historia entretejidos. Todas son <strong>para un jugador</strong> — peleas en solitario, con los propios personajes de la historia a tu lado como aliados NPC — y van en orden estricto, cada una requiere la anterior, a lo largo de tres capítulos y contando.")+'</p>'+
  '<div class="chap"><div class="chap__h"><h2>'+C1+'</h2><span class="chap__id">'+L("14 missions","14 misiones")+'</span><span class="chap__st">'+DONE+'</span></div>'+
  '<p class="chap__w">Stormbay</p>'+
  '<div class="chap__body"><div class="chap__beats">'+beats(CH1)+'</div>'+
@@ -2603,6 +2603,27 @@ document.getElementById("langsw").addEventListener("click",function(e){
  var b=e.target.closest("[data-lang]"); if(b) setLang(b.dataset.lang);
 });
 syncLang();
+
+/* ── theme toggle: light / dark, remembered; follows the OS until first toggle ── */
+function _effectiveTheme(){
+ var t=document.documentElement.getAttribute("data-theme");
+ if(t==="dark"||t==="light") return t;
+ return (window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";
+}
+function syncThemeBtn(){ var b=document.getElementById("themesw"); if(b) b.textContent=(_effectiveTheme()==="dark"?"☀️":"🌙"); }
+function initTheme(){
+ var t=null; try{t=localStorage.getItem("gtheme");}catch(e){}
+ if(t==="dark"||t==="light") document.documentElement.setAttribute("data-theme",t);
+ syncThemeBtn();
+}
+function toggleTheme(){
+ var t=_effectiveTheme()==="dark"?"light":"dark";
+ document.documentElement.setAttribute("data-theme",t);
+ try{localStorage.setItem("gtheme",t);}catch(e){}
+ syncThemeBtn();
+}
+initTheme();
+(function(){ var tb=document.getElementById("themesw"); if(tb) tb.addEventListener("click",toggleTheme); })();
 
 var rail=document.getElementById("rail"), scrim=document.getElementById("scrim");
 function closeRail(){rail.classList.remove("is-open");scrim.classList.remove("is-on");}
