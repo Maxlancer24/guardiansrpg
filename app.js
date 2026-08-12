@@ -775,9 +775,9 @@ var FAQ=[
   "¿Es gratis?",
   "Sí. The Guardians es un juego de bot de Discord; este sitio es un compendio para jugadores, gratuito, leído del bot en vivo."],
  ["How do I start?",
-  "Join the Discord server where the bot lives and make your first profile from the Kiosk — your account is created the moment you make a profile or join your first game. The Getting Started commands on this page walk you through it.",
+  "Join the Discord where the bot lives — currently the Chainers server (Chainers is its own separate game; Guardians RPG will get its own server soon) — and make your first profile from the Kiosk. Your account is created the moment you make a profile or join your first game. The Getting Started commands on this page walk you through it.",
   "¿Cómo empiezo?",
-  "Entra al servidor de Discord donde vive el bot y crea tu primer perfil desde el Kiosco — tu cuenta se crea en cuanto haces un perfil o entras a tu primera partida. Los comandos de esta página de Primeros pasos te guían."],
+  "Entra al Discord donde vive el bot — por ahora el servidor de Chainers (Chainers es un juego aparte; Guardians RPG pronto tendrá su propio servidor) — y crea tu primer perfil desde el Kiosco. Tu cuenta se crea en cuanto haces un perfil o entras a tu primera partida. Los comandos de esta página de Primeros pasos te guían."],
  ["What are Pokemax?",
   "A complete monster-catcher living inside the RPG: catch 108 species across Valestia, raise them to level 50 through two evolutions, and battle 3-versus-3 — with its own type chart, moves and genes.",
   "¿Qué son los Pokemax?",
@@ -820,9 +820,11 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
     '<span class="stat"><b class="num" data-to="19">0</b><span>'+L("Game modes","Modos de juego")+'</span></span>'+
    '</div>'+
    '<div class="hero__cta anim d4">'+
-    '<a class="hbtn hbtn--primary" href="#start">'+L("Start playing →","Empezar a jugar →")+'</a>'+
+    '<a class="hbtn hbtn--primary" href="https://discord.gg/chainers" target="_blank" rel="noopener">'+L("Join the Discord →","Únete al Discord →")+'</a>'+
+    '<a class="hbtn hbtn--ghost" href="#start">'+L("Getting Started","Primeros pasos")+'</a>'+
     '<a class="hbtn hbtn--ghost" href="#valestia">'+L("Explore Valestia","Explorar Valestia")+'</a>'+
    '</div>'+
+   '<p class="anim d4" style="margin:.9rem 0 0;font-size:.82rem;color:rgba(238,235,226,.62);max-width:52ch">'+L("Guardians RPG currently runs inside the <b>Chainers</b> Discord — Chainers is its own separate game — and it will get its own server soon.","Guardians RPG vive por ahora dentro del Discord de <b>Chainers</b> — Chainers es un juego aparte — y pronto tendrá su propio servidor.")+'</p>'+
   '</div></section>'+
   '<section class="proto">'+
    '<figure class="proto__fig"><img src="'+COVER+'" alt="The four protagonists of The Guardians" width="1672" height="941" loading="lazy" decoding="async"></figure>'+
@@ -845,7 +847,7 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
    }).join("")+
   '</div></div>'+
   '<div class="foot"><p>'+L("<b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.","<b>The Guardians</b> — un RPG de Discord creado y gestionado por <b>Max</b>. Este compendio se genera del bot en vivo; las recompensas, tasas de drop y qué paneles están activos los define Max en el servidor donde vive el bot.")+
-  '<br>'+L("Contact: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"#privacy\">Privacy Policy</a>","Contacto: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"#privacy\">Política de privacidad</a>")+'</p></div>';
+  '<br>'+L("Contact: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"https://discord.gg/chainers\" target=\"_blank\" rel=\"noopener\">Join the Discord</a> · <a href=\"#privacy\">Privacy Policy</a>","Contacto: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"https://discord.gg/chainers\" target=\"_blank\" rel=\"noopener\">Únete al Discord</a> · <a href=\"#privacy\">Política de privacidad</a>")+'</p></div>';
 }};
 
 PAGES["tut-combat"]={t:"Combat Basics",e:"Tutorial",d:"Your very first fight, explained one turn at a time — with a full worked example. No maths needed.",h:function(){
@@ -2572,8 +2574,8 @@ function renderNav(){
 function renderMain(){
  var foot=L('<b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. Every formula, item, region, quest and line of prose here was read out of the live bot. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.',
   '<b>The Guardians — Compendio.</b> Un RPG de Discord creado y gestionado por <b>Max</b>. Cada fórmula, objeto, región, misión y línea de texto aquí se lee del bot en vivo. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max en el servidor donde vive el bot.')+
-  L(' <br><b>Contact:</b> questions, feedback, or proposals → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a> · <a href="#privacy">Privacy Policy</a>.',
-    ' <br><b>Contacto:</b> preguntas, comentarios o propuestas → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a> · <a href="#privacy">Política de privacidad</a>.');
+  L(' <br><b>Contact:</b> questions, feedback, or proposals → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a> · <a href="https://discord.gg/chainers" target="_blank" rel="noopener">Join the Discord</a> · <a href="#privacy">Privacy Policy</a>.',
+    ' <br><b>Contacto:</b> preguntas, comentarios o propuestas → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a> · <a href="https://discord.gg/chainers" target="_blank" rel="noopener">Únete al Discord</a> · <a href="#privacy">Política de privacidad</a>.');
  document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
   var p=PAGES[k], acc=PACC[k]||"var(--brass)", th=(TR_HEAD[k]||{});
   if(p.nohead) return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'">'+p.h()+'</section>';
