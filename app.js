@@ -2250,7 +2250,7 @@ PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The fir
   ['🔵 Tideglass OILball',"6","×3.5 de poder de captura aquí (poder básico en otro lado). Límite 5."],
   ['🛢️ 1,000 OIL Cache',"8","Agrega 1,000 OIL a tu saldo al instante."],
   ['🌊 Tidal Mending Elixir',"10","Cura a tus 3 aliados con menos HP y deja un resplandor curativo."],
-  ['🔱 Sunken Fang Insignia',"15","Desbloquea para siempre el título equipable <strong>The Tidebound</strong>. Límite 1."],
+  ['🔱 Sunken Fang Insignia',"15","Desbloquea para siempre el título equipable <strong>The Tidebound</strong> — equipado: <strong>+1 Fang Doubloon por caza</strong> y <strong>+10 HP máx</strong>. Límite 1."],
   ['🧭 Tideglass Compass',"55","Gear exclusivo — ver abajo. Límite 1."],
   ['🎟️ Promo Code',"60","Un código promo de Chainers, entregado en privado por DM. Stock limitado."],
   ['🗡️ Leviathan Harpoon',"70","Arma exclusiva — ver abajo. Límite 1."]
@@ -2261,7 +2261,7 @@ PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The fir
   ['🔵 Tideglass OILball',"6","×3.5 catch power here (basic power elsewhere). Limit 5."],
   ['🛢️ 1,000 OIL Cache',"8","Instantly adds 1,000 OIL to your balance."],
   ['🌊 Tidal Mending Elixir',"10","Heals your 3 lowest-HP allies and leaves a healing afterglow."],
-  ['🔱 Sunken Fang Insignia',"15","Permanently unlocks the equippable title <strong>The Tidebound</strong>. Limit 1."],
+  ['🔱 Sunken Fang Insignia',"15","Permanently unlocks the equippable title <strong>The Tidebound</strong> — while worn: <strong>+1 Fang Doubloon per hunt</strong> and <strong>+10 max HP</strong>. Limit 1."],
   ['🧭 Tideglass Compass',"55","Exclusive gear — see below. Limit 1."],
   ['🎟️ Promo Code',"60","A Chainers promo code, delivered privately by DM. Limited stock."],
   ['🗡️ Leviathan Harpoon',"70","Exclusive weapon — see below. Limit 1."]
@@ -2289,6 +2289,7 @@ PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The fir
  ],["k","n",""])+
  '<p class="b">'+L("Each <strong>+1</strong> adds <strong>+2%</strong> to the opening strike and <strong>+5%</strong> to the return; the redirect unlocks at <strong>+5</strong>. The +4 and +5 steps cost <strong>Leviathan Scales</strong>.","Cada <strong>+1</strong> suma <strong>+2%</strong> al golpe inicial y <strong>+5%</strong> al de retorno; la redirección se desbloquea en <strong>+5</strong>. Los pasos +4 y +5 cuestan <strong>Leviathan Scales</strong>.")+'</p>'+
  '<p class="b">'+L("Both are <strong>expedition-exclusive</strong> — you cannot forge them on the mainland, and their final two enhancement steps need materials that only the Fang Exchange sells. Wear the <strong>Insignia</strong> once and the <strong>The Tidebound</strong> title is yours to equip for good.","Ambos son <strong>exclusivos de expedición</strong> — no puedes forjarlos en el continente, y sus dos últimos pasos de mejora necesitan materiales que solo vende el Fang Exchange. Usa la <strong>Insignia</strong> una vez y el título <strong>The Tidebound</strong> es tuyo para equipar para siempre.")+'</p>'+
+ '<p class="b"><strong>🔱 '+L("The Tidebound — title","The Tidebound — título")+'</strong> · '+L("The Sunken Fang's prestige reward. Buy the <strong>Insignia</strong> once (15 Doubloons) to unlock it for good, then equip it from your profile. While it is equipped it does two things: every successful Sunken Fang hunt pays <strong>+1 Fang Doubloon</strong> on top of the tide's usual haul, and you carry <strong>+10 max HP</strong> into your character combat everywhere else. Unequip it to swap it off at any time — the unlock itself is permanent.","La recompensa de prestigio del Sunken Fang. Compra la <strong>Insignia</strong> una vez (15 Doubloons) para desbloquearlo para siempre, luego equípalo desde tu perfil. Mientras está equipado hace dos cosas: cada caza exitosa en el Sunken Fang paga <strong>+1 Fang Doubloon</strong> además del botín normal de la marea, y llevas <strong>+10 HP máx</strong> a tu combate de personaje en todo lo demás. Desequípalo para quitarlo cuando quieras — el desbloqueo en sí es permanente.")+'</p>'+
  '<div class="callout"><p>'+L("🌊 This was the <strong>first</strong> expedition destination. The second is now open — see <a href=\"#hollowstar-crater\">The Hollowstar Crater</a>.","🌊 Este fue el <strong>primer</strong> destino de expedición. El segundo ya está abierto — ve <a href=\"#hollowstar-crater\">El Cráter Hollowstar</a>.")+'</p></div>';
 }};
 
