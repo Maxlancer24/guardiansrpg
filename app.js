@@ -2597,9 +2597,9 @@ PAGES.changelog={t:"What's New",e:"The guide",d:"Recent additions to The Guardia
 
 /* Legal — Privacy Policy. English-only (per operator); the ES page keeps a Spanish
    header note via TR_HEAD.privacy. "Guardians RPG" throughout. */
-PAGES.privacy={t:"Privacy Policy",e:"Legal",d:"How Guardians RPG collects, uses, and shares your information — effective and last updated August 11, 2026.",h:function(){
+PAGES.privacy={t:"Privacy Policy",e:"Legal",d:"How Guardians RPG collects, uses, and shares your information — effective August 11, 2026, last updated September 14, 2026.",h:function(){
  return '<div class="legal">'+
- '<p class="legal__meta">Effective date: August 11, 2026 · Last updated: August 11, 2026</p>'+
+ '<p class="legal__meta">Effective date: August 11, 2026 · Last updated: September 14, 2026</p>'+
 
  '<h2 class="s">1. Introduction</h2>'+
  '<p class="b">This Privacy Policy explains how Guardians RPG (“Guardians RPG,” “the Application,” “the Bot,” “we,” “us,” or “our”) collects, uses, stores, and shares information when you interact with the Guardians RPG Discord application or visit https://guardiansrpg.com.</p>'+
@@ -2628,9 +2628,9 @@ PAGES.privacy={t:"Privacy Policy",e:"Legal",d:"How Guardians RPG collects, uses,
  '<h3>3.4 Message content</h3>'+
  '<p class="b">Guardians RPG uses Discord’s Message Content privileged intent for specific application functionality. The Application may process the content of Discord messages to:</p>'+
  '<ul><li>Recognize and process commands using the ! prefix.</li><li>Parse command names and arguments.</li><li>Distinguish commands from ordinary messages.</li><li>Validate qualifying community activity.</li><li>Operate message-based daily missions and rewards.</li><li>Apply cooldown, minimum-length, and repeated-text anti-abuse controls.</li><li>Trigger ambient RPG encounters based on activity in configured game channels.</li><li>Detect specific ritual phrases used to advance hidden narrative mysteries.</li></ul>'+
- '<p class="b">The Application does not maintain an archive of ordinary Discord conversations and does not store the complete raw text of ordinary messages for general monitoring. For anti-abuse purposes, the Application currently stores:</p>'+
- '<ul><li>The Discord user ID associated with qualifying activity.</li><li>Activity counters.</li><li>Relevant timestamps.</li><li>A SHA-1 fingerprint derived from the most recently qualifying normalized message.</li></ul>'+
- '<p class="b">The fingerprint is used to detect repeated text and is overwritten when a later qualifying message is recorded. Although it is not stored as readable message text, it is derived from message content and is treated as protected application data.</p>'+
+ '<p class="b">Message content is processed in memory only, at the moment a message is received, and is never written to our database, logs, or backups. The Application does not maintain an archive of Discord conversations and does not store message text or any data derived from it. For anti-abuse purposes, the Application stores only:</p>'+
+ '<ul><li>The Discord user ID associated with qualifying activity.</li><li>Activity counters.</li><li>Relevant timestamps.</li></ul>'+
+ '<p class="b">To detect repeated text, the Application keeps a temporary fingerprint of a user’s most recently counted message in volatile memory only. It is compared for a short window (currently 10 minutes), replaced by the next counted message, and discarded whenever the Application restarts. It is never persisted to storage.</p>'+
  '<p class="b">Information intentionally submitted as part of a command may be retained when necessary to provide the requested feature. Examples include custom character or companion names, configuration values, and other persistent game inputs.</p>'+
  '<h3>3.5 Attachments and uploaded files</h3>'+
  '<p class="b">Certain authorized administrative or import features may allow a user to upload an attachment through Discord. When such a feature is used, the Application may temporarily access and process the attachment to perform the requested import, configuration, or administrative action. Information extracted from the file may be stored as application configuration or game content. We do not use uploaded files for unrelated purposes or AI model training.</p>'+
@@ -2683,7 +2683,7 @@ PAGES.privacy={t:"Privacy Policy",e:"Legal",d:"How Guardians RPG collects, uses,
 
  '<h2 class="s">8. Data Retention</h2>'+
  '<p class="b">We retain information only for as long as reasonably necessary to operate the Application, provide persistent game progression, maintain security, resolve disputes, and comply with legal or platform requirements. Retention practices include:</p>'+
- '<ul><li>Game profiles and progression may remain stored while the Application operates or until deletion is requested.</li><li>Server configuration may remain stored while needed to operate features for that server.</li><li>Transaction, redemption, security, and administrative records may be retained when needed to prevent fraud, resolve disputes, or meet legal obligations.</li><li>The fingerprint of the latest qualifying activity message remains stored until it is overwritten by a later qualifying message or the associated data is deleted.</li><li>Rolling backup copies may temporarily retain deleted information until those backups are overwritten through the ordinary backup cycle.</li><li>Raw ordinary conversational messages are not retained as a general message archive.</li><li>Public blockchain records cannot be deleted or modified by us.</li></ul>'+
+ '<ul><li>Game profiles and progression may remain stored while the Application operates or until deletion is requested.</li><li>Server configuration may remain stored while needed to operate features for that server.</li><li>Transaction, redemption, security, and administrative records may be retained when needed to prevent fraud, resolve disputes, or meet legal obligations.</li><li>Message content and data derived from it are not stored; the temporary repeated-text fingerprint exists only in memory and is lost on restart.</li><li>Rolling backup copies may temporarily retain deleted information until those backups are overwritten through the ordinary backup cycle.</li><li>Raw ordinary conversational messages are not retained as a general message archive.</li><li>Public blockchain records cannot be deleted or modified by us.</li></ul>'+
  '<p class="b">When information is no longer necessary, we will delete or de-identify it, subject to legal, security, and technical limitations.</p>'+
 
  '<h2 class="s">9. Data Security</h2>'+
@@ -2744,7 +2744,7 @@ NAV.forEach(function(g){ (g[1]||[]).forEach(function(p){ PACC[p[0]]=GACC[g[0]]||
    fall back to English until translated; headers all live here. */
 var TR_HEAD={
  changelog:{e:"La guía",t:"Novedades",d:"Adiciones recientes a The Guardians y a este compendio, de lo más nuevo a lo más antiguo."},
- privacy:{e:"Legal",t:"Política de privacidad",d:"Cómo Guardians RPG recopila, usa y comparte tu información. Esta política se ofrece en inglés. Vigente / última actualización: 11 de agosto de 2026."},
+ privacy:{e:"Legal",t:"Política de privacidad",d:"Cómo Guardians RPG recopila, usa y comparte tu información. Esta política se ofrece en inglés. Vigente desde el 11 de agosto de 2026; última actualización: 14 de septiembre de 2026."},
  "tut-combat":{e:"Tutorial",t:"Combate básico",d:"Tu primera pelea, explicada turno a turno — con un ejemplo completo. Sin matemáticas."},
  "tut-pokemax":{e:"Tutorial",t:"Pokemax básico",d:"Tu primer combate Pokemax, paso a paso — tipos, HP y cómo capturar uno. Para principiantes."},
  start:{e:"La guía",t:"Primeros pasos",d:"No hay registro. Tu cuenta se crea la primera vez que haces un perfil en el Kiosco, o la primera vez que entras a una partida — lo que ocurra primero."},
