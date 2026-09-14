@@ -1044,13 +1044,13 @@ PAGES.combat={t:"Combat",e:"The guide",d:"Every turn, against players and NPCs a
  '<h2 class="s">'+L("The four actions","Las cuatro acciones")+'</h2>'+
  tbl(L(["Action","What it does"],["Acción","Qué hace"]),LANG==="es"?[
   ["Attack","Haces daño a tu objetivo. Puede ser crítico, según AGI."],
-  ["Parry","Te preparas para bloquear y contraatacar el próximo golpe. No es una reducción plana — mira abajo."],
+  ["Parry","Te preparas para bloquear y contraatacar el próximo golpe. Es una apuesta, no un escudo — mira abajo."],
   ["Rest","Curas 20 + CON×3 <em>y</em> ganas Focus — pero solo si ningún enemigo te ataca este turno (mira abajo)."],
   ["Use Consumable","Usas una poción de tu bolsa en tu turno."],
   ["Switch","Solo en modos de equipo y tag: cambias tu luchador activo por uno del banco. Gasta tu turno."]
  ]:[
   ["Attack","Deal damage to your target. Can crit, from AGI."],
-  ["Parry","Brace to block and counter the next hit. Not a flat reduction — see below."],
+  ["Parry","Brace to block and counter the next hit. It's a wager, not a shield — see below."],
   ["Rest","Heal 20 + CON×3 <em>and</em> gain Focus — but only if no enemy attacks you this turn (see below)."],
   ["Use Consumable","Use a potion from your bag on your turn."],
   ["Switch","Team and tag modes only: swap your active fighter for a benched one. Uses your turn."]
