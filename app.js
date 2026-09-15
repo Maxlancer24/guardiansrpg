@@ -1058,7 +1058,7 @@ PAGES.combat={t:"Combat",e:"The guide",d:"Every turn, against players and NPCs a
  ],["k",""])+
  '<div class="callout callout--warn"><p>'+L("<strong>Rest is interruptible.</strong> If any enemy attacks you on the turn you Rest, your Rest fails — <strong>no heal and no Focus</strong> — and you are <strong>caught resting</strong>: the attacker deals bonus damage (<strong>×1.5</strong> in a duel). Only Rest when you are safe from a hit; a resting fighter is the most punishable target on the board.","<strong>El Rest es interrumpible.</strong> Si cualquier enemigo te ataca en el turno que haces Rest, tu Rest falla — <strong>sin cura y sin Focus</strong> — y te pillan <strong>descansando</strong>: el atacante hace daño extra (<strong>×1.5</strong> en un duelo). Solo descansa cuando estés a salvo de un golpe; un luchador descansando es el objetivo más castigable del tablero.")+'</p></div>'+
  '<h2 class="s">'+L("Parry is a wager, not a shield","Parry es una apuesta, no un escudo")+'</h2>'+
- '<span class="fx">'+L("block value = (CON × 5) + STR   ·   counter value = (CON × 3) + STR","valor de bloqueo = (CON × 5) + STR   ·   valor de contra = (CON × 3) + STR")+'</span>'+
+ '<span class="fx">'+L("block value = (CON × 4) + STR   ·   counter value = (CON × 3) + STR","valor de bloqueo = (CON × 4) + STR   ·   valor de contra = (CON × 3) + STR")+'</span>'+
  '<p class="b">'+L("<strong>Perfect Block</strong> — if your block value is greater than or equal to the incoming attack, you take <strong>zero</strong> damage and reflect your counter value back.","<strong>Bloqueo perfecto</strong> — si tu valor de bloqueo es mayor o igual al ataque entrante, recibes <strong>cero</strong> daño y reflejas tu valor de contra.")+'</p>'+
  '<p class="b">'+L("<strong>Guard Break</strong> — if the attack is bigger than your block value, you break: you take only the <em>overflow</em> above your block.","<strong>Rotura de guardia</strong> — si el ataque supera tu valor de bloqueo, te rompen: recibes solo el <em>exceso</em> por encima de tu bloqueo.")+'</p>'+
  '<div class="callout"><p>'+L("This is why a high-CON parry punishes attackers, and why a hard enough hitter breaks one anyway. Do not parry a guaranteed guard-breaker — you just eat the difference.","Por eso un parry de CON alta castiga a los atacantes, y por eso un golpeador lo bastante fuerte lo rompe igual. No hagas parry ante una rotura de guardia garantizada — solo te comes la diferencia.")+'</p></div>'+
@@ -3049,14 +3049,14 @@ function initCalc(){
    '<button class="btn" data-inc="'+d[0]+'" aria-label="Raise '+d[1]+'">+</button></div></div>';
  }).join("");
  var TL=[["hp","Max HP","50 + CON×15",1],["rest","Rest heals","20 + CON×3"],["crit","Crit / Dodge","from AGI"],
-         ["init","Initiative","AGI + 1"],["blk","Parry block","CON×5 + STR"],["ctr","Parry counter","CON×3 + STR"]];
+         ["init","Initiative","AGI + 1"],["blk","Parry block","CON×4 + STR"],["ctr","Parry counter","CON×3 + STR"]];
  document.getElementById("ro").innerHTML=TL.map(function(t){
   return '<div class="tl"><span class="tl__k">'+L(t[1],DTR[t[1]])+'</span><span class="tl__v num'+(t[3]?" br":"")+'" data-t="'+t[0]+'">—</span><span class="tl__f">'+L(t[2],DTR[t[2]])+"</span></div>";
  }).join("");
  function verdict(){
   var a=S.agi,c=S.con,s=S.str,tot=spent()||1,left=budget()-spent();
   if(left>0) return L("You have <strong>"+left+"</strong> unspent point"+(left>1?"s":"")+".","Te quedan <strong>"+left+"</strong> punto"+(left>1?"s":"")+" sin gastar.");
-  if(c/tot>=.5) return L("A parry tank. You block <strong>"+(c*5+s)+"</strong> and counter for <strong>"+(c*3+s)+"</strong> — and Ultra Focus walks straight through all of it.","Un tanque de parry. Bloqueas <strong>"+(c*5+s)+"</strong> y contraatacas por <strong>"+(c*3+s)+"</strong> — y Ultra Focus atraviesa todo eso de largo.");
+  if(c/tot>=.5) return L("A parry tank. You block <strong>"+(c*4+s)+"</strong> and counter for <strong>"+(c*3+s)+"</strong> — and Ultra Focus walks straight through all of it.","Un tanque de parry. Bloqueas <strong>"+(c*4+s)+"</strong> y contraatacas por <strong>"+(c*3+s)+"</strong> — y Ultra Focus atraviesa todo eso de largo.");
   if(a/tot>=.45) return L("A dodge build. <strong>"+crit(a)+"%</strong> to avoid the hit outright, and initiative <strong>"+(a+1)+"</strong> so you almost always move first.","Una build de esquiva. <strong>"+crit(a)+"%</strong> de evitar el golpe por completo, e iniciativa <strong>"+(a+1)+"</strong> así que casi siempre mueves primero.");
   if(s/tot>=.5) return L("A hitter. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> on an average swing, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> with Focus. A tank who rests will bury you.","Un golpeador. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> en un golpe promedio, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> con Focus. Un tanque que descansa te entierra.");
   return L("Balanced. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> crit, no glaring hole — and nothing that scares anyone.","Equilibrado. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> de crítico, sin agujero evidente — y nada que asuste a nadie.");
@@ -3072,7 +3072,7 @@ function initCalc(){
    document.querySelector('[data-dec="'+d[0]+'"]').disabled=(S[d[0]]<=0);
   });
   document.getElementById("lvD").disabled=(S.lvl<=1);
-  var set={hp:50+S.con*15,rest:20+S.con*3,crit:crit(S.agi)+"%",init:S.agi+1,blk:S.con*5+S.str,ctr:S.con*3+S.str};
+  var set={hp:50+S.con*15,rest:20+S.con*3,crit:crit(S.agi)+"%",init:S.agi+1,blk:S.con*4+S.str,ctr:S.con*3+S.str};
   Object.keys(set).forEach(function(k){document.querySelector('[data-t="'+k+'"]').textContent=set[k];});
   var m=oc(S.agi), lo=Math.round((S.str*4+5)*m), hi=Math.round((S.str*4+15)*m), sc=Math.max(1,hi*2);
   function bar(si,ni,l,h,col){
