@@ -302,7 +302,7 @@ var DTR={
  "up to Mk1":"hasta Mk1","up to Mk2":"hasta Mk2","up to Mk3":"hasta Mk3","up to Mk4":"hasta Mk4","up to Mk5":"hasta Mk5","Mk5 signature frames":"Chasis Mk5 de firma",
  "Damage per hit, and the spine of your parry":"Daño por golpe, y la columna de tu parry",
  "Damage multiplier, crit, dodge, flat reduction":"Multiplicador de daño, crítico, esquiva, reducción plana",
- "Crit, dodge, and initiative (turn order)":"Crítico, esquiva e iniciativa (orden de turno)",
+ "Crit, dodge, initiative, bonus damage, and damage reduction":"Crítico, esquiva, iniciativa, daño extra y reducción de daño",
  "Max HP, rest healing, block and counter":"HP máx, cura de rest, bloqueo y contra",
  "Initiative":"Iniciativa","AGI + 1":"AGI + 1",
  "Max HP":"HP máx","Rest heals":"Cura de Rest","Crit / Dodge":"Crítico / Esquiva","from AGI":"de AGI","Flat reduction":"Reducción plana","Parry block":"Bloqueo de parry","Parry counter":"Contra de parry"
@@ -1019,10 +1019,10 @@ PAGES.combat={t:"Combat",e:"The guide",d:"Every turn, against players and NPCs a
  '<p class="b">'+L("Raw damage. Each point adds <strong>+4</strong> to your base attack on top of a random 5–15 roll, and it strengthens both halves of your Parry.","Daño puro. Cada punto suma <strong>+4</strong> a tu ataque base sobre una tirada aleatoria de 5–15, y refuerza ambas mitades de tu Parry.")+'</p>'+
  '<span class="fx">'+L("base damage = (STR × 4) + random(5–15)","daño base = (STR × 4) + aleatorio(5–15)")+'</span>'+
  '<h3 class="t">'+L("AGI — Agility","AGI — Agilidad")+'</h3>'+
- '<p class="b">'+L("One of the most important stats, because it does <strong>three</strong> things at once: it sets your <strong>crit chance</strong>, sets your <strong>dodge chance</strong>, and decides <strong>initiative</strong> — the turn order. The higher your AGI, the sooner you act each round. It no longer multiplies your damage or softens the hits you take.","Uno de los stats más importantes, porque hace <strong>tres</strong> cosas a la vez: fija tu <strong>probabilidad de crítico</strong>, fija tu <strong>probabilidad de esquiva</strong>, y decide la <strong>iniciativa</strong> — el orden de turno. Cuanto mayor tu AGI, antes actúas cada ronda. Ya no multiplica tu daño ni suaviza los golpes que recibes.")+'</p>'+
- '<span class="fx">'+L("initiative speed = AGI + 1   ·   crit chance = dodge chance (see the table)","velocidad de iniciativa = AGI + 1   ·   prob. de crítico = prob. de esquiva (ver la tabla)")+'</span>'+
+ '<p class="b">'+L("One of the most important stats, because it does <strong>five</strong> things at once: it sets your <strong>crit chance</strong> and your <strong>dodge chance</strong>, decides <strong>initiative</strong> — the turn order, so the higher your AGI the sooner you act each round — adds <strong>bonus damage</strong> to every hit you land, and <strong>softens the hits you take</strong> with flat damage reduction.","Uno de los stats más importantes, porque hace <strong>cinco</strong> cosas a la vez: fija tu <strong>probabilidad de crítico</strong> y tu <strong>probabilidad de esquiva</strong>, decide la <strong>iniciativa</strong> — el orden de turno, así que cuanto mayor tu AGI antes actúas cada ronda — suma <strong>daño extra</strong> a cada golpe que conectas, y <strong>suaviza los golpes que recibes</strong> con reducción de daño plana.")+'</p>'+
+ '<span class="fx">'+L("initiative speed = AGI + 1   ·   crit chance = dodge chance (see the table)   ·   bonus damage = × (1 + 0.0175 × AGI)   ·   flat damage reduction = AGI × 2.5","velocidad de iniciativa = AGI + 1   ·   prob. de crítico = prob. de esquiva (ver la tabla)   ·   daño extra = × (1 + 0.0175 × AGI)   ·   reducción de daño plana = AGI × 2.5")+'</span>'+
  tbl(L(["AGI","Crit &amp; dodge chance"],["AGI","Prob. de crítico y esquiva"]),[["0","0%"],["5","5%"],["10","10%"],["13","11%"],["16","12%"],["20","13%"],["40","20%"]],["n",""])+
- '<p class="b">'+L("Up to AGI 10 each point is +1% to both crit and dodge; above 10 it slows to roughly +1% per 3 AGI. Initiative, though, keeps climbing with every point — everyone still acts once per round, AGI just decides who goes first.","Hasta AGI 10, cada punto es +1% tanto a crítico como a esquiva; por encima de 10 baja a aproximadamente +1% por cada 3 de AGI. La iniciativa, en cambio, sigue subiendo con cada punto — todos actúan una vez por ronda, AGI solo decide quién va primero.")+'</p>'+
+ '<p class="b">'+L("Up to AGI 10 each point is +1% to both crit and dodge; above 10 it slows to roughly +1% per 3 AGI. Initiative, though, keeps climbing with every point — everyone still acts once per round, AGI just decides who goes first. Bonus damage and flat damage reduction also rise smoothly with every point — about +1.75% damage and +2.5 flat reduction per AGI.","Hasta AGI 10, cada punto es +1% tanto a crítico como a esquiva; por encima de 10 baja a aproximadamente +1% por cada 3 de AGI. La iniciativa, en cambio, sigue subiendo con cada punto — todos actúan una vez por ronda, AGI solo decide quién va primero. El daño extra y la reducción de daño plana también suben de forma pareja con cada punto — cerca de +1,75% de daño y +2,5 de reducción plana por AGI.")+'</p>'+
  '<h3 class="t">'+L("CON — Constitution","CON — Constitución")+'</h3>'+
  '<span class="fx">'+L("max HP = 50 + (CON × 15)   ·   rest heal = 20 + (CON × 3)","HP máx = 50 + (CON × 15)   ·   cura de Rest = 20 + (CON × 3)")+'</span>'+
  tbl(L(["CON","Max HP","Rest heals"],["CON","HP máx","Cura de Rest"]),[["0","50","20"],["5","125","35"],["10","200","50"],["15","275","65"],["20","350","80"]],["n","n","n"])+
@@ -3041,11 +3041,11 @@ function buildSearchIndex(){
 function initCalc(){
  var S={lvl:20,str:10,agi:9,con:10};
  var DEF=[["str","STR","Damage per hit, and the spine of your parry"],
-          ["agi","AGI","Crit, dodge, and initiative (turn order)"],
+          ["agi","AGI","Crit, dodge, initiative, bonus damage, and damage reduction"],
           ["con","CON","Max HP, rest healing, block and counter"]];
  var budget=function(){return 10+(S.lvl-1);}, spent=function(){return S.str+S.agi+S.con;};
  function crit(a){return a<=10?a:10+Math.floor((a-10)/3);}
- function oc(a){return 1;} /* AGI overcrit damage is disabled in the live engine */
+ function oc(a){return 1+0.0175*a;} /* AGI overcrit damage: ×(1 + 0.5·(3.5·AGI/100)) = 1 + 0.0175·AGI */
  var sEl=document.getElementById("stats");
  sEl.innerHTML=DEF.map(function(d){
   return '<div class="st"><div class="st__t"><span class="st__k">'+d[1]+'</span><span class="st__d">'+L(d[2],DTR[d[2]])+'</span>'+
@@ -3055,7 +3055,7 @@ function initCalc(){
    '<button class="btn" data-inc="'+d[0]+'" aria-label="Raise '+d[1]+'">+</button></div></div>';
  }).join("");
  var TL=[["hp","Max HP","50 + CON×15",1],["rest","Rest heals","20 + CON×3"],["crit","Crit / Dodge","from AGI"],
-         ["init","Initiative","AGI + 1"],["blk","Parry block","CON×4 + STR"],["ctr","Parry counter","CON×3 + STR"]];
+         ["init","Initiative","AGI + 1"],["mit","Flat reduction","AGI × 2.5"],["blk","Parry block","CON×4 + STR"],["ctr","Parry counter","CON×3 + STR"]];
  document.getElementById("ro").innerHTML=TL.map(function(t){
   return '<div class="tl"><span class="tl__k">'+L(t[1],DTR[t[1]])+'</span><span class="tl__v num'+(t[3]?" br":"")+'" data-t="'+t[0]+'">—</span><span class="tl__f">'+L(t[2],DTR[t[2]])+"</span></div>";
  }).join("");
@@ -3063,7 +3063,7 @@ function initCalc(){
   var a=S.agi,c=S.con,s=S.str,tot=spent()||1,left=budget()-spent();
   if(left>0) return L("You have <strong>"+left+"</strong> unspent point"+(left>1?"s":"")+".","Te quedan <strong>"+left+"</strong> punto"+(left>1?"s":"")+" sin gastar.");
   if(c/tot>=.5) return L("A parry tank. You block <strong>"+(c*4+s)+"</strong> and counter for <strong>"+(c*3+s)+"</strong> — and Ultra Focus walks straight through all of it.","Un tanque de parry. Bloqueas <strong>"+(c*4+s)+"</strong> y contraatacas por <strong>"+(c*3+s)+"</strong> — y Ultra Focus atraviesa todo eso de largo.");
-  if(a/tot>=.45) return L("A dodge build. <strong>"+crit(a)+"%</strong> to avoid the hit outright, and initiative <strong>"+(a+1)+"</strong> so you almost always move first.","Una build de esquiva. <strong>"+crit(a)+"%</strong> de evitar el golpe por completo, e iniciativa <strong>"+(a+1)+"</strong> así que casi siempre mueves primero.");
+  if(a/tot>=.45) return L("A dodge build. <strong>"+crit(a)+"%</strong> to avoid the hit outright, initiative <strong>"+(a+1)+"</strong> so you almost always move first, and <strong>"+(a*2.5)+"</strong> shaved off every hit you do take.","Una build de esquiva. <strong>"+crit(a)+"%</strong> de evitar el golpe por completo, iniciativa <strong>"+(a+1)+"</strong> así que casi siempre mueves primero, y <strong>"+(a*2.5)+"</strong> menos en cada golpe que sí recibes.");
   if(s/tot>=.5) return L("A hitter. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> on an average swing, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> with Focus. A tank who rests will bury you.","Un golpeador. <strong>"+Math.round((s*4+10)*oc(a))+"</strong> en un golpe promedio, <strong>"+Math.round((s*4+10)*oc(a)*2)+"</strong> con Focus. Un tanque que descansa te entierra.");
   return L("Balanced. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> crit, no glaring hole — and nothing that scares anyone.","Equilibrado. <strong>"+(50+c*15)+"</strong> HP, <strong>"+crit(a)+"%</strong> de crítico, sin agujero evidente — y nada que asuste a nadie.");
  }
@@ -3078,7 +3078,7 @@ function initCalc(){
    document.querySelector('[data-dec="'+d[0]+'"]').disabled=(S[d[0]]<=0);
   });
   document.getElementById("lvD").disabled=(S.lvl<=1);
-  var set={hp:50+S.con*15,rest:20+S.con*3,crit:crit(S.agi)+"%",init:S.agi+1,blk:S.con*4+S.str,ctr:S.con*3+S.str};
+  var set={hp:50+S.con*15,rest:20+S.con*3,crit:crit(S.agi)+"%",init:S.agi+1,mit:"−"+(S.agi*2.5),blk:S.con*4+S.str,ctr:S.con*3+S.str};
   Object.keys(set).forEach(function(k){document.querySelector('[data-t="'+k+'"]').textContent=set[k];});
   var m=oc(S.agi), lo=Math.round((S.str*4+5)*m), hi=Math.round((S.str*4+15)*m), sc=Math.max(1,hi*2);
   function bar(si,ni,l,h,col){
