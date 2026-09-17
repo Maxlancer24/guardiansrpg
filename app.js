@@ -106,8 +106,8 @@ var DTR={
  "A focused strike that deals 125% damage to one target.":"Un golpe enfocado que hace 125% de daño a un objetivo.",
  "Recipe: 100 Bonds, one-time":"Receta: 100 Bonds, única",
  "Granted by the weapon quest The First Blade — not craftable.":"Se obtiene en la misión de arma The First Blade — no crafteable.",
- "REST. If a hit would kill you this round you're held at 1 HP; at round end your HP becomes the hostile damage you took that round (cap 200% of max HP), then STR/AGI/CON drop 10% and you gain Gravefury — +25% attack damage for 2 rounds. A safe round is just a REST.":"REST. Si un golpe te mataría este round, te quedas en 1 HP; al final del round tu HP pasa a ser el daño hostil que recibiste ese round (tope 200% del HP máx), luego STR/AGI/CON bajan 10% y ganas Gravefury — +25% de daño de ataque por 2 rounds. Un round sin peligro es solo un REST.",
- "→ +5: 250% cap, 5% penalty, 3-round Gravefury":"→ +5: tope 250%, penalización 5%, Gravefury de 3 rounds",
+ "REST. If a hit would kill you this round you're held at 1 HP; at round end your HP becomes the hostile damage you took that round (cap 200% of max HP), then STR/AGI/CON drop 10% and you gain Gravefury — +75% damage on your next attack, held until you swing. A safe round is just a REST.":"REST. Si un golpe te mataría este round, te quedas en 1 HP; al final del round tu HP pasa a ser el daño hostil que recibiste ese round (tope 200% del HP máx), luego STR/AGI/CON bajan 10% y ganas Gravefury — +75% de daño en tu próximo ataque, hasta que golpees. Un round sin peligro es solo un REST.",
+ "→ +5: 250% cap, 5% penalty, Gravefury +100% & undodgeable":"→ +5: tope 250%, penalización 5%, Gravefury +100% e imposible de esquivar",
  "Unique — max one owned.":"Única — máximo una en propiedad.",
  "no enhance":"sin mejora",
  "Player versus player":"Jugador contra jugador",
@@ -392,7 +392,7 @@ var WEAPONS=[
  ["Bulwark Fang","+1 CON, +5 Parry Def","Guarded Strike","PARRY this turn (Parry Def ×1.4) and chip one enemy for 30% — you must break their guard, with no counter risk.","→ 50%; at +5 double chip on parry",37000,"clan",""],
  ["Revenant Edge","+1 STR, +1 AGI","Fallen Echo","Strike normally, then your strongest fallen ally's spirit echoes a second hit for 50% of their damage on the same enemy. Needs a fallen ally.","→ 75% echo at +5",22000,"bond","Recipe: 100 Bonds, one-time"],
  ["Requiem Aegis","+2 CON","Guardian Requiem","REST guarded by a fallen ally's spirit: gain a shield worth 50% of your highest-HP fallen ally's max HP this turn. Needs a fallen ally.","→ 75% shield at +5",22000,"bond","Recipe: 100 Bonds, one-time"],
- ["Coffinwake Greatblade","+1 STR, +2 CON, −2 AGI","Grave-Sleep Covenant","REST. If a hit would kill you this round you're held at 1 HP; at round end your HP becomes the hostile damage you took that round (cap 200% of max HP), then STR/AGI/CON drop 10% and you gain Gravefury — +25% attack damage for 2 rounds. A safe round is just a REST.","→ +5: 250% cap, 5% penalty, 3-round Gravefury",50000,"bm","Unique — max one owned."],
+ ["Coffinwake Greatblade","+1 STR, +2 CON, −2 AGI","Grave-Sleep Covenant","REST. If a hit would kill you this round you're held at 1 HP; at round end your HP becomes the hostile damage you took that round (cap 200% of max HP), then STR/AGI/CON drop 10% and you gain Gravefury — +75% damage on your next attack, held until you swing. A safe round is just a REST.","→ +5: 250% cap, 5% penalty, Gravefury +100% & undodgeable",50000,"bm","Unique — max one owned."],
  ["Trainee's Edge","—","Power Strike","A focused strike that deals 125% damage to one target.","no enhance",0,"quest","Granted by the weapon quest The First Blade — not craftable."]
 ];
 
