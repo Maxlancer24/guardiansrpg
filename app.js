@@ -322,7 +322,7 @@ var IMG_HOLLOWSTAR="/assets/hollowstar-presentation.webp";
 var IMG_NYXHAVEN="/assets/nyxhaven-presentation.webp";
 var IMG_POKEMAX="/assets/pokemax-cover.webp";
 function expoCover(src,alt,w,h){return '<figure style="margin:0 0 1.4rem"><img src="'+src+'" alt="'+E(alt)+'" width="'+(w||1400)+'" height="'+(h||788)+'" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--rule);box-shadow:0 16px 42px rgba(0,0,0,.34)"></figure>';}
-function pmxPortrait(id,cap){return '<figure style="max-width:220px;margin:.2rem auto 1.1rem;text-align:center"><img src="/assets/pokemax/'+id+'.webp" alt="'+E(cap)+'" width="400" height="400" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--rule);box-shadow:0 10px 26px rgba(0,0,0,.3)"><figcaption style="margin-top:.45rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.02em;color:var(--muted)">'+E(cap)+'</figcaption></figure>';}
+function pmxPortrait(id,cap){return '<figure style="max-width:240px;margin:.2rem auto 1.1rem;text-align:center"><img src="/assets/pokemax/'+id+'.webp" alt="'+E(cap)+'" width="400" height="400" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;filter:drop-shadow(0 8px 20px rgba(0,0,0,.45))"><figcaption style="margin-top:.4rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.02em;color:var(--muted)">'+E(cap)+'</figcaption></figure>';}
 
 /* ══════════════════════════════════════════════════════════════════
    DATA — read out of the live bot: crafting_system.py, weapons_system.py,
@@ -3350,7 +3350,7 @@ function initLab(){
   GK.forEach(function(g){ document.querySelector('[data-gv="'+g[0]+'"]').textContent=st.g[g[0]]; });
 
   document.getElementById("labId").innerHTML=
-   '<img class="lab__thumb" src="/assets/pokemax/'+id+'.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()" style="width:60px;height:60px;border-radius:10px;object-fit:cover;border:1px solid var(--rule);flex:0 0 auto;box-shadow:0 3px 10px rgba(0,0,0,.25)">'+
+   '<img class="lab__thumb" src="/assets/pokemax/'+id+'.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()" style="width:72px;height:72px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 3px 7px rgba(0,0,0,.35))">'+
    '<span class="lab__emo">'+s.emoji+'</span><div><div class="lab__nm">'+E(s.name)+'</div>'+
    '<div class="lab__meta">'+E(REG[s.region])+' · '+L("stage","etapa")+' '+s.stage+' '+L("of","de")+' '+line.length+'</div></div>'+
    '<div class="lab__badges"><span class="lab__bd lab__bd--t">'+TEMO[s.type]+" "+E(s.type)+'</span>'+
