@@ -322,6 +322,7 @@ var IMG_HOLLOWSTAR="/assets/hollowstar-presentation.webp";
 var IMG_NYXHAVEN="/assets/nyxhaven-presentation.webp";
 var IMG_POKEMAX="/assets/pokemax-cover.webp";
 function expoCover(src,alt,w,h){return '<figure style="margin:0 0 1.4rem"><img src="'+src+'" alt="'+E(alt)+'" width="'+(w||1400)+'" height="'+(h||788)+'" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--rule);box-shadow:0 16px 42px rgba(0,0,0,.34)"></figure>';}
+function pmxPortrait(id,cap){return '<figure style="max-width:220px;margin:.2rem auto 1.1rem;text-align:center"><img src="/assets/pokemax/'+id+'.webp" alt="'+E(cap)+'" width="400" height="400" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--rule);box-shadow:0 10px 26px rgba(0,0,0,.3)"><figcaption style="margin-top:.45rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.02em;color:var(--muted)">'+E(cap)+'</figcaption></figure>';}
 
 /* ══════════════════════════════════════════════════════════════════
    DATA — read out of the live bot: crafting_system.py, weapons_system.py,
@@ -2421,6 +2422,7 @@ PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The fir
   ['🐦‍⬛ Tempest Raven',"43"],['🦭 Glacierseal',"45"],['🪸 Leviatide',"47"]
  ],["k","n"])+
  '<p class="b">'+L("<strong>One-time victory, unlimited retries.</strong> Register exactly <strong>three Pokemax</strong> in your Party. Your current <strong>HP and Move Uses carry into the battle and stay saved</strong> afterward, so heal at the Pokemax Center between attempts. Lose and you can try again as often as you like; <strong>win once and the Trial can never be challenged again</strong>.","<strong>Victoria única, reintentos ilimitados.</strong> Registra exactamente <strong>tres Pokemax</strong> en tu Party. Tu <strong>HP y Usos de Movimiento actuales entran a la batalla y quedan guardados</strong> después, así que cúrate en el Pokemax Center entre intentos. Si pierdes puedes reintentar cuantas veces quieras; <strong>ganas una vez y el Trial no se puede volver a desafiar</strong>.")+'</p>'+
+ pmxPortrait("nautyrant","Nautyrant — Tidebound")+
  '<div class="callout"><p>'+L("🐋 <strong>First-victory reward:</strong> <strong>Nautyrant — Tidebound</strong> at Level 30 (genes HP 12 · ATK 11 · DEF 11 · SPD 12), plus <strong>5 Fang Doubloons</strong> and <strong>1,500 OIL</strong>.","🐋 <strong>Recompensa de la primera victoria:</strong> <strong>Nautyrant — Tidebound</strong> a nivel 30 (genes HP 12 · ATK 11 · DEF 11 · SPD 12), más <strong>5 Fang Doubloons</strong> y <strong>1,500 OIL</strong>.")+'</p></div>'+
  '<p class="b"><strong>🐋 Nautyrant</strong> · Water · '+L("all-rounder","todoterreno")+' — '+L("a <strong>unique</strong> Pokemax, not one of the 120 catchable species. A defensive all-rounder built on a huge DEF and a tide-reactive passive.","un Pokemax <strong>único</strong>, no una de las 120 especies capturables. Un todoterreno defensivo construido sobre una DEF enorme y una pasiva que reacciona a la marea.")+'</p>'+
  tbl(L(["Nautyrant — base stats","Value"],["Nautyrant — stats base","Valor"]),LANG==="es"?[
@@ -2507,6 +2509,7 @@ PAGES["hollowstar-crater"]={t:"The Hollowstar Crater",e:"Expeditions",d:"The sec
   ['🪲 Astralith',"43"],['🐏 Novaryx',"45"],['🦅 Zenithra',"47"]
  ],["k","n"])+
  '<p class="b">'+L("<strong>One-time victory, unlimited retries.</strong> Register exactly <strong>three Pokemax</strong> in your Party; your current HP and Move Uses carry into the battle and stay saved, so heal at the Pokemax Center between attempts. Lose and retry as often as you like; <strong>win once and the Trial can never be challenged again</strong>.","<strong>Victoria única, reintentos ilimitados.</strong> Registra exactamente <strong>tres Pokemax</strong> en tu Party; tu HP y Usos de Movimiento actuales entran a la batalla y quedan guardados, así que cúrate en el Pokemax Center entre intentos. Si pierdes puedes reintentar cuantas veces quieras; <strong>ganas una vez y el Trial no se puede volver a desafiar</strong>.")+'</p>'+
+ pmxPortrait("cosmoryx","Cosmoryx — Starbound")+
  '<div class="callout"><p>'+L("🦌 <strong>First-victory reward:</strong> <strong>Cosmoryx — Starbound</strong> at Level 30 (genes HP 12 · ATK 12 · DEF 12 · SPD 12), plus <strong>5 Starseals</strong> and <strong>1,500 OIL</strong>.","🦌 <strong>Recompensa de la primera victoria:</strong> <strong>Cosmoryx — Starbound</strong> a nivel 30 (genes HP 12 · ATK 12 · DEF 12 · SPD 12), más <strong>5 Starseals</strong> y <strong>1,500 OIL</strong>.")+'</p></div>'+
  '<p class="b"><strong>🦌 Cosmoryx</strong> · Rock · '+L("all-rounder","todoterreno")+' — '+L("a <strong>unique</strong> Pokemax, not one of the 120 catchable species. A bulky rock all-rounder leaning on heavy HP and DEF.","un Pokemax <strong>único</strong>, no una de las 120 especies capturables. Un todoterreno de roca robusto que se apoya en HP y DEF altos.")+'</p>'+
  tbl(L(["Cosmoryx — base stats","Value"],["Cosmoryx — stats base","Valor"]),LANG==="es"?[
@@ -2605,6 +2608,7 @@ PAGES["nyxhaven"]={t:"The Moonless Court of Nyxhaven",e:"Expeditions",d:"The thi
   ['🦗 Glaciemantis',"48"],['🐇 Lunavorn',"49"],['🦢 Eclipsyne',"50"]
  ],["k","n"])+
  '<p class="b">'+L("<strong>One-time victory, unlimited retries.</strong> Register exactly <strong>three Pokemax</strong>; your HP and Move Uses carry in and stay saved, so heal between attempts.","<strong>Victoria única, reintentos ilimitados.</strong> Registra exactamente <strong>tres Pokemax</strong>; tu HP y Usos de Movimiento entran tal cual y quedan guardados, así que cúrate entre intentos.")+'</p>'+
+ pmxPortrait("selunara","Selunara — Moonbound")+
  '<div class="callout"><p>'+L("🦋 <strong>First-victory reward:</strong> <strong>Selunara — Moonbound</strong> at Level 30 (genes HP 12 · ATK 12 · DEF 12 · SPD 12), plus <strong>5 Court Marks</strong> and <strong>1,500 OIL</strong>.","🦋 <strong>Recompensa de la primera victoria:</strong> <strong>Selunara — Moonbound</strong> a nivel 30 (genes HP 12 · ATK 12 · DEF 12 · SPD 12), más <strong>5 Court Marks</strong> y <strong>1,500 OIL</strong>.")+'</p></div>'+
  tbl(L(["Selunara — base stats","Value"],["Selunara — stats base","Valor"]),[
   ["HP","112"],["ATK","118"],["DEF","100"],["SPD","115"]
