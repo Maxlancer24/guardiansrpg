@@ -320,7 +320,8 @@ var COVER="/assets/cover.webp";
 var IMG_TEAMCOMET="/assets/team-comet.webp";
 var IMG_HOLLOWSTAR="/assets/hollowstar-presentation.webp";
 var IMG_NYXHAVEN="/assets/nyxhaven-presentation.webp";
-function expoCover(src,alt){return '<figure style="margin:0 0 1.4rem"><img src="'+src+'" alt="'+E(alt)+'" width="1400" height="788" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--rule);box-shadow:0 16px 42px rgba(0,0,0,.34)"></figure>';}
+var IMG_POKEMAX="/assets/pokemax-cover.webp";
+function expoCover(src,alt,w,h){return '<figure style="margin:0 0 1.4rem"><img src="'+src+'" alt="'+E(alt)+'" width="'+(w||1400)+'" height="'+(h||788)+'" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--rule);box-shadow:0 16px 42px rgba(0,0,0,.34)"></figure>';}
 
 /* ══════════════════════════════════════════════════════════════════
    DATA — read out of the live bot: crafting_system.py, weapons_system.py,
@@ -1488,7 +1489,8 @@ PAGES.economy={t:"Economy &amp; Progression",e:"The guide",d:"Two currencies, a 
 }};
 
 PAGES.pets={t:"The Pokemax System",e:"Pokemax",d:"Catch wild animals across Valestia, raise them to level 50 through two evolutions, and fight 3-versus-3. A whole monster-battler living inside the RPG, sharing none of its combat rules.",h:function(){
- return '<h2 class="s">'+L("A different game","Un juego distinto")+'</h2>'+
+ return expoCover(IMG_POKEMAX,L("A Cinderling battles a Pebblecrab","Un Cinderling combate a un Pebblecrab"),1400,933)+
+ '<h2 class="s">'+L("A different game","Un juego distinto")+'</h2>'+
  '<p class="b">'+L("Pokemax shares <strong>nothing</strong> with normal combat. No STR/AGI/CON, no Focus, no Parry, no gear. A Pokemax has <strong>four stats</strong>, a <strong>type</strong>, up to <strong>four moves</strong> with limited uses, and it faints. You fight <strong>3 versus 3</strong>.","Pokemax <strong>no comparte nada</strong> con el combate normal. Sin STR/AGI/CON, sin Focus, sin Parry, sin gear. Un Pokemax tiene <strong>cuatro stats</strong>, un <strong>tipo</strong>, hasta <strong>cuatro movimientos</strong> con usos limitados, y se debilita. Peleas <strong>3 contra 3</strong>.")+'</p>'+
  '<p class="b">'+L("You catch them wild in the regions of Valestia. Each region breeds its own type: <strong>84 species</strong> across <strong>28 animal families</strong>, every family a three-stage evolution line — and the three expeditions (<a href=\"#sunken-fang\">Sunken Fang</a>, <a href=\"#hollowstar-crater\">Hollowstar</a> and <a href=\"#nyxhaven\">Nyxhaven</a>) add <strong>12 each</strong>, <strong>120</strong> in all.","Los capturas salvajes en las regiones de Valestia. Cada región cría su propio tipo: <strong>84 especies</strong> en <strong>28 familias animales</strong>, cada familia una línea evolutiva de tres etapas — y las tres expediciones (<a href=\"#sunken-fang\">Sunken Fang</a>, <a href=\"#hollowstar-crater\">Hollowstar</a> y <a href=\"#nyxhaven\">Nyxhaven</a>) suman <strong>12 cada una</strong>, <strong>120</strong> en total.")+'</p>'+
  tbl(L(["Rule","Value"],["Regla","Valor"]),LANG==="es"?[
