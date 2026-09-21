@@ -476,6 +476,8 @@ tbody tr:hover td{background:color-mix(in srgb,var(--accent) 9%,transparent)}
 .hbtn{display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap;line-height:1;font-family:var(--cond);font-weight:600;font-size:.84rem;letter-spacing:.14em;text-transform:uppercase;padding:.8rem 1.6rem;border-radius:7px;text-decoration:none;cursor:pointer;transition:transform .14s var(--ease),box-shadow .14s var(--ease),background .14s var(--ease),border-color .14s var(--ease);border:1px solid transparent}
 .hbtn--primary{background:#C79A4B;color:#1a130a;box-shadow:0 8px 24px -8px rgba(199,154,75,.6)}
 .hbtn--primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(199,154,75,.7);background:#D3A85A}
+.hbtn--portal{background:rgba(50,139,120,.2);color:#9EE3D1;border-color:rgba(105,212,179,.65);box-shadow:0 8px 24px -10px rgba(105,212,179,.45)}
+.hbtn--portal:hover{transform:translateY(-2px);background:rgba(50,139,120,.32);border-color:#69D4B3;color:#D7FFF4;box-shadow:0 14px 34px -10px rgba(105,212,179,.55)}
 .hbtn--ghost{background:rgba(255,255,255,.05);color:#F5F0E4;border-color:rgba(238,235,226,.34);backdrop-filter:blur(4px)}
 .hbtn--ghost:hover{border-color:#D9A84E;color:#E3B45C;transform:translateY(-2px)}
 
