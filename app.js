@@ -829,6 +829,7 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
  return '<section class="hero">'+
   '<img class="hero__bg" src="'+MAP_SRC+'" alt="The map of Valestia" width="1485" height="810">'+
   '<div class="hero__scrim"></div>'+
+  '<img class="hero__emblem" src="/assets/guardians-emblem.png" alt="" width="1254" height="1254" decoding="async">'+
   '<div class="hero__in">'+
    '<p class="hero__eyebrow anim">'+L("A Discord RPG · Valestia","Un RPG de Discord · Valestia")+'</p>'+
    '<h1 class="hero__t anim d1"><span class="hero__the">The</span><span class="hero__big">Guardians</span></h1>'+
