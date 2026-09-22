@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Demo Battle — The Guardians</title>
+  <meta name="description" content="Play a short animated battle with Jessie in Black Lotus Wood.">
+  <link rel="canonical" href="https://guardiansrpg.com/demo-battle/">
+  <link rel="alternate" hreflang="es" href="https://guardiansrpg.com/es/demo-battle/">
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/demo-battle/demo-battle.css?v=1">
+</head>
+<body>
+  <header class="topbar"><a href="/">← The Guardians</a><span>Prototype · No account progress</span><a href="/es/demo-battle/">ES</a></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">BLACK LOTUS WOOD · COMBAT PROTOTYPE</p>
+      <h1>Jessie’s Ambush</h1>
+      <p>Choose a target and an action. This demonstration is completely separate from your real Guardian profile.</p>
+    </section>
+    <section class="battle-shell" aria-label="Demo battle">
+      <div class="battle-stage" id="battle-stage">
+        <div class="weather" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
+        <div class="fighter hero" id="jessie" data-actor="jessie">
+          <div class="nameplate"><span>Jessie</span><small>Gunslinger</small><div class="hp"><i></i></div><b class="hp-text">140 / 140</b></div>
+          <div class="sprite jessie-sprite" role="img" aria-label="Jessie in a combat stance"></div>
+          <div class="shadow"></div>
+        </div>
+        <button class="fighter enemy selected" id="marauder" data-actor="marauder" aria-label="Target Black Lotus Marauder">
+          <div class="nameplate"><span>Black Lotus Marauder</span><small>Lv. 8</small><div class="hp"><i></i></div><b class="hp-text">80 / 80</b></div>
+          <div class="sprite marauder-sprite"></div><div class="target-ring"></div><div class="shadow"></div>
+        </button>
+        <button class="fighter enemy warden" id="warden" data-actor="warden" aria-label="Target Hollow Warden">
+          <div class="nameplate"><span>Hollow Warden</span><small>Lv. 10</small><div class="hp"><i></i></div><b class="hp-text">110 / 110</b></div>
+          <div class="sprite warden-sprite"></div><div class="target-ring"></div><div class="shadow"></div>
+        </button>
+        <div class="battle-flash" aria-hidden="true"></div><div id="effects" aria-hidden="true"></div>
+        <div class="result" id="result" hidden><small>ENCOUNTER COMPLETE</small><h2>Road secured</h2><button id="restart">Play again</button></div>
+      </div>
+      <div class="combat-ui">
+        <div class="turn-copy"><small>JESSIE’S TURN</small><strong id="battle-log" aria-live="polite">Choose a target, then an action.</strong></div>
+        <div class="actions" id="actions">
+          <button data-action="quick"><span>Quick Shot</span><small>Fast single-target shot</small></button>
+          <button data-action="dual"><span>Twin Fang</span><small>Hits both enemies · 2 turn cooldown</small></button>
+          <button data-action="focus"><span>Focus</span><small>Empower the next shot</small></button>
+          <button data-action="guard"><span>Guard</span><small>Reduce the next enemy turn</small></button>
+        </div>
+      </div>
+    </section>
+    <p class="prototype-note">Visual prototype: rewards, inventory and profile data are not affected.</p>
+  </main>
+  <script src="/demo-battle/demo-battle.js?v=1" defer></script>
+</body>
+</html>

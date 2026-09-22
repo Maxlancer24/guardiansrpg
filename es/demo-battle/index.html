@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Combate de prueba — The Guardians</title>
+  <meta name="description" content="Juega un breve combate animado con Jessie en Black Lotus Wood.">
+  <link rel="canonical" href="https://guardiansrpg.com/es/demo-battle/">
+  <link rel="alternate" hreflang="en" href="https://guardiansrpg.com/demo-battle/">
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/demo-battle/demo-battle.css?v=1">
+</head>
+<body>
+  <header class="topbar"><a href="/es/">← The Guardians</a><span>Prototipo · Sin progreso de cuenta</span><a href="/demo-battle/">EN</a></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">BLACK LOTUS WOOD · PROTOTIPO DE COMBATE</p>
+      <h1>La emboscada de Jessie</h1>
+      <p>Elige un objetivo y una acción. Esta demostración está completamente separada del perfil real de tu Guardián.</p>
+    </section>
+    <section class="battle-shell" aria-label="Combate de prueba">
+      <div class="battle-stage" id="battle-stage">
+        <div class="weather" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
+        <div class="fighter hero" id="jessie" data-actor="jessie">
+          <div class="nameplate"><span>Jessie</span><small>Pistolera</small><div class="hp"><i></i></div><b class="hp-text">140 / 140</b></div>
+          <div class="sprite jessie-sprite" role="img" aria-label="Jessie en posición de combate"></div><div class="shadow"></div>
+        </div>
+        <button class="fighter enemy selected" id="marauder" data-actor="marauder" aria-label="Elegir Merodeador del Loto Negro">
+          <div class="nameplate"><span>Merodeador del Loto Negro</span><small>Nv. 8</small><div class="hp"><i></i></div><b class="hp-text">80 / 80</b></div>
+          <div class="sprite marauder-sprite"></div><div class="target-ring"></div><div class="shadow"></div>
+        </button>
+        <button class="fighter enemy warden" id="warden" data-actor="warden" aria-label="Elegir Guardián Hollow">
+          <div class="nameplate"><span>Guardián Hollow</span><small>Nv. 10</small><div class="hp"><i></i></div><b class="hp-text">110 / 110</b></div>
+          <div class="sprite warden-sprite"></div><div class="target-ring"></div><div class="shadow"></div>
+        </button>
+        <div class="battle-flash" aria-hidden="true"></div><div id="effects" aria-hidden="true"></div>
+        <div class="result" id="result" hidden><small>ENCUENTRO COMPLETADO</small><h2>Camino asegurado</h2><button id="restart">Jugar otra vez</button></div>
+      </div>
+      <div class="combat-ui">
+        <div class="turn-copy"><small>TURNO DE JESSIE</small><strong id="battle-log" aria-live="polite">Elige un objetivo y luego una acción.</strong></div>
+        <div class="actions" id="actions">
+          <button data-action="quick"><span>Disparo rápido</span><small>Disparo veloz a un objetivo</small></button>
+          <button data-action="dual"><span>Colmillo gemelo</span><small>Golpea a ambos · 2 turnos de recarga</small></button>
+          <button data-action="focus"><span>Focus</span><small>Potencia el siguiente disparo</small></button>
+          <button data-action="guard"><span>Guardia</span><small>Reduce el próximo turno enemigo</small></button>
+        </div>
+      </div>
+    </section>
+    <p class="prototype-note">Prototipo visual: las recompensas, el inventario y el perfil no se modifican.</p>
+  </main>
+  <script src="/demo-battle/demo-battle.js?v=1" defer></script>
+</body>
+</html>
