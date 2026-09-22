@@ -14,8 +14,8 @@
   document.querySelectorAll('[data-copy]').forEach(el=>{if(copy[el.dataset.copy])el.textContent=copy[el.dataset.copy];});
   $('shoot').textContent=es?'Dos disparos ↗':'Double shot ↗';
   copy.aim=es?'Preparación':'Preparing';
-  let scene,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,speed=1,loop=false,debug=false,effects=true;
-  $('speed').value='1';
+  let scene,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,speed=1.5,loop=false,debug=false,effects=true;
+  $('speed').value=String(speed);
   const reset=document.createElement('button');reset.textContent=es?'Reiniciar':'Reset';reset.id='reset';$('pause').after(reset);
   const fxLabel=document.createElement('label');fxLabel.className='toggle';
   const fxToggle=document.createElement('input');fxToggle.type='checkbox';fxToggle.checked=true;fxToggle.id='effects';
@@ -26,11 +26,11 @@
   const idleDur=[380,240,240,260,240,240];
   // Avoid the old tilted-head acting drawings. Two shots, same gun and stance.
   const shotKeys=['idle0','raise0','raise1','raise2','recoil','raise2','recoil','raise2','raise1','raise0','idle0'];
-  const shotDur=[120,1500,240,460,80,220,80,200,220,240,180];
+  const shotDur=[120,1125,240,460,80,220,80,200,220,240,180];
   const prepKeys=['prep0','prep1','prep2','prep3','prep2','prep1','prep0'];
-  const prepDur=[170,200,230,200,230,200,270];
+  const prepDur=[170,200,230,200,230,200,270].map(ms=>ms*.75);
   const total=a=>a.reduce((x,y)=>x+y,0),frameAt=(t,d)=>{let end=0;for(let i=0;i<d.length;i++){end+=d[i];if(t<end)return i;}return d.length-1;};
-  const FIRES=[2300,2600],END=total(shotDur),S=.64;
+  const FIRES=[1925,2225],END=total(shotDur),S=.64;
   class DrawnLab extends Phaser.Scene {
     preload(){
       this.failed=false;this.load.on('loaderror',()=>{this.failed=true;$('loading').textContent=copy.error;});
@@ -75,7 +75,7 @@
           this.rest+=dt;if(loop&&this.rest>1500)this.shoot();
         }
       }
-      if(this.action>=0){this.frame=this.justFired?3:frameAt(this.action,shotDur);const key=this.frame===1?prepKeys[frameAt(this.action-120,prepDur)]:shotKeys[this.frame];this.hero.setTexture(key);this.phase(this.action<FIRES[0]?'aim':this.action<2700?'fire':'recover');}
+      if(this.action>=0){this.frame=this.justFired?3:frameAt(this.action,shotDur);const key=this.frame===1?prepKeys[frameAt(this.action-120,prepDur)]:shotKeys[this.frame];this.hero.setTexture(key);this.phase(this.action<FIRES[0]?'aim':this.action<FIRES[1]+100?'fire':'recover');}
       else{this.frame=frameAt(this.idleTime%total(idleDur),idleDur);this.hero.setTexture(this.blinkLeft>0?'blink':idleKeys[this.frame]);this.phase('idle');}
       this.drawEffects();
     }
