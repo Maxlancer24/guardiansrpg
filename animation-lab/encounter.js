@@ -68,11 +68,11 @@
       if(s.effectsEnabled&&hurt>=0&&hurt<200){const k=1-hurt/200,x=s.target.x-130,y=435;s.fx.lineStyle(3,0xffd2a2,k);s.fx.lineBetween(x-14,y-18,x+15,y+18);s.fx.lineBetween(x-18,y+12,x+18,y-12);if(hurt<70)s.hero.setTint(0xffcfb4);}
       s.target.setOrigin(.5,s.target.texture.key.startsWith('wardenAnim')?1238/1280:1050/1092);
       this.movingShadow.setPosition(s.target.x,470).setVisible(this.state==='enemy');s.targetShadow.setVisible(this.state!=='enemy');
-      this.hud.clear();const y=small?156:82,w=small?216:190;
+      this.hud.clear();const y=small?485:82,w=small?216:190;
       const bar=(x,title,label,hp,shown,color)=>{this.hud.fillStyle(0x081510,.85).fillRoundedRect(x-w/2-10,y,w+20,small?72:58,4);this.hud.fillStyle(0x473830).fillRect(x-w/2,y+30,w,5);this.hud.fillStyle(0xe2ac60).fillRect(x-w/2,y+30,w*shown/140,5);this.hud.fillStyle(color).fillRect(x-w/2,y+30,w*hp/140,5);title.setPosition(x,y+8).setFontSize(small?18:12);label.setPosition(x,y+(small?48:38)).setFontSize(small?18:12).setText(`${hp} / 140`);};
       this.title.setText(this.es?'GUARDIÁN HOLLOW':'HOLLOW WARDEN');bar(home,this.title,this.hpText,this.hp,this.shown,0x74cbb0);bar(small?280:390,this.heroTitle,this.heroHpText,this.heroHp,this.heroShown,0x74cbb0);
       const message=this.victory?(this.es?'Victoria · Jessie':'Victory · Jessie'):this.defeat?(this.es?'Derrota · Vuelve a intentarlo':'Defeat · Try again'):this.es?`Ronda ${this.round} · ${this.state==='enemy'?'Turno del guardián':'Turno de Jessie'}`:`Round ${this.round} · ${this.state==='enemy'?'Warden’s turn':'Jessie’s turn'}`;
-      this.banner.setPosition(s.scale.width/2,small?565:530).setFontSize(small?23:22).setText(message);
+      this.banner.setPosition(s.scale.width/2,small?600:530).setFontSize(small?23:22).setText(message);
       for(const label of this.labels){const k=(s.clock-label.at)/650;label.text.setY(260-38*Math.min(k,1)).setAlpha(Math.max(0,1-k));}
       this.labels=this.labels.filter(x=>{if(s.clock-x.at>650){x.text.destroy();return false;}return true;});
       document.getElementById('preview-defeat').disabled=s.action>=0||this.state==='enemy';
