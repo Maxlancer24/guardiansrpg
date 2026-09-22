@@ -27,6 +27,8 @@
   // Avoid the old tilted-head acting drawings. Two shots, same gun and stance.
   const shotKeys=['idle0','raise0','raise1','raise2','recoil','raise2','recoil','raise2','raise1','raise0','idle0'];
   const shotDur=[120,1500,240,460,80,220,80,200,220,240,180];
+  const prepKeys=['prep0','prep1','prep2','prep3','prep2','prep1','prep0'];
+  const prepDur=[170,200,230,200,230,200,270];
   const total=a=>a.reduce((x,y)=>x+y,0),frameAt=(t,d)=>{let end=0;for(let i=0;i<d.length;i++){end+=d[i];if(t<end)return i;}return d.length-1;};
   const FIRES=[2300,2600],END=total(shotDur),S=.64;
   class DrawnLab extends Phaser.Scene {
@@ -38,6 +40,7 @@
       for(let i=0;i<3;i++)this.load.image(`raise${i}`,`/assets/demo-battle/jessie-polish-v2/raise-${i}.png`);
       this.load.image('blink','/assets/demo-battle/jessie-acting-v3/blink.png');
       this.load.image('recoil','/assets/demo-battle/jessie-double-v4/recoil.png');
+      for(let i=0;i<4;i++)this.load.image(`prep${i}`,`/assets/demo-battle/jessie-prep-v5/prep-${i}.png`);
     }
     create(){
       if(this.failed)return;scene=this;this.clock=0;this.action=-1;this.idleTime=0;this.rest=0;this.shots=0;this.hits=0;this.fireAge=9999;this.hitAge=9999;
@@ -72,7 +75,7 @@
           this.rest+=dt;if(loop&&this.rest>1500)this.shoot();
         }
       }
-      if(this.action>=0){this.frame=this.justFired?3:frameAt(this.action,shotDur);this.hero.setTexture(shotKeys[this.frame]);this.phase(this.action<FIRES[0]?'aim':this.action<2700?'fire':'recover');}
+      if(this.action>=0){this.frame=this.justFired?3:frameAt(this.action,shotDur);const key=this.frame===1?prepKeys[frameAt(this.action-120,prepDur)]:shotKeys[this.frame];this.hero.setTexture(key);this.phase(this.action<FIRES[0]?'aim':this.action<2700?'fire':'recover');}
       else{this.frame=frameAt(this.idleTime%total(idleDur),idleDur);this.hero.setTexture(this.blinkLeft>0?'blink':idleKeys[this.frame]);this.phase('idle');}
       this.drawEffects();
     }
