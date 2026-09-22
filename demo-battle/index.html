@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://guardiansrpg.com/demo-battle/">
   <link rel="alternate" hreflang="es" href="https://guardiansrpg.com/es/demo-battle/">
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/demo-battle/demo-battle.css?v=7">
+  <link rel="stylesheet" href="/demo-battle/demo-battle.css?v=8">
 </head>
 <body>
   <header class="topbar"><a href="/">← The Guardians</a><span>Prototype · No account progress</span><a href="/es/demo-battle/">ES</a></header>
@@ -24,12 +24,8 @@
         <div class="weather" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
         <div class="fighter hero" id="jessie" data-actor="jessie">
           <div class="nameplate"><span>Jessie</span><small>Gunslinger</small><div class="hp"><i></i></div><b class="hp-text">140 / 140</b></div>
-          <div class="sprite jessie-rig" role="img" aria-label="Jessie in an animated combat stance">
-            <span class="jessie-layer jessie-body"></span>
-            <span class="jessie-layer jessie-hair"></span>
-            <span class="jessie-layer jessie-aim-arm"></span>
-            <span class="jessie-layer jessie-coat-left"></span>
-            <span class="jessie-layer jessie-coat-right"></span>
+          <div class="sprite jessie-sprite-v2" role="img" aria-label="Jessie in an animated combat stance">
+            <img id="jessie-idle-frame" src="/assets/demo-battle/jessie-idle-v2/frame-01.png" width="448" height="576" alt="">
           </div>
           <div class="shadow"></div>
         </div>
@@ -56,6 +52,6 @@
     </section>
     <p class="prototype-note">Visual prototype: rewards, inventory and profile data are not affected.</p>
   </main>
-  <script src="/demo-battle/demo-battle.js?v=5" defer></script>
+  <script src="/demo-battle/demo-battle.js?v=6" defer></script>
 </body>
 </html>

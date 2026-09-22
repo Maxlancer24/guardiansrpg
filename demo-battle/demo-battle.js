@@ -6,6 +6,10 @@
   let hp={},target="marauder",busy=false,focused=false,guarded=false,dualCooldown=0;
   const $=id=>document.getElementById(id),stage=$("battle-stage"),log=$("battle-log"),effects=$("effects"),actions=$("actions"),result=$("result");
   const actor=id=>$(id),alive=id=>hp[id]>0,wait=ms=>new Promise(r=>setTimeout(r,ms)),rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+  const idleFrame=$("jessie-idle-frame");
+  const idleFrames=Array.from({length:8},(_,index)=>`/assets/demo-battle/jessie-idle-v2/frame-${String(index+1).padStart(2,"0")}.png`);
+  const idleImages=idleFrames.map(src=>{const image=new Image();image.src=src;return image;});
+  if(idleFrame&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){const startIdle=()=>{let frame=0,last=0;const frameTime=110;const animateIdle=time=>{if(!document.hidden&&time-last>=frameTime){const elapsed=Math.max(1,Math.floor((time-last)/frameTime));frame=(frame+elapsed)%idleFrames.length;idleFrame.src=idleFrames[frame];last=time;}else if(document.hidden){last=time;}requestAnimationFrame(animateIdle)};requestAnimationFrame(animateIdle)};Promise.allSettled(idleImages.map(image=>image.decode())).then(startIdle);}
   function update(){Object.keys(max).forEach(id=>{const el=actor(id),pct=Math.max(0,hp[id]/max[id]*100);el.querySelector(".hp i").style.width=pct+"%";el.querySelector(".hp-text").textContent=`${Math.max(0,hp[id])} / ${max[id]}`;if(hp[id]<=0)el.classList.add("defeated");});const dual=actions.querySelector('[data-action="dual"]');dual.disabled=busy||dualCooldown>0||(!alive("marauder")&&!alive("warden"));actions.querySelectorAll("button").forEach(b=>{if(b!==dual)b.disabled=busy;});}
   function pickNext(){if(alive(target))return;target=alive("marauder")?"marauder":"warden";select(target)}
   function select(id){if(busy||!alive(id))return;target=id;document.querySelectorAll(".enemy").forEach(e=>e.classList.toggle("selected",e.id===id));}
