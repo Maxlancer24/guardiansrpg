@@ -21,14 +21,14 @@
   const lerp=Phaser.Math.Linear, ease=t=>t*t*(3-2*t), clamp=Phaser.Math.Clamp;
   const blend=(a,b,t)=>a.map((v,i)=>lerp(v,b[i],ease(clamp(t,0,1))));
   // [shoulder, elbow, torso, head] radians, continuous pose curves.
-  const idle=[.60,-.29,0,0], aim=[-.10,.23,-.025,.025], recoil=[-.29,.10,-.065,.055];
+  const idle=[.76,-.39,-.012,.012], aim=[-.08,.18,.018,-.018], recoil=[-.23,.06,-.045,.032];
   class Lab extends Phaser.Scene {
     preload(){
       this.failed=false;
       this.load.on('loaderror',()=>{this.failed=true; $('loading').textContent=strings.error;});
       this.load.image('arena','/assets/demo-battle/black-lotus-arena.png');
       this.load.image('target','/assets/demo-battle/warden-idle-cutout.png');
-      parts.forEach(p=>this.load.image(p,`/assets/demo-battle/jessie-rig-v1/${p}.png`));
+      parts.forEach(p=>this.load.image(p,`/assets/demo-battle/jessie-rig-v1/${p==='torso'?'torso-v2':p}.png`));
     }
     create(){
       if(this.failed)return;
@@ -41,19 +41,23 @@
       this.target=this.add.image(mobile?705:958,470,'target').setOrigin(.5,1).setDisplaySize(226,350).setAlpha(.85);
       this.root=this.add.container(mobile?300:410,285);
       const image=(parent,key,x,y,w,ox=.5,oy=.5)=>{const obj=this.add.image(x,y,key).setOrigin(ox,oy);obj.setScale(w/obj.width);parent.add(obj);return obj;};
-      this.tailBack=image(this.root,'tail-back',-18,-5,123,.88,.05);
-      this.tailFront=image(this.root,'tail-front',16,-5,130,.12,.05);
-      image(this.root,'legs',0,-12,186,.5,0);
-      this.body=this.add.container(0,0);this.root.add(this.body);
-      this.off=image(this.body,'off-arm',-37,-99,105,.88,.08);
-      this.hair=image(this.body,'hair',-15,-169,112,.88,.13);
-      image(this.body,'torso',0,-2,99,.5,1);
-      this.head=image(this.body,'head',7,-116,79,.5,1);
-      this.arm=this.add.container(31,-101);this.body.add(this.arm);
-      image(this.arm,'upper-arm',0,0,64,.10,.40);
-      this.elbow=this.add.container(50,11);this.arm.add(this.elbow);
-      image(this.elbow,'forearm',0,0,100,.05,.55);
-      this.muzzle=this.add.container(94,-12);this.elbow.add(this.muzzle);
+      this.tailBack=image(this.root,'tail-back',-18,-24,123,.88,.05);
+      this.tailFront=image(this.root,'tail-front',16,-24,130,.12,.05);
+      this.legs=image(this.root,'legs',0,185,186,.5,1);
+      this.legs.scaleY*=1.08;
+      // The waist is the shared pivot, with overlap into the belt. Upper-arm
+      // caps sit BEHIND the torso so they never read as exposed socket disks.
+      this.body=this.add.container(0,-20);this.root.add(this.body);
+      this.off=image(this.body,'off-arm',-32,-84,101,.88,.08);
+      this.hair=image(this.body,'hair',-13,-153,105,.88,.13);
+      this.arm=this.add.container(27,-88);this.body.add(this.arm);
+      image(this.arm,'upper-arm',0,0,59,.10,.40);
+      this.elbow=this.add.container(44,10);this.arm.add(this.elbow);
+      image(this.elbow,'forearm',0,0,91,.08,.55);
+      this.muzzle=this.add.container(83,-11);this.elbow.add(this.muzzle);
+      this.torso=image(this.body,'torso',0,0,96,.5,1);
+      this.torso.scaleY*=.93;
+      this.head=image(this.body,'head',6,-102,74,.5,1);
       this.fx=this.add.graphics();this.bones=this.add.graphics();
       this.phaseName='';this.pose(idle);this.updatePhase('idle');
       $('loading').hidden=true;$('pause').disabled=false;$('shoot').disabled=paused;
@@ -65,13 +69,19 @@
     shoot(){if(this.attack>=0||paused)return;this.attack=0;this.fired=false;this.rest=0;$('shoot').disabled=true;}
     updatePhase(name){if(name===this.phaseName)return;this.phaseName=name;$('phase-label').textContent=strings[name];document.querySelectorAll('.steps li').forEach((el,i)=>el.classList.toggle('active',i===['idle','aim','fire','recover'].indexOf(name)));}
     pose(p){
-      const t=this.timeNow/1000, breath=Math.sin(t*2.1), after=Math.max(0,1-(this.timeNow-this.hitAt)/800);
-      this.body.y=breath*1.1;this.body.rotation=p[2];this.head.rotation=p[3]+Math.sin(t*2.1-.4)*.008;
-      this.arm.rotation=p[0]+breath*.009;this.elbow.rotation=p[1];
-      this.hair.rotation=Math.sin(t*1.8-.8)*.034+Math.sin((this.timeNow-this.hitAt)/115)*after*.085;
-      this.tailBack.rotation=Math.sin(t*1.7-.6)*.023+after*Math.sin((this.timeNow-this.hitAt)/145)*.045;
-      this.tailFront.rotation=Math.sin(t*1.7-1.1)*.028+after*Math.sin((this.timeNow-this.hitAt)/155)*.035;
-      this.off.rotation=Math.sin(t*2.1-.7)*.017-p[2]*.6;
+      const t=this.timeNow/1000, breath=Math.sin(t*1.65);
+      const age=Math.max(0,this.timeNow-this.hitAt);
+      // A damped follow-through, rather than continuous pendulum rotations.
+      const settle=Math.sin(age/145)*Math.exp(-age/260);
+      this.body.y=-20+breath*.45;this.body.x=p[2]*22;
+      this.body.rotation=p[2]+breath*.003;
+      this.head.rotation=p[3]+Math.sin(t*1.65-.4)*.004;
+      this.arm.rotation=p[0]+breath*.005;this.elbow.rotation=p[1];
+      this.hair.rotation=Math.sin(t*1.35-.8)*.012+settle*.028;
+      this.tailBack.rotation=Math.sin(t*1.2-.6)*.008+settle*.018;
+      this.tailFront.rotation=Math.sin(t*1.2-1.1)*.009+settle*.014;
+      this.tailBack.x=-18+this.body.x*.4;this.tailFront.x=16+this.body.x*.4;
+      this.off.rotation=Math.sin(t*1.65-.7)*.007-p[2]*.35;
     }
     update(_time,delta){
       if(!scene)return;
