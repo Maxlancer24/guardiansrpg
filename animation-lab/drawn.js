@@ -14,6 +14,7 @@
   document.querySelectorAll('[data-copy]').forEach(el=>{if(copy[el.dataset.copy])el.textContent=copy[el.dataset.copy];});
   $('shoot').textContent=es?'Dos disparos ↗':'Double shot ↗';
   copy.aim=es?'Preparación':'Preparing';
+  copy.victory=es?'Victoria':'Victory';
   let scene,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,speed=1.5,loop=false,debug=false,effects=true;
   $('speed').value=String(speed);
   const reset=document.createElement('button');reset.textContent=es?'Reiniciar':'Reset';reset.id='reset';$('pause').after(reset);
@@ -36,6 +37,7 @@
       this.failed=false;this.load.on('loaderror',()=>{this.failed=true;$('loading').textContent=copy.error;});
       this.load.image('arena','/assets/demo-battle/black-lotus-arena.png');
       this.load.image('target','/assets/demo-battle/warden-idle-cutout.png');
+      for(const key of ['hurt','kneel','fallen'])this.load.image(key,`/assets/demo-battle/warden-feedback-v1/${key}.png`);
       for(const mode of ['idle','shot'])for(let i=0;i<8;i++)this.load.image(`${mode}${i}`,`/assets/demo-battle/jessie-idle-shot-v1/${mode}-${String(i).padStart(2,'0')}.png`);
       for(let i=0;i<3;i++)this.load.image(`raise${i}`,`/assets/demo-battle/jessie-polish-v2/raise-${i}.png`);
       this.load.image('blink','/assets/demo-battle/jessie-acting-v3/blink.png');
@@ -48,26 +50,29 @@
       this.add.image(640,300,'arena').setDisplaySize(1280,720).setTint(0xc5d2d4);
       this.shadow=this.add.ellipse(0,470,120,16,0x050a09,.45);
       this.targetShadow=this.add.ellipse(0,470,140,16,0x050a09,.45);
-      this.target=this.add.image(0,470,'target').setOrigin(.5,1).setDisplaySize(205,318);
+      // Uniform scale: the original image is landscape, not a narrow portrait.
+      this.target=this.add.image(0,470,'target').setOrigin(.5,1050/1092).setScale(318/991);
       this.hero=this.add.image(0,470-525*S,'idle0').setOrigin(0).setScale(S);
       this.light=this.add.image(0,this.hero.y,'idle0').setOrigin(0).setScale(S).setTintFill(0xffcc89).setBlendMode(Phaser.BlendModes.ADD).setAlpha(0);
       this.fx=this.add.graphics();this.place();this.scale.on('resize',()=>this.place());
+      this.feedback=new window.PracticeFeedback(this,es);
       $('loading').hidden=true;$('pause').disabled=false;this.controls();this.phase('idle');
-      window.jessieLab={snapshot:()=>({attack:this.action,frame:this.frame,texture:this.hero.texture.key,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,blinks:this.blinks,blinking:this.blinkLeft>0,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
+      window.jessieLab={snapshot:()=>({attack:this.action,frame:this.frame,texture:this.hero.texture.key,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,hp:this.feedback.hp,victory:this.feedback.victory,enemyTexture:this.target.texture.key,enemyScale:[this.target.scaleX,this.target.scaleY],sound:this.feedback.audio.enabled,blinks:this.blinks,blinking:this.blinkLeft>0,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
     }
-    place(){const small=this.scale.width<1000;this.hero.x=(small?280:390)-245*S;this.light.x=this.hero.x;this.shadow.x=small?280:390;this.target.x=small?705:958;this.targetShadow.x=this.target.x;}
+    place(){const small=this.scale.width<1000;this.hero.x=(small?280:390)-245*S;this.light.x=this.hero.x;this.shadow.x=small?280:390;this.target.x=small?660:958;this.targetShadow.x=this.target.x;}
     muzzle(){return{x:this.hero.x+431*S,y:this.hero.y+154*S};}
     scheduleBlink(){this.nextBlink=this.clock+3800+Math.random()*2400;}
     controls(){$('shoot').disabled=paused||this.action>=0;$('pause').textContent=paused?copy.resume:copy.pause;}
     phase(name){this.phaseName=name;$('phase-label').textContent=copy[name];const active=['idle','aim','fire','recover'].indexOf(name);document.querySelectorAll('.steps li').forEach((li,i)=>li.classList.toggle('active',i===active));}
-    shoot(){if(paused||this.action>=0)return;this.blinkLeft=0;this.scheduleBlink();this.action=0;this.rest=0;this.fireIndex=0;this.hitIndex=0;this.fireAge=9999;this.hitAge=9999;this.controls();}
-    reset(){this.action=-1;this.justFired=false;this.blinkLeft=0;this.scheduleBlink();this.idleTime=0;this.rest=0;this.fireAge=9999;this.hitAge=9999;loop=false;$('loop').checked=false;this.hero.setTexture('idle0');this.target.clearTint();this.fx.clear();this.phase('idle');this.controls();}
+    shoot(){if(paused||this.action>=0)return;this.feedback.reset();this.feedback.audio.play('cloth');$('shoot').textContent=es?'Dos disparos ↗':'Double shot ↗';this.blinkLeft=0;this.scheduleBlink();this.action=0;this.rest=0;this.fireIndex=0;this.hitIndex=0;this.fireAge=9999;this.hitAge=9999;this.controls();}
+    reset(){this.feedback.reset();this.action=-1;this.justFired=false;this.blinkLeft=0;this.scheduleBlink();this.idleTime=0;this.rest=0;this.fireAge=9999;this.hitAge=9999;loop=false;$('loop').checked=false;this.hero.setTexture('idle0');this.target.clearTint();this.fx.clear();this.phase('idle');this.controls();}
     update(_,delta){
       if(!scene)return;
-      if(!paused){this.justFired=false;const dt=Math.min(delta,80)*speed;this.clock+=dt;this.fireAge+=dt;this.hitAge+=dt;
+      const feedbackDt=paused?0:Math.min(delta,80)*speed;
+      if(!paused){this.justFired=false;const dt=feedbackDt;this.clock+=dt;this.fireAge+=dt;this.hitAge+=dt;
         if(this.action>=0){this.action+=dt;
-          while(this.fireIndex<FIRES.length&&this.action>=FIRES[this.fireIndex]){this.justFired=true;this.shots++;this.fireAge=this.action-FIRES[this.fireIndex++];}
-          while(this.hitIndex<FIRES.length&&this.action>=FIRES[this.hitIndex]+55){this.hits++;this.hitAge=this.action-(FIRES[this.hitIndex++]+55);}
+          while(this.fireIndex<FIRES.length&&this.action>=FIRES[this.fireIndex]){this.feedback.fire(this.fireIndex);this.justFired=true;this.shots++;this.fireAge=this.action-FIRES[this.fireIndex++];}
+          while(this.hitIndex<FIRES.length&&this.action>=FIRES[this.hitIndex]+55){this.feedback.hit(this.hitIndex);this.hits++;this.hitAge=this.action-(FIRES[this.hitIndex++]+55);}
           if(this.action>=END){this.action=-1;this.idleTime=0;this.rest=0;this.controls();}
         }else{
           if(this.blinkLeft>0)this.blinkLeft=Math.max(0,this.blinkLeft-dt);
@@ -78,6 +83,7 @@
       if(this.action>=0){this.frame=this.justFired?3:frameAt(this.action,shotDur);const key=this.frame===1?prepKeys[frameAt(this.action-120,prepDur)]:shotKeys[this.frame];this.hero.setTexture(key);this.phase(this.action<FIRES[0]?'aim':this.action<FIRES[1]+100?'fire':'recover');}
       else{this.frame=frameAt(this.idleTime%total(idleDur),idleDur);this.hero.setTexture(this.blinkLeft>0?'blink':idleKeys[this.frame]);this.phase('idle');}
       this.drawEffects();
+      this.feedback.update(feedbackDt);
     }
     drawEffects(){
       const g=this.fx,m=this.muzzle(),hit={x:this.target.x-20,y:m.y};g.clear();this.target.clearTint();
@@ -100,6 +106,6 @@
   const game=new Phaser.Game({type:Phaser.AUTO,parent:'stage',width:mobile.matches?900:1280,height:mobile.matches?660:600,backgroundColor:'#101a1b',render:{antialias:true},scale:{mode:Phaser.Scale.FIT,autoCenter:Phaser.Scale.CENTER_BOTH},scene:DrawnLab,audio:{noAudio:true},banner:false});
   mobile.addEventListener('change',e=>game.scale.setGameSize(e.matches?900:1280,e.matches?660:600));
   $('shoot').onclick=()=>scene?.shoot();reset.onclick=()=>scene?.reset();
-  $('pause').onclick=()=>{paused=!paused;scene?.controls();};$('speed').onchange=e=>speed=Number(e.target.value);
+  $('pause').onclick=()=>{paused=!paused;if(paused)scene?.feedback.audio.stop();scene?.controls();};$('speed').onchange=e=>speed=Number(e.target.value);
   $('loop').onchange=e=>loop=e.target.checked;$('joints').onchange=e=>debug=e.target.checked;
 })();
