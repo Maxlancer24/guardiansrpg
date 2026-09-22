@@ -6,8 +6,11 @@
   let hp={},target="marauder",busy=false,focused=false,guarded=false,dualCooldown=0,frame=0,loop;
   const $=id=>document.getElementById(id),stage=$("battle-stage"),log=$("battle-log"),effects=$("effects"),actions=$("actions"),result=$("result");
   const actor=id=>$(id),alive=id=>hp[id]>0,wait=ms=>new Promise(r=>setTimeout(r,ms)),rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+  const idleFrames={jessie:[5,6,7,6],marauder:[0,1,2,3,4,5,6,7],warden:[0,1,2,3,4,5,6,7]};
+  const frameX={jessie:[-.8,0,-1.8,2.7,-3.3,1.2,.7,1.6],marauder:[-1.4,.5,0,0,-3.4,0,.1,0],warden:[-1.8,1.2,0,0,.1,0,1.6,2.7]};
   const frameY={jessie:[0,0,0,0,3.2,2.9,2.9,3.4],marauder:[0,1.6,1.6,1.6,2.7,2.9,2.9,2.7],warden:[0,0,1.6,1.6,6.3,6.3,6.1,6.3]};
-  function startIdle(){clearInterval(loop);loop=setInterval(()=>{frame=(frame+1)%8;document.querySelectorAll(".sprite").forEach((el,i)=>{const f=(frame+i*2)%8,id=el.parentElement.id;el.style.backgroundPosition=`${(f%4)/3*100}% ${f<4?0:100}%`;el.style.setProperty("--frame-y",(frameY[id][f]||0)+"%");});},400)}
+  function renderIdle(){document.querySelectorAll(".sprite").forEach((el,i)=>{const id=el.parentElement.id,sequence=idleFrames[id],f=sequence[(frame+i*2)%sequence.length];el.style.backgroundPosition=`${(f%4)/3*100}% ${f<4?0:100}%`;el.style.setProperty("--frame-x",(frameX[id][f]||0)+"%");el.style.setProperty("--frame-y",(frameY[id][f]||0)+"%");})}
+  function startIdle(){clearInterval(loop);renderIdle();loop=setInterval(()=>{frame=(frame+1)%8;renderIdle()},330)}
   function update(){Object.keys(max).forEach(id=>{const el=actor(id),pct=Math.max(0,hp[id]/max[id]*100);el.querySelector(".hp i").style.width=pct+"%";el.querySelector(".hp-text").textContent=`${Math.max(0,hp[id])} / ${max[id]}`;if(hp[id]<=0)el.classList.add("defeated");});const dual=actions.querySelector('[data-action="dual"]');dual.disabled=busy||dualCooldown>0||(!alive("marauder")&&!alive("warden"));actions.querySelectorAll("button").forEach(b=>{if(b!==dual)b.disabled=busy;});}
   function pickNext(){if(alive(target))return;target=alive("marauder")?"marauder":"warden";select(target)}
   function select(id){if(busy||!alive(id))return;target=id;document.querySelectorAll(".enemy").forEach(e=>e.classList.toggle("selected",e.id===id));}
