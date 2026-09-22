@@ -18,18 +18,19 @@
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let paused=reduced, speed=1.5, loop=false, debug=false, scene;
   $('speed').value=String(speed);
-  const parts=['head','torso','legs','hair','tail-back','tail-front','upper-arm','forearm','off-arm'];
+  const parts=['master','body','upper-arm','forearm'];
   const lerp=Phaser.Math.Linear, ease=t=>t*t*(3-2*t), clamp=Phaser.Math.Clamp;
   const blend=(a,b,t)=>a.map((v,i)=>lerp(v,b[i],ease(clamp(t,0,1))));
   // [shoulder, elbow, torso, head] radians, continuous pose curves.
-  const idle=[.76,-.39,-.012,.012], aim=[-.08,.18,.018,-.018], recoil=[-.23,.06,-.045,.032];
+  const idle=[0,0,0,0], aim=[-.78,-.09,.008,0], recoil=[-.89,-.13,-.022,0];
   class Lab extends Phaser.Scene {
     preload(){
       this.failed=false;
       this.load.on('loaderror',()=>{this.failed=true; $('loading').textContent=strings.error;});
       this.load.image('arena','/assets/demo-battle/black-lotus-arena.png');
       this.load.image('target','/assets/demo-battle/warden-idle-cutout.png');
-      parts.forEach(p=>this.load.image(p,`/assets/demo-battle/jessie-rig-v1/${p==='torso'?'torso-v2':p}.png`));
+      parts.forEach(p=>this.load.image(p,`/assets/demo-battle/jessie-coherent-v1/${p}.png`));
+      this.load.json('rig','/assets/demo-battle/jessie-coherent-v1/rig.json');
     }
     create(){
       if(this.failed)return;
@@ -37,54 +38,52 @@
       const mobile=this.scale.width<1000;
       this.add.image(640,300,'arena').setDisplaySize(1280,720).setTint(0xc5d2d4);
       this.add.rectangle(640,300,1400,700,0x09151b,.10);
-      this.heroShadow=this.add.ellipse(mobile?300:410,470,185,22,0x050a09,.53);
+      this.heroX=mobile?300:410;
+      this.heroShadow=this.add.ellipse(this.heroX,470,122,18,0x050a09,.53);
       this.targetShadow=this.add.ellipse(mobile?705:958,470,155,17,0x050a09,.45);
       this.target=this.add.image(mobile?705:958,470,'target').setOrigin(.5,1).setDisplaySize(226,350).setAlpha(.85);
-      // Whole-character scale is separate from anatomy. Re-anchor the floor
-      // after scaling; individual pieces use the full-character reference ratios.
-      this.root=this.add.container(mobile?300:410,470-185*1.10).setScale(1.10);
-      const image=(parent,key,x,y,w,ox=.5,oy=.5)=>{const obj=this.add.image(x,y,key).setOrigin(ox,oy);obj.setScale(w/obj.width);parent.add(obj);return obj;};
-      this.tailBack=image(this.root,'tail-back',-18,-24,134,.88,.05);
-      this.tailFront=image(this.root,'tail-front',16,-24,141,.12,.05);
-      this.legs=image(this.root,'legs',0,185,186,.5,1);
-      this.legs.scaleY*=1.08;
-      // The waist is the shared pivot, with overlap into the belt. Upper-arm
-      // caps sit BEHIND the torso so they never read as exposed socket disks.
-      this.body=this.add.container(0,-8);this.root.add(this.body);
-      this.off=image(this.body,'off-arm',-27,-71,91,.88,.08);
-      this.hair=image(this.body,'hair',-9,-125,87,.88,.13);
-      this.arm=this.add.container(23,-74);this.body.add(this.arm);
-      image(this.arm,'upper-arm',0,0,53,.10,.40);
-      this.elbow=this.add.container(40,9);this.arm.add(this.elbow);
-      image(this.elbow,'forearm',0,0,82,.08,.55);
-      this.muzzle=this.add.container(75,-10);this.elbow.add(this.muzzle);
-      this.torso=image(this.body,'torso',0,0,82,.5,1);
-      this.torso.scaleY*=.93;
-      this.head=image(this.body,'head',5,-86,56,.5,1);
+      this.rig=this.cache.json.get('rig');this.artScale=.50;
+      const r=this.rig, [sx,sy]=r.shoulder,[ex,ey]=r.elbow,[mx,my]=r.muzzle;
+      this.root=this.add.container(this.heroX-r.centerX*this.artScale,470-r.floor*this.artScale).setScale(this.artScale);
+      // Every layer shares the same canvas and scale. No head/torso/leg resizing.
+      if(this.game.renderer.type===Phaser.WEBGL){
+        this.body=this.add.mesh(r.width/2,r.height/2,'body');
+        this.body.setSize(r.width,r.height).setOrtho(r.width,r.height);
+        this.body.hideCCW=false;this.body.ignoreDirtyCache=true;
+        Phaser.Geom.Mesh.GenerateGridVerts({mesh:this.body,width:r.width,height:r.height,widthSegments:20,heightSegments:30});
+        this.restVertices=this.body.vertices.map(v=>({v,x:v.x+r.width/2,y:r.height/2-v.y}));
+      }else{this.body=this.add.image(0,0,'body').setOrigin(0);}
+      this.root.add(this.body);
+      this.arm=this.add.container(sx,sy);this.root.add(this.arm);
+      this.arm.add(this.add.image(-sx,-sy,'upper-arm').setOrigin(0));
+      this.elbow=this.add.container(ex-sx,ey-sy);this.arm.add(this.elbow);
+      this.elbow.add(this.add.image(-ex,-ey,'forearm').setOrigin(0));
+      this.muzzle=this.add.container(mx-ex,my-ey);this.elbow.add(this.muzzle);
       this.fx=this.add.graphics();this.bones=this.add.graphics();
       this.phaseName='';this.pose(idle);this.updatePhase('idle');
       $('loading').hidden=true;$('pause').disabled=false;$('shoot').disabled=paused;
       $('pause').textContent=paused?strings.resume:strings.pause;
       // Read-only QA snapshot: no game or account state is exposed.
-      window.jessieLab={snapshot:()=>({time:this.timeNow,attack:this.attack,paused,speed,phase:this.phaseName,feet:this.root.getWorldTransformMatrix().transformPoint(0,185),muzzle:this.muzzle.getWorldTransformMatrix().transformPoint(0,0),shoulder:this.arm.rotation,elbow:this.elbow.rotation})};
-      this.scale.on('resize',()=>{const small=this.scale.width<1000;this.root.x=this.heroShadow.x=small?300:410;this.targetShadow.x=small?705:958;});
+      window.jessieLab={snapshot:()=>({time:this.timeNow,attack:this.attack,paused,speed,phase:this.phaseName,feet:this.root.getWorldTransformMatrix().transformPoint(r.centerX,r.floor),muzzle:this.muzzle.getWorldTransformMatrix().transformPoint(0,0),shoulder:this.arm.rotation,elbow:this.elbow.rotation,coherent:true,mesh:!!this.restVertices})};
+      this.scale.on('resize',()=>{const small=this.scale.width<1000;this.heroX=small?300:410;this.root.x=this.heroX-r.centerX*this.artScale;this.heroShadow.x=this.heroX;this.targetShadow.x=small?705:958;});
     }
     shoot(){if(this.attack>=0||paused)return;this.attack=0;this.fired=false;this.rest=0;$('shoot').disabled=true;}
     updatePhase(name){if(name===this.phaseName)return;this.phaseName=name;$('phase-label').textContent=strings[name];document.querySelectorAll('.steps li').forEach((el,i)=>el.classList.toggle('active',i===['idle','aim','fire','recover'].indexOf(name)));}
     pose(p){
-      const t=this.timeNow/1000, breath=Math.sin(t*1.65);
-      const age=Math.max(0,this.timeNow-this.hitAt);
-      // A damped follow-through, rather than continuous pendulum rotations.
+      const t=this.timeNow/1000, breath=Math.sin(t*1.65), age=Math.max(0,this.timeNow-this.hitAt);
       const settle=Math.sin(age/145)*Math.exp(-age/260);
-      this.body.y=-8+breath*.45;this.body.x=p[2]*22;
-      this.body.rotation=p[2]+breath*.003;
-      this.head.rotation=p[3]+Math.sin(t*1.65-.4)*.004;
-      this.arm.rotation=p[0]+breath*.005;this.elbow.rotation=p[1];
-      this.hair.rotation=Math.sin(t*1.35-.8)*.012+settle*.028;
-      this.tailBack.rotation=Math.sin(t*1.2-.6)*.008+settle*.018;
-      this.tailFront.rotation=Math.sin(t*1.2-1.1)*.009+settle*.014;
-      this.tailBack.x=-18+this.body.x*.4;this.tailFront.x=16+this.body.x*.4;
-      this.off.rotation=Math.sin(t*1.65-.7)*.007-p[2]*.35;
+      const warp=(x,y)=>{
+        const weight=ease(clamp((490-y)/200,0,1)),a=p[2]*weight;
+        const dx=x-255,dy=y-310;
+        let X=255+dx*Math.cos(a)-dy*Math.sin(a),Y=310+dx*Math.sin(a)+dy*Math.cos(a)-breath*1.6*weight;
+        const hair=clamp((245-x)/85,0,1)*clamp((y-15)/80,0,1)*clamp((190-y)/45,0,1);
+        const coat=clamp((y-320)/130,0,1)*clamp((635-y)/80,0,1)*Math.max(clamp((190-x)/65,0,1),clamp((x-345)/65,0,1));
+        X+=hair*(Math.sin(t*1.4-.6)*3.2+settle*3)+coat*(Math.sin(t*1.1-.8)*2+settle*2);
+        return {x:X,y:Y};
+      };
+      if(this.restVertices){for(const v of this.restVertices){const q=warp(v.x,v.y);v.v.x=q.x-this.rig.width/2;v.v.y=this.rig.height/2-q.y;}}
+      const [sx,sy]=this.rig.shoulder,q=this.restVertices?warp(sx,sy):{x:sx,y:sy};
+      this.arm.setPosition(q.x,q.y);this.arm.rotation=p[0]+p[2];this.elbow.rotation=p[1];
     }
     update(_time,delta){
       if(!scene)return;
@@ -101,7 +100,7 @@
           else if(a<2370){p=blend(aim,idle,(a-1660)/710);this.updatePhase('recover');}
           else{this.attack=-1;$('shoot').disabled=false;this.updatePhase('idle');}
           this.pose(p);
-          if(a>=880&&!this.fired){this.fired=true;this.hitAt=this.timeNow;this.shotPoint=this.muzzle.getWorldTransformMatrix().transformPoint(0,0);this.shotAngle=aim[0]+aim[1]+aim[2];}
+          if(a>=880&&!this.fired){this.fired=true;this.hitAt=this.timeNow;this.shotPoint=this.muzzle.getWorldTransformMatrix().transformPoint(0,0);this.shotAngle=this.rig.barrelAngle+aim[0]+aim[1]+aim[2];}
         }else{this.pose(idle);this.rest+=dt;if(loop&&this.rest>1500)this.shoot();}
       }
       this.drawEffects();this.drawBones();
@@ -123,7 +122,7 @@
     }
     drawBones(){
       this.bones.clear();if(!debug)return;
-      const point=o=>o.getWorldTransformMatrix().transformPoint(0,0), points=[point(this.body),point(this.arm),point(this.elbow),point(this.muzzle)];
+      const point=o=>o.getWorldTransformMatrix().transformPoint(0,0), points=[this.root.getWorldTransformMatrix().transformPoint(255,310),point(this.arm),point(this.elbow),point(this.muzzle)];
       this.bones.lineStyle(2,0x7fffe1,.85);this.bones.beginPath();this.bones.moveTo(points[0].x,points[0].y);points.slice(1).forEach(p=>this.bones.lineTo(p.x,p.y));this.bones.strokePath();
       points.forEach(p=>{this.bones.fillStyle(0x071c1b);this.bones.fillCircle(p.x,p.y,5);this.bones.lineStyle(2,0x7fffe1);this.bones.strokeCircle(p.x,p.y,5);});
     }

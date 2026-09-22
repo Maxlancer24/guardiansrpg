@@ -1,0 +1,20 @@
+{
+  "width": 512,
+  "height": 768,
+  "shoulder": [
+    315,
+    160
+  ],
+  "elbow": [
+    346,
+    253
+  ],
+  "muzzle": [
+    493,
+    383
+  ],
+  "barrelAngle": 0.87,
+  "floor": 761,
+  "centerX": 287,
+  "master": "master.png"
+}
