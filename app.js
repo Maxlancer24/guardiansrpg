@@ -844,7 +844,6 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
    '<div class="hero__cta anim d4">'+
     '<a class="hbtn hbtn--primary" href="https://discord.gg/chainers" target="_blank" rel="noopener">'+L("Join the Discord →","Únete al Discord →")+'</a>'+
     '<a class="hbtn hbtn--portal" href="https://guardians-app.discloud.app/">'+L("Player Portal &rarr;","Portal del jugador &rarr;")+'</a>'+
-    '<a class="hbtn hbtn--ghost" href="'+(LANG==="es"?"/es/demo-battle/":"/demo-battle/")+'">'+L("Play Demo Battle &rarr;","Juega un combate de prueba &rarr;")+'</a>'+
     '<a class="hbtn hbtn--ghost" href="#start">'+L("Getting Started","Primeros pasos")+'</a>'+
     '<a class="hbtn hbtn--ghost" href="#valestia">'+L("Explore Valestia","Explorar Valestia")+'</a>'+
    '</div>'+
