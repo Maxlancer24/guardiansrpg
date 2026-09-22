@@ -35,6 +35,7 @@
   const FIRES=[1925,2225],END=total(shotDur),S=.64;
   class DrawnLab extends Phaser.Scene {
     preload(){
+      for(let i=0;i<4;i++){this.load.image(`wardenIdle${i}`,`/assets/demo-battle/ambient-loops-v1/warden-${i}.png`);this.load.image(`jessieWin${i}`,`/assets/demo-battle/ambient-loops-v1/jessie-${i}.png`);}
       for(let i=0;i<8;i++){this.load.image(`jessieReaction${i}`,`/assets/demo-battle/combat-reactions-v1/jessie-${i}.png`);this.load.image(`wardenAnim${i}`,`/assets/demo-battle/combat-reactions-v1/warden-${i}.png`);}
       this.failed=false;this.load.on('loaderror',()=>{this.failed=true;$('loading').textContent=copy.error;});
       this.load.image('arena','/assets/demo-battle/black-lotus-arena.png');

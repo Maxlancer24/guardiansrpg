@@ -43,7 +43,8 @@
       const age=s.clock-this.struck,death=this.deadAt===null?-1:s.clock-this.deadAt;
       this.shown+=(this.hp-this.shown)*(1-Math.exp(-dt/110));this.heroShown+=(this.heroHp-this.heroShown)*(1-Math.exp(-dt/110));
       s.hero.x=heroHome;s.hero.clearTint();s.target.x=home;
-      s.target.setTexture(death>=650?'fallen':death>=180?'kneel':age<220?'hurt':Math.floor(s.clock/480)%4===1?'wardenAnim1':'target');
+      const breathe=[0,1,2,3,2,1][Math.floor(s.clock/240)%6];
+      s.target.setTexture(death>=650?'fallen':death>=180?'kneel':age<220?'hurt':`wardenIdle${breathe}`);
       if(this.state==='enemy'){
         this.enemyTime+=dt;const t=this.enemyTime,contact=heroHome+256*.64+145;
         const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
@@ -60,7 +61,10 @@
       }
       if(this.state==='victory'||this.state==='defeat'){
         this.endTime+=dt;
-        s.hero.setTexture(this.state==='victory'?(this.endTime<450?'jessieReaction4':'jessieReaction5'):(this.endTime<450?'jessieReaction6':'jessieReaction7'));
+        const winTime=Math.max(0,this.endTime-450);
+        const winBlink=winTime%4800>=4500&&winTime%4800<4620;
+        const winFrame=winBlink?3:[0,1,2,1][Math.floor(winTime/300)%4];
+        s.hero.setTexture(this.state==='victory'?(this.endTime<450?'jessieReaction4':`jessieWin${winFrame}`):(this.endTime<450?'jessieReaction6':'jessieReaction7'));
         s.phase(this.state);
       }
       // Contact accent is drawn only on the axe's hit, never while winding up.
