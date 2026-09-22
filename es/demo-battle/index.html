@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://guardiansrpg.com/es/demo-battle/">
   <link rel="alternate" hreflang="en" href="https://guardiansrpg.com/demo-battle/">
   <link rel="stylesheet" href="/fonts.css">
-  <link rel="stylesheet" href="/demo-battle/demo-battle.css?v=6">
+  <link rel="stylesheet" href="/demo-battle/demo-battle.css?v=7">
 </head>
 <body>
   <header class="topbar"><a href="/es/">← The Guardians</a><span>Prototipo · Sin progreso de cuenta</span><a href="/demo-battle/">EN</a></header>
@@ -24,7 +24,13 @@
         <div class="weather" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
         <div class="fighter hero" id="jessie" data-actor="jessie">
           <div class="nameplate"><span>Jessie</span><small>Pistolera</small><div class="hp"><i></i></div><b class="hp-text">140 / 140</b></div>
-          <div class="sprite jessie-sprite" role="img" aria-label="Jessie en posición de combate"></div><div class="shadow"></div>
+          <div class="sprite jessie-rig" role="img" aria-label="Jessie en posición de combate animada">
+            <span class="jessie-layer jessie-body"></span>
+            <span class="jessie-layer jessie-hair"></span>
+            <span class="jessie-layer jessie-aim-arm"></span>
+            <span class="jessie-layer jessie-coat-left"></span>
+            <span class="jessie-layer jessie-coat-right"></span>
+          </div><div class="shadow"></div>
         </div>
         <button class="fighter enemy selected" id="marauder" data-actor="marauder" aria-label="Elegir Merodeador del Loto Negro">
           <div class="nameplate"><span>Merodeador del Loto Negro</span><small>Nv. 8</small><div class="hp"><i></i></div><b class="hp-text">80 / 80</b></div>
@@ -49,6 +55,6 @@
     </section>
     <p class="prototype-note">Prototipo visual: las recompensas, el inventario y el perfil no se modifican.</p>
   </main>
-  <script src="/demo-battle/demo-battle.js?v=4" defer></script>
+  <script src="/demo-battle/demo-battle.js?v=5" defer></script>
 </body>
 </html>
