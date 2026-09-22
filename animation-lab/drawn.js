@@ -22,10 +22,10 @@
   // Restrict idle to calm drawings; no wind extremes or synthetic warping.
   const idleKeys=['idle0','idle7','idle6','idle5','idle6','idle7'];
   const idleDur=[380,240,240,260,240,240];
-  const shotKeys=['idle0','raise0','raise1','raise2','shot3','shot4','shot5','raise2','raise1','raise0','idle0'];
-  const shotDur=[60,100,100,80,120,70,110,80,100,130,140];
+  const shotKeys=['idle0','act0','raise0','raise1','raise2','act1','act2','act1','raise2','raise1','raise0','idle0'];
+  const shotDur=[60,100,80,90,80,120,65,95,90,110,140,150];
   const total=a=>a.reduce((x,y)=>x+y,0),frameAt=(t,d)=>{let end=0;for(let i=0;i<d.length;i++){end+=d[i];if(t<end)return i;}return d.length-1;};
-  const FIRE=440,IMPACT=495,END=total(shotDur),S=.64;
+  const FIRE=510,IMPACT=565,END=total(shotDur),S=.64;
   class DrawnLab extends Phaser.Scene {
     preload(){
       this.failed=false;this.load.on('loaderror',()=>{this.failed=true;$('loading').textContent=copy.error;});
@@ -33,9 +33,11 @@
       this.load.image('target','/assets/demo-battle/warden-idle-cutout.png');
       for(const mode of ['idle','shot'])for(let i=0;i<8;i++)this.load.image(`${mode}${i}`,`/assets/demo-battle/jessie-idle-shot-v1/${mode}-${String(i).padStart(2,'0')}.png`);
       for(let i=0;i<3;i++)this.load.image(`raise${i}`,`/assets/demo-battle/jessie-polish-v2/raise-${i}.png`);
+      for(const key of ['act0','act1','act2','blink'])this.load.image(key,`/assets/demo-battle/jessie-acting-v3/${key}.png`);
     }
     create(){
       if(this.failed)return;scene=this;this.clock=0;this.action=-1;this.idleTime=0;this.rest=0;this.shots=0;this.hits=0;this.fireAge=9999;this.hitAge=9999;
+      this.blinkLeft=0;this.blinks=0;this.scheduleBlink();
       this.add.image(640,300,'arena').setDisplaySize(1280,720).setTint(0xc5d2d4);
       this.shadow=this.add.ellipse(0,470,120,16,0x050a09,.45);
       this.targetShadow=this.add.ellipse(0,470,140,16,0x050a09,.45);
@@ -43,14 +45,15 @@
       this.hero=this.add.image(0,470-525*S,'idle0').setOrigin(0).setScale(S);
       this.fx=this.add.graphics();this.place();this.scale.on('resize',()=>this.place());
       $('loading').hidden=true;$('pause').disabled=false;this.controls();this.phase('idle');
-      window.jessieLab={snapshot:()=>({attack:this.action,frame:this.frame,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
+      window.jessieLab={snapshot:()=>({attack:this.action,frame:this.frame,texture:this.hero.texture.key,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,blinks:this.blinks,blinking:this.blinkLeft>0,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
     }
     place(){const small=this.scale.width<1000;this.hero.x=(small?280:390)-245*S;this.shadow.x=small?280:390;this.target.x=small?705:958;this.targetShadow.x=this.target.x;}
-    muzzle(){return{x:this.hero.x+398*S,y:this.hero.y+128*S};}
+    muzzle(){return{x:this.hero.x+425*S,y:this.hero.y+116*S};}
+    scheduleBlink(){this.nextBlink=this.clock+3800+Math.random()*2400;}
     controls(){$('shoot').disabled=paused||this.action>=0;$('pause').textContent=paused?copy.resume:copy.pause;}
     phase(name){this.phaseName=name;$('phase-label').textContent=copy[name];const active=['idle','aim','fire','recover'].indexOf(name);document.querySelectorAll('.steps li').forEach((li,i)=>li.classList.toggle('active',i===active));}
-    shoot(){if(paused||this.action>=0)return;this.action=0;this.rest=0;this.didFire=false;this.didHit=false;this.fireAge=9999;this.hitAge=9999;this.controls();}
-    reset(){this.action=-1;this.justFired=false;this.idleTime=0;this.rest=0;this.fireAge=9999;this.hitAge=9999;loop=false;$('loop').checked=false;this.hero.setTexture('idle0');this.target.clearTint();this.fx.clear();this.phase('idle');this.controls();}
+    shoot(){if(paused||this.action>=0)return;this.blinkLeft=0;this.scheduleBlink();this.action=0;this.rest=0;this.didFire=false;this.didHit=false;this.fireAge=9999;this.hitAge=9999;this.controls();}
+    reset(){this.action=-1;this.justFired=false;this.blinkLeft=0;this.scheduleBlink();this.idleTime=0;this.rest=0;this.fireAge=9999;this.hitAge=9999;loop=false;$('loop').checked=false;this.hero.setTexture('idle0');this.target.clearTint();this.fx.clear();this.phase('idle');this.controls();}
     update(_,delta){
       if(!scene)return;
       if(!paused){this.justFired=false;const dt=Math.min(delta,80)*speed;this.clock+=dt;this.fireAge+=dt;this.hitAge+=dt;
@@ -58,20 +61,24 @@
           if(!this.didFire&&this.action>=FIRE){this.didFire=true;this.justFired=true;this.shots++;this.fireAge=this.action-FIRE;}
           if(!this.didHit&&this.action>=IMPACT){this.didHit=true;this.hits++;this.hitAge=this.action-IMPACT;}
           if(this.action>=END){this.action=-1;this.idleTime=0;this.rest=0;this.controls();}
-        }else{this.idleTime+=dt;this.rest+=dt;if(loop&&this.rest>1500)this.shoot();}
+        }else{
+          if(this.blinkLeft>0)this.blinkLeft=Math.max(0,this.blinkLeft-dt);
+          else{this.idleTime+=dt;if(this.clock>=this.nextBlink&&frameAt(this.idleTime%total(idleDur),idleDur)===0){this.blinkLeft=120;this.blinks++;this.scheduleBlink();}}
+          this.rest+=dt;if(loop&&this.rest>1500)this.shoot();
+        }
       }
-      if(this.action>=0){this.frame=this.justFired?4:frameAt(this.action,shotDur);this.hero.setTexture(shotKeys[this.frame]);this.phase(this.action<FIRE?'aim':this.action<530?'fire':'recover');}
-      else{this.frame=frameAt(this.idleTime%total(idleDur),idleDur);this.hero.setTexture(idleKeys[this.frame]);this.phase('idle');}
+      if(this.action>=0){this.frame=this.justFired?5:frameAt(this.action,shotDur);this.hero.setTexture(shotKeys[this.frame]);this.phase(this.action<FIRE?'aim':this.action<595?'fire':'recover');}
+      else{this.frame=frameAt(this.idleTime%total(idleDur),idleDur);this.hero.setTexture(this.blinkLeft>0?'blink':idleKeys[this.frame]);this.phase('idle');}
       this.drawEffects();
     }
     drawEffects(){
-      const g=this.fx,m=this.muzzle(),hit={x:this.target.x-20,y:310};g.clear();this.target.clearTint();
+      const g=this.fx,m=this.muzzle(),hit={x:this.target.x-20,y:m.y};g.clear();this.target.clearTint();
       if(!effects)return;
-      // Fire on the held aiming drawing. Recoil follows 20ms later, at 460ms.
+      // Fire on the held aiming drawing. Recoil follows 20ms later, at 530ms.
       if(this.justFired||this.fireAge<20){g.fillStyle(0xffdc8c,1);g.fillTriangle(m.x,m.y-7,m.x+35,m.y,m.x,m.y+7);g.fillStyle(0xffffff,1);g.fillCircle(m.x+3,m.y,3);}
       if(this.fireAge<55){const p=this.fireAge/55;g.lineStyle(2,0xffe2a5,1-p*.6);g.lineBetween(Phaser.Math.Linear(m.x,hit.x,Math.max(0,p-.18)),Phaser.Math.Linear(m.y,hit.y,Math.max(0,p-.18)),Phaser.Math.Linear(m.x,hit.x,p),Phaser.Math.Linear(m.y,hit.y,p));}
       if(this.hitAge<240){const k=this.hitAge/240;if(k<.3)this.target.setTintFill(0xffe4b1);g.lineStyle(2,0xffcd83,1-k);g.strokeCircle(hit.x,hit.y,5+k*23);for(let i=0;i<6;i++){const a=i*Math.PI/3;g.lineBetween(hit.x+Math.cos(a)*8,hit.y+Math.sin(a)*8,hit.x+Math.cos(a)*(12+k*36),hit.y+Math.sin(a)*(12+k*36));}}
-      if(debug&&this.action>=340&&this.action<460){g.lineStyle(1,0x73ffdd);g.strokeCircle(m.x,m.y,6);}
+      if(debug&&this.action>=410&&this.action<530){g.lineStyle(1,0x73ffdd);g.strokeCircle(m.x,m.y,6);}
     }
   }
   const mobile=matchMedia('(max-width:760px)');
