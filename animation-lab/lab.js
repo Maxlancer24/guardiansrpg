@@ -16,7 +16,8 @@
   if(es){document.querySelector('.lab').setAttribute('aria-label','Laboratorio de animación de Jessie');document.getElementById('stage').setAttribute('aria-label','Jessie respira, apunta y dispara a un objetivo de práctica');}
   const $=id=>document.getElementById(id);
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let paused=reduced, speed=1, loop=false, debug=false, scene;
+  let paused=reduced, speed=1.5, loop=false, debug=false, scene;
+  $('speed').value=String(speed);
   const parts=['head','torso','legs','hair','tail-back','tail-front','upper-arm','forearm','off-arm'];
   const lerp=Phaser.Math.Linear, ease=t=>t*t*(3-2*t), clamp=Phaser.Math.Clamp;
   const blend=(a,b,t)=>a.map((v,i)=>lerp(v,b[i],ease(clamp(t,0,1))));
@@ -39,31 +40,33 @@
       this.heroShadow=this.add.ellipse(mobile?300:410,470,185,22,0x050a09,.53);
       this.targetShadow=this.add.ellipse(mobile?705:958,470,155,17,0x050a09,.45);
       this.target=this.add.image(mobile?705:958,470,'target').setOrigin(.5,1).setDisplaySize(226,350).setAlpha(.85);
-      this.root=this.add.container(mobile?300:410,285);
+      // Whole-character scale is separate from anatomy. Re-anchor the floor
+      // after scaling; individual pieces use the full-character reference ratios.
+      this.root=this.add.container(mobile?300:410,470-185*1.10).setScale(1.10);
       const image=(parent,key,x,y,w,ox=.5,oy=.5)=>{const obj=this.add.image(x,y,key).setOrigin(ox,oy);obj.setScale(w/obj.width);parent.add(obj);return obj;};
-      this.tailBack=image(this.root,'tail-back',-18,-24,123,.88,.05);
-      this.tailFront=image(this.root,'tail-front',16,-24,130,.12,.05);
+      this.tailBack=image(this.root,'tail-back',-18,-24,134,.88,.05);
+      this.tailFront=image(this.root,'tail-front',16,-24,141,.12,.05);
       this.legs=image(this.root,'legs',0,185,186,.5,1);
       this.legs.scaleY*=1.08;
       // The waist is the shared pivot, with overlap into the belt. Upper-arm
       // caps sit BEHIND the torso so they never read as exposed socket disks.
-      this.body=this.add.container(0,-20);this.root.add(this.body);
-      this.off=image(this.body,'off-arm',-32,-84,101,.88,.08);
-      this.hair=image(this.body,'hair',-13,-153,105,.88,.13);
-      this.arm=this.add.container(27,-88);this.body.add(this.arm);
-      image(this.arm,'upper-arm',0,0,59,.10,.40);
-      this.elbow=this.add.container(44,10);this.arm.add(this.elbow);
-      image(this.elbow,'forearm',0,0,91,.08,.55);
-      this.muzzle=this.add.container(83,-11);this.elbow.add(this.muzzle);
-      this.torso=image(this.body,'torso',0,0,96,.5,1);
+      this.body=this.add.container(0,-8);this.root.add(this.body);
+      this.off=image(this.body,'off-arm',-27,-71,91,.88,.08);
+      this.hair=image(this.body,'hair',-9,-125,87,.88,.13);
+      this.arm=this.add.container(23,-74);this.body.add(this.arm);
+      image(this.arm,'upper-arm',0,0,53,.10,.40);
+      this.elbow=this.add.container(40,9);this.arm.add(this.elbow);
+      image(this.elbow,'forearm',0,0,82,.08,.55);
+      this.muzzle=this.add.container(75,-10);this.elbow.add(this.muzzle);
+      this.torso=image(this.body,'torso',0,0,82,.5,1);
       this.torso.scaleY*=.93;
-      this.head=image(this.body,'head',6,-102,74,.5,1);
+      this.head=image(this.body,'head',5,-86,56,.5,1);
       this.fx=this.add.graphics();this.bones=this.add.graphics();
       this.phaseName='';this.pose(idle);this.updatePhase('idle');
       $('loading').hidden=true;$('pause').disabled=false;$('shoot').disabled=paused;
       $('pause').textContent=paused?strings.resume:strings.pause;
       // Read-only QA snapshot: no game or account state is exposed.
-      window.jessieLab={snapshot:()=>({time:this.timeNow,attack:this.attack,paused,phase:this.phaseName,feet:{x:this.root.x,y:this.root.y+185},muzzle:this.muzzle.getWorldTransformMatrix().transformPoint(0,0),shoulder:this.arm.rotation,elbow:this.elbow.rotation})};
+      window.jessieLab={snapshot:()=>({time:this.timeNow,attack:this.attack,paused,speed,phase:this.phaseName,feet:this.root.getWorldTransformMatrix().transformPoint(0,185),muzzle:this.muzzle.getWorldTransformMatrix().transformPoint(0,0),shoulder:this.arm.rotation,elbow:this.elbow.rotation})};
       this.scale.on('resize',()=>{const small=this.scale.width<1000;this.root.x=this.heroShadow.x=small?300:410;this.targetShadow.x=small?705:958;});
     }
     shoot(){if(this.attack>=0||paused)return;this.attack=0;this.fired=false;this.rest=0;$('shoot').disabled=true;}
@@ -73,7 +76,7 @@
       const age=Math.max(0,this.timeNow-this.hitAt);
       // A damped follow-through, rather than continuous pendulum rotations.
       const settle=Math.sin(age/145)*Math.exp(-age/260);
-      this.body.y=-20+breath*.45;this.body.x=p[2]*22;
+      this.body.y=-8+breath*.45;this.body.x=p[2]*22;
       this.body.rotation=p[2]+breath*.003;
       this.head.rotation=p[3]+Math.sin(t*1.65-.4)*.004;
       this.arm.rotation=p[0]+breath*.005;this.elbow.rotation=p[1];
