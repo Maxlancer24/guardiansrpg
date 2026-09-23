@@ -49,3 +49,16 @@ Syntax and route/asset checks also run. These are not browser visual tests.
 Existing animation lab remains available separately. Shared rendering changes
 are optional hooks, inactive there. Existing audio credits remain in
 `assets/demo-battle/audio-v1/CREDITS.md`.
+
+## Presentation revision 2
+
+Focus uses a turquoise aura; Ultra Focus uses gold. Labels remain readable
+with effects disabled; reduced-motion disables orbiting motes and number bounce.
+Aura state follows the displayed combat snapshots and disappears after use/KO.
+Parry announces guarding, perfect block or guard break, followed by a distinct
+counter animation. Reflected HP loss is presented on counter contact, using the
+already-resolved amount: no extra attack, random roll or damage calculation.
+Normal attack and special numbers occupy separate lanes and rise on a dedicated
+presentation clock, which advances during the cinematic and stops when paused.
+Tests cover lane separation, cinematic label expiry, pause, Focus/Ultra/KO,
+deferred counter HP and reset cleanup. Enemy artwork and game rules unchanged.
