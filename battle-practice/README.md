@@ -92,3 +92,11 @@ mint, guard breaks orange, and normal impacts warm gold. Dodges have a trail but
 no body impact or impact sound. Effects use the existing paused action clock,
 respect the effects toggle, and replace motion with a compact outline for reduced
 motion. No camera/terrain shake, new assets, or combat-rule changes.
+
+## Presentation revision 6
+
+Jessie's Parry stance loops the existing prep0–3 drawings with the normal attack's
+1125 ms preparation cadence, at the player's selected playback speed. A continuous
+clock spans the guard event and incoming swing; pausing freezes it. Successful
+blocks keep the stance until the existing counter animation takes over. Damage or
+guard break releases it into the hurt reaction. No new assets or rules changes.

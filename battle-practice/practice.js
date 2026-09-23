@@ -19,7 +19,7 @@
    super.reset();if(!$('stat-0-str'))return;
    const stats=defaults.map((_,i)=>Object.fromEntries(['str','agi','con'].map(k=>[k,Number($(`stat-${i}-${k}`).value)])));
    this.battle=new PracticeRules.Battle(...stats);this.display=this.battle.snapshot();this.queue=[];this.current=null;this.result=null;this.state='ready';this.victory=false;this.defeat=false;this.endTime=0;this.heroStruck=-10000;this.visualTime=0;this.defensePulse=null;this.notice=null;this.aura?.clear();this.defenseFX?.clear();this.noticeText?.setVisible(false);this.focusTexts?.forEach(t=>t.setVisible(false));
-   this.enemyStruck=-10000;this.restPulse=null;
+   this.enemyStruck=-10000;this.restPulse=null;this.guardTime=0;this.guardReleased=false;
    if(this.s.special){this.s.special.impactHandler=null;this.s.special.practiceTargetDead=false;}
    this.sync();$('battle-log').replaceChildren();this.log(tr('Elige tu acción. La iniciativa determina quién actúa primero.','Choose your action. Initiative determines who acts first.'));this.renderUI();
   }
@@ -27,6 +27,7 @@
   sync(){if(!this.display)return;this.heroHp=this.display.actors[0].hp;this.hp=this.display.actors[1].hp;this.round=this.display.round;}
   log(text){const li=document.createElement('li');li.textContent=text;$('battle-log').append(li);while($('battle-log').children.length>100)$('battle-log').firstChild.remove();$('battle-log').scrollTop=$('battle-log').scrollHeight;}
   submit(action){if(this.state!=='ready'||this.s.special.active||$('pause').textContent===tr('Continuar','Resume'))return;if(action==='SPECIAL'&&this.battle.actors[0].used)return;
+   this.guardTime=0;this.guardReleased=false;
    this.result=this.battle.resolve(action);this.queue=[...this.result.events];this.state='resolving';this.log(`${tr('Ronda','Round')} ${this.round}: Jessie — ${actionName[action]}; ${names[1]} — ${actionName[this.result.actions[1]]}.`);this.next();this.renderUI();
   }
   next(){
@@ -71,6 +72,7 @@
   }
   applyHit(e){if(e.amount){this.number(e.amount,1-e.actor);if(e.actor===0)this.enemyStruck=this.visualTime;}if(e.outcome==='dodge')this.number(outcomes.dodge,1-e.actor,'#a0e9e1');this.log(`${names[e.actor]} · ${outcomes[e.outcome]}${e.crit?' · CRIT':''}: ${e.amount}.`);}
   applyCurrent(){const e=this.current;if(this.applied)return;this.applied=true;
+   if((e.type==='attack'&&e.actor===1&&(e.amount>0||e.outcome==='break'))||(e.type==='counter'&&e.actor===0))this.guardReleased=true;
    if(e.type==='attack'){if(e.actor===0){if(e.outcome==='dodge')this.number(outcomes.dodge,1);this.log(`${names[0]} · ${outcomes[e.outcome]}${e.crit?' · CRIT':''}: ${e.amount}.`);}else{this.applyHit(e);if(e.amount)this.heroStruck=this.s.clock;}
     if(['parry','break'].includes(e.outcome)){this.defensePulse={at:this.visualTime,id:1-e.actor,kind:e.outcome};this.announce(e.outcome==='parry'?tr('PARRY · BLOQUEO PERFECTO','PARRY · PERFECT BLOCK'):tr('GUARDIA ROTA','GUARD BREAK'),1-e.actor,e.outcome==='parry'?0x98ffe1:0xffaf83);}
    }
@@ -103,7 +105,14 @@
     else if(e.type==='special'){this.applyCurrent();s.special.impactHandler=null;this.next();}
     else if(e.type!=='attack'){const resting=['rest-start','rest'].includes(e.type);if(this.timer>=(resting?600:350))this.applyCurrent();if(this.timer>=(resting?1300:900))this.next();}
    }
-   if((this.current?.type==='guard'&&this.current.actor===0)||(this.current?.type==='attack'&&this.current.actor===1&&this.result?.actions[0]==='DEFEND'&&this.timer<1120))s.hero.setTexture('jessieReaction1');
+   if(this.state==='resolving'&&this.result?.actions[0]==='DEFEND'&&!this.guardReleased&&this.heroHp>0){
+    // Reuse the attack's exact preparation drawings and timing, looping without firing.
+    // One continuous clock spans guard and incoming attack; pause freezes it.
+    this.guardTime+=dt;
+    const frames=['prep0','prep1','prep2','prep3','prep2','prep1','prep0'],durations=[127.5,150,172.5,150,172.5,150,202.5];
+    let phase=this.guardTime%1125,index=0;while(index<durations.length-1&&phase>=durations[index])phase-=durations[index++];
+    s.hero.setTexture(frames[index]);
+   }
    if(this.current?.type==='counter'&&this.current.actor===0)s.hero.setTexture(this.timer<180?'raise1':this.timer<450?'raise2':this.timer<560?'recoil':this.timer<820?'raise2':'raise0');
    if(this.current&&['rest-start','rest'].includes(this.current.type)){
     // Existing coherent breathing drawings; feet and sprite scale remain fixed.
