@@ -1,7 +1,7 @@
 # Guardians player demo 0.1
 
-Routes: `/play/` (English), `/es/play/` (neutral Spanish). Unlisted/noindex, not
-access-controlled. No portal/home links were added. `/battle-practice/` and
+Routes: `/play/` (English), `/es/play/` (neutral Spanish). Linked from the
+English and Spanish home hero; noindex and not access-controlled. `/battle-practice/` and
 `/es/battle-practice/` remain unchanged and retain editable development controls.
 
 The static welcome loads the existing engine only after Play. The demo-only

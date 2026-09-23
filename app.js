@@ -842,6 +842,7 @@ PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
     '<span class="stat"><b class="num" data-to="19">0</b><span>'+L("Game modes","Modos de juego")+'</span></span>'+
    '</div>'+
    '<div class="hero__cta anim d4">'+
+    '<a class="hbtn hbtn--primary" href="'+L('/play/','/es/play/')+'">'+L('Play a demo battle →','Jugar combate de prueba →')+'</a>'+
     '<a class="hbtn hbtn--primary" href="https://discord.gg/chainers" target="_blank" rel="noopener">'+L("Join the Discord →","Únete al Discord →")+'</a>'+
     '<a class="hbtn hbtn--portal" href="https://guardians-app.discloud.app/">'+L("Player Portal &rarr;","Portal del jugador &rarr;")+'</a>'+
     '<a class="hbtn hbtn--ghost" href="#start">'+L("Getting Started","Primeros pasos")+'</a>'+
