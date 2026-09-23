@@ -19,12 +19,18 @@
    super.reset();if(!$('stat-0-str'))return;
    const stats=defaults.map((_,i)=>Object.fromEntries(['str','agi','con'].map(k=>[k,Number($(`stat-${i}-${k}`).value)])));
    this.battle=new PracticeRules.Battle(...stats);this.display=this.battle.snapshot();this.queue=[];this.current=null;this.result=null;this.state='ready';this.victory=false;this.defeat=false;this.endTime=0;this.heroStruck=-10000;this.visualTime=0;this.defensePulse=null;this.notice=null;this.aura?.clear();this.defenseFX?.clear();this.noticeText?.setVisible(false);this.focusTexts?.forEach(t=>t.setVisible(false));
-   this.enemyStruck=-10000;this.restPulse=null;this.guardTime=0;this.guardReleased=false;this.ambient?.clear();this.resultShade?.clear();this.banner.setVisible(false);
+   this.enemyStruck=-10000;this.enemyDeathAt=null;this.restPulse=null;this.guardTime=0;this.guardReleased=false;this.ambient?.clear();this.resultShade?.clear();this.banner.setVisible(false);
    if(this.s.special){this.s.special.impactHandler=null;this.s.special.practiceTargetDead=false;}
    this.sync();$('battle-log').replaceChildren();this.log(tr('Elige tu acción. La iniciativa determina quién actúa primero.','Choose your action. Initiative determines who acts first.'));this.renderUI();
   }
   busy(){return this.launching?false:this.state!=='ready';}
-  sync(){if(!this.display)return;this.heroHp=this.display.actors[0].hp;this.hp=this.display.actors[1].hp;this.round=this.display.round;}
+  sync(){if(!this.display)return;this.heroHp=this.display.actors[0].hp;this.hp=this.display.actors[1].hp;this.round=this.display.round;if(this.hp<=0&&this.enemyDeathAt===null)this.enemyDeathAt=this.visualTime;}
+  enemyDeathTexture(){
+   // Shared virtual clock: normal hits, counters and the cinematic use one
+   // sequence. Pausing freezes it; returning from the cinematic cannot restart it.
+   const age=this.visualTime-(this.enemyDeathAt??this.visualTime);
+   return age<240?'hurt':age<1080?'kneel':'fallen';
+  }
   log(text){const li=document.createElement('li');li.textContent=text;$('battle-log').append(li);while($('battle-log').children.length>100)$('battle-log').firstChild.remove();$('battle-log').scrollTop=$('battle-log').scrollHeight;}
   submit(action){if(this.state!=='ready'||this.s.special.active||$('pause').textContent===tr('Continuar','Resume'))return;if(action==='SPECIAL'&&this.battle.actors[0].used)return;
    this.guardTime=0;this.guardReleased=false;
@@ -98,7 +104,7 @@
   }
   update(dt){
    if(!this.battle)return;const s=this.s,home=s.targetShadow.x,heroHome=(s.scale.width<1000?280:390)-245*.64;s.hero.x=heroHome;s.target.x=home;s.target.setOrigin(.5,1050/1092);
-   s.target.setTexture(this.hp<=0?'fallen':`wardenIdle${[0,1,2,3,2,1][Math.floor(s.clock/240)%6]}`);
+   s.target.setTexture(this.hp<=0?this.enemyDeathTexture():`wardenIdle${[0,1,2,3,2,1][Math.floor(s.clock/240)%6]}`);
    const e=this.current;if(e&&dt>0){this.timer+=dt;
     if((e.type==='attack'||e.type==='counter')&&e.actor===1){const t=this.timer*(e.type==='counter'?1.3:1),travel=t<650?Math.max(0,Math.min(1,(t-350)/300)):t>1550?1-Math.min(1,(t-1550)/650):1;
      s.target.x=home+(heroHome+309-home)*travel;s.target.setTexture('wardenAnim'+(t<650?2:t<900?3:t<1120?4:t<1280?5:t<1550?6:7)).setOrigin(.5,1238/1280);
@@ -126,7 +132,7 @@
    const enemyHurt=this.visualTime-this.enemyStruck;
    if(this.hp>0&&enemyHurt>=0&&enemyHurt<400){s.target.setTexture(enemyHurt<260?'hurt':'wardenIdle1').setOrigin(.5,1050/1092);if(s.effectsEnabled&&enemyHurt<85)s.target.setTint(0xffdab5);}
    if(this.victory||this.defeat){this.endTime+=dt;s.hero.setTexture(this.victory?`jessieWin${[0,1,2,1][Math.floor(this.endTime/300)%4]}`:'jessieReaction7');}
-   if(this.hp<=0)s.target.setTexture('fallen').setOrigin(.5,1050/1092);
+   if(this.hp<=0)s.target.setTexture(this.enemyDeathTexture()).setOrigin(.5,1050/1092);
    this.updateVisuals(dt);
    this.hud.clear();this.title.setVisible(false);this.hpText.setVisible(false);
    const ended=this.victory||this.defeat;this.resultShade?.clear();this.banner.setVisible(ended);
@@ -232,7 +238,7 @@
   s.hero.setDepth(2);s.target.setDepth(2);s.light?.setDepth(3);s.fx.setDepth(4);
   s.feedback.ambient=s.add.graphics().setDepth(1);s.feedback.resultShade=s.add.graphics().setDepth(39);
   const f=s.feedback;f.aura=s.add.graphics().setDepth(9);f.defenseFX=s.add.graphics().setDepth(14);f.noticeText=s.add.text(0,110,'',{fontFamily:'Arial',fontSize:'24px',fontStyle:'bold',stroke:'#06100e',strokeThickness:6}).setOrigin(.5).setDepth(31);f.focusTexts=[0,1].map(()=>s.add.text(0,180,'',{fontFamily:'Arial',fontSize:'16px',fontStyle:'bold',stroke:'#06100e',strokeThickness:4}).setOrigin(.5).setDepth(15));
-  const specialUpdate=s.special.update.bind(s.special);s.special.update=(dt,enabled)=>{specialUpdate(dt,enabled);f.updateVisuals(dt);};
+  const specialUpdate=s.special.update.bind(s.special);s.special.update=(dt,enabled)=>{specialUpdate(dt,enabled);if(f.hp<=0)s.special.enemy.setTexture(f.enemyDeathTexture());f.updateVisuals(dt);};
   const original=s.shoot.bind(s);s.shoot=()=>s.feedback.launching?original():s.feedback.submit('ATTACK');s.startSpecial=()=>s.feedback.submit('SPECIAL');
   const drawEffects=s.drawEffects.bind(s);s.drawEffects=()=>{const age=s.hitAge;if(s.feedback.current?.type==='attack'&&s.feedback.current.actor===0&&!s.feedback.current.amount)s.hitAge=9999;drawEffects();s.hitAge=age;};
   const controls=s.controls.bind(s);s.controls=()=>{controls();const f=s.feedback,paused=$('pause').textContent===tr('Continuar','Resume');for(const id of ['shoot','parry','rest','special'])$(id).disabled=paused||f.state!=='ready'||!!s.special.active||(id==='special'&&f.battle.actors[0].used);$('shoot').textContent=tr('Atacar · Dos disparos','Attack · Two shots');$('special').textContent=actionName.SPECIAL;};
