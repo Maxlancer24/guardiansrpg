@@ -64,6 +64,7 @@
       this.scale.on('resize',size=>{if(this.special.active&&(size.width!==this.special.width||size.height!==this.special.height))this.special.stop();});
       window.encounterSnapshot=()=>({state:this.feedback.state,round:this.feedback.round,heroHp:this.feedback.heroHp,enemyHp:this.feedback.hp,enemyHits:this.feedback.enemyHits,enemyTime:this.feedback.enemyTime,heroTexture:this.hero.texture.key,enemyX:this.target.x,heroX:this.hero.x});
       $('loading').hidden=true;$('pause').disabled=false;this.controls();this.phase('idle');
+      window.PracticeController?.attach(this);
       window.jessieLab={snapshot:()=>({attack:this.action,frame:this.frame,texture:this.hero.texture.key,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,hp:this.feedback.hp,victory:this.feedback.victory,enemyTexture:this.target.texture.key,enemyScale:[this.target.scaleX,this.target.scaleY],sound:this.feedback.audio.enabled,blinks:this.blinks,blinking:this.blinkLeft>0,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
     }
     place(){const small=this.scale.width<1000;this.hero.x=(small?280:390)-245*S;this.light.x=this.hero.x;this.shadow.x=small?280:390;this.target.x=small?660:958;this.targetShadow.x=this.target.x;}

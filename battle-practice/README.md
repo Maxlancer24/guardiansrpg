@@ -1,0 +1,51 @@
+# Local playable practice — base duel rules, revision 1
+
+Routes: `/battle-practice/` (EN), `/es/battle-practice/` (neutral ES).
+Unlisted/noindex, not access-controlled. No homepage promotion, account access,
+API calls, inventory writes, rewards or bot runtime changes.
+
+## Supported subset and sources
+
+- STR, AGI, CON: editable 0–60, synthetic starting builds clearly labelled.
+- HP: `50 + 15*CON` from `database.create_player`.
+- Base damage, AGI overcrit, critical/dodge chance, Focus, flat mitigation:
+  `combat_rules.py` functions `compute_offensive_damage`, `crit_chance_pct`,
+  `dodge_chance_pct`, `compute_strike_damage`, `apply_flat_graze_mitigation`.
+- Accumulated initiative: `prepare_round_initiative`. Each living actor has
+  one action; only the round leader spends a full meter when attacking.
+- Parry: DEF = `5*CON + STR`; perfect-block counter = `3*CON + STR`.
+  Overflow damage receives AGI mitigation. No per-visual-bullet counter.
+- Rest: deferred until all attacks resolve, heals `20 + 3*CON`, grants Focus;
+  resting with Focus grants Ultra. Any targeted attack interrupts unshielded
+  Rest, including a dodged attack. Rest vulnerability is x1.5 before mitigation.
+- Ultra: guaranteed normal attack, bypasses dodge, guard and flat mitigation;
+  consumes Focus/Ultra, retains the underlying damage/critical computation.
+- Jessie `jessie_two_problems`: once per combat; two separate actual hits,
+  each can dodge, ignores Parry, receives flat mitigation, no crit roll,
+  clears prior Focus before firing and grants Focus afterward. In this 1v1
+  version both shots target the sole opponent; stop if no live target remains.
+
+Normal shot animation splits ONE resolved damage total into two displayed
+numbers. Special cinematic has extra visual muzzle flashes, but resolves only
+the two logical hits. Damage is calculated first; presentation cannot generate
+extra crits, actions or damage. Enemy decisions do not inspect the chosen action.
+
+This is a JavaScript port for an isolated demonstration, **not** the entire
+Python combat engine or a secure multiplayer implementation. Practice opponent
+AI is explicitly simplified. No equipped weapons/gears, enhancements, clan or
+territory bonuses, NPC passives, consumables, shields, revives, teams or mode
+overrides (War/Vanguard/Horde/BR). The existing enemy art is reused unchanged.
+Account-backed combat must use a server-authoritative shared resolver later.
+
+## Validation
+
+`check-practice-rules.cjs`: 72 comparisons with the actual Python damage/chance
+helpers; initiative retention, guard/counter, Rest interruption on dodge,
+Focus/Ultra, special limit, KO, invalid actions and 100 simulated duels.
+`check-practice-adapter.cjs`: fake-scene unit integration for action queues,
+state snapshots, special cancellation/reset and complete victory/defeat flow.
+Syntax and route/asset checks also run. These are not browser visual tests.
+
+Existing animation lab remains available separately. Shared rendering changes
+are optional hooks, inactive there. Existing audio credits remain in
+`assets/demo-battle/audio-v1/CREDITS.md`.

@@ -36,7 +36,7 @@
       this.saved=this.hidden.map(o=>o.visible);this.hidden.forEach(o=>o.setVisible(false));
       this.actor.setVisible(true);this.enemy.setVisible(true);this.heading.setVisible(true);this.counter.setVisible(true);
       this.heading.setText(this.es?'JESSIE · FUEGO CRUZADO':'JESSIE · CROSSFIRE');
-      this.counter.setText(this.es?'PRUEBA VISUAL · SIN CAMBIOS EN EL COMBATE':'VISUAL PREVIEW · COMBAT UNCHANGED');
+      this.counter.setText(this.practiceMode?(this.es?'DOS IMPACTOS REALES · IGNORA PARRY':'TWO LOGICAL HITS · BYPASSES PARRY'):(this.es?'PRUEBA VISUAL · SIN CAMBIOS EN EL COMBATE':'VISUAL PREVIEW · COMBAT UNCHANGED'));
       s.feedback.audio.play('cloth');s.controls();
     }
     stop(){
@@ -77,11 +77,11 @@
         s.feedback.audio.special(b.name==='final'?'final':'shot',this.next);
       }
       this.actor.setTexture('specialPose'+pose).clearTint();
-      for(const e of this.events){if(!e.impacted&&t>=e.at+70){e.impacted=true;s.feedback.audio.play('impact');this.hold=e.name==='final'?110:45;}}
+      for(const e of this.events){if(!e.impacted&&t>=e.at+70){e.impacted=true;e.missed=this.impactHandler?.(e)===false;if(!e.missed)s.feedback.audio.play('impact');this.hold=e.name==='final'?110:45;}}
       const last=this.events.at(-1),age=last?t-last.at:9999,final=last?.name==='final';
       const impactAge=age-70;
-      this.enemy.setTexture(impactAge>=0&&impactAge<400?'hurt':'target');
-      if(impactAge>=0&&impactAge<360)this.enemy.x+=Math.sin(clamp(impactAge/360)*Math.PI)*(final?20:8);
+      this.enemy.setTexture(this.practiceTargetDead?'fallen':!last?.missed&&impactAge>=0&&impactAge<400?'hurt':'target');
+      if(!last?.missed&&impactAge>=0&&impactAge<360)this.enemy.x+=Math.sin(clamp(impactAge/360)*Math.PI)*(final?20:8);
       this.dark.clear();this.floor.clear();this.fx.clear();this.burst.setVisible(false);this.ghosts.forEach(o=>o.setAlpha(0));
       if(this.enabled){
         const fade=smooth(t/400)*(1-smooth((t-4350)/1000));
@@ -110,7 +110,7 @@
         }
         for(const e of this.events)this.drawBurst(e,t);
         this.drawRecoverySmoke(t,pose,dt);
-        if(impactAge>=0&&impactAge<650){const p=impactAge/650,hitY=last.origins.reduce((sum,m)=>sum+m.y,0)/last.origins.length;this.burst.setPosition(this.enemyBase-35,hitY).setScale((final?.52:.21)*(.65+.55*smooth(p*2))).setAlpha((final?.95:.65)*(1-smooth((p-.2)/.8))).setVisible(true);}
+        if(!last?.missed&&impactAge>=0&&impactAge<650){const p=impactAge/650,hitY=last.origins.reduce((sum,m)=>sum+m.y,0)/last.origins.length;this.burst.setPosition(this.enemyBase-35,hitY).setScale((final?.52:.21)*(.65+.55*smooth(p*2))).setAlpha((final?.95:.65)*(1-smooth((p-.2)/.8))).setVisible(true);}
         const punch=impactAge>=0&&impactAge<180?(1-impactAge/180):0;
         s.cameras.main.setZoom(1).setScroll(Math.sin(impactAge*.11)*punch*(final?3:1),Math.cos(impactAge*.13)*punch*(final?2:0));
         if(age<75)this.actor.setTint(0xffe8b5);
@@ -155,7 +155,7 @@
         }
         if(age>90){const k=clamp((age-90)/1000);for(let j=0;j<4;j++)g.fillStyle(0xc1d9d4,.075*(1-k)).fillCircle(m.x+8+j*10+k*20,m.y-k*(35+j*12),4+k*(12+j*3));}
       }
-      const a=age-70;if(a<0)return;const p=clamp(a/550),radius=(final?110:55)*p;
+      const a=age-70;if(a<0||e.missed)return;const p=clamp(a/550),radius=(final?110:55)*p;
       for(let j=3;j>0;j--)g.fillStyle(final?0x63eed6:0xffc477,.025*(1-p)).fillEllipse(hit.x,hit.y,70*j*(.5+p),60*j*(.5+p));
       g.lineStyle(final?4:2,0xffd58f,(1-p)*.8).strokeCircle(hit.x,hit.y,8+radius);
       const count=final?26:13;
