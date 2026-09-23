@@ -64,9 +64,9 @@
       const t=this.t<80?this.t:this.t<1660?80+(this.t-80)/2:this.t-790;
       const s=this.s,w=s.scale.width,h=s.scale.height,foot=this.layout(t);
       // Cues use the same virtual clock as the drawings, never timers or fetch callbacks.
-      for(const [at,key] of [[650,'dash'],[950,'mechanism'],[2700,'charge']])if(t>=at&&!this.audioCues.has(key)){
+      for(const [at,key] of [[80,'awakening'],[650,'dash'],[950,'mechanism'],[2700,'charge']])if(t>=at&&!this.audioCues.has(key)){
         this.audioCues.add(key);const speed=Number(document.getElementById('speed').value)||1.5;
-        if(key==='dash')s.feedback.audio.play('dash');else s.feedback.audio.special(key,0,Math.max(.12,(3420-t)/1000/speed));
+        if(key==='dash'||key==='awakening')s.feedback.audio.play(key);else s.feedback.audio.special(key,0,Math.max(.12,(3420-t)/1000/speed));
       }
       let pose=t<650?0:t<900?1:t<1460?2:t<1570?3:t<2000?4:t<2400?6:t<2700?0:t<3480?4:t<3730?5:t<4050?4:t<4450?6:7;
       // Place each muzzle on the actual fired drawing, including after a slow frame.
@@ -88,6 +88,7 @@
         this.dark.fillStyle(0x020711,.72*fade).fillRect(0,0,w,h);
         this.dark.fillStyle(0x02050b,.92*fade).fillRect(0,0,w,40).fillRect(0,h-34,w,34);
         this.floor.fillStyle(0x060b0c,.6).fillEllipse(foot,474,130,17).fillEllipse(this.enemy.x,474,150,17);
+        this.drawChargeLight(t,w,h);
         const charge=clamp((t-2700)/720)*(t<3420?1:0);
         if(charge>0){
           for(const [x,y] of [[463,158],[435,201]]){
@@ -119,6 +120,27 @@
       const step=t<650?1:t<4300?2:3;document.querySelectorAll('.steps li').forEach((li,i)=>li.classList.toggle('active',i===step));
       if(this.count)this.counter.setText(`${this.count} ${this.es?'DISPAROS · PRUEBA VISUAL':'SHOTS · VISUAL PREVIEW'}`);
       if(t>=6000)this.stop();
+    }
+    drawChargeLight(t,w,h){
+      // Two smooth envelopes: entering the skill and preparing the final shot.
+      // No rings or strobe; use the cinematic clock so pause/speed stay coherent.
+      if(!this.enabled)return;
+      const intro=smooth(t/240)*(1-smooth((t-650)/300));
+      const finale=smooth((t-2700)/580)*(1-smooth((t-3420)/240));
+      const strength=Math.max(intro*.8,finale);
+      if(strength<=0)return;
+      const x=this.actor.x+256*this.scale,y=this.actor.y+280*this.scale;
+      for(let i=0;i<24;i++){
+        const k=i/24;this.floor.fillStyle(i<12?0x68e4d2:0xffd58d,.017*strength).fillEllipse(x,y,(350-240*k)*( .85+.15*strength),440-220*k);
+      }
+      // Restrained full-screen warm wash, never a white flash.
+      const wash=Math.max(Math.sin(Math.PI*clamp((t-180)/520))*.045,Math.sin(Math.PI*clamp((t-3220)/400))*.065);
+      if(wash>0)this.fx.fillStyle(0xffe8bc,wash).fillRect(0,0,w,h);
+      for(let i=0;i<12;i++){
+        const p=(t/1100+i*.618)%1,side=i%2?1:-1,px=x+side*(100-60*p)+Math.sin(i*2.4+p*3)*12,py=455-p*295,a=Math.sin(p*Math.PI)*strength;
+        this.fx.fillStyle(0xffdb9e,.045*a).fillCircle(px,py,8);
+        this.fx.fillStyle(0xfff0c5,.65*a).fillCircle(px,py,1.7);
+      }
     }
     drawDash(t,foot){
           const p=clamp((t-650)/400);

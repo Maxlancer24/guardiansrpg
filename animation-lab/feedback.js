@@ -51,13 +51,26 @@
       if(!this.enabled||!this.ctx||this.ctx.state!=='running'||!this.volume||this.nodes.size>24)return;
       const c=this.ctx,t=c.currentTime,pan=kind==='whoosh'?.25:kind==='parry'?-.18:0;
       this.cues.push(kind);if(this.cues.length>100)this.cues.shift();
-      const layer=(freq,end,d,level,type='sine',noise=false,delay=0)=>{
+      const layer=(freq,end,d,level,type='sine',noise=false,delay=0,attack=.012)=>{
         const start=t+delay,g=c.createGain(),p=c.createStereoPanner();p.pan.value=pan;
-        g.gain.setValueAtTime(.0001,start);g.gain.linearRampToValueAtTime(level,start+.012);g.gain.exponentialRampToValueAtTime(.0001,start+d);
+        g.gain.setValueAtTime(.0001,start);g.gain.linearRampToValueAtTime(level,start+Math.min(attack,d*.7));g.gain.exponentialRampToValueAtTime(.0001,start+d);
         let n,filter;if(noise){n=c.createBufferSource();const b=c.createBuffer(1,Math.ceil(c.sampleRate*d),c.sampleRate),data=b.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=Math.random()*2-1;n.buffer=b;filter=c.createBiquadFilter();filter.type='bandpass';filter.Q.value=.7;filter.frequency.setValueAtTime(freq,start);filter.frequency.exponentialRampToValueAtTime(end,start+d);n.connect(filter);filter.connect(g);}else{n=c.createOscillator();n.type=type;n.frequency.setValueAtTime(freq,start);n.frequency.exponentialRampToValueAtTime(end,start+d);n.connect(g);}
         g.connect(p);p.connect(this.compressor);this.nodes.add(n);n.onended=()=>{this.nodes.delete(n);n.disconnect();filter?.disconnect();g.disconnect();p.disconnect();};n.start(start);n.stop(start+d);
       };
       if(kind==='whoosh'||kind==='dash'){layer(500,2400,.24,.09,'sine',true);layer(180,65,.2,.045);return;}
+      if(kind==='awakening'){
+        // A short magical activation, not background music; all voices stop on pause/reset.
+        layer(210,560,.65,.06,'sine',false,0,.16);
+        layer(650,2100,.50,.055,'sine',true,0,.18);
+        layer(1175,1185,.58,.035,'sine',false,.13,.025);
+        layer(1762,1780,.68,.022,'sine',false,.19,.025);return;
+      }
+      if(kind==='axe'){
+        // Heavy blade contact: low body, dry crunch and short inharmonic metal tail.
+        layer(210,48,.30,.22,'triangle');layer(82,34,.42,.13);
+        layer(1700,380,.14,.20,'sine',true);layer(4200,1100,.075,.10,'sine',true,.015);
+        layer(793,570,.24,.037);layer(1267,960,.18,.022,'sine',false,.025);return;
+      }
       if(kind==='parry'){for(const [i,f] of [1480,2371,3547].entries())layer(f,f*.96,.24+i*.09,.045/(i+1));layer(4500,1600,.08,.09,'sine',true);return;}
       if(kind==='break'){layer(170,38,.35,.17);layer(3200,280,.25,.13,'sine',true);layer(770,160,.18,.05,'triangle');return;}
       if(kind==='rest'){layer(420,630,.55,.035);layer(840,1260,.7,.018,'sine',false,.08);return;}
@@ -67,7 +80,7 @@
     stop(){for(const n of this.nodes){try{n.stop();}catch{}}this.nodes.clear();}
     play(kind,variation=0){
       if(!this.enabled||!this.ctx||this.ctx.state!=='running'||this.volume===0)return;
-      if(['impact','parry','break','whoosh','dash','rest'].includes(kind)){this.effect(kind,variation);return;}
+      if(['impact','axe','awakening','parry','break','whoosh','dash','rest'].includes(kind)){this.effect(kind,variation);return;}
       const c=this.ctx,t=c.currentTime,d=kind==='shot'?.16:kind==='impact'?.22:.12;
       if(kind==='shot'&&this.sample('shot',{level:.48,rate:variation%2?.98:1.02}))return;
       const gain=c.createGain();gain.gain.setValueAtTime(kind==='shot'?.3:.14,t);gain.gain.exponentialRampToValueAtTime(.0001,t+d);gain.connect(this.compressor);

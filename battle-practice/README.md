@@ -123,3 +123,15 @@ Enemy swing/contact cues are separate; dodges have no contact sound. The existin
 opt-in sound control, volume, compressor, pause/reset cleanup and special timing
 remain. No background music added: user will choose it. Automated fake-scene and
 audio-node regressions are not substitutes for listening/visual review.
+
+## Presentation revision 10
+
+Enemy contact and counters use a separate six-layer synthesized axe impact:
+low body, dry crunch and short metal resonance. Parry, guard break and misses
+retain their distinct cues. Jessie gains feathered full-body turquoise/gold light
+on entering her special and charging the finisher, plus a restrained warm screen
+wash and rising motes. No rings or strobe; disabled with effects/reduced motion,
+driven by the existing cinematic clock, with no changes to damage or shot timing.
+A one-shot awakening cue accompanies the opening glow: soft rising energy and
+two short crystalline resonances. It respects sound opt-in, volume and stop/reset;
+the cue latch prevents replay on paused frames. No background music was added.
