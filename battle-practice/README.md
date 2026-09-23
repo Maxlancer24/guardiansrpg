@@ -83,3 +83,12 @@ Visible HP follows the same cumulative values; lethal damage is shown on the
 finisher. The underlying two logical hits, dodge results, Focus and action
 count are unchanged and remain recorded in the chronicle. Zero-total skills
 show dodges, not invented damage. Duplicate beat callbacks are ignored.
+
+## Presentation revision 5
+
+Enemy axe attacks and counters have a tapered luminous swing trail and a compact
+contact burst at virtual time 1120 ms (counter speed included). Parry sparks are
+mint, guard breaks orange, and normal impacts warm gold. Dodges have a trail but
+no body impact or impact sound. Effects use the existing paused action clock,
+respect the effects toggle, and replace motion with a compact outline for reduced
+motion. No camera/terrain shake, new assets, or combat-rule changes.

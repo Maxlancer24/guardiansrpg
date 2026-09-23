@@ -98,7 +98,7 @@
    const e=this.current;if(e&&dt>0){this.timer+=dt;
     if((e.type==='attack'||e.type==='counter')&&e.actor===1){const t=this.timer*(e.type==='counter'?1.3:1),travel=t<650?Math.max(0,Math.min(1,(t-350)/300)):t>1550?1-Math.min(1,(t-1550)/650):1;
      s.target.x=home+(heroHome+309-home)*travel;s.target.setTexture('wardenAnim'+(t<650?2:t<900?3:t<1120?4:t<1280?5:t<1550?6:7)).setOrigin(.5,1238/1280);
-     if(t>=1120&&!this.applied){this.applyCurrent();if(e.type!=='counter')this.audio.play('impact');}if(t>=2200)this.next();
+      if(t>=1120&&!this.applied){this.applyCurrent();if(e.type!=='counter'&&e.outcome!=='dodge')this.audio.play('impact');}if(t>=2200)this.next();
     }else if(e.type==='counter'){if(this.timer>=450&&!this.applied)this.applyCurrent();if(this.timer>=1100)this.next();}
     else if(e.type==='special'){this.applyCurrent();s.special.impactHandler=null;this.next();}
     else if(e.type!=='attack'){const resting=['rest-start','rest'].includes(e.type);if(this.timer>=(resting?600:350))this.applyCurrent();if(this.timer>=(resting?1300:900))this.next();}
@@ -121,7 +121,43 @@
   }
   actorX(id){const sp=this.s.special;return sp?.active?(id?sp.enemy.x:sp.actor.x+256*sp.actor.scaleX):(id?this.s.target.x:this.s.hero.x+256*this.s.hero.scaleX);}
   announce(text,id,color){this.notice={text,id,color,at:this.visualTime};}
-  updateVisuals(dt){
+   drawEnemyStrike(e,reduced){
+    if(!e||e.actor!==1||!['attack','counter'].includes(e.type))return;
+    // Same virtual clock and contact frame as the axe animation, including counters.
+    const t=this.timer*(e.type==='counter'?1.3:1),g=this.defenseFX;
+    if(t<980||t>=1510)return;
+    const blocked=e.outcome==='parry',broken=e.outcome==='break',contact=e.amount>0||blocked;
+    const color=blocked?0x9bffe7:broken?0xff995e:0xffd08a;
+    const x=this.actorX(0)+(blocked||broken?45:20),y=345;
+    if(!reduced){
+     const progress=Math.min(1,(t-980)/250),fade=Math.min(1,(1510-t)/220);
+     // Tapered curved blade trail: overhead, through contact, down toward the ground.
+     const cx=this.s.target.x+10,cy=328,rx=145,ry=137;
+     for(let i=0;i<24;i++){
+      const a=Math.max(0,progress-.48)+i/24*Math.min(progress,.48);
+      const b=Math.max(0,progress-.48)+(i+1)/24*Math.min(progress,.48);
+      const p=-1.55-a*2.65,q=-1.55-b*2.65,w=Math.sin((i+1)/25*Math.PI)*fade;
+      const x1=cx+Math.cos(p)*rx,y1=cy+Math.sin(p)*ry,x2=cx+Math.cos(q)*rx,y2=cy+Math.sin(q)*ry;
+      g.lineStyle(21*w,color,.13*fade).lineBetween(x1,y1,x2,y2);
+      g.lineStyle(8*w,color,.65*fade).lineBetween(x1,y1,x2,y2);
+      g.lineStyle(2.5*w,0xfff7df,.95*fade).lineBetween(x1,y1,x2,y2);
+     }
+    }
+    // A miss still has a swing, but never produces a body impact or sparks.
+    const age=t-1120;if(!contact||age<0||age>=320)return;
+    const k=age/320,alpha=(1-k)*(1-k);
+    if(reduced){g.lineStyle(3,color,.7*alpha).strokeEllipse(x,y,38,48);return;}
+    g.fillStyle(color,.17*alpha).fillEllipse(x,y,95+50*k,70+40*k);
+    g.lineStyle(4*(1-k)+1,color,alpha).strokeEllipse(x,y,18+100*k,14+74*k);
+    g.lineStyle(7*(1-k),0xfff9e8,alpha).lineBetween(x+22,y-31,x-22,y+31);
+    g.lineStyle(3*(1-k),color,alpha).lineBetween(x-20,y-12,x+20,y+12);
+    for(let i=0;i<11;i++){
+     const angle=i*2.39996,r=9+k*(55+(i%3)*18),len=(7+(i%4)*4)*(1-k);
+     const px=x+Math.cos(angle)*r,py=y+Math.sin(angle)*r*.75+18*k*k;
+     g.lineStyle(i%3===0?3:2,i%2?color:0xfff9e8,alpha).lineBetween(px,py,px+Math.cos(angle)*len,py+Math.sin(angle)*len);
+    }
+   }
+   updateVisuals(dt){
    this.visualTime+=dt;const time=this.visualTime,s=this.s,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,fx=s.special?.active?s.special.enabled:s.effectsEnabled;
    for(const l of this.labels){const k=Math.min(1,(time-l.at)/1500),jump=reduced?0:Math.sin(k*Math.PI)*34;
     l.text.setPosition(l.x+(reduced?0:l.dir*16*k),l.y-58*k-jump).setAlpha(k<.65?1:(1-k)/.35).setScale(reduced?1:1+.18*Math.max(0,1-k*5));
@@ -154,7 +190,8 @@
      if(broken)g.lineStyle(3,0x081714,alpha).lineBetween(x-22,298,x+16,333).lineBetween(x+16,333,x-14,371).lineBetween(x-14,371,x+23,407);
     }
    }
-   if(e?.type==='counter'&&e.actor===0&&this.timer>=450&&this.timer<600&&fx){const m=s.muzzle(),k=1-(this.timer-450)/150;this.defenseFX.lineStyle(3,0xb3ffe1,k).lineBetween(m.x,m.y,s.target.x-20,m.y);this.defenseFX.fillStyle(0xfff1c4,k).fillCircle(m.x,m.y,9*k);s.target.setTint(0xb3ffe1);}
+    if(fx)this.drawEnemyStrike(e,reduced);
+    if(e?.type==='counter'&&e.actor===0&&this.timer>=450&&this.timer<600&&fx){const m=s.muzzle(),k=1-(this.timer-450)/150;this.defenseFX.lineStyle(3,0xb3ffe1,k).lineBetween(m.x,m.y,s.target.x-20,m.y);this.defenseFX.fillStyle(0xfff1c4,k).fillCircle(m.x,m.y,9*k);s.target.setTint(0xb3ffe1);}
    if(this.notice&&time-this.notice.at<1400){const n=this.notice;this.noticeText.setText(n.text).setColor('#'+n.color.toString(16).padStart(6,'0')).setPosition(s.scale.width/2,110).setVisible(true).setAlpha(Math.min(1,(1400-(time-n.at))/300));}else this.noticeText.setVisible(false);
   }
  };
