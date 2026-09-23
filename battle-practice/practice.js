@@ -37,7 +37,24 @@
    if(e.type==='counter')this.announce(tr('CONTRAATAQUE','COUNTERATTACK'),e.actor,0x93ffdf);
    if(e.type==='rest-start')this.announce(tr('DESCANSANDO…','RESTING…'),e.actor,0xb3e9df);
    if(e.type==='attack'&&e.actor===0){this.launching=true;this.s.shoot();this.launching=false;}
-   if(e.type==='special'){this.s.special.practiceTargetDead=false;this.s.special.start();this.s.special.heading.setText(actionName.SPECIAL.toUpperCase());this.s.special.impactHandler=beat=>{const i=beat.name==='first'?0:beat.name==='second'?1:-1;if(i>=0&&e.hits[i]){this.applyHit({...e.hits[i],actor:0});this.display=e.hits[i].state;this.sync();this.s.special.practiceTargetDead=this.hp<=0;this.renderUI();return e.hits[i].amount>0;}return i===-1&&this.hp>0&&e.hits.some(h=>h.amount>0);};}
+   if(e.type==='special'){
+    const total=e.hits.reduce((sum,h)=>sum+h.amount,0),half=Math.floor(total/2),first=Math.floor(half/2);
+    const parts=[first,half-first,total-half],startHp=this.hp,seen=new Set();let shown=0;
+    this.s.special.practiceTargetDead=false;this.s.special.start();this.s.special.heading.setText(actionName.SPECIAL.toUpperCase());
+    this.s.special.impactHandler=beat=>{
+     const i=['first','second','final'].indexOf(beat.name);if(i<0||seen.has(i))return false;seen.add(i);
+     // Redistribute the resolved total over choreography beats, never new hits.
+     const amount=parts[i];shown+=amount;
+     if(total>0)this.number(amount,1,i===2?'#ffe3a0':'#f0d396');
+     else if(i<2)this.number(tr('Esquiva','Dodge'),1,'#a0e9e1');
+     if(amount>0)this.enemyStruck=this.visualTime;
+     this.display=JSON.parse(JSON.stringify(e.hits[0]?.state||e.state));
+     this.display.actors[1].hp=Math.max(0,startHp-shown);
+     this.sync();this.s.special.practiceTargetDead=this.hp<=0;this.renderUI();
+     if(i===2)for(const h of e.hits)this.log(`${names[0]} · ${outcomes[h.outcome]}: ${h.amount}.`);
+     return amount>0;
+    };
+   }
   }
   startShot(){}
   hit(i){const e=this.current;if(!e||e.type!=='attack')return;

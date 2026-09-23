@@ -74,3 +74,12 @@ recovery pulse and Focus/Ultra announcement; interrupted Rest has no success
 pulse and grants no new Focus. Both actors use the same outcome timing.
 Unit regressions cover hurt/recovery/pause/dodge and Rest pose, delayed Focus,
 interruption and reset. Rules tests still pass unchanged.
+
+## Presentation revision 4
+
+Jessie's special displays its already-resolved total across three beats:
+25%, 25%, 50%. Integer rounding assigns the remaining point to the finisher.
+Visible HP follows the same cumulative values; lethal damage is shown on the
+finisher. The underlying two logical hits, dodge results, Focus and action
+count are unchanged and remain recorded in the chronicle. Zero-total skills
+show dodges, not invented damage. Duplicate beat callbacks are ignored.
