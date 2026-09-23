@@ -124,12 +124,15 @@
    if(this.hp>0&&enemyHurt>=0&&enemyHurt<400){s.target.setTexture(enemyHurt<260?'hurt':'wardenIdle1').setOrigin(.5,1050/1092);if(s.effectsEnabled&&enemyHurt<85)s.target.setTint(0xffdab5);}
    if(this.victory||this.defeat){this.endTime+=dt;s.hero.setTexture(this.victory?`jessieWin${[0,1,2,1][Math.floor(this.endTime/300)%4]}`:'jessieReaction7');}
    if(this.hp<=0)s.target.setTexture('fallen').setOrigin(.5,1050/1092);
-   if(s.effectsEnabled&&this.current&&['guard','rest-start','rest'].includes(this.current.type)){const x=this.current.actor?s.target.x:s.shadow.x;s.fx.lineStyle(2,this.current.type==='guard'?0xe5c789:0x7decc7,.55).strokeEllipse(x,405,105,125);}
    this.updateVisuals(dt);
    this.hud.clear();this.title.setVisible(false);this.hpText.setVisible(false);this.banner.setVisible(false);
   }
   actorX(id){const sp=this.s.special;return sp?.active?(id?sp.enemy.x:sp.actor.x+256*sp.actor.scaleX):(id?this.s.target.x:this.s.hero.x+256*this.s.hero.scaleX);}
   announce(text,id,color){this.notice={text,id,color,at:this.visualTime};}
+  bodyGlow(g,x,color,strength){
+   // Feathered light, no outlined rings; covers head, torso and feet.
+   for(let i=0;i<20;i++){const k=i/20;g.fillStyle(color,strength*.014).fillEllipse(x,312,210*(1-k*.8),350*(1-k*.35));}
+  }
    drawEnemyStrike(e,reduced){
     if(!e||e.actor!==1||!['attack','counter'].includes(e.type))return;
     // Same virtual clock and contact frame as the axe animation, including counters.
@@ -155,9 +158,9 @@
     // A miss still has a swing, but never produces a body impact or sparks.
     const age=t-1120;if(!contact||age<0||age>=320)return;
     const k=age/320,alpha=(1-k)*(1-k);
-    if(reduced){g.lineStyle(3,color,.7*alpha).strokeEllipse(x,y,38,48);return;}
+    if(reduced){this.bodyGlow(g,x,color,.5*alpha);return;}
     g.fillStyle(color,.17*alpha).fillEllipse(x,y,95+50*k,70+40*k);
-    g.lineStyle(4*(1-k)+1,color,alpha).strokeEllipse(x,y,18+100*k,14+74*k);
+    if(!blocked)g.lineStyle(4*(1-k)+1,color,alpha).strokeEllipse(x,y,18+100*k,14+74*k);
     g.lineStyle(7*(1-k),0xfff9e8,alpha).lineBetween(x+22,y-31,x-22,y+31);
     g.lineStyle(3*(1-k),color,alpha).lineBetween(x-20,y-12,x+20,y+12);
     for(let i=0;i<11;i++){
@@ -176,9 +179,7 @@
    for(const a of this.display.actors){const x=this.actorX(a.id),on=a.hp>0&&(a.focus||a.ultra),color=a.ultra?0xffd679:0x77f5df;
     this.focusTexts[a.id].setText(a.ultra?'ULTRA FOCUS':'FOCUS').setColor(a.ultra?'#ffda82':'#8affdf').setPosition(x,180).setVisible(on);
     if(!on||!fx)continue;const pulse=reduced?1:.8+.2*Math.sin(time*.003);
-    this.aura.fillStyle(color,.035*pulse).fillEllipse(x,353,a.ultra?175:145,245);
-    this.aura.lineStyle(a.ultra?3:2,color,.55*pulse).strokeEllipse(x,467,a.ultra?158:135,25);
-    this.aura.lineStyle(1,color,.22*pulse).strokeEllipse(x,467,a.ultra?182:154,35);
+    this.bodyGlow(this.aura,x,color,pulse*(a.ultra?.8:.5));
     if(!reduced)for(let i=0;i<10;i++){const k=(time/1700+i/10)%1,side=i%2?1:-1;this.aura.fillStyle(color,.6*Math.sin(k*Math.PI)).fillCircle(x+side*(48+Math.sin(k*5+i)*18),457-k*215,a.ultra?2.4:1.6);}
    }
    const e=this.current;
@@ -186,17 +187,16 @@
    if(fx&&(resting||restAge<1050)){
     const success=restAge<1050,id=success?this.restPulse.id:e.actor,x=this.actorX(id),g=this.aura,color=success?(this.restPulse.ultra?0xffd679:0x77f5df):0xb3dfdf;
     const k=success?Math.min(1,restAge/1050):Math.min(1,this.timer/1300),alpha=success?1-k:.45;
-    g.lineStyle(success?3:2,color,alpha).strokeEllipse(x,467,success?95+k*115:150-k*45,success?20+k*18:26);
-    g.fillStyle(color,.07*alpha).fillEllipse(x,363,115,205);
-    if(!reduced)for(let i=0;i<12;i++){const a=i*Math.PI/6,r=success?25+k*65:65*(1-k*.65),y=success?443-k*180:423-Math.sin(a)*40;g.fillStyle(color,.65*alpha).fillCircle(x+Math.cos(a)*r,y,success?3:2);}
+    this.bodyGlow(g,x,color,alpha*.9);
+    if(!reduced)for(let i=0;i<14;i++){const p=(time/1700+i*.618)%1,px=x+Math.sin(i*2.4+p*2)*75,py=466-p*320,fade=Math.sin(p*Math.PI)*alpha;g.fillStyle(color,.07*fade).fillCircle(px,py,8);g.fillStyle(color,.55*fade).fillCircle(px,py,1.5);}
    }
    const guarded=e?.type==='attack'&&this.result?.actions[1-e.actor]==='DEFEND'&&this.display.actors[1-e.actor].hp>0&&(!this.applied||e.outcome==='parry');
    const pulse=this.defensePulse,age=pulse?time-pulse.at:9999;
-   if(fx&&(guarded||age<900)){
-    const id=age<900?pulse.id:1-e.actor,x=this.actorX(id)+(id?-45:45),broken=age<900&&pulse.kind==='break',alpha=broken?Math.max(0,1-age/900):.6;
-    const g=this.defenseFX;g.fillStyle(broken?0xffa072:0x8cf5df,.10*alpha).fillEllipse(x,345,82,155);g.lineStyle(3,broken?0xffa072:0x98ffe3,alpha).strokeEllipse(x,345,82,155);
+   const preparing=e?.type==='guard';
+   if(fx&&(preparing||guarded||age<900)){
+    const id=age<900?pulse.id:preparing?e.actor:1-e.actor,center=this.actorX(id),x=center+(id?-45:45),broken=age<900&&pulse.kind==='break',alpha=age<900?Math.max(0,1-age/900):.35;
+    const g=this.defenseFX;this.bodyGlow(this.aura,center,broken?0xffa072:0x8cf5df,alpha*.7);
     if(age<900){for(let i=0;i<9;i++){const angle=i*2.4,r=18+(reduced?0:age/900)*(broken?105:65);g.lineStyle(2,broken?0xffb880:0xdbfff2,(1-age/900)*.8);g.lineBetween(x+Math.cos(angle)*r,345+Math.sin(angle)*r,x+Math.cos(angle)*(r+12),345+Math.sin(angle)*(r+12));}
-     if(broken)g.lineStyle(3,0x081714,alpha).lineBetween(x-22,298,x+16,333).lineBetween(x+16,333,x-14,371).lineBetween(x-14,371,x+23,407);
     }
    }
     if(fx)this.drawEnemyStrike(e,reduced);

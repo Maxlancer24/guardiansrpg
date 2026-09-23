@@ -100,3 +100,11 @@ Jessie's Parry stance loops the existing prep0–3 drawings with the normal atta
 clock spans the guard event and incoming swing; pausing freezes it. Successful
 blocks keep the stance until the existing counter animation takes over. Damage or
 guard break releases it into the hurt reaction. No new assets or rules changes.
+
+## Presentation revision 7
+
+Removed guard, Rest and Focus outline rings. Status effects now use feathered
+full-body light and rising motes; successful blocks retain contact sparks without
+a shield oval. The Parry preparation loop is unchanged. The special's slide uses
+historical-position sprite echoes and feathered ground dust instead of horizontal
+speed lines. All motion remains on the existing virtual clock and effects toggle.

@@ -104,9 +104,7 @@
           }
         }
         if(t>=650&&t<1050){
-          const p=clamp((t-650)/400);
-          this.ghosts.forEach((g,i)=>g.setPosition(this.actor.x-22*(i+1),this.actor.y).setScale(this.scale).setAlpha((1-p)*.14/(i+1)));
-          for(let i=0;i<14;i++){const y=195+i*19;this.fx.lineStyle(i%3+1,0x8de4d7,.25*(1-p));this.fx.lineBetween(foot-260-i*8,y,foot-65,y-3);}
+          this.drawDash(t,foot);
         }
         for(const e of this.events)this.drawBurst(e,t);
         this.drawRecoverySmoke(t,pose,dt);
@@ -121,6 +119,18 @@
       const step=t<650?1:t<4300?2:3;document.querySelectorAll('.steps li').forEach((li,i)=>li.classList.toggle('active',i===step));
       if(this.count)this.counter.setText(`${this.count} ${this.es?'DISPAROS · PRUEBA VISUAL':'SHOTS · VISUAL PREVIEW'}`);
       if(t>=6000)this.stop();
+    }
+    drawDash(t,foot){
+          const p=clamp((t-650)/400);
+          // Echo actual earlier positions, rather than dragging parallel screen lines.
+          const advance=85*smooth((t-650)/250),fade=Math.sin(Math.PI*p);
+          this.ghosts.forEach((g,i)=>{const past=85*smooth((t-650-(i+1)*55)/250);g.setPosition(this.actor.x+past-advance,this.actor.y).setScale(this.scale).setTint(0xb7d8d3).setAlpha(fade*.19/(i+1));});
+          // Short, feathered dust wisps stay near the launch point and the boots.
+          for(let i=0;i<7;i++){
+            const age=clamp((p-i*.055)/.65),alpha=Math.sin(age*Math.PI)*.12;
+            const x=foot-advance-24-i*9-age*32,y=468-7*Math.sin(i*2.4)-age*(12+i*2);
+            for(let j=0;j<12;j++){const feather=1-j/14;this.floor.fillStyle(i%2?0xa8b1a1:0xcfb890,alpha/12).fillEllipse(x,y,(22+age*58)*feather,(9+age*20)*feather);}
+          }
     }
     clearCard(){this.card.clear();this.cardMask.clear();this.portrait.setVisible(false);this.cardTitle.setVisible(false);this.cardSkill.setVisible(false);}
     drawRecoverySmoke(t,pose,dt){
