@@ -64,9 +64,9 @@
       const t=this.t<80?this.t:this.t<1660?80+(this.t-80)/2:this.t-790;
       const s=this.s,w=s.scale.width,h=s.scale.height,foot=this.layout(t);
       // Cues use the same virtual clock as the drawings, never timers or fetch callbacks.
-      for(const [at,key] of [[950,'mechanism'],[2700,'charge']])if(t>=at&&!this.audioCues.has(key)){
+      for(const [at,key] of [[650,'dash'],[950,'mechanism'],[2700,'charge']])if(t>=at&&!this.audioCues.has(key)){
         this.audioCues.add(key);const speed=Number(document.getElementById('speed').value)||1.5;
-        s.feedback.audio.special(key,0,Math.max(.12,(3420-t)/1000/speed));
+        if(key==='dash')s.feedback.audio.play('dash');else s.feedback.audio.special(key,0,Math.max(.12,(3420-t)/1000/speed));
       }
       let pose=t<650?0:t<900?1:t<1460?2:t<1570?3:t<2000?4:t<2400?6:t<2700?0:t<3480?4:t<3730?5:t<4050?4:t<4450?6:7;
       // Place each muzzle on the actual fired drawing, including after a slow frame.

@@ -108,3 +108,18 @@ full-body light and rising motes; successful blocks retain contact sparks withou
 a shield oval. The Parry preparation loop is unchanged. The special's slide uses
 historical-position sprite echoes and feathered ground dust instead of horizontal
 speed lines. All motion remains on the existing virtual clock and effects toggle.
+
+## Presentation revision 9
+
+Overhead Focus labels are hidden; auras and status cards remain. The forest has
+14–24 deterministic glowing fireflies behind the combatants, frozen on pause,
+static with reduced motion, hidden when effects are disabled and subdued during
+the special. A localized victory/defeat banner appears after the resolved action
+queue finishes and clears on reset. No rewards or combat-rule changes.
+
+Audio keeps the existing CC0 shot/mechanism recordings and adds synthesized
+layered impact, metallic Parry, guard-break, axe/dash whoosh and recovery cues.
+Enemy swing/contact cues are separate; dodges have no contact sound. The existing
+opt-in sound control, volume, compressor, pause/reset cleanup and special timing
+remain. No background music added: user will choose it. Automated fake-scene and
+audio-node regressions are not substitutes for listening/visual review.
