@@ -177,7 +177,8 @@
    this.labels=this.labels.filter(l=>{if(time-l.at>=1500){l.text.destroy();return false;}return true;});
    if(!this.aura)return;this.aura.clear();this.defenseFX.clear();
    for(const a of this.display.actors){const x=this.actorX(a.id),on=a.hp>0&&(a.focus||a.ultra),color=a.ultra?0xffd679:0x77f5df;
-    this.focusTexts[a.id].setText(a.ultra?'ULTRA FOCUS':'FOCUS').setColor(a.ultra?'#ffda82':'#8affdf').setPosition(x,180).setVisible(on);
+    // Aura communicates Focus in the arena; detailed status stays in the HUD.
+    this.focusTexts[a.id].setVisible(false);
     if(!on||!fx)continue;const pulse=reduced?1:.8+.2*Math.sin(time*.003);
     this.bodyGlow(this.aura,x,color,pulse*(a.ultra?.8:.5));
     if(!reduced)for(let i=0;i<10;i++){const k=(time/1700+i/10)%1,side=i%2?1:-1;this.aura.fillStyle(color,.6*Math.sin(k*Math.PI)).fillCircle(x+side*(48+Math.sin(k*5+i)*18),457-k*215,a.ultra?2.4:1.6);}
