@@ -62,3 +62,15 @@ Normal attack and special numbers occupy separate lanes and rise on a dedicated
 presentation clock, which advances during the cinematic and stops when paused.
 Tests cover lane separation, cinematic label expiry, pause, Focus/Ultra/KO,
 deferred counter HP and reset cleanup. Enemy artwork and game rules unchanged.
+
+## Presentation revision 3
+
+Restore the existing enemy hurt drawing for actual damage, ahead of the idle
+and recovery drawings; KO remains higher priority. Normal shots, special hits
+and Jessie's counter notify the reaction timer; dodges and full blocks do not.
+Rest has a 1300 ms virtual breathing/eyes-closed sequence using existing frames
+without moving the feet or changing proportions. Success gets a separate
+recovery pulse and Focus/Ultra announcement; interrupted Rest has no success
+pulse and grants no new Focus. Both actors use the same outcome timing.
+Unit regressions cover hurt/recovery/pause/dodge and Rest pose, delayed Focus,
+interruption and reset. Rules tests still pass unchanged.
