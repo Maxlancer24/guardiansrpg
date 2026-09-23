@@ -135,3 +135,16 @@ driven by the existing cinematic clock, with no changes to damage or shot timing
 A one-shot awakening cue accompanies the opening glow: soft rising energy and
 two short crystalline resonances. It respects sound opt-in, volume and stop/reset;
 the cue latch prevents replay on paused frames. No background music was added.
+
+## Presentation revision 11
+
+Adds the user-supplied Airship Armada MP3 with separate Music toggle/volume,
+initially 10%, looping after user opt-in. Its page-owned audio element is created
+once and never touched by battle reset, SFX stop/mute or cinematic cleanup.
+Toggling music off/on pauses/resumes rather than seeking to zero. Reloading or
+leaving the page is outside the in-page continuity guarantee. Both languages have
+loading/playback error messages. No musical asset is labeled CC0.
+
+Enemy axe and Parry now prefer documented CC0 weapon recordings; failed sample
+loads retain the previous fallback without replaying expired events. Existing
+shot/mechanism recordings and cinematic timing are unchanged.

@@ -227,6 +227,8 @@
  };
  window.PracticeController={attach(s){
   s.special.practiceMode=true;
+  // Kept outside reset(), next() and the SFX voice pool: never restart the song per duel.
+  if(window.PracticeMusic&&!s.practiceMusic)s.practiceMusic=new window.PracticeMusic(es);
   s.hero.setDepth(2);s.target.setDepth(2);s.light?.setDepth(3);s.fx.setDepth(4);
   s.feedback.ambient=s.add.graphics().setDepth(1);s.feedback.resultShade=s.add.graphics().setDepth(39);
   const f=s.feedback;f.aura=s.add.graphics().setDepth(9);f.defenseFX=s.add.graphics().setDepth(14);f.noticeText=s.add.text(0,110,'',{fontFamily:'Arial',fontSize:'24px',fontStyle:'bold',stroke:'#06100e',strokeThickness:6}).setOrigin(.5).setDepth(31);f.focusTexts=[0,1].map(()=>s.add.text(0,180,'',{fontFamily:'Arial',fontSize:'16px',fontStyle:'bold',stroke:'#06100e',strokeThickness:4}).setOrigin(.5).setDepth(15));

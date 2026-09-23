@@ -22,11 +22,11 @@
     }
     async loadSamples(){
       if(this.loading)return;this.loading=true;this.status.textContent=this.es?'Cargando sonidos…':'Loading sounds…';
-      await Promise.all(['shot','mechanism'].map(async name=>{try{
+      await Promise.all(['shot','mechanism','axe','parry'].map(async name=>{try{
         const r=await fetch(`/assets/demo-battle/audio-v1/${name}.wav`,{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error(r.status);
         this.buffers[name]=await this.ctx.decodeAudioData(await r.arrayBuffer());
       }catch{/* No late playback. Missing samples retain the synthesized fallback. */}}));
-      this.status.textContent=Object.keys(this.buffers).length===2?(this.es?'Audio real listo':'Recorded audio ready'):(this.es?'Audio básico disponible':'Basic audio available');
+      this.status.textContent=Object.keys(this.buffers).length===4?(this.es?'Audio grabado listo':'Recorded audio ready'):(this.es?'Audio básico disponible':'Basic audio available');
     }
     sample(name,{level=.5,pan=-.2,rate=1}={}){
       if(!this.enabled||!this.ctx||this.ctx.state!=='running'||!this.volume)return false;
@@ -51,6 +51,7 @@
       if(!this.enabled||!this.ctx||this.ctx.state!=='running'||!this.volume||this.nodes.size>24)return;
       const c=this.ctx,t=c.currentTime,pan=kind==='whoosh'?.25:kind==='parry'?-.18:0;
       this.cues.push(kind);if(this.cues.length>100)this.cues.shift();
+      if((kind==='axe'||kind==='parry')&&this.sample(kind,{level:kind==='axe'?.68:.48,pan:-.12,rate:variation%2?.98:1}))return;
       const layer=(freq,end,d,level,type='sine',noise=false,delay=0,attack=.012)=>{
         const start=t+delay,g=c.createGain(),p=c.createStereoPanner();p.pan.value=pan;
         g.gain.setValueAtTime(.0001,start);g.gain.linearRampToValueAtTime(level,start+Math.min(attack,d*.7));g.gain.exponentialRampToValueAtTime(.0001,start+d);

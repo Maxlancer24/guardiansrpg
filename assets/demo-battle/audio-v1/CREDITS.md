@@ -1,5 +1,32 @@
 # Jessie practice audio — revision 19
 
+## Recorded melee upgrade (practice revision 11)
+
+Source: **Medieval sound effects - Weapon impacts**, recorded by Ben Jaszczak
+and Brian Nelson (Still North Media), submitted by MedicineStorm. CC0 1.0.
+https://opengameart.org/node/146863
+Archive: https://opengameart.org/sites/default/files/medieval_sfx_weapon_on_weapon_1_of_2.7z
+
+- axe.wav: `Axe Spear Haft on Haft.wav`, excerpt 0.12596 s, length 0.65 s.
+  Dry recorded haft impact used as the enemy's body-contact sound.
+  SHA256: 8e5c6a72f1eaa3b219d37d26a11faa56fa728bbec307d06f4a2627838caa5d2f
+- parry.wav: `Axe Norse Sword Blade on Blade.wav`, excerpt 0.12028 s, length 0.9 s.
+  Recorded blade collision used for a successful block.
+  SHA256: f06de399292ad37a20d1e3da7e3bc2acb9ec300d89aa94fcbd47b948281e16ce
+
+Both excerpts use mono 32 kHz 16-bit PCM, transient trimming, peak normalization
+and edge fades. Synthetic cues remain only as unavailable-file fallbacks for these
+two events; other energy/guard-break accents remain synthesized.
+
+## User-provided music (not part of the CC0 collection)
+
+airship-armada.mp3 is the user's supplied `RPG Combat Music The Airship Armada.mp3`,
+copied without modification at their request. No CC0 or redistribution license
+is asserted for this music. Track rights/attribution remain with its owner.
+SHA256: 2fe7d4559d48d58f64d99e9db35861a83397d5ac628732f6756a8d1a5de3be57
+Page-level looping playback defaults to 10% volume and starts only on opt-in;
+battle resets and SFX stop/mute do not reset or pause the music.
+
 Both source recordings are published under CC0 1.0:
 https://creativecommons.org/publicdomain/zero/1.0/
 
