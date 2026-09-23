@@ -29,7 +29,7 @@
       window.specialSnapshot=()=>({active:this.active,time:this.t,shots:this.count,impacts:this.events.filter(e=>e.impacted).length,pose:this.actor.texture.key,events:this.events.map(e=>({name:e.name,origins:e.origins,impacted:!!e.impacted})),effects:this.enabled,zoom:s.cameras.main.zoom,actorScale:this.actor.scaleX,normalScale:s.hero.scaleX,portrait:this.portrait.visible});
     }
     start(){
-      if(this.active)return;this.active=true;this.t=0;this.count=0;this.events=[];this.next=0;this.hold=0;
+      if(this.active)return;this.active=true;this.t=0;this.count=0;this.events=[];this.next=0;this.hold=0;this.audioCues=new Set();this.smoke=[];this.lastSmoke=0;
       const s=this.s;
       this.width=s.scale.width;this.height=s.scale.height;
       this.hidden=[s.hero,s.target,s.shadow,s.targetShadow,s.light,s.fx,s.feedback.hud,s.feedback.title,s.feedback.hpText,s.feedback.heroTitle,s.feedback.heroHpText,s.feedback.banner,s.feedback.movingShadow];
@@ -37,7 +37,7 @@
       this.actor.setVisible(true);this.enemy.setVisible(true);this.heading.setVisible(true);this.counter.setVisible(true);
       this.heading.setText(this.es?'JESSIE · FUEGO CRUZADO':'JESSIE · CROSSFIRE');
       this.counter.setText(this.es?'PRUEBA VISUAL · SIN CAMBIOS EN EL COMBATE':'VISUAL PREVIEW · COMBAT UNCHANGED');
-      s.feedback.audio.play('cloth');this.tone('charge');s.controls();
+      s.feedback.audio.play('cloth');s.controls();
     }
     stop(){
       if(!this.active)return;this.active=false;
@@ -47,13 +47,6 @@
       this.clearCard();
       this.ghosts.forEach(o=>o.setAlpha(0));this.dark.clear();this.floor.clear();this.fx.clear();
       this.s.cameras.main.setZoom(1).setScroll(0,0);this.s.feedback.audio.stop();this.s.rest=0;this.s.controls();
-    }
-    tone(kind){
-      const a=this.s.feedback.audio;if(!a.enabled||!a.ctx||a.ctx.state!=='running'||!a.volume)return;
-      const c=a.ctx,now=c.currentTime,d=kind==='charge'?.4:.32,o=c.createOscillator(),g=c.createGain();
-      o.type=kind==='charge'?'sine':'triangle';o.frequency.setValueAtTime(kind==='charge'?130:95,now);o.frequency.exponentialRampToValueAtTime(kind==='charge'?520:28,now+d);
-      g.gain.setValueAtTime(.001,now);g.gain.linearRampToValueAtTime(a.volume*.18,now+.025);g.gain.exponentialRampToValueAtTime(.0001,now+d);
-      o.connect(g);g.connect(c.destination);a.nodes.add(o);o.onended=()=>{a.nodes.delete(o);o.disconnect();g.disconnect();};o.start();o.stop(now+d);
     }
     layout(t){
       const small=this.s.scale.width<1000,home=small?225:365;
@@ -70,13 +63,18 @@
       // After it closes, preserve the original attack rhythm and muzzle events.
       const t=this.t<80?this.t:this.t<1660?80+(this.t-80)/2:this.t-790;
       const s=this.s,w=s.scale.width,h=s.scale.height,foot=this.layout(t);
+      // Cues use the same virtual clock as the drawings, never timers or fetch callbacks.
+      for(const [at,key] of [[950,'mechanism'],[2700,'charge']])if(t>=at&&!this.audioCues.has(key)){
+        this.audioCues.add(key);const speed=Number(document.getElementById('speed').value)||1.5;
+        s.feedback.audio.special(key,0,Math.max(.12,(3420-t)/1000/speed));
+      }
       let pose=t<650?0:t<900?1:t<1460?2:t<1570?3:t<2000?4:t<2400?6:t<2700?0:t<3480?4:t<3730?5:t<4050?4:t<4450?6:7;
       // Place each muzzle on the actual fired drawing, including after a slow frame.
       while(this.next<beats.length&&t>=beats[this.next].at){
         const b=beats[this.next++];pose=b.pose;
         const origins=b.guns.map(([x,y])=>({x:this.actor.x+x*this.scale,y:this.actor.y+y*this.scale}));
         this.events.push({...b,origins});this.count+=origins.length;
-        s.feedback.audio.play('shot',this.next);if(b.name==='final')this.tone('impact');
+        s.feedback.audio.special(b.name==='final'?'final':'shot',this.next);
       }
       this.actor.setTexture('specialPose'+pose).clearTint();
       for(const e of this.events){if(!e.impacted&&t>=e.at+70){e.impacted=true;s.feedback.audio.play('impact');this.hold=e.name==='final'?110:45;}}
@@ -97,6 +95,13 @@
             this.fx.lineStyle(1.5,0x95ffe7,.7*charge).strokeCircle(mx,my,12+24*(1-charge));
             for(let i=0;i<12;i++){const a=i*Math.PI/6+t*.004,r=15+70*(1-charge);this.fx.fillStyle(i%2?0xf4cb79:0x7dffe6,.7*charge).fillCircle(mx+Math.cos(a)*r,my+Math.sin(a)*r,(i%3)+1);}
           }
+          // Sweep along each barrel, not across the character's face or entire silhouette.
+          for(const [ax,ay,bx,by] of [[391,158,463,158],[365,197,435,201]]){
+            const p=smooth(charge),x=this.actor.x+(ax+(bx-ax)*p)*this.scale,y=this.actor.y+(ay+(by-ay)*p)*this.scale;
+            this.fx.lineStyle(6,0x8affeb,.16).lineBetween(x-9,y,x+9,y);
+            this.fx.lineStyle(2,0xffefbd,.9).lineBetween(x-6,y,x+6,y);
+            this.fx.lineBetween(x,y-4,x,y+4);
+          }
         }
         if(t>=650&&t<1050){
           const p=clamp((t-650)/400);
@@ -104,6 +109,7 @@
           for(let i=0;i<14;i++){const y=195+i*19;this.fx.lineStyle(i%3+1,0x8de4d7,.25*(1-p));this.fx.lineBetween(foot-260-i*8,y,foot-65,y-3);}
         }
         for(const e of this.events)this.drawBurst(e,t);
+        this.drawRecoverySmoke(t,pose,dt);
         if(impactAge>=0&&impactAge<650){const p=impactAge/650,hitY=last.origins.reduce((sum,m)=>sum+m.y,0)/last.origins.length;this.burst.setPosition(this.enemyBase-35,hitY).setScale((final?.52:.21)*(.65+.55*smooth(p*2))).setAlpha((final?.95:.65)*(1-smooth((p-.2)/.8))).setVisible(true);}
         const punch=impactAge>=0&&impactAge<180?(1-impactAge/180):0;
         s.cameras.main.setZoom(1).setScroll(Math.sin(impactAge*.11)*punch*(final?3:1),Math.cos(impactAge*.13)*punch*(final?2:0));
@@ -117,6 +123,15 @@
       if(t>=6000)this.stop();
     }
     clearCard(){this.card.clear();this.cardMask.clear();this.portrait.setVisible(false);this.cardTitle.setVisible(false);this.cardSkill.setVisible(false);}
+    drawRecoverySmoke(t,pose,dt){
+      // Emit from each current drawing's muzzle; existing wisps keep their world position.
+      const tips={4:[[463,158],[435,201]],6:[[416,311],[350,344]],7:[[86,343],[417,331]]};
+      if(dt>0&&t>=3730&&t<4900&&tips[pose]&&(!this.lastSmoke||t-this.lastSmoke>=65)){
+        this.lastSmoke=t;for(const [x,y] of tips[pose])this.smoke.push({at:t,x:this.actor.x+x*this.scale,y:this.actor.y+y*this.scale});
+      }
+      this.smoke=this.smoke.filter(p=>t-p.at<750);
+      for(const p of this.smoke){const k=clamp((t-p.at)/750);this.fx.fillStyle(0xd7e4de,.1*(1-k)).fillCircle(p.x+7*Math.sin(k*3),p.y-26*k,2+8*k);}
+    }
     drawCard(t,w){
       this.clearCard();if(!this.enabled||t<80||t>870)return;
       const alpha=smooth((t-80)/130)*(1-smooth((t-670)/200));
