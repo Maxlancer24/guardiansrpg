@@ -1,5 +1,10 @@
 # Jessie special — Crossfire visual study
 
+Revision18: portrait interval doubled from790 to1580 virtual milliseconds
+(approximately0.53 to1.05seconds at1.5x). The choreography clock runs half-rate
+only during the portrait interval; subsequent shot/recoil/impact spacing is
+unchanged, shifted790ms later. Pause and speed controls remain effective.
+
 ## Revision 17
 
 Special actor scale now inherits the normal hero scale (.64 instead of .72).

@@ -66,7 +66,10 @@
     update(dt,enabled){
       this.enabled=enabled&&!this.reduced;
       if(this.hold>0)this.hold=Math.max(0,this.hold-dt);else this.t+=dt;
-      const t=this.t,s=this.s,w=s.scale.width,h=s.scale.height,foot=this.layout(t);
+      // Double only the portrait interval (80–870): 790 -> 1580 virtual ms.
+      // After it closes, preserve the original attack rhythm and muzzle events.
+      const t=this.t<80?this.t:this.t<1660?80+(this.t-80)/2:this.t-790;
+      const s=this.s,w=s.scale.width,h=s.scale.height,foot=this.layout(t);
       let pose=t<650?0:t<900?1:t<1460?2:t<1570?3:t<2000?4:t<2400?6:t<2700?0:t<3480?4:t<3730?5:t<4050?4:t<4450?6:7;
       // Place each muzzle on the actual fired drawing, including after a slow frame.
       while(this.next<beats.length&&t>=beats[this.next].at){
