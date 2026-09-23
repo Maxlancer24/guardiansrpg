@@ -1,5 +1,15 @@
 # Jessie special — Crossfire visual study
 
+## Revision 17
+
+Special actor scale now inherits the normal hero scale (.64 instead of .72).
+Camera zoom stays at1 throughout, preventing a second apparent size increase.
+The existing jessie-cutin.png art is reused in a masked sliding title strip
+(80–870 virtual ms), dismissed before the first shot at1240. No new generated
+art. ES/EN titles, hidden with Effects off/reduced motion, cleared on reset.
+QA verifies equal normal/special scale, zoom1, portrait present at350 and absent
+at1050, plus the existing desktop/mobile special and normal-combat tests.
+
 Independent preview button, ES/EN. This is NOT a production skill or a change to
 the Discord combat resolver: no HP, initiative, turns, account or DB mutations.
 The normal two-shot action remains unchanged. Four visual shots: single first
@@ -23,7 +33,7 @@ floor525. Muzzle coordinates measured on extracted drawings: pose2=(485,150),
 pose4 upper=(463,158), lower=(435,201). First fires pose2; second fires lower
 gun in pose4; final fires both in pose4. Actor changes to recoil after release.
 Transparent drawn impact, code-driven trails, sparks, smoke, charged motes,
-localized glows, small zoom/shake and silhouette echoes. No full-screen flashes.
+localized glows, small shake and silhouette echoes. No full-screen flashes.
 The crowded later VFX cells were rejected; only isolated first burst is used.
 Pause freezes cinematic clock; reset/resize cancels and restores the scene.
 Reduced-motion preference suppresses effects/camera. Effects toggle allows

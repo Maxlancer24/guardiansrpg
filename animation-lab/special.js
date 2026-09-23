@@ -6,7 +6,7 @@
     {at:1780,pose:4,guns:[[435,201]],name:'second'},
     {at:3420,pose:4,guns:[[463,158],[435,201]],name:'final'}];
   window.SpecialPreview=class {
-    static preload(s){for(let i=0;i<8;i++)s.load.image(`specialPose${i}`,`/assets/demo-battle/jessie-special-v1/pose-${i}.png`);s.load.image('specialImpact','/assets/demo-battle/jessie-special-v1/impact.png');}
+    static preload(s){for(let i=0;i<8;i++)s.load.image(`specialPose${i}`,`/assets/demo-battle/jessie-special-v1/pose-${i}.png`);s.load.image('specialImpact','/assets/demo-battle/jessie-special-v1/impact.png');s.load.image('specialPortrait','/assets/demo-battle/jessie-cutin.png');}
     constructor(s,es){
       this.s=s;this.es=es;this.active=false;this.t=0;this.count=0;this.events=[];
       this.reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -18,10 +18,15 @@
       this.burst=s.add.image(0,0,'specialImpact').setDepth(13).setVisible(false);
       this.heading=s.add.text(0,0,'',{fontFamily:'Georgia',fontSize:'26px',color:'#ffe4ac',align:'center'}).setOrigin(.5).setDepth(14);
       this.counter=s.add.text(0,0,'',{fontFamily:'Arial',fontSize:'18px',color:'#a9fff0'}).setOrigin(.5).setDepth(14);
+      this.card=s.add.graphics().setDepth(20);
+      this.cardMask=s.make.graphics({add:false});
+      this.portrait=s.add.image(0,0,'specialPortrait').setOrigin(0).setDepth(21).setMask(this.cardMask.createGeometryMask()).setVisible(false);
+      this.cardTitle=s.add.text(0,0,'JESSIE',{fontFamily:'Georgia',fontSize:'42px',color:'#ffe1a3'}).setOrigin(.5).setDepth(22).setVisible(false);
+      this.cardSkill=s.add.text(0,0,es?'FUEGO CRUZADO':'CROSSFIRE',{fontFamily:'Arial',fontSize:'18px',color:'#98f4df',letterSpacing:4}).setOrigin(.5).setDepth(22).setVisible(false);
       this.button=document.createElement('button');this.button.id='special';this.button.textContent=es?'Probar especial ✦':'Preview special ✦';
       this.button.title=es?'Cinemática de prueba: no cambia vida ni turnos':'Visual cinematic: health and turns are unchanged';
       document.getElementById('shoot').after(this.button);this.button.onclick=()=>s.startSpecial();
-      window.specialSnapshot=()=>({active:this.active,time:this.t,shots:this.count,impacts:this.events.filter(e=>e.impacted).length,pose:this.actor.texture.key,events:this.events.map(e=>({name:e.name,origins:e.origins,impacted:!!e.impacted})),effects:this.enabled,zoom:s.cameras.main.zoom});
+      window.specialSnapshot=()=>({active:this.active,time:this.t,shots:this.count,impacts:this.events.filter(e=>e.impacted).length,pose:this.actor.texture.key,events:this.events.map(e=>({name:e.name,origins:e.origins,impacted:!!e.impacted})),effects:this.enabled,zoom:s.cameras.main.zoom,actorScale:this.actor.scaleX,normalScale:s.hero.scaleX,portrait:this.portrait.visible});
     }
     start(){
       if(this.active)return;this.active=true;this.t=0;this.count=0;this.events=[];this.next=0;this.hold=0;
@@ -39,6 +44,7 @@
       this.hidden.forEach((o,i)=>o.setVisible(this.saved[i]));
       this.actor.setVisible(false);this.enemy.setVisible(false);this.heading.setVisible(false);this.counter.setVisible(false);
       this.burst.setVisible(false);
+      this.clearCard();
       this.ghosts.forEach(o=>o.setAlpha(0));this.dark.clear();this.floor.clear();this.fx.clear();
       this.s.cameras.main.setZoom(1).setScroll(0,0);this.s.feedback.audio.stop();this.s.rest=0;this.s.controls();
     }
@@ -52,7 +58,7 @@
     layout(t){
       const small=this.s.scale.width<1000,home=small?225:365;
       const advance=85*smooth((t-650)/250)-25*smooth((t-1950)/350)-60*smooth((t-4300)/900);
-      this.scale=.72;this.actor.setPosition(home+advance-256*this.scale,470-525*this.scale).setScale(this.scale);
+      this.scale=this.s.hero.scaleX;this.actor.setPosition(home+advance-256*this.scale,470-525*this.scale).setScale(this.scale);
       this.enemyBase=small?690:958;this.enemy.setPosition(this.enemyBase,470).clearTint();
       this.heading.setPosition(this.s.scale.width/2,86);this.counter.setPosition(this.s.scale.width/2,this.s.scale.height-60);
       return home+advance;
@@ -97,15 +103,29 @@
         for(const e of this.events)this.drawBurst(e,t);
         if(impactAge>=0&&impactAge<650){const p=impactAge/650,hitY=last.origins.reduce((sum,m)=>sum+m.y,0)/last.origins.length;this.burst.setPosition(this.enemyBase-35,hitY).setScale((final?.52:.21)*(.65+.55*smooth(p*2))).setAlpha((final?.95:.65)*(1-smooth((p-.2)/.8))).setVisible(true);}
         const punch=impactAge>=0&&impactAge<180?(1-impactAge/180):0;
-        const zoom=1+.035*fade+(final?.018:0)*punch;
-        s.cameras.main.setZoom(zoom).setScroll(Math.sin(impactAge*.11)*punch*(final?3:1),Math.cos(impactAge*.13)*punch*(final?2:0));
+        s.cameras.main.setZoom(1).setScroll(Math.sin(impactAge*.11)*punch*(final?3:1),Math.cos(impactAge*.13)*punch*(final?2:0));
         if(age<75)this.actor.setTint(0xffe8b5);
       }else s.cameras.main.setZoom(1).setScroll(0,0);
+      this.drawCard(t,w);
       const label=t<650?(this.es?'Preparación':'Preparing'):t<2400?(this.es?'Ráfaga alternada':'Alternating fire'):t<3420?(this.es?'Concentración':'Gathering energy'):t<4300?(this.es?'Disparo doble':'Twin finisher'):(this.es?'Recuperación':'Recovery');
       document.getElementById('phase-label').textContent=label;
       const step=t<650?1:t<4300?2:3;document.querySelectorAll('.steps li').forEach((li,i)=>li.classList.toggle('active',i===step));
       if(this.count)this.counter.setText(`${this.count} ${this.es?'DISPAROS · PRUEBA VISUAL':'SHOTS · VISUAL PREVIEW'}`);
       if(t>=6000)this.stop();
+    }
+    clearCard(){this.card.clear();this.cardMask.clear();this.portrait.setVisible(false);this.cardTitle.setVisible(false);this.cardSkill.setVisible(false);}
+    drawCard(t,w){
+      this.clearCard();if(!this.enabled||t<80||t>870)return;
+      const alpha=smooth((t-80)/130)*(1-smooth((t-670)/200));
+      const slide=-90*(1-smooth((t-80)/160))+100*smooth((t-700)/170),y=130,height=285;
+      this.card.fillStyle(0x071423,.96*alpha).fillRect(0,y,w,height);
+      this.card.fillStyle(0x123f46,.55*alpha).fillTriangle(w*.4,y,w*.73,y,w*.52,y+height);
+      this.card.lineStyle(2,0xe7bb68,alpha).lineBetween(0,y,w,y).lineBetween(0,y+height,w,y+height);
+      this.cardMask.fillStyle(0xffffff).fillPoints([{x:0,y},{x:w*.61,y},{x:w*.51,y:y+height},{x:0,y:y+height}],true);
+      this.portrait.setPosition(w*.04+slide,y-65).setScale(w<1000?.5:.65).setAlpha(alpha).setVisible(true);
+      this.cardTitle.setPosition(w*.74-slide*.15,y+112).setAlpha(alpha).setVisible(true);
+      this.cardSkill.setPosition(w*.74-slide*.15,y+157).setAlpha(alpha).setVisible(true);
+      for(let i=0;i<5;i++){this.card.lineStyle(1,0x8df2dc,.18*alpha).lineBetween(w*.62+i*30,y+height-25-i*8,w,y+height-25-i*8);}
     }
     drawBurst(e,t){
       const age=t-e.at,g=this.fx,final=e.name==='final',hit={x:this.enemyBase-35,y:e.origins.reduce((sum,m)=>sum+m.y,0)/e.origins.length};
