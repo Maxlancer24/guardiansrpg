@@ -1,0 +1,128 @@
+/* Independent visual skill study. Never changes encounter HP, turns or rewards. */
+(() => {
+  const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+  const smooth=x=>{x=clamp(x);return x*x*(3-2*x);};
+  const beats=[{at:1240,pose:2,guns:[[485,150]],name:'first'},
+    {at:1780,pose:4,guns:[[435,201]],name:'second'},
+    {at:3420,pose:4,guns:[[463,158],[435,201]],name:'final'}];
+  window.SpecialPreview=class {
+    static preload(s){for(let i=0;i<8;i++)s.load.image(`specialPose${i}`,`/assets/demo-battle/jessie-special-v1/pose-${i}.png`);s.load.image('specialImpact','/assets/demo-battle/jessie-special-v1/impact.png');}
+    constructor(s,es){
+      this.s=s;this.es=es;this.active=false;this.t=0;this.count=0;this.events=[];
+      this.reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      this.dark=s.add.graphics().setDepth(8);this.floor=s.add.graphics().setDepth(9);
+      this.ghosts=Array.from({length:3},()=>s.add.image(0,0,'specialPose1').setOrigin(0).setDepth(10).setTint(0x6cf3e1).setAlpha(0));
+      this.enemy=s.add.image(0,470,'target').setOrigin(.5,1050/1092).setScale(318/991).setDepth(11).setVisible(false);
+      this.actor=s.add.image(0,0,'specialPose0').setOrigin(0).setDepth(12).setVisible(false);
+      this.fx=s.add.graphics().setDepth(13);
+      this.burst=s.add.image(0,0,'specialImpact').setDepth(13).setVisible(false);
+      this.heading=s.add.text(0,0,'',{fontFamily:'Georgia',fontSize:'26px',color:'#ffe4ac',align:'center'}).setOrigin(.5).setDepth(14);
+      this.counter=s.add.text(0,0,'',{fontFamily:'Arial',fontSize:'18px',color:'#a9fff0'}).setOrigin(.5).setDepth(14);
+      this.button=document.createElement('button');this.button.id='special';this.button.textContent=es?'Probar especial ✦':'Preview special ✦';
+      this.button.title=es?'Cinemática de prueba: no cambia vida ni turnos':'Visual cinematic: health and turns are unchanged';
+      document.getElementById('shoot').after(this.button);this.button.onclick=()=>s.startSpecial();
+      window.specialSnapshot=()=>({active:this.active,time:this.t,shots:this.count,impacts:this.events.filter(e=>e.impacted).length,pose:this.actor.texture.key,events:this.events.map(e=>({name:e.name,origins:e.origins,impacted:!!e.impacted})),effects:this.enabled,zoom:s.cameras.main.zoom});
+    }
+    start(){
+      if(this.active)return;this.active=true;this.t=0;this.count=0;this.events=[];this.next=0;this.hold=0;
+      const s=this.s;
+      this.width=s.scale.width;this.height=s.scale.height;
+      this.hidden=[s.hero,s.target,s.shadow,s.targetShadow,s.light,s.fx,s.feedback.hud,s.feedback.title,s.feedback.hpText,s.feedback.heroTitle,s.feedback.heroHpText,s.feedback.banner,s.feedback.movingShadow];
+      this.saved=this.hidden.map(o=>o.visible);this.hidden.forEach(o=>o.setVisible(false));
+      this.actor.setVisible(true);this.enemy.setVisible(true);this.heading.setVisible(true);this.counter.setVisible(true);
+      this.heading.setText(this.es?'JESSIE · FUEGO CRUZADO':'JESSIE · CROSSFIRE');
+      this.counter.setText(this.es?'PRUEBA VISUAL · SIN CAMBIOS EN EL COMBATE':'VISUAL PREVIEW · COMBAT UNCHANGED');
+      s.feedback.audio.play('cloth');this.tone('charge');s.controls();
+    }
+    stop(){
+      if(!this.active)return;this.active=false;
+      this.hidden.forEach((o,i)=>o.setVisible(this.saved[i]));
+      this.actor.setVisible(false);this.enemy.setVisible(false);this.heading.setVisible(false);this.counter.setVisible(false);
+      this.burst.setVisible(false);
+      this.ghosts.forEach(o=>o.setAlpha(0));this.dark.clear();this.floor.clear();this.fx.clear();
+      this.s.cameras.main.setZoom(1).setScroll(0,0);this.s.feedback.audio.stop();this.s.rest=0;this.s.controls();
+    }
+    tone(kind){
+      const a=this.s.feedback.audio;if(!a.enabled||!a.ctx||a.ctx.state!=='running'||!a.volume)return;
+      const c=a.ctx,now=c.currentTime,d=kind==='charge'?.4:.32,o=c.createOscillator(),g=c.createGain();
+      o.type=kind==='charge'?'sine':'triangle';o.frequency.setValueAtTime(kind==='charge'?130:95,now);o.frequency.exponentialRampToValueAtTime(kind==='charge'?520:28,now+d);
+      g.gain.setValueAtTime(.001,now);g.gain.linearRampToValueAtTime(a.volume*.18,now+.025);g.gain.exponentialRampToValueAtTime(.0001,now+d);
+      o.connect(g);g.connect(c.destination);a.nodes.add(o);o.onended=()=>{a.nodes.delete(o);o.disconnect();g.disconnect();};o.start();o.stop(now+d);
+    }
+    layout(t){
+      const small=this.s.scale.width<1000,home=small?225:365;
+      const advance=85*smooth((t-650)/250)-25*smooth((t-1950)/350)-60*smooth((t-4300)/900);
+      this.scale=.72;this.actor.setPosition(home+advance-256*this.scale,470-525*this.scale).setScale(this.scale);
+      this.enemyBase=small?690:958;this.enemy.setPosition(this.enemyBase,470).clearTint();
+      this.heading.setPosition(this.s.scale.width/2,86);this.counter.setPosition(this.s.scale.width/2,this.s.scale.height-60);
+      return home+advance;
+    }
+    update(dt,enabled){
+      this.enabled=enabled&&!this.reduced;
+      if(this.hold>0)this.hold=Math.max(0,this.hold-dt);else this.t+=dt;
+      const t=this.t,s=this.s,w=s.scale.width,h=s.scale.height,foot=this.layout(t);
+      let pose=t<650?0:t<900?1:t<1460?2:t<1570?3:t<2000?4:t<2400?6:t<2700?0:t<3480?4:t<3730?5:t<4050?4:t<4450?6:7;
+      // Place each muzzle on the actual fired drawing, including after a slow frame.
+      while(this.next<beats.length&&t>=beats[this.next].at){
+        const b=beats[this.next++];pose=b.pose;
+        const origins=b.guns.map(([x,y])=>({x:this.actor.x+x*this.scale,y:this.actor.y+y*this.scale}));
+        this.events.push({...b,origins});this.count+=origins.length;
+        s.feedback.audio.play('shot',this.next);if(b.name==='final')this.tone('impact');
+      }
+      this.actor.setTexture('specialPose'+pose).clearTint();
+      for(const e of this.events){if(!e.impacted&&t>=e.at+70){e.impacted=true;s.feedback.audio.play('impact');this.hold=e.name==='final'?110:45;}}
+      const last=this.events.at(-1),age=last?t-last.at:9999,final=last?.name==='final';
+      const impactAge=age-70;
+      this.enemy.setTexture(impactAge>=0&&impactAge<400?'hurt':'target');
+      if(impactAge>=0&&impactAge<360)this.enemy.x+=Math.sin(clamp(impactAge/360)*Math.PI)*(final?20:8);
+      this.dark.clear();this.floor.clear();this.fx.clear();this.burst.setVisible(false);this.ghosts.forEach(o=>o.setAlpha(0));
+      if(this.enabled){
+        const fade=smooth(t/400)*(1-smooth((t-4350)/1000));
+        this.dark.fillStyle(0x020711,.72*fade).fillRect(0,0,w,h);
+        this.dark.fillStyle(0x02050b,.92*fade).fillRect(0,0,w,40).fillRect(0,h-34,w,34);
+        this.floor.fillStyle(0x060b0c,.6).fillEllipse(foot,474,130,17).fillEllipse(this.enemy.x,474,150,17);
+        const charge=clamp((t-2700)/720)*(t<3420?1:0);
+        if(charge>0){
+          for(const [x,y] of [[463,158],[435,201]]){
+            const mx=this.actor.x+x*this.scale,my=this.actor.y+y*this.scale;
+            this.fx.lineStyle(1.5,0x95ffe7,.7*charge).strokeCircle(mx,my,12+24*(1-charge));
+            for(let i=0;i<12;i++){const a=i*Math.PI/6+t*.004,r=15+70*(1-charge);this.fx.fillStyle(i%2?0xf4cb79:0x7dffe6,.7*charge).fillCircle(mx+Math.cos(a)*r,my+Math.sin(a)*r,(i%3)+1);}
+          }
+        }
+        if(t>=650&&t<1050){
+          const p=clamp((t-650)/400);
+          this.ghosts.forEach((g,i)=>g.setPosition(this.actor.x-22*(i+1),this.actor.y).setScale(this.scale).setAlpha((1-p)*.14/(i+1)));
+          for(let i=0;i<14;i++){const y=195+i*19;this.fx.lineStyle(i%3+1,0x8de4d7,.25*(1-p));this.fx.lineBetween(foot-260-i*8,y,foot-65,y-3);}
+        }
+        for(const e of this.events)this.drawBurst(e,t);
+        if(impactAge>=0&&impactAge<650){const p=impactAge/650,hitY=last.origins.reduce((sum,m)=>sum+m.y,0)/last.origins.length;this.burst.setPosition(this.enemyBase-35,hitY).setScale((final?.52:.21)*(.65+.55*smooth(p*2))).setAlpha((final?.95:.65)*(1-smooth((p-.2)/.8))).setVisible(true);}
+        const punch=impactAge>=0&&impactAge<180?(1-impactAge/180):0;
+        const zoom=1+.035*fade+(final?.018:0)*punch;
+        s.cameras.main.setZoom(zoom).setScroll(Math.sin(impactAge*.11)*punch*(final?3:1),Math.cos(impactAge*.13)*punch*(final?2:0));
+        if(age<75)this.actor.setTint(0xffe8b5);
+      }else s.cameras.main.setZoom(1).setScroll(0,0);
+      const label=t<650?(this.es?'Preparación':'Preparing'):t<2400?(this.es?'Ráfaga alternada':'Alternating fire'):t<3420?(this.es?'Concentración':'Gathering energy'):t<4300?(this.es?'Disparo doble':'Twin finisher'):(this.es?'Recuperación':'Recovery');
+      document.getElementById('phase-label').textContent=label;
+      const step=t<650?1:t<4300?2:3;document.querySelectorAll('.steps li').forEach((li,i)=>li.classList.toggle('active',i===step));
+      if(this.count)this.counter.setText(`${this.count} ${this.es?'DISPAROS · PRUEBA VISUAL':'SHOTS · VISUAL PREVIEW'}`);
+      if(t>=6000)this.stop();
+    }
+    drawBurst(e,t){
+      const age=t-e.at,g=this.fx,final=e.name==='final',hit={x:this.enemyBase-35,y:e.origins.reduce((sum,m)=>sum+m.y,0)/e.origins.length};
+      if(age<0||age>1100)return;
+      for(const m of e.origins){
+        if(age<85){const k=1-age/85;for(let j=3;j>0;j--)g.fillStyle(0xffc377,.055*k).fillEllipse(m.x,m.y,42*j,25*j);g.fillStyle(0xffe1a0,k).fillTriangle(m.x,m.y-9,m.x+48,m.y,m.x,m.y+9);g.fillStyle(0xffffff,k).fillCircle(m.x+5,m.y,4);}
+        if(age<260){const p=clamp(age/70),tail=clamp((age-75)/180),x=m.x+(hit.x-m.x)*p;
+          for(const [width,color,alpha] of [[final?22:12,0x55e8da,.12],[final?9:5,0xffcc77,.6],[2,0xfff2ce,1]]){g.lineStyle(width,color,alpha*(1-tail));g.lineBetween(m.x+(hit.x-m.x)*tail,m.y,x,m.y);}
+        }
+        if(age>90){const k=clamp((age-90)/1000);for(let j=0;j<4;j++)g.fillStyle(0xc1d9d4,.075*(1-k)).fillCircle(m.x+8+j*10+k*20,m.y-k*(35+j*12),4+k*(12+j*3));}
+      }
+      const a=age-70;if(a<0)return;const p=clamp(a/550),radius=(final?110:55)*p;
+      for(let j=3;j>0;j--)g.fillStyle(final?0x63eed6:0xffc477,.025*(1-p)).fillEllipse(hit.x,hit.y,70*j*(.5+p),60*j*(.5+p));
+      g.lineStyle(final?4:2,0xffd58f,(1-p)*.8).strokeCircle(hit.x,hit.y,8+radius);
+      const count=final?26:13;
+      for(let i=0;i<count;i++){const angle=i*2.39996,range=(final?190:90)*(0.5+(i%7)/10)*p,x=hit.x+Math.cos(angle)*range,y=hit.y+Math.sin(angle)*range+p*p*50;g.lineStyle(i%3+1,i%2?0xffd78d:0x8cffee,(1-p)*.9);g.lineBetween(x,y,x-Math.cos(angle)*15*(1-p),y-Math.sin(angle)*15*(1-p));}
+      if(final&&a<170){const k=1-a/170;g.lineStyle(6,0xffefb5,k).lineBetween(hit.x-75,hit.y-105,hit.x+75,hit.y+105);g.lineStyle(4,0x8cffee,k).lineBetween(hit.x-80,hit.y+70,hit.x+80,hit.y-70);}
+    }
+  };
+})();
