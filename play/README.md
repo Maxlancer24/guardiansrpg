@@ -10,14 +10,17 @@ opponent intent and beginner guidance, and keeps the detailed chronicle collapse
 Jessie: STR 9 / AGI 12 / CON 14. Warden: STR 10 / AGI 6 / CON 15.
 Enemy actions cycle Attack, Defend, Attack, Rest, Attack, Defend; from round 9 it
 attacks to prevent indefinite Rest stalls. All math is the shared unchanged
-bot-parity rules. No account, rewards, persistence or backend writes.
+bot-parity rules. No account or rewards; combat does not write to the game database.
 
 End state includes win/loss, rounds, decisions, remaining HP, special use and
 replay. The page-owned music is preserved on replay. Audio remains opt-in.
-Feedback is explicitly copy-only, not submitted or stored. Clipboard rejection
-reveals a selectable plain-text fallback. Three optional hit previews use the
-existing dry/metal recordings or a slower recorded hit with a synthetic body;
-they do not alter the battle or claim to be three newly sourced recordings.
+Feedback collects a name, opinion and explicit consent. POST /api/demo-feedback
+on guardians-app.discloud.app stores it separately in demo_feedback.db.
+The backend requires DEMO_FEEDBACK_ADMIN_IDS; without configuration it fails
+closed. /admin/demo-feedback uses existing Discord session authentication.
+Deploy demo_feedback.py and the updated web_dashboard.py to enable storage.
+Back up demo_feedback.db separately. No success is shown without a save receipt.
+Sound comparison previews were removed; combat audio is unchanged.
 
 Validation: Node fake-scene lifecycle, isolated demo configuration, 200 seeded
 duels per strategy, shared practice regressions and formula parity. Guided play

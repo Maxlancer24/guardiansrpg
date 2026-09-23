@@ -9,7 +9,7 @@
   submit(action){const before=this.battle?.round;super.submit(action);if(this.battle?.round!==before||this.result?.finished){if(this.state==='resolving'){this.moves.push(action);this.renderUI();}}}
   renderUI(){
    if(!this.display)return;
-   $('status-cards').innerHTML=this.display.actors.map((a,i)=>`<article class="fighter"><h2>${i?tr('Guardián Hollow','Hollow Warden'):'Jessie'}</h2><progress max="${a.max}" value="${a.hp}" aria-label="${i?'Hollow Warden':'Jessie'} HP"></progress><p>${a.hp} / ${a.max} HP</p><p class="state">${a.ultra?'Ultra Focus':a.focus?'Focus':tr('Sin bonificación','No bonus')} · ${a.rank===1?tr('Actúa primero','Acts first'):tr('Actúa después','Acts second')}</p></article>`).join('');
+   $('status-cards').innerHTML=this.display.actors.map((a,i)=>`<article class="fighter"><h2>${i?tr('Guardián Hollow','Hollow Warden'):'Jessie'}</h2><progress max="${a.max}" value="${a.hp}" aria-label="${i?'Hollow Warden':'Jessie'} HP"></progress><p>${a.hp} / ${a.max} HP</p><p>STR ${a.str} · AGI ${a.agi} · CON ${a.con}</p><p class="state">${a.ultra?'Ultra Focus':a.focus?'Focus':tr('Sin bonificación','No bonus')} · ${a.rank===1?tr('Actúa primero','Acts first'):tr('Actúa después','Acts second')}</p></article>`).join('');
    const done=this.victory||this.defeat,intent=this.battle.chooseEnemy();
    $('round-info').textContent=done?(this.victory?tr('Victoria de Jessie','Jessie wins'):tr('Jessie ha caído','Jessie has fallen')):`${tr('Ronda','Round')} ${this.round} · ${this.state==='ready'?tr('Tu decisión','Your decision'):tr('Resolviendo las acciones','Resolving actions')}`;
    $('enemy-intent').textContent=done?tr('Combate finalizado','Battle complete'):this.state!=='ready'?tr('Observa el resultado de tu decisión.','Watch your decision play out.'):tr('El guardián prepara: ','The warden prepares: ')+names[intent];
@@ -36,19 +36,7 @@
   $('replay').onclick=()=>{s.reset();if($('pause').textContent===tr('Continuar','Resume'))$('pause').click();$('round-info').scrollIntoView({behavior:'auto',block:'center'});$('shoot').focus();};
   $('dismiss-guide').onclick=()=>{$('first-turn-guide').hidden=true;};
   $('give-feedback').onclick=()=>{$('feedback-panel').hidden=false;$('feedback-text').focus();};
-  $('copy-feedback').onclick=async()=>{
-   const opinion=$('feedback-text').value.trim();if(!opinion){$('feedback-state').textContent=tr('Escribe tu opinión primero.','Write your feedback first.');return;}
-   const result=f.victory?'victory':f.defeat?'defeat':'unfinished';
-   const text=`Guardians demo v1 | ${result} | rounds: ${f.round} | special: ${f.battle.actors[0].used}\n${opinion}`;
-   $('feedback-export').value=text;$('feedback-export').hidden=false;
-   try{await navigator.clipboard.writeText(text);$('feedback-state').textContent=tr('Copiado. Pégalo en el mensaje que envíes a Max. No se envió automáticamente.','Copied. Paste it in your message to Max. It was not sent automatically.');}catch{$('feedback-export').focus();$('feedback-export').select();$('feedback-state').textContent=tr('Copia el texto de abajo y envíaselo a Max.','Copy the text below and send it to Max.');}
-  };
-  for(const [id,style] of [['sound-dry','dry'],['sound-metal','metal'],['sound-cinematic','cinematic']])$(id).onclick=()=>{
-   const audio=f.audio;if(!audio.enabled){$('sound').checked=true;$('sound').onchange();}
-   if(!audio.ctx||audio.ctx.state!=='running'||!audio.buffers.axe||!audio.buffers.parry){$('sound-comparison-status').textContent=tr('Espera a que carguen los sonidos y vuelve a pulsar.','Wait for sounds to load, then press again.');return;}
-   audio.stop();audio.sample(style==='metal'?'parry':'axe',{level:.6,rate:style==='cinematic'?.86:1});if(style==='cinematic')audio.effect('impact');
-   $('sound-comparison-status').textContent=tr('Solo una muestra; no cambia el combate. Cuéntanos cuál prefieres.','Preview only; battle audio is unchanged. Tell us which you prefer.');
-  };
+  window.DemoFeedbackForm.attach(f,es);
   $('ready-note').hidden=false;s.controls();
  };
 })();
