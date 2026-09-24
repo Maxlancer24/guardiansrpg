@@ -29,6 +29,8 @@
   // Avoid the old tilted-head acting drawings. Two shots, same gun and stance.
   const shotKeys=['idle0','raise0','raise1','raise2','recoil','raise2','recoil','raise2','raise1','raise0','idle0'];
   const shotDur=[120,1125,240,460,80,220,80,200,220,240,180];
+  // Both variants share the same fire/contact schedule and resolved damage.
+  const alternateKeys=['idle0','other1','other3','other3','other5','other3','other5','other3','other6','other1','idle0'];
   const prepKeys=['prep0','prep1','prep2','prep3','prep2','prep1','prep0'];
   const prepDur=[170,200,230,200,230,200,270].map(ms=>ms*.75);
   const total=a=>a.reduce((x,y)=>x+y,0),frameAt=(t,d)=>{let end=0;for(let i=0;i<d.length;i++){end+=d[i];if(t<end)return i;}return d.length-1;};
@@ -47,10 +49,11 @@
       this.load.image('blink','/assets/demo-battle/jessie-acting-v3/blink.png');
       this.load.image('recoil','/assets/demo-battle/jessie-double-v4/recoil.png');
       for(let i=0;i<4;i++)this.load.image(`prep${i}`,`/assets/demo-battle/jessie-prep-v5/prep-${i}.png`);
+      for(const i of [1,2,3,5,6])this.load.image(`other${i}`,`/assets/demo-battle/jessie-other-hand-v1/frame-${i}.png`);
     }
     create(){
       if(this.failed)return;scene=this;this.clock=0;this.action=-1;this.idleTime=0;this.rest=0;this.shots=0;this.hits=0;this.fireAge=9999;this.hitAge=9999;
-      this.blinkLeft=0;this.blinks=0;this.scheduleBlink();
+      this.blinkLeft=0;this.blinks=0;this.attackVariant=0;this.nextAttackVariant=0;this.scheduleBlink();
       this.add.image(640,300,'arena').setDisplaySize(1280,720).setTint(0xc5d2d4);
       this.shadow=this.add.ellipse(0,470,120,16,0x050a09,.45);
       this.targetShadow=this.add.ellipse(0,470,140,16,0x050a09,.45);
@@ -65,16 +68,22 @@
       window.encounterSnapshot=()=>({state:this.feedback.state,round:this.feedback.round,heroHp:this.feedback.heroHp,enemyHp:this.feedback.hp,enemyHits:this.feedback.enemyHits,enemyTime:this.feedback.enemyTime,heroTexture:this.hero.texture.key,enemyX:this.target.x,heroX:this.hero.x});
       $('loading').hidden=true;$('pause').disabled=false;this.controls();this.phase('idle');
       window.PracticeController?.attach(this);
-      window.jessieLab={snapshot:()=>({attack:this.action,frame:this.frame,texture:this.hero.texture.key,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,hp:this.feedback.hp,victory:this.feedback.victory,enemyTexture:this.target.texture.key,enemyScale:[this.target.scaleX,this.target.scaleY],sound:this.feedback.audio.enabled,blinks:this.blinks,blinking:this.blinkLeft>0,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
+      window.jessieLab={snapshot:()=>({attack:this.action,variant:this.attackVariant,frame:this.frame,texture:this.hero.texture.key,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,hp:this.feedback.hp,victory:this.feedback.victory,enemyTexture:this.target.texture.key,enemyScale:[this.target.scaleX,this.target.scaleY],sound:this.feedback.audio.enabled,blinks:this.blinks,blinking:this.blinkLeft>0,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
     }
     place(){const small=this.scale.width<1000;this.hero.x=(small?280:390)-245*S;this.light.x=this.hero.x;this.shadow.x=small?280:390;this.target.x=small?660:958;this.targetShadow.x=this.target.x;}
-    muzzle(){return{x:this.hero.x+431*S,y:this.hero.y+154*S};}
+    muzzle(){const alternate=this.action>=0&&this.attackVariant===1;return{x:this.hero.x+(alternate?447:431)*S,y:this.hero.y+(alternate?111:154)*S};}
+    attackTexture(){
+      if(this.attackVariant!==1)return this.frame===1?prepKeys[frameAt(this.action-120,prepDur)]:shotKeys[this.frame];
+      if(this.frame!==1)return alternateKeys[this.frame];
+      if(this.action<700)return prepKeys[frameAt(this.action-120,prepDur)];
+      return this.action<1050?'other1':'other2';
+    }
     scheduleBlink(){this.nextBlink=this.clock+3800+Math.random()*2400;}
     controls(){$('shoot').disabled=paused||this.action>=0||!!this.feedback?.busy()||!!this.special?.active;$('pause').textContent=paused?copy.resume:copy.pause;if(this.special)this.special.button.disabled=paused||this.action>=0||this.feedback.state==='enemy'||this.special.active;if($('preview-defeat'))$('preview-defeat').disabled=!!this.special?.active||this.action>=0||this.feedback?.state==='enemy';}
     startSpecial(){if(paused||this.action>=0||this.feedback.state==='enemy'||this.special.active)return;this.special.start();}
     phase(name){this.phaseName=name;$('phase-label').textContent=copy[name];const active=['idle','aim','fire','recover'].indexOf(name);document.querySelectorAll('.steps li').forEach((li,i)=>li.classList.toggle('active',i===active));}
-    shoot(){if(paused||this.action>=0||this.feedback.busy()||this.special.active)return;this.feedback.startShot();this.feedback.audio.play('cloth');$('shoot').textContent=es?'Dos disparos ↗':'Double shot ↗';this.blinkLeft=0;this.scheduleBlink();this.action=0;this.rest=0;this.fireIndex=0;this.hitIndex=0;this.fireAge=9999;this.hitAge=9999;this.controls();}
-    reset(){this.special?.stop();this.feedback.reset();this.action=-1;this.justFired=false;this.blinkLeft=0;this.scheduleBlink();this.idleTime=0;this.rest=0;this.fireAge=9999;this.hitAge=9999;loop=false;$('loop').checked=false;this.hero.setTexture('idle0');this.target.clearTint();this.fx.clear();this.phase('idle');this.controls();}
+    shoot(){if(paused||this.action>=0||this.feedback.busy()||this.special.active)return;this.attackVariant=this.nextAttackVariant;this.nextAttackVariant=1-this.nextAttackVariant;this.feedback.startShot();this.feedback.audio.play('cloth');$('shoot').textContent=es?'Dos disparos ↗':'Double shot ↗';this.blinkLeft=0;this.scheduleBlink();this.action=0;this.rest=0;this.fireIndex=0;this.hitIndex=0;this.fireAge=9999;this.hitAge=9999;this.controls();}
+    reset(){this.special?.stop();this.feedback.reset();this.action=-1;this.attackVariant=0;this.nextAttackVariant=0;this.justFired=false;this.blinkLeft=0;this.scheduleBlink();this.idleTime=0;this.rest=0;this.fireAge=9999;this.hitAge=9999;loop=false;$('loop').checked=false;this.hero.setTexture('idle0');this.target.clearTint();this.fx.clear();this.phase('idle');this.controls();}
     update(_,delta){
       if(!scene)return;
       const feedbackDt=paused?0:Math.min(delta,80)*speed;
@@ -90,7 +99,7 @@
           this.rest+=dt;if(loop&&this.rest>1500)this.shoot();
         }
       }
-      if(this.action>=0){this.frame=this.justFired?3:frameAt(this.action,shotDur);const key=this.frame===1?prepKeys[frameAt(this.action-120,prepDur)]:shotKeys[this.frame];this.hero.setTexture(key);this.phase(this.action<FIRES[0]?'aim':this.action<FIRES[1]+100?'fire':'recover');}
+      if(this.action>=0){this.frame=this.justFired?3:frameAt(this.action,shotDur);this.hero.setTexture(this.attackTexture());this.phase(this.action<FIRES[0]?'aim':this.action<FIRES[1]+100?'fire':'recover');}
       else{this.frame=frameAt(this.idleTime%total(idleDur),idleDur);this.hero.setTexture(this.blinkLeft>0?'blink':idleKeys[this.frame]);this.phase('idle');}
       this.drawEffects();
       this.feedback.update(feedbackDt);
