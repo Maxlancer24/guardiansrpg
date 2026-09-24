@@ -115,20 +115,20 @@
     else if(e.type!=='attack'){const resting=['rest-start','rest'].includes(e.type);if(this.timer>=(resting?600:350))this.applyCurrent();if(this.timer>=(resting?1300:900))this.next();}
    }
    if(this.state==='resolving'&&this.result?.actions[0]==='DEFEND'&&!this.guardReleased&&this.heroHp>0){
-    // Reuse the attack's exact preparation drawings and timing, looping without firing.
-    // One continuous clock spans guard and incoming attack; pause freezes it.
+    // Dedicated guard drawings. One clock spans entry, hold and incoming contact.
     this.guardTime+=dt;
-    const frames=['prep0','prep1','prep2','prep3','prep2','prep1','prep0'],durations=[127.5,150,172.5,150,172.5,150,202.5];
-    let phase=this.guardTime%1125,index=0;while(index<durations.length-1&&phase>=durations[index])phase-=durations[index++];
-    s.hero.setTexture(frames[index]);
+    const contactAge=this.defensePulse?.id===0&&this.defensePulse.kind==='parry'?this.visualTime-this.defensePulse.at:9999;
+    const hold=[1,4,1,4][Math.floor(Math.max(0,this.guardTime-220)/360)%4];
+    s.hero.setTexture('jessieGuard'+(contactAge<180?3:contactAge<360?4:this.guardTime<220?0:hold));
    }
-   if(this.current?.type==='counter'&&this.current.actor===0)s.hero.setTexture(this.timer<180?'raise1':this.timer<450?'raise2':this.timer<560?'recoil':this.timer<820?'raise2':'raise0');
+   if(this.current?.type==='counter'&&this.current.actor===0)s.hero.setTexture(this.timer<100?'jessieGuard5':this.timer<180?'raise1':this.timer<450?'raise2':this.timer<560?'recoil':this.timer<820?'raise2':'raise0');
    if(this.current&&['rest-start','rest'].includes(this.current.type)){
     // Existing coherent breathing drawings; feet and sprite scale remain fixed.
     const t=this.timer;if(this.current.actor===0)s.hero.setTexture(t<220?'idle5':t<420?'idle6':t<850?'blink':t<1060?'idle6':'idle5');
     else s.target.setTexture(`wardenIdle${[0,1,2,1][Math.floor(t/350)%4]}`);
    }
-   if(s.clock-this.heroStruck<450)s.hero.setTexture('jessieReaction2');
+   const heroHurt=s.clock-this.heroStruck;
+   if(heroHurt>=0&&heroHurt<600)s.hero.setTexture('jessieHurt'+(heroHurt<170?1:heroHurt<370?2:3));
    const enemyHurt=this.visualTime-this.enemyStruck;
    if(this.hp>0&&enemyHurt>=0&&enemyHurt<400){s.target.setTexture(enemyHurt<260?'hurt':'wardenIdle1').setOrigin(.5,1050/1092);if(s.effectsEnabled&&enemyHurt<85)s.target.setTint(0xffdab5);}
    if(this.victory||this.defeat){this.endTime+=dt;s.hero.setTexture(this.victory?`jessieWin${[0,1,2,1][Math.floor(this.endTime/300)%4]}`:'jessieReaction7');}

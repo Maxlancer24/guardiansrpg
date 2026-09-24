@@ -38,6 +38,8 @@
   class DrawnLab extends Phaser.Scene {
     preload(){
       window.SpecialPreview.preload(this);
+      this.load.image('defenseGuardSheet','/assets/demo-battle/jessie-defense-v1/guard.png');
+      this.load.image('defenseHurtSheet','/assets/demo-battle/jessie-defense-v1/hurt.png');
       for(let i=0;i<4;i++){this.load.image(`wardenIdle${i}`,`/assets/demo-battle/ambient-loops-v1/warden-${i}.png`);this.load.image(`jessieWin${i}`,`/assets/demo-battle/ambient-loops-v1/jessie-${i}.png`);}
       for(let i=0;i<8;i++){this.load.image(`jessieReaction${i}`,`/assets/demo-battle/combat-reactions-v1/jessie-${i}.png`);this.load.image(`wardenAnim${i}`,`/assets/demo-battle/combat-reactions-v1/warden-${i}.png`);}
       this.failed=false;this.load.on('loaderror',()=>{this.failed=true;$('loading').textContent=copy.error;});
@@ -52,6 +54,7 @@
       for(const i of [1,2,3,5,6])this.load.image(`other${i}`,`/assets/demo-battle/jessie-other-hand-v1/frame-${i}.png`);
     }
     create(){
+      if(!this.failed)this.registerDefenseFrames();
       if(this.failed)return;scene=this;this.clock=0;this.action=-1;this.idleTime=0;this.rest=0;this.shots=0;this.hits=0;this.fireAge=9999;this.hitAge=9999;
       this.blinkLeft=0;this.blinks=0;this.attackVariant=0;this.nextAttackVariant=0;this.scheduleBlink();
       this.add.image(640,300,'arena').setDisplaySize(1280,720).setTint(0xc5d2d4);
@@ -69,6 +72,19 @@
       $('loading').hidden=true;$('pause').disabled=false;this.controls();this.phase('idle');
       window.PracticeController?.attach(this);
       window.jessieLab={snapshot:()=>({attack:this.action,variant:this.attackVariant,frame:this.frame,texture:this.hero.texture.key,phase:this.phaseName,paused,speed,shots:this.shots,hits:this.hits,hp:this.feedback.hp,victory:this.feedback.victory,enemyTexture:this.target.texture.key,enemyScale:[this.target.scaleX,this.target.scaleY],sound:this.feedback.audio.enabled,blinks:this.blinks,blinking:this.blinkLeft>0,fireAge:this.fireAge,hitAge:this.hitAge,muzzle:this.muzzle(),foot:{x:this.hero.x+350*S,y:this.hero.y+525*S},drawn:true})};
+    }
+    registerDefenseFrames(){
+      // Render atlas cells into the same 512x560 coordinate space as the idle.
+      // Uniform scaling only; fixed boot baseline. The source PNGs stay intact.
+      const add=(key,sheet,index,columns,cell,anchor,floor,scale)=>{
+        if(this.textures.exists(key))return;
+        const tex=this.textures.createCanvas(key,512,560),ctx=tex.getContext();
+        ctx.drawImage(this.textures.get(sheet).getSourceImage(),index%columns*cell,Math.floor(index/columns)*cell,cell,cell,225-anchor*scale,525-floor*scale,cell*scale,cell*scale);tex.refresh();
+      };
+      const anchors=[278,270,270,278,268,278],floors=[500,499,500,492,492,494];
+      // Cell 2 is deliberately excluded: the overlapping gun grips are ambiguous.
+      for(const i of [0,1,3,4,5])add('jessieGuard'+i,'defenseGuardSheet',i,3,512,anchors[i],floors[i],1.04);
+      for(let i=0;i<4;i++)add('jessieHurt'+i,'defenseHurtSheet',i,2,627,[348,286,348,286][i],[607,607,565,565][i],1.05);
     }
     place(){const small=this.scale.width<1000;this.hero.x=(small?280:390)-245*S;this.light.x=this.hero.x;this.shadow.x=small?280:390;this.target.x=small?660:958;this.targetShadow.x=this.target.x;}
     muzzle(){const alternate=this.action>=0&&this.attackVariant===1;return{x:this.hero.x+(alternate?447:431)*S,y:this.hero.y+(alternate?111:154)*S};}
