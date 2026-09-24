@@ -150,6 +150,30 @@
    // Feathered light, no outlined rings; covers head, torso and feet.
    for(let i=0;i<20;i++){const k=i/20;g.fillStyle(color,strength*.014).fillEllipse(x,312,210*(1-k*.8),350*(1-k*.35));}
   }
+  drawContactSlash(g,x,y,age,color,reduced){
+   if(age<0||age>=550)return;
+   const k=age/550,alpha=(1-k)*(1-k);
+   if(reduced){this.bodyGlow(g,x,color,.4*alpha);return;}
+   // Garrick study: soft contact bloom + a filled, tapered curved slash.
+   // All geometry is deterministic and uses the existing paused combat clock.
+   for(let i=6;i>0;i--)g.fillStyle(color,.025*alpha).fillEllipse(x,y,24+i*15,20+i*12);
+   const ribbon=(width,tint,opacity)=>{
+    const points=[];
+    for(const side of [1,-1])for(let j=0;j<=24;j++){
+     const t=side===1?j/24:1-j/24,u=1-t;
+     const px=u*u*(x-65)+2*u*t*(x-10)+t*t*(x+65);
+     const py=u*u*(y-110)+2*u*t*(y-18)+t*t*(y+100);
+     const w=Math.sin(t*Math.PI)*width;
+     points.push({x:px+side*w,y:py-side*w*.5});
+    }
+    g.fillStyle(tint,opacity*alpha).fillPoints(points,true);
+   };
+   ribbon(13,color,.18);ribbon(5,color,.8);ribbon(1.8,0xfff9e8,1);
+   for(let i=0;i<18;i++){
+    const a=i*2.399+1,r=18+age*(.1+(i%5)*.04);
+    g.fillStyle(i%2?color:0xfff9e8,alpha).fillCircle(x+Math.cos(a)*r,y+Math.sin(a)*r,1+i%3);
+   }
+  }
    drawEnemyStrike(e,reduced){
     if(!e||e.actor!==1||!['attack','counter'].includes(e.type))return;
     // Same virtual clock and contact frame as the axe animation, including counters.
@@ -173,18 +197,8 @@
      }
     }
     // A miss still has a swing, but never produces a body impact or sparks.
-    const age=t-1120;if(!contact||age<0||age>=320)return;
-    const k=age/320,alpha=(1-k)*(1-k);
-    if(reduced){this.bodyGlow(g,x,color,.5*alpha);return;}
-    g.fillStyle(color,.17*alpha).fillEllipse(x,y,95+50*k,70+40*k);
-    if(!blocked)g.lineStyle(4*(1-k)+1,color,alpha).strokeEllipse(x,y,18+100*k,14+74*k);
-    g.lineStyle(7*(1-k),0xfff9e8,alpha).lineBetween(x+22,y-31,x-22,y+31);
-    g.lineStyle(3*(1-k),color,alpha).lineBetween(x-20,y-12,x+20,y+12);
-    for(let i=0;i<11;i++){
-     const angle=i*2.39996,r=9+k*(55+(i%3)*18),len=(7+(i%4)*4)*(1-k);
-     const px=x+Math.cos(angle)*r,py=y+Math.sin(angle)*r*.75+18*k*k;
-     g.lineStyle(i%3===0?3:2,i%2?color:0xfff9e8,alpha).lineBetween(px,py,px+Math.cos(angle)*len,py+Math.sin(angle)*len);
-    }
+    const age=t-1120;if(!contact)return;
+    this.drawContactSlash(g,x,y,age,color,reduced);
    }
   updateVisuals(dt){
    this.visualTime+=dt;const time=this.visualTime,s=this.s,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,fx=s.special?.active?s.special.enabled:s.effectsEnabled;
@@ -223,8 +237,8 @@
    if(fx&&(preparing||guarded||age<900)){
     const id=age<900?pulse.id:preparing?e.actor:1-e.actor,center=this.actorX(id),x=center+(id?-45:45),broken=age<900&&pulse.kind==='break',alpha=age<900?Math.max(0,1-age/900):.35;
     const g=this.defenseFX;this.bodyGlow(this.aura,center,broken?0xffa072:0x8cf5df,alpha*.7);
-    if(age<900){for(let i=0;i<9;i++){const angle=i*2.4,r=18+(reduced?0:age/900)*(broken?105:65);g.lineStyle(2,broken?0xffb880:0xdbfff2,(1-age/900)*.8);g.lineBetween(x+Math.cos(angle)*r,345+Math.sin(angle)*r,x+Math.cos(angle)*(r+12),345+Math.sin(angle)*(r+12));}
-    }
+    // Enemy defense uses the same accent; hero defense is drawn on axe contact.
+    if(id===1&&age<550)this.drawContactSlash(g,x,345,age,broken?0xff995e:0x9bffe7,reduced);
    }
     if(fx)this.drawEnemyStrike(e,reduced);
     if(e?.type==='counter'&&e.actor===0&&this.timer>=450&&this.timer<600&&fx){const m=s.muzzle(),k=1-(this.timer-450)/150;this.defenseFX.lineStyle(3,0xb3ffe1,k).lineBetween(m.x,m.y,s.target.x-20,m.y);this.defenseFX.fillStyle(0xfff1c4,k).fillCircle(m.x,m.y,9*k);s.target.setTint(0xb3ffe1);}
