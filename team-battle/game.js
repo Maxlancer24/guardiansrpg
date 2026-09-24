@@ -89,7 +89,9 @@
  const guardR=[[0,0,560,520],[560,0,490,520],[1050,0,486,520],[0,520,560,504],[560,520,550,504],[1110,520,426,504]],guardA=[275,224,252,291,212,171],guardF=[516,516,516,473,470,474];
  function garrick(mode,f,p){
   if(mode==='idle'){const row=Math.floor(f/3);drawFrame('gidle',[f%3*512,row*512,512,512],p.x,p.y,270,row?501:504,.48);}
-  else if(mode==='motion')drawFrame('gmotion',[f%3*512,Math.floor(f/3)*512,512,512],p.x,p.y,[275,288,273,266,276,268][f],[465,468,468,465,378,459][f],.6);
+  // Motion drawings have a larger anatomical scale inside their cells than attack.png.
+  // Match head/torso proportions, not bounding-box height (dash and jump bend the legs).
+  else if(mode==='motion')drawFrame('gmotion',[f%3*512,Math.floor(f/3)*512,512,512],p.x,p.y,[275,288,273,266,276,268][f],[465,468,468,465,378,459][f],.53);
   else if(mode==='guard')drawFrame('gguard',guardR[f],p.x,p.y,guardA[f],guardF[f],.54);
   else if(mode==='attack'){const rs=[[0,0,512,512],[512,0,512,512],[1024,0,512,512],[0,512,540,512],[560,512,464,512],[1024,512,512,512]];drawFrame('gattack',rs[f],p.x,p.y,[270,296,296,270,222,296][f],[482,482,482,443,446,452][f],.6);}
   else if(mode==='hurt'){drawFrame('ghurt',[[0,0,627,627],[627,0,627,627],[0,627,650,627],[650,627,604,627]][f],p.x,p.y,[316,297,324,295][f],[612,612,597,612][f],.41);}
