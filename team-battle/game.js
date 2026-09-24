@@ -25,7 +25,7 @@
  function log(s){const li=document.createElement('li');li.textContent=s;$('log').append(li);while($('log').children.length>100)$('log').firstElementChild.remove();$('log').scrollTop=$('log').scrollHeight;}
  function status(s){$('status').textContent=s;}
  function reset(){serial++;stopSounds();battle=new TeamRules.Battle();display=battle.snapshot();queue=[];current=null;result=null;t=0;clock=0;labels=[];bursts=[];struck={};deadAt={};variant=0;ready=true;selected={};enemyPlans=battle.intents();$('log').replaceChildren();$('result').hidden=true;ui();}
- let activeAlly=0;
+ let activeAlly=0,guardStarted={};
  const needsTarget=(id,p)=>p&&['ATTACK','SPECIAL'].includes(p.action)&&!(id===1&&p.action==='SPECIAL');
  function choose(id){if(!ready||paused||display.actors[id].hp<=0)return;if(id<2)activeAlly=id;else if(needsTarget(activeAlly,selected[activeAlly]))selected[activeAlly].target=id;ui();}
  function button(text,pressed,fn,disabled=false){const b=document.createElement('button');b.type='button';b.textContent=text;b.setAttribute('aria-pressed',String(pressed));b.disabled=disabled;b.onclick=fn;return b;}
@@ -57,13 +57,13 @@
  return [{at:e.actor===0?505:1120,target:e.target,amount:e.amount,outcome:e.outcome}];}
  function begin(){current=queue.shift();t=0;eventBeat=0;if(!current){display=clone(result.next);ready=!result.finished;enemyPlans=battle.intents();if(result.finished){$('result').hidden=false;$('result').textContent=result.winner===0?tr('VICTORIA · Jessie y Garrick vencieron.','VICTORY · Jessie and Garrick prevailed.'):tr('DERROTA · Puedes probar otra estrategia.','DEFEAT · Try another strategy.');status($('result').textContent);}ui();return;}
   current.duration=eventDuration(current);current.beats=impacts(current);if(current.type==='attack'&&current.actor===0){current.variant=variant;variant=1-variant;}
-  if(current.type==='protection')display.actors[1].guard=true;
+  if(current.type==='protection'){display.actors[1].guard=true;guardStarted[1]??=clock;}
   const n=current.actor===null?'':names[current.actor];status(n+' · '+(current.type==='protection'?tr('Protege a todo el equipo','Protects the whole team'):current.type==='cinematic'?tr('Fuego cruzado','Crossfire'):current.type==='counter'?tr('Contraataque','Counterattack'):actions[current.type.toUpperCase()]||tr('Resolviendo','Resolving')));
  }
- function submit(){if(!ready||paused)return;try{result=battle.resolve(selected,enemyPlans);ready=false;queue=combine(result.events);ui();canvas.scrollIntoView({behavior:'instant',block:'start'});begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
+ function submit(){if(!ready||paused)return;try{result=battle.resolve(selected,enemyPlans);guardStarted={};for(const a of display.actors)if(result.plans[a.id]?.action==='DEFEND')guardStarted[a.id]=clock;ready=false;queue=combine(result.events);ui();canvas.scrollIntoView({behavior:'instant',block:'start'});begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
  function commit(){
   const e=current;for(const a of e.state.actors)if(a.hp<=0&&display.actors[a.id].hp>0)deadAt[a.id]=clock;
-  display=clone(e.state);if(e.type==='rest')labels.push({id:e.actor,value:'+'+e.heal,at:clock,color:'#9ff5d4'});
+  display=clone(e.state);if(e.type==='counter')guardStarted[e.actor]=clock;if(e.type==='rest')labels.push({id:e.actor,value:'+'+e.heal,at:clock,color:'#9ff5d4'});
   if(e.type==='attack'||e.type==='counter')log(names[e.actor]+' → '+names[e.target]+' · '+(e.type==='counter'?tr('Contraataque','Counter'):outcomes[e.outcome])+' '+e.amount+(e.protected!==null&&e.protected!==undefined?' · '+tr('Garrick cubre a ','Garrick covers ')+names[e.protected]:'')+(e.lastStand?' · 1 HP':''));
   else if(e.type==='cinematic')log('Jessie · '+tr('Especial: ','Special: ')+e.hits.map(h=>names[h.target]+' '+h.amount).join(' / '));
   else if(e.type!=='round-end')log(names[e.actor]+' · '+({protection:tr('Protección para todo el equipo','Whole-team protection'),guard:'Parry',rest:tr('Recupera vida y Focus','Recovers HP and Focus'),'rest-start':tr('Intenta descansar','Attempts to rest'),interrupted:tr('Descanso interrumpido','Rest interrupted')}[e.type]||e.type));
@@ -98,16 +98,22 @@
   const maps={guard:[[278,270,270,278,268,278],[500,499,500,492,492,494],.98],hurt:[[348,286,348,286],[607,607,565,565],1.05],rest:[[345,318,345,318],[615,615,614,614],.84],defeat:[[337,313,331,328],[684,703,474,474],.77]};
   const m=maps[mode],rect=mode==='defeat'?[[0,0,627,740],[627,0,627,740],[0,740,627,514],[627,740,627,514]][f]:[f%cols*cell,Math.floor(f/cols)*cell,cell,cell];drawFrame('j'+mode,rect,p.x,p.y,m[0][f],m[1][f],m[2]*.46);
  }
+ function guardFrame(id,elapsed,contactAge=Infinity){
+  // Guard has its own continuous clock, not the clock of each queued attack.
+  // Garrick 3/4/5 are counterattack drawings: never play them while blocking.
+  if(contactAge>=0&&contactAge<360)return id===1?(contactAge<240?2:1):(contactAge<180?3:4);
+  if(elapsed<220)return 0;
+  return (id===1?[1,1,0,1]:[1,4,1,4])[Math.floor((elapsed-220)/360)%4];
+ }
  function pose(id,p){
   const a=display.actors[id],e=current,age=clock-(struck[id]??-99999),death=clock-(deadAt[id]??clock),guard=a.guard||(result?.plans[id]?.action==='DEFEND'&&!ready);
   let mode='idle',f=[0,1,2,1,0,5,4,5][Math.floor(clock/360)%8];
   if(a.hp<=0){mode='defeat';f=death<250?0:death<650?1:death<1080?2:3;}
   else if(!current&&result?.winner===a.team){mode='victory';f=clock%4800>4650?3:[1,2,1,2][Math.floor(clock/450)%4];}
   else if(age>=0&&age<600){mode='hurt';f=age<170?1:age<370?2:3;}
-  else if(e?.type==='protection'&&id===1){mode='guard';f=1;}
   else if(e&&e.actor===id&&['rest','rest-start'].includes(e.type)){mode='rest';f=t<220?0:t<600?1:t<1020?2:3;}
   else if(e&&e.actor===id&&['attack','counter'].includes(e.type)){mode='attack';f=t<400?0:t<750?1:t<1120?2:t<1280?3:t<1500?4:5;}
-  else if(guard){mode='guard';f=1;const pulse=bursts.findLast(b=>b.id===id&&b.parry&&clock-b.at<360);if(pulse)f=id===1?(clock-pulse.at<240?2:1):(clock-pulse.at<180?3:4);}
+  else if(guard){mode='guard';const pulse=bursts.findLast(b=>b.id===id&&b.parry&&clock-b.at<360);f=guardFrame(id,clock-(guardStarted[id]??clock),pulse?clock-pulse.at:Infinity);}
   if(id===1){garrick(mode,f,p);return;}
   if(id===0){
    if(['guard','hurt','rest','defeat'].includes(mode)){jAtlas(mode,f,p);return;}
