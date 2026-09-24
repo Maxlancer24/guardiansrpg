@@ -123,15 +123,21 @@
    }
    if(this.current?.type==='counter'&&this.current.actor===0)s.hero.setTexture(this.timer<100?'jessieGuard5':this.timer<180?'raise1':this.timer<450?'raise2':this.timer<560?'recoil':this.timer<820?'raise2':'raise0');
    if(this.current&&['rest-start','rest'].includes(this.current.type)){
-    // Existing coherent breathing drawings; feet and sprite scale remain fixed.
-    const t=this.timer;if(this.current.actor===0)s.hero.setTexture(t<220?'idle5':t<420?'idle6':t<850?'blink':t<1060?'idle6':'idle5');
+    // Dedicated rest: settle, inhale, exhale, eyes open. No extra healing events.
+    const t=this.timer;if(this.current.actor===0)s.hero.setTexture('jessieRest'+(t<220?0:t<600?1:t<1020?2:3));
     else s.target.setTexture(`wardenIdle${[0,1,2,1][Math.floor(t/350)%4]}`);
    }
    const heroHurt=s.clock-this.heroStruck;
    if(heroHurt>=0&&heroHurt<600)s.hero.setTexture('jessieHurt'+(heroHurt<170?1:heroHurt<370?2:3));
    const enemyHurt=this.visualTime-this.enemyStruck;
    if(this.hp>0&&enemyHurt>=0&&enemyHurt<400){s.target.setTexture(enemyHurt<260?'hurt':'wardenIdle1').setOrigin(.5,1050/1092);if(s.effectsEnabled&&enemyHurt<85)s.target.setTint(0xffdab5);}
-   if(this.victory||this.defeat){this.endTime+=dt;s.hero.setTexture(this.victory?`jessieWin${[0,1,2,1][Math.floor(this.endTime/300)%4]}`:'jessieReaction7');}
+   if(this.victory||this.defeat){
+    this.endTime+=dt;
+    if(this.victory){
+     const loopTime=Math.max(0,this.endTime-420),blink=loopTime%4800>=4500&&loopTime%4800<4620;
+     s.hero.setTexture(this.endTime<420?'jessieReaction4':'jessieWin'+(blink?3:[0,1,2,1][Math.floor(loopTime/300)%4]));
+    }else s.hero.setTexture('jessieDefeat'+(this.endTime<250?0:this.endTime<650?1:this.endTime<1080?2:3));
+   }
    if(this.hp<=0)s.target.setTexture(this.enemyDeathTexture()).setOrigin(.5,1050/1092);
    this.updateVisuals(dt);
    this.hud.clear();this.title.setVisible(false);this.hpText.setVisible(false);

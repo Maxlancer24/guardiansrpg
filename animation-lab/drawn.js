@@ -40,6 +40,8 @@
       window.SpecialPreview.preload(this);
       this.load.image('defenseGuardSheet','/assets/demo-battle/jessie-defense-v1/guard.png');
       this.load.image('defenseHurtSheet','/assets/demo-battle/jessie-defense-v1/hurt.png');
+      this.load.image('restSheet','/assets/demo-battle/jessie-lifecycle-v1/rest.png');
+      this.load.image('defeatSheet','/assets/demo-battle/jessie-lifecycle-v1/defeat.png');
       for(let i=0;i<4;i++){this.load.image(`wardenIdle${i}`,`/assets/demo-battle/ambient-loops-v1/warden-${i}.png`);this.load.image(`jessieWin${i}`,`/assets/demo-battle/ambient-loops-v1/jessie-${i}.png`);}
       for(let i=0;i<8;i++){this.load.image(`jessieReaction${i}`,`/assets/demo-battle/combat-reactions-v1/jessie-${i}.png`);this.load.image(`wardenAnim${i}`,`/assets/demo-battle/combat-reactions-v1/warden-${i}.png`);}
       this.failed=false;this.load.on('loaderror',()=>{this.failed=true;$('loading').textContent=copy.error;});
@@ -76,15 +78,20 @@
     registerDefenseFrames(){
       // Render atlas cells into the same 512x560 coordinate space as the idle.
       // Uniform scaling only; fixed boot baseline. The source PNGs stay intact.
-      const add=(key,sheet,index,columns,cell,anchor,floor,scale)=>{
+      const add=(key,sheet,index,columns,cell,anchor,floor,scale,rect)=>{
         if(this.textures.exists(key))return;
         const tex=this.textures.createCanvas(key,512,560),ctx=tex.getContext();
-        ctx.drawImage(this.textures.get(sheet).getSourceImage(),index%columns*cell,Math.floor(index/columns)*cell,cell,cell,225-anchor*scale,525-floor*scale,cell*scale,cell*scale);tex.refresh();
+        const r=rect||[index%columns*cell,Math.floor(index/columns)*cell,cell,cell];
+        ctx.drawImage(this.textures.get(sheet).getSourceImage(),...r,225-anchor*scale,525-floor*scale,r[2]*scale,r[3]*scale);tex.refresh();
       };
       const anchors=[278,270,270,278,268,278],floors=[500,499,500,492,492,494];
       // Cell 2 is deliberately excluded: the overlapping gun grips are ambiguous.
-      for(const i of [0,1,3,4,5])add('jessieGuard'+i,'defenseGuardSheet',i,3,512,anchors[i],floors[i],1.04);
+      for(const i of [0,1,3,4,5])add('jessieGuard'+i,'defenseGuardSheet',i,3,512,anchors[i],floors[i],.98);
       for(let i=0;i<4;i++)add('jessieHurt'+i,'defenseHurtSheet',i,2,627,[348,286,348,286][i],[607,607,565,565][i],1.05);
+      for(let i=0;i<4;i++)add('jessieRest'+i,'restSheet',i,2,627,[345,318,345,318][i],[615,615,614,614][i],.84);
+      // Keep one physical scale across standing and kneeling; never stretch a kneel to idle height.
+      const defeatRects=[[0,0,627,740],[627,0,627,740],[0,740,627,514],[627,740,627,514]];
+      for(let i=0;i<4;i++)add('jessieDefeat'+i,'defeatSheet',i,2,627,[337,313,331,328][i],[684,703,474,474][i],.77,defeatRects[i]);
     }
     place(){const small=this.scale.width<1000;this.hero.x=(small?280:390)-245*S;this.light.x=this.hero.x;this.shadow.x=small?280:390;this.target.x=small?660:958;this.targetShadow.x=this.target.x;}
     muzzle(){const alternate=this.action>=0&&this.attackVariant===1;return{x:this.hero.x+(alternate?447:431)*S,y:this.hero.y+(alternate?111:154)*S};}
