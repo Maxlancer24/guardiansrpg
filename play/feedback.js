@@ -1,12 +1,16 @@
 (() => {
- window.DemoFeedbackForm={attach(f,es){
+ window.DemoFeedbackForm={attach(f,es,mode='1v1'){
   const $=id=>document.getElementById(id),tr=(a,b)=>es?a:b;let pending=false,lastBody='',submissionId='';
+  const source=mode==='2v2'?'[Modo 2v2 · Jessie + Garrick]':'[Modo 1v1 · Jessie]';
+  const maxLength=3000-source.length-2;$('feedback-text').maxLength=maxLength;
   $('send-feedback').onclick=async()=>{
    if(pending)return;
    for(const id of ['feedback-name','feedback-text','feedback-consent'])if(!$(id).reportValidity())return;
    const name=$('feedback-name').value.trim(),feedback=$('feedback-text').value.trim();
    if(!name||feedback.length<5){$('feedback-state').textContent=tr('Escribe tu nombre y una opinión de al menos 5 caracteres.','Enter your name and at least 5 characters of feedback.');return;}
-   const data={name,feedback,consent:$('feedback-consent').checked,language:es?'es':'en',result:f.victory?'victory':f.defeat?'defeat':'unfinished',rounds:f.round};
+   if(feedback.length>maxLength){$('feedback-state').textContent=tr('La opinión es demasiado larga. Máximo: ','Feedback is too long. Maximum: ')+maxLength;return;}
+   // Prefix survives the deployed inbox unchanged: no schema migration or bot restart.
+   const data={name,feedback:source+'\n\n'+feedback,consent:$('feedback-consent').checked,language:es?'es':'en',result:f.victory?'victory':f.defeat?'defeat':'unfinished',rounds:f.round};
    const body=JSON.stringify(data);if(body!==lastBody){submissionId=crypto.randomUUID();lastBody=body;}
    pending=true;$('send-feedback').disabled=true;$('feedback-state').textContent=tr('Enviando…','Sending…');
    const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);

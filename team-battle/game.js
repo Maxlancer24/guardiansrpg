@@ -60,7 +60,7 @@
   if(current.type==='protection')display.actors[1].guard=true;
   const n=current.actor===null?'':names[current.actor];status(n+' · '+(current.type==='protection'?tr('Protege a todo el equipo','Protects the whole team'):current.type==='cinematic'?tr('Fuego cruzado','Crossfire'):current.type==='counter'?tr('Contraataque','Counterattack'):actions[current.type.toUpperCase()]||tr('Resolviendo','Resolving')));
  }
- function submit(){if(!ready||paused)return;try{result=battle.resolve(selected,enemyPlans);ready=false;queue=combine(result.events);ui();begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
+ function submit(){if(!ready||paused)return;try{result=battle.resolve(selected,enemyPlans);ready=false;queue=combine(result.events);ui();canvas.scrollIntoView({behavior:'instant',block:'start'});begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
  function commit(){
   const e=current;for(const a of e.state.actors)if(a.hp<=0&&display.actors[a.id].hp>0)deadAt[a.id]=clock;
   display=clone(e.state);if(e.type==='rest')labels.push({id:e.actor,value:'+'+e.heal,at:clock,color:'#9ff5d4'});
@@ -76,7 +76,14 @@
   if(hit)sound(b.outcome==='parry'?'parry':current.actor===0?'shot':'axe');else if(current.actor===0)sound('shot');ui();
  }
  function txt(s,x,y,size=18,color='#fff0d7',align='center'){ctx.fillStyle=color;ctx.font='600 '+size+'px Georgia';ctx.textAlign=align;ctx.fillText(s,x,y);}
- function drawFrame(key,r,x,y,anchor,floor,scale){const im=imgs[key];if(!im)return;ctx.drawImage(im,...r,x-anchor*scale,y-floor*scale,r[2]*scale,r[3]*scale);}
+ const paletteCache=new Map();let enemyPalette=null;
+ function paletteImage(key,id){const cacheKey=key+':'+id;if(paletteCache.has(cacheKey))return paletteCache.get(cacheKey);
+  const im=imgs[key],out=document.createElement('canvas');out.width=Math.ceil(im.width*.5);out.height=Math.ceil(im.height*.5);const g=out.getContext('2d');g.drawImage(im,0,0,out.width,out.height);
+  // Source-atop works without Canvas filter (not supported by some mobile browsers).
+  // Cache at half source resolution: still above the displayed sprite size.
+  g.globalCompositeOperation='source-atop';g.fillStyle=id===2?'rgba(65,156,238,.46)':'rgba(231,104,45,.46)';g.fillRect(0,0,out.width,out.height);paletteCache.set(cacheKey,out);return out;
+ }
+ function drawFrame(key,r,x,y,anchor,floor,scale){const im=imgs[key];if(!im)return;const paint=enemyPalette===null?im:paletteImage(key,enemyPalette),sx=paint.width/im.width,sy=paint.height/im.height;ctx.drawImage(paint,r[0]*sx,r[1]*sy,r[2]*sx,r[3]*sy,x-anchor*scale,y-floor*scale,r[2]*scale,r[3]*scale);}
  function whole(key,x,y,scale=.46,anchor=225,floor=525){const im=imgs[key];drawFrame(key,[0,0,im.width,im.height],x,y,anchor,floor,scale);}
  const guardR=[[0,0,560,520],[560,0,490,520],[1050,0,486,520],[0,520,560,504],[560,520,550,504],[1110,520,426,504]],guardA=[275,224,252,291,212,171],guardF=[516,516,516,473,470,474];
  function garrick(mode,f,p){
@@ -115,12 +122,12 @@
    whole(clock%4800>4650?'jblink':'ji'+[0,7,6,5,6,7][Math.floor(clock/300)%6],p.x,p.y);return;
   }
   // Palette is applied to every pose, preserving source silhouettes and animation.
-  ctx.save();ctx.filter=id===2?'sepia(.45) saturate(1.7) hue-rotate(155deg)':'sepia(.65) saturate(1.8) hue-rotate(330deg)';
+  ctx.save();enemyPalette=id;
   let key='wi'+[0,1,2,3,2,1][Math.floor(clock/250)%6],floor=1050;
   if(mode==='defeat')key=death<240?'whurt':death<1080?'wkneel':'wfallen';
   else if(mode==='hurt')key='whurt';
   else if(mode==='attack'){key='wa'+(t<650?2:t<900?3:t<1120?4:t<1280?5:t<1550?6:7);floor=1238;}
-  whole(key,p.x,p.y,.235,720.5,floor);ctx.restore();
+  whole(key,p.x,p.y,.235,720.5,floor);enemyPalette=null;ctx.restore();
  }
  function positions(){const ps=homes.map(p=>({...p})),e=current;if(!e)return ps;
   if(e.protected!==null&&e.protected!==undefined){const a=ps[e.protected],g=ps[e.target],u=ease(t/450)*(1-ease((t-1600)/500));g.x=lerp(g.x,a.x+125,u);g.y=lerp(g.y,a.y+12,u);}
