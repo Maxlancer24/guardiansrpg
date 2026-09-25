@@ -3,6 +3,7 @@
  'use strict';
  const es=document.documentElement.lang==='es',tr=(a,b)=>es?a:b,$=id=>document.getElementById(id);
  const names=['Jessie','Garrick',tr('Guardián de escarcha','Frost Warden'),tr('Guardián de ceniza','Ash Warden')];
+ const shortNames=['Jessie','Garrick',tr('Escarcha','Frost'),tr('Ceniza','Ash')];
  const actions={ATTACK:tr('Atacar','Attack'),DEFEND:'Parry',REST:tr('Descansar','Rest'),SPECIAL:tr('Especial','Special')};
  const outcomes={hit:tr('Impacto','Hit'),break:tr('Guardia rota','Guard break'),parry:'PARRY',dodge:tr('Esquiva','Dodge'),ultra:'ULTRA FOCUS',vulnerable:tr('Descanso interrumpido','Rest interrupted')};
  const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),imgs={},src={},root='/assets/demo-battle/';
@@ -31,20 +32,29 @@
  function choose(id){if(!ready||paused||display.actors[id].hp<=0)return;if(id<2)activeAlly=id;else if(needsTarget(activeAlly,selected[activeAlly]))selected[activeAlly].target=id;ui();}
  function button(text,pressed,fn,disabled=false){const b=document.createElement('button');b.type='button';b.textContent=text;b.setAttribute('aria-pressed',String(pressed));b.disabled=disabled;b.onclick=fn;return b;}
  function ui(){
-  $('cards').innerHTML=display.actors.map(a=>`<article class="card ${a.hp<=0?'dead':''}"><h2>${names[a.id]}</h2><progress max="${a.max}" value="${a.hp}" aria-label="${names[a.id]} HP"></progress><p>${a.hp} / ${a.max} HP · STR ${a.str} · AGI ${a.agi} · CON ${a.con}</p><p>${a.hp<=0?tr('Fuera de combate','Defeated'):a.ultra?'ULTRA FOCUS':a.focus?'FOCUS':tr('Sin Focus','No Focus')} · #${a.rank}</p><p>${a.id<2?(a.used?tr('Especial utilizada','Special used'):tr('Especial disponible','Special ready')):(ready&&enemyPlans[a.id]?actions[enemyPlans[a.id].action]+(enemyPlans[a.id].action==='ATTACK'?' → '+names[enemyPlans[a.id].target]:''):'')}</p></article>`).join('');
+  const focusKey=document.activeElement?.getAttribute?.('data-control');
+  $('cards').replaceChildren();for(const a of display.actors){const target=needsTarget(activeAlly,selected[activeAlly])&&selected[activeAlly]?.target===a.id;
+   const card=button('',ready&&(a.id===activeAlly||target),()=>choose(a.id),!ready||paused||a.hp<=0);card.className='card team-'+a.team+(a.hp<=0?' dead':'')+(current?.actor===a.id?' acting':'');card.setAttribute('data-control','actor-'+a.id);card.setAttribute('aria-label',names[a.id]+', '+a.hp+'/'+a.max+' HP');
+   const state=a.hp<=0?tr('Caído','Down'):a.guard?tr('Protegiendo','Protecting'):a.ultra?'Ultra Focus':a.focus?'Focus':a.id<2?(a.used?tr('Especial usada','Special used'):tr('Especial lista','Special ready')):ready?actions[enemyPlans[a.id]?.action]||'—':tr('En combate','In battle');
+   card.innerHTML=`<span class="fighter-name">${shortNames[a.id]} <small>#${a.rank}</small></span><progress max="${a.max}" value="${a.hp}" aria-label="HP"></progress><span class="hp-value">${a.hp} / ${a.max}</span><span class="fighter-state">${state}</span>`;$('cards').append(card);
+  }
+  $('stats-content').innerHTML=display.actors.map(a=>`<div><strong>${names[a.id]}</strong><span>STR ${a.str} · AGI ${a.agi} · CON ${a.con}</span></div>`).join('');
+  $('round-label').textContent=tr('Ronda ','Round ')+display.round;
   $('confirm').disabled=!loaded||!ready||paused||battle.winner()!==null;
   $('plans').replaceChildren();if(ready){for(const a of battle.living(0)){
    const p=selected[a.id]||{action:'ATTACK',target:battle.living(1)[0]?.id};if(a.used&&p.action==='SPECIAL')p.action='ATTACK';if(!battle.living(1).some(b=>b.id===Number(p.target)))p.target=battle.living(1)[0]?.id;selected[a.id]=p;
   }
    if(!battle.living(0).some(a=>a.id===activeAlly))activeAlly=battle.living(0)[0]?.id;
    const allies=document.createElement('div');allies.className='ally-picker';
-   for(const a of battle.living(0)){const p=selected[a.id];allies.append(button(names[a.id]+' · '+actions[p.action]+(needsTarget(a.id,p)?' → '+names[p.target]:''),activeAlly===a.id,()=>choose(a.id),paused));}$('plans').append(allies);
+   for(const a of battle.living(0)){const p=selected[a.id],b=button(names[a.id]+' · '+actions[p.action]+(needsTarget(a.id,p)?' → '+shortNames[p.target]:''),activeAlly===a.id,()=>choose(a.id),paused);b.setAttribute('data-control','plan-'+a.id);allies.append(b);}$('plans').append(allies);
    const a=display.actors[activeAlly];if(a){const p=selected[a.id],box=document.createElement('div');box.className='choice';const title=document.createElement('h2');title.textContent=names[a.id]+' · '+tr('Elige acción','Choose action');box.append(title);
-   const row=document.createElement('div');row.className='action-picker';for(const [value,label] of Object.entries(actions))row.append(button(value==='SPECIAL'?(a.id===1?'No One Else':tr('Fuego cruzado','Crossfire')):label,p.action===value,()=>{p.action=value;ui();},paused||value==='SPECIAL'&&a.used));box.append(row);
-   const hint=document.createElement('p');hint.textContent=needsTarget(a.id,p)?tr('Toca un enemigo en el escenario o elige aquí:','Tap an enemy on the battlefield or choose here:'):p.action==='SPECIAL'?tr('Protege a TODO el equipo.','Protects the WHOLE team.'):tr('Esta acción no necesita un objetivo.','This action needs no target.');box.append(hint);
-   if(needsTarget(a.id,p)){const targets=document.createElement('div');targets.className='target-picker';for(const b of battle.living(1))targets.append(button(names[b.id],p.target===b.id,()=>choose(b.id),paused));box.append(targets);}$('plans').append(box);}
+   const row=document.createElement('div');row.className='action-picker';for(const [value,label] of Object.entries(actions)){const b=button(label,p.action===value,()=>{p.action=value;ui();},paused||value==='SPECIAL'&&a.used);b.setAttribute('data-control','action-'+value);b.title=value==='SPECIAL'?(a.id===1?'No One Else':tr('Fuego cruzado','Crossfire')):label;row.append(b);}box.append(row);
+   const hint=document.createElement('p');hint.className='target-hint';hint.textContent=needsTarget(a.id,p)?tr('Objetivo:','Target:'):p.action==='SPECIAL'?tr('Protege a TODO el equipo.','Protects the WHOLE team.'):tr('Acción sobre sí mismo.','Self action.');box.append(hint);
+   if(needsTarget(a.id,p)){const targets=document.createElement('div');targets.className='target-picker';for(const b of battle.living(1)){const targetButton=button(shortNames[b.id],p.target===b.id,()=>choose(b.id),paused);targetButton.setAttribute('data-control','target-'+b.id);targets.append(targetButton);}box.append(targets);}$('plans').append(box);}
+  }else{const summary=document.createElement('p');summary.className='resolution-note';summary.textContent=result?.finished&&!current?tr('Combate terminado.','Battle complete.'):tr('Tu equipo ejecuta las acciones elegidas.','Your team is carrying out your plan.');$('plans').append(summary);if(result?.finished&&!current)$('plans').append(button(tr('Volver a jugar','Play again'),false,reset));
   }
-  if(ready)status(tr('Ronda ','Round ')+display.round+' · '+tr('Toca a tu personaje → elige acción → toca al rival. Prepara ambos aliados y confirma.','Tap your character → choose an action → tap an enemy. Plan both allies, then confirm.'));
+  if(ready)status(paused?tr('En pausa','Paused'):tr('Personaje → acción → objetivo','Character → action → target'));
+  if(focusKey)document.querySelector('[data-control="'+focusKey+'"]')?.focus?.({preventScroll:true});
  }
  function combine(events){const out=[];for(let i=0;i<events.length;i++){const e=events[i];if(e.type==='special'){
    const hits=[];while(events[i+1]?.special)hits.push(events[++i]);let final=hits.at(-1)?.state||e.state;if(events[i+1]?.type==='focus')final=events[++i].state;out.push({...e,type:'cinematic',hits,state:final});
@@ -59,9 +69,9 @@
  function begin(){current=queue.shift();t=0;eventBeat=0;if(!current){display=clone(result.next);ready=!result.finished;enemyPlans=battle.intents();if(result.finished){$('result').hidden=false;$('result').textContent=result.winner===0?tr('VICTORIA · Jessie y Garrick vencieron.','VICTORY · Jessie and Garrick prevailed.'):tr('DERROTA · Puedes probar otra estrategia.','DEFEAT · Try another strategy.');status($('result').textContent);}ui();return;}
   current.duration=eventDuration(current);current.beats=impacts(current);if(current.type==='attack'&&current.actor===0){current.variant=variant;variant=1-variant;}
   if(current.type==='protection'){display.actors[1].guard=true;guardStarted[1]??=clock;}
-  const n=current.actor===null?'':names[current.actor];status(n+' · '+(current.type==='protection'?tr('Protege a todo el equipo','Protects the whole team'):current.type==='cinematic'?tr('Fuego cruzado','Crossfire'):current.type==='counter'?tr('Contraataque','Counterattack'):actions[current.type.toUpperCase()]||tr('Resolviendo','Resolving')));
+  const n=current.actor===null?'':names[current.actor];status(n+' · '+(current.type==='protection'?tr('Protege a todo el equipo','Protects the whole team'):current.type==='cinematic'?tr('Fuego cruzado','Crossfire'):current.type==='counter'?tr('Contraataque','Counterattack'):actions[current.type.toUpperCase()]||tr('Resolviendo','Resolving')));ui();
  }
- function submit(){if(!ready||paused)return;try{result=battle.resolve(selected,enemyPlans);guardStarted={};for(const a of display.actors)if(result.plans[a.id]?.action==='DEFEND')guardStarted[a.id]=clock;ready=false;queue=combine(result.events);ui();canvas.scrollIntoView({behavior:'instant',block:'start'});begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
+ function submit(){if(!ready||paused)return;try{result=battle.resolve(selected,enemyPlans);guardStarted={};for(const a of display.actors)if(result.plans[a.id]?.action==='DEFEND')guardStarted[a.id]=clock;ready=false;queue=combine(result.events);ui();begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
  function commit(){
   const e=current;for(const a of e.state.actors)if(a.hp<=0&&display.actors[a.id].hp>0)deadAt[a.id]=clock;
   display=clone(e.state);if(e.type==='counter')guardStarted[e.actor]=clock;if(e.type==='rest')labels.push({id:e.actor,value:'+'+e.heal,at:clock,color:'#9ff5d4'});
@@ -112,7 +122,8 @@
  function garrickAttackPose(time){
   if(time<650)return {mode:'motion',f:time<180?0:time<420?1:2};
   if(time<1450)return {mode:'attack',f:time<850?1:time<1120?2:time<1280?3:4};
-  if(time<2150)return {mode:'motion',f:time<1600?3:time<1950?4:5};
+  if(time<2090)return {mode:'motion',f:time<1600?3:time<1950?4:5};
+  if(time<2230)return {mode:'attack',f:5};
   return {mode:'idle',f:0};
  }
  function garrickTravel(time,home,target,reduced=false){
@@ -125,10 +136,10 @@
   let mode='idle',f=[0,1,2,1,0,5,4,5][Math.floor(clock/360)%8];
   if(a.hp<=0){mode='defeat';f=death<250?0:death<650?1:death<1080?2:3;}
   else if(!current&&result?.winner===a.team){mode='victory';f=clock%4800>4650?3:[1,2,1,2][Math.floor(clock/450)%4];}
-  else if(age>=0&&age<600){mode='hurt';f=age<170?1:age<370?2:3;}
+  else if(age>=0&&age<600){mode='hurt';f=age<170?1:age<370?2:age<470?3:0;}
   else if(e&&e.actor===id&&['rest','rest-start'].includes(e.type)){mode='rest';f=t<220?0:t<600?1:t<1020?2:3;}
   else if(e&&e.actor===id&&['attack','counter'].includes(e.type)){mode='attack';f=t<400?0:t<750?1:t<1120?2:t<1280?3:t<1500?4:5;}
-  else if(guard){mode='guard';const pulse=bursts.findLast(b=>b.id===id&&b.parry&&clock-b.at<360);f=guardFrame(id,clock-(guardStarted[id]??clock),pulse?clock-pulse.at:Infinity);}
+  else if(guard){mode='guard';const pulse=bursts.findLast(b=>b.id===id&&b.parry&&clock-b.at<360);f=guardFrame(id,clock-(guardStarted[id]??clock),pulse?clock-pulse.at:Infinity);if(e?.type==='round-end'){f=0;if(t>=220)mode='idle';}}
   if(id===1){if(mode==='attack'){const phase=garrickAttackPose(t);garrick(phase.mode,phase.f,p);}else garrick(mode,f,p);return;}
   if(id===0){
    if(['guard','hurt','rest','defeat'].includes(mode)){jAtlas(mode,f,p);return;}
@@ -220,6 +231,7 @@
  function tick(now){const dt=last?Math.min(now-last,80)*1.5:0;last=now;if(!paused){clock+=dt;if(current){t+=dt;while(eventBeat<current.beats.length&&t>=current.beats[eventBeat].at)beat(current.beats[eventBeat++]);if(t>=current.duration)commit();}labels=labels.filter(x=>clock-x.at<1300);bursts=bursts.filter(x=>clock-x.at<550);}render();requestAnimationFrame(tick);}
  $('confirm').onclick=submit;$('reset').onclick=()=>{if(loaded)reset();};$('pause').onclick=()=>{paused=!paused;if(paused)stopSounds();$('pause').textContent=paused?tr('Continuar','Resume'):tr('Pausar','Pause');ui();};$('sound').onchange=()=>{if(!$('sound').checked)stopSounds();};
  Promise.all(Object.entries(src).map(([key,path])=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{imgs[key]=im;resolve();};im.onerror=()=>reject(Error(path));im.src=path;}))).then(()=>{loaded=true;reset();$('pause').disabled=false;$('reset').disabled=false;$('pause').textContent=paused?tr('Continuar','Resume'):tr('Pausar','Pause');requestAnimationFrame(tick);}).catch(e=>{status(tr('No se pudo cargar un recurso. Recarga la página.','An asset could not be loaded. Reload the page.'));console.error(e);});
- canvas.onclick=ev=>{if(!ready||paused)return;const r=canvas.getBoundingClientRect(),x=(ev.clientX-r.left)*1280/r.width,y=(ev.clientY-r.top)*650/r.height;const hit=homes.map((p,id)=>({p,id})).filter(({p,id})=>display.actors[id].hp>0&&Math.abs(x-p.x)<105&&y>p.y-270&&y<p.y+35).sort((a,b)=>Math.abs(x-a.p.x)-Math.abs(x-b.p.x))[0];if(hit)choose(hit.id);};
+ function canvasPoint(clientX,clientY,r){const scale=Math.min(r.width/1280,r.height/650);return {x:(clientX-r.left-(r.width-1280*scale)/2)/scale,y:(clientY-r.top-(r.height-650*scale)/2)/scale};}
+ canvas.onclick=ev=>{if(!ready||paused)return;const {x,y}=canvasPoint(ev.clientX,ev.clientY,canvas.getBoundingClientRect());const hit=homes.map((p,id)=>({p,id})).filter(({p,id})=>display.actors[id].hp>0&&Math.abs(x-p.x)<105&&y>p.y-270&&y<p.y+35).sort((a,b)=>Math.abs(x-a.p.x)-Math.abs(x-b.p.x))[0];if(hit)choose(hit.id);};
  window.teamBattleSnapshot=()=>({ready,paused,event:current?.type,activeAlly,selected:clone(selected),display:clone(display),resolved:battle?.snapshot()});
 })();
