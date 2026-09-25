@@ -1,8 +1,9 @@
 (() => {
  window.DemoFeedbackForm={attach(f,es,mode='1v1'){
   const $=id=>document.getElementById(id),tr=(a,b)=>es?a:b;let pending=false,lastBody='',submissionId='';
-  const source=mode==='2v2'?'[Modo 2v2 · Jessie + Garrick]':'[Modo 1v1 · Jessie]';
-  const maxLength=3000-source.length-2;$('feedback-text').maxLength=maxLength;
+  const sources={'2v2':'[Modo 2v2 · Jessie + Garrick]','1v1':'[Modo 1v1 · Jessie]','1v1-jessie':'[Modo 1v1 selector · Jessie]','1v1-garrick':'[Modo 1v1 selector · Garrick]','1v1-zoe':'[Modo 1v1 selector · Zoe]'};
+  const prefixLength=typeof mode==='function'?Math.max(...Object.values(sources).map(s=>s.length)):(sources[mode]||sources['1v1']).length;
+  const maxLength=3000-prefixLength-2;$('feedback-text').maxLength=maxLength;
   $('send-feedback').onclick=async()=>{
    if(pending)return;
    for(const id of ['feedback-name','feedback-text','feedback-consent'])if(!$(id).reportValidity())return;
@@ -10,6 +11,7 @@
    if(!name||feedback.length<5){$('feedback-state').textContent=tr('Escribe tu nombre y una opinión de al menos 5 caracteres.','Enter your name and at least 5 characters of feedback.');return;}
    if(feedback.length>maxLength){$('feedback-state').textContent=tr('La opinión es demasiado larga. Máximo: ','Feedback is too long. Maximum: ')+maxLength;return;}
    // Prefix survives the deployed inbox unchanged: no schema migration or bot restart.
+   const source=sources[typeof mode==='function'?mode():mode]||sources['1v1'];
    const data={name,feedback:source+'\n\n'+feedback,consent:$('feedback-consent').checked,language:es?'es':'en',result:f.victory?'victory':f.defeat?'defeat':'unfinished',rounds:f.round};
    const body=JSON.stringify(data);if(body!==lastBody){submissionId=crypto.randomUUID();lastBody=body;}
    pending=true;$('send-feedback').disabled=true;$('feedback-state').textContent=tr('Enviando…','Sending…');
