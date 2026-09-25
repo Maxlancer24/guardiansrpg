@@ -15,7 +15,7 @@
  let battle,display,queue=[],current=null,result=null,t=0,clock=0,last=0,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,ready=false,loaded=false,labels=[],bursts=[],struck={},deadAt={},eventBeat=0,variant=0,selected={},enemyPlans={},serial=0;
  for(const key of ['idle','attack','guard','hurt','rest','victory','defeat','portrait'])src['g'+key]=root+'garrick-v1/'+key+'.png';
  src.gmotion=root+'garrick-motion-v1/motion.png';
- for(const k of [...Object.keys(ZOE_PACK.specs),'cutin','projectile'])src['z'+k]=root+'zoe-v1/'+k+'.png';
+ for(const k of [...Object.keys(ZOE_PACK.specs),'cutin','projectile'])src['z'+k]=root+'zoe-v1/'+(k==='victory'?'victory-v2':k)+'.png';
  src.jcutin=root+'jessie-cutin-v3.png';src.gcutin=root+'garrick-cutin-v3.png';
  Object.assign(src,{arena:root+'black-lotus-arena.png',jportrait:root+'jessie-cutin.png',jguard:root+'jessie-defense-v1/guard.png',jhurt:root+'jessie-defense-v1/hurt.png',jrest:root+'jessie-lifecycle-v1/rest.png',jdefeat:root+'jessie-lifecycle-v1/defeat.png'});
  for(const i of [0,5,6,7])src['ji'+i]=root+'jessie-idle-shot-v1/idle-'+String(i).padStart(2,'0')+'.png';
