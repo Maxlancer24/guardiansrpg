@@ -31,7 +31,7 @@
  const clone=x=>JSON.parse(JSON.stringify(x));
  function log(s){const li=document.createElement('li');li.textContent=s;$('log').append(li);while($('log').children.length>100)$('log').firstElementChild.remove();$('log').scrollTop=$('log').scrollHeight;}
  function status(s){$('status').textContent=s;}
- function reset(){serial++;stopSounds();battle=new TeamRules.Battle(Math.random,team);finishedAt=null;activeAlly=0;guardStarted={};team.forEach((k,i)=>{names[i]=shortNames[i]=k[0].toUpperCase()+k.slice(1)});$('team-heading').textContent=names.slice(0,2).join(' + ');display=battle.snapshot();queue=[];current=null;result=null;t=0;clock=0;labels=[];bursts=[];struck={};deadAt={};variant=0;ready=true;selected={};enemyPlans=battle.intents();$('log').replaceChildren();$('result').hidden=true;ui();}
+ function reset(){window.DemoAnalytics?.reset();serial++;stopSounds();battle=new TeamRules.Battle(Math.random,team);finishedAt=null;activeAlly=0;guardStarted={};team.forEach((k,i)=>{names[i]=shortNames[i]=k[0].toUpperCase()+k.slice(1)});$('team-heading').textContent=names.slice(0,2).join(' + ');display=battle.snapshot();queue=[];current=null;result=null;t=0;clock=0;labels=[];bursts=[];struck={};deadAt={};variant=0;ready=true;selected={};enemyPlans=battle.intents();$('log').replaceChildren();$('result').hidden=true;ui();}
  let activeAlly=0,guardStarted={};
  const needsTarget=(id,p)=>p&&['ATTACK','SPECIAL'].includes(p.action)&&!(actorKey(id)==='garrick'&&p.action==='SPECIAL');
  function choose(id){if(selecting||!ready||paused||display.actors[id].hp<=0)return;if(id<2)activeAlly=id;else if(needsTarget(activeAlly,selected[activeAlly]))selected[activeAlly].target=id;ui();}
@@ -71,12 +71,12 @@
  }if(!['attack','counter'].includes(e.type))return [];
  if(actorKey(e.actor)==='jessie'&&e.type==='attack'){const n=Math.floor(e.amount/2);return [{at:1980,target:e.target,amount:n,outcome:e.outcome},{at:2280,target:e.target,amount:e.amount-n,outcome:e.outcome}];}
  return [{at:actorKey(e.actor)==='zoe'?1040:actorKey(e.actor)==='jessie'?505:1120,target:e.target,amount:e.amount,outcome:e.outcome}];}
- function begin(){current=queue.shift();t=0;eventBeat=0;if(!current){display=clone(result.next);ready=!result.finished;enemyPlans=battle.intents();if(result.finished){finishedAt=clock;$('result').hidden=false;$('result').textContent=result.winner===0?tr('VICTORIA · ','VICTORY · ')+names.slice(0,2).join(' + '):tr('DERROTA · Puedes probar otra estrategia.','DEFEAT · Try another strategy.');status($('result').textContent);}ui();return;}
+ function begin(){current=queue.shift();t=0;eventBeat=0;if(!current){display=clone(result.next);ready=!result.finished;enemyPlans=battle.intents();if(result.finished){window.DemoAnalytics?.finish(result.winner);finishedAt=clock;$('result').hidden=false;$('result').textContent=result.winner===0?tr('VICTORIA · ','VICTORY · ')+names.slice(0,2).join(' + '):tr('DERROTA · Puedes probar otra estrategia.','DEFEAT · Try another strategy.');status($('result').textContent);}ui();return;}
   current.duration=eventDuration(current);current.beats=impacts(current);if(current.type==='attack'&&actorKey(current.actor)==='jessie'){current.variant=variant;variant=1-variant;}
   if(current.type==='protection'){display.actors[current.actor].guard=true;guardStarted[current.actor]??=clock;}
   const n=current.actor===null?'':names[current.actor];status(n+' · '+(current.type==='protection'?tr('Protege a todo el equipo','Protects the whole team'):['cinematic','zoe-special'].includes(current.type)?skillName(current.actor):current.type==='counter'?tr('Contraataque','Counterattack'):actions[current.type.toUpperCase()]||tr('Resolviendo','Resolving')));ui();
  }
- function submit(){if(selecting||!ready||paused)return;try{result=battle.resolve(selected,enemyPlans);guardStarted={};for(const a of display.actors)if(result.plans[a.id]?.action==='DEFEND')guardStarted[a.id]=clock;ready=false;queue=combine(result.events);ui();begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
+ function submit(){if(selecting||!ready||paused)return;try{window.DemoAnalytics?.start('2v2',team);result=battle.resolve(selected,enemyPlans);guardStarted={};for(const a of display.actors)if(result.plans[a.id]?.action==='DEFEND')guardStarted[a.id]=clock;ready=false;queue=combine(result.events);ui();begin();}catch(e){status(tr('Revisa las acciones y objetivos.','Check actions and targets.'));console.error(e);}}
  function commit(){
   const e=current;for(const a of e.state.actors)if(a.hp<=0&&display.actors[a.id].hp>0)deadAt[a.id]=clock;
   display=clone(e.state);if(e.type==='counter')guardStarted[e.actor]=clock;if(e.type==='rest')labels.push({id:e.actor,value:'+'+e.heal,at:clock,color:'#9ff5d4'});
