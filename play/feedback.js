@@ -2,6 +2,7 @@
  window.DemoFeedbackForm={attach(f,es,mode='1v1'){
   const $=id=>document.getElementById(id),tr=(a,b)=>es?a:b;let pending=false,lastBody='',submissionId='';
   const sources={'2v2':'[Modo 2v2 · Jessie + Garrick]','1v1':'[Modo 1v1 · Jessie]','1v1-jessie':'[Modo 1v1 selector · Jessie]','1v1-garrick':'[Modo 1v1 selector · Garrick]','1v1-zoe':'[Modo 1v1 selector · Zoe]'};
+  sources['2v2-jessie-garrick']='[Modo 2v2 · Jessie + Garrick]';sources['2v2-jessie-zoe']='[Modo 2v2 · Jessie + Zoe]';sources['2v2-garrick-zoe']='[Modo 2v2 · Garrick + Zoe]';
   const prefixLength=typeof mode==='function'?Math.max(...Object.values(sources).map(s=>s.length)):(sources[mode]||sources['1v1']).length;
   const maxLength=3000-prefixLength-2;$('feedback-text').maxLength=maxLength;
   $('send-feedback').onclick=async()=>{

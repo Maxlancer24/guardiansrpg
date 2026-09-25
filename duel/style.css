@@ -4,6 +4,7 @@
 .action-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .action-picker button{font-size:15px;min-height:50px}
 #action-special{border-color:var(--gold)}
+.switch-hero{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}.switch-hero small{color:var(--muted)}
 #round-label{color:var(--gold);font-size:17px}
 #status{font-size:13px;color:var(--mint);min-height:18px}
 #result{position:absolute;top:5%;left:50%;transform:translateX(-50%);padding:12px 25px;background:#071411df;border:1px solid var(--gold);color:var(--gold);font:24px Georgia;pointer-events:none}
