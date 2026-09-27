@@ -23,7 +23,8 @@ for(const c of catalog.characters){
  assert.equal(c.kind,'player-appearance');
  if(c.status==='concept-only'){
   assert(!c.manifest&&!c.release.demo&&!c.release.liveGame);
-  characters.push({id:c.id,status:c.status,actions:{}});continue;
+  const concept=c.conceptAsset?{asset:c.conceptAsset,sha256:hash(fs.readFileSync(local(c.conceptAsset))),designReview:c.designReview}:null;
+  characters.push({id:c.id,status:c.status,concept,actions:{}});continue;
  }
  assert.equal(c.status,'demo-ready');assert(c.release.demo&&!c.release.liveGame);
  const manifestFile=local(c.manifest),pack=require(manifestFile),actions={};

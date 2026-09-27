@@ -1571,6 +1571,11 @@
     {
       "id": "arcanist",
       "status": "concept-only",
+      "concept": {
+        "asset": "characters/concepts/arcanist-v1/base-v1.png",
+        "sha256": "5d04a624d296d11ca64946645e4c00f8405e25025733663610090b9c3238aa4e",
+        "designReview": "awaiting-user-review"
+      },
       "actions": {}
     },
     {
@@ -1998,21 +2003,25 @@
     {
       "id": "tracker",
       "status": "concept-only",
+      "concept": null,
       "actions": {}
     },
     {
       "id": "pugilist",
       "status": "concept-only",
+      "concept": null,
       "actions": {}
     },
     {
       "id": "wanderer",
       "status": "concept-only",
+      "concept": null,
       "actions": {}
     },
     {
       "id": "custodian",
       "status": "concept-only",
+      "concept": null,
       "actions": {}
     },
     {
