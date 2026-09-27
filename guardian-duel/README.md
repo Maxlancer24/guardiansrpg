@@ -35,7 +35,8 @@ Blink is independent of the breathing loop. Defeat has priority over idle recove
 
 Explorer has its own nine atlases in assets/explorer-v1, with six attack frames.
 explorer.js defines its anchors/timing. Ranged release is at 1300ms, projectile
-arrival/impact at 1440ms, and return at 1940ms. A short step replaces the melee dash.
+arrival/impact at 1440ms, and idle recovery at 1940ms. Ranged actors stay planted:
+no approach displacement or backward hop; their motion atlases remain available.
 All appearances share the unchanged rules, effects, sounds and music. Only the
 chosen pack plus each selector idle preview is loaded. Sprite keys include the
 appearance ID, so switching cannot accidentally reuse another character's images.
@@ -118,12 +119,17 @@ arcanist.js preserves left-hand staff/right-hand gestures, calibrated feet and
 was rejected and regenerated to face the incoming threat. Defeat uses explicit
 row boundaries and a corner mask; victory returns through all six poses and blinks.
 
-Ranged presentation shares Explorer's 2600ms turn animation: short approach,
+Ranged presentation shares Explorer's 2600ms turn animation: stationary preparation,
 release at 1300ms, impact at 1440ms. It is still ONE normal attack under the same
-rules. arcane-fx.js attaches charge to the staff crystal and the projectile to
-the drawn release palm. No new special ability, stats, rewards or bot integration.
-Sound/music reuse existing assets. Projectile core remains visible with effects
-off; reduced motion removes the trail and lowers the flashes.
+rules. arcane-fx.js attaches charge and a continuous tapered beam to the actual
+staff crystal, including follow-through frames. It extends to the target exactly
+at 1440ms and fades by 1670ms. No palm projectile. No new special ability, stats,
+rewards or bot integration. Sound/music reuse existing assets. Beam core remains
+visible with effects off; reduced motion removes outer ribbons and lowers flashes.
+Both ranged avatars use idle/attack/recovery poses only during attacks; no motion
+sprites, world translation or jump offsets. Explorer's arrow origin was adjusted
+to the stationary bow. Automated client instrumentation asserts planted x/y for
+preparation, attack and recovery of BOTH appearances; melee movement is unchanged.
 
 Validation: 54 atlas checks, 59 seeded rules battles, 48 client-simulated battles,
 all six avatars' full victory playback, and verify-arcanist.cjs timing/socket checks.

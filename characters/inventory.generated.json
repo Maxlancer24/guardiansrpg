@@ -1576,7 +1576,7 @@
       "id": "arcanist",
       "status": "demo-ready",
       "manifest": "guardian-duel/arcanist.js",
-      "manifestSha256": "5b899bde06ea556f521cc4d380de63f72585ecfed602f321a097ff6b1df86aa8",
+      "manifestSha256": "056fee6a56f02c025ce528b06f2aba169f5eeb90a8777f2097a3d92d5a0f4705",
       "scale": {
         "sourceBodyHeight": 470,
         "idleScale": 0.67,
@@ -1586,7 +1586,7 @@
       "presentationFiles": [
         {
           "file": "guardian-duel/arcane-fx.js",
-          "sha256": "ccdba11829f32905df685b7a08c3659b938ab7b782bf17be064c5227e5dcd687"
+          "sha256": "9ecdf7f5056f04b0ce59734c4b037dbf6d49f70da48d0fd6ae458b193b5e3482"
         }
       ],
       "actions": {

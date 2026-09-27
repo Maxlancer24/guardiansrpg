@@ -26,7 +26,7 @@ const ARCANIST_ACTIONS=(()=>{
   [[420,540],[512,540],[512,1024],[0,1024],[0,552],[420,552]],null,null];
  p.idle.loop=true;
  p.victory.settled={sequence:[[0,1600],[5,110],[0,900]],loop:true};
- p.attack.markers=[{at:940,event:'release',frame:2,point:[1440,137]}];
+ p.attack.markers=[{at:940,event:'release',frame:2,point:[1350,39]}];
  p.attack.castSockets={palm:[[245,160],[776,138],[1440,137],[420,640],[761,680],[1180,768]],crystal:[[352,35],[849,35],[1350,39],[343,546],[858,548],[1352,547]]};
  return p;
 })();

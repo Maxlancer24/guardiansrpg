@@ -13,7 +13,7 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 - `guardian-duel/<id>.js`: recortes, anclajes de pies, máscaras y tiempos activos.
 - `guardian-duel/scale.js`: tamaño anatómico; `animation.js`: reproducción.
 - `guardian-duel/melee-fx.js`: efectos independientes de las imágenes.
-- `guardian-duel/arcane-fx.js`: carga del bastón y proyectil de Arcanista, sin daño propio.
+- `guardian-duel/arcane-fx.js`: carga y rayo del bastón de Arcanista, sin daño propio.
 
 No editar el inventario generado a mano. Después de cambiar un pack:
 
