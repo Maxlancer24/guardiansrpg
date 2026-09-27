@@ -8,7 +8,8 @@
   lancer:{sourceBodyHeight:440,idleScale:.70,targetHeight:230},
   explorer:{sourceBodyHeight:468,idleScale:.67,targetHeight:225},
   duelist:{sourceBodyHeight:465,idleScale:.67,targetHeight:230},
-  sentinel:{sourceBodyHeight:473,idleScale:.67,targetHeight:228}
+  sentinel:{sourceBodyHeight:473,idleScale:.67,targetHeight:228},
+  vanguard:{sourceBodyHeight:481,idleScale:.67,targetHeight:235}
  };
  const api={profiles,
   sceneSize(width,cssWidth){return 230*width/1280*(cssWidth<=700?1.5:1)},

@@ -6,7 +6,7 @@ No account writes, rewards, analytics, feedback submission or character persiste
 
 ## Playable appearances
 
-Lancer, Explorer, Duelist and Sentinel. The other six static concepts are not playable yet. Appearance is
+Lancer, Explorer, Duelist, Sentinel and Vanguard. The other five static concepts are not playable yet. Appearance is
 independent of STR/AGI/CON and future equipped weapons. This demo uses 12/10/14
 against Hollow 10/6/15. It reuses PracticeRules for ATTACK/DEFEND/REST and explicitly
 rejects SPECIAL rather than borrowing Jessie's active. Focus activation art is
@@ -16,7 +16,7 @@ used for a successful rest. Server combat integration remains a separate task.
 
 `scale.js` calibrates standing anatomy to the existing protagonist renderers.
 At 1280 scene units, crown-to-sole measurements are approximately Jessie 214
-(without the ponytail), Garrick 230, Zoe 241. Lancer and Duelist target 230, Explorer 225, Sentinel 228.
+(without the ponytail), Garrick 230, Zoe 241. Lancer and Duelist target 230, Explorer 225, Sentinel 228, Vanguard 235.
 Weapons never participate in this measurement. One uniform factor applies to
 every action, anchored at the feet; no per-frame stretching or stance normalization.
 Projectile release uses the same factor. Mobile uses the protagonist camera's
@@ -71,15 +71,23 @@ Victory includes all six poses, a brief blink, and repeated full celebrations.
 Its shield is visual only: it does not change the shared DEFEND rules or stats.
 Generation prompts and visual review notes are saved beside the atlases.
 
+Vanguard is roster design 06 with the requested fair/light skin. Nine atlases
+(52 poses) live in assets/vanguard-v1. vanguard.js preserves the full two-handed
+cut at the existing 1235ms damage event, defensive blade block, hurt/rest/focus,
+approach/back-hop, all six victory frames and six defeat frames. Crossing swords
+and row-adjacent boots use explicit rectangles and source-space clipping masks.
+Idle and victory anchors are checked against the planted boot positions. Its
+armor and sword are cosmetic; rules, damage, audio and effects are unchanged.
+
 `node guardian-duel/verify.cjs` checks actual PNG bounds, rules, complete animated
 client turns with a simulated DOM/canvas, results, replay, language and selection.
-This is not a browser visual test. The Sentinel integration passes 36 atlas checks,
-59 seeded rules battles and 32 complete client-simulated battles across all four
+This is not a browser visual test. The Vanguard integration passes 45 atlas checks,
+59 seeded rules battles and 40 complete client-simulated battles across all five
 appearances. Native-canvas contact and anatomical-scale renders were visually
 inspected. Browser/mobile visual QA is still needed: the browser helper fails
 to start in the current sandbox. No existing protagonist files changed.
 
 Victory regression coverage records real client drawImage source rectangles
-after wins for all four appearances, asserts that all six poses were drawn and
+after wins for all five appearances, asserts that all six poses were drawn and
 the whole celebration repeats. Timing boundary tests cover three full cycles and
 a longer synthetic gesture, preventing future durations from truncating poses.

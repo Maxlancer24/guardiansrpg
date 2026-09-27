@@ -2,7 +2,7 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id),canvas=$('arena'),ctx=canvas.getContext('2d'),images={},base='/assets/demo-battle/';
 let appearance='lancer';
-const AVATARS={lancer:{actions:LANCER_ACTIONS,es:'Lancero',en:'Lancer'},explorer:{actions:EXPLORER_ACTIONS,es:'Exploradora',en:'Explorer'},duelist:{actions:DUELIST_ACTIONS,es:'Duelista',en:'Duelist'},sentinel:{actions:SENTINEL_ACTIONS,es:'Centinela',en:'Sentinel'}};
+const AVATARS={lancer:{actions:LANCER_ACTIONS,es:'Lancero',en:'Lancer'},explorer:{actions:EXPLORER_ACTIONS,es:'Exploradora',en:'Explorer'},duelist:{actions:DUELIST_ACTIONS,es:'Duelista',en:'Duelist'},sentinel:{actions:SENTINEL_ACTIONS,es:'Centinela',en:'Sentinel'},vanguard:{actions:VANGUARD_ACTIONS,es:'Vanguardia',en:'Vanguard'}};
 let en=new URLSearchParams(location.search).get('lang')==='en',battle,display,intent,choice=null,active=false,busy=false,paused=false,clock=0,last=0,current=null,queue=[],result=null,labels=[],sparks=[],deaths={},readyAssets=false,loadPromise=null;
 const modes=[{name:'idle',at:0},{name:'idle',at:0}],voices=new Set(),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const music=new PracticeMusic(!en);
