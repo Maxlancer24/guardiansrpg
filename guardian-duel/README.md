@@ -36,13 +36,19 @@ All appearances share the unchanged rules, effects, sounds and music. Only the
 chosen pack plus each selector idle preview is loaded. Sprite keys include the
 appearance ID, so switching cannot accidentally reuse another character's images.
 
-Duelist has nine atlases in assets/duelist-v1. duelist.js defines five selected
-attack poses (one inconsistent generated pose is excluded), six poses for each
+Duelist has nine active atlases in assets/duelist-v1. duelist.js uses the corrected
+six-pose right-handed attack-right-v2 sheet, six poses for each
 other action except hurt (four). Its single rapier thrust impacts at 1235ms,
 after 360ms approach + 875ms anticipation. Melee travel accounts for source-space
 rapier reach and camera scale, so the extended blade reaches the target on mobile
 as well as desktop. Wide attack polygons isolate blades crossing nominal cells.
 Victory plays its entry and then a settled loop with a short 110ms blink.
+
+Lancer idle/attack/guard use refined source drawings in assets/lancer-refined-v1.
+The attack now has six poses with the same 1235ms overall impact timing. Larger
+source figures are scaled down to the original anatomical height, not enlarged
+in-world. The selector respects device pixel density; combat supports up to 3x
+with the existing 4-million-pixel backing budget. Original assets are preserved.
 
 Generated rasters retain alpha. Guard frames retain custom polygon masks to avoid
 adjacent-row spear fragments. Source rectangles are explicit, not assumed uniform

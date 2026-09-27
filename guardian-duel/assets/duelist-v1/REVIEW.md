@@ -1,5 +1,11 @@
 # Duelist animation review
 
+Correction after user review: the first attack set still switched arms in the
+extended thrust despite the initial review below. It is superseded by
+attack-right-v2.png, a six-pose right-handed sequence with a rear three-quarter
+torso turn. See ../lancer-refined-v1/REVIEW.md for current review and exact prompts.
+The following notes describe the initial release, not the corrected attack.
+
 Uses approved roster design 04 and the shared Guardian combat renderer. Generated
 with the built-in image tool (true alpha), using the selected idle as the identity
 reference for every action. Exact prompts including rejected attack-v2 are in PROMPTS.md.

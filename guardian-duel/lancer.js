@@ -51,4 +51,19 @@ LANCER_ACTIONS.motion.frames[2]=[992,0,544,512,272,455];
 LANCER_ACTIONS.motion.clips=[null,
  [[512,0],[1024,0],[1024,300],[970,300],[970,512],[512,512]],
  [[1024,0],[1536,0],[1536,512],[992,512],[992,330],[1024,330]]];
+// Refined source art: larger attack/guard figures need less source enlargement.
+// Keep world anatomy and timings; do not stretch or sharpen low-res old crops.
+LANCER_ACTIONS.idle.src='/guardian-duel/assets/lancer-refined-v1/idle.png';
+LANCER_ACTIONS.idle.frames=cells([315,278,246,313,278,246],[505,505,505,496,496,496]);
+LANCER_ACTIONS.attack={src:'/guardian-duel/assets/lancer-refined-v1/attack.png',scale:.78,frames:[
+ [0,0,627,452,282,436],[627,0,627,452,260,436],
+ [0,452,627,369,248,355],[585,452,669,369,239,355],
+ [0,821,627,433,263,409],[627,821,627,433,290,409]
+],sequence:[[0,350],[1,525],[2,110],[3,150],[4,150],[5,135]],loop:false,
+ markers:[{at:875,event:'visual-impact',frame:2}],reach:372,
+ clips:[null,null,[[0,452],[627,452],[627,700],[580,700],[580,821],[0,821]],
+ [[640,452],[1254,452],[1254,821],[585,821],[585,700],[640,700]],null,null]};
+LANCER_ACTIONS.guard={src:'/guardian-duel/assets/lancer-refined-v1/guard.png',scale:.685,
+ frames:cells([256,261,242,290,266,246],[504,504,504,495,495,495]),
+ sequence:[[0,250],[1,250],[2,400],[1,400],[2,400],[3,140],[4,300],[5,220]],loop:false};
 if(typeof module!=='undefined')module.exports=LANCER_ACTIONS;
