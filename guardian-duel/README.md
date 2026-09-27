@@ -91,3 +91,17 @@ Victory regression coverage records real client drawImage source rectangles
 after wins for all five appearances, asserts that all six poses were drawn and
 the whole celebration repeats. Timing boundary tests cover three full cycles and
 a longer synthetic gesture, preventing future durations from truncating poses.
+
+Vanguard victory-v2 replaces the abrupt sword reset with neutral, downward
+diagonal, horizontal and raised salute poses. Recovery reverses those same
+in-betweens before the settled blink. The original sheet is retained.
+
+melee-fx.js draws separate procedural weapon trails at the existing 1235ms
+impact event: tapered thrust light for Lancer/Duelist, curved sword ribbons for
+Sentinel/Vanguard, brief blade-tip glints and small fading flecks. Atlas-space
+blade endpoints share the sprite's frame, foot anchor, scale and dash offset.
+No extra sprites, hits, damage, audio changes or protagonist changes are involved.
+Reduced motion keeps only a subdued glint; the effects toggle disables them.
+`node guardian-duel/verify-melee-fx.cjs` checks timing, both weapon poses,
+mobile/desktop registration, deterministic output and canvas state restoration.
+Native-canvas attack snapshots were inspected; these do not replace browser QA.
