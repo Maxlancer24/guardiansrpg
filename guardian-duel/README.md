@@ -6,7 +6,7 @@ No account writes, rewards, analytics, feedback submission or character persiste
 
 ## Playable appearances
 
-Lancer and Explorer. The other eight static concepts are not playable yet. Appearance is
+Lancer, Explorer and Duelist. The other seven static concepts are not playable yet. Appearance is
 independent of STR/AGI/CON and future equipped weapons. This demo uses 12/10/14
 against Hollow 10/6/15. It reuses PracticeRules for ATTACK/DEFEND/REST and explicitly
 rejects SPECIAL rather than borrowing Jessie's active. Focus activation art is
@@ -16,7 +16,7 @@ used for a successful rest. Server combat integration remains a separate task.
 
 `scale.js` calibrates standing anatomy to the existing protagonist renderers.
 At 1280 scene units, crown-to-sole measurements are approximately Jessie 214
-(without the ponytail), Garrick 230, Zoe 241. Lancer targets 230 and Explorer 225.
+(without the ponytail), Garrick 230, Zoe 241. Lancer and Duelist target 230, Explorer 225.
 Weapons never participate in this measurement. One uniform factor applies to
 every action, anchored at the feet; no per-frame stretching or stance normalization.
 Projectile release uses the same factor. Mobile uses the protagonist camera's
@@ -32,9 +32,17 @@ Blink is independent of the breathing loop. Defeat has priority over idle recove
 Explorer has its own nine atlases in assets/explorer-v1, with six attack frames.
 explorer.js defines its anchors/timing. Ranged release is at 1300ms, projectile
 arrival/impact at 1440ms, and return at 1940ms. A short step replaces the melee dash.
-Both appearances share the unchanged rules, effects, sounds and music. Only the
+All appearances share the unchanged rules, effects, sounds and music. Only the
 chosen pack plus each selector idle preview is loaded. Sprite keys include the
 appearance ID, so switching cannot accidentally reuse another character's images.
+
+Duelist has nine atlases in assets/duelist-v1. duelist.js defines five selected
+attack poses (one inconsistent generated pose is excluded), six poses for each
+other action except hurt (four). Its single rapier thrust impacts at 1235ms,
+after 360ms approach + 875ms anticipation. Melee travel accounts for source-space
+rapier reach and camera scale, so the extended blade reaches the target on mobile
+as well as desktop. Wide attack polygons isolate blades crossing nominal cells.
+Victory plays its entry and then a settled loop with a short 110ms blink.
 
 Generated rasters retain alpha. Guard frames retain custom polygon masks to avoid
 adjacent-row spear fragments. Source rectangles are explicit, not assumed uniform
@@ -45,5 +53,8 @@ anatomical size and weapon length and be visually checked in motion, not only as
 
 `node guardian-duel/verify.cjs` checks actual PNG bounds, rules, complete animated
 client turns with a simulated DOM/canvas, results, replay, language and selection.
-This is not a browser visual test. Browser/mobile visual QA still needed because
-no browser was connected during implementation. No existing protagonist files changed.
+This is not a browser visual test. The Duelist integration passes 27 atlas checks,
+59 seeded rules battles and 24 complete client-simulated battles across all three
+appearances. Native-canvas contact and anatomical-scale renders were visually
+inspected. Browser/mobile visual QA is still needed: the browser helper fails
+to start in the current sandbox. No existing protagonist files changed.
