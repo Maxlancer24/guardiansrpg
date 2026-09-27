@@ -14,6 +14,14 @@ used for a successful rest. Server combat integration remains a separate task.
 
 ## Animation contract
 
+`scale.js` calibrates standing anatomy to the existing protagonist renderers.
+At 1280 scene units, crown-to-sole measurements are approximately Jessie 214
+(without the ponytail), Garrick 230, Zoe 241. Lancer targets 230 and Explorer 225.
+Weapons never participate in this measurement. One uniform factor applies to
+every action, anchored at the feet; no per-frame stretching or stance normalization.
+Projectile release uses the same factor. Mobile uses the protagonist camera's
+1.5x presentation zoom. Selector portraits also share this anatomical calibration.
+
 Nine atlases: idle (6), attack (8), guard (6), hurt (4), rest (6), motion (6),
 activation (6), victory (6), defeat (6). Coordinates, anchors, durations and masks
 are in lancer.js. Guard loops only defensive poses; attack is a separate counter.
