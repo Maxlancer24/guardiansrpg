@@ -12,7 +12,25 @@ assert(duelist.attack.src.endsWith('attack-right-v2.png'));
 assert.equal(duelist.attack.sequence.slice(0,2).reduce((n,f)=>n+f[1],0),875,'thrust and damage timing');
 assert.equal(duelist.attack.markers[0].frame,2);
 assert.equal(duelist.attack.sequence.reduce((n,f)=>n+f[1],0),1420,'return begins after the thrust recovery');
-assert.equal(duelist.victory.sequence.reduce((n,f)=>n+f[1],0),1940);
+const animation=require('./animation.js');
+for(const [key,p] of Object.entries(pack).filter(([k])=>k.endsWith(':victory'))){
+ const entry=animation.duration(p),cycle=entry+animation.duration(p.settled);
+ assert(entry/1.5>=1.9,key+' readable full entry');
+ for(const offset of [0,cycle,cycle*2]){
+  let start=0;
+  for(const [index,ms] of p.sequence){
+   assert.equal(animation.victory(p,offset+start+1),index,key+' frame start');
+   assert.equal(animation.victory(p,offset+start+ms-1),index,key+' full frame duration');
+   start+=ms;
+  }
+ }
+ assert.equal(animation.victory(p,entry),p.settled.sequence[0][0]);
+ const visited=new Set();for(let ms=0;ms<cycle;ms+=75)visited.add(animation.victory(p,ms));
+ assert.deepEqual([...visited].sort(),[0,1,2,3,4,5],key+' all six at 1.5x');
+ // No fixed 1940ms cutoff: a future longer gesture also finishes fully.
+ const longer={...p,sequence:p.sequence.map(([i,ms])=>[i,ms*2])};
+ assert.equal(animation.victory(longer,animation.duration(longer)-1),p.sequence.at(-1)[0]);
+}
 for(const [f,ms] of duelist.victory.settled.sequence){assert(duelist.victory.frames[f]);if(f===5)assert(ms<=120,'settled victory blink is brief');}
 for(const cssWidth of [390,640,701,1240]){
  const sceneSize=scale.sceneSize(960,cssWidth),zoom=cssWidth<=700?1.5:1;
@@ -28,13 +46,24 @@ for(const cssWidth of [390,640,701,1240]){
  assert(Math.abs(960*.28+advance+reach-(960*.75-sceneSize*.10))<1e-9,'rapier reaches target at each zoom');
 }
 for(let seed=1;seed<60;seed++){let n=seed;const rng=()=>((n=(n*1664525+1013904223)>>>0)/4294967296);const b=new R.Battle(rng);for(let t=0;t<100;t++){const before=b.snapshot(),r=b.resolve(['ATTACK','DEFEND','REST'][t%3]);for(const a of r.state.actors)assert(a.hp>=0&&a.hp<=a.max);assert.deepEqual(before.actors.map(a=>a.max),r.state.actors.map(a=>a.max));if(r.finished)break;if(t===99)throw Error('battle failed to terminate');}}
-let drawCalls=0;
+let drawCalls=0;const victoryDraws=[],victoryCovered=new Set();
 const paint={addColorStop(){}};
-const ctx=new Proxy({drawImage(im,...args){assert(im&&im.width>0);assert(args.every(Number.isFinite));if(args.length===8){const [x,y,w,h]=args;assert(x>=0&&y>=0&&x+w<=im.width&&y+h<=im.height)}drawCalls++;},createRadialGradient(){return paint}}, {get:(t,k)=>k in t?t[k]:()=>{}});
+const ctx=new Proxy({drawImage(im,...args){assert(im&&im.width>0);assert(args.every(Number.isFinite));if(args.length===8){const [x,y,w,h]=args;assert(x>=0&&y>=0&&x+w<=im.width&&y+h<=im.height)}if(im.assetPath&&im.assetPath.endsWith('/victory.png')){
+ const found=Object.entries(pack).find(([k,p])=>k.endsWith(':victory')&&p.src===im.assetPath);
+ if(found){const [key,p]=found;victoryDraws.push({key,frame:p.frames.findIndex(r=>r.slice(0,4).every((v,i)=>v===args[i]))});}
+}drawCalls++;},createRadialGradient(){return paint}}, {get:(t,k)=>k in t?t[k]:()=>{}});
 class El{constructor(id){this.id=id;this.style={};this.dataset={};this.hidden=['battle','outcome','replay'].includes(id);this.disabled=false;this.children=[];this.clientWidth=390;this.clientHeight=690;this.checked=false;this.textContent='';}getContext(){return ctx}setAttribute(){}append(el){this.children.push(el)}replaceChildren(){this.children=[]}focus(){}scrollIntoView(){}get firstElementChild(){return {remove:()=>this.children.shift()}}}
 const ids=[...fs.readFileSync(path.join(__dirname,'index.html'),'utf8').matchAll(/id="([^"]+)"/g)].map(m=>m[1]);
 const els=Object.fromEntries(ids.map(id=>[id,new El(id)]));els.effects.checked=true;const actions=['ATTACK','DEFEND','REST'].map(a=>{const e=new El(a);e.dataset.action=a;return e});
-let raf,time=0;const context={console,devicePixelRatio:2,GuardianRules:R,Math,URL,URLSearchParams,location:{search:'',href:'http://localhost/guardian-duel/'},history:{replaceState(){}},matchMedia:()=>({matches:false}),document:{hidden:false,documentElement:{lang:'es'},getElementById:id=>{assert(els[id],id);return els[id]},querySelectorAll:s=>s==='[data-action]'?actions:[],querySelector:()=>new El(),createTextNode:s=>({textContent:s}),createElement:()=>new El(),addEventListener(){}},Image:class{set src(v){const [w,h]=dimensions(path.join(root,v));this.width=w;this.height=h;queueMicrotask(()=>this.onload())}},Audio:class{addEventListener(){}play(){return Promise.resolve()}pause(){}},requestAnimationFrame:fn=>{raf=fn}};
-context.window=context;vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(root,'battle-practice/music.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'lancer.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'explorer.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'duelist.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'scale.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'game.js'),'utf8'),context);
+let raf,time=0;const context={console,devicePixelRatio:2,GuardianRules:R,Math,URL,URLSearchParams,location:{search:'',href:'http://localhost/guardian-duel/'},history:{replaceState(){}},matchMedia:()=>({matches:false}),document:{hidden:false,documentElement:{lang:'es'},getElementById:id=>{assert(els[id],id);return els[id]},querySelectorAll:s=>s==='[data-action]'?actions:[],querySelector:()=>new El(),createTextNode:s=>({textContent:s}),createElement:()=>new El(),addEventListener(){}},Image:class{set src(v){this.assetPath=v;const [w,h]=dimensions(path.join(root,v));this.width=w;this.height=h;queueMicrotask(()=>this.onload())}},Audio:class{addEventListener(){}play(){return Promise.resolve()}pause(){}},requestAnimationFrame:fn=>{raf=fn}};
+context.window=context;vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(root,'battle-practice/music.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'lancer.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'explorer.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'duelist.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'scale.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'animation.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(__dirname,'game.js'),'utf8'),context);
 const tick=()=>{time+=50;raf(time)};
-(async()=>{await new Promise(r=>setImmediate(r));await els.lancer.onclick();assert.equal(els.battle.hidden,false);for(let trial=0;trial<24;trial++){if(trial===8){els.change.onclick();await els.explorer.onclick();assert.equal(els['hero-name'].textContent,'Exploradora');}if(trial===16){els.change.onclick();await els.duelist.onclick();assert.equal(els['hero-name'].textContent,'Duelista');}let rounds=0;while(els.replay.hidden&&rounds++<70){actions[trial%2===0?rounds%3:0].onclick();assert.equal(els.confirm.disabled,false);els.confirm.onclick();assert.equal(actions[0].disabled,true);for(let i=0;actions[0].disabled&&els.replay.hidden&&i<500;i++)tick();assert(!actions[0].disabled||!els.replay.hidden);}assert(!els.replay.hidden,'expected completed battle');assert.equal(els.outcome.hidden,false);els.replay.onclick();assert.equal(els.outcome.hidden,true);assert.equal(els['hero-hp'].value,260);}els.pause.onclick();assert.equal(els.status.textContent,'En pausa');els.pause.onclick();els.language.onclick();assert.equal(context.document.documentElement.lang,'en');els.change.onclick();assert.equal(els.selection.hidden,false);assert.equal(els.battle.hidden,true);assert(drawCalls>100);assert.equal(els.arena.width,780,'mobile backing uses CSS width times DPR');assert.equal(ctx.imageSmoothingEnabled,true);assert.equal(ctx.imageSmoothingQuality,'high');els.arena.clientWidth=1240;els.arena.clientHeight=775;await els.lancer.onclick();tick();assert.equal(els.arena.width,2480,'desktop retina backing');context.devicePixelRatio=3;els.arena.clientWidth=390;els.arena.clientHeight=690;tick();assert.equal(els.arena.width,1170,'3x mobile backing');assert(els.arena.width*els.arena.height<=4000000);console.log('PASS: 27 atlases, 59 seeded battles, 24 animated client battles across all three appearances, replay, selection, pause, language, mobile canvas and crop bounds. Draw calls:',drawCalls)})().catch(e=>{console.error(e);process.exitCode=1});
+(async()=>{await new Promise(r=>setImmediate(r));await els.lancer.onclick();assert.equal(els.battle.hidden,false);for(let trial=0;trial<24;trial++){if(trial===8){els.change.onclick();await els.explorer.onclick();assert.equal(els['hero-name'].textContent,'Exploradora');}if(trial===16){els.change.onclick();await els.duelist.onclick();assert.equal(els['hero-name'].textContent,'Duelista');}let rounds=0;while(els.replay.hidden&&rounds++<70){actions[trial%2===0?rounds%3:0].onclick();assert.equal(els.confirm.disabled,false);els.confirm.onclick();assert.equal(actions[0].disabled,true);for(let i=0;actions[0].disabled&&els.replay.hidden&&i<500;i++)tick();assert(!actions[0].disabled||!els.replay.hidden);}assert(!els.replay.hidden,'expected completed battle');assert.equal(els.outcome.hidden,false);if(els.outcome.textContent==='VICTORIA'){
+ victoryDraws.length=0;for(let n=0;n<180;n++)tick();
+ const id=trial<8?'lancer':trial<16?'explorer':'duelist',key=id+':victory';
+ const frames=victoryDraws.filter(v=>v.key===key).map(v=>v.frame);
+ assert.deepEqual([...new Set(frames)].sort(),[0,1,2,3,4,5],key+' actual game renderer shows every pose');
+ const transitions=frames.filter((v,i)=>i===0||v!==frames[i-1]);
+ assert(transitions.filter(v=>v===0).length>=2,key+' repeats complete celebration');
+ victoryCovered.add(id);
+}els.replay.onclick();assert.equal(els.outcome.hidden,true);assert.equal(els['hero-hp'].value,260);}assert.equal(victoryCovered.size,3,'victory render coverage for every avatar');els.pause.onclick();assert.equal(els.status.textContent,'En pausa');els.pause.onclick();els.language.onclick();assert.equal(context.document.documentElement.lang,'en');els.change.onclick();assert.equal(els.selection.hidden,false);assert.equal(els.battle.hidden,true);assert(drawCalls>100);assert.equal(els.arena.width,780,'mobile backing uses CSS width times DPR');assert.equal(ctx.imageSmoothingEnabled,true);assert.equal(ctx.imageSmoothingQuality,'high');els.arena.clientWidth=1240;els.arena.clientHeight=775;await els.lancer.onclick();tick();assert.equal(els.arena.width,2480,'desktop retina backing');context.devicePixelRatio=3;els.arena.clientWidth=390;els.arena.clientHeight=690;tick();assert.equal(els.arena.width,1170,'3x mobile backing');assert(els.arena.width*els.arena.height<=4000000);console.log('PASS: 27 atlases, 59 seeded battles, 24 animated client battles across all three appearances, full victory poses and repeated cycles for all avatars, replay, selection, pause, language, mobile canvas and crop bounds. Draw calls:',drawCalls)})().catch(e=>{console.error(e);process.exitCode=1});

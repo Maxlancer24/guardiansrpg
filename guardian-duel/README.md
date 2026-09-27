@@ -42,7 +42,13 @@ other action except hurt (four). Its single rapier thrust impacts at 1235ms,
 after 360ms approach + 875ms anticipation. Melee travel accounts for source-space
 rapier reach and camera scale, so the extended blade reaches the target on mobile
 as well as desktop. Wide attack polygons isolate blades crossing nominal cells.
-Victory plays its entry and then a settled loop with a short 110ms blink.
+Victory timing is handled by animation.js: play every entry pose for its declared
+duration, pause in the character's settled pose, then repeat the WHOLE gesture.
+There is no hardcoded 1940ms cutoff or permanent last-two-frame loop. Lancer and
+Explorer entries take 3100 animation ms; Duelist takes 2860 with a short 110ms
+blink. The shared 1.5x combat playback remains unchanged. Cycle time is relative
+to entering victory, not the global scene clock. Pausing/hidden-tab behavior is
+unchanged. No sprite assets were changed for this timing fix.
 
 Lancer idle/attack/guard use refined source drawings in assets/lancer-refined-v1.
 The attack now has six poses with the same 1235ms overall impact timing. Larger
@@ -64,3 +70,8 @@ This is not a browser visual test. The Duelist integration passes 27 atlas check
 appearances. Native-canvas contact and anatomical-scale renders were visually
 inspected. Browser/mobile visual QA is still needed: the browser helper fails
 to start in the current sandbox. No existing protagonist files changed.
+
+Victory regression coverage records real client drawImage source rectangles
+after wins for all three appearances, asserts that all six poses were drawn and
+the whole celebration repeats. Timing boundary tests cover three full cycles and
+a longer synthetic gesture, preventing future durations from truncating poses.

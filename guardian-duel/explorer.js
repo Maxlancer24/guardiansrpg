@@ -10,7 +10,7 @@ const EXPLORER_ACTIONS=(()=>{
  rest:pack('rest',normal,floor,[[0,180],[1,360],[2,480],[3,360],[4,300],[5,200]]),
  motion:pack('motion',[265,272,262,275,252,260],[498,492,493,449,478,487],[[0,120],[1,120],[2,120],[3,220],[4,220],[5,220]]),
  activation:pack('activation',normal,floor,[[0,180],[1,230],[2,280],[3,300],[4,230],[5,200]]),
- victory:pack('victory',normal,floor,[[0,180],[1,200],[2,240],[3,300],[4,320],[5,700]]),
+ victory:pack('victory',normal,floor,[[0,350],[1,400],[2,600],[3,400],[4,450],[5,900]]),
  defeat:pack('defeat',[235,245,240,270,250,250],[505,506,520,435,420,425],[[0,170],[1,240],[2,330],[3,370],[4,320],[5,800]],.63)
  };
  // Bow tips in the lower attack row start at y=508; boots above finish at y=507.
@@ -22,6 +22,7 @@ const EXPLORER_ACTIONS=(()=>{
  [0,627,627,627,335,595],[627,627,627,627,290,604]
  ],sequence:[[0,100],[1,150],[2,200],[3,200]],loop:false};
  out.idle.loop=true;
+ out.victory.settled={sequence:[[5,1700]],loop:true};
  out.attack.markers=[{at:940,event:'release',frame:3,point:[430,680]}];
  return out;
 })();

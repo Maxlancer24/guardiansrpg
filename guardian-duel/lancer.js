@@ -43,7 +43,7 @@ const cells=(anchors,floors)=>anchors.map((x,i)=>[i%3*512,Math.floor(i/3)*512,51
 Object.assign(LANCER_ACTIONS,{
  motion:{src:'/guardian-duel/assets/motion.png',scale:.70,frames:cells([230,225,240,250,250,250],[455,455,455,440,440,440]),sequence:[[0,100],[1,130],[2,130],[3,160],[4,160],[5,160]],loop:false},
  activation:{src:'/guardian-duel/assets/activation.png',scale:.70,frames:cells([315,285,275,315,285,275],[504,504,504,496,496,496]),sequence:[[0,180],[1,230],[2,280],[3,300],[4,230],[5,200]],loop:false},
- victory:{src:'/guardian-duel/assets/victory.png',scale:.70,frames:cells([300,270,265,300,270,265],[504,504,504,496,496,496]),sequence:[[0,180],[1,200],[2,240],[3,300],[4,320],[5,700]],loop:false},
+ victory:{src:'/guardian-duel/assets/victory.png',scale:.70,frames:cells([300,270,265,300,270,265],[504,504,504,496,496,496]),sequence:[[0,350],[1,400],[2,500],[3,600],[4,450],[5,800]],settled:{sequence:[[5,1700]],loop:true},loop:false},
  defeat:{src:'/guardian-duel/assets/defeat.png',scale:.70,frames:cells([335,310,240,285,255,255],[504,504,504,450,425,425]),sequence:[[0,170],[1,240],[2,330],[3,370],[4,320],[5,800]],loop:false}
 });
 // The third dash drawing extends left of its nominal cell at boot height.
