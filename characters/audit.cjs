@@ -40,7 +40,8 @@ for(const c of catalog.characters){
   active.add(p.src.replace(/^\//,''));
   actions[name]={asset:p.src,sha256:hash(bytes),dimensions:[width,height],frameCount:p.frames.length,sequence:p.sequence,settled:p.settled||null,scale:p.scale,hasClipping:!!p.clips};
  }
- characters.push({id:c.id,status:c.status,manifest:c.manifest,manifestSha256:hash(fs.readFileSync(manifestFile)),scale:scale.profiles[c.id],weaponEffect:fx.profiles[c.id]||null,actions});
+ const presentationFiles=(c.presentationFiles||[]).map(file=>({file,sha256:hash(fs.readFileSync(local(file)))}));
+ characters.push({id:c.id,status:c.status,manifest:c.manifest,manifestSha256:hash(fs.readFileSync(manifestFile)),scale:scale.profiles[c.id],weaponEffect:fx.profiles[c.id]||null,presentationFiles,actions});
 }
 const available=catalog.characters.filter(c=>c.status==='demo-ready').map(c=>c.id).sort();
 assert.deepEqual(available,Object.keys(scale.profiles).sort(),'catalog covers every calibrated appearance');

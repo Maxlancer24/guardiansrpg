@@ -10,7 +10,7 @@ No account writes, rewards, analytics, feedback submission or character persiste
 
 ## Playable appearances
 
-Lancer, Explorer, Duelist, Sentinel and Vanguard. The other five static concepts are not playable yet. Appearance is
+Lancer, Explorer, Duelist, Sentinel, Vanguard and Arcanist. The other four static concepts are not playable yet. Appearance is
 independent of STR/AGI/CON and future equipped weapons. This demo uses 12/10/14
 against Hollow 10/6/15. It reuses PracticeRules for ATTACK/DEFEND/REST and explicitly
 rejects SPECIAL rather than borrowing Jessie's active. Focus activation art is
@@ -109,3 +109,26 @@ Reduced motion keeps only a subdued glint; the effects toggle disables them.
 `node guardian-duel/verify-melee-fx.cjs` checks timing, both weapon poses,
 mobile/desktop registration, deterministic output and canvas state restoration.
 Native-canvas attack snapshots were inspected; these do not replace browser QA.
+
+## Arcanist v1
+
+Nine atlases / 52 poses in assets/arcanist-v1, with prompts and review notes.
+arcanist.js preserves left-hand staff/right-hand gestures, calibrated feet and
+230px anatomical height at the 1280-unit reference width. Initial guard generation
+was rejected and regenerated to face the incoming threat. Defeat uses explicit
+row boundaries and a corner mask; victory returns through all six poses and blinks.
+
+Ranged presentation shares Explorer's 2600ms turn animation: short approach,
+release at 1300ms, impact at 1440ms. It is still ONE normal attack under the same
+rules. arcane-fx.js attaches charge to the staff crystal and the projectile to
+the drawn release palm. No new special ability, stats, rewards or bot integration.
+Sound/music reuse existing assets. Projectile core remains visible with effects
+off; reduced motion removes the trail and lowers the flashes.
+
+Validation: 54 atlas checks, 59 seeded rules battles, 48 client-simulated battles,
+all six avatars' full victory playback, and verify-arcanist.cjs timing/socket checks.
+Headless Chrome tested the actual page at 1280x1000 and 390x844 (DPR 2 mobile):
+selection, attack/parry/rest, ES/EN and switching passed with no HTTP/JS errors.
+Browser screenshots of idle, charge/release, guard/contact, rest, activation,
+victory and defeat were captured; native-canvas contact sheet covers every pose.
+This is emulated mobile, not an iOS/Android device or listening test.
