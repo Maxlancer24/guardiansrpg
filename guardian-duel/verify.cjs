@@ -13,6 +13,15 @@ assert.equal(duelist.attack.sequence.slice(0,2).reduce((n,f)=>n+f[1],0),875,'thr
 assert.equal(duelist.attack.markers[0].frame,2);
 assert.equal(duelist.attack.sequence.reduce((n,f)=>n+f[1],0),1420,'return begins after the thrust recovery');
 const animation=require('./animation.js');
+const sentinel=require('./sentinel.js');
+assert(sentinel.idle.src.endsWith('/idle-v2.png'),'Sentinel uses the corrected neutral-head blink');
+for(const [i,leftBoot] of [184,144,111,184,144,112].entries()){
+ assert(Math.abs(leftBoot-sentinel.idle.frames[i][4]+121)<=1,'Sentinel idle boots stay registered');
+}
+for(const [a,b,edgeA,edgeB] of [[1,2,140,140],[4,5,139,107]]){
+ assert.equal(edgeA-sentinel.victory.frames[a][4],edgeB-sentinel.victory.frames[b][4],
+  'Sentinel victory blink retains the same planted boot position');
+}
 for(const [key,p] of Object.entries(pack).filter(([k])=>k.endsWith(':victory'))){
  const entry=animation.duration(p),cycle=entry+animation.duration(p.settled);
  assert(entry/1.5>=1.9,key+' readable full entry');
