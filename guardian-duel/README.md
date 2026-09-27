@@ -1,5 +1,9 @@
 # Guardian vs. Hollow
 
+Character identities, release states and exact active sprite inventory are indexed
+in [characters/README.md](../characters/README.md). Use that catalog before adding
+or replacing a pack; do not infer active versions from filenames.
+
 Independent local demo at `/guardian-duel/` (Spanish) or `/guardian-duel/?lang=en`.
 Does not replace `/duel/`, `/team-battle/` or server-authoritative Discord rooms.
 No account writes, rewards, analytics, feedback submission or character persistence.
@@ -22,7 +26,7 @@ every action, anchored at the feet; no per-frame stretching or stance normalizat
 Projectile release uses the same factor. Mobile uses the protagonist camera's
 1.5x presentation zoom. Selector portraits also share this anatomical calibration.
 
-Nine atlases: idle (6), attack (8), guard (6), hurt (4), rest (6), motion (6),
+Nine active atlases: idle (6), attack (6), guard (6), hurt (4), rest (6), motion (6),
 activation (6), victory (6), defeat (6). Coordinates, anchors, durations and masks
 are in lancer.js. Guard loops only defensive poses; attack is a separate counter.
 Motion uses dash on entry and backward jump on return. Attack impact is at 1235ms

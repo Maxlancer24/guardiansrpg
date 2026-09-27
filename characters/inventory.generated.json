@@ -1,0 +1,2059 @@
+{
+  "schemaVersion": 1,
+  "scope": "Guardian player appearances: complete active action inventory. Protagonists: source pointers only.",
+  "characters": [
+    {
+      "id": "explorer",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/explorer.js",
+      "manifestSha256": "54edb8b7a92186804d042abbe87f7233f50f50676c44ea2a250491d1b47aa132",
+      "scale": {
+        "sourceBodyHeight": 468,
+        "idleScale": 0.67,
+        "targetHeight": 225
+      },
+      "weaponEffect": null,
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/explorer-v1/idle.png",
+          "sha256": "d4a3aff2a697d1a66a84329e9344cc43fbe2acf58b31d36327808af0b0ee1a78",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              550
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              450
+            ],
+            [
+              0,
+              550
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/explorer-v1/attack.png",
+          "sha256": "b0cddb10b1a5665127040b2c397bea015bca26a081cc6313a24889f93179c81f",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              220
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              460
+            ],
+            [
+              3,
+              180
+            ],
+            [
+              4,
+              200
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 0.69,
+          "hasClipping": false
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/explorer-v1/guard.png",
+          "sha256": "35573fa317ec4eb9999da0d8499ccf91d72db5f2776a3dbe27d188fb483a4833",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              250
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/explorer-v1/hurt.png",
+          "sha256": "112761a058e8bf597ad38694fd676897fd2bcd85c4bc6202ec8073eae2028edf",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              150
+            ],
+            [
+              2,
+              200
+            ],
+            [
+              3,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.53,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/explorer-v1/rest.png",
+          "sha256": "3ecce2762f38f4d2d4d9646fa5a811c674a8110421977b957a0b8ce01e870b9b",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              360
+            ],
+            [
+              2,
+              480
+            ],
+            [
+              3,
+              360
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/explorer-v1/motion.png",
+          "sha256": "ffa80a906957129e3d05081876f1192fd81f0a5087b28ad7ffec6a4adab28d30",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              220
+            ],
+            [
+              4,
+              220
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/explorer-v1/activation.png",
+          "sha256": "772b758d665a04bb4600837b8100a06bd98d229a487919e4d75dd93e2335ca43",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/explorer-v1/victory.png",
+          "sha256": "147637a50ab79b22c849907fc2e23316aee3289ae84f8231957b32390edda2a0",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              600
+            ],
+            [
+              3,
+              400
+            ],
+            [
+              4,
+              450
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                5,
+                1700
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/explorer-v1/defeat.png",
+          "sha256": "b2a730bd64df941fe2c08ca7998b6881f9a582a8a0034e5416e363489c6074df",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              170
+            ],
+            [
+              1,
+              240
+            ],
+            [
+              2,
+              330
+            ],
+            [
+              3,
+              370
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": null,
+          "scale": 0.63,
+          "hasClipping": false
+        }
+      }
+    },
+    {
+      "id": "lancer",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/lancer.js",
+      "manifestSha256": "5ea9f6276e80d92bcb2cc8e1b2368abba6fc3a1407ba0e407b9586849cc05a35",
+      "scale": {
+        "sourceBodyHeight": 440,
+        "idleScale": 0.7,
+        "targetHeight": 230
+      },
+      "weaponEffect": {
+        "kind": "thrust",
+        "color": "147,231,255",
+        "width": 10,
+        "blade": {
+          "2": [
+            [
+              455,
+              570
+            ],
+            [
+              620,
+              565
+            ]
+          ],
+          "3": [
+            [
+              1080,
+              576
+            ],
+            [
+              1240,
+              576
+            ]
+          ]
+        }
+      },
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/lancer-refined-v1/idle.png",
+          "sha256": "2dce9d783b92c901168a4247b6dd1517e164a6df227f64e7a64de2b327213527",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              550
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              4,
+              450
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              0,
+              550
+            ]
+          ],
+          "settled": null,
+          "scale": 0.7,
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/lancer-refined-v1/attack.png",
+          "sha256": "81b35b33d662518a23e2c193005822b14ffbcc71499c48b8a64593d992731cf1",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 0.78,
+          "hasClipping": true
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/lancer-refined-v1/guard.png",
+          "sha256": "f0bb7cb4b6e2f86b212e00abaa5a5066b54f9e168a83237e30c3466dcd0693ff",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              250
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.685,
+          "hasClipping": false
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/hurt.png",
+          "sha256": "2e32093d1b222d37037004ddcca290187e1b8a10e31761efb9e79f5c34450eb5",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              150
+            ],
+            [
+              2,
+              200
+            ],
+            [
+              3,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.6,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/rest.png",
+          "sha256": "773961445ddbfaf42e539ce7ffd6b8713332a2fcb74e76bcc83f38840afe374e",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              160
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              430
+            ],
+            [
+              1,
+              360
+            ],
+            [
+              2,
+              430
+            ],
+            [
+              3,
+              260
+            ],
+            [
+              4,
+              240
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.7,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/motion.png",
+          "sha256": "5ba182daa6503a3ef5468a4af4d5784e4beb5767e9f99198141352146dda8adc",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              130
+            ],
+            [
+              2,
+              130
+            ],
+            [
+              3,
+              160
+            ],
+            [
+              4,
+              160
+            ],
+            [
+              5,
+              160
+            ]
+          ],
+          "settled": null,
+          "scale": 0.7,
+          "hasClipping": true
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/activation.png",
+          "sha256": "8c0feea776ddb2f08a7e2613eb14a8e926f0642ce517b7b599c13503fa78113d",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.7,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/victory.png",
+          "sha256": "674069f92e14bad1929988ee2f6d17a85e06819fab17a994d87e26185d5e2558",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              500
+            ],
+            [
+              3,
+              600
+            ],
+            [
+              4,
+              450
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                5,
+                1700
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.7,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/defeat.png",
+          "sha256": "329b277e1e6e465c777fbfaf360ebd37ffc551a0c32beb1d8564e02e9a78163b",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              170
+            ],
+            [
+              1,
+              240
+            ],
+            [
+              2,
+              330
+            ],
+            [
+              3,
+              370
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": null,
+          "scale": 0.7,
+          "hasClipping": false
+        }
+      }
+    },
+    {
+      "id": "sentinel",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/sentinel.js",
+      "manifestSha256": "a2d430b3c8196928b43ffa94cd06ce8bb26602ea72d6e65b53b30c8a5b37f293",
+      "scale": {
+        "sourceBodyHeight": 473,
+        "idleScale": 0.67,
+        "targetHeight": 228
+      },
+      "weaponEffect": {
+        "kind": "slash",
+        "color": "193,224,255",
+        "width": 22,
+        "blade": {
+          "2": [
+            [
+              1403,
+              298
+            ],
+            [
+              1527,
+              418
+            ]
+          ],
+          "3": [
+            [
+              446,
+              767
+            ],
+            [
+              600,
+              875
+            ]
+          ]
+        }
+      },
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/sentinel-v1/idle-v2.png",
+          "sha256": "83f94bcd6e7fd68e1ee95c247c6673db0d54812555414b78e67805d90abc54d1",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              500
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              0,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              400
+            ],
+            [
+              3,
+              350
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/sentinel-v1/attack.png",
+          "sha256": "b514ce0bdfd73caf66fe3199f65ba835b63f083e6c02fa8cddbedee31055559a",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/sentinel-v1/guard.png",
+          "sha256": "15edd060f5e5eb6023f1b32185715f26a3179549d97c06d941f2e1660bcbb297",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              250
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.66,
+          "hasClipping": false
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/sentinel-v1/hurt.png",
+          "sha256": "52ed8b9ea6668ed83064ece2b27884c72122f8c1234d2e79d3910797e81f9cab",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              150
+            ],
+            [
+              2,
+              200
+            ],
+            [
+              3,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.545,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/sentinel-v1/rest.png",
+          "sha256": "221194573e51d8c2efc6529b18e217c3c70422f758fd83d74ebfac2ba790aebd",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              300
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              350
+            ],
+            [
+              5,
+              400
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/sentinel-v1/motion.png",
+          "sha256": "6a9c92448b6b985dd713cde9f14040704c7e52d6bbe60f270920788884360789",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 0.58,
+          "hasClipping": true
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/sentinel-v1/activation.png",
+          "sha256": "83db75cfc726ea8e384ed4a6642a43c8da9b98449216e3ccb97707b47829d64f",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/sentinel-v1/victory.png",
+          "sha256": "5f833b0f8c2cebb583863bc75b26e2a087892213c227c8d03febce1687a2caf8",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              500
+            ],
+            [
+              4,
+              900
+            ],
+            [
+              5,
+              110
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                4,
+                1200
+              ],
+              [
+                5,
+                110
+              ],
+              [
+                4,
+                900
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/sentinel-v1/defeat.png",
+          "sha256": "35143e92c5abb0cd3e6a9728d9f5fb4df12ba4463650d0d996072cca66eab93f",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              170
+            ],
+            [
+              1,
+              240
+            ],
+            [
+              2,
+              330
+            ],
+            [
+              3,
+              370
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": null,
+          "scale": 0.59,
+          "hasClipping": false
+        }
+      }
+    },
+    {
+      "id": "duelist",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/duelist.js",
+      "manifestSha256": "d8d3277123b54e77d02ddd188acd8b73c02fd59ac133958be2ec06f3fe553c5b",
+      "scale": {
+        "sourceBodyHeight": 465,
+        "idleScale": 0.67,
+        "targetHeight": 230
+      },
+      "weaponEffect": {
+        "kind": "thrust",
+        "color": "237,209,255",
+        "width": 6,
+        "blade": {
+          "2": [
+            [
+              542,
+              535
+            ],
+            [
+              720,
+              530
+            ]
+          ],
+          "3": [
+            [
+              1125,
+              539
+            ],
+            [
+              1237,
+              537
+            ]
+          ]
+        }
+      },
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/duelist-v1/idle.png",
+          "sha256": "ad4f93410600183b84af1a3346033bbc1c0c8d0a0214ac5f3c80c1588cbb45f3",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              500
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              0,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              400
+            ],
+            [
+              3,
+              350
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/duelist-v1/attack-right-v2.png",
+          "sha256": "27015d06826edba65f548ce64b9b30994030d419f2318510da2807bc9c1f2b29",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 0.75,
+          "hasClipping": true
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/duelist-v1/guard.png",
+          "sha256": "2111a08382d646da908420631f7ca1cf2441fb580728453be60e360b1bae572b",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              250
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/duelist-v1/hurt.png",
+          "sha256": "eddbf68c60e8c68fb026b0261a4dd892fe2bf78811cc5c4e816a7634afc1be1b",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              150
+            ],
+            [
+              2,
+              200
+            ],
+            [
+              3,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.54,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/duelist-v1/rest.png",
+          "sha256": "a32f65996d94e862a744b824738c851d994c6c45c626285e885ab4ad726ba6cf",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              160
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              350
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/duelist-v1/motion.png",
+          "sha256": "bddbc03eee03efda03538f1cba8426974e50ed7bbc3615db18c43d4ca95588b6",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/duelist-v1/activation.png",
+          "sha256": "58b8199a96a7d25129028b18764122cbc63e6372233cb0bdb4a8cd3a69f65c12",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/duelist-v1/victory.png",
+          "sha256": "e9f02cbe5701a56bd9d6d40207f57eba9436cfc57311e7db9b024038e9cf9578",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              500
+            ],
+            [
+              4,
+              900
+            ],
+            [
+              5,
+              110
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                4,
+                1000
+              ],
+              [
+                5,
+                110
+              ],
+              [
+                4,
+                750
+              ],
+              [
+                3,
+                750
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/duelist-v1/defeat.png",
+          "sha256": "22883d245e46d85f975e7b0dcc68ea225a5828666c061d3f777e225468b78c51",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              170
+            ],
+            [
+              1,
+              240
+            ],
+            [
+              2,
+              330
+            ],
+            [
+              3,
+              370
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": null,
+          "scale": 0.65,
+          "hasClipping": false
+        }
+      }
+    },
+    {
+      "id": "arcanist",
+      "status": "concept-only",
+      "actions": {}
+    },
+    {
+      "id": "vanguard",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/vanguard.js",
+      "manifestSha256": "e700029373d1fc69f30e4fbf327cda286c022aa5c633401de7cbf526e6e11864",
+      "scale": {
+        "sourceBodyHeight": 481,
+        "idleScale": 0.67,
+        "targetHeight": 235
+      },
+      "weaponEffect": {
+        "kind": "slash",
+        "color": "255,204,129",
+        "width": 32,
+        "blade": {
+          "2": [
+            [
+              1361,
+              329
+            ],
+            [
+              1519,
+              465
+            ]
+          ],
+          "3": [
+            [
+              375,
+              815
+            ],
+            [
+              556,
+              955
+            ]
+          ]
+        }
+      },
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/vanguard-v1/idle.png",
+          "sha256": "474288e242b4c0a7278fa6237afe633e15c182db011235be20091d9bdee658ec",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              500
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              0,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              400
+            ],
+            [
+              3,
+              350
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/vanguard-v1/attack.png",
+          "sha256": "656b37a42e390c1c7d06c2c5bce4690da23742be9062d9626a08f3b82491ab88",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/vanguard-v1/guard.png",
+          "sha256": "492a23f6eab53ded4e4c025936498b41a126e571fdab0ec17bcb43f3f080ba82",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              250
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": true
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/vanguard-v1/hurt.png",
+          "sha256": "a2b93451ba437b185bd8fdc68aae214207d846e4ae38a127dbef84f41d627c13",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              150
+            ],
+            [
+              2,
+              200
+            ],
+            [
+              3,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.54,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/vanguard-v1/rest.png",
+          "sha256": "e118a5f18f3a3225365b876952282167d9b5b41d9847b4784101f890d2eabe91",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              300
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              350
+            ],
+            [
+              5,
+              400
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/vanguard-v1/motion.png",
+          "sha256": "074d011481a184ea934f1755796dd82bddc87ef837707bf44bb7722a7e75bde3",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/vanguard-v1/activation.png",
+          "sha256": "a9be6e73f166b1c434a39a2dabf9ddd91b3b46007224cab642801f5785bdae40",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/vanguard-v1/victory-v2.png",
+          "sha256": "cd68ec0ec158a89f2e9a8e59634f7cf97b1001d40f806c29685c824e7af27b85",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              170
+            ],
+            [
+              2,
+              170
+            ],
+            [
+              3,
+              210
+            ],
+            [
+              4,
+              850
+            ],
+            [
+              3,
+              210
+            ],
+            [
+              2,
+              190
+            ],
+            [
+              1,
+              190
+            ],
+            [
+              0,
+              500
+            ],
+            [
+              5,
+              110
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                0,
+                1600
+              ],
+              [
+                5,
+                110
+              ],
+              [
+                0,
+                900
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/vanguard-v1/defeat.png",
+          "sha256": "d7673e6fa32266a86ac8e70f55cb91cb637efd9733ed0d45db77a2af296c1b79",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              170
+            ],
+            [
+              1,
+              240
+            ],
+            [
+              2,
+              330
+            ],
+            [
+              3,
+              370
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": null,
+          "scale": 0.65,
+          "hasClipping": true
+        }
+      }
+    },
+    {
+      "id": "tracker",
+      "status": "concept-only",
+      "actions": {}
+    },
+    {
+      "id": "pugilist",
+      "status": "concept-only",
+      "actions": {}
+    },
+    {
+      "id": "wanderer",
+      "status": "concept-only",
+      "actions": {}
+    },
+    {
+      "id": "custodian",
+      "status": "concept-only",
+      "actions": {}
+    },
+    {
+      "id": "jessie",
+      "status": "legacy-integrated",
+      "inventoryCoverage": "source-pointers-only",
+      "sourceFiles": [
+        "duel/game.js",
+        "team-battle/game.js",
+        "duel/animations.js"
+      ]
+    },
+    {
+      "id": "garrick",
+      "status": "legacy-integrated",
+      "inventoryCoverage": "source-pointers-only",
+      "sourceFiles": [
+        "duel/game.js",
+        "team-battle/game.js",
+        "duel/animations.js"
+      ]
+    },
+    {
+      "id": "zoe",
+      "status": "legacy-integrated",
+      "inventoryCoverage": "source-pointers-only",
+      "sourceFiles": [
+        "assets/demo-battle/zoe-v1/manifest.js",
+        "duel/game.js",
+        "team-battle/game.js",
+        "duel/animations.js"
+      ]
+    }
+  ],
+  "retainedAssetsNotSelectedByGuardianManifests": [
+    "guardian-duel/assets/attack.png",
+    "guardian-duel/assets/duelist-v1/attack.png",
+    "guardian-duel/assets/guard.png",
+    "guardian-duel/assets/idle.png",
+    "guardian-duel/assets/sentinel-v1/idle.png",
+    "guardian-duel/assets/vanguard-v1/victory.png"
+  ],
+  "retentionWarning": "Not selected by these manifests does NOT mean unused globally. Do not delete without checking other consumers."
+}
