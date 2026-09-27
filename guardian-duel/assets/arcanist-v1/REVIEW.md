@@ -2,7 +2,7 @@
 
 Nueve atlas, 52 dibujos: seis por acción y cuatro en `hurt.png`.
 Estilo/identidad: misma piel, cabello, ropa índigo/dorada y bastón que la base.
-Bastón en mano izquierda, lanzamiento y defensa con la derecha. No efectos
+Bastón en mano izquierda; ataque v2 apuntando con apoyo de la derecha, defensa con la derecha. No efectos
 pintados en los sprites; `arcane-fx.js` dibuja el rayo y el brillo aparte.
 
 Se descartó la primera guardia (palma hacia atrás) y se generó la versión actual
@@ -15,7 +15,8 @@ usos, pero el ataque a distancia ya no utiliza avance ni salto de regreso.
 
 Revisión de presentación v2: rayo anclado al cristal, no a la palma. Se extiende
 entre 1300 y 1440ms, coincide con el daño y se desvanece hasta 1670ms. La mano libre
-dirige el hechizo; el arma permanece en la izquierda. Ataque y recuperación desde
+dirigía el hechizo en el atlas anterior. En [ataque v2](ATTACK-V2.md) ambas manos
+inclinan el bastón hacia el enemigo; el cristal apunta a su torso superior. Ataque y recuperación desde
 el sitio original, sin traslación de mundo ni elevación del sprite.
 
 Recortes: motion separa filas en y=520; defeat separa en y=552, con máscara de

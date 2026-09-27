@@ -1576,7 +1576,7 @@
       "id": "arcanist",
       "status": "demo-ready",
       "manifest": "guardian-duel/arcanist.js",
-      "manifestSha256": "056fee6a56f02c025ce528b06f2aba169f5eeb90a8777f2097a3d92d5a0f4705",
+      "manifestSha256": "51e8029902bfad64bbb5fc3c43a11bc9788902d98d14750c8a5924a4c25e4577",
       "scale": {
         "sourceBodyHeight": 470,
         "idleScale": 0.67,
@@ -1629,8 +1629,8 @@
           "hasClipping": false
         },
         "attack": {
-          "asset": "/guardian-duel/assets/arcanist-v1/attack.png",
-          "sha256": "9b27df8e59a968cae350ac53ceedebda7388029e2d593920e1ff6d8495f5f16a",
+          "asset": "/guardian-duel/assets/arcanist-v1/attack-v2.png",
+          "sha256": "082434f26691d77be550dc3cdc32b7b2bc813fa5e3ca0f5b2a151252441ec6df",
           "dimensions": [
             1536,
             1024
@@ -1663,7 +1663,7 @@
             ]
           ],
           "settled": null,
-          "scale": 0.71,
+          "scale": 0.69,
           "hasClipping": false
         },
         "guard": {
@@ -2434,6 +2434,7 @@
     }
   ],
   "retainedAssetsNotSelectedByGuardianManifests": [
+    "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",
     "guardian-duel/assets/duelist-v1/attack.png",
     "guardian-duel/assets/guard.png",

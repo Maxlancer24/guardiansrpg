@@ -4,7 +4,10 @@ const ARCANIST_ACTIONS=(()=>{
  const pack=(key,x,y,sequence,scale=.67)=>({src:'/guardian-duel/assets/arcanist-v1/'+key+'.png',scale,frames:grid(x,y),sequence,loop:false});
  const p={
   idle:pack('idle',[272,241,230,270,241,232],[493,493,493,493,493,493],[[0,550],[1,350],[2,450],[3,350],[4,450],[0,550]]),
-  attack:pack('attack',[268,228,194,225,264,251],[493,493,494,478,479,480],[[0,400],[1,540],[2,180],[3,200],[4,140],[5,120]],.71),
+  attack:{src:'/guardian-duel/assets/arcanist-v1/attack-v2.png',scale:.69,frames:[
+   [0,0,512,500,222,489],[512,0,480,500,216,489],[992,0,544,500,199,489],
+   [0,500,544,524,209,496],[544,500,480,524,211,496],[1024,500,512,524,238,495]
+  ],sequence:[[0,400],[1,540],[2,180],[3,200],[4,140],[5,120]],loop:false},
   guard:pack('guard',[285,256,213,272,247,226],[503,503,503,488,484,489],[[0,250],[1,250],[2,400],[1,400],[2,400],[3,140],[4,300],[5,220]]),
   rest:pack('rest',[267,256,248,269,259,260],[511,511,511,507,507,507],[[0,180],[1,360],[2,480],[3,360],[4,300],[5,200]],.64),
   motion:pack('motion',[280,275,255,330,323,240],[512,510,512,488,449,499],[[0,120],[1,120],[2,120],[3,220],[4,220],[5,220]],.65),
@@ -26,8 +29,10 @@ const ARCANIST_ACTIONS=(()=>{
   [[420,540],[512,540],[512,1024],[0,1024],[0,552],[420,552]],null,null];
  p.idle.loop=true;
  p.victory.settled={sequence:[[0,1600],[5,110],[0,900]],loop:true};
- p.attack.markers=[{at:940,event:'release',frame:2,point:[1350,39]}];
- p.attack.castSockets={palm:[[245,160],[776,138],[1440,137],[420,640],[761,680],[1180,768]],crystal:[[352,35],[849,35],[1350,39],[343,546],[858,548],[1352,547]]};
+ // Explicit cells include the wide horizontal staff, with no neighbouring art.
+ // Atlas-space crystal tips follow the actual weapon through preparation/recovery.
+ p.attack.markers=[{at:940,event:'release',frame:2,point:[1519,159]}];
+ p.attack.castSockets={crystal:[[357,22],[978,21],[1519,159],[523,669],[978,517],[1376,506]]};
  return p;
 })();
 if(typeof module!=='undefined')module.exports=ARCANIST_ACTIONS;

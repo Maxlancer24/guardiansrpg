@@ -138,3 +138,9 @@ selection, attack/parry/rest, ES/EN and switching passed with no HTTP/JS errors.
 Browser screenshots of idle, charge/release, guard/contact, rest, activation,
 victory and defeat were captured; native-canvas contact sheet covers every pose.
 This is emulated mobile, not an iOS/Android device or listening test.
+
+Arcanist aimed-staff attack v2: `assets/arcanist-v1/attack-v2.png` replaces the
+upright-staff/free-hand cast. Both hands aim the same staff forward; explicit
+wide cell bounds preserve the complete horizontal weapon. Charge and beam follow
+the per-frame crystal sockets. Release/impact timing and combat rules are unchanged.
+Source/prompt and calibration notes: `assets/arcanist-v1/ATTACK-V2.md`.

@@ -6,6 +6,16 @@ assert.equal(pack.attack.sequence.slice(0,2).reduce((n,[f,ms])=>n+ms,0)+360,fx.t
 assert.equal(animation.frame(pack.attack,fx.timing.release-360),2,'release uses casting pose');
 assert.equal(animation.frame(pack.attack,fx.timing.impact-360-1),2,'same pose while beam extends');
 assert.deepEqual(pack.attack.markers[0].point,pack.attack.castSockets.crystal[2],'marker is the staff crystal');
+assert(pack.attack.src.endsWith('/attack-v2.png'),'uses aimed-staff artwork');
+for(const [i,[x,y,w,h,ax,ay]] of pack.attack.frames.entries()){
+ const [cx,cy]=pack.attack.castSockets.crystal[i];
+ assert(cx>=x&&cx<x+w&&cy>=y&&cy<y+h,'crystal socket lies inside its own source cell');
+ if(i===2||i===3)assert(cx-x-ax>300,'firing crystal points forward, not above the head');
+}
+const firing=pack.attack.frames.slice(2,4).map((r,i)=>{
+ const c=pack.attack.castSockets.crystal[i+2];return[c[0]-r[0]-r[4],c[1]-r[1]-r[5]];
+});
+assert(Math.abs(firing[0][0]-firing[1][0])<=15&&Math.abs(firing[0][1]-firing[1][1])<=10,'beam origin stable throughout firing hold');
 assert.equal(animation.frame(pack.defeat,100000),5,'defeat holds full final pose');
 for(const [f,leftFoot] of [164,133,119,162,133,124].entries())assert(Math.abs(leftFoot-pack.idle.frames[f][4]+108)<=3,'idle feet registered');
 for(const width of [390,640,1240]){
