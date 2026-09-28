@@ -3986,12 +3986,12 @@
   ],
   "paletteSystem": {
     "definition": "guardian-duel/palettes.js",
-    "definitionSha256": "c3e1bda5674c013a28abc40f51df1bc3ec43dfd08b5763073374f6e3a1a50d07",
+    "definitionSha256": "22274a150f5f081b325b0e743bf123ac33fc06315945c48e5a45988853609dc1",
     "engine": "guardian-duel/palette-engine.js",
     "engineSha256": "8f9d32a716986600e458db10711bc92defa31c9c97affec1425a1ed698ff6fbf",
     "profiles": {
       "lancer": {
-        "version": 1,
+        "version": 2,
         "materials": {
           "cloth": {
             "hue": [
@@ -4070,6 +4070,26 @@
                 "#241d20",
                 "#b5a183",
                 "#fff0cd"
+              ]
+            }
+          },
+          "emerald": {
+            "es": "Esmeralda",
+            "en": "Emerald",
+            "swatches": [
+              "#27634c",
+              "#d1ad61"
+            ],
+            "materials": {
+              "cloth": [
+                "#0b1817",
+                "#27634c",
+                "#85c39b"
+              ],
+              "sash": [
+                "#292017",
+                "#b38a43",
+                "#ffe5a0"
               ]
             }
           }

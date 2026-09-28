@@ -9,6 +9,11 @@ No es otro personaje: sigue usando el ID `lancer` y la variante `crimson`.
 Las reglas, stats, recortes, máscaras, escalas, sonidos, efectos y tiempos son los
 mismos del original. Idle continúa a 1×; acciones a 1,5×.
 
+Segunda receta: Lancero Esmeralda (`emerald`), con túnica verde y fajín dorado.
+Reutiliza el mismo perfil de materiales y todas las animaciones; no necesita
+nuevos PNG, cambios de interfaz ni cambios en el motor. Disponible junto a Original
+y Carmesí. Nombre en inglés: Emerald.
+
 ## Añadir otra paleta a un personaje preparado
 
 1. En `guardian-duel/palettes.js`, añadir una entrada en `profiles.lancer.variants`.
