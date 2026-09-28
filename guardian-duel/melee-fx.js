@@ -6,7 +6,8 @@
   lancer:{kind:'thrust',color:'147,231,255',width:10,blade:{2:[[455,570],[620,565]],3:[[1080,576],[1240,576]]}},
   duelist:{kind:'thrust',color:'237,209,255',width:6,blade:{2:[[542,535],[720,530]],3:[[1125,539],[1237,537]]}},
   sentinel:{kind:'slash',color:'193,224,255',width:22,blade:{2:[[1403,298],[1527,418]],3:[[446,767],[600,875]]}},
-  vanguard:{kind:'slash',color:'255,204,129',width:32,blade:{2:[[1361,329],[1519,465]],3:[[375,815],[556,955]]}}
+  vanguard:{kind:'slash',color:'255,204,129',width:32,blade:{2:[[1361,329],[1519,465]],3:[[375,815],[556,955]]}},
+  pugilist:{kind:'punch',color:'255,211,143',width:18,blade:{2:[[1435,129],[1501,129]],3:[[438,640],[507,640]]}}
  };
  const clamp=n=>Math.max(0,Math.min(1,n));
  const rgba=(color,a)=>'rgba('+color+','+clamp(a)+')';
@@ -57,7 +58,7 @@
   }else{
    // Tapered lance of light around the thrust axis, never a full-screen straight line.
    ctx.save();ctx.translate(g.tip.x,g.tip.y);ctx.rotate(g.angle);
-   const length=Math.min(240*g.scale,g.radius+80*g.scale)*(1-g.t*.22),w=g.width;
+   const length=Math.min((g.kind==='punch'?95:240)*g.scale,g.radius+80*g.scale)*(1-g.t*.22),w=g.width;
    const grad=ctx.createLinearGradient(-length,0,18*g.scale,0);
    grad.addColorStop(0,rgba(g.color,0));grad.addColorStop(.68,rgba(g.color,g.alpha*.5));
    grad.addColorStop(.95,rgba('255,253,236',g.alpha));grad.addColorStop(1,rgba(g.color,0));

@@ -10,7 +10,7 @@ No account writes, rewards, analytics, feedback submission or character persiste
 
 ## Playable appearances
 
-Lancer, Explorer, Duelist, Sentinel, Vanguard and Arcanist. The other four static concepts are not playable yet. Appearance is
+Lancer, Explorer, Duelist, Sentinel, Vanguard, Arcanist and Pugilist. The other three static concepts are not playable yet. Appearance is
 independent of STR/AGI/CON and future equipped weapons. This demo uses 12/10/14
 against Hollow 10/6/15. It reuses PracticeRules for ATTACK/DEFEND/REST and explicitly
 rejects SPECIAL rather than borrowing Jessie's active. Focus activation art is
@@ -20,7 +20,7 @@ used for a successful rest. Server combat integration remains a separate task.
 
 `scale.js` calibrates standing anatomy to the existing protagonist renderers.
 At 1280 scene units, crown-to-sole measurements are approximately Jessie 214
-(without the ponytail), Garrick 230, Zoe 241. Lancer and Duelist target 230, Explorer 225, Sentinel 228, Vanguard 235.
+(without the ponytail), Garrick 230, Zoe 241. Lancer, Duelist and Arcanist target 230, Explorer 225, Sentinel 228, Vanguard 235, Pugilist 232.
 Weapons never participate in this measurement. One uniform factor applies to
 every action, anchored at the feet; no per-frame stretching or stance normalization.
 Projectile release uses the same factor. Mobile uses the protagonist camera's
@@ -144,3 +144,18 @@ upright-staff/free-hand cast. Both hands aim the same staff forward; explicit
 wide cell bounds preserve the complete horizontal weapon. Charge and beam follow
 the per-frame crystal sockets. Release/impact timing and combat rules are unchanged.
 Source/prompt and calibration notes: `assets/arcanist-v1/ATTACK-V2.md`.
+
+## Pugilist v1
+
+Nine independent atlases, 52 full-body poses, same character identity and art style.
+Idle breathing/blink, right straight punch, covered parry/contact, hurt, breathing
+rest, approach/retreat, focus activation, complete salute and non-graphic collapse.
+Fist reach determines approach distance; the 1235ms damage event is unchanged.
+Procedural warm knuckle flash and compact hit burst replace the sword-shaped
+impact for his punches. Existing audio/music are reused. This is an appearance,
+not a new class, equipment rule or special ability.
+
+Sources/prompts: `assets/pugilist-v1/PROMPTS.md`; calibration/QA:
+`assets/pugilist-v1/REVIEW.md`. Regression now covers 63 active atlases and
+56 client battles for seven appearances; run `node guardian-duel/verify-pugilist.cjs`
+for fist reach, feet registration, full defeat and timing checks.
