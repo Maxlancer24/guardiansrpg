@@ -9,6 +9,7 @@
   vanguard:{kind:'slash',color:'255,204,129',width:32,blade:{2:[[1361,329],[1519,465]],3:[[375,815],[556,955]]}},
   pugilist:{kind:'punch',color:'255,211,143',width:18,blade:{2:[[1435,129],[1501,129]],3:[[438,640],[507,640]]}},
   wanderer:{kind:'slash',color:'136,237,221',width:22,blade:{2:[[1425,305],[1522,410]],3:[[398,800],[544,903]]}},
+  guardian:{kind:'slash',color:'144,204,255',width:24,blade:{2:[[1335,187],[1524,233]],3:[[409,801],[589,919]]}},
   custodian:{kind:'hammer',color:'255,202,121',width:38,blade:{2:[[1288,260],[1495,325]],3:[[364,801],[540,940]]}}
  };
  const clamp=n=>Math.max(0,Math.min(1,n));

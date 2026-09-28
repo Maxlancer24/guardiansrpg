@@ -2,7 +2,7 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id),canvas=$('arena'),ctx=canvas.getContext('2d'),images={},base='/assets/demo-battle/';
 let appearance='lancer';
-const AVATARS={lancer:{actions:LANCER_ACTIONS,es:'Lancero',en:'Lancer'},explorer:{actions:EXPLORER_ACTIONS,es:'Exploradora',en:'Explorer'},duelist:{actions:DUELIST_ACTIONS,es:'Duelista',en:'Duelist'},sentinel:{actions:SENTINEL_ACTIONS,es:'Centinela',en:'Sentinel'},vanguard:{actions:VANGUARD_ACTIONS,es:'Vanguardia',en:'Vanguard'},arcanist:{actions:ARCANIST_ACTIONS,es:'Arcanista',en:'Arcanist'},pugilist:{actions:PUGILIST_ACTIONS,es:'Pugilista',en:'Pugilist'},tracker:{actions:TRACKER_ACTIONS,es:'Rastreadora',en:'Tracker'},custodian:{actions:CUSTODIAN_ACTIONS,es:'Custodio',en:'Custodian'},wanderer:{actions:WANDERER_ACTIONS,es:'Errante',en:'Wanderer'}};
+const AVATARS={lancer:{actions:LANCER_ACTIONS,es:'Lancero',en:'Lancer'},explorer:{actions:EXPLORER_ACTIONS,es:'Exploradora',en:'Explorer'},duelist:{actions:DUELIST_ACTIONS,es:'Duelista',en:'Duelist'},sentinel:{actions:SENTINEL_ACTIONS,es:'Centinela',en:'Sentinel'},vanguard:{actions:VANGUARD_ACTIONS,es:'Vanguardia',en:'Vanguard'},arcanist:{actions:ARCANIST_ACTIONS,es:'Arcanista',en:'Arcanist'},pugilist:{actions:PUGILIST_ACTIONS,es:'Pugilista',en:'Pugilist'},tracker:{actions:TRACKER_ACTIONS,es:'Rastreadora',en:'Tracker'},custodian:{actions:CUSTODIAN_ACTIONS,es:'Custodio',en:'Custodian'},wanderer:{actions:WANDERER_ACTIONS,es:'Errante',en:'Wanderer'},guardian:{actions:GUARDIAN_ACTIONS,es:'Guardián',en:'Guardian'}};
 const paletteCache=GuardianPaletteEngine.createCache(GuardianPalettes),selectedVariants={},paletteControls=[];
 let paletteBusy=false;
 const variant=id=>selectedVariants[id]||'original';
