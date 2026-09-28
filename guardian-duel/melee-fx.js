@@ -15,7 +15,7 @@
  const clamp=n=>Math.max(0,Math.min(1,n));
  const rgba=(color,a)=>'rgba('+color+','+clamp(a)+')';
  function sample({id,age,frame,pack,factor,x,y,reduced=false,enabled=true}){
-  const baseProfile=profiles[id],p=baseProfile&&{...baseProfile,blade:pack.blade||baseProfile.blade,sweep:pack.sweep||1},t=(age-1235)/240;
+  const baseProfile=profiles[id],p=baseProfile&&{...baseProfile,blade:pack.blade||baseProfile.blade,sweep:pack.sweep||1,arcFlatten:pack.arcFlatten??1,arcSpan:pack.arcSpan??2.05},t=(age-1235)/240;
   if(!enabled||!p||t<0||t>=1||!p.blade[frame])return null;
   const r=pack.frames[frame],s=pack.scale*factor;
   const point=([px,py])=>({x:x+(px-r[0]-r[4])*s,y:y+(py-r[1]-r[5])*s});
@@ -24,17 +24,20 @@
    width:p.width*s,scale:s,t,alpha:(1-t)**1.6,reduced};
  }
  function ribbon(ctx,g,width,opacity){
-  const span=2.05*(1-g.t*.35)*(g.sweep||1),end=g.angle,start=end-span,r=g.radius;
+  const span=g.arcSpan*(1-g.t*.35)*(g.sweep||1),start=-span,r=g.radius;
+  // Flatten the sweep plane for horizontal cuts, keeping the endpoint on the blade.
+  const point=(a,rr)=>{const px=Math.cos(a)*rr,py=Math.sin(a)*rr*g.arcFlatten;
+   return [g.base.x+Math.cos(g.angle)*px-Math.sin(g.angle)*py,g.base.y+Math.sin(g.angle)*px+Math.cos(g.angle)*py];};
   ctx.beginPath();
   const count=28;
   for(let i=0;i<=count;i++){const u=i/count,a=start+span*u;
    const bulge=Math.sin(Math.PI*u)**.8*width,rr=r+bulge;
-   const x=g.base.x+Math.cos(a)*rr,y=g.base.y+Math.sin(a)*rr;
+   const [x,y]=point(a,rr);
    i?ctx.lineTo(x,y):ctx.moveTo(x,y);
   }
   for(let i=count;i>=0;i--){const u=i/count,a=start+span*u;
    const rr=r-Math.sin(Math.PI*u)**.8*width*.45;
-   ctx.lineTo(g.base.x+Math.cos(a)*rr,g.base.y+Math.sin(a)*rr);
+   ctx.lineTo(...point(a,rr));
   }
   ctx.closePath();
   const grad=ctx.createLinearGradient(g.base.x,g.base.y-r,g.tip.x,g.tip.y);

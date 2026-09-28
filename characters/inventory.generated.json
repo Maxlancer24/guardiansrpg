@@ -7,7 +7,7 @@
       "kind": "story-protagonist",
       "status": "demo-ready",
       "manifest": "guardian-duel/guardian.js",
-      "manifestSha256": "927f299121e6baa84763d56e3cfef098e6bb5776433e455fa41ebb6d4cdee870",
+      "manifestSha256": "66db865810a650fff3d3c3d09c522231961385f5d2bd63439198bc5c6b21d98d",
       "scale": {
         "sourceBodyHeight": 495,
         "idleScale": 0.67,
@@ -410,8 +410,8 @@
           "hasClipping": false
         },
         "attack2": {
-          "asset": "/guardian-duel/assets/guardian-v1/attack-b.png",
-          "sha256": "a47640f7fbdfbbd2c4af510967abb99636ec565351d154d4ff63e4c482bd5da1",
+          "asset": "/guardian-duel/assets/guardian-v1/attack-b-v3.png",
+          "sha256": "e25d5cceeb682b808395846a704ec1e710b0ba54c75b07c7482860ab49165650",
           "dimensions": [
             1536,
             1024
@@ -445,7 +445,7 @@
           ],
           "settled": null,
           "scale": 0.67,
-          "hasClipping": true
+          "hasClipping": false
         }
       }
     },
@@ -4572,6 +4572,7 @@
     "guardian-duel/assets/duelist-v1/attack.png",
     "guardian-duel/assets/guard.png",
     "guardian-duel/assets/guardian-v1/activation-draft.png",
+    "guardian-duel/assets/guardian-v1/attack-b.png",
     "guardian-duel/assets/guardian-v1/idle.png",
     "guardian-duel/assets/guardian-v1/motion-draft.png",
     "guardian-duel/assets/guardian-v1/motion.png",

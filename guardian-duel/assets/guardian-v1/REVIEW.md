@@ -69,3 +69,13 @@ que puede representar el renderizador compartido, no una clasificación narrativ
 
 La publicación web no actualiza el Site de Discloud. El parche del adaptador de
 red se instala aparte; no contiene DB, no cambia stats ni fórmulas de combate.
+
+## Revisión 3 — corte lateral (reemplaza el ataque B ascendente)
+
+- Nuevo atlas attack-b-v3.png: seis poses, espada siempre en la mano derecha.
+- Preparación cruzada hacia su costado izquierdo; corte horizontal de izquierda a derecha; recuperación hacia idle.
+- Alfa original conservado; revisión visual de las seis poses sobre fondo verde y escena. Sin recortes entre celdas.
+- Anclajes por pose, alcance 244, impacto base 1235 ms, duración 1420 ms como ataque A.
+- Estela horizontal con arcFlatten .24 y arcSpan 2.7; extremos alineados a la hoja en contacto y seguimiento. Otros personajes conservan parámetros anteriores.
+- Validación: galería 60 poses y secuencia A/parry/rest/B/A en Chrome desktop y móvil, ES/EN; fixture de red A/B y contraataque; verificadores de arte, combate y efectos.
+- Capturas locales: output/guardian-character-v3-qa/. No cambia daño ni el número de impactos. No se reinicia ni despliega el bot.

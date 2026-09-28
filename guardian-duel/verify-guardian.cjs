@@ -25,6 +25,12 @@ let at=0;for(const [f,ms]of p.victory.sequence){assert.equal(anim.victory(p.vict
 assert(p.guard.scale<p.idle.scale);assert.equal(p.guard.scale,.64);
 for(const [i,key]of ['attack','attack2','attack','attack2'].entries())assert.equal(anim.attackKey(p,i),key);
 assert.equal(anim.duration(p.attack2),anim.duration(p.attack));
+assert(p.attack2.src.endsWith('/attack-b-v3.png'));
+assert(p.attack2.windupBlade[1][0]<p.attack2.windupBlade[0][0],'windup blade points left');
+assert(p.attack2.blade[2][1][0]>p.attack2.blade[2][0][0],'impact blade points right');
+assert(Math.abs(p.attack2.blade[2][1][1]-p.attack2.blade[2][0][1])<10,'horizontal cut');
+assert.equal(p.attack2.arcFlatten,.24);
+assert.equal(p.attack2.arcSpan,2.7);
 for(const pack of [p.attack,p.attack2]){const s=pack.scale*factor;const g=fx.sample({id:'guardian',age:1235,frame:2,pack,factor,x:900-pack.reach*s,y:500});assert(Math.abs(g.tip.x-900)<1e-8);}
 const catalog=require('../characters/catalog.json'),hero=catalog.characters.find(c=>c.id==='guardian');assert.equal(hero.kind,'story-protagonist');assert.equal(hero.appearanceSelectableForPlayers,false);assert.equal(hero.specialSource,'player-equipped-active');
 console.log('Guardian: 60 frames / nine actions + second attack; feet, full victory, defeat, RGBA, melee contact and shared scale verified.');

@@ -78,3 +78,22 @@ Use case: stylized-concept. Asset: SECOND normal attack animation atlas for this
 Archivo final: attack-b.png. Cortes, anclajes y estelas se definen en el código;
 no se modificaron los dibujos por código. Originales y versión previa conservados.
 
+
+## Revision 3 — right-handed cross-body horizontal slash
+
+Mode: built-in image_gen. Source: exec-141b7103-1f2a-4053-9679-1bcdcbb94388.png.
+Saved unchanged as `attack-b-v3.png` (1536x1024 RGBA, 3x2). References: idle-v2.png for identity; attack.png for linework/anatomy only.
+
+```text
+Use case: stylized-concept. Create a NEW six-frame attack sprite atlas for the EXACT Guardian protagonist in reference1; reference2 defines the same cel-shaded linework and proportions only, NOT the new attack choreography.
+The NEW choreography is a RIGHT-HANDED CROSS-BODY BACKHAND HORIZONTAL SLASH FROM LEFT TO RIGHT. NOT an upward cut, NOT an overhead downward cut, NOT a forward stab.
+Frame0: neutral idle reference stance, sword in anatomical RIGHT hand lowered diagonally forward.
+Frame1: preparation: his RIGHT arm crosses IN FRONT of his torso, right fist placed beside his LEFT waist/ribs; sword blade extends toward SCREEN LEFT behind this hand horizontally. His left hand is empty, held clear near his chest, never on sword. Torso twists into the windup.
+Frame2: uncoils: the SAME RIGHT hand sweeps from his LEFT side across the front of his torso, sword cutting at waist/chest height from SCREEN LEFT toward SCREEN RIGHT, broad horizontal arc. No stabbing thrust.
+Frame3: follow-through: RIGHT arm opens out toward his RIGHT side, blade now extended to SCREEN RIGHT horizontally, torso turned with the cut, weight on forward boot. Left hand still EMPTY balancing behind torso. The hand visibly traveled across his body, not overhead.
+Frame4: returns sword downward to ready, gradual recovery.
+Frame5: original neutral ready pose.
+CRITICAL: same anatomical RIGHT hand in every drawing. In the initial stance his sword hand is on the viewer-left/near side. Never swap weapon to the opposite arm when crossing his body. Exactly two arms and hands, one blade. Keep anatomical shoulder continuity.
+Subject and invariants: lean young adult male, short tousled dark-brown hair, amber eyes, white short-sleeve tunic with blue vertical placket and navy collar, black fitted undersleeves, black fingerless gloves, brown diagonal strap and belt with brass buckles, blue split hip panels, navy trousers, brown calf boots. Empty scabbard LEFT hip. Same straight long silver sword brass crossguard blue handle. Do not redesign, shorten body, enlarge head or change palette.
+Atlas 1536x1024, THREE columns TWO rows, 512px cells, reading order. Full body AND full blade stay inside EACH cell with 18px margin. Fixed standing crown-to-sole around465px; feet y490. Fixed camera, slight three-quarter side view facing screen right, planted feet except natural knee flexion. TRUE transparent RGBA background including enclosed arm gaps; no colored haze, no floor, no glow, no painted slash, no text, no grid. Effects are added in engine. Each pose distinct, clean professional anime game linework identical to references.
+```

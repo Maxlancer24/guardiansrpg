@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const en=new URLSearchParams(location.search).get('lang')==='en',tr=(es,english)=>en?english:es,pack=GUARDIAN_ACTIONS,images={};
-const names={idle:['Reposo','Idle'],attack:['Ataque A · Corte descendente','Attack A · Downward slash'],attack2:['Ataque B · Corte ascendente','Attack B · Rising slash'],guard:['Guardia / Parry','Guard / Parry'],hurt:['Daño recibido','Hit reaction'],rest:['Descanso','Rest'],motion:['Entrada y regreso','Approach and return'],activation:['Activación','Activation'],victory:['Victoria','Victory'],defeat:['Derrota','Defeat']};
+const names={idle:['Reposo','Idle'],attack:['Ataque A · Corte descendente','Attack A · Downward slash'],attack2:['Ataque B · Corte lateral','Attack B · Cross-body slash'],guard:['Guardia / Parry','Guard / Parry'],hurt:['Daño recibido','Hit reaction'],rest:['Descanso','Rest'],motion:['Entrada y regreso','Approach and return'],activation:['Activación','Activation'],victory:['Victoria','Victory'],defeat:['Derrota','Defeat']};
 document.documentElement.lang=en?'en':'es';document.title=document.querySelector('#title').textContent=tr('Guardián · Animaciones','Guardian · Animations');
 document.querySelector('#lang').textContent=en?'Español':'English';document.querySelector('#lang').href=en?'?lang=es':'?lang=en';
 document.querySelector('#speed-label').textContent=tr('Velocidad','Speed');document.querySelector('#play').textContent=tr('Probar combate →','Try battle →');
