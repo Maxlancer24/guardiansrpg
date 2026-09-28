@@ -1,5 +1,9 @@
 # Custodio / Custodian v1 — incorporación a demo
 
+Actualización de consistencia: los atlas activos fueron sustituidos por versiones
+de guantes uniformes y mangos corregidos. Véase `CONSISTENCY-V2.md`; las notas
+de incorporación siguientes describen la revisión original y se conservan como historial.
+
 Fecha: 2026-09-27. ID `custodian`, concepto 10, apariencia de jugador.
 Nueve atlas y 52 poses. Con Custodio hay nueve de diez diseños jugables;
 Errante queda pendiente. No es un protagonista ni una nueva clase/habilidad.

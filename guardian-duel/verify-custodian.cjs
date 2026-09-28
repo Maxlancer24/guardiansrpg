@@ -8,10 +8,11 @@ assert.equal(animation.frame(pack.attack,1235-360),2,'hammer contact coincides w
 assert.equal(animation.frame(pack.attack,1380-360),3,'follow-through after impact');
 assert.deepEqual(pack.attack.markers[0].point,pack.attack.hammer[2]);
 assert.equal(animation.frame(pack.defeat,100000),5,'defeat completes and holds final pose');
-assert(pack.guard.src.endsWith('guard-v2.png'),'neutral guard uses upright hammer correction');
-assert(pack.defeat.src.endsWith('defeat-v2.png'),'fall orientation correction is active');
-for(const [i,edge] of [173,141,109,173,141,109].entries())assert.equal(edge-pack.idle.frames[i][4],-134,'idle feet registered');
-for(const [i,edge] of [148,143,134,148,144,135].entries())assert.equal(edge-pack.victory.frames[i][4],-137,'salute feet registered');
+assert(pack.guard.src.endsWith('guard-v3.png'),'full-length hammer guard correction');
+assert(pack.defeat.src.endsWith('defeat-v3.png'),'consistent gloves and fall weapon correction');
+for(const [i,edge] of [173,141,141,173,141,141].entries())assert.equal(edge-pack.idle.frames[i][4],-134,'idle feet registered');
+for(const [i,edge] of [148,142,133,147,143,134].entries())assert.equal(edge-pack.victory.frames[i][4],-137,'salute feet registered');
+for(const action of ['idle','attack','rest','motion','activation','victory','hurt'])assert(pack[action].src.endsWith(action+'-v2.png'),'corrected glove atlas active: '+action);
 assert.deepEqual(pack.victory.sequence.map(([f])=>f),[0,1,2,3,4,0,5,0],'salute lowers through intermediate pose, no hammer flip');
 const r=pack.attack.frames[2];
 assert.equal(pack.attack.hammer[2][0]-r[0]-r[4],pack.attack.reach);

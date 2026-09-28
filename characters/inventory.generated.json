@@ -3164,7 +3164,7 @@
       "id": "custodian",
       "status": "demo-ready",
       "manifest": "guardian-duel/custodian.js",
-      "manifestSha256": "230c4c842111c6180428c9f25e4c4be826f908c12419fb90b86e8b84d51a5ed9",
+      "manifestSha256": "f34b2e20c159c078f523109cb395dc264c4617abd9db391021fed54105b38a02",
       "scale": {
         "sourceBodyHeight": 494,
         "idleScale": 0.67,
@@ -3200,8 +3200,8 @@
       "presentationFiles": [],
       "actions": {
         "idle": {
-          "asset": "/guardian-duel/assets/custodian-v1/idle.png",
-          "sha256": "3f2a88dc41614abcfa739adb9ac92dba72d9f66e829662b0f0569366a7df739e",
+          "asset": "/guardian-duel/assets/custodian-v1/idle-v2.png",
+          "sha256": "855b0690e9bf34cdf94ec6b5022a3a20049ec5f0ad11735f5560ff93064ae7ef",
           "dimensions": [
             1536,
             1024
@@ -3238,8 +3238,8 @@
           "hasClipping": false
         },
         "attack": {
-          "asset": "/guardian-duel/assets/custodian-v1/attack.png",
-          "sha256": "27e480edf75afc86598653581061d01cf246e5a2c53df1c72140e20e2c6a4c3e",
+          "asset": "/guardian-duel/assets/custodian-v1/attack-v2.png",
+          "sha256": "e2e56d1fecaaabee115c9a07e380314b17b7547a30ee3c9d38bc1be8d71c26af",
           "dimensions": [
             1536,
             1024
@@ -3276,8 +3276,8 @@
           "hasClipping": true
         },
         "guard": {
-          "asset": "/guardian-duel/assets/custodian-v1/guard-v2.png",
-          "sha256": "737125ea64501889fd45e70434c6964622eb57ac86b35b2d09bcb623323b77b0",
+          "asset": "/guardian-duel/assets/custodian-v1/guard-v3.png",
+          "sha256": "c13763585346816cb45d17b6ff3571b90fab9e79cae28c0655f1d56bf3ad6f4d",
           "dimensions": [
             1536,
             1024
@@ -3314,8 +3314,8 @@
           "hasClipping": false
         },
         "hurt": {
-          "asset": "/guardian-duel/assets/custodian-v1/hurt.png",
-          "sha256": "3c6e314fb96e853e12464ed49a938200342c47b883f6483adb0ef29c96ceebb3",
+          "asset": "/guardian-duel/assets/custodian-v1/hurt-v2.png",
+          "sha256": "c9cdbbf24fc5a6a0a6dd306f46df5146959a8d16fbb295183de813423129fd8d",
           "dimensions": [
             1254,
             1254
@@ -3344,8 +3344,8 @@
           "hasClipping": false
         },
         "rest": {
-          "asset": "/guardian-duel/assets/custodian-v1/rest.png",
-          "sha256": "d3e0bb61834804b76d462c3bb349a355dc43e260d0caa011d9249bf221ef5b05",
+          "asset": "/guardian-duel/assets/custodian-v1/rest-v2.png",
+          "sha256": "10a69b9ec3eb84cc2b3cd4e64aba75ad1969a0a0f8dd70b33c7206b3e01cace1",
           "dimensions": [
             1536,
             1024
@@ -3382,8 +3382,8 @@
           "hasClipping": false
         },
         "motion": {
-          "asset": "/guardian-duel/assets/custodian-v1/motion.png",
-          "sha256": "975ac4e347df01259b41619c05abbf1e1e2313d6ede55f85146c14a9a63d6577",
+          "asset": "/guardian-duel/assets/custodian-v1/motion-v2.png",
+          "sha256": "f476ea01a0d2607767fbc54f07d917553c6a108eac14d87e1b0feaa08bce2199",
           "dimensions": [
             1536,
             1024
@@ -3420,8 +3420,8 @@
           "hasClipping": false
         },
         "activation": {
-          "asset": "/guardian-duel/assets/custodian-v1/activation.png",
-          "sha256": "5df191984ae57126aa28f743a79afac4727fa0522e10c32986dfc905abe5bd5a",
+          "asset": "/guardian-duel/assets/custodian-v1/activation-v2.png",
+          "sha256": "89ce189197f98ee7d09720f09d2435c1167dece6a8bae423ad7b475492f5850f",
           "dimensions": [
             1536,
             1024
@@ -3458,8 +3458,8 @@
           "hasClipping": false
         },
         "victory": {
-          "asset": "/guardian-duel/assets/custodian-v1/victory.png",
-          "sha256": "3d598af46e4bddee1bdbe27500edb1c1d865d5324ab1ff120ff1837a1c3fd231",
+          "asset": "/guardian-duel/assets/custodian-v1/victory-v2.png",
+          "sha256": "05d7448e8a6692a960b1802a38e9ea5b3cdc4260a00ee939bd858044ccbf15a0",
           "dimensions": [
             1536,
             1024
@@ -3520,8 +3520,8 @@
           "hasClipping": false
         },
         "defeat": {
-          "asset": "/guardian-duel/assets/custodian-v1/defeat-v2.png",
-          "sha256": "3fcfcb637e250d8f3d12ff25b866813d676661f76d67d1c6b870787f8065f55a",
+          "asset": "/guardian-duel/assets/custodian-v1/defeat-v3.png",
+          "sha256": "5a821a264295b3d5af585cdd6f7798a7881886cdb7814e45f30af209ec55026a",
           "dimensions": [
             1536,
             1024
@@ -3594,6 +3594,15 @@
   "retainedAssetsNotSelectedByGuardianManifests": [
     "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",
+    "guardian-duel/assets/custodian-v1/activation.png",
+    "guardian-duel/assets/custodian-v1/attack.png",
+    "guardian-duel/assets/custodian-v1/defeat-v2.png",
+    "guardian-duel/assets/custodian-v1/guard-v2.png",
+    "guardian-duel/assets/custodian-v1/hurt.png",
+    "guardian-duel/assets/custodian-v1/idle.png",
+    "guardian-duel/assets/custodian-v1/motion.png",
+    "guardian-duel/assets/custodian-v1/rest.png",
+    "guardian-duel/assets/custodian-v1/victory.png",
     "guardian-duel/assets/duelist-v1/attack.png",
     "guardian-duel/assets/guard.png",
     "guardian-duel/assets/idle.png",
