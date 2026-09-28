@@ -33,4 +33,4 @@ for(const [id,{actions}] of Object.entries(avatars)){
  }
 }
 assert(game.includes('clock+=dt*1.5'),'combat clock stays at 1.5x');
-console.log('PASS: all nine combat idles and blinking at 1x; rest, hurt, victory, attack and damage clock remain at 1.5x.');
+console.log('PASS: all ten combat idles and blinking at 1x; rest, hurt, victory, attack and damage clock remain at 1.5x.');

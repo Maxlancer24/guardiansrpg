@@ -13,7 +13,8 @@
   arcanist:{sourceBodyHeight:470,idleScale:.67,targetHeight:230},
   pugilist:{sourceBodyHeight:489,idleScale:.67,targetHeight:232},
   tracker:{sourceBodyHeight:500,idleScale:.67,targetHeight:228},
-  custodian:{sourceBodyHeight:494,idleScale:.67,targetHeight:235}
+  custodian:{sourceBodyHeight:494,idleScale:.67,targetHeight:235},
+  wanderer:{sourceBodyHeight:491,idleScale:.67,targetHeight:228}
  };
  const api={profiles,
   sceneSize(width,cssWidth){return 230*width/1280*(cssWidth<=700?1.5:1)},
