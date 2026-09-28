@@ -50,4 +50,7 @@ const b=setup(true,false);for(let i=0;i<100;i++)b.context.review.step(80);
 assert.equal(b.draws.length,7);assert(b.draws.every(d=>d.f===0),'reduced motion stays static');
 const c=setup(false,false);for(let i=0;i<30;i++)c.context.review.step(80);
 assert.equal(new Set(c.draws.map(d=>d.id)).size,7,'fallback works without IntersectionObserver');
+const d=setup(false,false),ages=d.context.review.portraits.map(p=>p.age);
+d.context.review.step(80);
+d.context.review.portraits.forEach((p,i)=>assert.equal(p.age-ages[i],80,'every selector idle uses real-time 1x'));
 console.log('PASS: seven idle portraits, anchors, frame deduplication/clearing, visibility pause/resume, DPR and reduced motion.');

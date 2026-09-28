@@ -44,7 +44,7 @@ function renderPortraits(dt){
  if(document.hidden||$('selection').hidden)return;
  for(const p of portraits){
   if(!p.visible||!images[p.id+':idle'])continue;
-  if(!reduced)p.age+=dt*1.5;
+  if(!reduced)p.age+=dt; // Idle only: real time (1x), independent of combat's 1.5x.
   const f=reduced?0:p.age%7000>=6890?5:sequence(p.pack,p.age,true);
   const ratio=Math.min(3,globalThis.devicePixelRatio||1);
   if(p.frame===f&&p.ratio===ratio)continue;
@@ -70,7 +70,7 @@ function drawActor(id,x,y,size){const state=modes[id],age=clock-state.at;let mod
  if(mode==='attack'){
   if(id===0&&isRanged()){
    // Ranged actors stay planted: no approach frames, translation or retreat hop.
-   if(age<360||age>=1940){mode='idle';f=sequence(AVATARS[appearance].actions.idle,age<360?age:age-1940,true)}
+   if(age<360||age>=1940){mode='idle';f=sequence(AVATARS[appearance].actions.idle,(age<360?age:age-1940)/1.5,true)}
    else f=sequence(AVATARS[appearance].actions.attack,age-360,false);
   }else{
    const backAt=1780,returnTime=470,u=ease(age/360)*(1-ease((age-backAt)/returnTime));
@@ -83,7 +83,7 @@ function drawActor(id,x,y,size){const state=modes[id],age=clock-state.at;let mod
   }
  }
  if($('effects').checked&&(display.actors[id].focus||mode==='activation'||mode==='rest'||mode==='guard')){const color=display.actors[id].ultra?'rgba(255,212,108,':mode==='guard'?'rgba(160,237,183,':'rgba(100,255,220,';combatGlow({x,y},size,color,mode==='activation'?.23:.15);}
- if(id===0){if(state.name!=='attack'){const p=AVATARS[appearance].actions[mode]||AVATARS[appearance].actions.idle;if(mode==='guard'){const contact=clock-(state.contact??-Infinity);f=contact<660?(contact<140?3:contact<440?4:5):age<250?0:age<500?1:[1,2][Math.floor(age/400)%2];}else if(mode==='victory')f=GuardianAnimation.victory(p,age);else if(mode==='idle'&&clock%7000<110)f=5;else f=sequence(p,age,mode==='idle'||mode==='rest');}sprite(ctx,mode,f,x,y,GuardianScale.factor(appearance,size));}else{let k='wi'+[0,1,2,3,2,1][Math.floor(clock/250)%6],floor=1050;if(mode==='attack'){k='wa'+(age<650?2:age<900?3:age<1120?4:age<1280?5:age<1550?6:7);floor=1238}else if(mode==='hurt')k='whurt';else if(mode==='defeat')k=age<240?'whurt':age<1080?'wkneel':'wfallen';const im=images[k],s=size/950;ctx.drawImage(im,x-720.5*s,y-floor*s,im.width*s,im.height*s)}
+ if(id===0){if(state.name!=='attack'){const p=AVATARS[appearance].actions[mode]||AVATARS[appearance].actions.idle;if(mode==='guard'){const contact=clock-(state.contact??-Infinity);f=contact<660?(contact<140?3:contact<440?4:5):age<250?0:age<500?1:[1,2][Math.floor(age/400)%2];}else if(mode==='victory')f=GuardianAnimation.victory(p,age);else if(mode==='idle'&&(clock/1.5)%7000<110)f=5;else f=sequence(p,mode==='idle'?age/1.5:age,mode==='idle'||mode==='rest');}sprite(ctx,mode,f,x,y,GuardianScale.factor(appearance,size));}else{let k='wi'+[0,1,2,3,2,1][Math.floor(clock/250)%6],floor=1050;if(mode==='attack'){k='wa'+(age<650?2:age<900?3:age<1120?4:age<1280?5:age<1550?6:7);floor=1238}else if(mode==='hurt')k='whurt';else if(mode==='defeat')k=age<240?'whurt':age<1080?'wkneel':'wfallen';const im=images[k],s=size/950;ctx.drawImage(im,x-720.5*s,y-floor*s,im.width*s,im.height*s)}
  if(mode==='hurt'&&age>650&&!busy)setMode(id,'idle');return{x,y,frame:f,mode};}
 function render(){if(!active||!readyAssets)return;const w=960,h=Math.round(w*canvas.clientHeight/canvas.clientWidth);const dpr=Math.min(3,globalThis.devicePixelRatio||1),density=Math.min(canvas.clientWidth*dpr/w,Math.sqrt(4000000/(w*h))),pw=Math.max(1,Math.round(w*density)),ph=Math.max(1,Math.round(h*density));if(canvas.width!==pw||canvas.height!==ph){canvas.width=pw;canvas.height=ph}ctx.setTransform(pw/w,0,0,ph/h,0,0);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';const im=images.arena,s=Math.max(w/im.width,h/im.height);ctx.drawImage(im,(w-im.width*s)/2,(h-im.height*s)/2,im.width*s,im.height*s);const size=GuardianScale.sceneSize(w,canvas.clientWidth),floor=h*.63,homes=[w*.28,w*.75];if(!reduced)for(let i=0;i<18;i++){ctx.fillStyle='rgba(152,242,191,'+(.16+.22*Math.sin(clock/1300+i)**2)+')';ctx.fillRect((i*193+Math.sin(clock/1600+i)*12)%w,h*.2+(i*89)%(h*.48),2,2)}const poses=[];for(let id=0;id<2;id++)poses[id]=drawActor(id,homes[id],floor,size);
  if(modes[0].name==='attack')GuardianMeleeFX.draw(ctx,{id:appearance,age:clock-modes[0].at,frame:poses[0].frame,pack:AVATARS[appearance].actions.attack,factor:GuardianScale.factor(appearance,size),x:poses[0].x,y:poses[0].y,reduced,enabled:$('effects').checked});

@@ -8,11 +8,15 @@ Independent local demo at `/guardian-duel/` (Spanish) or `/guardian-duel/?lang=e
 Does not replace `/duel/`, `/team-battle/` or server-authoritative Discord rooms.
 No account writes, rewards, analytics, feedback submission or character persistence.
 
-The appearance selector plays each character's existing idle at 1.5x with
+The appearance selector plays each character's existing idle at 1x with
 staggered blinking and the same anatomical scale. It shares the main RAF loop,
 repaints only on frame/DPR changes and pauses offscreen, in battle or in a hidden
 tab. Reduced-motion users get the neutral still pose. No additional image assets
 or animation downloads. Checks: `node guardian-duel/verify-portraits.cjs`.
+
+Guardian idle also runs at 1x in battle, including the idle segments before/after
+ranged attacks. Blinking uses real-time cadence. All other actions, damage/FX
+timing and Hollow remain at 1.5x; the combat clock is unchanged.
 
 ## Playable appearances
 
