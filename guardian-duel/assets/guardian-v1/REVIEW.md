@@ -45,3 +45,27 @@ activas, conservando DB y variables. No se ha modificado la DB ni desplegado.
 Prueba independiente: `/guardian-duel/`. Galería: `/guardian-duel/guardian-preview.html`.
 En salas Guardian/Perfil, elegir el botón Guardián; actor de combate y apariencia
 siguen siendo IDs separados. Jessie, Garrick y Zoe no cambian.
+## Revisión 2 — protagonista y ataques alternados
+
+Guardián es un protagonista, NO una skin. Su especial procede de la habilidad
+activa equipada por el jugador. Catálogo y registro del bot separan los diez
+GUARDIANS cosméticos de STORY_PROTAGONISTS; COMBAT_VISUALS es solo el conjunto
+que puede representar el renderizador compartido, no una clasificación narrativa.
+
+- idle-v2.png limpia el residuo de alfa en las axilas. El fotograma físico 4
+  contiene el parpadeo y se remapea al índice lógico 5, conservando el contrato.
+- Guardia reducida de escala .67 a .64 (4,48%), sin cambiar anclajes de pies.
+- attack-b.png agrega seis poses para un corte ascendente. Sesenta poses totales.
+- Ataques normales A/B/A por personaje; parry/rest/counter no consumen la variante.
+  Cada ataque sigue generando un solo impacto, a 1235 ms en el reloj base.
+- El segundo slash usa sus propios puntos de hoja, alcance y sentido ascendente.
+  Recortes de atlas evitan la hoja vecina encima de la fila inferior.
+- Entrada del protagonista desde /duel/ y /es/duel/ a
+  /guardian-duel/?hero=guardian. Prueba gráfica sin perfil: no inventa una especial.
+- Validación local: transparencia, clasificación, escala, ambas secuencias,
+  contacto de hoja, replay de red A/B, 75 pruebas Python del combate y dos de arte;
+  revisión de 60 poses y Chrome desktop/móvil con ataque/parry/rest y entrada desde
+  el selector de protagonistas. Capturas en output/guardian-character-v2-qa/.
+
+La publicación web no actualiza el Site de Discloud. El parche del adaptador de
+red se instala aparte; no contiene DB, no cambia stats ni fórmulas de combate.

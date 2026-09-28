@@ -7,7 +7,7 @@ function canvas(){
  for(const key of ['createLinearGradient','createRadialGradient'])ctx[key]=(...args)=>{assert(args.every(Number.isFinite));return{addColorStop(n,color){assert(n>=0&&n<=1);assert(!color.includes('NaN'))}}};
  return{ctx,calls,stack};
 }
-assert.deepEqual(Object.keys(fx.profiles),['lancer','duelist','sentinel','vanguard','pugilist','wanderer','custodian']);
+assert.deepEqual(Object.keys(fx.profiles),['lancer','duelist','sentinel','vanguard','pugilist','wanderer','guardian','custodian']);
 for(const id of Object.keys(fx.profiles))for(const cssWidth of [390,1240])for(const frame of [2,3]){
  const pack=require('./'+id+'.js').attack;
  const input={id,age:1240,frame,pack,factor:scale.factor(id,scale.sceneSize(960,cssWidth)),x:310,y:470};
@@ -28,4 +28,4 @@ for(const id of Object.keys(fx.profiles))for(const cssWidth of [390,1240])for(co
  for(const c of [full,reduced]){assert.equal(c.stack.length,0);assert.equal(c.ctx.globalCompositeOperation,'source-over');}
  assert.equal(JSON.stringify(input),before,'presentation must not mutate actor data');
 }
-console.log('PASS: seven melee effects including saber, fists and warhammer, both attack poses, mobile/desktop registration, impact window, fade, reduced motion, effects toggle and canvas isolation.');
+console.log('PASS: eight melee effects including saber, fists and warhammer, both attack poses, mobile/desktop registration, impact window, fade, reduced motion, effects toggle and canvas isolation.');

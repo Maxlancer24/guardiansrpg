@@ -1,4 +1,5 @@
-/* Cosmetic avatars are not story heroes and do not inherit their actives. */
+/* Shared no-profile animation demo rules. Guardian is a protagonist, not a skin;
+ * no equipped skill is simulated here. Live rooms use the player's server loadout. */
 (function(root){
  'use strict';
  const R=typeof module==='object'?require('../battle-practice/rules.js'):root.PracticeRules;

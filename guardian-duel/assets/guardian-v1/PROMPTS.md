@@ -63,4 +63,18 @@ decoraciones ni efectos horneados: se agregan en el renderizador del combate.
 
 Modo utilizado: herramienta integrada `image_gen`, con referencias locales.
 Los PNG finales se conservan sin procesamiento destructivo por código.
+## Revisión 2 — prompts exactos (herramienta integrada)
+
+### Idle: extracción del fondo residual
+
+Use case: background-extraction. Input image 1 is the EDIT TARGET: the six-frame Guardian idle sprite atlas. Remove residual opaque or translucent background from ALL negative spaces, especially the holes between upper arms/armpits and torso. Preserve EVERY drawing, face, sword, pose, clothing color, scale, cell layout and pixel positions as closely as possible. Do NOT redraw or redesign the character. Keep white tunic and black undersleeves, do not confuse them with background. Six characters unchanged, 3 columns x 2 rows on 1536x1024. True transparent alpha everywhere outside the character including enclosed armpit holes and between legs. No glow, no haze, no background, no shadow, no checkerboard painted. Frame5 eyes closed must remain closed.
+
+Archivo final: idle-v2.png. Se preservó el PNG generado con su alfa original.
+
+### Segundo ataque normal
+
+Use case: stylized-concept. Asset: SECOND normal attack animation atlas for this EXACT Guardian anime RPG protagonist. Image1 idle is immutable character design reference, image2 attack is style/anatomy/weapon reference. Draw a NEW attack, not a mirror of the first. Same young adult face, short dark brown hair, white short-sleeve tunic/navy collar and blue placket, black undersleeves and black fingerless gloves, brown chest strap/belt, blue hip cloths, navy trousers, brown boots. ONE straight silver sword with brass crossguard and blue grip ALWAYS in anatomical RIGHT hand; left hand EMPTY; empty sheath left hip. Six consecutive poses, 3 columns x 2 rows, 1536x1024, each 512x512 cell. Full body and entire weapon contained within each cell, 20px clear gutter, fixed scale approx450px standing crown-to-sole. Facing screen RIGHT throughout. Animation is a LOW-TO-HIGH rising diagonal sword cut (first existing attack is descending). Pose0 neutral reference ready, sword lowered forward. Pose1 anticipation: flex knees slightly and coil torso, right sword lowered across front near opposite hip, empty left hand balancing. Pose2 explosive rising cut toward enemy at right, right forearm extends forward, blade pointing right and slightly upward at chest level, strong stance. Pose3 follow-through sword elevated diagonally up-right above right shoulder, blade not cropped; torso follows motion. Pose4 gradual lowering/recovery to ready. Pose5 exact neutral ready silhouette. Natural anatomy and SAME right-hand grip every pose, no switching hands, no second blade, no tiny sword, no extra fingers. Crisp clean anime cel shading, SAME rendering complexity as reference; no chibi or photorealism. TRUE TRANSPARENT background including armpit gaps; no atmospheric glow or shadows, no VFX painted, no text, no grid. Feet/body proportion and costume identical across all six poses.
+
+Archivo final: attack-b.png. Cortes, anclajes y estelas se definen en el código;
+no se modificaron los dibujos por código. Originales y versión previa conservados.
 

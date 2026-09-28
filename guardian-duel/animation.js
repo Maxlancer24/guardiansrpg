@@ -14,6 +14,7 @@
   if(t<entry)return frame(pack,t,false);
   return pack.settled?frame(pack.settled,t-entry,true):pack.sequence.at(-1)[0];
  }
- const api={duration,frame,victory};
+ const attackKey=(packs,variant=0)=>variant%2===1&&packs.attack2?'attack2':'attack';
+ const api={duration,frame,victory,attackKey};
  if(typeof module!=='undefined')module.exports=api;else root.GuardianAnimation=api;
 })(typeof window!=='undefined'?window:globalThis);

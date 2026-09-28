@@ -11,13 +11,13 @@ negras, guantes negros sin dedos, correaje marrón, hebillas latón, faldones az
 pantalones navy y botas marrones. Espada recta plateada, guarda de latón y mango
 azul SIEMPRE en mano derecha; izquierda libre; vaina izquierda VACÍA.
 
-Este es el avatar narrativo del jugador; no convierte a Jessie, Garrick ni Zoe
-en apariencias del perfil. La apariencia no concede una habilidad nueva.
+Es un protagonista, NO una skin de avatar. No convierte a Jessie, Garrick ni Zoe
+en apariencias del perfil. Guardián no tiene especial propia fija.
 Las activas/pasivas pertenecen al arma y equipo del jugador.
 
-Plan de integración: apariencia adicional `guardian` en la prueba de Guardianes
-y en las salas de práctica con equipo. Se identifica explícitamente su origen
-narrativo. No se reemplazan los otros diez diseños ni se cambian las quests.
+Integración: protagonista `guardian` en una sección separada de los diez diseños
+cosméticos y en las salas de práctica con equipo. Su especial usa la activa del
+jugador, conservando el origen narrativo. No se reemplazan los otros diez diseños ni se cambian las quests.
 
 Generación con la herramienta integrada de imágenes. Originales preservados;
 RGBA original, sin quitar fondo por código ni reconstruir partes articuladas.

@@ -15,7 +15,7 @@
  const clamp=n=>Math.max(0,Math.min(1,n));
  const rgba=(color,a)=>'rgba('+color+','+clamp(a)+')';
  function sample({id,age,frame,pack,factor,x,y,reduced=false,enabled=true}){
-  const p=profiles[id],t=(age-1235)/240;
+  const baseProfile=profiles[id],p=baseProfile&&{...baseProfile,blade:pack.blade||baseProfile.blade,sweep:pack.sweep||1},t=(age-1235)/240;
   if(!enabled||!p||t<0||t>=1||!p.blade[frame])return null;
   const r=pack.frames[frame],s=pack.scale*factor;
   const point=([px,py])=>({x:x+(px-r[0]-r[4])*s,y:y+(py-r[1]-r[5])*s});
@@ -24,7 +24,7 @@
    width:p.width*s,scale:s,t,alpha:(1-t)**1.6,reduced};
  }
  function ribbon(ctx,g,width,opacity){
-  const span=2.05*(1-g.t*.35),end=g.angle,start=end-span,r=g.radius;
+  const span=2.05*(1-g.t*.35)*(g.sweep||1),end=g.angle,start=end-span,r=g.radius;
   ctx.beginPath();
   const count=28;
   for(let i=0;i<=count;i++){const u=i/count,a=start+span*u;

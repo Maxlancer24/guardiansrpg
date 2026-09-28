@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "scope": "Guardian player appearances: complete active action inventory. Protagonists: source pointers only.",
+  "scope": "Ten player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
   "characters": [
     {
       "id": "guardian",
+      "kind": "story-protagonist",
       "status": "demo-ready",
       "manifest": "guardian-duel/guardian.js",
-      "manifestSha256": "bfccc7e625c71bfb52ae57120622c323b73e230700c77463f12e0119662a9ec1",
+      "manifestSha256": "927f299121e6baa84763d56e3cfef098e6bb5776433e455fa41ebb6d4cdee870",
       "scale": {
         "sourceBodyHeight": 495,
         "idleScale": 0.67,
@@ -47,8 +48,8 @@
       ],
       "actions": {
         "idle": {
-          "asset": "/guardian-duel/assets/guardian-v1/idle.png",
-          "sha256": "b4d691ad5fb62b58efec0bc44ed21bebbea216bb063b4c103b5615409fea2d16",
+          "asset": "/guardian-duel/assets/guardian-v1/idle-v2.png",
+          "sha256": "7284e0b78398c9ce43a9d62477fa1b28263fc3c92b3d16615afcbe811a1da167",
           "dimensions": [
             1536,
             1024
@@ -157,7 +158,7 @@
             ]
           ],
           "settled": null,
-          "scale": 0.67,
+          "scale": 0.64,
           "hasClipping": false
         },
         "hurt": {
@@ -407,11 +408,50 @@
           "settled": null,
           "scale": 0.62,
           "hasClipping": false
+        },
+        "attack2": {
+          "asset": "/guardian-duel/assets/guardian-v1/attack-b.png",
+          "sha256": "a47640f7fbdfbbd2c4af510967abb99636ec565351d154d4ff63e4c482bd5da1",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": true
         }
       }
     },
     {
       "id": "explorer",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/explorer.js",
       "manifestSha256": "54edb8b7a92186804d042abbe87f7233f50f50676c44ea2a250491d1b47aa132",
@@ -769,6 +809,7 @@
     },
     {
       "id": "lancer",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/lancer.js",
       "manifestSha256": "5ea9f6276e80d92bcb2cc8e1b2368abba6fc3a1407ba0e407b9586849cc05a35",
@@ -1164,6 +1205,7 @@
     },
     {
       "id": "sentinel",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/sentinel.js",
       "manifestSha256": "a2d430b3c8196928b43ffa94cd06ce8bb26602ea72d6e65b53b30c8a5b37f293",
@@ -1571,6 +1613,7 @@
     },
     {
       "id": "duelist",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/duelist.js",
       "manifestSha256": "d8d3277123b54e77d02ddd188acd8b73c02fd59ac133958be2ec06f3fe553c5b",
@@ -1982,6 +2025,7 @@
     },
     {
       "id": "arcanist",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/arcanist.js",
       "manifestSha256": "51e8029902bfad64bbb5fc3c43a11bc9788902d98d14750c8a5924a4c25e4577",
@@ -2364,6 +2408,7 @@
     },
     {
       "id": "vanguard",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/vanguard.js",
       "manifestSha256": "e700029373d1fc69f30e4fbf327cda286c022aa5c633401de7cbf526e6e11864",
@@ -2787,6 +2832,7 @@
     },
     {
       "id": "tracker",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/tracker.js",
       "manifestSha256": "a6d686046facf784c0a665e385e3fb6cbcb6bce0c162b29b9f894f51a1a49a8d",
@@ -3157,6 +3203,7 @@
     },
     {
       "id": "pugilist",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/pugilist.js",
       "manifestSha256": "79a10cd708ffcddf6d5ced9e3d91f07f393c8c764a48e2a9159a325df2086545",
@@ -3564,6 +3611,7 @@
     },
     {
       "id": "wanderer",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/wanderer.js",
       "manifestSha256": "82dcfa9dd6e044db89f12e8483925564ae36320976fb1fb185c57ac7f07917d9",
@@ -3963,6 +4011,7 @@
     },
     {
       "id": "custodian",
+      "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/custodian.js",
       "manifestSha256": "f34b2e20c159c078f523109cb395dc264c4617abd9db391021fed54105b38a02",
@@ -4362,6 +4411,7 @@
     },
     {
       "id": "jessie",
+      "kind": "story-protagonist",
       "status": "legacy-integrated",
       "inventoryCoverage": "source-pointers-only",
       "sourceFiles": [
@@ -4372,6 +4422,7 @@
     },
     {
       "id": "garrick",
+      "kind": "story-protagonist",
       "status": "legacy-integrated",
       "inventoryCoverage": "source-pointers-only",
       "sourceFiles": [
@@ -4382,6 +4433,7 @@
     },
     {
       "id": "zoe",
+      "kind": "story-protagonist",
       "status": "legacy-integrated",
       "inventoryCoverage": "source-pointers-only",
       "sourceFiles": [
@@ -4520,6 +4572,7 @@
     "guardian-duel/assets/duelist-v1/attack.png",
     "guardian-duel/assets/guard.png",
     "guardian-duel/assets/guardian-v1/activation-draft.png",
+    "guardian-duel/assets/guardian-v1/idle.png",
     "guardian-duel/assets/guardian-v1/motion-draft.png",
     "guardian-duel/assets/guardian-v1/motion.png",
     "guardian-duel/assets/guardian-v1/portrait.png",

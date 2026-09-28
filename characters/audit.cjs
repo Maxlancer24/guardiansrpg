@@ -19,9 +19,9 @@ for(const c of catalog.characters){
  if(c.kind==='story-protagonist'){
   assert.equal(c.appearanceSelectableForPlayers,false);
   for(const file of c.sourceFiles)local(file);
-  characters.push({id:c.id,status:c.status,inventoryCoverage:'source-pointers-only',sourceFiles:c.sourceFiles});continue;
+  if(!c.manifest){characters.push({id:c.id,kind:c.kind,status:c.status,inventoryCoverage:'source-pointers-only',sourceFiles:c.sourceFiles});continue;}
  }
- assert.equal(c.kind,'player-appearance');
+ assert(['player-appearance','story-protagonist'].includes(c.kind));
  if(c.status==='concept-only'){
   assert(!c.manifest&&!c.release.demo&&!c.release.liveGame);
   const concept=c.conceptAsset?{asset:c.conceptAsset,sha256:hash(fs.readFileSync(local(c.conceptAsset))),designReview:c.designReview}:null;
@@ -29,8 +29,8 @@ for(const c of catalog.characters){
  }
  assert.equal(c.status,'demo-ready');assert(c.release.demo&&!c.release.liveGame);
  const manifestFile=local(c.manifest),pack=require(manifestFile),actions={};
- assert.deepEqual(Object.keys(pack).sort(),[...required].sort());assert(scale.profiles[c.id]);
- for(const name of required){
+ const expected=pack.attack2?[...required,'attack2']:required;assert.deepEqual(Object.keys(pack).sort(),[...expected].sort());assert(scale.profiles[c.id]);
+ for(const name of expected){
   const p=pack[name],file=local(p.src),bytes=fs.readFileSync(file);
   assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
   const width=bytes.readUInt32BE(16),height=bytes.readUInt32BE(20);
@@ -42,7 +42,7 @@ for(const c of catalog.characters){
   actions[name]={asset:p.src,sha256:hash(bytes),dimensions:[width,height],frameCount:p.frames.length,sequence:p.sequence,settled:p.settled||null,scale:p.scale,hasClipping:!!p.clips};
  }
  const presentationFiles=(c.presentationFiles||[]).map(file=>({file,sha256:hash(fs.readFileSync(local(file)))}));
- characters.push({id:c.id,status:c.status,manifest:c.manifest,manifestSha256:hash(fs.readFileSync(manifestFile)),scale:scale.profiles[c.id],weaponEffect:fx.profiles[c.id]||null,presentationFiles,actions});
+ characters.push({id:c.id,kind:c.kind,status:c.status,manifest:c.manifest,manifestSha256:hash(fs.readFileSync(manifestFile)),scale:scale.profiles[c.id],weaponEffect:fx.profiles[c.id]||null,presentationFiles,actions});
 }
 const available=catalog.characters.filter(c=>c.status==='demo-ready').map(c=>c.id).sort();
 assert.deepEqual(available,Object.keys(scale.profiles).sort(),'catalog covers every calibrated appearance');
@@ -52,7 +52,7 @@ assert.deepEqual(available,runtime,'catalog matches current demo roster');
 for(const id of Object.keys(fx.profiles))assert(available.includes(id));
 for(const [id,profile]of Object.entries(palettes)){assert(available.includes(id));paletteEngine.validate(profile);}
 function pngs(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?pngs(path.join(dir,e.name)):e.name.endsWith('.png')?[path.relative(root,path.join(dir,e.name)).split(path.sep).join('/')]:[])}
-const data={schemaVersion:1,scope:'Guardian player appearances: complete active action inventory. Protagonists: source pointers only.',characters,
+const data={schemaVersion:1,scope:'Ten player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.',characters,
  paletteSystem:{definition:'guardian-duel/palettes.js',definitionSha256:hash(fs.readFileSync(local('guardian-duel/palettes.js'))),engine:'guardian-duel/palette-engine.js',engineSha256:hash(fs.readFileSync(local('guardian-duel/palette-engine.js'))),profiles:palettes},
  retainedAssetsNotSelectedByGuardianManifests:pngs(path.join(root,'guardian-duel/assets')).filter(p=>!active.has(p)).sort(),
  retentionWarning:'Not selected by these manifests does NOT mean unused globally. Do not delete without checking other consumers.'};
