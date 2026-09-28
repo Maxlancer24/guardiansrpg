@@ -8,12 +8,13 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 
 - `catalog.json`: identidad, nombre ES/EN, grupo y estado de incorporación.
 - `inventory.generated.json`: archivo **exacto** usado por cada acción de las
-  diez apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
+  once apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
   Se deriva de los manifiestos ejecutados, no de nombres de carpeta ni versiones supuestas.
 - `guardian-duel/<id>.js`: recortes, anclajes de pies, máscaras y tiempos activos.
 - `guardian-duel/scale.js`: tamaño anatómico; `animation.js`: reproducción.
 - `guardian-duel/melee-fx.js`: efectos independientes de las imágenes.
 - `guardian-duel/arcane-fx.js`: carga y rayo del bastón de Arcanista, sin daño propio.
+- `guardian-duel/alchemy-fx.js`: frasco parabólico y estallido cosmético de Alquimista; no añade estados ni consume objetos.
 - `guardian-duel/crossbow-fx.js`: virote de Rastreadora, anclado al carril del arma.
 - `guardian-duel/palettes.js`: recetas cosméticas; el selector las descubre automáticamente.
   Ver [VARIANTS.md](VARIANTS.md) para añadir paletas sin duplicar sprites ni personajes.
@@ -32,6 +33,7 @@ node guardian-duel/verify-custodian.cjs
 node guardian-duel/verify-wanderer.cjs
 node guardian-duel/verify-palettes.cjs
 node guardian-duel/verify-guardian.cjs
+node guardian-duel/verify-alchemist.cjs
 ```
 
 La auditoría falla ante archivos ausentes, recortes fuera de imagen, secuencias
@@ -42,8 +44,8 @@ su inventario. No sustituye la revisión visual en movimiento.
 
 | Grupo | Personajes | Estado |
 | --- | --- | --- |
-| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista, Rastreadora, Custodio, Errante | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
-| Conceptos pendientes del lote inicial | Ninguno | Diez apariencias completas en la demo |
+| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista, Rastreadora, Custodio, Errante, Alquimista | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
+| Conceptos pendientes del lote inicial | Ninguno | Diez apariencias del primer roster completas en la demo; Alquimista añade la primera del segundo roster |
 | Protagonista de las quests | Guardián / Guardian (arte de Max) | No es una skin; nueve acciones, dos ataques y retrato. Especial determinada por la activa equipada del jugador |
 | Protagonistas de historia | Jessie, Garrick, Zoe | Integrados en sus pruebas existentes; no son apariencias para jugadores |
 
@@ -54,7 +56,7 @@ Hollow es un NPC compartido, no un personaje seleccionable del catálogo.
 
 ## Carpetas y versiones
 
-Las diez apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
+Las once apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
 histórica: combina `guardian-duel/assets/*.png` con `assets/lancer-refined-v1/`.
 El inventario elimina la ambigüedad sin mover archivos que usa la web.
 Para personajes nuevos: `guardian-duel/assets/<id>-v1/` y `guardian-duel/<id>.js`.

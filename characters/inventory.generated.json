@@ -1,7 +1,406 @@
 {
   "schemaVersion": 1,
-  "scope": "Ten player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
+  "scope": "Eleven player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
   "characters": [
+    {
+      "id": "alchemist",
+      "kind": "player-appearance",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/alchemist.js",
+      "manifestSha256": "4f3761f5d38274cd815a8450db724be2c68d0cc060ac1c3f9ee9c8b5db62ad74",
+      "scale": {
+        "sourceBodyHeight": 495,
+        "idleScale": 0.67,
+        "targetHeight": 228
+      },
+      "weaponEffect": null,
+      "presentationFiles": [
+        {
+          "file": "guardian-duel/alchemy-fx.js",
+          "sha256": "c55e4372bd6434d47deb965f5ae18a3bb7262631debf4daa6da0f3108b994cae"
+        }
+      ],
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/alchemist-v1/idle.png",
+          "sha256": "eed157d289a02440e668b4ba2f3abe43b90da2ef8ecf7c2b15ec624476311f94",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              550
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              400
+            ],
+            [
+              0,
+              550
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/alchemist-v1/attack.png",
+          "sha256": "c99bf56daea27d8af5d8ae03dcb64905b64b483f9cfe501a51df6ca6374684a7",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              300
+            ],
+            [
+              1,
+              520
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              160
+            ],
+            [
+              4,
+              220
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/alchemist-v1/guard.png",
+          "sha256": "b82adb8f28420a542d242d1169b79fa4fb18ac507bbb04f8fd468375f3913883",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              250
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/alchemist-v1/hurt.png",
+          "sha256": "fd76deb41be880182c44abf828f1f4ee2f1ea3875e407e51028a324bb779e609",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              50
+            ],
+            [
+              1,
+              80
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              130
+            ],
+            [
+              5,
+              130
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/alchemist-v1/rest.png",
+          "sha256": "ebc06d23247673f719a935dad9b69ec9670c4b2da77bfefac9846231f3149510",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              160
+            ],
+            [
+              2,
+              230
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              3,
+              500
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/alchemist-v1/motion.png",
+          "sha256": "8a34f8e1b552e8c30643d15592afc4e2aeee92e798dc6cc3349796c9565905a1",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              220
+            ],
+            [
+              4,
+              220
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/alchemist-v1/activation-v2.png",
+          "sha256": "aaa04e3e4aa28cbdf4c4a34e3f5b7682999c2e59f5320df977320801ee881371",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/alchemist-v1/victory.png",
+          "sha256": "3e869738a6e5cbe2e4e9c2b50f38d53675af1f6d5ba78141b5f0e393cd31a747",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              450
+            ],
+            [
+              2,
+              650
+            ],
+            [
+              3,
+              650
+            ],
+            [
+              1,
+              300
+            ],
+            [
+              4,
+              350
+            ],
+            [
+              5,
+              110
+            ],
+            [
+              0,
+              350
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                0,
+                1700
+              ],
+              [
+                5,
+                110
+              ],
+              [
+                0,
+                850
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/alchemist-v1/defeat-v2.png",
+          "sha256": "74c4ed3050c84ff7109cfa7e0c747feee283fd6743705a35496e1c96a8d15f09",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              170
+            ],
+            [
+              1,
+              240
+            ],
+            [
+              2,
+              330
+            ],
+            [
+              3,
+              370
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        }
+      }
+    },
     {
       "id": "guardian",
       "kind": "story-protagonist",
@@ -4558,6 +4957,8 @@
     }
   },
   "retainedAssetsNotSelectedByGuardianManifests": [
+    "guardian-duel/assets/alchemist-v1/activation.png",
+    "guardian-duel/assets/alchemist-v1/defeat.png",
     "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",
     "guardian-duel/assets/custodian-v1/activation.png",
