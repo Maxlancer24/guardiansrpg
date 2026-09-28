@@ -3984,6 +3984,99 @@
       ]
     }
   ],
+  "paletteSystem": {
+    "definition": "guardian-duel/palettes.js",
+    "definitionSha256": "c3e1bda5674c013a28abc40f51df1bc3ec43dfd08b5763073374f6e3a1a50d07",
+    "engine": "guardian-duel/palette-engine.js",
+    "engineSha256": "8f9d32a716986600e458db10711bc92defa31c9c97affec1425a1ed698ff6fbf",
+    "profiles": {
+      "lancer": {
+        "version": 1,
+        "materials": {
+          "cloth": {
+            "hue": [
+              165,
+              250
+            ],
+            "saturation": [
+              0.08,
+              0.2
+            ],
+            "value": [
+              0.015,
+              0.075
+            ]
+          },
+          "sash": {
+            "hue": [
+              315,
+              367
+            ],
+            "saturation": [
+              0.1,
+              0.23
+            ],
+            "value": [
+              0.035,
+              0.1
+            ],
+            "region": [
+              0,
+              0.32,
+              1,
+              1
+            ],
+            "regions": {
+              "motion": {
+                "4": [
+                  0,
+                  0,
+                  0.6,
+                  1
+                ]
+              },
+              "defeat": {
+                "4": [
+                  0,
+                  0.32,
+                  0.65,
+                  1
+                ],
+                "5": [
+                  0,
+                  0.32,
+                  0.65,
+                  1
+                ]
+              }
+            }
+          }
+        },
+        "variants": {
+          "crimson": {
+            "es": "Carmesí",
+            "en": "Crimson",
+            "swatches": [
+              "#842f40",
+              "#e6d4af"
+            ],
+            "materials": {
+              "cloth": [
+                "#160f18",
+                "#842f40",
+                "#d87880"
+              ],
+              "sash": [
+                "#241d20",
+                "#b5a183",
+                "#fff0cd"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
   "retainedAssetsNotSelectedByGuardianManifests": [
     "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",

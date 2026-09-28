@@ -2,6 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),catalog=require('./catalog.json');
 const scale=require('../guardian-duel/scale.js'),fx=require('../guardian-duel/melee-fx.js');
+const palettes=require('../guardian-duel/palettes.js'),paletteEngine=require('../guardian-duel/palette-engine.js');
 const required=['idle','attack','guard','hurt','rest','motion','activation','victory','defeat'];
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 function local(p){
@@ -49,8 +50,10 @@ const game=fs.readFileSync(local('guardian-duel/game.js'),'utf8');
 const runtime=[...game.matchAll(/(\w+):\{actions:\w+_ACTIONS/g)].map(m=>m[1]).sort();
 assert.deepEqual(available,runtime,'catalog matches current demo roster');
 for(const id of Object.keys(fx.profiles))assert(available.includes(id));
+for(const [id,profile]of Object.entries(palettes)){assert(available.includes(id));paletteEngine.validate(profile);}
 function pngs(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?pngs(path.join(dir,e.name)):e.name.endsWith('.png')?[path.relative(root,path.join(dir,e.name)).split(path.sep).join('/')]:[])}
 const data={schemaVersion:1,scope:'Guardian player appearances: complete active action inventory. Protagonists: source pointers only.',characters,
+ paletteSystem:{definition:'guardian-duel/palettes.js',definitionSha256:hash(fs.readFileSync(local('guardian-duel/palettes.js'))),engine:'guardian-duel/palette-engine.js',engineSha256:hash(fs.readFileSync(local('guardian-duel/palette-engine.js'))),profiles:palettes},
  retainedAssetsNotSelectedByGuardianManifests:pngs(path.join(root,'guardian-duel/assets')).filter(p=>!active.has(p)).sort(),
  retentionWarning:'Not selected by these manifests does NOT mean unused globally. Do not delete without checking other consumers.'};
 const output=path.join(__dirname,'inventory.generated.json'),content=JSON.stringify(data,null,2)+'\n';

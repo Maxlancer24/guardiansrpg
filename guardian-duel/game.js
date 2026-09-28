@@ -3,6 +3,9 @@
 const $=id=>document.getElementById(id),canvas=$('arena'),ctx=canvas.getContext('2d'),images={},base='/assets/demo-battle/';
 let appearance='lancer';
 const AVATARS={lancer:{actions:LANCER_ACTIONS,es:'Lancero',en:'Lancer'},explorer:{actions:EXPLORER_ACTIONS,es:'Exploradora',en:'Explorer'},duelist:{actions:DUELIST_ACTIONS,es:'Duelista',en:'Duelist'},sentinel:{actions:SENTINEL_ACTIONS,es:'Centinela',en:'Sentinel'},vanguard:{actions:VANGUARD_ACTIONS,es:'Vanguardia',en:'Vanguard'},arcanist:{actions:ARCANIST_ACTIONS,es:'Arcanista',en:'Arcanist'},pugilist:{actions:PUGILIST_ACTIONS,es:'Pugilista',en:'Pugilist'},tracker:{actions:TRACKER_ACTIONS,es:'Rastreadora',en:'Tracker'},custodian:{actions:CUSTODIAN_ACTIONS,es:'Custodio',en:'Custodian'},wanderer:{actions:WANDERER_ACTIONS,es:'Errante',en:'Wanderer'}};
+const paletteCache=GuardianPaletteEngine.createCache(GuardianPalettes),selectedVariants={},paletteControls=[];
+let paletteBusy=false;
+const variant=id=>selectedVariants[id]||'original';
 const isRanged=()=>appearance==='explorer'||appearance==='arcanist'||appearance==='tracker';
 let en=new URLSearchParams(location.search).get('lang')==='en',battle,display,intent,choice=null,active=false,busy=false,paused=false,clock=0,last=0,current=null,queue=[],result=null,labels=[],sparks=[],deaths={},readyAssets=false,loadPromise=null;
 const modes=[{name:'idle',at:0},{name:'idle',at:0}],voices=new Set(),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -12,9 +15,53 @@ const source={arena:base+'black-lotus-arena.png',whurt:base+'warden-feedback-v1/
 for(const [id,avatar] of Object.entries(AVATARS))for(const [key,pack] of Object.entries(avatar.actions))source[id+':'+key]=pack.src;
 for(let i=0;i<4;i++)source['wi'+i]=base+'ambient-loops-v1/warden-'+i+'.png';
 for(let i=0;i<8;i++)source['wa'+i]=base+'combat-reactions-v1/warden-'+i+'.png';
-function load(key){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{images[key]=im;resolve()};im.onerror=()=>reject(Error(key));im.src=source[key]})}
-function localize(){document.documentElement.lang=en?'en':'es';document.querySelectorAll('[data-es]').forEach(el=>el.textContent=el.dataset[en?'en':'es']);$('language').textContent=en?'Español':'English';document.title=tr('Guardián vs. Hollow','Guardian vs. Hollow')+' · Guardians';$('arena').setAttribute('aria-label',tr('Escenario del combate. Resultados disponibles en el registro.','Battle scene. Results available in the battle log.'));if(display)ui()}
-function name(id){return id===0?AVATARS[appearance][en?'en':'es']:'Hollow'}
+const pendingLoads={};
+function load(key){if(images[key])return Promise.resolve();if(pendingLoads[key])return pendingLoads[key];return pendingLoads[key]=new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{images[key]=im;delete pendingLoads[key];resolve()};im.onerror=()=>{delete pendingLoads[key];reject(Error(key))};im.src=source[key]})}
+function localize(){document.documentElement.lang=en?'en':'es';document.querySelectorAll('[data-es]').forEach(el=>el.textContent=el.dataset[en?'en':'es']);$('language').textContent=en?'Español':'English';document.title=tr('Guardián vs. Hollow','Guardian vs. Hollow')+' · Guardians';$('arena').setAttribute('aria-label',tr('Escenario del combate. Resultados disponibles en el registro.','Battle scene. Results available in the battle log.'));localizePalettes();if(display)ui()}
+function name(id){return id===0?AVATARS[appearance][en?'en':'es']+(variant(appearance)==='original'?'':' · '+GuardianPalettes[appearance].variants[variant(appearance)][en?'en':'es']):'Hollow'}
+
+function localizePalettes(){
+ for(const control of paletteControls){
+  control.label.textContent=tr('Paleta','Palette');
+  for(const option of control.select.options)option.textContent=option.value==='original'?'Original':GuardianPalettes[control.id].variants[option.value][en?'en':'es'];
+  control.hint.textContent=tr('Solo cambia los colores. Mismas animaciones y stats.','Colors only. Same animations and stats.');
+ }
+}
+async function preparePalette(id){
+ for(const [action,pack]of Object.entries(AVATARS[id].actions))await paletteCache.prepare(id,variant(id),action,images[id+':'+action],pack);
+}
+function mountPalettes(){
+ for(const [id,profile]of Object.entries(GuardianPalettes)){
+  const button=$(id);if(!button?.parentElement)continue;
+  const wrapper=document.createElement('article');wrapper.className='avatar-choice';
+  button.parentElement.insertBefore(wrapper,button);wrapper.append(button);
+  const field=document.createElement('label'),label=document.createElement('span'),select=document.createElement('select'),hint=document.createElement('small');
+  field.className='palette-field';select.id=id+'-palette';hint.id=id+'-palette-hint';select.setAttribute('aria-describedby',hint.id);
+  for(const value of ['original',...Object.keys(profile.variants)]){const option=document.createElement('option');option.value=value;select.append(option)}
+  field.append(label,select);wrapper.append(field,hint);paletteControls.push({id,label,select,hint});
+  select.onchange=async()=>{
+   if(loadPromise||paletteBusy){select.value=variant(id);return}
+   const wanted=select.value;paletteBusy=true;
+   for(const key of Object.keys(AVATARS))$(key).disabled=true;
+   for(const c of paletteControls)c.select.disabled=true;
+   $('load-status').textContent=tr('Preparando paleta…','Preparing palette…');
+   try{
+    await load(id+':idle');
+    await paletteCache.prepare(id,wanted,'idle',images[id+':idle'],AVATARS[id].actions.idle);
+    selectedVariants[id]=wanted;
+    const portrait=portraits.find(p=>p.id===id);if(portrait)portrait.frame=-1;
+    renderPortraits(0);$('load-status').textContent='';
+   }catch(error){
+    select.value=variant(id);$('load-status').textContent=tr('No se pudo preparar la paleta. Conservamos tu selección anterior; puedes reintentar.','Could not prepare the palette. Your previous selection is unchanged; you can retry.');
+   }finally{
+    paletteBusy=false;for(const key of Object.keys(AVATARS))$(key).disabled=false;
+    for(const c of paletteControls)c.select.disabled=false;
+   }
+  };
+ }
+ localizePalettes();
+}
+
 function actionName(a){return {ATTACK:tr('Atacar','Attack'),DEFEND:'Parry',REST:tr('Descansar','Rest')}[a]}
 function sound(key,volume=.2){if(!$('sound').checked)return;const a=new Audio(base+'audio-v1/'+key+'.wav');a.volume=volume;voices.add(a);a.onended=()=>voices.delete(a);a.play().catch(()=>voices.delete(a))}
 function stopSounds(){for(const a of voices)a.pause();voices.clear()}
@@ -22,7 +69,7 @@ $('sound').onchange=()=>{if(!$('sound').checked)stopSounds()};
 function setMode(id,name){modes[id]={name,at:clock}}
 function log(text){const li=document.createElement('li');li.textContent=text;$('log').append(li);while($('log').children.length>100)$('log').firstElementChild.remove()}
 function ui(){if(!display)return;for(let id=0;id<2;id++){const a=display.actors[id],p=id?'enemy':'hero';$(p+'-hp').max=a.max;$(p+'-hp').value=a.hp;$(p+'-health').textContent=a.hp+' / '+a.max+' HP';}const done=result?.finished&&!busy;$('change').disabled=busy;$('hero-name').textContent=name(0);$('round').textContent=tr('Ronda ','Round ')+display.round;$('intent').textContent=done?tr('Combate finalizado','Battle finished'):busy?tr('Resolviendo el turno…','Resolving turn…'):tr('Hollow prepara: ','Hollow prepares: ')+actionName(intent);document.querySelectorAll('[data-action]').forEach(b=>{b.disabled=busy||done;b.setAttribute('aria-pressed',String(b.dataset.action===choice))});$('confirm').disabled=busy||done||!choice;$('confirm').hidden=!!done;$('replay').hidden=!done;$('status').textContent=paused?tr('En pausa','Paused'):busy?tr('Observa el resultado de tu decisión.','Watch your decision play out.'):done?'':tr('Elige una acción y confirma.','Choose an action and confirm.');$('action-help').textContent=choice?({ATTACK:tr('Un ataque. El daño y la iniciativa dependen de tus stats.','One attack. Damage and initiative depend on your stats.'),DEFEND:tr('Bloquea y contraataca si resistes; un golpe fuerte rompe la guardia.','Block and counter if defense holds; a strong hit breaks guard.'),REST:tr('Recupera vida y Focus. Si te atacan, se interrumpe y recibes más daño.','Recover HP and Focus. Incoming attacks interrupt rest and deal extra damage.')})[choice]:tr('Tu apariencia no cambia las reglas.','Your appearance does not change the rules.');$('pause').textContent=paused?tr('Continuar','Resume'):tr('Pausar','Pause')}
-async function start(id='lancer'){if(loadPromise||!AVATARS[id])return;try{for(const key of Object.keys(AVATARS))$(key).disabled=true;$('load-status').textContent=tr('Cargando animaciones…','Loading animations…');loadPromise=Promise.all(Object.keys(source).filter(k=>(!k.includes(':')||k.startsWith(id+':'))&&!images[k]).map(load));await loadPromise;appearance=id;readyAssets=true;active=true;$('selection').hidden=true;$('battle').hidden=false;reset();$('stage').scrollIntoView({block:'start'});$('stage').focus({preventScroll:true});$('load-status').textContent='';}catch(error){$('load-status').textContent=tr('No se pudo cargar una animación. Selecciona de nuevo para reintentar.','An animation could not load. Select again to retry.');}finally{loadPromise=null;for(const key of Object.keys(AVATARS))$(key).disabled=false}}
+async function start(id='lancer'){if(loadPromise||paletteBusy||!AVATARS[id])return;try{for(const key of Object.keys(AVATARS))$(key).disabled=true;$('load-status').textContent=tr('Cargando animaciones…','Loading animations…');loadPromise=Promise.all(Object.keys(source).filter(k=>(!k.includes(':')||k.startsWith(id+':'))&&!images[k]).map(load));await loadPromise;await preparePalette(id);appearance=id;readyAssets=true;active=true;$('selection').hidden=true;$('battle').hidden=false;reset();$('stage').scrollIntoView({block:'start'});$('stage').focus({preventScroll:true});$('load-status').textContent='';}catch(error){$('load-status').textContent=tr('No se pudo cargar una animación. Selecciona de nuevo para reintentar.','An animation could not load. Select again to retry.');}finally{loadPromise=null;for(const key of Object.keys(AVATARS))$(key).disabled=false}}
 function reset(){stopSounds();battle=new GuardianRules.Battle();display=battle.snapshot();intent=battle.chooseEnemy();choice=null;busy=false;paused=false;current=null;queue=[];result=null;labels=[];sparks=[];deaths={};setMode(0,'idle');setMode(1,'idle');$('outcome').hidden=true;$('log').replaceChildren();ui()}
 function add(duration,begin,impact,at=Infinity,end=()=>{}){queue.push({duration,begin,impact,at,end,hit:false})}
 function floating(id,value,color='#ffdea0'){labels.push({id,value,color,at:clock,lane:labels.filter(l=>l.id===id&&clock-l.at<1200).length})}
@@ -34,7 +81,7 @@ function confirm(){if(busy||!choice||result?.finished)return;busy=true;result=ba
  log(tr('Decisión: ','Decision: ')+actionName(selected));next();ui()}
 function next(){current=queue.shift()||null;if(current){current.started=clock;current.begin();return;}if(!result)return;display=copy(result.next);busy=false;if(result.finished){setMode(result.winner,'victory');$('outcome').textContent=result.winner===0?tr('VICTORIA','VICTORY'):tr('DERROTA','DEFEAT');$('outcome').hidden=false;log($('outcome').textContent);}else{intent=battle.chooseEnemy();setMode(0,'idle');setMode(1,'idle')}ui()}
 const sequence=GuardianAnimation.frame;
-function sprite(context,mode,f,x,y,factor,avatar=appearance){const p=AVATARS[avatar].actions[mode],r=p.frames[f],s=p.scale*factor,im=images[avatar+':'+mode];context.save();const polygon=p.clips?.[f];if(polygon){context.beginPath();polygon.forEach(([px,py],i)=>{const dx=x+(px-r[0]-r[4])*s,dy=y+(py-r[1]-r[5])*s;i?context.lineTo(dx,dy):context.moveTo(dx,dy)});context.closePath();context.clip();}context.drawImage(im,r[0],r[1],r[2],r[3],x-r[4]*s,y-r[5]*s,r[2]*s,r[3]*s);context.restore()}
+function sprite(context,mode,f,x,y,factor,avatar=appearance){const p=AVATARS[avatar].actions[mode],r=p.frames[f],s=p.scale*factor,im=paletteCache.get(avatar,variant(avatar),mode,images[avatar+':'+mode]);context.save();const polygon=p.clips?.[f];if(polygon){context.beginPath();polygon.forEach(([px,py],i)=>{const dx=x+(px-r[0]-r[4])*s,dy=y+(py-r[1]-r[5])*s;i?context.lineTo(dx,dy):context.moveTo(dx,dy)});context.closePath();context.clip();}context.drawImage(im,r[0],r[1],r[2],r[3],x-r[4]*s,y-r[5]*s,r[2]*s,r[3]*s);context.restore()}
 // Reuse the battle's idle atlases/anchors and its single animation clock callback.
 const portraits=Object.entries(AVATARS).map(([id,avatar],i)=>({
  id,pack:avatar.actions.idle,canvas:$(id==='lancer'?'portrait':id+'-portrait'),
@@ -94,5 +141,5 @@ function render(){if(!active||!readyAssets)return;const w=960,h=Math.round(w*can
  if($('effects').checked)for(const v of sparks){const age=clock-v.at;if(age>550||v.miss)continue;const p={x:homes[v.id],y:floor},k=1-age/550;ctx.save();ctx.globalAlpha=k;combatGlow(p,size,v.parry?'rgba(145,255,220,':'rgba(255,207,130,',.25*k);if(!reduced){ctx.translate(p.x+(v.id===0?25:-25)*size/240,p.y-135*size/240);ctx.scale(size/240,size/240);ctx.fillStyle=v.parry?'#b5ffe4':'#ffdb9b';if((appearance==='pugilist'||appearance==='custodian')&&v.id===1&&!v.parry){ctx.beginPath();for(let j=0;j<12;j++){const a=j*Math.PI/6,r=j%2?7:24,px=Math.cos(a)*r,py=Math.sin(a)*r;j?ctx.lineTo(px,py):ctx.moveTo(px,py)}ctx.closePath();ctx.fill()}else{ctx.beginPath();ctx.moveTo(-50,-85);ctx.quadraticCurveTo(7,-8,52,82);ctx.quadraticCurveTo(-12,8,-50,-85);ctx.fill();}for(let i=0;i<16;i++){const a=i*2.399,r=12+age*(.08+i%4*.025);ctx.beginPath();ctx.arc(Math.cos(a)*r,Math.sin(a)*r,1+i%3,0,7);ctx.fill()}}ctx.restore()}
  for(const v of labels){const age=clock-v.at;if(age>1300)continue;ctx.save();ctx.globalAlpha=Math.min(1,(1300-age)/300);ctx.fillStyle=v.color;ctx.strokeStyle='#061612';ctx.lineWidth=4;ctx.textAlign='center';ctx.font='bold '+Math.max(16,size*.12)+'px system-ui';const x=homes[v.id]+(v.lane%2?size*.2:-size*.1),y=floor-size*.65-age*.035-v.lane*30;ctx.strokeText(v.value,x,y);ctx.fillText(v.value,x,y);ctx.restore()}labels=labels.filter(v=>clock-v.at<1300);sparks=sparks.filter(v=>clock-v.at<550);}
 function tick(now){const dt=last?Math.min(80,now-last):0;last=now;renderPortraits(dt);if(active&&!paused&&!document.hidden){clock+=dt*1.5;if(current&&isRanged()&&modes[0].name==='attack'&&!modes[0].released&&clock-modes[0].at>=1300){modes[0].released=true;sound('mechanism',.12)}if(current){const age=clock-current.started;if(!current.hit&&age>=current.at){current.hit=true;current.impact()}if(age>=current.duration){current.end();next()}}render()}requestAnimationFrame(tick)}
-document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(!busy&&!result?.finished){choice=b.dataset.action;ui()}});$('confirm').onclick=confirm;for(const id of Object.keys(AVATARS))$(id).onclick=()=>start(id);$('replay').onclick=reset;$('pause').onclick=()=>{paused=!paused;stopSounds();ui()};$('change').onclick=()=>{if(busy)return;active=false;current=null;queue=[];stopSounds();$('battle').hidden=true;$('selection').hidden=false;$(appearance).focus()};$('language').onclick=()=>{en=!en;const url=new URL(location.href);url.searchParams.set('lang',en?'en':'es');history.replaceState(null,'',url);localize()};document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden)stopSounds()});localize();for(const id of Object.keys(AVATARS))load(id+':idle').then(()=>{renderPortraits(0)}).catch(()=>{$('load-status').textContent=tr('Selecciona una apariencia para reintentar la carga.','Choose an appearance to retry loading.')});requestAnimationFrame(tick);
+document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(!busy&&!result?.finished){choice=b.dataset.action;ui()}});$('confirm').onclick=confirm;for(const id of Object.keys(AVATARS))$(id).onclick=()=>start(id);$('replay').onclick=reset;$('pause').onclick=()=>{paused=!paused;stopSounds();ui()};$('change').onclick=()=>{if(busy)return;active=false;current=null;queue=[];stopSounds();$('battle').hidden=true;$('selection').hidden=false;$(appearance).focus()};$('language').onclick=()=>{en=!en;const url=new URL(location.href);url.searchParams.set('lang',en?'en':'es');history.replaceState(null,'',url);localize()};document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden)stopSounds()});mountPalettes();localize();for(const id of Object.keys(AVATARS))load(id+':idle').then(()=>{renderPortraits(0)}).catch(()=>{$('load-status').textContent=tr('Selecciona una apariencia para reintentar la carga.','Choose an appearance to retry loading.')});requestAnimationFrame(tick);
 })();

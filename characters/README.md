@@ -15,6 +15,8 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 - `guardian-duel/melee-fx.js`: efectos independientes de las imágenes.
 - `guardian-duel/arcane-fx.js`: carga y rayo del bastón de Arcanista, sin daño propio.
 - `guardian-duel/crossbow-fx.js`: virote de Rastreadora, anclado al carril del arma.
+- `guardian-duel/palettes.js`: recetas cosméticas; el selector las descubre automáticamente.
+  Ver [VARIANTS.md](VARIANTS.md) para añadir paletas sin duplicar sprites ni personajes.
 
 No editar el inventario generado a mano. Después de cambiar un pack:
 
@@ -28,6 +30,7 @@ node guardian-duel/verify-pugilist.cjs
 node guardian-duel/verify-tracker.cjs
 node guardian-duel/verify-custodian.cjs
 node guardian-duel/verify-wanderer.cjs
+node guardian-duel/verify-palettes.cjs
 ```
 
 La auditoría falla ante archivos ausentes, recortes fuera de imagen, secuencias
