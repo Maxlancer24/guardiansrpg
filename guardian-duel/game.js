@@ -35,6 +35,35 @@ function confirm(){if(busy||!choice||result?.finished)return;busy=true;result=ba
 function next(){current=queue.shift()||null;if(current){current.started=clock;current.begin();return;}if(!result)return;display=copy(result.next);busy=false;if(result.finished){setMode(result.winner,'victory');$('outcome').textContent=result.winner===0?tr('VICTORIA','VICTORY'):tr('DERROTA','DEFEAT');$('outcome').hidden=false;log($('outcome').textContent);}else{intent=battle.chooseEnemy();setMode(0,'idle');setMode(1,'idle')}ui()}
 const sequence=GuardianAnimation.frame;
 function sprite(context,mode,f,x,y,factor,avatar=appearance){const p=AVATARS[avatar].actions[mode],r=p.frames[f],s=p.scale*factor,im=images[avatar+':'+mode];context.save();const polygon=p.clips?.[f];if(polygon){context.beginPath();polygon.forEach(([px,py],i)=>{const dx=x+(px-r[0]-r[4])*s,dy=y+(py-r[1]-r[5])*s;i?context.lineTo(dx,dy):context.moveTo(dx,dy)});context.closePath();context.clip();}context.drawImage(im,r[0],r[1],r[2],r[3],x-r[4]*s,y-r[5]*s,r[2]*s,r[3]*s);context.restore()}
+// Reuse the battle's idle atlases/anchors and its single animation clock callback.
+const portraits=Object.entries(AVATARS).map(([id,avatar],i)=>({
+ id,pack:avatar.actions.idle,canvas:$(id==='lancer'?'portrait':id+'-portrait'),
+ visible:typeof IntersectionObserver==='undefined',age:i*731,frame:-1,ratio:0
+}));
+function renderPortraits(dt){
+ if(document.hidden||$('selection').hidden)return;
+ for(const p of portraits){
+  if(!p.visible||!images[p.id+':idle'])continue;
+  if(!reduced)p.age+=dt*1.5;
+  const f=reduced?0:p.age%7000>=6890?5:sequence(p.pack,p.age,true);
+  const ratio=Math.min(3,globalThis.devicePixelRatio||1);
+  if(p.frame===f&&p.ratio===ratio)continue;
+  const pc=p.canvas.getContext('2d');
+  if(p.ratio!==ratio){p.canvas.width=p.canvas.height=Math.round(340*ratio);p.ratio=ratio;}
+  pc.setTransform(ratio,0,0,ratio,0,0);
+  pc.clearRect(0,0,340,340);
+  pc.imageSmoothingEnabled=true;pc.imageSmoothingQuality='high';
+  sprite(pc,'idle',f,175,320,GuardianScale.factor(p.id,255),p.id);
+  p.frame=f;
+ }
+}
+if(typeof IntersectionObserver!=='undefined'){
+ const observer=new IntersectionObserver(entries=>{
+  for(const entry of entries){const p=portraits.find(p=>p.canvas===entry.target);if(p)p.visible=entry.isIntersecting;}
+  renderPortraits(0);
+ });
+ for(const p of portraits)observer.observe(p.canvas);
+}
 // Same soft aura and curved impact flash as duel/game.js, scaled to this camera.
 function combatGlow(p,size,color,alpha){const scale=size/240,g=ctx.createRadialGradient(p.x,p.y-115*scale,10*scale,p.x,p.y-115*scale,135*scale);g.addColorStop(0,color+alpha+')');g.addColorStop(1,color+'0)');ctx.fillStyle=g;ctx.fillRect(p.x-140*scale,p.y-260*scale,280*scale,290*scale);}
 function drawActor(id,x,y,size){const state=modes[id],age=clock-state.at;let mode=state.name,f=0;
@@ -62,6 +91,6 @@ function render(){if(!active||!readyAssets)return;const w=960,h=Math.round(w*can
  if(appearance==='explorer'&&modes[0].name==='attack'){const age=clock-modes[0].at;if(age>=1300&&age<1440){const s=AVATARS.explorer.actions.attack.scale*GuardianScale.factor('explorer',size),start={x:poses[0].x+(430-224)*s,y:poses[0].y+(172-494)*s},end={x:homes[1],y:floor-size*.55},u=clamp((age-1300)/140),x=start.x+(end.x-start.x)*u,y=start.y+(end.y-start.y)*u;ctx.save();ctx.translate(x,y);ctx.rotate(Math.atan2(end.y-start.y,end.x-start.x));ctx.strokeStyle='#e5c28a';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-28,0);ctx.lineTo(0,0);ctx.stroke();ctx.fillStyle='#f4f3df';ctx.beginPath();ctx.moveTo(4,0);ctx.lineTo(-3,-3);ctx.lineTo(-3,3);ctx.fill();if($('effects').checked&&!reduced){ctx.globalAlpha=.45;ctx.strokeStyle='#a0f4da';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-65,0);ctx.lineTo(-18,0);ctx.stroke()}ctx.restore()}}
  if($('effects').checked)for(const v of sparks){const age=clock-v.at;if(age>550||v.miss)continue;const p={x:homes[v.id],y:floor},k=1-age/550;ctx.save();ctx.globalAlpha=k;combatGlow(p,size,v.parry?'rgba(145,255,220,':'rgba(255,207,130,',.25*k);if(!reduced){ctx.translate(p.x+(v.id===0?25:-25)*size/240,p.y-135*size/240);ctx.scale(size/240,size/240);ctx.fillStyle=v.parry?'#b5ffe4':'#ffdb9b';if(appearance==='pugilist'&&v.id===1&&!v.parry){ctx.beginPath();for(let j=0;j<12;j++){const a=j*Math.PI/6,r=j%2?7:24,px=Math.cos(a)*r,py=Math.sin(a)*r;j?ctx.lineTo(px,py):ctx.moveTo(px,py)}ctx.closePath();ctx.fill()}else{ctx.beginPath();ctx.moveTo(-50,-85);ctx.quadraticCurveTo(7,-8,52,82);ctx.quadraticCurveTo(-12,8,-50,-85);ctx.fill();}for(let i=0;i<16;i++){const a=i*2.399,r=12+age*(.08+i%4*.025);ctx.beginPath();ctx.arc(Math.cos(a)*r,Math.sin(a)*r,1+i%3,0,7);ctx.fill()}}ctx.restore()}
  for(const v of labels){const age=clock-v.at;if(age>1300)continue;ctx.save();ctx.globalAlpha=Math.min(1,(1300-age)/300);ctx.fillStyle=v.color;ctx.strokeStyle='#061612';ctx.lineWidth=4;ctx.textAlign='center';ctx.font='bold '+Math.max(16,size*.12)+'px system-ui';const x=homes[v.id]+(v.lane%2?size*.2:-size*.1),y=floor-size*.65-age*.035-v.lane*30;ctx.strokeText(v.value,x,y);ctx.fillText(v.value,x,y);ctx.restore()}labels=labels.filter(v=>clock-v.at<1300);sparks=sparks.filter(v=>clock-v.at<550);}
-function tick(now){const dt=last?Math.min(80,now-last):0;last=now;if(active&&!paused&&!document.hidden){clock+=dt*1.5;if(current&&isRanged()&&modes[0].name==='attack'&&!modes[0].released&&clock-modes[0].at>=1300){modes[0].released=true;sound('mechanism',.12)}if(current){const age=clock-current.started;if(!current.hit&&age>=current.at){current.hit=true;current.impact()}if(age>=current.duration){current.end();next()}}render()}requestAnimationFrame(tick)}
-document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(!busy&&!result?.finished){choice=b.dataset.action;ui()}});$('confirm').onclick=confirm;for(const id of Object.keys(AVATARS))$(id).onclick=()=>start(id);$('replay').onclick=reset;$('pause').onclick=()=>{paused=!paused;stopSounds();ui()};$('change').onclick=()=>{if(busy)return;active=false;current=null;queue=[];stopSounds();$('battle').hidden=true;$('selection').hidden=false;$(appearance).focus()};$('language').onclick=()=>{en=!en;const url=new URL(location.href);url.searchParams.set('lang',en?'en':'es');history.replaceState(null,'',url);localize()};document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden)stopSounds()});localize();for(const id of Object.keys(AVATARS))load(id+':idle').then(()=>{const p=$(id==='lancer'?'portrait':id+'-portrait'),pc=p.getContext('2d'),ratio=Math.min(3,globalThis.devicePixelRatio||1);p.width=p.height=Math.round(340*ratio);pc.setTransform(ratio,0,0,ratio,0,0);pc.imageSmoothingEnabled=true;pc.imageSmoothingQuality='high';sprite(pc,'idle',0,175,320,GuardianScale.factor(id,255),id)}).catch(()=>{$('load-status').textContent=tr('Selecciona una apariencia para reintentar la carga.','Choose an appearance to retry loading.')});requestAnimationFrame(tick);
+function tick(now){const dt=last?Math.min(80,now-last):0;last=now;renderPortraits(dt);if(active&&!paused&&!document.hidden){clock+=dt*1.5;if(current&&isRanged()&&modes[0].name==='attack'&&!modes[0].released&&clock-modes[0].at>=1300){modes[0].released=true;sound('mechanism',.12)}if(current){const age=clock-current.started;if(!current.hit&&age>=current.at){current.hit=true;current.impact()}if(age>=current.duration){current.end();next()}}render()}requestAnimationFrame(tick)}
+document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{if(!busy&&!result?.finished){choice=b.dataset.action;ui()}});$('confirm').onclick=confirm;for(const id of Object.keys(AVATARS))$(id).onclick=()=>start(id);$('replay').onclick=reset;$('pause').onclick=()=>{paused=!paused;stopSounds();ui()};$('change').onclick=()=>{if(busy)return;active=false;current=null;queue=[];stopSounds();$('battle').hidden=true;$('selection').hidden=false;$(appearance).focus()};$('language').onclick=()=>{en=!en;const url=new URL(location.href);url.searchParams.set('lang',en?'en':'es');history.replaceState(null,'',url);localize()};document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden)stopSounds()});localize();for(const id of Object.keys(AVATARS))load(id+':idle').then(()=>{renderPortraits(0)}).catch(()=>{$('load-status').textContent=tr('Selecciona una apariencia para reintentar la carga.','Choose an appearance to retry loading.')});requestAnimationFrame(tick);
 })();

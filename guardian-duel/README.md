@@ -8,6 +8,12 @@ Independent local demo at `/guardian-duel/` (Spanish) or `/guardian-duel/?lang=e
 Does not replace `/duel/`, `/team-battle/` or server-authoritative Discord rooms.
 No account writes, rewards, analytics, feedback submission or character persistence.
 
+The appearance selector plays each character's existing idle at 1.5x with
+staggered blinking and the same anatomical scale. It shares the main RAF loop,
+repaints only on frame/DPR changes and pauses offscreen, in battle or in a hidden
+tab. Reduced-motion users get the neutral still pose. No additional image assets
+or animation downloads. Checks: `node guardian-duel/verify-portraits.cjs`.
+
 ## Playable appearances
 
 Lancer, Explorer, Duelist, Sentinel, Vanguard, Arcanist and Pugilist. The other three static concepts are not playable yet. Appearance is
