@@ -20,7 +20,7 @@ timing and Hollow remain at 1.5x; the combat clock is unchanged.
 
 ## Playable appearances
 
-Lancer, Explorer, Duelist, Sentinel, Vanguard, Arcanist, Pugilist and Tracker. Wanderer and Custodian are the two remaining static concepts. Appearance is
+Lancer, Explorer, Duelist, Sentinel, Vanguard, Arcanist, Pugilist, Tracker and Custodian. Wanderer is the remaining static concept. Appearance is
 independent of STR/AGI/CON and future equipped weapons. This demo uses 12/10/14
 against Hollow 10/6/15. It reuses PracticeRules for ATTACK/DEFEND/REST and explicitly
 rejects SPECIAL rather than borrowing Jessie's active. Focus activation art is
@@ -30,7 +30,7 @@ used for a successful rest. Server combat integration remains a separate task.
 
 `scale.js` calibrates standing anatomy to the existing protagonist renderers.
 At 1280 scene units, crown-to-sole measurements are approximately Jessie 214
-(without the ponytail), Garrick 230, Zoe 241. Lancer, Duelist and Arcanist target 230, Explorer 225, Sentinel and Tracker 228, Vanguard 235, Pugilist 232.
+(without the ponytail), Garrick 230, Zoe 241. Lancer, Duelist and Arcanist target 230, Explorer 225, Sentinel and Tracker 228, Vanguard and Custodian 235, Pugilist 232.
 Weapons never participate in this measurement. One uniform factor applies to
 every action, anchored at the feet; no per-frame stretching or stance normalization.
 Projectile release uses the same factor. Mobile uses the protagonist camera's
@@ -191,3 +191,21 @@ ranged actions and registered projectile timing. Headless Chrome checks desktop
 1280x1000 and emulated mobile 390x844/DPR2 with no JS or asset-loading errors.
 No physical mobile-device or listening test claimed. New pack documentation:
 `assets/tracker-v1/PROMPTS.md` and `assets/tracker-v1/REVIEW.md`.
+
+## Custodian v1
+
+Roster concept 10. Nine atlases / 52 poses; mature grey-haired, bearded Guardian
+in olive/bronze, one warhammer. Registered feet, readable two-handed strike,
+defensive parry without early counterattack, hit/rest/focus, approach and retreat,
+full chest-salute victory and corrected consistent-direction collapse.
+`custodian.js` defines source rectangles/masks, 235-unit anatomical height and
+explicit hammer reach. `melee-fx.js` follows both contact/follow-through head
+positions with a broad amber trail and weighted glint; compact impact burst.
+Existing single 1235ms melee damage event, sounds/music and rules are unchanged.
+Idle remains 1x; all other actions remain 1.5x. No bot restart or character writes.
+
+Current regression: 81 active atlases, 59 seeded rules battles, 72 complete client
+battles for nine appearances, full victory cycles and six registered melee effects.
+Headless Chrome desktop and emulated mobile verify all nine portraits, selection,
+actions, ES/EN, asset loading and layout. Run `verify-custodian.cjs` for specific
+feet/reach/weapon-effect checks. Sources/prompts and QA in `assets/custodian-v1/`.

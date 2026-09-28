@@ -7,7 +7,8 @@
   duelist:{kind:'thrust',color:'237,209,255',width:6,blade:{2:[[542,535],[720,530]],3:[[1125,539],[1237,537]]}},
   sentinel:{kind:'slash',color:'193,224,255',width:22,blade:{2:[[1403,298],[1527,418]],3:[[446,767],[600,875]]}},
   vanguard:{kind:'slash',color:'255,204,129',width:32,blade:{2:[[1361,329],[1519,465]],3:[[375,815],[556,955]]}},
-  pugilist:{kind:'punch',color:'255,211,143',width:18,blade:{2:[[1435,129],[1501,129]],3:[[438,640],[507,640]]}}
+  pugilist:{kind:'punch',color:'255,211,143',width:18,blade:{2:[[1435,129],[1501,129]],3:[[438,640],[507,640]]}},
+  custodian:{kind:'hammer',color:'255,202,121',width:38,blade:{2:[[1288,260],[1495,325]],3:[[364,801],[540,940]]}}
  };
  const clamp=n=>Math.max(0,Math.min(1,n));
  const rgba=(color,a)=>'rgba('+color+','+clamp(a)+')';
@@ -51,7 +52,7 @@
   const g=sample(input);if(!g)return false;
   ctx.save();ctx.globalCompositeOperation='lighter';
   if(g.reduced){glint(ctx,g.tip.x,g.tip.y,7*g.scale,g.color,g.alpha*.4);ctx.restore();return true;}
-  if(g.kind==='slash'){
+  if(g.kind==='slash'||g.kind==='hammer'){
    ribbon(ctx,g,g.width*1.8,g.alpha*.12);
    ribbon(ctx,g,g.width,g.alpha*.63);
    ribbon(ctx,g,g.width*.18,g.alpha*.9);
@@ -66,7 +67,7 @@
    ctx.bezierCurveTo(-length*.4,-w*.35,-25*g.scale,-w,18*g.scale,0);
    ctx.bezierCurveTo(-25*g.scale,w,-length*.4,w*.35,-length,0);ctx.fill();ctx.restore();
   }
-  glint(ctx,g.tip.x,g.tip.y,(g.kind==='slash'?10:12)*g.scale,g.color,g.alpha*.85);
+  glint(ctx,g.tip.x,g.tip.y,(g.kind==='hammer'?18:g.kind==='slash'?10:12)*g.scale,g.color,g.alpha*.85);
   // Deterministic tiny tapered flecks drift with the weapon, not confetti or rings.
   for(let i=0;i<5;i++){
    const a=g.angle+(i-2)*.23,d=(10+g.t*(45+i*9))*g.scale;
