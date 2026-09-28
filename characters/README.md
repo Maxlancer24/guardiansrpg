@@ -8,12 +8,13 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 
 - `catalog.json`: identidad, nombre ES/EN, grupo y estado de incorporación.
 - `inventory.generated.json`: archivo **exacto** usado por cada acción de las
-  siete apariencias, dimensiones, número de frames, secuencia, escala y SHA-256.
+  ocho apariencias, dimensiones, número de frames, secuencia, escala y SHA-256.
   Se deriva de los manifiestos ejecutados, no de nombres de carpeta ni versiones supuestas.
 - `guardian-duel/<id>.js`: recortes, anclajes de pies, máscaras y tiempos activos.
 - `guardian-duel/scale.js`: tamaño anatómico; `animation.js`: reproducción.
 - `guardian-duel/melee-fx.js`: efectos independientes de las imágenes.
 - `guardian-duel/arcane-fx.js`: carga y rayo del bastón de Arcanista, sin daño propio.
+- `guardian-duel/crossbow-fx.js`: virote de Rastreadora, anclado al carril del arma.
 
 No editar el inventario generado a mano. Después de cambiar un pack:
 
@@ -24,6 +25,7 @@ node guardian-duel/verify.cjs
 node guardian-duel/verify-melee-fx.cjs
 node guardian-duel/verify-arcanist.cjs
 node guardian-duel/verify-pugilist.cjs
+node guardian-duel/verify-tracker.cjs
 ```
 
 La auditoría falla ante archivos ausentes, recortes fuera de imagen, secuencias
@@ -34,8 +36,8 @@ su inventario. No sustituye la revisión visual en movimiento.
 
 | Grupo | Personajes | Estado |
 | --- | --- | --- |
-| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
-| Conceptos pendientes | Rastreadora, Errante, Custodio | Diseño estático, no seleccionables ni packs animados |
+| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista, Rastreadora | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
+| Conceptos pendientes | Errante, Custodio | Diseño estático, no seleccionables ni packs animados |
 | Protagonistas de historia | Jessie, Garrick, Zoe | Integrados en sus pruebas existentes; no son apariencias para jugadores |
 
 Los protagonistas conservan sus cargadores actuales. Sus rutas fuente están
@@ -45,7 +47,7 @@ Hollow es un NPC compartido, no un personaje seleccionable del catálogo.
 
 ## Carpetas y versiones
 
-Los siete Guardianes ya tienen manifiestos separados. Lancero es una excepción
+Los ocho Guardianes ya tienen manifiestos separados. Lancero es una excepción
 histórica: combina `guardian-duel/assets/*.png` con `assets/lancer-refined-v1/`.
 El inventario elimina la ambigüedad sin mover archivos que usa la web.
 Para personajes nuevos: `guardian-duel/assets/<id>-v1/` y `guardian-duel/<id>.js`.
@@ -67,7 +69,8 @@ Usar [la ficha de incorporación](CHARACTER-TEMPLATE.md). Nueve acciones:
 `idle`, `attack`, `guard`, `hurt`, `rest`, `motion`, `activation`, `victory`, `defeat`.
 Base actual: seis dibujos por acción salvo `hurt` (cuatro); no imponer esos números
 a protagonistas ni confundir dibujos con repeticiones de la secuencia.
-Los tiempos se definen por acción; la velocidad global actual es 1.5x.
+Rastreadora usa ocho poses de ataque para incluir la recarga. Los tiempos se definen
+por acción: idle a 1× tanto en combate como en selector, demás acciones a 1,5×.
 
 Mantener diseño, manos, arma, vestimenta y proporciones coherentes. PNG con alfa
 real, sin efectos pintados sobre el sprite. Preferir celdas de 512 px para nuevas

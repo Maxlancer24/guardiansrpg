@@ -21,7 +21,7 @@ function setup(reduced=false,observer=true){
  return{context,draws,clears,elements,ids,observed,visible(id,value){callback([{target:elements[id==='lancer'?'portrait':id+'-portrait'],isIntersecting:value}])}};
 }
 const a=setup();
-assert.equal(a.observed.length,7);
+assert.equal(a.observed.length,a.ids.length);
 a.context.review.step(80);assert.equal(a.draws.length,0,'no offscreen painting');
 a.visible('pugilist',true);assert.equal(a.draws.length,1);
 assert.equal(a.elements['pugilist-portrait'].width,680);
@@ -47,10 +47,10 @@ count=a.draws.length;a.context.devicePixelRatio=3;a.context.review.step(0);
 assert.equal(a.elements['pugilist-portrait'].width,1020);
 assert.equal(a.draws.length,count+1,'DPR changes repaint the same frame');
 const b=setup(true,false);for(let i=0;i<100;i++)b.context.review.step(80);
-assert.equal(b.draws.length,7);assert(b.draws.every(d=>d.f===0),'reduced motion stays static');
+assert.equal(b.draws.length,b.ids.length);assert(b.draws.every(d=>d.f===0),'reduced motion stays static');
 const c=setup(false,false);for(let i=0;i<30;i++)c.context.review.step(80);
-assert.equal(new Set(c.draws.map(d=>d.id)).size,7,'fallback works without IntersectionObserver');
+assert.equal(new Set(c.draws.map(d=>d.id)).size,c.ids.length,'fallback works without IntersectionObserver');
 const d=setup(false,false),ages=d.context.review.portraits.map(p=>p.age);
 d.context.review.step(80);
 d.context.review.portraits.forEach((p,i)=>assert.equal(p.age-ages[i],80,'every selector idle uses real-time 1x'));
-console.log('PASS: seven idle portraits, anchors, frame deduplication/clearing, visibility pause/resume, DPR and reduced motion.');
+console.log('PASS: all idle portraits, anchors, frame deduplication/clearing, visibility pause/resume, DPR and reduced motion.');

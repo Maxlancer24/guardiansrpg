@@ -6,7 +6,7 @@ const avatars=Object.fromEntries(Object.keys(scale.profiles).map(id=>[id,{action
 for(const [id,{actions}] of Object.entries(avatars)){
  const ctx={clock:0,appearance:id,modes:[{name:'idle',at:0}],display:{actors:[{}]},busy:true,
   AVATARS:avatars,GuardianScale:scale,GuardianAnimation:animation,sequence:animation.frame,
-  $:()=>({checked:false}),isRanged:()=>id==='explorer'||id==='arcanist',ctx:{},
+  $:()=>({checked:false}),isRanged:()=>id==='explorer'||id==='arcanist'||id==='tracker',ctx:{},
   clamp:n=>Math.max(0,Math.min(1,n)),ease:n=>Math.max(0,Math.min(1,n)),
   sprite(context,mode,frame){ctx.drawn={mode,frame}},setMode(){}};
  vm.createContext(ctx);vm.runInContext(source,ctx);
@@ -28,9 +28,9 @@ for(const [id,{actions}] of Object.entries(avatars)){
   for(const age of [200,2400,2540]){
    ctx.clock=age;ctx.drawActor(0,270,480,230);
    assert.equal(ctx.drawn.mode,'idle');
-   assert.equal(ctx.drawn.frame,animation.frame(actions.idle,(age<360?age:age-1940)/1.5,true),'ranged idle segments at 1x');
+   assert.equal(ctx.drawn.frame,animation.frame(actions.idle,(age<360?age:age-360-animation.duration(actions.attack))/1.5,true),'ranged idle segments at 1x');
   }
  }
 }
 assert(game.includes('clock+=dt*1.5'),'combat clock stays at 1.5x');
-console.log('PASS: all seven combat idles and blinking at 1x; rest, hurt, victory, attack and damage clock remain at 1.5x.');
+console.log('PASS: all eight combat idles and blinking at 1x; rest, hurt, victory, attack and damage clock remain at 1.5x.');

@@ -20,7 +20,7 @@ timing and Hollow remain at 1.5x; the combat clock is unchanged.
 
 ## Playable appearances
 
-Lancer, Explorer, Duelist, Sentinel, Vanguard, Arcanist and Pugilist. The other three static concepts are not playable yet. Appearance is
+Lancer, Explorer, Duelist, Sentinel, Vanguard, Arcanist, Pugilist and Tracker. Wanderer and Custodian are the two remaining static concepts. Appearance is
 independent of STR/AGI/CON and future equipped weapons. This demo uses 12/10/14
 against Hollow 10/6/15. It reuses PracticeRules for ATTACK/DEFEND/REST and explicitly
 rejects SPECIAL rather than borrowing Jessie's active. Focus activation art is
@@ -30,7 +30,7 @@ used for a successful rest. Server combat integration remains a separate task.
 
 `scale.js` calibrates standing anatomy to the existing protagonist renderers.
 At 1280 scene units, crown-to-sole measurements are approximately Jessie 214
-(without the ponytail), Garrick 230, Zoe 241. Lancer, Duelist and Arcanist target 230, Explorer 225, Sentinel 228, Vanguard 235, Pugilist 232.
+(without the ponytail), Garrick 230, Zoe 241. Lancer, Duelist and Arcanist target 230, Explorer 225, Sentinel and Tracker 228, Vanguard 235, Pugilist 232.
 Weapons never participate in this measurement. One uniform factor applies to
 every action, anchored at the feet; no per-frame stretching or stance normalization.
 Projectile release uses the same factor. Mobile uses the protagonist camera's
@@ -169,3 +169,25 @@ Sources/prompts: `assets/pugilist-v1/PROMPTS.md`; calibration/QA:
 `assets/pugilist-v1/REVIEW.md`. Regression now covers 63 active atlases and
 56 client battles for seven appearances; run `node guardian-duel/verify-pugilist.cjs`
 for fist reach, feet registration, full defeat and timing checks.
+
+## Tracker v1
+
+Roster concept 07: copper braid, blue-grey cape, leather and olive tunic, crossbow.
+Nine atlases / 54 poses include an eight-pose attack with aiming, release, recoil,
+reload and return. The ranged actor never advances or jumps backward when firing.
+The complete attack sequence now determines the return-to-idle time; Explorer
+and Arcanist retain their existing 1940ms boundary, Tracker returns at 2180ms.
+The shared ranged turn remains 2600ms with one damage event at 1440ms.
+
+`crossbow-fx.js` starts a separate bolt at the registered rail socket of firing
+frame 2 at 1300ms and reaches the target at 1440ms. Optional soft trail; the bolt
+stays visible with extra effects disabled. Existing audio and music are reused.
+Guard/contact is defensive only; a counterattack is a separate rules event.
+Idle runs at 1x in both selector and battle, all other actions remain at 1.5x.
+
+Current checks: 72 active atlases, 59 seeded rules battles, 64 complete animated
+client battles across eight appearances, full repeating victories, stationary
+ranged actions and registered projectile timing. Headless Chrome checks desktop
+1280x1000 and emulated mobile 390x844/DPR2 with no JS or asset-loading errors.
+No physical mobile-device or listening test claimed. New pack documentation:
+`assets/tracker-v1/PROMPTS.md` and `assets/tracker-v1/REVIEW.md`.

@@ -2379,9 +2379,373 @@
     },
     {
       "id": "tracker",
-      "status": "concept-only",
-      "concept": null,
-      "actions": {}
+      "status": "demo-ready",
+      "manifest": "guardian-duel/tracker.js",
+      "manifestSha256": "a6d686046facf784c0a665e385e3fb6cbcb6bce0c162b29b9f894f51a1a49a8d",
+      "scale": {
+        "sourceBodyHeight": 500,
+        "idleScale": 0.67,
+        "targetHeight": 228
+      },
+      "weaponEffect": null,
+      "presentationFiles": [
+        {
+          "file": "guardian-duel/crossbow-fx.js",
+          "sha256": "6cde27666e43ac8ca7e2838c99e363c62c874ab54c8e00eddbc28ca42ef65420"
+        }
+      ],
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/tracker-v1/idle-v2.png",
+          "sha256": "2f752a5289c9b267b3a6ecde87fc76b797474be9bfde5a1539a64be986788d00",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              550
+            ],
+            [
+              1,
+              350
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              450
+            ],
+            [
+              0,
+              550
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/tracker-v1/attack.png",
+          "sha256": "9683c77b2ea30097cc3e65cbb8c22b37bf04d181489225a8d068df1572c3d36b",
+          "dimensions": [
+            1774,
+            887
+          ],
+          "frameCount": 8,
+          "sequence": [
+            [
+              0,
+              400
+            ],
+            [
+              1,
+              540
+            ],
+            [
+              2,
+              160
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              145
+            ],
+            [
+              5,
+              145
+            ],
+            [
+              6,
+              145
+            ],
+            [
+              7,
+              145
+            ]
+          ],
+          "settled": null,
+          "scale": 0.775,
+          "hasClipping": false
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/tracker-v1/guard-v2.png",
+          "sha256": "4194fe9f674d265cfe6bd39cf086473c752401d9c4e4d436b0bbe7c8e2f8eb77",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              250
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/tracker-v1/hurt.png",
+          "sha256": "a97b9bc3af19ac545989c15b847b3897c5b27c9552493e9f6d48e061a9e29ba9",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              100
+            ],
+            [
+              1,
+              150
+            ],
+            [
+              2,
+              200
+            ],
+            [
+              3,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.55,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/tracker-v1/rest.png",
+          "sha256": "c9a2ecbd58938bd6f095131450e059ac18f24840bcf5899d91b1ac952137460e",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              360
+            ],
+            [
+              2,
+              480
+            ],
+            [
+              3,
+              360
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.69,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/tracker-v1/motion.png",
+          "sha256": "64a4dde7676f3efa5b757b620e166e8ea87ed1998097bd319df9ebb9f2f50db2",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              220
+            ],
+            [
+              4,
+              220
+            ],
+            [
+              5,
+              220
+            ]
+          ],
+          "settled": null,
+          "scale": 0.69,
+          "hasClipping": false
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/tracker-v1/activation.png",
+          "sha256": "cb69e4423fe54cbd75449a4a705fe750d8b334fe488a6fa9b554ce45f2e0fe86",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.684,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/tracker-v1/victory.png",
+          "sha256": "977c312493ccc95d14a0be30ee7c22bf8f2742764b0a1d1bbccb81cdcee52cca",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              450
+            ],
+            [
+              1,
+              450
+            ],
+            [
+              2,
+              700
+            ],
+            [
+              3,
+              550
+            ],
+            [
+              4,
+              650
+            ],
+            [
+              5,
+              100
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                0,
+                1800
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.67,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/tracker-v1/defeat.png",
+          "sha256": "846651be118d320c357e682ec9a8fcf5f49e6950e576197e543788cc871fbc63",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              170
+            ],
+            [
+              1,
+              240
+            ],
+            [
+              2,
+              330
+            ],
+            [
+              3,
+              370
+            ],
+            [
+              4,
+              320
+            ],
+            [
+              5,
+              800
+            ]
+          ],
+          "settled": null,
+          "scale": 0.63,
+          "hasClipping": false
+        }
+      }
     },
     {
       "id": "pugilist",
@@ -2841,6 +3205,7 @@
     "guardian-duel/assets/guard.png",
     "guardian-duel/assets/idle.png",
     "guardian-duel/assets/sentinel-v1/idle.png",
+    "guardian-duel/assets/tracker-v1/idle.png",
     "guardian-duel/assets/vanguard-v1/victory.png"
   ],
   "retentionWarning": "Not selected by these manifests does NOT mean unused globally. Do not delete without checking other consumers."
