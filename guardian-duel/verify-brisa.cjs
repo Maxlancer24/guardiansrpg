@@ -11,6 +11,9 @@ for(const [key,pack]of Object.entries(p)){
 assert(p.idle.authoredBlink&&p.idle.loop);
 assert.equal(p.idle.sequence.filter(([f])=>f===5).length,1);
 assert.equal(a.duration(p.attack),1420);
+assert.equal(p.attack.scale,p.idle.scale,'attack must not enlarge her body');
+assert.equal(p.attack.frameScale,undefined,'no per-frame inflation');
+for(const f of [2,3,4])assert(p.attack.blade[f][1][0]>p.attack.blade[f][0][0],'forward blade through contact and recovery');
 assert.equal(a.frame(p.attack,874),2);assert.equal(a.frame(p.attack,875),3);
 assert.equal(p.attack.markers[0].at+360,1235);
 assert.equal(a.duration(p.hurt),650);assert.equal(a.duration(p.activation),1420);
@@ -21,7 +24,7 @@ for(const width of [390,700,1240]){
  const size=s.sceneSize(960,width),factor=s.factor('brisa',size);
  const input={id:'brisa',age:1235,frame:3,pack:p.attack,factor,x:300,y:450};
  const effect=fx.sample(input);assert(effect&&effect.kind==='sweep');
- assert(Math.abs(effect.tip.x-(300+(1244-627-307)*p.attack.scale*factor))<1e-8);
+ assert(Math.abs(effect.tip.x-(300+(578-262.5)*p.attack.scale*factor))<1e-8);
  assert.equal(fx.sample({...input,enabled:false}),null);
  const height=492*p.idle.scale*factor;
  assert(Math.abs(height-228*.75*(width<=700?1.5:1))<1e-8);

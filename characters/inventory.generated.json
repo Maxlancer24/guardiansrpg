@@ -7,7 +7,7 @@
       "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/brisa.js",
-      "manifestSha256": "c76a57e8019365d012469abf5f95fee7583541bc3a0547203879c04cc600726b",
+      "manifestSha256": "dedcf5bf0c6abeb75c6b4102ac0b1818c2d267352aa0ca7cac4b55f9ff8a8e4c",
       "scale": {
         "sourceBodyHeight": 492,
         "idleScale": 1,
@@ -20,32 +20,32 @@
         "blade": {
           "2": [
             [
-              326,
-              570
+              1290,
+              137
             ],
             [
-              95,
-              608
+              1412,
+              23
             ]
           ],
           "3": [
             [
-              1051,
-              530
+              375,
+              629
             ],
             [
-              1244,
-              541
+              578,
+              630
             ]
           ],
           "4": [
             [
-              310,
-              980
+              881,
+              706
             ],
             [
-              103,
-              987
+              1056,
+              809
             ]
           ]
         }
@@ -144,11 +144,11 @@
           "hasClipping": false
         },
         "attack": {
-          "asset": "/guardian-duel/assets/brisa-v1/attack-circular-v3.png",
-          "sha256": "37c1b229140b9f352107863af904f7b7800dad093afc9b17b3cbf28099ff3604",
+          "asset": "/guardian-duel/assets/brisa-v1/attack-right-hand-v4.png",
+          "sha256": "3b555a8bed40ca4f214e98635e4dfac7854f3f8adddabc7cd580ad56f28b9fdd",
           "dimensions": [
-            1254,
-            1254
+            1536,
+            1024
           ],
           "frameCount": 6,
           "sequence": [
@@ -178,7 +178,7 @@
             ]
           ],
           "settled": null,
-          "scale": 1.2647814910025708,
+          "scale": 1,
           "frameScale": null,
           "hasClipping": false
         },
@@ -882,7 +882,7 @@
       "kind": "story-protagonist",
       "status": "demo-ready",
       "manifest": "guardian-duel/guardian.js",
-      "manifestSha256": "9b96dec18eb8026922d47a4a5888a3d467fc51b45c7a158693645f6141f7a655",
+      "manifestSha256": "9b97b65a8ff729acadefe5a0ad86484d43a90beb2e4e6b5f6631c8b57d36809c",
       "scale": {
         "sourceBodyHeight": 495,
         "idleScale": 0.67,
@@ -1294,11 +1294,11 @@
           "hasClipping": false
         },
         "attack2": {
-          "asset": "/guardian-duel/assets/guardian-v1/attack-b-thrust-v4.png",
-          "sha256": "aa4591ab6a2a26ed0dc88b44308998f483107e99ffb9d975b993688507996fdf",
+          "asset": "/guardian-duel/assets/guardian-v1/attack-b-identity-v5.png",
+          "sha256": "a168382a547e4112c963924d4e0b972dbff3e7b508e96080208728a74904e6cc",
           "dimensions": [
-            1254,
-            1254
+            1536,
+            1024
           ],
           "frameCount": 6,
           "sequence": [
@@ -1328,15 +1328,8 @@
             ]
           ],
           "settled": null,
-          "scale": 0.9669096209912538,
-          "frameScale": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1.078616352201258
-          ],
+          "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -5544,6 +5537,7 @@
     "guardian-duel/assets/alchemist-v1/defeat.png",
     "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",
+    "guardian-duel/assets/brisa-v1/attack-circular-v3.png",
     "guardian-duel/assets/brisa-v1/attack-v2.png",
     "guardian-duel/assets/custodian-v1/activation.png",
     "guardian-duel/assets/custodian-v1/attack.png",
@@ -5557,6 +5551,7 @@
     "guardian-duel/assets/duelist-v1/attack.png",
     "guardian-duel/assets/guard.png",
     "guardian-duel/assets/guardian-v1/activation-draft.png",
+    "guardian-duel/assets/guardian-v1/attack-b-thrust-v4.png",
     "guardian-duel/assets/guardian-v1/attack-b-v3.png",
     "guardian-duel/assets/guardian-v1/attack-b.png",
     "guardian-duel/assets/guardian-v1/idle.png",

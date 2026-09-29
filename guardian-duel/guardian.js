@@ -32,7 +32,7 @@ const GUARDIAN_ACTIONS=(()=>{
  p.attack.blade={2:[[1335,187],[1524,233]],3:[[409,801],[589,919]]};
  p.attack.markers=[{at:875,event:'visual-impact',frame:2,point:p.attack.blade[2][1]}];
  // Alternate attack is a committed thrust, not a reversed slash. First attack unchanged.
- p.attack2={"src":"/guardian-duel/assets/guardian-v1/attack-b-thrust-v4.png","scale":0.9669096209912538,"frames":[[0,0,645,470,312,428],[645,0,609,470,264.5,429],[0,470,645,370,254.5,327],[645,470,609,370,227,327],[0,840,645,414,300,350],[645,840,609,414,301.5,352]],"frameScale":[1,1,1,1,1,1.078616352201258],"sequence":[[0,300],[1,575],[2,110],[3,150],[4,170],[5,115]],"loop":false,"reach":370.5,"windupBlade":[[917,205],[1147,205]],"blade":{"2":[[430,586],[625,586]],"3":[[1040,586],[1220,586]]},"effectKind":"thrust","effectWidth":9,"markers":[{"at":875,"event":"visual-impact","frame":2,"point":[625,586]}]};
+ p.attack2={"src":"/guardian-duel/assets/guardian-v1/attack-b-identity-v5.png","scale":0.67,"frames":[[0,0,512,512,258,505],[512,0,460,512,201,507],[972,0,564,512,160.5,507],[0,512,618,512,212.5,492],[618,512,452,512,172.5,495],[1070,512,466,512,176.5,505]],"sequence":[[0,300],[1,575],[2,110],[3,150],[4,170],[5,115]],"loop":false,"reach":381.5,"windupBlade":[[700,178],[970,178]],"blade":{"2":[[1280,137],[1514,138]],"3":[[380,649],[609,649]]},"effectKind":"thrust","effectWidth":9,"markers":[{"at":875,"event":"visual-impact","frame":2,"point":[1514,138]}]};
  p.victory.settled={sequence:[[0,1400],[5,110],[0,1200]],loop:true};
  return p;
 })();
