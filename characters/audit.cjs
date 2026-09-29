@@ -53,7 +53,7 @@ assert.deepEqual(available,runtime,'catalog matches current demo roster');
 for(const id of Object.keys(fx.profiles))assert(available.includes(id));
 for(const [id,profile]of Object.entries(palettes)){assert(available.includes(id));paletteEngine.validate(profile);}
 function pngs(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?pngs(path.join(dir,e.name)):e.name.endsWith('.png')?[path.relative(root,path.join(dir,e.name)).split(path.sep).join('/')]:[])}
-const data={schemaVersion:1,scope:'Twelve player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.',characters,
+const data={schemaVersion:1,scope:'Thirteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.',characters,
  paletteSystem:{definition:'guardian-duel/palettes.js',definitionSha256:hash(fs.readFileSync(local('guardian-duel/palettes.js'))),engine:'guardian-duel/palette-engine.js',engineSha256:hash(fs.readFileSync(local('guardian-duel/palette-engine.js'))),profiles:palettes},
  retainedAssetsNotSelectedByGuardianManifests:pngs(path.join(root,'guardian-duel/assets')).filter(p=>!active.has(p)).sort(),
  retentionWarning:'Not selected by these manifests does NOT mean unused globally. Do not delete without checking other consumers.'};

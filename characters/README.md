@@ -8,7 +8,7 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 
 - `catalog.json`: identidad, nombre ES/EN, grupo y estado de incorporación.
 - `inventory.generated.json`: archivo **exacto** usado por cada acción de las
-  doce apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
+  trece apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
   Se deriva de los manifiestos ejecutados, no de nombres de carpeta ni versiones supuestas.
 - `guardian-duel/<id>.js`: recortes, anclajes de pies, máscaras y tiempos activos.
 - `guardian-duel/scale.js`: tamaño anatómico; `animation.js`: reproducción.
@@ -57,7 +57,7 @@ Hollow es un NPC compartido, no un personaje seleccionable del catálogo.
 
 ## Carpetas y versiones
 
-Las doce apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
+Las trece apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
 histórica: combina `guardian-duel/assets/*.png` con `assets/lancer-refined-v1/`.
 El inventario elimina la ambigüedad sin mover archivos que usa la web.
 Para personajes nuevos: `guardian-duel/assets/<id>-v1/` y `guardian-duel/<id>.js`.

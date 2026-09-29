@@ -25,3 +25,12 @@ Frame 4 bottom-left: gentle exhale, shoulders return, tips relax lower; torso he
 Frame 5 bottom-middle: return toward neutral, hair and sash trailing the motion slightly. Eyes open and same face.
 Frame 6 bottom-right: exact neutral Frame1 pose with eyelids CLOSED for a brief blink; do not bow or tilt head, no different expression, no new hair.
 IMPORTANT: visible subtle animation of cloth and breath, but extremely stable identity and blade/hand continuity. No new buttons, changing boots or different sleeve shapes. Do not copy Yasuo's outfit or high hairstyle. All six sprites fully separated, no overlap and no clipped sword.
+
+## Complete action set
+
+Built-in image_gen, eight action sheets generated separately from the approved idle.
+Full prompt set and final attack layout correction:
+[prompts.json](/guardian-duel/assets/jadewind-v1/prompts.json).
+Final project images are in guardian-duel/assets/jadewind-v1/; jadewind.js selects
+the approved idle-v1, final attack-v2 and seven other action-v1 files.
+Attack-v1 is a discarded local draft, not part of the published pack.

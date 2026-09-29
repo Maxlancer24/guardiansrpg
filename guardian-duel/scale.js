@@ -5,6 +5,7 @@
  */
 (function(root){
  const profiles={
+  jadewind:{sourceBodyHeight:506,idleScale:1,targetHeight:230},
   lancer:{sourceBodyHeight:440,idleScale:.70,targetHeight:230},
   explorer:{sourceBodyHeight:468,idleScale:.67,targetHeight:225},
   duelist:{sourceBodyHeight:465,idleScale:.67,targetHeight:230},
