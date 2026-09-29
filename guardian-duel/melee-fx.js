@@ -3,6 +3,7 @@
  */
 (function(root){
  const profiles={
+  lucien:{kind:'slash',color:'181,226,255',width:23,blade:{2:[[550,548],[789,555]],3:[[1135,638],[1246,733]]}},
   lancer:{kind:'thrust',color:'147,231,255',width:10,blade:{2:[[455,570],[620,565]],3:[[1080,576],[1240,576]]}},
   duelist:{kind:'thrust',color:'237,209,255',width:6,blade:{2:[[542,535],[720,530]],3:[[1125,539],[1237,537]]}},
   sentinel:{kind:'slash',color:'193,224,255',width:22,blade:{2:[[1403,298],[1527,418]],3:[[446,767],[600,875]]}},

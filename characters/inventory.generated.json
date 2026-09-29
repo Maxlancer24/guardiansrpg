@@ -1,7 +1,450 @@
 {
   "schemaVersion": 1,
-  "scope": "Thirteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
+  "scope": "Fourteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
   "characters": [
+    {
+      "id": "lucien",
+      "kind": "player-appearance",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/lucien.js",
+      "manifestSha256": "902f8917088a0a18e056456d4381e63cf6fbf38d072bcfc11329e1985eae58b0",
+      "scale": {
+        "sourceBodyHeight": 502,
+        "idleScale": 1,
+        "targetHeight": 230
+      },
+      "weaponEffect": {
+        "kind": "slash",
+        "color": "181,226,255",
+        "width": 23,
+        "blade": {
+          "2": [
+            [
+              550,
+              548
+            ],
+            [
+              789,
+              555
+            ]
+          ],
+          "3": [
+            [
+              1135,
+              638
+            ],
+            [
+              1246,
+              733
+            ]
+          ]
+        }
+      },
+      "presentationFiles": [],
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/lucien-v1/idle-facing-v2.png",
+          "sha256": "936302404a70d19b7dc84de28d647e9e745b1e598da426398b3d86d6060477f7",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              500
+            ],
+            [
+              1,
+              320
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              1,
+              320
+            ],
+            [
+              0,
+              350
+            ],
+            [
+              3,
+              320
+            ],
+            [
+              4,
+              450
+            ],
+            [
+              3,
+              320
+            ],
+            [
+              0,
+              500
+            ],
+            [
+              1,
+              320
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              1,
+              320
+            ],
+            [
+              0,
+              500
+            ],
+            [
+              5,
+              110
+            ],
+            [
+              0,
+              250
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": [
+            1,
+            0.9980119284294234,
+            0.9980119284294234,
+            1.001996007984032,
+            1.001996007984032,
+            1.004
+          ],
+          "hasClipping": false
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/lucien-v1/attack-v1.png",
+          "sha256": "a9d225de94d7ea0ca1e354c11230ed379366555cb210ec2b66139bce35e90815",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 1.162037037037037,
+          "frameScale": [
+            1.0666666666666667,
+            1.0773067331670823,
+            1,
+            1,
+            1,
+            1
+          ],
+          "hasClipping": true
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/lucien-v1/guard-v1.png",
+          "sha256": "5c0e6a3d9e870f954468e9b3b675bb9072d344ffcfd602cc9b122885fe8430db",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              150
+            ],
+            [
+              1,
+              220
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 1.0350515463917527,
+          "frameScale": null,
+          "hasClipping": false
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/lucien-v1/hurt-v1.png",
+          "sha256": "44110d5214b4bf7bdc36d508a582f4164a94359347a45fb107c8300b8cb03473",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              90
+            ],
+            [
+              1,
+              140
+            ],
+            [
+              2,
+              180
+            ],
+            [
+              3,
+              240
+            ]
+          ],
+          "settled": null,
+          "scale": 0.8325041459369817,
+          "frameScale": null,
+          "hasClipping": false
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/lucien-v1/rest-v1.png",
+          "sha256": "cdb0683ac2a7bebbd260bcd3499a3fe70e33c026282e6f2818dff2644ae188b5",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": false
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/lucien-v1/motion-v1.png",
+          "sha256": "3ac34d00c48a134dba133a9fda2e7f958b5133b55a5027bd3b281fc4fe0e9697",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 1.1081677704194262,
+          "frameScale": null,
+          "hasClipping": false
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/lucien-v1/activation-v1.png",
+          "sha256": "3754d089369601d5937070440ecc23dd542b12ec1c54d8893a27d78bfe404c58",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": false
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/lucien-v1/victory-v1.png",
+          "sha256": "ec353b7972e6e8b030df8c1c1b9455c4db80653f63ee1edf5e01bb5f209b230d",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              220
+            ],
+            [
+              1,
+              380
+            ],
+            [
+              2,
+              700
+            ],
+            [
+              3,
+              850
+            ],
+            [
+              4,
+              650
+            ],
+            [
+              5,
+              700
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                5,
+                1400
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": false
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/lucien-v1/defeat-v2.png",
+          "sha256": "b932745ff9bec0ae3b8799774df597a3e715c57f5fea6c9c5cb069d379ce4ec6",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        }
+      }
+    },
     {
       "id": "jadewind",
       "kind": "player-appearance",
@@ -5996,6 +6439,7 @@
     "guardian-duel/assets/guardian-v1/portrait.png",
     "guardian-duel/assets/idle.png",
     "guardian-duel/assets/jadewind-v1/attack-v1.png",
+    "guardian-duel/assets/lucien-v1/idle-v1.png",
     "guardian-duel/assets/sentinel-v1/idle.png",
     "guardian-duel/assets/tracker-v1/idle.png",
     "guardian-duel/assets/vanguard-v1/victory.png",

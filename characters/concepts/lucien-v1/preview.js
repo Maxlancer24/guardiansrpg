@@ -1,0 +1,29 @@
+(()=>{'use strict';
+const model=LUCIEN_PROTOTYPE,pack=model.idle,$=s=>document.querySelector(s),images={},duration=pack.sequence.reduce((n,[,ms])=>n+ms,0);
+const siteRoot=new URL('../../../',location.href);
+let clock=0,last=null,forced=null,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,en=new URLSearchParams(location.search).get('lang')==='en',ready=false;
+const tr=(es,english)=>en?english:es;
+function frame(p,t){t=Math.max(0,t)%p.sequence.reduce((n,[,ms])=>n+ms,0);for(const[f,ms]of p.sequence){if(t<ms)return f;t-=ms}return 0}
+function draw(ctx,p,im,f,x,y,factor){const r=p.frames[f],s=factor*p.scale*(p.frameScale?.[f]||1);ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(im,r[0],r[1],r[2],r[3],x-r[4]*s,y-r[5]*s,r[2]*s,r[3]*s);ctx.restore()}
+function labels(){document.documentElement.lang=en?'en':'es';document.querySelectorAll('[data-es]').forEach(e=>e.textContent=e.dataset[en?'en':'es']);$('#language').textContent=en?'Español':'English';$('#play').textContent=paused?tr('Reproducir','Play'):tr('Pausar','Pause')}
+function render(){
+ if(!ready)return;
+ const f=forced??frame(pack,clock),d=$('#detail').getContext('2d');d.clearRect(0,0,600,560);d.strokeStyle='#587c6d';d.beginPath();d.moveTo(20,515);d.lineTo(580,515);d.stroke();draw(d,pack,images.idle,f,300,515,450/model.sourceBodyHeight);
+ const s=$('#scene').getContext('2d');s.clearRect(0,0,1280,660);s.drawImage(images.background,0,0,1280,660);
+ const jf=214/501;s.drawImage(images.jessie,195-256*jf,485-526*jf,512*jf,560*jf);
+ draw(s,pack,images.idle,f,480,485,model.targetHeight/model.sourceBodyHeight);
+ draw(s,GUARDIAN_ACTIONS.idle,images.guardian,frame(GUARDIAN_ACTIONS.idle,clock),775,485,GuardianScale.factor('guardian',230));
+ draw(s,JADEWIND_ACTIONS.idle,images.jadewind,frame(JADEWIND_ACTIONS.idle,clock),1055,485,GuardianScale.factor('jadewind',230));
+ s.font='18px Georgia';s.textAlign='center';s.fillStyle='#fff3cf';
+ for(const [x,name]of [[195,'Jessie · 214'],[480,'Lucien · 230'],[775,tr('Guardián · 230','Guardian · 230')],[1055,tr('Viento de Jade · 230','Jade Wind · 230')]])s.fillText(name,x,520);
+ $('#status').textContent=tr('Fotograma ','Frame ')+(f+1)+' / 6'+(forced!==null?tr(' · Inspección fija',' · Still inspection'):'');document.querySelectorAll('#frames button').forEach((b,i)=>b.setAttribute('aria-pressed',String(forced===i)));
+}
+function tick(now){if(last!==null&&!paused)clock+=Math.min(100,now-last);last=now;render();requestAnimationFrame(tick)}
+$('#language').onclick=()=>{en=!en;labels();render()};$('#play').onclick=()=>{paused=!paused;forced=null;last=null;labels();render()};$('#restart').onclick=()=>{clock=0;forced=null;paused=false;last=null;labels();render()};
+labels();$('#status').textContent=tr('Cargando imágenes…','Loading images…');
+const sources={idle:pack.src,guardian:GUARDIAN_ACTIONS.idle.src,jadewind:JADEWIND_ACTIONS.idle.src,jessie:'/assets/demo-battle/jessie-idle-shot-v1/idle-00.png',background:'/assets/demo-battle/black-lotus-arena.png'};
+Promise.all(Object.entries(sources).map(([key,src])=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{images[key]=im;resolve()};im.onerror=()=>reject(new Error(src));im.src=new URL(src.replace(/^\//,''),siteRoot).href}))).then(()=>{
+ for(let i=0;i<6;i++){const b=document.createElement('button'),c=document.createElement('canvas');c.width=300;c.height=340;b.setAttribute('aria-label','Frame '+(i+1));b.append(c,document.createTextNode(String(i+1)));draw(c.getContext('2d'),pack,images.idle,i,150,318,285/model.sourceBodyHeight);b.onclick=()=>{paused=true;forced=i;labels();render()};$('#frames').append(b)}
+ ready=true;window.lucienPreview={ready:true,model,duration,frame,setTime(t){clock=t;forced=null;paused=true;render()},setFrame(f){if(!Number.isInteger(f)||f<0||f>5)throw Error('invalid frame');forced=f;paused=true;render()},state(){return{clock,paused,frame:forced??frame(pack,clock)}}};render();requestAnimationFrame(tick);
+}).catch(e=>{$('#status').textContent=tr('No se pudo cargar una imagen. Recarga la página.','An image failed to load. Reload this page.');console.error(e)});
+})();

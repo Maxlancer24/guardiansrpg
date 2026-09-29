@@ -8,7 +8,7 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 
 - `catalog.json`: identidad, nombre ES/EN, grupo y estado de incorporación.
 - `inventory.generated.json`: archivo **exacto** usado por cada acción de las
-  trece apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
+  catorce apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
   Se deriva de los manifiestos ejecutados, no de nombres de carpeta ni versiones supuestas.
 - `guardian-duel/<id>.js`: recortes, anclajes de pies, máscaras y tiempos activos.
 - `guardian-duel/scale.js`: tamaño anatómico; `animation.js`: reproducción.
@@ -35,6 +35,8 @@ node guardian-duel/verify-palettes.cjs
 node guardian-duel/verify-guardian.cjs
 node guardian-duel/verify-alchemist.cjs
 node guardian-duel/verify-brisa.cjs
+node guardian-duel/verify-jadewind.cjs
+node guardian-duel/verify-lucien.cjs
 ```
 
 La auditoría falla ante archivos ausentes, recortes fuera de imagen, secuencias
@@ -45,7 +47,7 @@ su inventario. No sustituye la revisión visual en movimiento.
 
 | Grupo | Personajes | Estado |
 | --- | --- | --- |
-| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista, Rastreadora, Custodio, Errante, Alquimista, Brisa | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
+| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista, Rastreadora, Custodio, Errante, Alquimista, Brisa, Viento de Jade, Lucien | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
 | Conceptos pendientes del lote inicial | Ninguno | Diez apariencias del primer roster completas en la demo; Alquimista y Brisa amplían las apariencias disponibles |
 | Protagonista de las quests | Guardián / Guardian (arte de Max) | No es una skin; nueve acciones, dos ataques y retrato. Especial determinada por la activa equipada del jugador |
 | Protagonistas de historia | Jessie, Garrick, Zoe | Integrados en sus pruebas existentes; no son apariencias para jugadores |
@@ -57,7 +59,7 @@ Hollow es un NPC compartido, no un personaje seleccionable del catálogo.
 
 ## Carpetas y versiones
 
-Las trece apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
+Las catorce apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
 histórica: combina `guardian-duel/assets/*.png` con `assets/lancer-refined-v1/`.
 El inventario elimina la ambigüedad sin mover archivos que usa la web.
 Para personajes nuevos: `guardian-duel/assets/<id>-v1/` y `guardian-duel/<id>.js`.
