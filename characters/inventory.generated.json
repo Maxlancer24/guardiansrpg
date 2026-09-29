@@ -7,45 +7,45 @@
       "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/brisa.js",
-      "manifestSha256": "dedcf5bf0c6abeb75c6b4102ac0b1818c2d267352aa0ca7cac4b55f9ff8a8e4c",
+      "manifestSha256": "3ec6003da95e2f3ad380bfc448309f6d3ba3bf160faebf380913a33fc5e209c7",
       "scale": {
         "sourceBodyHeight": 492,
         "idleScale": 1,
         "targetHeight": 228
       },
       "weaponEffect": {
-        "kind": "sweep",
+        "kind": "slash",
         "color": "177,244,193",
-        "width": 35,
+        "width": 22,
         "blade": {
           "2": [
             [
-              1290,
-              137
+              1368,
+              130
             ],
             [
-              1412,
-              23
+              1498,
+              38
             ]
           ],
           "3": [
             [
-              375,
-              629
+              410,
+              768
             ],
             [
-              578,
-              630
+              550,
+              915
             ]
           ],
           "4": [
             [
-              881,
-              706
+              865,
+              800
             ],
             [
-              1056,
-              809
+              994,
+              935
             ]
           ]
         }
@@ -144,8 +144,8 @@
           "hasClipping": false
         },
         "attack": {
-          "asset": "/guardian-duel/assets/brisa-v1/attack-right-hand-v4.png",
-          "sha256": "3b555a8bed40ca4f214e98635e4dfac7854f3f8adddabc7cd580ad56f28b9fdd",
+          "asset": "/guardian-duel/assets/brisa-v1/attack-v2.png",
+          "sha256": "ddb78a466656b067b17be9a5c360a46d0dfb5e9e150b4fecfae82e527b62df6c",
           "dimensions": [
             1536,
             1024
@@ -158,27 +158,27 @@
             ],
             [
               1,
-              425
+              525
             ],
             [
               2,
-              200
+              100
             ],
             [
               3,
-              160
+              150
             ],
             [
               4,
-              205
+              200
             ],
             [
               5,
-              180
+              195
             ]
           ],
           "settled": null,
-          "scale": 1,
+          "scale": 1.0695652173913044,
           "frameScale": null,
           "hasClipping": false
         },
@@ -5538,7 +5538,7 @@
     "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",
     "guardian-duel/assets/brisa-v1/attack-circular-v3.png",
-    "guardian-duel/assets/brisa-v1/attack-v2.png",
+    "guardian-duel/assets/brisa-v1/attack-right-hand-v4.png",
     "guardian-duel/assets/custodian-v1/activation.png",
     "guardian-duel/assets/custodian-v1/attack.png",
     "guardian-duel/assets/custodian-v1/defeat-v2.png",

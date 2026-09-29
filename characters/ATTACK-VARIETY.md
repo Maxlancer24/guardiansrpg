@@ -1,5 +1,9 @@
 # Brisa and Guardian attack continuity — 2026-09-29
 
+## Brisa rollback requested by user
+
+Brisa now uses her original `attack-v2.png` animation and its original scale, timing, blade anchors and slash effect, restored from revision `5df928e`. The replacement sheets described below are historical, not active. Guardian B remains on `attack-b-identity-v5.png`; no Guardian actions were reverted.
+
 ## Current selected assets
 
 Built-in ImageGen, edited from each character's approved idle sheet. Generated alpha is preserved; no code-painted sprite replacement.
