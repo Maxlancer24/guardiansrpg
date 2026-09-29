@@ -4,7 +4,10 @@ assert.equal(Object.keys(p).length,9);
 assert(p.attack.src.endsWith('/attack-v2.png'),'use reviewed right-cross atlas');
 assert.equal(Object.values(p).reduce((n,v)=>n+v.frames.length,0),52);
 assert(p.idle.authoredBlink);
-assert.equal(s.profiles.kaori.targetHeight,225,'Kaori matches the roster, not the enlarged attack silhouette');
+assert.equal(p.idle.clips.length,6,'every idle cell has its own row-isolating polygon');
+assert.equal(p.idle.frames[2][1],500,'keep full middle-row ponytail');
+assert.equal(p.idle.frames[4][1],1000,'keep full last-row ponytail');
+assert.equal(s.profiles.kaori.targetHeight,208,'Kaori matches the roster, not the enlarged attack silhouette');
 assert.equal(p.attack.scale,1.12,'do not scale bent-knee attack up to standing height');
 assert.equal(p.guard.scale,.98);assert.equal(p.motion.scale,.97);
 assert.deepEqual(p.attack.frameScale,[1,1,1,1,.96,.96]);
@@ -27,6 +30,6 @@ for(const width of [390,700,1240]){
  const effect=fx.sample(input);assert(effect&&effect.kind==='punch');
  assert(Math.abs(effect.tip.x-(300+p.attack.reach*p.attack.scale*factor))<1e-8);
  assert.equal(fx.sample({...input,enabled:false}),null);
- assert(Math.abs(464*factor-225*.75*(width<=700?1.5:1))<1e-8);
+ assert(Math.abs(464*factor-208*.75*(width<=700?1.5:1))<1e-8);
 }
 console.log('PASS Kaori: 52 drawings, animated blink idle, right cross, single impact, guard, full victory/defeat and proportional responsive scale.');

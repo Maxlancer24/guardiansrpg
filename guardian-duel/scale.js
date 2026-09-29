@@ -5,7 +5,7 @@
  */
 (function(root){
  const profiles={
-  kaori:{sourceBodyHeight:464,idleScale:1,targetHeight:225},
+  kaori:{sourceBodyHeight:464,idleScale:1,targetHeight:208},
   lucien:{sourceBodyHeight:502,idleScale:1,targetHeight:230},
   jadewind:{sourceBodyHeight:506,idleScale:1,targetHeight:230},
   lancer:{sourceBodyHeight:440,idleScale:.70,targetHeight:230},

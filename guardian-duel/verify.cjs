@@ -56,7 +56,10 @@ for(const cssWidth of [390,640,701,1240]){
  for(const [id,p] of Object.entries(scale.profiles)){
   const body=p.sourceBodyHeight*p.idleScale*scale.factor(id,sceneSize);
   assert(Math.abs(body-p.targetHeight*960/1280*zoom)<1e-9);
-  assert(p.targetHeight>=214&&p.targetHeight<=245);
+  // Kaori's high ponytail/broad stance needs a smaller anatomical target to
+  // match the roster silhouette; user-requested correction, not a global zoom.
+  if(id==='kaori')assert.equal(p.targetHeight,208);
+  else assert(p.targetHeight>=214&&p.targetHeight<=245);
  }
  assert(scale.profiles.explorer.targetHeight<scale.profiles.lancer.targetHeight);
  const reach=duelist.attack.reach*duelist.attack.scale*scale.factor('duelist',sceneSize);
