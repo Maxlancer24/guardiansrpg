@@ -3,6 +3,7 @@
  */
 (function(root){
  const profiles={
+  kaori:{kind:'punch',color:'255,221,151',width:18,blade:{2:[[545,515],[615,515]],3:[[1135,515],[1210,515]]}},
   lucien:{kind:'slash',color:'181,226,255',width:23,blade:{2:[[550,548],[789,555]],3:[[1135,638],[1246,733]]}},
   lancer:{kind:'thrust',color:'147,231,255',width:10,blade:{2:[[455,570],[620,565]],3:[[1080,576],[1240,576]]}},
   duelist:{kind:'thrust',color:'237,209,255',width:6,blade:{2:[[542,535],[720,530]],3:[[1125,539],[1237,537]]}},

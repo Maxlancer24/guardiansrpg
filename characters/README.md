@@ -8,7 +8,7 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 
 - `catalog.json`: identidad, nombre ES/EN, grupo y estado de incorporación.
 - `inventory.generated.json`: archivo **exacto** usado por cada acción de las
-  catorce apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
+  quince apariencias y el protagonista Guardián, dimensiones, número de frames, secuencia, escala y SHA-256.
   Se deriva de los manifiestos ejecutados, no de nombres de carpeta ni versiones supuestas.
 - `guardian-duel/<id>.js`: recortes, anclajes de pies, máscaras y tiempos activos.
 - `guardian-duel/scale.js`: tamaño anatómico; `animation.js`: reproducción.
@@ -59,7 +59,7 @@ Hollow es un NPC compartido, no un personaje seleccionable del catálogo.
 
 ## Carpetas y versiones
 
-Las catorce apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
+Las quince apariencias y el protagonista Guardián ya tienen manifiestos separados. Lancero es una excepción
 histórica: combina `guardian-duel/assets/*.png` con `assets/lancer-refined-v1/`.
 El inventario elimina la ambigüedad sin mover archivos que usa la web.
 Para personajes nuevos: `guardian-duel/assets/<id>-v1/` y `guardian-duel/<id>.js`.
@@ -109,3 +109,4 @@ producción por completar sus dibujos o por marcar una casilla de este catálogo
    autorización del servidor, fallback y compatibilidad con los modos. No cambiar
    `liveGame` hasta implementar y verificar esa integración.
 7. Publicar una versión acotada; conservar el manifiesto/commit anterior para rollback.
+Kaori: pack de nueve acciones en `guardian-duel/kaori.js`; galería de revisión en `guardian-duel/kaori-preview.html`. Solo demo, no habilitada aún en salas del bot.
