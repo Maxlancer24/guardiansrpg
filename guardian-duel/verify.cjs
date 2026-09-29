@@ -67,7 +67,7 @@ for(const cssWidth of [390,640,701,1240]){
 for(let seed=1;seed<60;seed++){let n=seed;const rng=()=>((n=(n*1664525+1013904223)>>>0)/4294967296);const b=new R.Battle(rng);for(let t=0;t<100;t++){const before=b.snapshot(),r=b.resolve(['ATTACK','DEFEND','REST'][t%3]);for(const a of r.state.actors)assert(a.hp>=0&&a.hp<=a.max);assert.deepEqual(before.actors.map(a=>a.max),r.state.actors.map(a=>a.max));if(r.finished)break;if(t===99)throw Error('battle failed to terminate');}}
 let drawCalls=0;const victoryDraws=[],victoryCovered=new Set();
 const paint={addColorStop(){}};
-const ctx=new Proxy({drawImage(im,...args){assert(im&&im.width>0);assert(args.every(Number.isFinite));if(args.length===8){const [x,y,w,h]=args;assert(x>=0&&y>=0&&x+w<=im.width&&y+h<=im.height)}if(im.assetPath&&/\/victory(?:-v2)?\.png$/.test(im.assetPath)){
+const ctx=new Proxy({drawImage(im,...args){assert(im&&im.width>0);assert(args.every(Number.isFinite));if(args.length===8){const [x,y,w,h]=args;assert(x>=0&&y>=0&&x+w<=im.width&&y+h<=im.height)}if(im.assetPath&&/\/victory(?:-v2(?:-clean)?)?\.png$/.test(im.assetPath)){
  const found=Object.entries(pack).find(([k,p])=>k.endsWith(':victory')&&p.src===im.assetPath);
  if(found){const [key,p]=found;victoryDraws.push({key,frame:p.frames.findIndex(r=>r.slice(0,4).every((v,i)=>v===args[i]))});}
 }drawCalls++;},createRadialGradient(){return paint},createLinearGradient(){return paint}}, {get:(t,k)=>k in t?t[k]:()=>{}});

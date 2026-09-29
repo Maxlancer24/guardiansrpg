@@ -16,7 +16,8 @@
   custodian:{sourceBodyHeight:494,idleScale:.67,targetHeight:235},
   wanderer:{sourceBodyHeight:491,idleScale:.67,targetHeight:228},
   guardian:{sourceBodyHeight:495,idleScale:.67,targetHeight:230},
-  alchemist:{sourceBodyHeight:495,idleScale:.67,targetHeight:228}
+  alchemist:{sourceBodyHeight:495,idleScale:.67,targetHeight:228},
+  brisa:{sourceBodyHeight:492,idleScale:1,targetHeight:228}
  };
  const api={profiles,
   sceneSize(width,cssWidth){return 230*width/1280*(cssWidth<=700?1.5:1)},
