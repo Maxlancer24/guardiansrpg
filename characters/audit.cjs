@@ -35,11 +35,12 @@ for(const c of catalog.characters){
   assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
   const width=bytes.readUInt32BE(16),height=bytes.readUInt32BE(20);
   assert(p.scale>0&&Number.isFinite(p.scale));
+  if(p.frameScale){assert.equal(p.frameScale.length,p.frames.length);assert(p.frameScale.every(s=>Number.isFinite(s)&&s>0));}
   for(const r of p.frames){assert.equal(r.length,6);assert(r.every(Number.isFinite));const [x,y,w,h]=r;assert(x>=0&&y>=0&&w>0&&h>0&&x+w<=width&&y+h<=height,p.src);}
   for(const seq of [p.sequence,p.settled?.sequence].filter(Boolean))for(const [f,ms] of seq)assert(p.frames[f]&&Number.isFinite(ms)&&ms>0);
   for(const clip of p.clips||[])if(clip)for(const [x,y] of clip)assert(Number.isFinite(x)&&Number.isFinite(y)&&x>=0&&x<=width&&y>=0&&y<=height);
   active.add(p.src.replace(/^\//,''));
-  actions[name]={asset:p.src,sha256:hash(bytes),dimensions:[width,height],frameCount:p.frames.length,sequence:p.sequence,settled:p.settled||null,scale:p.scale,hasClipping:!!p.clips};
+  actions[name]={asset:p.src,sha256:hash(bytes),dimensions:[width,height],frameCount:p.frames.length,sequence:p.sequence,settled:p.settled||null,scale:p.scale,frameScale:p.frameScale||null,hasClipping:!!p.clips};
  }
  const presentationFiles=(c.presentationFiles||[]).map(file=>({file,sha256:hash(fs.readFileSync(local(file)))}));
  characters.push({id:c.id,kind:c.kind,status:c.status,manifest:c.manifest,manifestSha256:hash(fs.readFileSync(manifestFile)),scale:scale.profiles[c.id],weaponEffect:fx.profiles[c.id]||null,presentationFiles,actions});

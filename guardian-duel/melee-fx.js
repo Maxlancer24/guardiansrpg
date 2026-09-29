@@ -11,18 +11,38 @@
   wanderer:{kind:'slash',color:'136,237,221',width:22,blade:{2:[[1425,305],[1522,410]],3:[[398,800],[544,903]]}},
   guardian:{kind:'slash',color:'144,204,255',width:24,blade:{2:[[1335,187],[1524,233]],3:[[409,801],[589,919]]}},
   custodian:{kind:'hammer',color:'255,202,121',width:38,blade:{2:[[1288,260],[1495,325]],3:[[364,801],[540,940]]}},
-  brisa:{kind:'slash',color:'177,244,193',width:22,blade:{2:[[1368,130],[1498,38]],3:[[410,768],[550,915]],4:[[865,800],[994,935]]}}
+  brisa:{kind:'sweep',color:'177,244,193',width:35,blade:{2:[[326,570],[95,608]],3:[[1051,530],[1244,541]],4:[[310,980],[103,987]]}}
  };
  const clamp=n=>Math.max(0,Math.min(1,n));
  const rgba=(color,a)=>'rgba('+color+','+clamp(a)+')';
  function sample({id,age,frame,pack,factor,x,y,reduced=false,enabled=true}){
-  const baseProfile=profiles[id],p=baseProfile&&{...baseProfile,blade:pack.blade||baseProfile.blade,sweep:pack.sweep||1,arcFlatten:pack.arcFlatten??1,arcSpan:pack.arcSpan??2.05},t=(age-1235)/240;
+  const baseProfile=profiles[id],lead=pack.effectLeadIn||0,p=baseProfile&&{...baseProfile,kind:pack.effectKind||baseProfile.kind,width:pack.effectWidth??baseProfile.width,blade:pack.blade||baseProfile.blade,sweep:pack.sweep||1,arcFlatten:pack.arcFlatten??1,arcSpan:pack.arcSpan??2.05},t=(age-(1235-lead))/(240+lead);
   if(!enabled||!p||t<0||t>=1||!p.blade[frame])return null;
-  const r=pack.frames[frame],s=pack.scale*factor;
+  const r=pack.frames[frame],s=pack.scale*factor*(pack.frameScale?.[frame]||1);
   const point=([px,py])=>({x:x+(px-r[0]-r[4])*s,y:y+(py-r[1]-r[5])*s});
   const [base,tip]=p.blade[frame].map(point),angle=Math.atan2(tip.y-base.y,tip.x-base.x);
   return{...p,base,tip,angle,radius:Math.hypot(tip.x-base.x,tip.y-base.y),
-   width:p.width*s,scale:s,t,alpha:(1-t)**1.6,reduced};
+   width:p.width*s,scale:s,t,alpha:(1-t)**1.6,reduced,
+   center:{x:x+(pack.sweepCenter?.[0]||0)*s,y:y+(pack.sweepCenter?.[1]||0)*s},
+   sweepRadius:(pack.sweepRadius||325)*s,sweepFlatten:pack.sweepFlatten??.32,
+   sweepProgress:clamp((age-(1235-lead))/Math.max(1,lead))};
+ }
+ // A tapered half-ellipse across the foreground, never a complete ring.
+ // The body pivots first; the crescent reaches the enemy at the shared impact.
+ function circularRibbon(ctx,g,width,opacity){
+  const end=Math.PI*(1-g.sweepProgress),span=2.8,start=end+span,r=g.sweepRadius;
+  ctx.beginPath();
+  for(let side=0;side<2;side++)for(let j=0;j<=40;j++){
+   const u=side?1-j/40:j/40,a=start+(end-start)*u;
+   const bulge=Math.sin(Math.PI*u)**.7*width,rr=r+(side?-bulge*.3:bulge);
+   const x=g.center.x+Math.cos(a)*rr,y=g.center.y+Math.sin(a)*rr*g.sweepFlatten;
+   if(!side&&!j)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  const grad=ctx.createLinearGradient(g.center.x-r,g.center.y,g.center.x+r,g.center.y);
+  grad.addColorStop(0,rgba(g.color,0));grad.addColorStop(.35,rgba(g.color,opacity*.35));
+  grad.addColorStop(.8,rgba('241,255,230',opacity));grad.addColorStop(1,rgba(g.color,opacity*.2));
+  ctx.fillStyle=grad;ctx.fill();
  }
  function ribbon(ctx,g,width,opacity){
   const span=g.arcSpan*(1-g.t*.35)*(g.sweep||1),start=-span,r=g.radius;
@@ -58,7 +78,11 @@
   const g=sample(input);if(!g)return false;
   ctx.save();ctx.globalCompositeOperation='lighter';
   if(g.reduced){glint(ctx,g.tip.x,g.tip.y,7*g.scale,g.color,g.alpha*.4);ctx.restore();return true;}
-  if(g.kind==='slash'||g.kind==='hammer'){
+  if(g.kind==='sweep'){
+   circularRibbon(ctx,g,g.width*2.1,g.alpha*.12);
+   circularRibbon(ctx,g,g.width,g.alpha*.85);
+   circularRibbon(ctx,g,g.width*.2,g.alpha);
+  }else if(g.kind==='slash'||g.kind==='hammer'){
    ribbon(ctx,g,g.width*1.8,g.alpha*.12);
    ribbon(ctx,g,g.width,g.alpha*.63);
    ribbon(ctx,g,g.width*.18,g.alpha*.9);

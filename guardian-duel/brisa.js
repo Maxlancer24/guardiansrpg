@@ -907,4 +907,6 @@ const BRISA_ACTIONS={
     "holdLast": true
   }
 };
+// Approved circular choreography replaces the downward cut. Damage remains one event.
+BRISA_ACTIONS.attack={"src":"/guardian-duel/assets/brisa-v1/attack-circular-v3.png","scale":1.2647814910025708,"frames":[[0,0,627,418,326,401],[627,0,627,418,344,401],[0,418,627,418,353,392],[627,418,627,418,307,392],[0,836,627,418,348,386],[627,836,627,418,319.5,386]],"sequence":[[0,250],[1,425],[2,200],[3,160],[4,205],[5,180]],"loop":false,"reach":310,"blade":{"2":[[326,570],[95,608]],"3":[[1051,530],[1244,541]],"4":[[310,980],[103,987]]},"effectKind":"sweep","effectWidth":130,"effectLeadIn":120,"sweepCenter":[0,-280],"sweepRadius":325,"sweepFlatten":0.32,"markers":[{"at":875,"event":"visual-impact","frame":3,"point":[1244,541]}],"presentation":{"kind":"circular-sweep","ranged":false,"impact":1235}};
 if(typeof module!=='undefined')module.exports=BRISA_ACTIONS;

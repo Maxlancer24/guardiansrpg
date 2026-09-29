@@ -20,8 +20,8 @@ let t=0;for(const [f,ms]of p.victory.sequence){assert.equal(a.victory(p.victory,
 for(const width of [390,700,1240]){
  const size=s.sceneSize(960,width),factor=s.factor('brisa',size);
  const input={id:'brisa',age:1235,frame:3,pack:p.attack,factor,x:300,y:450};
- const effect=fx.sample(input);assert(effect&&effect.kind==='slash');
- assert.equal(effect.tip.x,300+(550-267)*p.attack.scale*factor);
+ const effect=fx.sample(input);assert(effect&&effect.kind==='sweep');
+ assert(Math.abs(effect.tip.x-(300+(1244-627-307)*p.attack.scale*factor))<1e-8);
  assert.equal(fx.sample({...input,enabled:false}),null);
  const height=492*p.idle.scale*factor;
  assert(Math.abs(height-228*.75*(width<=700?1.5:1))<1e-8);

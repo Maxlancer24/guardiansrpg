@@ -7,45 +7,45 @@
       "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/brisa.js",
-      "manifestSha256": "3ec6003da95e2f3ad380bfc448309f6d3ba3bf160faebf380913a33fc5e209c7",
+      "manifestSha256": "c76a57e8019365d012469abf5f95fee7583541bc3a0547203879c04cc600726b",
       "scale": {
         "sourceBodyHeight": 492,
         "idleScale": 1,
         "targetHeight": 228
       },
       "weaponEffect": {
-        "kind": "slash",
+        "kind": "sweep",
         "color": "177,244,193",
-        "width": 22,
+        "width": 35,
         "blade": {
           "2": [
             [
-              1368,
-              130
+              326,
+              570
             ],
             [
-              1498,
-              38
+              95,
+              608
             ]
           ],
           "3": [
             [
-              410,
-              768
+              1051,
+              530
             ],
             [
-              550,
-              915
+              1244,
+              541
             ]
           ],
           "4": [
             [
-              865,
-              800
+              310,
+              980
             ],
             [
-              994,
-              935
+              103,
+              987
             ]
           ]
         }
@@ -140,14 +140,15 @@
           ],
           "settled": null,
           "scale": 1,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
-          "asset": "/guardian-duel/assets/brisa-v1/attack-v2.png",
-          "sha256": "ddb78a466656b067b17be9a5c360a46d0dfb5e9e150b4fecfae82e527b62df6c",
+          "asset": "/guardian-duel/assets/brisa-v1/attack-circular-v3.png",
+          "sha256": "37c1b229140b9f352107863af904f7b7800dad093afc9b17b3cbf28099ff3604",
           "dimensions": [
-            1536,
-            1024
+            1254,
+            1254
           ],
           "frameCount": 6,
           "sequence": [
@@ -157,27 +158,28 @@
             ],
             [
               1,
-              525
+              425
             ],
             [
               2,
-              100
-            ],
-            [
-              3,
-              150
-            ],
-            [
-              4,
               200
             ],
             [
+              3,
+              160
+            ],
+            [
+              4,
+              205
+            ],
+            [
               5,
-              195
+              180
             ]
           ],
           "settled": null,
-          "scale": 1.0695652173913044,
+          "scale": 1.2647814910025708,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -216,6 +218,7 @@
           ],
           "settled": null,
           "scale": 1,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -246,6 +249,7 @@
           ],
           "settled": null,
           "scale": 0.8,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -284,6 +288,7 @@
           ],
           "settled": null,
           "scale": 1,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -322,6 +327,7 @@
           ],
           "settled": null,
           "scale": 1,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -360,6 +366,7 @@
           ],
           "settled": null,
           "scale": 1,
+          "frameScale": null,
           "hasClipping": true
         },
         "victory": {
@@ -418,6 +425,7 @@
             "loop": true
           },
           "scale": 1,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -456,6 +464,7 @@
           ],
           "settled": null,
           "scale": 0.9425287356321839,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -515,6 +524,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -553,6 +563,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -599,6 +610,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -637,6 +649,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -679,6 +692,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -717,6 +731,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -755,6 +770,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -817,6 +833,7 @@
             "loop": true
           },
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -855,6 +872,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -864,7 +882,7 @@
       "kind": "story-protagonist",
       "status": "demo-ready",
       "manifest": "guardian-duel/guardian.js",
-      "manifestSha256": "66db865810a650fff3d3c3d09c522231961385f5d2bd63439198bc5c6b21d98d",
+      "manifestSha256": "9b96dec18eb8026922d47a4a5888a3d467fc51b45c7a158693645f6141f7a655",
       "scale": {
         "sourceBodyHeight": 495,
         "idleScale": 0.67,
@@ -940,6 +958,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -978,6 +997,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -1016,6 +1036,7 @@
           ],
           "settled": null,
           "scale": 0.64,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -1054,6 +1075,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -1092,6 +1114,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -1130,6 +1153,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -1168,6 +1192,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -1226,6 +1251,7 @@
             "loop": true
           },
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -1264,24 +1290,25 @@
           ],
           "settled": null,
           "scale": 0.62,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack2": {
-          "asset": "/guardian-duel/assets/guardian-v1/attack-b-v3.png",
-          "sha256": "e25d5cceeb682b808395846a704ec1e710b0ba54c75b07c7482860ab49165650",
+          "asset": "/guardian-duel/assets/guardian-v1/attack-b-thrust-v4.png",
+          "sha256": "aa4591ab6a2a26ed0dc88b44308998f483107e99ffb9d975b993688507996fdf",
           "dimensions": [
-            1536,
-            1024
+            1254,
+            1254
           ],
           "frameCount": 6,
           "sequence": [
             [
               0,
-              350
+              300
             ],
             [
               1,
-              525
+              575
             ],
             [
               2,
@@ -1293,15 +1320,23 @@
             ],
             [
               4,
-              150
+              170
             ],
             [
               5,
-              135
+              115
             ]
           ],
           "settled": null,
-          "scale": 0.67,
+          "scale": 0.9669096209912538,
+          "frameScale": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1.078616352201258
+          ],
           "hasClipping": false
         }
       }
@@ -1356,6 +1391,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -1394,6 +1430,7 @@
           ],
           "settled": null,
           "scale": 0.69,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -1432,6 +1469,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -1462,6 +1500,7 @@
           ],
           "settled": null,
           "scale": 0.53,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -1500,6 +1539,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -1538,6 +1578,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -1576,6 +1617,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -1622,6 +1664,7 @@
             "loop": true
           },
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -1660,6 +1703,7 @@
           ],
           "settled": null,
           "scale": 0.63,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -1736,6 +1780,7 @@
           ],
           "settled": null,
           "scale": 0.7,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -1774,6 +1819,7 @@
           ],
           "settled": null,
           "scale": 0.78,
+          "frameScale": null,
           "hasClipping": true
         },
         "guard": {
@@ -1820,6 +1866,7 @@
           ],
           "settled": null,
           "scale": 0.685,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -1850,6 +1897,7 @@
           ],
           "settled": null,
           "scale": 0.6,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -1896,6 +1944,7 @@
           ],
           "settled": null,
           "scale": 0.7,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -1934,6 +1983,7 @@
           ],
           "settled": null,
           "scale": 0.7,
+          "frameScale": null,
           "hasClipping": true
         },
         "activation": {
@@ -1972,6 +2022,7 @@
           ],
           "settled": null,
           "scale": 0.7,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -2018,6 +2069,7 @@
             "loop": true
           },
           "scale": 0.7,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -2056,6 +2108,7 @@
           ],
           "settled": null,
           "scale": 0.7,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -2144,6 +2197,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -2182,6 +2236,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -2228,6 +2283,7 @@
           ],
           "settled": null,
           "scale": 0.66,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -2258,6 +2314,7 @@
           ],
           "settled": null,
           "scale": 0.545,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -2296,6 +2353,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -2334,6 +2392,7 @@
           ],
           "settled": null,
           "scale": 0.58,
+          "frameScale": null,
           "hasClipping": true
         },
         "activation": {
@@ -2372,6 +2431,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -2426,6 +2486,7 @@
             "loop": true
           },
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -2464,6 +2525,7 @@
           ],
           "settled": null,
           "scale": 0.59,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -2552,6 +2614,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -2590,6 +2653,7 @@
           ],
           "settled": null,
           "scale": 0.75,
+          "frameScale": null,
           "hasClipping": true
         },
         "guard": {
@@ -2636,6 +2700,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -2666,6 +2731,7 @@
           ],
           "settled": null,
           "scale": 0.54,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -2704,6 +2770,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -2742,6 +2809,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -2780,6 +2848,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -2838,6 +2907,7 @@
             "loop": true
           },
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -2876,6 +2946,7 @@
           ],
           "settled": null,
           "scale": 0.65,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -2935,6 +3006,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -2973,6 +3045,7 @@
           ],
           "settled": null,
           "scale": 0.69,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -3019,6 +3092,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -3049,6 +3123,7 @@
           ],
           "settled": null,
           "scale": 0.54,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -3087,6 +3162,7 @@
           ],
           "settled": null,
           "scale": 0.64,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -3125,6 +3201,7 @@
           ],
           "settled": null,
           "scale": 0.65,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -3163,6 +3240,7 @@
           ],
           "settled": null,
           "scale": 0.66,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -3221,6 +3299,7 @@
             "loop": true
           },
           "scale": 0.64,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -3259,6 +3338,7 @@
           ],
           "settled": null,
           "scale": 0.61,
+          "frameScale": null,
           "hasClipping": true
         }
       }
@@ -3347,6 +3427,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -3385,6 +3466,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -3431,6 +3513,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": true
         },
         "hurt": {
@@ -3461,6 +3544,7 @@
           ],
           "settled": null,
           "scale": 0.54,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -3499,6 +3583,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -3537,6 +3622,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -3575,6 +3661,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -3645,6 +3732,7 @@
             "loop": true
           },
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -3683,6 +3771,7 @@
           ],
           "settled": null,
           "scale": 0.65,
+          "frameScale": null,
           "hasClipping": true
         }
       }
@@ -3742,6 +3831,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -3788,6 +3878,7 @@
           ],
           "settled": null,
           "scale": 0.775,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -3826,6 +3917,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -3856,6 +3948,7 @@
           ],
           "settled": null,
           "scale": 0.55,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -3894,6 +3987,7 @@
           ],
           "settled": null,
           "scale": 0.69,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -3932,6 +4026,7 @@
           ],
           "settled": null,
           "scale": 0.69,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -3970,6 +4065,7 @@
           ],
           "settled": null,
           "scale": 0.684,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -4016,6 +4112,7 @@
             "loop": true
           },
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -4054,6 +4151,7 @@
           ],
           "settled": null,
           "scale": 0.63,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -4134,6 +4232,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -4172,6 +4271,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -4218,6 +4318,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -4248,6 +4349,7 @@
           ],
           "settled": null,
           "scale": 0.54,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -4286,6 +4388,7 @@
           ],
           "settled": null,
           "scale": 0.665,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -4324,6 +4427,7 @@
           ],
           "settled": null,
           "scale": 0.69,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -4362,6 +4466,7 @@
           ],
           "settled": null,
           "scale": 0.66,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -4424,6 +4529,7 @@
             "loop": true
           },
           "scale": 0.66,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -4462,6 +4568,7 @@
           ],
           "settled": null,
           "scale": 0.57,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -4542,6 +4649,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -4580,6 +4688,7 @@
           ],
           "settled": null,
           "scale": 0.69,
+          "frameScale": null,
           "hasClipping": false
         },
         "guard": {
@@ -4618,6 +4727,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -4648,6 +4758,7 @@
           ],
           "settled": null,
           "scale": 0.553,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -4686,6 +4797,7 @@
           ],
           "settled": null,
           "scale": 0.661,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -4724,6 +4836,7 @@
           ],
           "settled": null,
           "scale": 0.69,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -4762,6 +4875,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -4824,6 +4938,7 @@
             "loop": true
           },
           "scale": 0.673,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -4862,6 +4977,7 @@
           ],
           "settled": null,
           "scale": 0.6,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -4942,6 +5058,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "attack": {
@@ -4980,6 +5097,7 @@
           ],
           "settled": null,
           "scale": 0.71,
+          "frameScale": null,
           "hasClipping": true
         },
         "guard": {
@@ -5018,6 +5136,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "hurt": {
@@ -5048,6 +5167,7 @@
           ],
           "settled": null,
           "scale": 0.562,
+          "frameScale": null,
           "hasClipping": false
         },
         "rest": {
@@ -5086,6 +5206,7 @@
           ],
           "settled": null,
           "scale": 0.666,
+          "frameScale": null,
           "hasClipping": false
         },
         "motion": {
@@ -5124,6 +5245,7 @@
           ],
           "settled": null,
           "scale": 0.67,
+          "frameScale": null,
           "hasClipping": false
         },
         "activation": {
@@ -5162,6 +5284,7 @@
           ],
           "settled": null,
           "scale": 0.675,
+          "frameScale": null,
           "hasClipping": false
         },
         "victory": {
@@ -5224,6 +5347,7 @@
             "loop": true
           },
           "scale": 0.66,
+          "frameScale": null,
           "hasClipping": false
         },
         "defeat": {
@@ -5262,6 +5386,7 @@
           ],
           "settled": null,
           "scale": 0.637,
+          "frameScale": null,
           "hasClipping": false
         }
       }
@@ -5419,6 +5544,7 @@
     "guardian-duel/assets/alchemist-v1/defeat.png",
     "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",
+    "guardian-duel/assets/brisa-v1/attack-v2.png",
     "guardian-duel/assets/custodian-v1/activation.png",
     "guardian-duel/assets/custodian-v1/attack.png",
     "guardian-duel/assets/custodian-v1/defeat-v2.png",
@@ -5431,6 +5557,7 @@
     "guardian-duel/assets/duelist-v1/attack.png",
     "guardian-duel/assets/guard.png",
     "guardian-duel/assets/guardian-v1/activation-draft.png",
+    "guardian-duel/assets/guardian-v1/attack-b-v3.png",
     "guardian-duel/assets/guardian-v1/attack-b.png",
     "guardian-duel/assets/guardian-v1/idle.png",
     "guardian-duel/assets/guardian-v1/motion-draft.png",

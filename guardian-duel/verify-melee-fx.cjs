@@ -18,7 +18,7 @@ for(const id of Object.keys(fx.profiles))for(const cssWidth of [390,1240])for(co
  assert(g.radius>0&&g.width>0);
  assert.deepEqual(g,fx.sample(input),'deterministic weapon attachment');
  assert(fx.sample({...input,age:1400}).alpha<g.alpha,'trail fades');
- for(const override of [{age:1234},{age:1475},{frame:0},{enabled:false},{id:'explorer'}]){
+ for(const override of [{age:1234-(pack.effectLeadIn||0)},{age:1475},{frame:0},{enabled:false},{id:'explorer'}]){
   const c=canvas();assert.equal(fx.sample({...input,...override}),null);
   assert.equal(fx.draw(c.ctx,{...input,...override}),false);assert.equal(c.calls.length,0);
  }
