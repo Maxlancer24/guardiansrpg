@@ -7,7 +7,7 @@
       "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/kaori.js",
-      "manifestSha256": "a7fefa9d33d76e410ce5afa643e3aa7ced55eb549502d134e2c1551bf7524c2d",
+      "manifestSha256": "0dc24ab381cc842b173582db008def2f02e577d0d1ab08cb7299139d9f02250a",
       "scale": {
         "sourceBodyHeight": 464,
         "idleScale": 1,
