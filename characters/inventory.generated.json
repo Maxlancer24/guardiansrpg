@@ -7,7 +7,7 @@
       "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/lucien.js",
-      "manifestSha256": "902f8917088a0a18e056456d4381e63cf6fbf38d072bcfc11329e1985eae58b0",
+      "manifestSha256": "dac01c91b2c7f289c5d93d2b109dd7380fcb5eccadda61a74238ed2e6a4b703c",
       "scale": {
         "sourceBodyHeight": 502,
         "idleScale": 1,
@@ -125,8 +125,8 @@
           "hasClipping": false
         },
         "attack": {
-          "asset": "/guardian-duel/assets/lucien-v1/attack-v1.png",
-          "sha256": "a9d225de94d7ea0ca1e354c11230ed379366555cb210ec2b66139bce35e90815",
+          "asset": "/guardian-duel/assets/lucien-v1/attack-forward-v2.png",
+          "sha256": "d0cff2d683533d41b765abe1422e712b63edd6b4cde44eb463e961d2552d826b",
           "dimensions": [
             1254,
             1254
@@ -6439,6 +6439,7 @@
     "guardian-duel/assets/guardian-v1/portrait.png",
     "guardian-duel/assets/idle.png",
     "guardian-duel/assets/jadewind-v1/attack-v1.png",
+    "guardian-duel/assets/lucien-v1/attack-v1.png",
     "guardian-duel/assets/lucien-v1/idle-v1.png",
     "guardian-duel/assets/sentinel-v1/idle.png",
     "guardian-duel/assets/tracker-v1/idle.png",

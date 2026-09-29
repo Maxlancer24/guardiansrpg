@@ -1,6 +1,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const p=require('./lucien.js'),a=require('./animation.js'),s=require('./scale.js'),fx=require('./melee-fx.js');
 assert.equal(Object.keys(p).length,9);
+assert(p.attack.src.endsWith('/attack-forward-v2.png'),'use corrected forward-facing anticipation, not reversed sword draft');
 assert.equal(Object.values(p).reduce((n,v)=>n+v.frames.length,0),52);
 assert.deepEqual(p.idle,require('../characters/concepts/lucien-v1/idle.js').idle,'approved idle remains unchanged');
 for(const [key,pack]of Object.entries(p)){

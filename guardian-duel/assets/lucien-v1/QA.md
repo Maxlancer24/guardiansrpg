@@ -1,6 +1,8 @@
 # Lucien — complete cosmetic pack, 2026-09-29
 
 Authoritative manifest: `/guardian-duel/lucien.js`. Nine actions, 52 drawings.
+
+Attack correction: `attack-forward-v2.png` replaces v1. Preparation frame 1 now has the right gloved hand drawn back and the blade pointing right/forward, consistently with the following thrust. Six-frame contact sheet and desktop/mobile combat reviewed again. Timings, contact markers, idle and other actions unchanged. Prompt: `ATTACK-FORWARD-V2-PROMPT.md` (built-in ImageGen).
 Approved right-facing idle remains byte-for-byte the same manifest data as the prototype.
 The `idle-v1.png` file is an inactive historical draft, not the active idle.
 

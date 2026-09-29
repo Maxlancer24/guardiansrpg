@@ -130,7 +130,7 @@ const LUCIEN_ACTIONS={
     "authoredBlink": true
   },
   "attack": {
-    "src": "/guardian-duel/assets/lucien-v1/attack-v1.png",
+    "src": "/guardian-duel/assets/lucien-v1/attack-forward-v2.png",
     "scale": 1.162037037037037,
     "frames": [
       [
