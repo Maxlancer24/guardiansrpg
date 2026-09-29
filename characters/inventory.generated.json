@@ -7,11 +7,11 @@
       "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/kaori.js",
-      "manifestSha256": "0dc24ab381cc842b173582db008def2f02e577d0d1ab08cb7299139d9f02250a",
+      "manifestSha256": "b56fac5f0cbc59f95a1a6fc08391c20e840c920c1faf13d3e77ea74a2fa3254c",
       "scale": {
         "sourceBodyHeight": 464,
         "idleScale": 1,
-        "targetHeight": 230
+        "targetHeight": 225
       },
       "weaponEffect": {
         "kind": "punch",
@@ -124,7 +124,7 @@
             ]
           ],
           "settled": null,
-          "scale": 1.2506738544474394,
+          "scale": 1.12,
           "frameScale": [
             1,
             1,
@@ -170,7 +170,7 @@
             ]
           ],
           "settled": null,
-          "scale": 1.0131004366812226,
+          "scale": 0.98,
           "frameScale": null,
           "hasClipping": false
         },
@@ -279,7 +279,7 @@
             ]
           ],
           "settled": null,
-          "scale": 1.0265486725663717,
+          "scale": 0.97,
           "frameScale": null,
           "hasClipping": false
         },

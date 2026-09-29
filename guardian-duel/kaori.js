@@ -1,4 +1,6 @@
-/* Kaori: cosmetic martial artist. Source-space feet and knuckle registration; uniform scale only. */
+/* Kaori: cosmetic martial artist. Source-space feet and knuckle registration; uniform scale only.
+ * Size review v2: match head/torso across poses, never enlarge a crouch to idle height.
+ * Attack 1.12 (was 1.25067), guard .98, motion .97. Recovery remains 4% smaller. */
 const KAORI_ACTIONS={
   "idle": {
     "src": "/guardian-duel/assets/kaori-v1/idle-v3.png",
@@ -92,7 +94,7 @@ const KAORI_ACTIONS={
   },
   "attack": {
     "src": "/guardian-duel/assets/kaori-v1/attack-v2.png",
-    "scale": 1.2506738544474394,
+    "scale": 1.12,
     "frames": [
       [
         0,
@@ -230,7 +232,7 @@ const KAORI_ACTIONS={
   },
   "guard": {
     "src": "/guardian-duel/assets/kaori-v1/guard-v1.png",
-    "scale": 1.0131004366812226,
+    "scale": 0.98,
     "frames": [
       [
         0,
@@ -449,7 +451,7 @@ const KAORI_ACTIONS={
   },
   "motion": {
     "src": "/guardian-duel/assets/kaori-v1/motion-v1.png",
-    "scale": 1.0265486725663717,
+    "scale": 0.97,
     "frames": [
       [
         0,
