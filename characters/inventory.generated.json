@@ -1,7 +1,423 @@
 {
   "schemaVersion": 1,
-  "scope": "Fifteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
+  "scope": "Sixteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
   "characters": [
+    {
+      "id": "autumnwolf",
+      "kind": "player-appearance",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/autumnwolf.js",
+      "manifestSha256": "2f2afff685e64b059f4f4a613909dee532b9e059a97719c3ea5aaac07cb7af89",
+      "scale": {
+        "sourceBodyHeight": 465,
+        "idleScale": 1,
+        "targetHeight": 220
+      },
+      "weaponEffect": {
+        "kind": "claw",
+        "color": "255,209,137",
+        "width": 12,
+        "blade": {
+          "2": [
+            [
+              1444,
+              126
+            ],
+            [
+              1518,
+              129
+            ]
+          ],
+          "3": [
+            [
+              505,
+              744
+            ],
+            [
+              553,
+              785
+            ]
+          ]
+        }
+      },
+      "presentationFiles": [],
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/idle-v1.png",
+          "sha256": "eda47f7deb5ccb6e329dfeaac189121f04bc299fe0bbd978af18ed2942ec00c6",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              900
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              2,
+              750
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              0,
+              900
+            ],
+            [
+              3,
+              110
+            ],
+            [
+              4,
+              600
+            ],
+            [
+              5,
+              700
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/attack-v1.png",
+          "sha256": "5e1ee06b51039c902c426f3dbc09408d5079c7922926eecf313f01f313d5bd7d",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/guard-v1.png",
+          "sha256": "3703b769e183c2cacc0134c913a5b587392dd044ff90244f2d56ee3706cfd8b3",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              150
+            ],
+            [
+              1,
+              220
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/hurt-v1.png",
+          "sha256": "b5e61811e45e1cc2779edf8a45165fe0a7176d8969a16498241796a9fda16e4c",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              90
+            ],
+            [
+              1,
+              140
+            ],
+            [
+              2,
+              180
+            ],
+            [
+              3,
+              240
+            ]
+          ],
+          "settled": null,
+          "scale": 0.8,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/rest-v1.png",
+          "sha256": "65832390beb611c20f441bf108bacc641fefda695aca7bfd0b9365cb7c23dfc1",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/motion-v1.png",
+          "sha256": "1442f31a0d65cfe0257ad47cd1d8b0ef7f630c7c34d298627274aa72e1aa8948",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0.94
+          ],
+          "hasClipping": true
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/activation-v1.png",
+          "sha256": "38e0b2567c9ad631147ad74455a996e3afdbe046faf0538c11c915e9eb8a055d",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/victory-v2.png",
+          "sha256": "e140c6d9557553bb56c94faabc5e61fa8ba11a309ca937f32e5529f734ad8720",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              220
+            ],
+            [
+              1,
+              380
+            ],
+            [
+              2,
+              700
+            ],
+            [
+              3,
+              850
+            ],
+            [
+              4,
+              650
+            ],
+            [
+              5,
+              700
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                5,
+                1000
+              ],
+              [
+                4,
+                600
+              ],
+              [
+                5,
+                1000
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/autumnwolf-v1/defeat-v1.png",
+          "sha256": "97e1f2b0a62d9320efa96fdb59d56bc98a8b3299ec855da9c06f2452361911c3",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": null,
+          "scale": 0.88,
+          "frameScale": null,
+          "hasClipping": true
+        }
+      }
+    },
     {
       "id": "kaori",
       "kind": "player-appearance",
@@ -6824,6 +7240,7 @@
     "guardian-duel/assets/alchemist-v1/defeat.png",
     "guardian-duel/assets/arcanist-v1/attack.png",
     "guardian-duel/assets/attack.png",
+    "guardian-duel/assets/autumnwolf-v1/victory-v1.png",
     "guardian-duel/assets/brisa-v1/attack-circular-v3.png",
     "guardian-duel/assets/brisa-v1/attack-right-hand-v4.png",
     "guardian-duel/assets/custodian-v1/activation.png",

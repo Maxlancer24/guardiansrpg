@@ -3,6 +3,7 @@
  */
 (function(root){
  const profiles={
+  autumnwolf:{kind:'claw',color:'255,209,137',width:12,blade:{2:[[1444,126],[1518,129]],3:[[505,744],[553,785]]}},
   kaori:{kind:'punch',color:'255,221,151',width:18,blade:{2:[[545,515],[615,515]],3:[[1135,515],[1210,515]]}},
   lucien:{kind:'slash',color:'181,226,255',width:23,blade:{2:[[550,548],[789,555]],3:[[1135,638],[1246,733]]}},
   lancer:{kind:'thrust',color:'147,231,255',width:10,blade:{2:[[455,570],[620,565]],3:[[1080,576],[1240,576]]}},
@@ -85,6 +86,15 @@
    circularRibbon(ctx,g,g.width*2.1,g.alpha*.12);
    circularRibbon(ctx,g,g.width,g.alpha*.85);
    circularRibbon(ctx,g,g.width*.2,g.alpha);
+  }else if(g.kind==='claw'){
+   // Three short tapered hand trails, attached to the striking wrist/fingers.
+   // They are presentation only; one contact and one damage event remain.
+   for(let i=-1;i<=1;i++){
+    const dy=i*12*g.scale,trail={...g,base:{x:g.base.x,y:g.base.y+dy},tip:{x:g.tip.x,y:g.tip.y+dy},arcSpan:1.6};
+    ribbon(ctx,trail,g.width*1.7,g.alpha*.10);
+    ribbon(ctx,trail,g.width*.55,g.alpha*.70);
+    ribbon(ctx,trail,g.width*.12,g.alpha*.95);
+   }
   }else if(g.kind==='slash'||g.kind==='hammer'){
    ribbon(ctx,g,g.width*1.8,g.alpha*.12);
    ribbon(ctx,g,g.width,g.alpha*.63);

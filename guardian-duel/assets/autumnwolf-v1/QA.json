@@ -1,0 +1,67 @@
+{
+  "id": "autumnwolf",
+  "name": {
+    "es": "Viajera otoñal",
+    "en": "Autumn Wayfarer"
+  },
+  "status": "demo-ready",
+  "date": "2026-09-30",
+  "scope": "Guardian vs Hollow web demo only; not a Discord/server unlock",
+  "generation": "Built-in image_gen, approved autumn traveler variant 1. Original RGBA files copied without rewriting pixels/alpha.",
+  "actions": {
+    "idle": 6,
+    "attack": 6,
+    "guard": 6,
+    "hurt": 4,
+    "rest": 6,
+    "motion": 6,
+    "activation": 6,
+    "victory": 6,
+    "defeat": 6
+  },
+  "totalDrawings": 52,
+  "reference": "/characters/concepts/autumnwolf-v1/base-v1.png",
+  "selectedManifest": "/guardian-duel/autumnwolf.js",
+  "scale": {
+    "sourceCrownToSole": 465,
+    "targetAt1280": 220,
+    "rule": "Uniform anatomical scale; crouches are never enlarged to idle height.",
+    "hurt": 0.8,
+    "defeat": 0.88,
+    "motionLastFrame": 0.94
+  },
+  "timing": {
+    "idleMultiplier": 1,
+    "otherActionsMultiplier": 1.5,
+    "blinkFrame": 3,
+    "blinkMs": 110,
+    "blinkLoopMs": 5160,
+    "approachMs": 360,
+    "attackContactMs": 875,
+    "sharedBattleImpactMs": 1235,
+    "attackDurationMs": 1420
+  },
+  "effect": "Separate three-tapered-claw trail attached to right wrist/fingers, one damage event; existing parry/focus/rest/hit/audio system reused. Sounds disabled by default.",
+  "review": {
+    "static": "All nine original sheets and all normalized contact sheets reviewed. Right-hand attack continuity, one tail, costume, cape, boots and adult proportions checked.",
+    "corrections": "Victory v2 replaces hand-switching frame 2. Source-space per-row boundary polygons remove adjacent sprite fragments without editing PNGs.",
+    "cropValidation": "52/52: no missing own-body pixels or foreign-body pixels at alpha > 120, using connected-component source checks. Does not prove anatomy automatically.",
+    "runtime": "136 simulated animated battles across 17 packs; nine-action browser playback reaches all 52 source frames; real attack/parry/rest actions, victory and defeat, replay, hero switch and ES/EN pass.",
+    "viewports": [
+      "Chrome desktop 1280x1000 DPR2",
+      "Chrome mobile emulation 390x844 DPR2"
+    ],
+    "physicalDeviceTest": false,
+    "evidence": "output/autumnwolf-complete-qa (local workspace)"
+  },
+  "assetVersions": {
+    "victory": "victory-v2.png",
+    "others": "*-v1.png"
+  },
+  "rollbackBaseCommit": "3fa44e12ccb296773315b808efc6f14894ca02d7",
+  "restrictions": [
+    "No changes to protagonist combat modes",
+    "No public menu link added to the unlisted appearance lab",
+    "No bot restart, stats, abilities or database changes"
+  ]
+}
