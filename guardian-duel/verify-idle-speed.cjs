@@ -6,7 +6,7 @@ const avatars=Object.fromEntries(Object.keys(scale.profiles).map(id=>[id,{action
 for(const [id,{actions}] of Object.entries(avatars)){
  const ctx={clock:0,appearance:id,modes:[{name:'idle',at:0}],display:{actors:[{}]},busy:true,
   AVATARS:avatars,GuardianScale:scale,GuardianAnimation:animation,sequence:animation.frame,
-  $:()=>({checked:false}),attackKey:()=>'attack',isRanged:()=>['shadowweaver','explorer','arcanist','tracker','alchemist'].includes(id),ctx:{},
+  $:()=>({checked:false}),attackKey:()=>'attack',isRanged:()=>['duskgunner','shadowweaver','explorer','arcanist','tracker','alchemist'].includes(id),ctx:{},
   clamp:n=>Math.max(0,Math.min(1,n)),ease:n=>Math.max(0,Math.min(1,n)),
   sprite(context,mode,frame){ctx.drawn={mode,frame}},setMode(){}};
  vm.createContext(ctx);vm.runInContext(source,ctx);

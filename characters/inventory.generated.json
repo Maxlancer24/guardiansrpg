@@ -1,7 +1,394 @@
 {
   "schemaVersion": 1,
-  "scope": "Eighteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
+  "scope": "Nineteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
   "characters": [
+    {
+      "id": "duskgunner",
+      "kind": "player-appearance",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/duskgunner.js",
+      "manifestSha256": "e6869dac6d20bbc56e44c0ab4df06200783f5af1aa93d32ce987ebd801ad21bd",
+      "scale": {
+        "sourceBodyHeight": 502,
+        "idleScale": 1,
+        "targetHeight": 230
+      },
+      "weaponEffect": null,
+      "presentationFiles": [
+        {
+          "file": "guardian-duel/gun-fx.js",
+          "sha256": "e1aed7a2064de1fe72d590bbbe802a973ab3b39b7ecf0bb2522b482eee7e019c"
+        }
+      ],
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/idle-v1.png",
+          "sha256": "e1b8980568eb957385844df3ac4411ce05284b39fc2c4511150872f106864557",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              900
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              2,
+              750
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              0,
+              900
+            ],
+            [
+              3,
+              110
+            ],
+            [
+              4,
+              600
+            ],
+            [
+              5,
+              700
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": [
+            1,
+            1,
+            1,
+            0.994059405940594,
+            0.996031746031746,
+            0.996031746031746
+          ],
+          "hasClipping": true
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/attack-v1.png",
+          "sha256": "5eb68b4cfa3c809a033e6b8a817d3b85d59b196fe544508008dd87f79de80be4",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              590
+            ],
+            [
+              2,
+              140
+            ],
+            [
+              3,
+              230
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.994,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/guard-v1.png",
+          "sha256": "4e24d812e4604ab692278866acaa7a75cfcc75f080516c5f3fd60eab4f8da32e",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              150
+            ],
+            [
+              1,
+              220
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 1.012,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/hurt-v1.png",
+          "sha256": "0dea468d60407a94120dc4a5e5e4a344592eed6c2c3c9e7937665b846615e59d",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              90
+            ],
+            [
+              1,
+              140
+            ],
+            [
+              2,
+              180
+            ],
+            [
+              3,
+              240
+            ]
+          ],
+          "settled": null,
+          "scale": 0.81,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/rest-v1.png",
+          "sha256": "25eb63125854348f5e505ab1f71ac2d141911aad61ba662d8dfc9a9661da7c6a",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 0.996,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/motion-v1.png",
+          "sha256": "74a2c13d23aba232160d85110fcec44763274a0b858c92a48b0e743c25244e29",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/activation-v1.png",
+          "sha256": "63b2a0c2635a4d1360bd78b6c91e126c96eda89fcced2c92ef47e55659087dbd",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.993,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/victory-v1.png",
+          "sha256": "47c3a469340b0b2782168a428a5e193e996e3b0f0d0977cd4435d6a68266eecb",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              220
+            ],
+            [
+              1,
+              380
+            ],
+            [
+              2,
+              500
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              500
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                5,
+                1400
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.992,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/duskgunner-v1/defeat-v1.png",
+          "sha256": "d00f048af81dfaa8d9f90df846bcf9139b047c25bb30921d08ac17060a4ad963",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": null,
+          "scale": 0.943,
+          "frameScale": null,
+          "hasClipping": true
+        }
+      }
+    },
     {
       "id": "shadowweaver",
       "kind": "player-appearance",

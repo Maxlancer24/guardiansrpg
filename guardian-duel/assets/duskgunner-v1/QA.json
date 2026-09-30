@@ -1,0 +1,49 @@
+{
+  "character": "duskgunner",
+  "scope": "Guardian vs Hollow standalone demo only",
+  "frames": 52,
+  "actions": 9,
+  "imageTool": "built-in image_gen",
+  "alphaPolicy": "Original generated RGBA preserved; runtime metadata clips only",
+  "corrections": [
+    "Defeat frame4 regenerated into lower kneel: revolver retained in anatomical right hand."
+  ],
+  "cropValidation": {
+    "threshold": 120,
+    "frames": 52,
+    "lostBodyPixels": 0,
+    "neighborBodyPixels": 0
+  },
+  "scale": {
+    "sourceBodyHeight": 502,
+    "targetHeight": 230,
+    "stretching": false
+  },
+  "timing": {
+    "idleSpeed": 1,
+    "actionSpeed": 1.5,
+    "blinkMs": 110,
+    "attackClipReleaseMs": 940,
+    "attackTimelineReleaseMs": 1300,
+    "attackTimelineImpactMs": 1440
+  },
+  "presentation": {
+    "revolverHand": "right",
+    "ranged": true,
+    "normalMovement": false,
+    "fx": "gun-fx.js",
+    "audio": "existing shot.wav, off by default",
+    "exclusiveSkill": false
+  },
+  "tests": {
+    "static": "verify-duskgunner; verify (160 animated battles,20 appearances); verify-idle-speed; verify-portraits; characters/audit",
+    "chrome": "Desktop1280x1000/mobile390x844 DPR2, all52 frames; attack/parry/rest, full outcome, replay, ES/EN, selector/change hero",
+    "visualEvidence": "output/duskgunner-complete-qa/"
+  },
+  "limitations": [
+    "Mobile emulation, not physical device",
+    "No Discord roster, profile or server changes",
+    "Generic activation preview; no exclusive special in no-profile demo"
+  ],
+  "rollbackBase": "4c68abd5d8fa8d1182902adf53866b8f8295a2e7"
+}
