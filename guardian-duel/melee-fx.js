@@ -3,6 +3,7 @@
  */
 (function(root){
  const profiles={
+  forestbastion:{kind:'shield',color:'185,238,188',width:24,blade:{2:[[1440,227],[1516,227]],3:[[407,730],[491,730]]}},
   autumnwolf:{kind:'claw',color:'255,209,137',width:12,blade:{2:[[1444,126],[1518,129]],3:[[505,744],[553,785]]}},
   kaori:{kind:'punch',color:'255,221,151',width:18,blade:{2:[[545,515],[615,515]],3:[[1135,515],[1210,515]]}},
   lucien:{kind:'slash',color:'181,226,255',width:23,blade:{2:[[550,548],[789,555]],3:[[1135,638],[1246,733]]}},
@@ -86,6 +87,18 @@
    circularRibbon(ctx,g,g.width*2.1,g.alpha*.12);
    circularRibbon(ctx,g,g.width,g.alpha*.85);
    circularRibbon(ctx,g,g.width*.2,g.alpha);
+  }else if(g.kind==='shield'){
+   // Short pressure crescent at the shield face, never a sword slash or full ring.
+   ctx.save();ctx.translate(g.tip.x,g.tip.y);
+   const r=(38+g.t*26)*g.scale;
+   ctx.beginPath();ctx.moveTo(-r*.18,-r);
+   ctx.bezierCurveTo(r*.9,-r*.5,r*.9,r*.5,-r*.18,r);
+   ctx.bezierCurveTo(r*.32,r*.45,r*.32,-r*.45,-r*.18,-r);
+   ctx.closePath();
+   const pressure=ctx.createLinearGradient(-r,0,r,0);
+   pressure.addColorStop(0,rgba(g.color,0));pressure.addColorStop(.6,rgba(g.color,g.alpha*.45));
+   pressure.addColorStop(1,rgba('248,255,226',g.alpha*.8));ctx.fillStyle=pressure;ctx.fill();
+   ctx.restore();
   }else if(g.kind==='claw'){
    // Three short tapered hand trails, attached to the striking wrist/fingers.
    // They are presentation only; one contact and one damage event remain.

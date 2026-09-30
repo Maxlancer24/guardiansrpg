@@ -1,0 +1,48 @@
+{
+  "character": "forestbastion",
+  "scope": "Guardian vs Hollow standalone demo only",
+  "frames": 52,
+  "actions": 9,
+  "imageTool": "built-in image_gen",
+  "activeVersions": {
+    "idle": "idle-v1.png",
+    "attack": "attack-v1.png",
+    "guard": "guard-v1.png",
+    "hurt": "hurt-v1.png",
+    "rest": "rest-v1.png",
+    "motion": "motion-v2.png",
+    "activation": "activation-v1.png",
+    "victory": "victory-v1.png",
+    "defeat": "defeat-v1.png"
+  },
+  "alphaPolicy": "Original generated RGBA retained; metadata clipping only",
+  "cropValidation": {
+    "threshold": 120,
+    "frames": 52,
+    "lostBodyPixels": 0,
+    "neighborBodyPixels": 0
+  },
+  "scale": {
+    "sourceBodyHeight": 480,
+    "targetHeight": 230,
+    "stretching": false
+  },
+  "timing": {
+    "idleSpeed": 1,
+    "actionSpeed": 1.5,
+    "attackClipImpactMs": 875,
+    "attackTimelineImpactMs": 1235
+  },
+  "tests": {
+    "static": "verify-forestbastion.cjs, verify-melee-fx.cjs, characters/audit.cjs",
+    "regression": "144 simulated battles across18 packs; existing palettes and previous character tests",
+    "chrome": "Desktop1280x1000/mobile390x844 DPR2; all52 drawings rendered, ATTACK/DEFEND/REST, victory/defeat, replay, ES/EN and change hero",
+    "visualEvidence": "output/forestbastion-complete-qa/"
+  },
+  "limitations": [
+    "Mobile emulation, not a physical phone",
+    "No Discord roster/profile or server deployment in this change",
+    "Generic activation art available in preview; no exclusive special added to no-profile demo"
+  ],
+  "rollbackBase": "55ea4627bb7e94ae744226dfe1ffbdb43502ed64"
+}

@@ -1,7 +1,416 @@
 {
   "schemaVersion": 1,
-  "scope": "Sixteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
+  "scope": "Seventeen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
   "characters": [
+    {
+      "id": "forestbastion",
+      "kind": "player-appearance",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/forestbastion.js",
+      "manifestSha256": "702d9123e2f9cb9f00c668d47e14486627ebb0a540973f7cfd3e6ac6d276ff7e",
+      "scale": {
+        "sourceBodyHeight": 480,
+        "idleScale": 1,
+        "targetHeight": 230
+      },
+      "weaponEffect": {
+        "kind": "shield",
+        "color": "185,238,188",
+        "width": 24,
+        "blade": {
+          "2": [
+            [
+              1440,
+              227
+            ],
+            [
+              1516,
+              227
+            ]
+          ],
+          "3": [
+            [
+              407,
+              730
+            ],
+            [
+              491,
+              730
+            ]
+          ]
+        }
+      },
+      "presentationFiles": [],
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/idle-v1.png",
+          "sha256": "a06f884a31ba094f5346afdfe4ac43e7d6d4ffc921b9b17da901b6fd4f174f18",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              900
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              2,
+              750
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              0,
+              900
+            ],
+            [
+              3,
+              110
+            ],
+            [
+              4,
+              600
+            ],
+            [
+              5,
+              700
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/attack-v1.png",
+          "sha256": "20ddcaf3b31d593617951d0c97e3d032ff35b705d5a6ac61f80b3f7d1ddaadf8",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              525
+            ],
+            [
+              2,
+              110
+            ],
+            [
+              3,
+              150
+            ],
+            [
+              4,
+              150
+            ],
+            [
+              5,
+              135
+            ]
+          ],
+          "settled": null,
+          "scale": 0.968,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/guard-v1.png",
+          "sha256": "ef3a56c94124ef62205e6c4ff73738ca8e749383963c47085ec71d95fc65eadc",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              150
+            ],
+            [
+              1,
+              220
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 0.944,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/hurt-v1.png",
+          "sha256": "6ea315b9678793b9ca3049aecb2c835668f3447a2f382bb7c4da79326b98a13a",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              90
+            ],
+            [
+              1,
+              140
+            ],
+            [
+              2,
+              180
+            ],
+            [
+              3,
+              240
+            ]
+          ],
+          "settled": null,
+          "scale": 0.8,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/rest-v1.png",
+          "sha256": "81f6f2436823fbccc8abbfd1207f97654118e6a17c670b935c841b6f1f18c32e",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 0.96,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/motion-v2.png",
+          "sha256": "32ecb51f9b42d84454028e6140d7d1d6cd6a9e79783da6f795f82dd1a9eb0120",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 0.98,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/activation-v1.png",
+          "sha256": "6f9b72bdaba856438128f810361cc8bba260b74ec28078d673a988e863912b26",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 0.97,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/victory-v1.png",
+          "sha256": "9d37a343b4b6af143afde19622e3cfa8a747b361c08f04a906fa226cc06e8c4b",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              220
+            ],
+            [
+              1,
+              380
+            ],
+            [
+              2,
+              700
+            ],
+            [
+              3,
+              850
+            ],
+            [
+              4,
+              650
+            ],
+            [
+              5,
+              700
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                5,
+                1000
+              ],
+              [
+                4,
+                600
+              ],
+              [
+                5,
+                1000
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 0.96,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/forestbastion-v1/defeat-v1.png",
+          "sha256": "880fce4843a53669aca6ba0ddad7eab705eb300d5c8fd774befa9f06c9677546",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": null,
+          "scale": 0.91,
+          "frameScale": null,
+          "hasClipping": true
+        }
+      }
+    },
     {
       "id": "autumnwolf",
       "kind": "player-appearance",
@@ -7253,6 +7662,7 @@
     "guardian-duel/assets/custodian-v1/rest.png",
     "guardian-duel/assets/custodian-v1/victory.png",
     "guardian-duel/assets/duelist-v1/attack.png",
+    "guardian-duel/assets/forestbastion-v1/motion-v1.png",
     "guardian-duel/assets/guard.png",
     "guardian-duel/assets/guardian-v1/activation-draft.png",
     "guardian-duel/assets/guardian-v1/attack-b-thrust-v4.png",
