@@ -5,6 +5,7 @@
  */
 (function(root){
  const profiles={
+  shadowweaver:{sourceBodyHeight:501,idleScale:1,targetHeight:224},
   forestbastion:{sourceBodyHeight:480,idleScale:1,targetHeight:230},
   autumnwolf:{sourceBodyHeight:465,idleScale:1,targetHeight:220},
   kaori:{sourceBodyHeight:464,idleScale:1,targetHeight:208},

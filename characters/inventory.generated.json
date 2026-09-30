@@ -1,7 +1,387 @@
 {
   "schemaVersion": 1,
-  "scope": "Seventeen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
+  "scope": "Eighteen player appearances and Guardian protagonist: complete action inventory. Legacy protagonists: source pointers only.",
   "characters": [
+    {
+      "id": "shadowweaver",
+      "kind": "player-appearance",
+      "status": "demo-ready",
+      "manifest": "guardian-duel/shadowweaver.js",
+      "manifestSha256": "257288667e3779ca2e4c9009ec77b9bc7e41f690f93d4947b8291edfe42772f2",
+      "scale": {
+        "sourceBodyHeight": 501,
+        "idleScale": 1,
+        "targetHeight": 224
+      },
+      "weaponEffect": null,
+      "presentationFiles": [
+        {
+          "file": "guardian-duel/shadow-fx.js",
+          "sha256": "29fc96592bfcbf9688bc98276909b0acf78e9fa60f6d95e494655f7941a3f9bb"
+        }
+      ],
+      "actions": {
+        "idle": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/idle-v1.png",
+          "sha256": "7dcf494e68e0c2eac0a3d13b2744493a635da9b6aab1d201cb171510bb9b7b79",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              900
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              2,
+              750
+            ],
+            [
+              1,
+              600
+            ],
+            [
+              0,
+              900
+            ],
+            [
+              3,
+              110
+            ],
+            [
+              4,
+              600
+            ],
+            [
+              5,
+              700
+            ]
+          ],
+          "settled": null,
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "attack": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/attack-v1.png",
+          "sha256": "2daff17e3b638f03535d70db85d6ef6b8c8e5017117e28ab81f4446458c25386",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              350
+            ],
+            [
+              1,
+              590
+            ],
+            [
+              2,
+              140
+            ],
+            [
+              3,
+              230
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 1.006,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "guard": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/guard-v1.png",
+          "sha256": "f046cf70618e0d998bf482bb90ccc4b909c29468fa0c132c99aed55c9be81748",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              150
+            ],
+            [
+              1,
+              220
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              140
+            ],
+            [
+              4,
+              300
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 1.01,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "hurt": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/hurt-v1.png",
+          "sha256": "f8f6f7514ef19ee3a251eb5ecafe8d95b4a4fc7e1af4e164075be6a3b05f09d7",
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "frameCount": 4,
+          "sequence": [
+            [
+              0,
+              90
+            ],
+            [
+              1,
+              140
+            ],
+            [
+              2,
+              180
+            ],
+            [
+              3,
+              240
+            ]
+          ],
+          "settled": null,
+          "scale": 0.826,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "rest": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/rest-v1.png",
+          "sha256": "1469220ae62e01f7444bd223af557bfaefabd504ceafa9a1015f45222e2544c2",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              260
+            ],
+            [
+              2,
+              450
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              260
+            ]
+          ],
+          "settled": null,
+          "scale": 0.994,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "motion": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/motion-v1.png",
+          "sha256": "e8d0f08e9f882d2e07b0236e8453a3697695b6ad47e15c40c3f4089e7abb19ee",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              120
+            ],
+            [
+              1,
+              120
+            ],
+            [
+              2,
+              120
+            ],
+            [
+              3,
+              157
+            ],
+            [
+              4,
+              156
+            ],
+            [
+              5,
+              157
+            ]
+          ],
+          "settled": null,
+          "scale": 1.04,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "activation": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/activation-v1.png",
+          "sha256": "299719d784670ec523f63eb7e57e098d3f15286bb48ca7301c5726c7d1f5b651",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              180
+            ],
+            [
+              1,
+              230
+            ],
+            [
+              2,
+              280
+            ],
+            [
+              3,
+              300
+            ],
+            [
+              4,
+              230
+            ],
+            [
+              5,
+              200
+            ]
+          ],
+          "settled": null,
+          "scale": 1.014,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "victory": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/victory-v1.png",
+          "sha256": "c3b2793d0b2acc4151b83aa84168546dd0a9b765074e6945fc8c3c21a59a9308",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              220
+            ],
+            [
+              1,
+              380
+            ],
+            [
+              2,
+              500
+            ],
+            [
+              3,
+              450
+            ],
+            [
+              4,
+              500
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": {
+            "sequence": [
+              [
+                5,
+                1400
+              ]
+            ],
+            "loop": true
+          },
+          "scale": 1,
+          "frameScale": null,
+          "hasClipping": true
+        },
+        "defeat": {
+          "asset": "/guardian-duel/assets/shadowweaver-v1/defeat-v1.png",
+          "sha256": "b7268053b92c7fc0ff0cbb2d4cf4f09e8212789004cfe5af6180431110269263",
+          "dimensions": [
+            1536,
+            1024
+          ],
+          "frameCount": 6,
+          "sequence": [
+            [
+              0,
+              250
+            ],
+            [
+              1,
+              400
+            ],
+            [
+              2,
+              400
+            ],
+            [
+              3,
+              350
+            ],
+            [
+              4,
+              260
+            ],
+            [
+              5,
+              900
+            ]
+          ],
+          "settled": null,
+          "scale": 0.93,
+          "frameScale": null,
+          "hasClipping": true
+        }
+      }
+    },
     {
       "id": "forestbastion",
       "kind": "player-appearance",

@@ -1,0 +1,37 @@
+{
+  "character": "shadowweaver",
+  "scope": "Guardian vs Hollow standalone demo only",
+  "frames": 52,
+  "actions": 9,
+  "imageTool": "built-in image_gen",
+  "alphaPolicy": "Original generated RGBA preserved; runtime metadata clips only",
+  "cropValidation": {
+    "threshold": 120,
+    "frames": 52,
+    "lostBodyPixels": 0,
+    "neighborBodyPixels": 0
+  },
+  "scale": {
+    "sourceBodyHeight": 501,
+    "targetHeight": 224,
+    "stretching": false
+  },
+  "timing": {
+    "idleSpeed": 1,
+    "actionSpeed": 1.5,
+    "attackClipReleaseMs": 940,
+    "attackTimelineReleaseMs": 1300,
+    "attackTimelineImpactMs": 1440
+  },
+  "tests": {
+    "static": "verify-shadowweaver.cjs; forestbastion and autumnwolf regression",
+    "chrome": "Desktop1280x1000/mobile390x844 DPR2, all52 drawings rendered; attack/parry/rest, complete outcome, replay, ES/EN, selector/change hero",
+    "visualEvidence": "output/shadowweaver-complete-qa/"
+  },
+  "limitations": [
+    "Mobile emulation, not physical device",
+    "No Discord roster, profile or server changes",
+    "Generic activation in preview; no exclusive special in no-profile demo"
+  ],
+  "rollbackBase": "37aad33d1af8c98e58e2b4b7302eac6ad7140cc4"
+}
