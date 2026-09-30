@@ -6,13 +6,13 @@ const avatars=Object.fromEntries(Object.keys(scale.profiles).map(id=>[id,{action
 for(const [id,{actions}] of Object.entries(avatars)){
  const ctx={clock:0,appearance:id,modes:[{name:'idle',at:0}],display:{actors:[{}]},busy:true,
   AVATARS:avatars,GuardianScale:scale,GuardianAnimation:animation,sequence:animation.frame,
-  $:()=>({checked:false}),isRanged:()=>id==='explorer'||id==='arcanist'||id==='tracker',ctx:{},
+  $:()=>({checked:false}),attackKey:()=>'attack',isRanged:()=>['shadowweaver','explorer','arcanist','tracker','alchemist'].includes(id),ctx:{},
   clamp:n=>Math.max(0,Math.min(1,n)),ease:n=>Math.max(0,Math.min(1,n)),
   sprite(context,mode,frame){ctx.drawn={mode,frame}},setMode(){}};
  vm.createContext(ctx);vm.runInContext(source,ctx);
  for(const elapsed of [200,350,500,800,1100,1800,2500,4200,6000,7050,7300]){
   ctx.clock=elapsed*1.5;ctx.modes[0]={name:'idle',at:0};ctx.drawActor(0,270,480,230);
-  const expected=elapsed%7000<110?5:animation.frame(actions.idle,elapsed,true);
+  const expected=!actions.idle.authoredBlink&&elapsed%7000<110?5:animation.frame(actions.idle,elapsed,true);
   assert.equal(ctx.drawn.frame,expected,id+' idle at 1x, including blink');
  }
  for(const mode of ['rest','hurt','victory']){
@@ -33,4 +33,4 @@ for(const [id,{actions}] of Object.entries(avatars)){
  }
 }
 assert(game.includes('clock+=dt*1.5'),'combat clock stays at 1.5x');
-console.log('PASS: all ten combat idles and blinking at 1x; rest, hurt, victory, attack and damage clock remain at 1.5x.');
+console.log('PASS: all combat idles and blinking at 1x; rest, hurt, victory, attack and damage clock remain at 1.5x.');
