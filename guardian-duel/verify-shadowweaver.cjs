@@ -43,3 +43,23 @@ for(const factor of [.33,.5,1])for(let frame=0;frame<6;frame++){
  assert.equal(fx.idleSample({...input,enabled:false}),null);
 }
 console.log('PASS idle orb: all six palm sockets, proportional scale, pulse, effects toggle and reduced motion.');
+for(const [mode,pack] of Object.entries(p)){
+ if(mode==='idle')continue;
+ assert.equal(pack.orbSockets.length,pack.frames.length,mode+' orb registration');
+ for(let frame=0;frame<pack.frames.length;frame++){
+  const input={mode,pack,frame,age:0,time:850,factor:.5,x:300,y:450};
+  const g=fx.poseSample(input),r=pack.frames[frame],point=pack.orbSockets[frame],scale=pack.scale*.5*(pack.frameScale?.[frame]||1);
+  assert(g&&Number.isFinite(g.radius));
+  assert.deepEqual(g.center,{x:300+(point[0]-r[0]-r[4])*scale,y:450+(point[1]-r[1]-r[5])*scale});
+  assert.equal(fx.poseSample({...input,enabled:false}),null);
+  assert.deepEqual(fx.poseSample({...input,reduced:true}),fx.poseSample({...input,reduced:true,time:5000}));
+ }
+}
+const cast=age=>fx.poseSample({mode:'attack',pack:p.attack,frame:a.frame(p.attack,age),age,time:0,factor:1,x:300,y:450});
+for(const age of [0,350,939])assert(cast(age),'held through anticipation and charge');
+for(const age of [940,1080,1309])assert.equal(cast(age),null,'released orb must not remain in hand');
+assert.equal(cast(1310),null);assert(cast(1440).opacity>0&&cast(1440).opacity<1);
+assert.equal(cast(1570).opacity,1);assert.equal(cast(1769).opacity,1);
+for(let age=1311;age<1570;age+=10)assert((cast(age+1)?.radius||0)>=(cast(age)?.radius||0),'smooth reformation');
+assert.equal(fx.poseSample({mode:'defeat',pack:p.defeat,frame:2,age:600,factor:1,x:0,y:0}),null);
+console.log('PASS orb continuity: all poses registered, charge/release/reformation, reduced motion, effects off and defeat dissipation.');

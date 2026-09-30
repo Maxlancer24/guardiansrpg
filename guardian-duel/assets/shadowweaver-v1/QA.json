@@ -3,6 +3,7 @@
   "scope": "Guardian vs Hollow standalone demo only",
   "frames": 52,
   "actions": 9,
+  "orbContinuity": {"registeredActions":9,"attack":"held through charge, travels on release, reforms over recovery","reformationClipMs":[1310,1570],"defeatFadeMs":600,"spritePixelsChanged":false,"rulesChanged":false},
   "idleOrb": {"implementation":"separate canvas effect","sixPalmSockets":true,"pulseMs":3400,"selectorMaxFps":20,"reducedMotion":"static","combatEffectsToggle":true,"spritePixelsChanged":false},
   "imageTool": "built-in image_gen",
   "alphaPolicy": "Original generated RGBA preserved; runtime metadata clips only",

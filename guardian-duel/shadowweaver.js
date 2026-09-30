@@ -22,6 +22,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:6},(_,i)=>SHADOWWEAVER_ROW_CLIPS.idle[i<3?0:1])
   },
   attack:{
+    orbSockets:[[421,188],[840,176],[1490,106],[501,616],[935,704],[1410,704]],
     src:"/guardian-duel/assets/shadowweaver-v1/attack-v1.png",
     scale:1.006,
     sequence:[[0,350],[1,590],[2,140],[3,230],[4,260],[5,200]],
@@ -33,6 +34,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:6},(_,i)=>SHADOWWEAVER_ROW_CLIPS.attack[i<3?0:1])
   },
   guard:{
+    orbSockets:[[413,195],[918,104],[1428,96],[391,613],[937,626],[1437,626]],
     src:"/guardian-duel/assets/shadowweaver-v1/guard-v1.png",
     scale:1.01,
     sequence:[[0,150],[1,220],[2,400],[3,140],[4,300],[5,260]],
@@ -41,6 +43,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:6},(_,i)=>SHADOWWEAVER_ROW_CLIPS.guard[i<3?0:1])
   },
   hurt:{
+    orbSockets:[[497,170],[1110,220],[531,902],[1165,843]],
     src:"/guardian-duel/assets/shadowweaver-v1/hurt-v1.png",
     scale:0.826,
     sequence:[[0,90],[1,140],[2,180],[3,240]],
@@ -49,6 +52,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:4},(_,i)=>SHADOWWEAVER_ROW_CLIPS.hurt[i<2?0:1])
   },
   rest:{
+    orbSockets:[[413,192],[892,260],[1434,259],[410,773],[901,765],[1436,705]],
     src:"/guardian-duel/assets/shadowweaver-v1/rest-v1.png",
     scale:0.994,
     sequence:[[0,180],[1,260],[2,450],[3,450],[4,260],[5,260]],
@@ -57,6 +61,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:6},(_,i)=>SHADOWWEAVER_ROW_CLIPS.rest[i<3?0:1])
   },
   motion:{
+    orbSockets:[[458,225],[937,208],[1476,208],[176,645],[943,726],[1449,698]],
     src:"/guardian-duel/assets/shadowweaver-v1/motion-v1.png",
     scale:1.04,
     sequence:[[0,120],[1,120],[2,120],[3,157],[4,156],[5,157]],
@@ -65,6 +70,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:6},(_,i)=>SHADOWWEAVER_ROW_CLIPS.motion[i<3?0:1])
   },
   activation:{
+    orbSockets:[[447,190],[824,135],[1488,149],[483,565],[935,704],[1418,704]],
     src:"/guardian-duel/assets/shadowweaver-v1/activation-v1.png",
     scale:1.014,
     sequence:[[0,180],[1,230],[2,280],[3,300],[4,230],[5,200]],
@@ -73,6 +79,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:6},(_,i)=>SHADOWWEAVER_ROW_CLIPS.activation[i<3?0:1])
   },
   victory:{
+    orbSockets:[[432,210],[937,282],[1446,282],[432,708],[958,771],[1477,763]],
     src:"/guardian-duel/assets/shadowweaver-v1/victory-v1.png",
     scale:1,
     sequence:[[0,220],[1,380],[2,500],[3,450],[4,500],[5,900]],
@@ -82,6 +89,7 @@ const SHADOWWEAVER_ACTIONS={
     clips:Array.from({length:6},(_,i)=>SHADOWWEAVER_ROW_CLIPS.victory[i<3?0:1])
   },
   defeat:{
+    orbSockets:[[455,263],[915,378],[1485,499],[209,914],[955,923],[1435,920]],
     src:"/guardian-duel/assets/shadowweaver-v1/defeat-v1.png",
     scale:0.93,
     sequence:[[0,250],[1,400],[2,400],[3,350],[4,260],[5,900]],

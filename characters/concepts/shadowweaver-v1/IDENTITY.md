@@ -1,5 +1,7 @@
 # Tejedora de sombras / Shadow Weaver
 
+- Esfera continua: sockets por dibujo en las nueve acciones. Se mantiene al cargar, viaja con el disparo y se recompone suavemente entre 1310–1570ms del clip; en derrota se disipa en 600ms. Sigue la mano en guardia, daño, descanso, movimiento, activación y victoria. No se modifican atlas ni reglas.
+
 - ID: shadowweaver. Apariencia de jugador, no protagonista ni clase fija.
 - Diseño 5 aprobado: cabello violeta corto con broche plateado, ojos gris/lila, blusa marfil, chaleco y capa asimétrica ciruela, pantalones oscuros, botas negras con hebillas plateadas. Humana, sin armas.
 - Lanza con palma izquierda hacia la derecha; mano derecha cerca del torso. Guardar esta continuidad en variantes.

@@ -3,6 +3,7 @@
  'use strict';
  const timing={approach:360,release:1300,impact:1440,end:1810};
  const clamp=n=>Math.max(0,Math.min(1,n));
+ const smooth=n=>{const t=clamp(n);return t*t*(3-2*t)};
  function socket(pack,frame,factor,x,y){
   const r=pack.frames[frame],p=pack.castSockets.palm[frame],s=pack.scale*factor*(pack.frameScale?.[frame]||1);
   return{x:x+(p[0]-r[0]-r[4])*s,y:y+(p[1]-r[1]-r[5])*s};
@@ -43,6 +44,7 @@
    }
   }
   if(g.projectile){
+   if(enabled)paintOrb(ctx,{center:g.point,radius:18*input.pack.scale*input.factor*(1.15-g.u*.15),phase:input.reduced?0:input.age/540,opacity:1},input.reduced);
    if(enabled&&!reduced){
     tendril(ctx,g.start,g.point,12*s,input.age/160,'rgba(42,14,68,.64)');
     ctx.globalCompositeOperation='lighter';
@@ -70,10 +72,10 @@
   const phase=reduced?0:age*Math.PI*2/3400,pulse=1+Math.sin(phase)*.08;
   return{palm,center:{x:palm.x,y:palm.y-(26+(reduced?0:Math.sin(phase)*1.5))*s},radius:18*s*pulse,phase,scale:s};
  }
- function drawIdle(ctx,input){
-  const g=idleSample(input);if(!g)return false;
+ function paintOrb(ctx,g,reduced){
   const {center:p,radius:r,phase}=g;ctx.save();
-  glow(ctx,p,r*3.3,input.reduced?.18:.30);
+  ctx.globalAlpha=g.opacity??1;
+  glow(ctx,p,r*3.3,reduced?.18:.30);
   // Solid shaded energy core, not an outlined circle or a baked sprite overlay.
   const core=ctx.createRadialGradient(p.x-r*.32,p.y-r*.4,r*.08,p.x,p.y,r);
   core.addColorStop(0,'#fff1ff');core.addColorStop(.18,'#e4b9ff');
@@ -82,11 +84,32 @@
   ctx.globalCompositeOperation='lighter';
   tendril(ctx,{x:p.x-r*.9,y:p.y+r*.24},{x:p.x+r*.85,y:p.y-r*.3},r*.16,phase,'rgba(232,191,255,.58)');
   glow(ctx,{x:p.x-r*.3,y:p.y-r*.32},r*.42,.6);
-  if(!input.reduced)for(let i=0;i<5;i++){
+  if(!reduced)for(let i=0;i<5;i++){
    const a=phase*.7+i*Math.PI*2/5,orbit=r*(1.3+(i%2)*.4);
    glow(ctx,{x:p.x+Math.cos(a)*orbit,y:p.y+Math.sin(a)*orbit*.65},r*.16,.42);
   }
   ctx.restore();return true;
  }
- const api={timing,socket,sample,draw,idleSample,drawIdle};if(typeof module!=='undefined')module.exports=api;else root.GuardianShadowFX=api;
+ function drawIdle(ctx,input){const g=idleSample(input);return g?paintOrb(ctx,g,input.reduced):false}
+ // Age is relative to the sprite clip (attack release at 940ms, not 1300ms).
+ // All centers are authored per drawing; no drifting interpolation away from hands.
+ function poseSample(input){
+  const {mode='idle',age=0,time=age,pack,frame,factor,x,y,reduced=false,enabled=true}=input;
+  if(mode==='idle')return idleSample({...input,age:time});
+  const point=pack.orbSockets?.[frame];if(!enabled||!point)return null;
+  const r=pack.frames[frame],s=pack.scale*factor*(pack.frameScale?.[frame]||1);
+  let strength=1,opacity=1;
+  if(mode==='attack'){
+   if(age<940)strength=1+.15*smooth((age-350)/590);
+   else if(age<1310)return null; // The same sphere is travelling / bursting at the target.
+   else{strength=smooth((age-1310)/260);opacity=strength;}
+  }else if(mode==='defeat'){opacity=1-smooth(age/600);strength=opacity;}
+  else if(mode==='hurt')strength=1-.3*Math.sin(Math.PI*clamp(age/650));
+  else if(mode==='activation')strength=1+.3*Math.sin(Math.PI*clamp(age/1420));
+  if(strength<.001||opacity<.001)return null;
+  const phase=reduced?0:time*Math.PI*2/3400;
+  return{center:{x:x+(point[0]-r[0]-r[4])*s,y:y+(point[1]-r[1]-r[5])*s},radius:18*s*strength*(1+Math.sin(phase)*.08),phase,opacity,scale:s};
+ }
+ function drawPose(ctx,input){const g=poseSample(input);return g?paintOrb(ctx,g,input.reduced):false}
+ const api={timing,socket,sample,draw,idleSample,drawIdle,poseSample,drawPose};if(typeof module!=='undefined')module.exports=api;else root.GuardianShadowFX=api;
 })(typeof window!=='undefined'?window:globalThis);
