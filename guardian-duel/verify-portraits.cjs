@@ -8,12 +8,12 @@ function setup(reduced=false,observer=true){
  let callback;const observed=[];
  for(const id of ids){
   avatars[id]={actions:require('./'+id+'.js')};images[id+':idle']={};
-  elements[id==='lancer'?'portrait':id+'-portrait']={id,getContext(){return{
-   setTransform(){},clearRect(...a){clears.push(a)}
-  }}};
+  elements[id==='lancer'?'portrait':id+'-portrait']={id,getContext(){return new Proxy({
+   setTransform(){},clearRect(...a){clears.push(a)},createRadialGradient(){return{addColorStop(){}}}
+  },{get:(t,k)=>k in t?t[k]:()=>{}})}};
  }
  const context={AVATARS:avatars,$:id=>elements[id],images,reduced,document:{hidden:false},
-  devicePixelRatio:2,GuardianScale:scale,sequence:animation.frame,
+  devicePixelRatio:2,GuardianScale:scale,GuardianShadowFX:require('./shadow-fx.js'),sequence:animation.frame,
   sprite(ctx,mode,f,x,y,factor,id){assert(avatars[id].actions.idle.frames[f]);draws.push({id,f,x,y,factor})}
  };
  if(observer)context.IntersectionObserver=class{constructor(cb){callback=cb}observe(el){observed.push(el)}};
@@ -53,4 +53,9 @@ assert.equal(new Set(c.draws.map(d=>d.id)).size,c.ids.length,'fallback works wit
 const d=setup(false,false),ages=d.context.review.portraits.map(p=>p.age);
 d.context.review.step(80);
 d.context.review.portraits.forEach((p,i)=>assert.equal(p.age-ages[i],80,'every selector idle uses real-time 1x'));
+const orb=setup();orb.visible('shadowweaver',true);
+const startOrb=orb.draws.length;orb.context.review.step(60);
+assert.equal(orb.draws.length,startOrb+1,'orb animates between sprite frame changes');
+orb.visible('shadowweaver',false);const stopped=orb.draws.length;orb.context.review.step(500);
+assert.equal(orb.draws.length,stopped,'offscreen orb stops painting');
 console.log('PASS: all idle portraits, anchors, frame deduplication/clearing, visibility pause/resume, DPR and reduced motion.');

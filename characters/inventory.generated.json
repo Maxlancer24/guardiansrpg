@@ -7,7 +7,7 @@
       "kind": "player-appearance",
       "status": "demo-ready",
       "manifest": "guardian-duel/shadowweaver.js",
-      "manifestSha256": "257288667e3779ca2e4c9009ec77b9bc7e41f690f93d4947b8291edfe42772f2",
+      "manifestSha256": "d65726a7acabe489360e9df3f1b2040f8bd73519f170fd7d21e2880f7f772094",
       "scale": {
         "sourceBodyHeight": 501,
         "idleScale": 1,
@@ -17,7 +17,7 @@
       "presentationFiles": [
         {
           "file": "guardian-duel/shadow-fx.js",
-          "sha256": "29fc96592bfcbf9688bc98276909b0acf78e9fa60f6d95e494655f7941a3f9bb"
+          "sha256": "3ae2888a4edc2f1a445afd10ecb899450c813ccea2d3f26f5fd9d379ad634755"
         }
       ],
       "actions": {

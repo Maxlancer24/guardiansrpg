@@ -95,14 +95,16 @@ function renderPortraits(dt){
   if(!reduced)p.age+=dt; // Idle only: real time (1x), independent of combat's 1.5x.
   const f=reduced?0:!p.pack.authoredBlink&&p.age%7000>=6890?5:sequence(p.pack,p.age,true);
   const ratio=Math.min(3,globalThis.devicePixelRatio||1);
-  if(p.frame===f&&p.ratio===ratio)continue;
+  const effectTick=p.id==='shadowweaver'&&!reduced?Math.floor(p.age/50):0;
+  if(p.frame===f&&p.ratio===ratio&&p.effectTick===effectTick)continue;
   const pc=p.canvas.getContext('2d');
   if(p.ratio!==ratio){p.canvas.width=p.canvas.height=Math.round(340*ratio);p.ratio=ratio;}
   pc.setTransform(ratio,0,0,ratio,0,0);
   pc.clearRect(0,0,340,340);
   pc.imageSmoothingEnabled=true;pc.imageSmoothingQuality='high';
   sprite(pc,'idle',f,175,320,GuardianScale.factor(p.id,255),p.id);
-  p.frame=f;
+  if(p.id==='shadowweaver')GuardianShadowFX.drawIdle(pc,{age:p.age,frame:f,pack:p.pack,factor:GuardianScale.factor(p.id,255),x:175,y:320,reduced});
+  p.frame=f;p.effectTick=effectTick;
  }
 }
 if(typeof IntersectionObserver!=='undefined'){
@@ -135,6 +137,7 @@ function drawActor(id,x,y,size){const state=modes[id],age=clock-state.at;let mod
  if(id===0){if(state.name!=='attack'){const p=AVATARS[appearance].actions[mode]||AVATARS[appearance].actions.idle;if(mode==='guard'){const contact=clock-(state.contact??-Infinity);f=contact<660?(contact<140?3:contact<440?4:5):age<250?0:age<500?1:[1,2][Math.floor(age/400)%2];}else if(mode==='victory')f=GuardianAnimation.victory(p,age);else if(mode==='idle'&&!p.authoredBlink&&(clock/1.5)%7000<110)f=5;else f=sequence(p,mode==='idle'?age/1.5:age,mode==='idle'||mode==='rest');}if(mode==='attack')mode=attackKey();sprite(ctx,mode,f,x,y,GuardianScale.factor(appearance,size));}else{let k='wi'+[0,1,2,3,2,1][Math.floor(clock/250)%6],floor=1050;if(mode==='attack'){k='wa'+(age<650?2:age<900?3:age<1120?4:age<1280?5:age<1550?6:7);floor=1238}else if(mode==='hurt')k='whurt';else if(mode==='defeat')k=age<240?'whurt':age<1080?'wkneel':'wfallen';const im=images[k],s=size/950;ctx.drawImage(im,x-720.5*s,y-floor*s,im.width*s,im.height*s)}
  if(mode==='hurt'&&age>650&&!busy)setMode(id,'idle');return{x,y,frame:f,mode};}
 function render(){if(!active||!readyAssets)return;const w=960,h=Math.round(w*canvas.clientHeight/canvas.clientWidth);const dpr=Math.min(3,globalThis.devicePixelRatio||1),density=Math.min(canvas.clientWidth*dpr/w,Math.sqrt(4000000/(w*h))),pw=Math.max(1,Math.round(w*density)),ph=Math.max(1,Math.round(h*density));if(canvas.width!==pw||canvas.height!==ph){canvas.width=pw;canvas.height=ph}ctx.setTransform(pw/w,0,0,ph/h,0,0);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';const im=images.arena,s=Math.max(w/im.width,h/im.height);ctx.drawImage(im,(w-im.width*s)/2,(h-im.height*s)/2,im.width*s,im.height*s);const size=GuardianScale.sceneSize(w,canvas.clientWidth),floor=h*.63,homes=[w*.28,w*.75];if(!reduced)for(let i=0;i<18;i++){ctx.fillStyle='rgba(152,242,191,'+(.16+.22*Math.sin(clock/1300+i)**2)+')';ctx.fillRect((i*193+Math.sin(clock/1600+i)*12)%w,h*.2+(i*89)%(h*.48),2,2)}const poses=[],order=appearance==='forestbastion'&&modes[0].name==='attack'?[1,0]:[0,1];for(const id of order)poses[id]=drawActor(id,homes[id],floor,size);
+ if(appearance==='shadowweaver'&&poses[0].mode==='idle')GuardianShadowFX.drawIdle(ctx,{age:clock/1.5,frame:poses[0].frame,pack:SHADOWWEAVER_ACTIONS.idle,factor:GuardianScale.factor(appearance,size),x:poses[0].x,y:poses[0].y,reduced,enabled:$('effects').checked});
  if(modes[0].name==='attack')GuardianMeleeFX.draw(ctx,{id:appearance,age:clock-modes[0].at,frame:poses[0].frame,pack:AVATARS[appearance].actions[attackKey()],factor:GuardianScale.factor(appearance,size),x:poses[0].x,y:poses[0].y,reduced,enabled:$('effects').checked});
  if(appearance==='shadowweaver'&&modes[0].name==='attack')GuardianShadowFX.draw(ctx,{age:clock-modes[0].at,frame:poses[0].frame,pack:SHADOWWEAVER_ACTIONS.attack,factor:GuardianScale.factor(appearance,size),x:poses[0].x,y:poses[0].y,end:{x:homes[1],y:floor-size*.55},size,reduced,enabled:$('effects').checked});
  if(appearance==='arcanist'&&modes[0].name==='attack')GuardianArcaneFX.draw(ctx,{age:clock-modes[0].at,frame:poses[0].frame,pack:ARCANIST_ACTIONS.attack,factor:GuardianScale.factor(appearance,size),x:poses[0].x,y:poses[0].y,end:{x:homes[1],y:floor-size*.8},size,reduced,enabled:$('effects').checked});

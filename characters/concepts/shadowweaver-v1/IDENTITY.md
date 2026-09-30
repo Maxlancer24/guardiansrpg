@@ -8,6 +8,7 @@
 - Atlas RGBA originales preservados. Recortes y clips de filas en manifiesto; escala proporcional, nunca deformación.
 - Fuente anatómica501px, objetivo224px en referencia1280. Escalas por acción conservan tamaño corporal; postura agachada no se reescala a altura completa.
 - Normal a distancia, sin traslación ni salto de regreso. Salida1300ms e impacto1440ms del timeline; efecto de sombra y sockets separados del arte.
+- Idle: esfera violeta sobre la palma, seis sockets registrados, pulso suave de3.4s y partículas. Compartida por combate, selector y visor; no modifica dibujos, stats ni velocidad de idle. Efectos apagados la ocultan en combate; movimiento reducido la mantiene estática.
 - Animación de activación genérica preparada. La activa real depende del equipo, no de esta apariencia.
 - Demo: /guardian-duel/?hero=shadowweaver. Visor: /guardian-duel/shadowweaver-preview.html.
 - Manifiesto: /guardian-duel/shadowweaver.js. Atlas/prompts/QA: /guardian-duel/assets/shadowweaver-v1/.

@@ -33,3 +33,13 @@ for(const width of [390,640,1280]){
  for(let f=0;f<6;f++){const [x,y,w,h]=p.attack.frames[f],v=p.attack.castSockets.palm[f];assert(v[0]>=x&&v[0]<=x+w&&v[1]>=y&&v[1]<=y+h,'palm socket inside its frame');}
 }
 console.log('PASS shadowweaver: 52 drawings, 9 actions, blink, complete victory/defeat, defensive parry, responsive scale and synchronized palm projectile.');
+for(const factor of [.33,.5,1])for(let frame=0;frame<6;frame++){
+ const input={age:0,frame,pack:p.idle,factor,x:300,y:450};
+ const orb=fx.idleSample(input),palm=fx.socket(p.idle,frame,factor,300,450);
+ assert.equal(orb.center.x,palm.x);assert(orb.center.y+orb.radius<palm.y,'orb floats above hand');
+ assert.equal(orb.radius,18*factor);
+ assert.notEqual(fx.idleSample({...input,age:850}).radius,orb.radius,'slow breathing pulse');
+ assert.deepEqual(fx.idleSample({...input,reduced:true}),fx.idleSample({...input,reduced:true,age:9500}));
+ assert.equal(fx.idleSample({...input,enabled:false}),null);
+}
+console.log('PASS idle orb: all six palm sockets, proportional scale, pulse, effects toggle and reduced motion.');
