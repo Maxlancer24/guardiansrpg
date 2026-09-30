@@ -1,4 +1,4 @@
-# Bastión del bosque / Forest Bastion
+# Joan
 
 - ID estable: forestbastion. Grupo: apariencia de jugador, no protagonista.
 - Estado: demo lista para publicar en /guardian-duel/. No modifica roster de Discord, perfiles ni reglas del bot.

@@ -1,4 +1,4 @@
-# Pistolero del ocaso / Dusk Gunslinger
+# Balthier
 
 - ID: duskgunner. Apariencia de jugador; no protagonista ni clase fija.
 - Diseño 4 aprobado del lote de cinco. Hombre adulto, pelo corto oscuro despeinado, tez oliva, barba incipiente, abrigo arena con forro burdeos y mangas remangadas, pañuelo burdeos, chaleco índigo, camisa crema, pantalones carbón, botas marrones.

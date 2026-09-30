@@ -1,4 +1,4 @@
-# Tejedora de sombras / Shadow Weaver
+# Juno
 
 - Esfera continua: sockets por dibujo en las nueve acciones. Se mantiene al cargar, viaja con el disparo y se recompone suavemente entre 1310–1570ms del clip; en derrota se disipa en 600ms. Sigue la mano en guardia, daño, descanso, movimiento, activación y victoria. No se modifican atlas ni reglas.
 

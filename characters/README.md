@@ -13,7 +13,7 @@ cliente actual sigue leyendo sus manifiestos JS. Los IDs son estables y no se tr
 - `guardian-duel/<id>.js`: recortes, anclajes de pies, máscaras y tiempos activos.
 - `guardian-duel/scale.js`: tamaño anatómico; `animation.js`: reproducción.
 - `guardian-duel/melee-fx.js`: efectos independientes de las imágenes.
-- `guardian-duel/gun-fx.js`: disparo del Pistolero del ocaso desde la boca del revólver; no calcula daño.
+- `guardian-duel/gun-fx.js`: disparo del Balthier desde la boca del revólver; no calcula daño.
 - `guardian-duel/shadow-fx.js`: hechizo de la Tejedora desde su palma, sin daño propio.
 - `guardian-duel/arcane-fx.js`: carga y rayo del bastón de Arcanista, sin daño propio.
 - `guardian-duel/alchemy-fx.js`: frasco parabólico y estallido cosmético de Alquimista; no añade estados ni consume objetos.
@@ -49,7 +49,7 @@ su inventario. No sustituye la revisión visual en movimiento.
 
 | Grupo | Personajes | Estado |
 | --- | --- | --- |
-| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista, Rastreadora, Custodio, Errante, Alquimista, Brisa, Viento de Jade, Lucien, Kaori, Viajera otoñal, Bastión del bosque, Tejedora de sombras, Pistolero del ocaso | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
+| Apariencias de jugadores | Lancero, Exploradora, Duelista, Centinela, Vanguardia, Arcanista, Pugilista, Rastreadora, Custodio, Errante, Alquimista, Brisa, Viento de Jade, Lucien, Kaori, Horo, Joan, Juno, Balthier | Nueve animaciones; disponibles en Guardian vs. Hollow; sin integración al personaje persistente |
 | Conceptos pendientes del lote inicial | Ninguno | Diez apariencias del primer roster completas en la demo; Alquimista y Brisa amplían las apariencias disponibles |
 | Protagonista de las quests | Guardián / Guardian (arte de Max) | No es una skin; nueve acciones, dos ataques y retrato. Especial determinada por la activa equipada del jugador |
 | Protagonistas de historia | Jessie, Garrick, Zoe | Integrados en sus pruebas existentes; no son apariencias para jugadores |
