@@ -60,8 +60,8 @@ var DTR={
  "Combo burst passive: every 3rd attack deals +18% and +8 flat bonus damage.":"Pasiva de combo: cada 3er ataque hace +18% y +8 de daño extra plano.",
  "Initiative control passive: a successful FOCUS attack drains 15 of the target's initiative (up to 25 at +5), shoving them down the turn order.":"Pasiva de control de iniciativa: un ataque con FOCUS exitoso drena 15 de la iniciativa del objetivo (hasta 25 en +5), empujándolo hacia atrás en el orden de turno.",
  "Guard-break rebound passive: when an attack breaks your PARRY, the attacker instantly takes 10 flat counter damage.":"Pasiva de rebote por rotura de guardia: cuando un ataque rompe tu PARRY, el atacante recibe al instante 10 de contra-daño plano.",
- "Blood line opener — feeds the lifesteal builds.":"Apertura de la línea de sangre — alimenta las builds de robo de vida.",
- "Defensive vow piece for the warden line.":"Pieza de voto defensivo para la línea warden.",
+ "💀 Bloodline passive: each time an ally is eliminated in combat, gain +12% permanent damage for that battle (stacks up to 2 times).":"Apertura de la línea de sangre — alimenta las builds de robo de vida.",
+ "🛡️ Warden's Vow passive: each time an ally is eliminated in combat, gain +8 flat damage mitigation permanently for that battle (stacks up to 2 times).":"Pieza de voto defensivo para la línea warden.",
  "Pay vitality for raw power. The steepest trade in the catalog.":"Paga vitalidad por poder puro. El trueque más duro del catálogo.",
  "All-round crown. No hole in it anywhere.":"Corona todoterreno. Sin ningún punto débil.",
  "Upgraded blood pact: lifesteal with a per-hit cap.":"Pacto de sangre mejorado: robo de vida con un tope por golpe.",
@@ -345,13 +345,20 @@ var GEAR=[
  ["Resonance Dagger","+1 STR, +1 AGI",9200,"Combo burst passive: every 3rd attack deals +18% and +8 flat bonus damage.","resonance_shard · pulse_essence"],
  ["Phase Shard","+1 STR, +5 HP",8000,"Initiative control passive: a successful FOCUS attack drains 15 of the target's initiative (up to 25 at +5), shoving them down the turn order.","focus_prism · bloodsteel_chip"],
  ["Shatter Brace","+1 CON, +5 HP",8200,"Guard-break rebound passive: when an attack breaks your PARRY, the attacker instantly takes 10 flat counter damage.","guard_core · null_coil"],
- ["Bloodline Ring","+1 STR, +5 HP",11000,"Blood line opener — feeds the lifesteal builds.","bloodsteel_chip · silver_ore"],
- ["Warden's Vow","+1 CON, +8 HP",10500,"Defensive vow piece for the warden line.","aegis_shard · medic_resin"],
+ ["Bloodline Ring","+1 STR, +5 HP",11000,"💀 Bloodline passive: each time an ally is eliminated in combat, gain +12% permanent damage for that battle (stacks up to 2 times).","bloodsteel_chip · silver_ore"],
+ ["Warden's Vow","+1 CON, +8 HP",10500,"🛡️ Warden's Vow passive: each time an ally is eliminated in combat, gain +8 flat damage mitigation permanently for that battle (stacks up to 2 times).","aegis_shard · medic_resin"],
  ["Blood Pact Seal","+3 STR, −35 HP",9000,"Pay vitality for raw power. The steepest trade in the catalog.","bloodsteel_chip · obsidian_alloy"],
  ["Null Crown","+1 STR, +1 AGI, +1 CON, +20 HP",20000,"All-round crown. No hole in it anywhere.","null_coil · obsidian_alloy"],
  ["Blood Pact Reliquary","+2 STR, −30 HP",26000,"Upgraded blood pact: lifesteal with a per-hit cap.","bloodsteel_chip · war_emblem_fragment"],
  ["Null Crown Apex","+2 STR, +2 AGI, +2 CON, +20 HP",31000,"Apex crown. First hit shreds 20 per enemy.","null_coil · temporal_gear · war_emblem_fragment"]
 ];
+
+GEAR.push(...[["Tideglass Compass", "+1 CON, +10 HP", 0, "Ebb and Flow: after ATTACK, the next successful REST restores +20 HP; after REST, the next ATTACK deals +10% damage. Effects do not stack.", "Reward only; not craftable"], ["Craterglass Bracer", "+1 CON, +20 HP", 0, "Resonant Guard: a successful PARRY prepares a shield for the following round. It can trigger once per round and refreshes instead of stacking.", "Reward only; not craftable"], ["Quartermaster's Seal", "+1 CON, +15 HP", 0, "📯 Field Supply: every consumable you use restores +30% more HP and grants +30% stronger shields, and every incoming attack is reduced by 10 flat damage. Enhancement adds 4 percentage points per level.", "Reward only; not craftable"], ["Mirrored Crown", "+1 STR, +1 AGI, +1 CON, +15 HP", 36000, "👑 Mirrored Majesty: at combat start, for each of STR, AGI and CON where the strongest enemy beats you, gain +1 in that stat (up to 2 stats). +3: up to 3 stats. +5: the largest gap gains +2.", "Queen's Vault recipe; then craft at the Forge"]]);
+Object.assign(DTR,{"Ebb and Flow: after ATTACK, the next successful REST restores +20 HP; after REST, the next ATTACK deals +10% damage. Effects do not stack.": "Ebb y Flow: después de ATTACK, el próximo REST exitoso recupera 20 HP adicionales. Después de REST, el próximo ATTACK causa +10% de daño. No se acumula.", "Resonant Guard: a successful PARRY prepares a shield for the following round. It can trigger once per round and refreshes instead of stacking.": "Un PARRY exitoso prepara 20 de escudo para la siguiente ronda. Una vez por ronda, sin acumular. Cada mejora añade 5 de escudo.", "📯 Field Supply: every consumable you use restores +30% more HP and grants +30% stronger shields, and every incoming attack is reduced by 10 flat damage. Enhancement adds 4 percentage points per level.": "Los consumibles curan un 30% más y otorgan escudos un 30% más fuertes. Reduce cada ataque recibido en 10 de daño fijo. Cada mejora añade 4 puntos a la amplificación.", "👑 Mirrored Majesty: at combat start, for each of STR, AGI and CON where the strongest enemy beats you, gain +1 in that stat (up to 2 stats). +3: up to 3 stats. +5: the largest gap gains +2.": "Al iniciar el combate, gana +1 en hasta dos atributos STR/AGI/CON en los que el enemigo más fuerte te supere. A +3: hasta tres atributos. A +5: la mayor diferencia recibe +2.", "Queen's Vault recipe; then craft at the Forge": "Receta de Queen’s Vault; luego se fabrica en la forja", "Reward only; not craftable": "Solo recompensa; no se fabrica"});
+
+Object.assign(DTR,{"💀 Bloodline passive: each time an ally is eliminated in combat, gain +12% permanent damage for that battle (stacks up to 2 times).": "Cada muerte de un aliado otorga +12% de daño durante el combate, hasta dos cargas."});
+
+Object.assign(DTR,{"🛡️ Warden's Vow passive: each time an ally is eliminated in combat, gain +8 flat damage mitigation permanently for that battle (stacks up to 2 times).": "Cada muerte de un aliado otorga 8 de mitigación fija durante el combate, hasta dos cargas."});
 
 var CLANFORGE=[
  ["First Aid Kit","—",5000,"Once per combat, if no consumable can be used, restores up to 35 HP."],
@@ -363,18 +370,165 @@ var CLANFORGE=[
 ];
 
 var SETS=[
- ["Siegebreak Protocol","Guardbreaker Gauntlets + Breach Core","Guardbreaker bonus increases from +12% to +15%, and Breach Mark lasts 5 hits instead of 4."],
- ["Predator Circuit","Hunter Stride Boots + Resonance Dagger","When execute triggers, add +5 flat damage."],
- ["Bastion Counterloop","War Harness + Retaliation Anchor","War Harness starting shield increases to 20, and Retaliation flat bonus increases to +8."],
- ["Phantom Oracle","Mist Cloak + Predictor Lens","Post-REST dodge bonus increases to +15%, and Predictor pattern bonus increases to +14%."],
- ["Last Line Protocol","Last Pulse Amulet + Field Resuscitator","Revives from Last Pulse and Field Resuscitator grant +8 shield to the revived unit."],
- ["Surgical Breach","Field Resuscitator + Breach Core","Allies revived by Field Resuscitator gain +6% damage on their first ATTACK."],
- ["Counter Hunt","Retaliation Anchor + Hunter Stride Boots","If counter-burst hits an execute-range target, add +3 flat damage."],
- ["Sentinel Tempo","War Harness + Predictor Lens","If you defended, your next ATTACK gains +5% damage (one attack)."],
- ["Crimson Null Pact","Blood Pact Seal + Null Crown","Once per combat, when HP falls to 50% or lower, your next ATTACK gains 25% lifesteal."],
- ["Hemophage Rite","Blood Pact Reliquary + Resonance Dagger","Blood Pact lifesteal gains +2% (14% → 16%) and per-hit lifesteal cap gains +2."],
- ["Null Tribunal","Null Crown Apex + Breach Core","Null Crown Apex first-hit shred increases from 20 to 25 per enemy."]
+ [
+  "Siegebreak Protocol",
+  "Guardbreaker Gauntlets + Breach Core",
+  "Guardbreaker bonus increases from +12% to +15%, and Breach Mark lasts 5 hits instead of 4."
+ ],
+ [
+  "Predator Circuit",
+  "Hunter Stride Boots + Resonance Dagger",
+  "When execute triggers, add +5 flat damage."
+ ],
+ [
+  "Bastion Counterloop",
+  "War Harness + Retaliation Anchor",
+  "War Harness starting shield increases to 20, and Retaliation flat bonus increases to +8."
+ ],
+ [
+  "Phantom Oracle",
+  "Mist Cloak + Predictor Lens",
+  "Post-REST dodge bonus increases to +15%, and Predictor pattern bonus increases to +14%."
+ ],
+ [
+  "Last Line Protocol",
+  "Last Pulse Amulet + Field Resuscitator",
+  "Revives from Last Pulse and Field Resuscitator grant +8 shield to the revived unit."
+ ],
+ [
+  "Surgical Breach",
+  "Field Resuscitator + Breach Core",
+  "Allies revived by Field Resuscitator gain +6% damage on their first ATTACK."
+ ],
+ [
+  "Counter Hunt",
+  "Retaliation Anchor + Hunter Stride Boots",
+  "If counter-burst hits an execute-range target, add +3 flat damage."
+ ],
+ [
+  "Sentinel Tempo",
+  "War Harness + Predictor Lens",
+  "If you defended, your next ATTACK gains +5% damage (one attack)."
+ ],
+ [
+  "Crimson Null Pact",
+  "Blood Pact Seal + Null Crown",
+  "Once per combat, when HP falls to 50% or lower, your next ATTACK gains 25% lifesteal."
+ ],
+ [
+  "Hemophage Rite",
+  "Blood Pact Reliquary + Resonance Dagger",
+  "Blood Pact lifesteal gains +2% (14% -> 16%) and per-hit lifesteal cap gains +2."
+ ],
+ [
+  "Null Tribunal",
+  "Null Crown Apex + Breach Core",
+  "Null Crown Apex first-hit shred increases from 20 to 25 per enemy."
+ ],
+ [
+  "Prism Rift",
+  "Phase Shard + Resonance Dagger",
+  "FOCUS attacks that trigger Phase Shard count as +2 resonance hits instead of +1, accelerating the combo cycle."
+ ],
+ [
+  "Focus Edge",
+  "Phase Shard + Predictor Lens",
+  "Phase Shard gains +5 INI drain and +5 percentage points of mitigation penetration."
+ ],
+ [
+  "Fracture Protocol",
+  "Phase Shard + Guardbreaker Gauntlets",
+  "FOCUS attacks against DEFEND targets add +2 flat damage on top of the Guardbreaker bonus."
+ ],
+ [
+  "Breakwall",
+  "Shatter Brace + War Harness",
+  "When the guard break counter fires, you gain a +3 HP shield."
+ ],
+ [
+  "Shatter Circuit",
+  "Shatter Brace + Guardbreaker Gauntlets",
+  "Guard break counter damage: +3 flat (10 → 13 base)."
+ ],
+ [
+  "Counter Pact",
+  "Shatter Brace + Retaliation Anchor",
+  "Guard break counter +2 flat. Retaliation Anchor counter-burst +1 flat."
+ ],
+ [
+  "Fracture Lens",
+  "Phase Shard + Shatter Brace",
+  "After your guard breaks, the next successful attack can trigger Phase Shard penetration and INI drain without FOCUS."
+ ],
+ [
+  "Shattered Fortress",
+  "Shatter Brace + Craterglass Bracer",
+  "A successful PARRY adds 25 to Craterglass's next-round shield (45 base; 70 at +5). Once per round; refreshes, never stacks."
+ ],
+ [
+  "Tidal Veil",
+  "Tideglass Compass + Mist Cloak",
+  "After a successful REST, the next Flow-empowered attack that deals damage heals 25 HP. Once per Flow charge, including multi-hit attacks."
+ ],
+ [
+  "Last Testament",
+  "Bloodline Ring + Warden's Vow",
+  "The first ally death grants 50 shield for the rest of that round. Once per combat."
+ ],
+ [
+  "Field Hospital",
+  "Quartermaster's Seal + First Aid Kit",
+  "Activating First Aid also grants 40 shield for this round. Once per combat; this shield is not amplified by consumable bonuses."
+ ],
+ [
+  "Returning Current",
+  "Leviathan Harpoon + Tideglass Compass",
+  "If Returning Tide deals damage, your next successful REST restores 40 additional HP. Once per combat; interrupted REST does not consume it."
+ ],
+ [
+  "Craterheart",
+  "Meteor Anchor + Craterglass Bracer",
+  "If Gravity Well reduces an impact and you survive until next round, gain 50 shield for that round. Once per combat."
+ ],
+ [
+  "Royal Reflection",
+  "Mirrorbound Rapier + Mirrored Crown",
+  "Your summoned Reflection starts with shield equal to 20% of its own max HP, minimum 30 and maximum 60. Lasts until absorbed or the summon disappears."
+ ],
+ [
+  "Inherited Wrath",
+  "Revenant Edge + Bloodline Ring",
+  "With at least one Bloodline stack, Fallen Echo gains 10 percentage points of echo damage (50% to 60%; 75% to 85% at +5)."
+ ]
 ];
+Object.assign(DTR,{
+ "Guardbreaker bonus increases from +12% to +15%, and Breach Mark lasts 5 hits instead of 4.": "Aumenta el bono contra guardia en 3 puntos porcentuales y la marca de brecha dura un impacto más.",
+ "When execute triggers, add +5 flat damage.": "Añade 5 de daño cuando se activa el bono contra enemigos heridos.",
+ "War Harness starting shield increases to 20, and Retaliation flat bonus increases to +8.": "Añade 5 al escudo inicial y 2 al bono fijo de Anchor.",
+ "Post-REST dodge bonus increases to +15%, and Predictor pattern bonus increases to +14%.": "Añade 3 puntos porcentuales a la evasión tras descansar y 2 al bono contra patrones repetidos.",
+ "Revives from Last Pulse and Field Resuscitator grant +8 shield to the revived unit.": "Las reanimaciones del amuleto y del reanimador otorgan un escudo de 8.",
+ "Allies revived by Field Resuscitator gain +6% damage on their first ATTACK.": "El aliado reanimado gana 6% de daño en su primer ataque.",
+ "If counter-burst hits an execute-range target, add +3 flat damage.": "Anchor añade 3 de daño fijo contra un objetivo dentro del umbral de ejecución.",
+ "If you defended, your next ATTACK gains +5% damage (one attack).": "Después de defender, el siguiente ataque gana 5% de daño.",
+ "Once per combat, when HP falls to 50% or lower, your next ATTACK gains 25% lifesteal.": "Una vez por combate, bajar a 50% de vida o menos prepara 25% de robo de vida para el próximo ataque.",
+ "Blood Pact lifesteal gains +2% (14% -> 16%) and per-hit lifesteal cap gains +2.": "Añade 2 puntos porcentuales de robo de vida y 2 al límite de curación por impacto.",
+ "Null Crown Apex first-hit shred increases from 20 to 25 per enemy.": "Añade 5 a la reducción de defensa de Parry del primer golpe por enemigo.",
+ "FOCUS attacks that trigger Phase Shard count as +2 resonance hits instead of +1, accelerating the combo cycle.": "Tras FOCUS, el ataque suma dos al contador de Resonance en lugar de uno.",
+ "Phase Shard gains +5 INI drain and +5 percentage points of mitigation penetration.": "Phase Shard añade 5 INI de drenaje y 5 puntos porcentuales de penetración de mitigación.",
+ "FOCUS attacks against DEFEND targets add +2 flat damage on top of the Guardbreaker bonus.": "Tras FOCUS, atacar contra PARRY añade 2 de daño fijo al bono de Guardbreaker.",
+ "When the guard break counter fires, you gain a +3 HP shield.": "El contraataque por guardia rota otorga 3 de escudo.",
+ "Guard break counter damage: +3 flat (10 → 13 base).": "Añade 3 de daño al contraataque de Shatter Brace.",
+ "Guard break counter +2 flat. Retaliation Anchor counter-burst +1 flat.": "Añade 2 al contraataque de Shatter Brace y 1 al bono fijo de Retaliation Anchor.",
+ "After your guard breaks, the next successful attack can trigger Phase Shard penetration and INI drain without FOCUS.": "Tras sufrir una rotura de guardia, el siguiente ataque puede activar la penetración y el drenaje de Phase Shard sin FOCUS.",
+ "A successful PARRY adds 25 to Craterglass's next-round shield (45 base; 70 at +5). Once per round; refreshes, never stacks.": "Un PARRY exitoso añade 25 al escudo de Craterglass para la próxima ronda (45 base; 70 a +5). Una vez por ronda, sin acumular.",
+ "After a successful REST, the next Flow-empowered attack that deals damage heals 25 HP. Once per Flow charge, including multi-hit attacks.": "Tras un REST exitoso, el siguiente ataque potenciado por Flow que cause daño cura 25 HP. Una vez por carga, incluso con múltiples impactos.",
+ "The first ally death grants 50 shield for the rest of that round. Once per combat.": "La primera muerte de un aliado otorga 50 de escudo hasta el final de esa ronda. Una vez por combate.",
+ "Activating First Aid also grants 40 shield for this round. Once per combat; this shield is not amplified by consumable bonuses.": "Activar First Aid otorga además 40 de escudo durante esta ronda. Una vez por combate; el escudo no recibe amplificación de consumibles.",
+ "If Returning Tide deals damage, your next successful REST restores 40 additional HP. Once per combat; interrupted REST does not consume it.": "Si Returning Tide causa daño, tu próximo REST exitoso cura 40 HP adicionales. Una vez por combate; un REST interrumpido no lo consume.",
+ "If Gravity Well reduces an impact and you survive until next round, gain 50 shield for that round. Once per combat.": "Si Gravity Well reduce un impacto y sobrevivís hasta la próxima ronda, ganás 50 de escudo durante esa ronda. Una vez por combate.",
+ "Your summoned Reflection starts with shield equal to 20% of its own max HP, minimum 30 and maximum 60. Lasts until absorbed or the summon disappears.": "Tu reflejo aparece con escudo del 20% de su propia vida máxima, mínimo 30 y máximo 60. Dura hasta consumirse o desaparecer la invocación.",
+ "With at least one Bloodline stack, Fallen Echo gains 10 percentage points of echo damage (50% to 60%; 75% to 85% at +5).": "Con al menos una carga de Bloodline, Fallen Echo gana 10 puntos porcentuales de daño de eco (50% a 60%; 75% a 85% con +5)."
+});
 
 var WEAPONS=[
  ["Gemini Edge","+1 STR, +1 AGI","Double Strike","Two strikes at 60% damage each; can hit the same or two different targets.","→ 75% at +5",15000,"",""],
@@ -1120,12 +1274,12 @@ PAGES.gear={t:"Gear &amp; Forge",e:"The guide",d:"Crafted gear boosts your stats
  ],["k",""])+
  '<p class="b">'+L("Above those sit uncommon, rare and very rare tiers, plus <strong>10 region signature materials</strong> that only drop from hunting one specific region, and two <strong>legendary</strong> weapon mats — Void-Tempered Core and Ascendant Ember — that no region drops at all.","Por encima están los tiers poco común, raro y muy raro, más <strong>10 materiales de firma de región</strong> que solo caen cazando en una región concreta, y dos materiales de arma <strong>legendarios</strong> — Void-Tempered Core y Ascendant Ember — que ninguna región suelta.")+'</p>'+
  '<h2 class="s">'+L("The catalog","El catálogo")+'</h2>'+
- '<p class="b">'+L("Twenty-seven pieces. Many carry a real combat passive, not just a stat line.","Veintisiete piezas. Muchas llevan una pasiva de combate real, no solo una línea de stats.")+'</p>'+cards(g)+
+ '<p class="b">'+L("Thirty-one pieces. Many carry a real combat passive, not just a stat line.","Treinta y una piezas. Muchas llevan una pasiva de combate real, no solo una línea de stats.")+'</p>'+cards(g)+
  '<h2 class="s">Clan Forge</h2>'+
  '<p class="b">'+L("Six pieces your <strong>clan</strong> must unlock the recipe for before any member can craft them.","Seis piezas cuya receta debe desbloquear tu <strong>clan</strong> antes de que cualquier miembro pueda craftearlas.")+'</p>'+cards(cf)+
  '<h2 class="s">'+L("Set bonuses","Bonos de set")+'</h2>'+
- '<p class="b">'+L("Wearing the right two pieces together upgrades their passives. Eleven pairs are defined.","Llevar las dos piezas correctas juntas mejora sus pasivas. Hay once pares definidos.")+'</p>'+
- tbl(L(["Set","The two pieces","What it changes"],["Set","Las dos piezas","Qué cambia"]),SETS.map(function(r){return [r[0],'<span style="font-family:var(--mono);font-size:.76rem">'+E(r[1])+"</span>",L(r[2],DTR[r[2]])];}),["k","",""])+
+ '<p class="b">'+L("Equip the required pieces to activate a set. There are 26 sets: 22 gear pairs and 4 weapon + gear combinations. All completed sets work together. Sets do not require a separate recipe.","Equipá las piezas indicadas para activar el bono. Hay 26 sets: 22 parejas de gears y 4 combinaciones de arma + gear. Todos los sets completos funcionan juntos. No requieren una receta separada.")+'</p>'+
+ tbl(L(["Set","The two pieces","What it changes"],["Set","Las dos piezas","Qué cambia"]),SETS.map(function(r){return [r[0],'<span style="font-family:var(--mono);font-size:.76rem">'+E(r[1])+"</span>",L(r[2],DTR[r[2]])];}),["k","",""]).replace('<div class="tw">','<div class="tw equipment-set-table">')+
  '<h2 class="s">'+L("Enhancement · +1 to +5","Mejora · +1 a +5")+'</h2>'+
  '<p class="b">'+L("Equipped gear enhances from +1 to +5, making its bonus stronger each level, and it applies in every combat mode. Cost scales hard: the oil curve runs <strong>20% → 35% → 60% → 100% → 150%</strong> of the item\'s base price per level, about 365% of the item\'s cost in total to reach +5.","El gear equipado se mejora de +1 a +5, haciendo su bono más fuerte cada nivel, y se aplica en todos los modos de combate. El costo escala duro: la curva de oil va <strong>20% → 35% → 60% → 100% → 150%</strong> del precio base por nivel, alrededor del 365% del costo del objeto en total para llegar a +5.")+'</p>'+
  '<div class="callout callout--warn"><p>'+L("<strong>The +4 and +5 wall is deliberate.</strong> Those two steps demand rare materials the earlier ones do not. Take your best piece to +3 before you even think about the last two.","<strong>El muro de +4 y +5 es deliberado.</strong> Esos dos pasos exigen materiales raros que los anteriores no. Lleva tu mejor pieza a +3 antes de siquiera pensar en los dos últimos.")+'</p></div>'+
@@ -1142,7 +1296,10 @@ PAGES.weapons={t:"Weapons",e:"The guide",d:"A separate equipment slot from gear,
    '<div class="card__d"><strong style="font-family:var(--serif);color:var(--text)">'+E(r[2])+'</strong> — '+E(L(r[3],DTR[r[3]]))+'</div>'+
    '<div class="card__f">'+(r[5]?r[5].toLocaleString()+" OIL · ":"")+E(L(r[4],DTR[r[4]]))+(r[7]?" · "+E(L(r[7],DTR[r[7]])):"")+'</div></div>';
  });
- return '<h2 class="s">'+L("How weapons work","Cómo funcionan las armas")+'</h2>'+
+ return '<h2 class="s">'+L("Weapon + gear sets","Sets de arma + gear")+'</h2>'+
+ '<p class="b">'+L("These bonuses also work alongside a completed two-gear set.","Estos bonos también funcionan junto con un set completo de dos gears.")+'</p>'+
+ tbl(L(["Set","Required pieces","Bonus"],["Set","Piezas necesarias","Bono"]),SETS.slice(-4).map(function(r){return [E(r[0]),E(r[1]),L(r[2],DTR[r[2]])];}),["k","",""]).replace('<div class="tw">','<div class="tw equipment-set-table">')+
+ '<h2 class="s">'+L("How weapons work","Cómo funcionan las armas")+'</h2>'+
  '<p class="b">'+L("Every weapon gives a <strong>passive</strong> that is always on, <strong>plus</strong> an <strong>active skill</strong> you fire with the skill button — it appears once you have a weapon equipped. You can only have <strong>one active skill in play per fight</strong>, and each one is <strong>once per combat</strong>.","Cada arma da una <strong>pasiva</strong> siempre activa, <strong>más</strong> una <strong>habilidad activa</strong> que disparas con el botón de skill — aparece cuando tienes un arma equipada. Solo puedes tener <strong>una activa en juego por pelea</strong>, y cada una es <strong>una vez por combate</strong>.")+'</p>'+
  '<p class="b">'+L("Weapons enhance to <strong>+5</strong> like gear, using their own recipes and materials, and every recipe needs a <strong>region signature material</strong> — so every region on the map feeds a particular weapon.","Las armas se mejoran hasta <strong>+5</strong> como el gear, con sus propias recetas y materiales, y cada receta necesita un <strong>material de firma de región</strong> — así cada región del mapa alimenta a un arma concreta.")+'</p>'+
  '<div class="callout"><p>'+L("Active skills are <strong>disabled in equalized modes</strong> — Blind Drop and Airdrop combat — where everyone fights on identical footing by design.","Las habilidades activas están <strong>deshabilitadas en los modos igualados</strong> — Blind Drop y el combate de Airdrop — donde todos pelean en igualdad por diseño.")+'</p></div>'+

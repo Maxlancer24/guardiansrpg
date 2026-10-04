@@ -588,3 +588,15 @@ h2.s:first-of-type::before{display:none}
 /* smoother active-nav accent */
 .nav a{transition:color .16s var(--ease),background .16s var(--ease),border-color .16s var(--ease),box-shadow .16s var(--ease)}
 @media (prefers-reduced-motion:reduce){body::after{display:none}}
+
+/* Equipment combinations stay readable without sideways scrolling on phones. */
+@media(max-width:640px){
+ .equipment-set-table{overflow:visible}
+ .equipment-set-table table,.equipment-set-table tbody{display:block;min-width:0;width:100%}
+ .equipment-set-table thead{display:none}
+ .equipment-set-table tr{display:block;padding:16px;border-bottom:1px solid var(--rule)}
+ .equipment-set-table tr:last-child{border-bottom:0}
+ .equipment-set-table td{display:block;width:auto!important;min-width:0;white-space:normal;border:0;padding:3px 0;overflow-wrap:anywhere}
+ .equipment-set-table td:first-child{font-size:1.05rem;margin-bottom:5px}
+ .equipment-set-table td:nth-child(2){opacity:.8;margin-bottom:8px}
+}
