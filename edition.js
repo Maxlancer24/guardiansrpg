@@ -89,6 +89,7 @@ window.GuardiansEdition = function (ctx) {
     ['Start here', [['home','Home','Inicio'],['start','Getting started','Primeros pasos'],['player-portal','Player portal guide','Guía del portal'],['mastery','Characters & mastery','Personajes y maestrías'],...pick(['tut-combat','tut-pokemax','changelog'])], 'Empieza aquí'],
     ['Combat & equipment',pick(['combat','gear','weapons','consumables','economy']),'Combate y equipo'],
     ['Activities & clans',[...pick(['modes']),['raids','Boss raids','Raids de jefes'],...pick(['battle-royale','war-campaign','abyss','clans','diplomacy','sabotage'])],'Actividades y clanes']);
+  window.GuardiansCombatGuide(ctx);
   function header(){
     let el=document.querySelector('.ed-header');
     if(!el){el=document.createElement('header');el.className='ed-header';document.body.prepend(el);}

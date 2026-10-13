@@ -12,7 +12,7 @@ function createServer() {
     if(fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');
     if(!fs.existsSync(file)){
       // The three new public routes are generated from the app on the first build.
-      if(/^\/(es\/)?(mastery|raids|player-portal)\/$/.test(pathname))file=path.join(root,pathname.startsWith('/es/')?'es/index.html':'index.html');
+      if(/^\/(es\/)?(mastery|raids|player-portal|combat-guide)\/$/.test(pathname))file=path.join(root,pathname.startsWith('/es/')?'es/index.html':'index.html');
       else {res.writeHead(404).end('Not found');return;}
     }
     res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});
