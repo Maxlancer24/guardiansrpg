@@ -940,98 +940,13 @@ function dsc(accent,title,body,footer){
    ══════════════════════════════════════════════════════════════════ */
 /* FAQ: shown on Getting Started AND emitted as FAQPage structured data by the build.
    [ questionEN, answerEN, questionES, answerES ] — one source, no drift. */
-var FAQ=[
- ["What is The Guardians?",
-  "A role-playing game that runs entirely inside Discord: turn-based combat, craftable gear and weapons, a story campaign, a full monster-catcher (Pokemax), mechs and more — all played with chat commands.",
-  "¿Qué es The Guardians?",
-  "Un juego de rol que corre por completo dentro de Discord: combate por turnos, gear y armas crafteables, una campaña de historia, un cazador de monstruos completo (Pokemax), mechas y más — todo con comandos de chat."],
- ["Is it free to play?",
-  "Yes. The Guardians is a Discord bot game; this website is a free player compendium read from the live bot.",
-  "¿Es gratis?",
-  "Sí. The Guardians es un juego de bot de Discord; este sitio es un compendio para jugadores, gratuito, leído del bot en vivo."],
- ["How do I start?",
-  "Join the Discord where the bot lives — currently the Chainers server (Chainers is its own separate game; Guardians RPG will get its own server soon) — and make your first profile from the Kiosk. Your account is created the moment you make a profile or join your first game. The Getting Started commands on this page walk you through it.",
-  "¿Cómo empiezo?",
-  "Entra al Discord donde vive el bot — por ahora el servidor de Chainers (Chainers es un juego aparte; Guardians RPG pronto tendrá su propio servidor) — y crea tu primer perfil desde el Kiosco. Tu cuenta se crea en cuanto haces un perfil o entras a tu primera partida. Los comandos de esta página de Primeros pasos te guían."],
- ["What are Pokemax?",
-  "A complete monster-catcher living inside the RPG: catch 120 species across Valestia, raise them to level 50 through two evolutions, and battle 3-versus-3 — with its own type chart, moves and genes.",
-  "¿Qué son los Pokemax?",
-  "Un cazador de monstruos completo dentro del RPG: captura 120 especies por Valestia, súbelas a nivel 50 con dos evoluciones y pelea 3 contra 3 — con su propia tabla de tipos, movimientos y genes."],
- ["Who makes and runs the game?",
-  "The Guardians is built and run by Max on his Discord server. Reward amounts, drop rates, prices and which features are live are all set by Max; this site simply reflects the live bot.",
-  "¿Quién hace y gestiona el juego?",
-  "The Guardians está creado y gestionado por Max en su servidor de Discord. Las recompensas, tasas de drop, precios y qué funciones están activas los define Max; este sitio solo refleja el bot en vivo."],
- ["How do I get in touch?",
-  "For questions, feedback or proposals, email contact@guardiansrpg.com.",
-  "¿Cómo puedo contactar?",
-  "Para preguntas, comentarios o propuestas, escribe a contact@guardiansrpg.com."]
-];
+var FAQ=[];
 var PAGES={};
-
-PAGES.home={t:"The Guardians",e:"",d:"",nohead:true,h:function(){
- var sys=[
-  ["⚔️","Combat","combat","var(--brass)","Four buttons, real maths — Focus, Parry, and the arithmetic every fight runs on.","Combate","Cuatro botones, matemática real — Focus, Parry y la aritmética que corre en cada pelea."],
-  ["🗺️","Valestia","valestia","var(--verdigris)","Eleven regions, 210 named enemies, and the roads between them. Travel and hunt.","Valestia","Once regiones, 210 enemigos con nombre, y los caminos entre ellas. Viaja y caza."],
-  ["🐾","Pokemax","pets","var(--t-grass)","Catch 120 species, raise them to 50, and battle 3-versus-3 — a whole monster-battler inside the RPG.","Pokemax","Captura 120 especies, súbelas a 50 y pelea 3 contra 3 — todo un juego de monstruos dentro del RPG."],
-  ["🤖","Mechas","mechas","var(--t-water)","Front Mission in a channel: pilot a four-part wanzer and dismantle the enemy limb by limb.","Mechas","Front Mission en un canal: pilota un wanzer de cuatro partes y desmóntalo miembro a miembro."],
-  ["📜","The Story","story","var(--brass)","A story campaign, "+COUNTS.story+" missions and counting, that runs inside the combat engine at your party's side.","La Historia","Una campaña de "+COUNTS.story+" misiones y contando, que corre dentro del motor de combate junto a tu grupo."],
-  ["🏛️","Clans &amp; Gyms","clans","var(--t-rock)","Found a clan, hold territory, sign treaties, and conquer the ten regional Gyms.","Clanes y Gimnasios","Funda un clan, controla territorio, firma tratados y conquista los diez Gimnasios regionales."],
-  ["🎲","Game Modes","modes","var(--t-ghost)","Duels, Triad, Horde, the Eternal Abyss, sieges, Vanguard — nineteen ways to fight.","Modos de juego","Duelos, Tríada, Horda, el Abismo Eterno, asedios, Vanguard — diecinueve formas de pelear."],
-  ["🔮","Mysteries","mysteries","var(--corrupt)","Hidden secrets scattered across the world, each with a surprise found nowhere else.","Misterios","Secretos ocultos por todo el mundo, cada uno con una sorpresa que no está en ningún otro lado."],
-  ["🧭","Expeditions","expeditions","#0E9CB8","Timed sea voyages from Ravennor to island regions with their own tides, currency and exclusive loot.","Expediciones","Viajes marítimos temporales desde Ravennor a regiones-isla con sus mareas, moneda y botín exclusivo."]
- ];
- return '<section class="hero">'+
-  '<img class="hero__bg" src="'+MAP_SRC+'" alt="The map of Valestia" width="1485" height="810">'+
-  '<div class="hero__scrim"></div>'+
-  '<img class="hero__emblem" src="/assets/guardians-emblem.png" alt="" width="1254" height="1254" decoding="async">'+
-  '<div class="hero__in">'+
-   '<p class="hero__eyebrow anim">'+L("A Discord RPG · Valestia","Un RPG de Discord · Valestia")+'</p>'+
-   '<h1 class="hero__t anim d1"><span class="hero__the">The</span><span class="hero__big">Guardians</span></h1>'+
-   '<p class="hero__sub anim d2">'+L("The seal on Azroth is failing, the scroll names three places, and the road only goes one way. A deep, living RPG played entirely in Discord — combat, a whole map to hunt, monster-catching, mechas, clans, and a story that keeps being written.","El sello sobre Azroth se está debilitando, el pergamino nombra tres lugares, y el camino solo va en una dirección. Un RPG profundo y vivo jugado enteramente en Discord — combate, todo un mapa para cazar, captura de monstruos, mechas, clanes, y una historia que se sigue escribiendo.")+'</p>'+
-   '<div class="hero__stats anim d3">'+
-    '<span class="stat"><b class="num" data-to="11">0</b><span>'+L("Regions","Regiones")+'</span></span>'+
-    '<span class="stat"><b class="num" data-to="120">0</b><span>Pokemax</span></span>'+
-    '<span class="stat"><b class="num" data-to="'+COUNTS.story+'">0</b><span>'+L("Story missions","Misiones de historia")+'</span></span>'+
-    '<span class="stat"><b class="num" data-to="50">0</b><span>'+L("Side quests","Misiones secundarias")+'</span></span>'+
-    '<span class="stat"><b class="num" data-to="19">0</b><span>'+L("Game modes","Modos de juego")+'</span></span>'+
-   '</div>'+
-   '<div class="hero__cta anim d4">'+
-    '<a class="hbtn hbtn--primary" href="'+L('/play/','/es/play/')+'">'+L('Play a demo battle →','Jugar combate de prueba →')+'</a>'+
-    '<a class="hbtn hbtn--primary" href="https://discord.gg/chainers" target="_blank" rel="noopener">'+L("Join the Discord →","Únete al Discord →")+'</a>'+
-    '<a class="hbtn hbtn--portal" href="https://guardians-app.discloud.app/">'+L("Player Portal &rarr;","Portal del jugador &rarr;")+'</a>'+
-    '<a class="hbtn hbtn--ghost" href="#start">'+L("Getting Started","Primeros pasos")+'</a>'+
-    '<a class="hbtn hbtn--ghost" href="#valestia">'+L("Explore Valestia","Explorar Valestia")+'</a>'+
-   '</div>'+
-   '<p class="anim d4" style="margin:.9rem 0 0;font-size:.82rem;color:rgba(238,235,226,.62);max-width:52ch">'+L("Guardians RPG currently runs inside the <b>Chainers</b> Discord — Chainers is its own separate game — and it will get its own server soon.","Guardians RPG vive por ahora dentro del Discord de <b>Chainers</b> — Chainers es un juego aparte — y pronto tendrá su propio servidor.")+'</p>'+
-  '</div></section>'+
-  '<section class="proto">'+
-   '<figure class="proto__fig"><img src="'+COVER+'" alt="The four protagonists of The Guardians" width="1672" height="941" loading="lazy" decoding="async"></figure>'+
-   '<div class="proto__body">'+
-    '<p class="proto__k">'+L("The protagonists","Los protagonistas")+'</p>'+
-    '<h2 class="proto__h">'+L("The four the story follows","Los cuatro que sigue la historia")+'</h2>'+
-    '<p class="proto__d">'+L('At the center, <b>Jessie</b> — the gunslinger who has been at your side since Stormbay. Beside her, <b>Garrick</b> and his maul, and <b>Zoe</b> with her throwing knives. The swordsman is <b>the Guardian</b> — and the Guardian is <span class="pl">you</span>, the player, written into the main story. This is your party.','En el centro, <b>Jessie</b> — la pistolera que te acompaña desde Stormbay. A su lado, <b>Garrick</b> y su maza, y <b>Zoe</b> con sus dagas arrojadizas. El espadachín es <b>el Guardian</b> — y el Guardian eres <span class="pl">tú</span>, el jugador, escrito en la historia principal. Este es tu grupo.')+'</p>'+
-   '</div>'+
-  '</section>'+
-  '<p class="home__lead">'+L("Everything on this site is read straight from the live bot — every number, region, item, formula and line of story. Pick a thread and pull.","Todo en este sitio se lee directamente del bot en vivo — cada número, región, objeto, fórmula y línea de historia. Elige un hilo y tira de él.")+'</p>'+
-  '<div class="newbie"><p class="newbie__t">'+L("🌱 <b>New to the game?</b> Start with the beginner tutorials — a first fight explained one turn at a time.","🌱 <b>¿Nuevo en el juego?</b> Empieza por los tutoriales para principiantes — una primera pelea explicada turno a turno.")+'</p>'+
-   '<a href="#tut-combat">'+L("Combat Basics →","Combate básico →")+'</a><a href="#tut-pokemax">'+L("Pokemax Basics →","Pokemax básico →")+'</a></div>'+
-  '<div class="syswrap"><div class="sysgrid">'+
-   sys.map(function(s){
-    return '<a class="syscard reveal" href="#'+s[2]+'" style="--sc:'+s[3]+'">'+
-     '<span class="syscard__i">'+s[0]+'</span>'+
-     '<div class="syscard__t">'+L(s[1],s[5])+'</div>'+
-     '<div class="syscard__d">'+L(s[4],s[6])+'</div>'+
-     '<span class="syscard__go">'+L("Open →","Abrir →")+'</span></a>';
-   }).join("")+
-  '</div></div>'+
-  '<div class="foot"><p>'+L("<b>The Guardians</b> — a Discord RPG built and run by <b>Max</b>. This compendium is generated from the live bot; reward amounts, drop rates and which panels are up are set by Max on the server the bot lives in.","<b>The Guardians</b> — un RPG de Discord creado y gestionado por <b>Max</b>. Este compendio se genera del bot en vivo; las recompensas, tasas de drop y qué paneles están activos los define Max en el servidor donde vive el bot.")+
-  '<br>'+L("Contact: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"https://discord.gg/chainers\" target=\"_blank\" rel=\"noopener\">Join the Discord</a> · <a href=\"#privacy\">Privacy Policy</a>","Contacto: <a href=\"mailto:contact@guardiansrpg.com\">contact@guardiansrpg.com</a> · <a href=\"https://discord.gg/chainers\" target=\"_blank\" rel=\"noopener\">Únete al Discord</a> · <a href=\"#privacy\">Política de privacidad</a>")+'</p></div>';
-}};
 
 PAGES["tut-combat"]={t:"Combat Basics",e:"Tutorial",d:"Your very first fight, explained one turn at a time — with a full worked example. No maths needed.",h:function(){
  return '<h2 class="s">'+L("What a fight is","Qué es una pelea")+'</h2>'+
  '<p class="b">'+L("Every fighter has <strong>HP</strong> — that is their health. When a fighter\'s HP reaches <strong>0</strong>, they are knocked out. Your job is simple: bring the enemy\'s HP to 0 before they bring yours to 0.","Cada luchador tiene <strong>HP</strong> — su salud. Cuando el HP de un luchador llega a <strong>0</strong>, queda fuera de combate. Tu objetivo es simple: llevar el HP del enemigo a 0 antes de que lleve el tuyo a 0.")+'</p>'+
- '<p class="b">'+L("A fight is <strong>turn-based</strong>, like a board game. You take a turn, then the enemy takes a turn, then you again — over and over. On <strong>your</strong> turn you press <strong>one</strong> button, and that is your whole move.","Una pelea es <strong>por turnos</strong>, como un juego de mesa. Tú juegas un turno, luego el enemigo, luego tú otra vez — una y otra vez. En <strong>tu</strong> turno pulsas <strong>un</strong> botón, y ese es todo tu movimiento.")+'</p>'+
+ '<p class="b">'+L("A fight is <strong>turn-based</strong>, like a board game. You take a turn, then the enemy takes a turn, then you again — over and over. On <strong>your</strong> turn, choose your main combat action. The controls also show the items and character options available to you.","Una pelea es <strong>por turnos</strong>, como un juego de mesa. Tú juegas un turno, luego el enemigo, luego tú otra vez — una y otra vez. En <strong>tu</strong> turno pulsas <strong>un</strong> botón, y ese es todo tu movimiento.")+'</p>'+
  '<h2 class="s">'+L("Your four buttons","Tus cuatro botones")+'</h2>'+
  tbl(L(["Button","What it does"],["Botón","Qué hace"]),LANG==="es"?[
   ['⚔️ <strong>Attack</strong>',"Golpeas al enemigo y le quitas algo de HP."],
@@ -1113,7 +1028,7 @@ PAGES["tut-pokemax"]={t:"Pokemax Basics",e:"Tutorial",d:"Your first Pokemax batt
 }};
 
 PAGES.start={t:"Getting Started",e:"The guide",d:"There is no registration. Your account is created the first time you make a profile from the Kiosk, or the first time you join a game — whichever happens first.",h:function(){
- return '<div class="callout"><p>'+L("<strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the 94 story and side missions, all of it.","<strong>The Guardians</strong> es un RPG de Discord creado y gestionado por <strong>Max</strong> — el motor de combate, el mundo de Valestia, las 94 misiones de historia y secundarias, todo.")+'</p>'+
+ return '<div class="callout"><p>'+L("<strong>The Guardians</strong> is a Discord RPG built and run by <strong>Max</strong> — the combat engine, the world of Valestia, the story and side missions, all of it.","<strong>The Guardians</strong> es un RPG de Discord creado y gestionado por <strong>Max</strong> — el motor de combate, el mundo de Valestia, las misiones de historia y secundarias, todo.")+'</p>'+
  '<p>'+L("Everything on this site describes the bot as it actually runs on <strong>the server the bot lives in</strong>. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max, and the defaults listed here are what he starts from.","Todo en este sitio describe el bot tal como funciona en <strong>el servidor donde vive el bot</strong>. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max, y los valores por defecto listados aquí son de los que él parte.")+'</p></div>'+
  '<h2 class="s">'+L("The Kiosk","El Kiosco")+'</h2>'+
  '<p class="b">'+L("The bot uses the <span class=\"cmd\">!</span> prefix for typed commands, but most of the game is <strong>panel-driven</strong>: Max places persistent button panels in the channels and you play by clicking them. The most important one is the <strong>Kiosk</strong> — your personal hub.","El bot usa el prefijo <span class=\"cmd\">!</span> para comandos escritos, pero la mayor parte del juego es <strong>por paneles</strong>: Max coloca paneles de botones persistentes en los canales y juegas haciendo clic. El más importante es el <strong>Kiosco</strong> — tu centro personal.")+'</p>'+
@@ -2898,7 +2813,7 @@ PAGES.changelog={t:"What's New",e:"The guide",d:"Recent additions to The Guardia
    "Beginner <strong><a href=\"#tut-combat\">combat</a></strong> and <strong><a href=\"#tut-pokemax\">Pokemax</a></strong> tutorials, chapter climax art across the <a href=\"#story\">Main Story</a>, and clearer consumable and Pokemax details.",
    "Tutoriales para principiantes de <strong><a href=\"#tut-combat\">combate</a></strong> y <strong><a href=\"#tut-pokemax\">Pokemax</a></strong>, arte de clímax por capítulo en la <a href=\"#story\">Historia Principal</a>, y detalles más claros de consumibles y Pokemax."]
  ];
- return '<div class="callout"><p>'+L("This page tracks the bigger additions to the game and to this site. The compendium itself is read from the live bot, so day-to-day tuning (prices, drop rates, caps) can change without a note here.","Esta página registra las adiciones más grandes al juego y a este sitio. El compendio se lee del bot en vivo, así que los ajustes del día a día (precios, tasas de drop, límites) pueden cambiar sin una nota aquí.")+'</p></div>'+
+ return '<div class="callout"><p>'+L("This page tracks the bigger additions to the game and to this site. This guide is updated periodically. The current game panels are the reference for event availability, prices, rewards and limits.","Esta página registra las adiciones más grandes al juego y a este sitio. Esta guía se actualiza periódicamente. Los paneles actuales del juego son la referencia para disponibilidad, precios, recompensas y límites.")+'</p></div>'+
   log.map(function(r){ return '<p class="b"><strong>'+r[0]+'</strong> · '+L(r[1],r[2])+'</p>'; }).join("");
 }};
 
@@ -3129,7 +3044,7 @@ var NAV=[
  ["Expeditions",[["expeditions","How Expeditions Work","Cómo funcionan"],["sunken-fang","Sunken Fang Archipelago","Archipiélago del Colmillo Hundido"],["hollowstar-crater","The Hollowstar Crater","El Cráter Hollowstar"],["nyxhaven","The Moonless Court of Nyxhaven","La Corte sin Luna de Nyxhaven"]],"Expediciones"],
  ["Reference",[["screens","What It Looks Like","Cómo se ve"]],"Referencia"]
 ];
-var COUNTS={gear:"27",weapons:"19",species:"120",petbattle:"71",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"44",sides:"50",gyms:"10"};
+var COUNTS={gear:"27",weapons:"19",species:"120",petbattle:"71",mechawpn:"7",pilot:"7",factions:"15",clans:"9",valestia:"11",story:"46",sides:"50",gyms:"10"};
 
 /* Per-group accent colour — gives each area of the site its own identity. */
 var GACC={"The guide":"var(--brass)","Tutorials":"#2FA3A3","The world":"var(--verdigris)","Campaign":"#C77D3A","Pokemax":"#4E9E5B","Mechas":"#3B87C4","Expeditions":"#0E9CB8","Reference":"#8E6BB0"};
@@ -3185,18 +3100,20 @@ var TR_HEAD={
  "nyxhaven":{e:"Expediciones",t:"La Corte sin Luna de Nyxhaven",d:"El tercer destino de expedición — una corte insular helada donde el Moonwell copia a cada guerrero, así que tus cazas se enfrentan a Echoes de jugadores reales de tu nivel."}
 };
 
+var edition=window.GuardiansEdition({L:L,PAGES:PAGES,TR_HEAD:TR_HEAD,FAQ:FAQ,NAV:NAV});
 function renderNav(){
+ edition.header();
  document.getElementById("nav").innerHTML=NAV.map(function(g){
   var acc=GACC[g[0]]||"var(--verdigris)";
-  return '<div class="navgrp"><div class="navgrp__t" style="color:'+acc+'">'+E(L(g[0],g[2]))+'</div><div class="nav">'+
+  return '<details class="navgrp"><summary class="navgrp__t" style="color:'+acc+'">'+E(L(g[0],g[2]))+'</summary><div class="nav">'+
    g[1].map(function(p){
     return '<a href="#'+p[0]+'" data-p="'+p[0]+'" style="--accent:'+(PACC[p[0]]||"var(--brass)")+'">'+L(p[1],p[2])+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
-   }).join("")+"</div></div>";
+   }).join("")+"</div></details>";
  }).join("");
 }
 function renderMain(){
- var foot=L('<b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. Every formula, item, region, quest and line of prose here was read out of the live bot. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.',
-  '<b>The Guardians — Compendio.</b> Un RPG de Discord creado y gestionado por <b>Max</b>. Cada fórmula, objeto, región, misión y línea de texto aquí se lee del bot en vivo. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max en el servidor donde vive el bot.')+
+ var foot=L('<b>The Guardians Compendium.</b> A Discord RPG built and run by <b>Max</b>. A reference guide based on the game code and content, updated periodically. Reward amounts, drop rates, daily caps, prices and which panels are up are set by Max on the server the bot lives in.',
+  '<b>The Guardians — Compendio.</b> Un RPG de Discord creado y gestionado por <b>Max</b>. Una guía de referencia basada en el código y contenido del juego, actualizada periódicamente. Las recompensas, tasas de drop, límites diarios, precios y qué paneles están activos los define Max en el servidor donde vive el bot.')+
   L(' <br><b>Contact:</b> questions, feedback, or proposals → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a> · <a href="https://discord.gg/chainers" target="_blank" rel="noopener">Join the Discord</a> · <a href="#privacy">Privacy Policy</a>.',
     ' <br><b>Contacto:</b> preguntas, comentarios o propuestas → <a href="mailto:contact@guardiansrpg.com">contact@guardiansrpg.com</a> · <a href="https://discord.gg/chainers" target="_blank" rel="noopener">Únete al Discord</a> · <a href="#privacy">Política de privacidad</a>.');
  document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
@@ -3231,7 +3148,7 @@ syncLang();
 function _effectiveTheme(){
  var t=document.documentElement.getAttribute("data-theme");
  if(t==="dark"||t==="light") return t;
- return (window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";
+ return "dark";
 }
 function syncThemeBtn(){ var b=document.getElementById("themesw"); if(b) b.textContent=(_effectiveTheme()==="dark"?"☀️":"🌙"); }
 function initTheme(){
@@ -3249,11 +3166,14 @@ initTheme();
 (function(){ var tb=document.getElementById("themesw"); if(tb) tb.addEventListener("click",toggleTheme); })();
 
 var rail=document.getElementById("rail"), scrim=document.getElementById("scrim");
-function closeRail(){rail.classList.remove("is-open");scrim.classList.remove("is-on");}
+function closeRail(){rail.classList.remove("is-open");scrim.classList.remove("is-on");document.querySelector(".ed-menu")?.setAttribute("aria-expanded","false");}
 document.getElementById("burger").addEventListener("click",function(){
  rail.classList.toggle("is-open");scrim.classList.toggle("is-on");
+ document.querySelector(".ed-menu")?.setAttribute("aria-expanded",String(rail.classList.contains("is-open")));
+ if(rail.classList.contains("is-open")) document.getElementById("q").focus();
 });
 scrim.addEventListener("click",closeRail);
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&rail.classList.contains("is-open")){closeRail();document.querySelector(".ed-menu")?.focus();}});
 
 var built={};
 var _reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -3334,6 +3254,7 @@ function route(){
  if(id==="lab"&&!built.lab){built.lab=1;initLab();}
  if(id==="home"){initHome();}
  updateMeta(id);
+ edition.route(id);
  revealIn(id);
  closeRail();
  window.scrollTo(0,0);
@@ -3349,6 +3270,7 @@ if(SITE_MODE){
  document.addEventListener("click",function(e){
   if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
   var a=e.target.closest&&e.target.closest("a"); if(!a||a.target==="_blank") return;
+  if(a.classList.contains("ed-language")){e.preventDefault();setLang(a.hreflang);return;}
   var id=navId(a.getAttribute("href")); if(id==null) return;
   e.preventDefault();
   history.pushState({},"",pageUrl(id));

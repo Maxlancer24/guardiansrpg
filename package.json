@@ -1,0 +1,10 @@
+{
+  "name": "guardians-compendium",
+  "private": true,
+  "scripts": {
+    "preview": "node scripts/preview.cjs",
+    "build": "node scripts/build-static.cjs",
+    "test": "node scripts/check-edition.cjs"
+  },
+  "devDependencies": {"playwright": "1.63.0"}
+}
