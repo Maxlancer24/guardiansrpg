@@ -36,7 +36,8 @@ window.GuardiansEdition = function (ctx) {
   );
   PAGES.home = {t:'The Guardians',e:'',d:'Explore Valestia: a fantasy RPG with tactical battles, character mastery and a connected Discord and web adventure.',nohead:true,h:()=>`
     <section class="ed-hero">
-      <img class="ed-hero-art" src="/assets/editorial/valestia-dawn.webp" width="1536" height="1024" alt="${L('An adventurer overlooking the emerald valleys of Valestia at dawn','Un aventurero contempla los valles esmeralda de Valestia al amanecer')}" fetchpriority="high">
+      <img class="ed-hero-art" src="/assets/editorial/guardian-valestia-v2.webp" width="1536" height="1024" alt="${L('The Guardian in blue and white, sword at his side, looking over Valestia at dawn','El Guardián de azul y blanco, con su espada, contempla Valestia al amanecer')}" fetchpriority="high">
+      <button class="hero-motion-toggle" type="button" hidden></button>
       <div class="ed-hero-copy">${label('A world to discover. A story to make yours.','Un mundo por descubrir. Una historia que hacer tuya.')}
         <h1><span>The</span> Guardians<span class="ed-hero-subtitle">${L('Your adventure begins in Valestia.','Tu aventura comienza en Valestia.')}</span></h1>
         <p>${L('Choose your path. Master turn-based battles. Explore a world of unlikely allies, ancient secrets and stories worth fighting for.','Elige tu camino. Domina el combate por turnos. Explora un mundo de aliados inesperados, secretos antiguos e historias por las que vale la pena luchar.')}</p>
@@ -102,6 +103,7 @@ window.GuardiansEdition = function (ctx) {
     close.onclick=()=>{document.getElementById('burger').click();document.querySelector('.ed-menu').focus();};
   }
   function route(id){
+    window.GuardiansHeroMotion?.route(id,L);
     document.body.classList.toggle('ed-home',id==='home');
     const lang=document.querySelector('.ed-language');
     if(lang)lang.href=L('/es/','/')+(id==='home'?'':id+'/');

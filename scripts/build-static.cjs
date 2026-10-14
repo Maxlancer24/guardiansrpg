@@ -28,7 +28,7 @@ const escape=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt
      title:document.title,description:document.querySelector('meta[name="description"]').content,
      header:document.querySelector('.ed-header').outerHTML,
      rail:document.querySelector('.rail').outerHTML,
-     main:document.querySelector('.page.is-on').outerHTML,
+     main:(()=>{const el=document.querySelector('.page.is-on').cloneNode(true);el.querySelectorAll('.hero-cloth,.hero-atmosphere').forEach(n=>n.remove());const hero=el.querySelector('.ed-hero');if(hero){delete hero.dataset.motion;delete hero.dataset.motionRunning;delete hero.dataset.cloth;}const toggle=el.querySelector('.hero-motion-toggle');if(toggle){toggle.hidden=true;toggle.textContent='';toggle.removeAttribute('aria-label');}return el.outerHTML;})(),
      faq:[...document.querySelectorAll('.page.is-on .ed-faq details')].map(d=>({q:d.querySelector('summary').textContent,a:d.querySelector('p').textContent})),
     }));
     const template=fs.readFileSync(path.join(root,lang==='es'?'es/index.html':'index.html'),'utf8');
@@ -45,14 +45,14 @@ const escape=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt
     if(data.faq.length)schema.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:data.faq.map(f=>({'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}}))});
     head=head.replace('</head>',schema.map(s=>`<script type="application/ld+json">${JSON.stringify(s).replace(/</g,'\\u003c')}</script>`).join('\n')+'\n</head>');
     const fixLinks=html=>html.replace(/href="#([^"/]+)"/g,(all,k)=>ids.includes(k)?`href="${prefix}${k==='home'?'':k+'/'}"`:all);
-    const html=head+`\n<body class="${id==='home'?'ed-home':''}">\n<a class="skip" href="#main">${lang==='es'?'Saltar al contenido':'Skip to content'}</a>\n${data.header}\n<button class="burger" id="burger" aria-label="${lang==='es'?'Abrir navegación':'Open navigation'}">Menu</button><div class="scrim" id="scrim"></div>\n<div class="app">${fixLinks(data.rail)}<main class="main" id="main" tabindex="-1">${fixLinks(data.main)}</main></div>\n<noscript><style>.ed-menu{display:none!important}.ed-home .rail{display:block;position:static;width:auto;height:auto}.rail{transform:none!important}.reveal{opacity:1;transform:none}@media(max-width:940px){.app{display:block}.rail{position:static;width:auto;height:auto}}</style></noscript>\n<script src="/combat-guide.js?v=20261013b" defer></script><script src="/edition.js?v=20261013b" defer></script><script src="/app.js?v=20261013b" defer></script>\n</body></html>\n`;
+    const html=head+`\n<body class="${id==='home'?'ed-home':''}">\n<a class="skip" href="#main">${lang==='es'?'Saltar al contenido':'Skip to content'}</a>\n${data.header}\n<button class="burger" id="burger" aria-label="${lang==='es'?'Abrir navegación':'Open navigation'}">Menu</button><div class="scrim" id="scrim"></div>\n<div class="app">${fixLinks(data.rail)}<main class="main" id="main" tabindex="-1">${fixLinks(data.main)}</main></div>\n<noscript><style>.ed-menu{display:none!important}.ed-home .rail{display:block;position:static;width:auto;height:auto}.rail{transform:none!important}.reveal{opacity:1;transform:none}@media(max-width:940px){.app{display:block}.rail{position:static;width:auto;height:auto}}</style></noscript>\n<script src="/hero-motion.js?v=20261014" defer></script><script src="/combat-guide.js?v=20261013b" defer></script><script src="/edition.js?v=20261014" defer></script><script src="/app.js?v=20261013b" defer></script>\n</body></html>\n`;
     const dest=path.join(root,route,'index.html');fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,html);
     pages.push(route);
    }
   }
   const sitemapFile=path.join(root,'sitemap.xml');let sitemap=fs.readFileSync(sitemapFile,'utf8');
-  for(const route of pages)if(!sitemap.includes(`<loc>https://guardiansrpg.com${route}</loc>`))sitemap=sitemap.replace('</urlset>',`<url><loc>https://guardiansrpg.com${route}</loc><lastmod>2026-10-13</lastmod></url>\n</urlset>`);
-  sitemap=sitemap.replace(/<lastmod>[^<]*<\/lastmod>/g,'<lastmod>2026-10-13</lastmod>');fs.writeFileSync(sitemapFile,sitemap);
+  for(const route of pages)if(!sitemap.includes(`<loc>https://guardiansrpg.com${route}</loc>`))sitemap=sitemap.replace('</urlset>',`<url><loc>https://guardiansrpg.com${route}</loc><lastmod>2026-10-14</lastmod></url>\n</urlset>`);
+  sitemap=sitemap.replace(/<lastmod>[^<]*<\/lastmod>/g,'<lastmod>2026-10-14</lastmod>');fs.writeFileSync(sitemapFile,sitemap);
   const manifestPath=path.join(root,'site.webmanifest'),manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
   manifest.description='Explore Valestia: a fantasy RPG with tactical battles, character mastery and a connected Discord and web adventure.';
   manifest.background_color=manifest.theme_color='#091813';fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2)+'\n');

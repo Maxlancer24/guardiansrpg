@@ -56,6 +56,11 @@ flow. The domain remains `guardiansrpg.com`.
 
 ## Artwork
 
+The October 14 cover update replaces the anonymous traveler with the canonical
+Guardian and adds a looping cape/ambient animation. See [HERO_ARTWORK.md](HERO_ARTWORK.md)
+for the current assets, references, full generation prompt and motion behavior.
+The original October 13 artwork is retained below for provenance.
+
 The hero was generated with the built-in Imagegen tool. Original:
 `assets/editorial/valestia-dawn.png`; optimized delivery:
 `assets/editorial/valestia-dawn.webp` (approximately 396 KB).
