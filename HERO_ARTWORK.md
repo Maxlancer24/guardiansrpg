@@ -52,10 +52,12 @@ Reference roles:
 
 `hero-motion.js` and `hero-motion.css` create a browser-rendered looping scene:
 
-- A WebGL texture deformation is restricted to an authored cape region. Head,
-  sword, feet and the rest of the landscape remain stationary. This is subtle
-  local cloth animation, not an AI-generated video or full 3D cloth simulation.
-- CSS leaves, warm motes and soft sunlight supply ambient movement. They do not
+- A transparent WebGL overlay contains only the interior of the blue cape.
+  A hand-traced silhouette, six-pixel inset and blue-fabric check restrict sampling
+  to the cloth. The original image remains the unchanged background: the renderer
+  emits zero alpha over scenery, body, sword and feet. Subtle folds move inside
+  the cloth while its outline stays anchored; this is not a silhouette/3D simulation.
+- CSS leaves and warm motes supply ambient movement. They do not
   intercept clicks or enter the accessibility tree.
 - WebGL drawing is capped at 30 fps, 1.5 device pixel ratio and 1920 pixels wide.
 - The scene pauses offscreen, on guide routes, and in hidden tabs. Language changes
@@ -66,8 +68,8 @@ Reference roles:
   with lightweight CSS ambient effects.
 - Mobile presents a 440px art window above the copy so the Guardian stays visible.
 
-The mask is specific to this artwork. Update its coordinates if replacing the
-composition; otherwise it could deform the wrong region.
+The path is specific to this artwork. Update it if replacing the composition and
+run the cape-isolation test; do not replace it with a broad elliptical mask.
 
 ## Verification
 
@@ -77,3 +79,10 @@ equality, persisted preference, resume, offscreen suspension, route suspension,
 live and initial reduced-motion handling, no-WebGL and no-JavaScript fallbacks.
 Screenshots and results are saved outside the repository in `../guardian-hero-qa`.
 The existing site checks cover all 98 generated routes and their assets/links.
+
+`npm run test:cape` reads the actual WebGL frame buffer. At desktop and mobile
+sizes it verifies every nontransparent overlay pixel corresponds to blue cloth,
+that the folds change between frames, and that all transparent background pixels
+remain identical. The correction passed with 0 non-cloth pixels and 0 background
+pixels changed in both viewports. The test disables CSS particles only while
+checking the underlying artwork; they remain enabled for visitors.

@@ -6,7 +6,8 @@
     "build": "node scripts/build-static.cjs",
     "test": "node scripts/check-edition.cjs",
     "test:combat": "node scripts/check-combat-guide.cjs",
-    "test:hero": "node scripts/check-hero-motion.cjs"
+    "test:hero": "node scripts/check-hero-motion.cjs",
+    "test:cape": "node scripts/check-cape-isolation.cjs"
   },
   "devDependencies": {"playwright": "1.63.0"}
 }
