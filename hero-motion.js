@@ -1,4 +1,4 @@
-/* Transparent cloth-only overlay. The landscape is always the unchanged <img>. */
+/* Independent moving cape over a stationary inpainted background patch. */
 (function () {
   'use strict';
   let scene=null;
@@ -8,47 +8,76 @@
   const capePath='M1210 483 Q1220 476 1232 480 L1257 485 L1263 491 Q1241 507 1221 540 Q1206 564 1197 585 Q1186 607 1170 622 L1172 632 Q1151 631 1145 616 Q1143 612 1148 606 Q1133 591 1118 594 Q1109 597 1103 605 Q1104 585 1115 575 Q1126 566 1151 555 Q1176 544 1188 531 Q1200 515 1204 498 Z';
   const vertex=`attribute vec2 a_position; varying vec2 v_uv;
     void main(){v_uv=vec2((a_position.x+1.0)*0.5,(1.0-a_position.y)*0.5);gl_Position=vec4(a_position,0.,1.);}`;
-  const fragment=`precision mediump float;
+  const fragment=`precision highp float;
     uniform sampler2D u_image;
     uniform sampler2D u_mask;
+    uniform sampler2D u_background;
     uniform vec2 u_view;
     uniform vec2 u_image_size;
     uniform vec2 u_position;
     uniform float u_time;
     varying vec2 v_uv;
     const float TAU=6.28318530718;
+    const vec2 PATCH=vec2(1080.,460.);
+    const vec2 PATCH_SIZE=vec2(220.,200.);
+    vec2 matte(vec2 p){
+      vec2 q=(p-PATCH)/PATCH_SIZE;
+      if(q.x<0.||q.y<0.||q.x>1.||q.y>1.)return vec2(0.);
+      return texture2D(u_mask,q).rg;
+    }
+    vec2 wind(vec2 p){
+      float free=smoothstep(12.,148.,length((p-vec2(1240.,486.))*vec2(1.,.8)));
+      float t=u_time*TAU/5.;
+      return free*vec2(7.*sin(t+free*1.5),16.*sin(t+free*2.)+3.*sin(t*2.-free*3.));
+    }
     void main(){
       float scale=max(u_view.x/u_image_size.x,u_view.y/u_image_size.y);
       vec2 displayed=u_image_size*scale;
       vec2 uv=(v_uv*u_view+(displayed-u_view)*u_position)/displayed;
-      // No full-frame texture deformation: outside the exact cloth mask this
-      // canvas is transparent, so it cannot move or repaint the landscape.
-      float cloth=texture2D(u_mask,uv).a;
-      if(cloth<.01){gl_FragColor=vec4(0.);return;}
-      // Keep a six-pixel inset, larger than the maximum sampling displacement.
-      // This also anchors the silhouette and avoids pulling scenery into a fold.
-      vec2 inset=vec2(6.)/u_image_size;
-      cloth*=texture2D(u_mask,uv+vec2(inset.x,0.)).a;
-      cloth*=texture2D(u_mask,uv-vec2(inset.x,0.)).a;
-      cloth*=texture2D(u_mask,uv+vec2(0.,inset.y)).a;
-      cloth*=texture2D(u_mask,uv-vec2(0.,inset.y)).a;
-      cloth*=texture2D(u_mask,uv+inset).a;
-      cloth*=texture2D(u_mask,uv-inset).a;
-      cloth*=texture2D(u_mask,uv+vec2(inset.x,-inset.y)).a;
-      cloth*=texture2D(u_mask,uv+vec2(-inset.x,inset.y)).a;
-      cloth*=smoothstep(.478,.515,uv.y);
-      vec3 original=texture2D(u_image,uv).rgb;
-      // Keep the warm rim and any ambiguous antialiased boundary stationary.
-      cloth*=smoothstep(.045,.085,original.b-max(original.r,original.g));
-      float hem=clamp((.813-uv.x)/.085,0.,1.);
-      float wave=sin(u_time*TAU/5.+uv.x*65.-uv.y*12.);
-      float flutter=sin(u_time*TAU/2.5-uv.x*105.+uv.y*42.);
-      vec2 drift=vec2(1.2*wave,2.7*wave+.6*flutter)/u_image_size*cloth*hem;
-      vec4 color=texture2D(u_image,clamp(uv+drift,0.,1.));
-      color.rgb*=1.+cloth*.035*sin(u_time*TAU/5.+uv.x*160.);
-      // WebGL's browser compositor expects premultiplied alpha.
-      gl_FragColor=vec4(color.rgb*cloth,cloth);
+      vec2 p=uv*u_image_size;
+      if(p.x<1080.||p.x>1280.||p.y<465.||p.y>656.){gl_FragColor=vec4(0.);return;}
+      // Reconstruct ONLY the part formerly hidden behind the original cape.
+      // This stationary plate is never deformed.
+      float ground=matte(p).g;
+      vec3 background=texture2D(u_background,(p-PATCH)/PATCH_SIZE).rgb;
+      // Inverse-map the independent cloth silhouette. Its shoulder stays pinned;
+      // the free tip travels visibly, revealing the stationary plate underneath.
+      vec2 cloth=p;
+      for(int i=0;i<4;i++)cloth=p-wind(cloth);
+      float alpha=matte(cloth).r;
+      vec3 fabric=texture2D(u_image,cloth/u_image_size).rgb;
+      fabric*=1.+.025*sin(u_time*TAU/5.+cloth.x*.08)*alpha;
+      float coverage=alpha+ground*(1.-alpha);
+      gl_FragColor=vec4(fabric*alpha+background*ground*(1.-alpha),coverage);
     }`;
+
+  function makeCapeMask(image){
+    const width=220,height=200;
+    const shape=document.createElement('canvas');shape.width=width;shape.height=height;
+    const ctx=shape.getContext('2d',{willReadFrequently:true});
+    ctx.translate(-1080,-460);ctx.fillStyle='#fff';ctx.fill(new Path2D(capePath));
+    const silhouette=ctx.getImageData(0,0,width,height).data;
+    const source=document.createElement('canvas');source.width=width;source.height=height;
+    const sc=source.getContext('2d',{willReadFrequently:true});sc.drawImage(image,1080,460,width,height,0,0,width,height);
+    const pixels=sc.getImageData(0,0,width,height).data;
+    const output=ctx.createImageData(width,height);
+    const at=(x,y)=>x<0||x>=width||y<0||y>=height?0:silhouette[(y*width+x)*4+3]/255;
+    for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+      const i=(y*width+x)*4,a=at(x,y);
+      let core=1,cover=0;
+      for(let dy=-8;dy<=8;dy++)for(let dx=-8;dx<=8;dx++){
+        const sample=at(x+dx,y+dy),distance=Math.max(Math.abs(dx),Math.abs(dy));
+        if(distance<=4)core=Math.min(core,sample);
+        cover=Math.max(cover,sample*Math.max(0,Math.min(1,(8-distance)/2)));
+      }
+      const blue=Math.max(0,Math.min(1,(pixels[i+2]-pixels[i]-1)/9,(pixels[i+2]-pixels[i+1]+1)/6));
+      output.data[i]=Math.round(255*a*Math.max(core,blue));
+      output.data[i+1]=Math.round(255*cover);
+      output.data[i+3]=255;
+    }
+    ctx.setTransform(1,0,0,1,0,0);ctx.putImageData(output,0,0);
+    return shape;
+  }
 
   class Scene {
     constructor(root,L){
@@ -93,7 +122,8 @@
       if(this.gl||this.loading||this.failed||this.destroyed)return;
       this.loading=true;
       try{
-        await this.image.decode();if(this.destroyed)return;
+        const background=new Image();background.src='/assets/editorial/guardian-cape-background-v3.webp';
+        await Promise.all([this.image.decode(),background.decode()]);if(this.destroyed)return;
         const canvas=document.createElement('canvas');canvas.className='hero-cloth';canvas.setAttribute('aria-hidden','true');canvas.hidden=true;
         const gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:true,antialias:false,depth:false,stencil:false,preserveDrawingBuffer:false,powerPreference:'low-power'});
         if(!gl){this.failed=true;return;}
@@ -112,13 +142,17 @@
         gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
         gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,this.image);
         gl.uniform1i(gl.getUniformLocation(program,'u_image'),0);
-        const mask=document.createElement('canvas');mask.width=this.image.naturalWidth;mask.height=this.image.naturalHeight;
-        const context=mask.getContext('2d');context.fillStyle='#fff';context.fill(new Path2D(capePath));
+        const mask=makeCapeMask(this.image);
         this.maskTexture=gl.createTexture();gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,this.maskTexture);
         gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
         gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,mask);
-        gl.uniform1i(gl.getUniformLocation(program,'u_mask'),1);gl.activeTexture(gl.TEXTURE0);
+        gl.uniform1i(gl.getUniformLocation(program,'u_mask'),1);
+        this.backgroundTexture=gl.createTexture();gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,this.backgroundTexture);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+        gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,background);
+        gl.uniform1i(gl.getUniformLocation(program,'u_background'),2);gl.activeTexture(gl.TEXTURE0);
         gl.uniform2f(gl.getUniformLocation(program,'u_image_size'),this.image.naturalWidth,this.image.naturalHeight);
         this.uniforms={view:gl.getUniformLocation(program,'u_view'),position:gl.getUniformLocation(program,'u_position'),time:gl.getUniformLocation(program,'u_time')};
         this.program=program;this.gl=gl;
@@ -149,7 +183,7 @@
     destroy(){
       this.destroyed=true;cancelAnimationFrame(this.frame);this.observer.disconnect();this.resizeObserver.disconnect();
       document.removeEventListener('visibilitychange',this.onVisibility);this.media.removeEventListener('change',this.onMotion);this.button.removeEventListener('click',this.onClick);
-      if(this.gl){this.gl.deleteTexture(this.texture);this.gl.deleteTexture(this.maskTexture);this.gl.deleteBuffer(this.buffer);this.gl.deleteProgram(this.program);this.gl.getExtension('WEBGL_lose_context')?.loseContext();}
+      if(this.gl){this.gl.deleteTexture(this.texture);this.gl.deleteTexture(this.maskTexture);this.gl.deleteTexture(this.backgroundTexture);this.gl.deleteBuffer(this.buffer);this.gl.deleteProgram(this.program);this.gl.getExtension('WEBGL_lose_context')?.loseContext();}
       this.layer.remove();this.canvas?.remove();
     }
   }

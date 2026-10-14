@@ -52,11 +52,13 @@ Reference roles:
 
 `hero-motion.js` and `hero-motion.css` create a browser-rendered looping scene:
 
-- A transparent WebGL overlay contains only the interior of the blue cape.
-  A hand-traced silhouette, six-pixel inset and blue-fabric check restrict sampling
-  to the cloth. The original image remains the unchanged background: the renderer
-  emits zero alpha over scenery, body, sword and feet. Subtle folds move inside
-  the cloth while its outline stays anchored; this is not a silhouette/3D simulation.
+- The entire cape silhouette moves independently, pinned near the shoulders.
+  Its original pixels are clipped using a traced path and a refined color matte.
+  An inverse-mapped wind field moves the free tip, including its edge, through a
+  five-second loop. A separate stationary inpainted background replaces the area
+  originally hidden behind the cape; it is never sampled with displaced coordinates.
+  The rest of the original image remains unchanged. This is layered 2D animation,
+  not a full 3D cloth simulation.
 - CSS leaves and warm motes supply ambient movement. They do not
   intercept clicks or enter the accessibility tree.
 - WebGL drawing is capped at 30 fps, 1.5 device pixel ratio and 1920 pixels wide.
@@ -68,8 +70,33 @@ Reference roles:
   with lightweight CSS ambient effects.
 - Mobile presents a 440px art window above the copy so the Guardian stays visible.
 
-The path is specific to this artwork. Update it if replacing the composition and
-run the cape-isolation test; do not replace it with a broad elliptical mask.
+The path, local background patch and source coordinates are specific to this artwork.
+Update them together when replacing the composition. Never deform the background.
+
+### Stationary background behind the cape
+
+The built-in Imagegen tool created `assets/editorial/guardian-cleanplate-v3.png`
+from the unchanged `guardian-valestia-v2.png`. Only a 220 × 200 crop at source
+coordinates (1080, 460) is delivered, as
+`assets/editorial/guardian-cape-background-v3.webp` (20,926 bytes). The original
+image remains visible outside the local restoration mask, so any unrelated
+generator changes outside the patch cannot affect the website.
+
+Final clean-plate prompt:
+
+> Use case: precise-object-edit. Technical clean plate for layered animation.
+> Keep this 1536x1024 image EXACTLY aligned: same camera, exact pixel positions,
+> landscape, light, character pose, hair, boots, sword, shirt, belt. Remove ONLY
+> the flowing blue shoulder cape (from neck/shoulders sweeping to the LEFT of the
+> man), revealing the stationary scenery and the man's underlying white tunic /
+> dark sleeve / brown strap that it covers. Preserve the separate blue split
+> coat-tails hanging from his BELT: those are his clothing, not the shoulder cape.
+> Do not remove the man. Do not replace his clothing, move him, alter the background
+> or add anything. Inpaint the areas formerly covered by the cape naturally with
+> existing river, forest, ruined path and correct underlying clothing. No cape
+> hanging off his shoulders remains. This plate will be placed directly behind
+> the separately animated original cape, so surrounding pixels and geometry MUST
+> match the source. No text or watermark.
 
 ## Verification
 
@@ -80,9 +107,9 @@ live and initial reduced-motion handling, no-WebGL and no-JavaScript fallbacks.
 Screenshots and results are saved outside the repository in `../guardian-hero-qa`.
 The existing site checks cover all 98 generated routes and their assets/links.
 
-`npm run test:cape` reads the actual WebGL frame buffer. At desktop and mobile
-sizes it verifies every nontransparent overlay pixel corresponds to blue cloth,
-that the folds change between frames, and that all transparent background pixels
-remain identical. The correction passed with 0 non-cloth pixels and 0 background
-pixels changed in both viewports. The test disables CSS particles only while
-checking the underlying artwork; they remain enabled for visitors.
+`npm run test:cape` reads the actual WebGL frame buffer at eight phases of the loop.
+It verifies transparent pixels outside the tightly bounded cape area and measures
+the free edge's travel: 32 CSS pixels at 1440px viewport width and 15 CSS pixels at
+390px. It fails if the silhouette moves fewer than 6 CSS pixels, preventing another
+nearly static result. It saves two clearly different cape positions for visual
+inspection. CSS particles are disabled only in this isolated check.
