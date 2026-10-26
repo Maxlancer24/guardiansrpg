@@ -128,7 +128,7 @@ var DTR={
  "Solo last-stand with Classic and Qualifier variants. Escalating waves, HP carries over between them, and milestone rewards pay once.":"Última resistencia en solitario con variantes Classic y Qualifier. Oleadas crecientes, el HP se conserva entre ellas, y las recompensas por hito pagan una vez.",
  "A squad mode used for both PvP and PvE: pick a role and field an army built from templates. It is also the engine behind region liberation.":"Un modo de escuadrón usado para PvP y PvE: elige un rol y despliega un ejército construido con plantillas. También es el motor detrás de la liberación de regiones.",
  "Missions issued by the 8 guilds. Completing one grants Oil, XP and reputation, and may cost you standing with a rival.":"Misiones emitidas por los 8 gremios. Completar una da Oil, XP y reputación, y puede costarte prestigio con un rival.",
- "Farm a region's enemies for Oil, XP and that region's signature material. 210 named enemies across ten regions, all scaling to your level.":"Farmea los enemigos de una región por Oil, XP y el material de firma de esa región. 210 enemigos con nombre en diez regiones, todos escalando a tu nivel.",
+ "Farm a region's enemies for Oil, XP and that region's signature material. 231 named enemies across eleven regions, all scaling to your level.":"Farmea los enemigos de una región por Oil, XP y el material de firma de esa región. 231 enemigos con nombre en once regiones, todos escalando a tu nivel.",
  "Move between regions. Regions can be upgraded and may charge entry taxes.":"Muévete entre regiones. Las regiones se pueden mejorar y pueden cobrar impuestos de entrada.",
  "A corrupted region loses its drops, its enemies get stronger and gain a Corrupted tag, and its upgrades freeze. Free it by winning a staged Vanguard PvE liberation.":"Una región corrupta pierde sus drops, sus enemigos se vuelven más fuertes y ganan la etiqueta Corrupted, y sus mejoras se congelan. Libérala ganando una liberación Vanguard PvE por etapas.",
  "A large-scale castle defense across an 8-zone, 3-lane castle, with phases from announcement to result. Hold zones to keep enemies from the Throne Room. Objectives: Intercept, Supply, Rescue, Sabotage. Pays War Oil.":"Una defensa de castillo a gran escala en un castillo de 8 zonas y 3 carriles, con fases desde el anuncio hasta el resultado. Mantén zonas para alejar a los enemigos de la Sala del Trono. Objetivos: Intercept, Supply, Rescue, Sabotage. Paga War Oil.",
@@ -730,7 +730,7 @@ var MODES=[
   ["Faction Contracts","","Missions issued by the 8 guilds. Completing one grants Oil, XP and reputation, and may cost you standing with a rival."]
  ]],
  ["The world",[
-  ["Hunt","!hunt","Farm a region's enemies for Oil, XP and that region's signature material. 210 named enemies across ten regions, all scaling to your level."],
+  ["Hunt","!hunt","Farm a region's enemies for Oil, XP and that region's signature material. 231 named enemies across eleven regions, all scaling to your level."],
   ["Travel","!travel","Move between regions. Regions can be upgraded and may charge entry taxes."],
   ["Region Liberation","!liberate","A corrupted region loses its drops, its enemies get stronger and gain a Corrupted tag, and its upgrades freeze. Free it by winning a staged Vanguard PvE liberation."],
   ["Castle Siege","","A large-scale castle defense across an 8-zone, 3-lane castle, with phases from announcement to result. Hold zones to keep enemies from the Throne Room. Objectives: Intercept, Supply, Rescue, Sabotage. Pays War Oil."],
@@ -1165,7 +1165,7 @@ PAGES.gear={t:"Gear &amp; Forge",e:"The guide",d:"Crafted gear boosts your stats
   ["Copper Ore","Duels, training, raids, dungeons"],["Silver Ore","Contracts, missions, raids, dungeons"],
   ["Linen Fiber","Missions, escort, contracts, dungeons"],["Cardboard Scrap","Loot drops, triad, escort, FFA"]
  ],["k",""])+
- '<p class="b">'+L("Above those sit uncommon, rare and very rare tiers, plus <strong>10 region signature materials</strong> that only drop from hunting one specific region, and two <strong>legendary</strong> weapon mats — Void-Tempered Core and Ascendant Ember — that no region drops at all.","Por encima están los tiers poco común, raro y muy raro, más <strong>10 materiales de firma de región</strong> que solo caen cazando en una región concreta, y dos materiales de arma <strong>legendarios</strong> — Void-Tempered Core y Ascendant Ember — que ninguna región suelta.")+'</p>'+
+ '<p class="b">'+L("Above those sit uncommon, rare and very rare tiers, plus <strong>11 region signature materials</strong> that only drop from hunting one specific region, and two <strong>legendary</strong> weapon mats — Void-Tempered Core and Ascendant Ember — that no region drops at all.","Por encima están los tiers poco común, raro y muy raro, más <strong>10 materiales de firma de región</strong> que solo caen cazando en una región concreta, y dos materiales de arma <strong>legendarios</strong> — Void-Tempered Core y Ascendant Ember — que ninguna región suelta.")+'</p>'+
  '<h2 class="s">'+L("The catalog","El catálogo")+'</h2>'+
  '<p class="b">'+L("Thirty-one pieces. Many carry a real combat passive, not just a stat line.","Treinta y una piezas. Muchas llevan una pasiva de combate real, no solo una línea de stats.")+'</p>'+cards(g)+
  '<h2 class="s">Clan Forge</h2>'+
@@ -1507,7 +1507,7 @@ PAGES.clans={t:"Clans",e:"The guide",d:"Permanent groups that grant collective p
  '<div class="callout"><p>'+L("<strong>Oathbound Link</strong> only fires with <strong>3+ members of the same clan on the same team</strong>. It is worthless unless you coordinate who queues together.","<strong>Oathbound Link</strong> solo se activa con <strong>3+ miembros del mismo clan en el mismo equipo</strong>. No sirve de nada si no coordinas quién entra junto.")+'</p></div>'+
  '<h2 class="s">'+L("Treasury, missions and forge","Tesoro, misiones y forja")+'</h2>'+
  '<p class="b">'+L("Your clan has shared <strong>daily objectives</strong> — win X of a mode, earn X Oil collectively — that pay the treasury in Oil and members in XP. The treasury funds passive upgrades and <strong>Clan Forge</strong> recipe unlocks, which gate six gear pieces and two weapons behind the clan rather than the player.","Tu clan tiene <strong>objetivos diarios</strong> compartidos — ganar X de un modo, ganar X Oil en conjunto — que pagan al tesoro en Oil y a los miembros en XP. El tesoro financia las mejoras de pasivas y los desbloqueos de recetas de <strong>Clan Forge</strong>, que ponen seis piezas de gear y dos armas detrás del clan en vez del jugador.")+'</p>'+
- '<p class="b">'+L("Clans also hold <strong>territory</strong>, which grants passive combat bonuses inside the zones they control.","Los clanes también controlan <strong>territorio</strong>, que otorga bonos pasivos de combate dentro de las zonas que dominan.")+'</p>';
+ '<p class="b">'+L("Clans also hold <strong>territory</strong>, which grants passive combat bonuses according to the region they hold and its current state.","Los clanes también controlan <strong>territorio</strong>, que otorga bonos pasivos de combate seg?n la regi?n que controlan y su estado actual.")+'</p>';
 }};
 
 PAGES.factions={t:"Factions",e:"The world",d:"The powers of Valestia, as the Codex records them. Ranked by how much of the board each one actually occupies.",h:function(){
@@ -1627,9 +1627,9 @@ PAGES.lab={t:"Pokemax Lab",e:"Pokemax",d:"Every species by name — its type, ro
  '<div class="callout"><p>'+L("Moves known are the <strong>last four learned at or below</strong> the current level — the same rule the bot uses. Raise the level and watch an early move fall off the list. The <strong>Full learnset</strong> below it lists <em>every</em> move the Pokemax can learn and the level it comes at, with power, PP and effect — dimmed rows are ones it has not reached yet.","Los movimientos conocidos son los <strong>últimos cuatro aprendidos en o por debajo</strong> del nivel actual — la misma regla que usa el bot. Sube el nivel y mira cómo un movimiento temprano se cae de la lista. El <strong>Learnset completo</strong> de abajo lista <em>cada</em> movimiento que el Pokemax puede aprender y el nivel al que llega, con poder, PP y efecto — las filas atenuadas son las que aún no ha alcanzado.")+'</p></div>';
 }};
 
-PAGES.species={t:"Species &amp; Evolution",e:"Pokemax",d:"120 species in 40 families. Every family is one animal with three stages; nine regions each breed one type, and three expeditions add four lines each.",h:function(){
+PAGES.species={t:"Species &amp; Evolution",e:"Pokemax",d:"129 ordinary species in 43 families. Every family is one animal with three stages; nine regions each breed one type, and three expeditions add four lines each.",h:function(){
  var names={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
-  rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
+  rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",greywood:"Greywood",ravencraft:"Ravencraft",
   mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum"};
  var fams=PET_FAMS.map(function(r){
   var emo={fire:"🔥",water:"💧",grass:"🌿",ice:"❄️",rock:"🪨",flying:"🦅",ghost:"👻",dark:"🌑"}[r[1]];
@@ -2180,7 +2180,7 @@ PAGES.sabotage={t:"Clan Sabotage",e:"The guide",d:"Covert clan-versus-clan raids
  '<p class="b">'+L("You cannot grind a single rival into the ground, either. The damaging effects sit on a <strong>cooldown against a given clan</strong>, and smuggling a given region is capped at <strong>once a day per raider</strong>. Sabotage is a scalpel, not a siege — for the fights that actually take and hold ground, see the <a href=\"#modes\">large-scale modes</a>.","Tampoco puedes machacar a un solo rival hasta el suelo. Los efectos dañinos tienen un <strong>cooldown contra un clan dado</strong>, y contrabandear una región dada está limitado a <strong>una vez al día por raider</strong>. El sabotaje es un bisturí, no un asedio — para las peleas que de verdad toman y mantienen terreno, mira los <a href=\"#modes\">modos a gran escala</a>.")+'</p>';
 }};
 
-PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"The Pokemax gym league: ten regions, ten permanent medals to win. Collect them all — then, if you want, take a gym for yourself, hold it, and build a leader's reputation.",h:function(){
+PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"The Pokemax gym league: eleven regional Gyms, ten required League medals and one optional Greywood medal. Collect the required ten — then, if you want, take a gym for yourself, hold it, and build a leader's reputation.",h:function(){
  var G=[
   ["Starter Ruins","🏺 Relic Medal","Curator Aster"],
   ["Black Lotus Wood","🪷 Black Lotus Medal","Warden Ilyra"],
@@ -2194,9 +2194,9 @@ PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"The Pokemax gym league: ten regions,
   ["Dark Knight's Sanctum","🔮 Abyss Medal","Abyssal Knight Morcant"]
  ];
  return '<h2 class="s">'+L("The league of ten medals","La liga de las diez medallas")+'</h2>'+
- '<p class="b">'+L("Every huntable region has a <strong>Gym</strong> — a 3-versus-3 Pokemax battle guarding one <strong>permanent medal</strong>. The ten Gyms are the Pokemax <strong>league</strong>: your goal is to <strong>collect all ten medals</strong>. A medal is yours <strong>forever</strong> once won — one per region, and it never gets taken back. Land all ten and your Medal Case turns gold: <strong>Regional Journey Complete</strong>.","Cada región cazable tiene un <strong>Gym</strong> — una batalla Pokemax 3 contra 3 que custodia una <strong>medalla permanente</strong>. Los diez Gyms son la <strong>liga</strong> Pokemax: tu meta es <strong>juntar las diez medallas</strong>. Una medalla es tuya <strong>para siempre</strong> una vez ganada — una por región, y nunca te la quitan. Consigue las diez y tu Vitrina de Medallas se vuelve dorada: <strong>Regional Journey Complete</strong>.")+'</p>'+
+ '<p class="b">'+L("The 11 regional Gyms offer permanent medals through 3-versus-3 Pokemax battles. Collect the <strong>original ten</strong> to complete the League Circuit. Greywood adds the optional Amberleaf Medal; it never replaces a required medal. The Medal Case tracks League progress out of 10 and all medals out of 11 separately.","Los 11 gimnasios regionales ofrecen medallas permanentes mediante combates Pokemax de 3 contra 3. Re?ne las <strong>diez originales</strong> para completar el circuito de la Liga. Greywood a?ade la Amberleaf Medal opcional; nunca reemplaza una obligatoria. La Vitrina de Medallas muestra por separado el progreso de Liga sobre 10 y todas las medallas sobre 11.")+'</p>'+
  tbl(L(["Region","Medal","Default NPC leader"],["Región","Medalla","Líder NPC por defecto"]),G.map(function(g){return [g[0],g[1],g[2]];}),["k","k",""])+
- '<div class="callout"><p>'+L("<strong>A Gym is only reachable from inside its region.</strong> <span class=\"cmd\">!travel</span> there first — you cannot touch a Gym while traveling. Then <span class=\"cmd\">!gym</span> opens that region's Gym panel (leader, medal, defending team, today's attack count, and the challenge buttons); <span class=\"cmd\">!gyms</span> lists every Gym at a glance; and <span class=\"cmd\">!gym_medals</span> or <span class=\"cmd\">!medal_case</span> shows your Medal Case and your <strong>X / 10</strong> progress.","<strong>Un Gym solo se alcanza desde dentro de su región.</strong> Primero <span class=\"cmd\">!travel</span> hacia allá — no puedes tocar un Gym mientras viajas. Luego <span class=\"cmd\">!gym</span> abre el panel del Gym de esa región (líder, medalla, equipo defensor, ataques del día y los botones de reto); <span class=\"cmd\">!gyms</span> lista todos los Gyms de un vistazo; y <span class=\"cmd\">!gym_medals</span> o <span class=\"cmd\">!medal_case</span> muestra tu Vitrina de Medallas y tu progreso <strong>X / 10</strong>.")+'</p></div>'+
+ '<div class="callout"><p>'+L("<strong>On-site or remote medal challenge.</strong> Travel to the region and open <span class=\"cmd\">!gym</span> for its local panel; conquest still requires being there. The Gym Circuit offers a separate remote medal challenge, with a base limit of one per day, without moving your character. It does not bypass a closed region. Use <span class=\"cmd\">!gyms</span> for the overview and <span class=\"cmd\">!gym_medals</span> for your collection.","<strong>Reto presencial o remoto por medalla.</strong> Viaja a la regi?n y abre <span class=\"cmd\">!gym</span> para su panel local; la conquista sigue exigiendo estar all?. El Circuito de Gimnasios ofrece un reto remoto por medalla separado, con un l?mite base de uno al d?a, sin mover a tu personaje. No permite saltarse el cierre de una regi?n. Usa <span class=\"cmd\">!gyms</span> para el resumen y <span class=\"cmd\">!gym_medals</span> para tu colecci?n.")+'</p></div>'+
  '<p class="b">'+L("When no player holds a Gym, a named <strong>NPC leader</strong> defends it with a team of region-native Pokemax at level <strong>40 / 43 / 46</strong> — this is <strong>endgame</strong> content, meant for a Pokemax stable you have already built up.","Cuando ningún jugador tiene un Gym, un <strong>líder NPC</strong> con nombre lo defiende con un equipo de Pokemax nativos de la región a nivel <strong>40 / 43 / 46</strong> — esto es contenido de <strong>endgame</strong>, pensado para una cuadra de Pokemax que ya hayas armado.")+'</p>'+
 
  '<h2 class="s">'+L("Two ways to challenge","Dos formas de retar")+'</h2>'+
@@ -2251,7 +2251,7 @@ PAGES.gyms={t:"Pokemax Gyms",e:"Pokemax",d:"The Pokemax gym league: ten regions,
  ],["k",""])+
 
  '<h2 class="s">'+L("How to think about it","Cómo pensarlo")+'</h2>'+
- '<p class="b">'+L("<strong>Chase medals first.</strong> Medal Challenges cost you nothing to win and never expire — clear the ten regions for the Regional Journey at your own pace. NPC teams sit at <strong>40–46</strong>, so build the stable before you knock.","<strong>Persigue medallas primero.</strong> Los Medal Challenges no te cuestan nada al ganar y nunca vencen — limpia las diez regiones para la Regional Journey a tu ritmo. Los equipos NPC están en <strong>40–46</strong>, así que arma la cuadra antes de tocar.")+'</p>'+
+ '<p class="b">'+L("<strong>Chase medals first.</strong> Medal Challenges cost you nothing to win and never expire — clear the ten regions for the Regional Journey at your own pace. NPC teams sit at <strong>40–46</strong>, so build the stable before you knock.","<strong>Persigue medallas primero.</strong> Los Medal Challenges no te cuestan nada al ganar y nunca vencen — completa las diez regiones originales para la Regional Journey a tu ritmo. Los equipos NPC están en <strong>40–46</strong>, así que arma la cuadra antes de tocar.")+'</p>'+
  '<p class="b">'+L("<strong>Take a Gym only where you will defend it.</strong> Rent follows Safari activity, so hold the region you actually hunt in — and be there to defend it, because a defence you play live is worth more Prestige than one the AI plays for you.","<strong>Toma un Gym solo donde vayas a defenderlo.</strong> La renta sigue la actividad de Safari, así que mantén la región donde realmente cazas — y está ahí para defenderla, porque una defensa que juegas en vivo vale más Prestige que una que la IA juega por ti.")+'</p>'+
  '<p class="b">'+L("<strong>Defend with a wall, attack with coverage.</strong> Your <a href=\"#genes\">gene</a> keepers earn their genes here — a defending team that dodges the common attackers holds a Gym for days.","<strong>Defiende con un wall, ataca con cobertura.</strong> Tus guardados por <a href=\"#genes\">genes</a> se ganan sus genes aquí — un equipo defensor que esquiva a los atacantes comunes mantiene un Gym por días.")+'</p>'+
  '<div class="callout"><p>'+L("🏆 <strong>The ten medals are a key.</strong> Collect all ten and the <a href=\"#league\">Pokemax League</a> opens — the Elite Four and Champion that are the real endgame past the Gyms.","🏆 <strong>Las diez medallas son una llave.</strong> Junta las diez y se abre la <a href=\"#league\">Liga Pokemax</a> — el Elite Four y el Campeón que son el verdadero endgame tras los Gimnasios.")+'</p></div>';
@@ -2280,7 +2280,7 @@ PAGES.valestia={t:"Valestia",e:"The world",d:"Ten huntable regions, the roads be
  '</div>'+
  '<h2 class="s">'+L("Travel and hunt","Viajar y cazar")+'</h2>'+
  '<p class="b">'+L("<span class=\"cmd\">!travel</span> moves you between regions. <span class=\"cmd\">!hunt</span> farms the region you are standing in for <strong>Oil, XP and that region\'s signature material</strong>. Each region has its own roster and its own drop table.","<span class=\"cmd\">!travel</span> te mueve entre regiones. <span class=\"cmd\">!hunt</span> farmea la región donde estás por <strong>Oil, XP y el material de firma de esa región</strong>. Cada región tiene su propia lista de enemigos y su propia tabla de drops.")+'</p>'+
- '<p class="b">'+L("There are <strong>210 named enemies</strong> across ten regions — 3 species × 7 tiers each. Their stats are <strong>generated from level</strong>, so a hunted enemy always matches you; the tier name is just flavour for the band you are in. Max may cap hunts per day.","Hay <strong>210 enemigos con nombre</strong> en diez regiones — 3 especies × 7 tiers cada una. Sus stats se <strong>generan desde el nivel</strong>, así que un enemigo cazado siempre te iguala; el nombre del tier es solo saborcito para la banda en la que estás. Max puede limitar las cazas por día.")+'</p>'+
+ '<p class="b">'+L("There are <strong>231 named enemies</strong> across ten regions — 3 species × 7 tiers each. Their stats are <strong>generated from level</strong>, so a hunted enemy always matches you; the tier name is just flavour for the band you are in. Max may cap hunts per day.","Hay <strong>231 enemigos con nombre</strong> en diez regiones — 3 especies × 7 tiers cada una. Sus stats se <strong>generan desde el nivel</strong>, así que un enemigo cazado siempre te iguala; el nombre del tier es solo saborcito para la banda en la que estás. Max puede limitar las cazas por día.")+'</p>'+
  '<p class="b">'+L("Roughly <strong>1 in 12</strong> hunts turns up an <strong>Elite</strong> — the same enemy at your level, but with a title (<strong>Apex, Alpha, Champion, Dire</strong> or <strong>Elder</strong>), one <strong>combat passive</strong> (Momentum, Thorns, Lifesteal, Shield Wall, Enrage, Resilience or Regeneration), <strong>2.5× the Oil</strong> (XP is unchanged), and a better shot at drops. Same fight, richer reward.","Aproximadamente <strong>1 de cada 12</strong> cazas aparece un <strong>Elite</strong> — el mismo enemigo a tu nivel, pero con un título (<strong>Apex, Alpha, Champion, Dire</strong> o <strong>Elder</strong>), una <strong>pasiva de combate</strong> (Momentum, Thorns, Lifesteal, Shield Wall, Enrage, Resilience o Regeneration), <strong>2.5× el Oil</strong> (el XP no cambia), y mejor probabilidad de drops. Misma pelea, mejor recompensa.")+'</p>'+
  '<div class="callout"><p>'+L("Hunting the right region is how you farm the exact material your next piece needs, instead of grinding random modes and hoping. Every weapon recipe needs a signature material.","Cazar en la región correcta es cómo farmeas el material exacto que necesita tu próxima pieza, en vez de moler modos al azar y esperar. Toda receta de arma necesita un material de firma.")+'</p></div>'+
  '<h2 class="s">'+L("Signature materials","Materiales de firma")+'</h2>'+
@@ -2481,7 +2481,7 @@ PAGES["sunken-fang"]={t:"The Sunken Fang Archipelago",e:"Expeditions",d:"The fir
  '<p class="b">'+L("<strong>One-time victory, unlimited retries.</strong> Register exactly <strong>three Pokemax</strong> in your Party. Your current <strong>HP and Move Uses carry into the battle and stay saved</strong> afterward, so heal at the Pokemax Center between attempts. Lose and you can try again as often as you like; <strong>win once and the Trial can never be challenged again</strong>.","<strong>Victoria única, reintentos ilimitados.</strong> Registra exactamente <strong>tres Pokemax</strong> en tu Party. Tu <strong>HP y Usos de Movimiento actuales entran a la batalla y quedan guardados</strong> después, así que cúrate en el Pokemax Center entre intentos. Si pierdes puedes reintentar cuantas veces quieras; <strong>ganas una vez y el Trial no se puede volver a desafiar</strong>.")+'</p>'+
  pmxPortrait("nautyrant","Nautyrant — Tidebound")+
  '<div class="callout"><p>'+L("🐋 <strong>First-victory reward:</strong> <strong>Nautyrant — Tidebound</strong> at Level 30 (genes HP 12 · ATK 11 · DEF 11 · SPD 12), plus <strong>5 Fang Doubloons</strong> and <strong>1,500 OIL</strong>.","🐋 <strong>Recompensa de la primera victoria:</strong> <strong>Nautyrant — Tidebound</strong> a nivel 30 (genes HP 12 · ATK 11 · DEF 11 · SPD 12), más <strong>5 Fang Doubloons</strong> y <strong>1,500 OIL</strong>.")+'</p></div>'+
- '<p class="b"><strong>🐋 Nautyrant</strong> · Water · '+L("all-rounder","todoterreno")+' — '+L("a <strong>unique</strong> Pokemax, not one of the 120 catchable species. A defensive all-rounder built on a huge DEF and a tide-reactive passive.","un Pokemax <strong>único</strong>, no una de las 120 especies capturables. Un todoterreno defensivo construido sobre una DEF enorme y una pasiva que reacciona a la marea.")+'</p>'+
+ '<p class="b"><strong>🐋 Nautyrant</strong> · Water · '+L("all-rounder","todoterreno")+' — '+L("a <strong>unique</strong> Pokemax, not one of the 120 catchable species. A defensive all-rounder built on a huge DEF and a tide-reactive passive.","un Pokemax <strong>único</strong>, no una de las 129 especies comunes capturables. Un todoterreno defensivo construido sobre una DEF enorme y una pasiva que reacciona a la marea.")+'</p>'+
  tbl(L(["Nautyrant — base stats","Value"],["Nautyrant — stats base","Valor"]),LANG==="es"?[
   ["HP","118"],["ATK","108"],["DEF","122"],["SPD","92"]
  ]:[
@@ -2568,7 +2568,7 @@ PAGES["hollowstar-crater"]={t:"The Hollowstar Crater",e:"Expeditions",d:"The sec
  '<p class="b">'+L("<strong>One-time victory, unlimited retries.</strong> Register exactly <strong>three Pokemax</strong> in your Party; your current HP and Move Uses carry into the battle and stay saved, so heal at the Pokemax Center between attempts. Lose and retry as often as you like; <strong>win once and the Trial can never be challenged again</strong>.","<strong>Victoria única, reintentos ilimitados.</strong> Registra exactamente <strong>tres Pokemax</strong> en tu Party; tu HP y Usos de Movimiento actuales entran a la batalla y quedan guardados, así que cúrate en el Pokemax Center entre intentos. Si pierdes puedes reintentar cuantas veces quieras; <strong>ganas una vez y el Trial no se puede volver a desafiar</strong>.")+'</p>'+
  pmxPortrait("cosmoryx","Cosmoryx — Starbound")+
  '<div class="callout"><p>'+L("🦌 <strong>First-victory reward:</strong> <strong>Cosmoryx — Starbound</strong> at Level 30 (genes HP 12 · ATK 12 · DEF 12 · SPD 12), plus <strong>5 Starseals</strong> and <strong>1,500 OIL</strong>.","🦌 <strong>Recompensa de la primera victoria:</strong> <strong>Cosmoryx — Starbound</strong> a nivel 30 (genes HP 12 · ATK 12 · DEF 12 · SPD 12), más <strong>5 Starseals</strong> y <strong>1,500 OIL</strong>.")+'</p></div>'+
- '<p class="b"><strong>🦌 Cosmoryx</strong> · Rock · '+L("all-rounder","todoterreno")+' — '+L("a <strong>unique</strong> Pokemax, not one of the 120 catchable species. A bulky rock all-rounder leaning on heavy HP and DEF.","un Pokemax <strong>único</strong>, no una de las 120 especies capturables. Un todoterreno de roca robusto que se apoya en HP y DEF altos.")+'</p>'+
+ '<p class="b"><strong>🦌 Cosmoryx</strong> · Rock · '+L("all-rounder","todoterreno")+' — '+L("a <strong>unique</strong> Pokemax, not one of the 120 catchable species. A bulky rock all-rounder leaning on heavy HP and DEF.","un Pokemax <strong>único</strong>, no una de las 129 especies comunes capturables. Un todoterreno de roca robusto que se apoya en HP y DEF altos.")+'</p>'+
  tbl(L(["Cosmoryx — base stats","Value"],["Cosmoryx — stats base","Valor"]),LANG==="es"?[
   ["HP","120"],["ATK","115"],["DEF","120"],["SPD","90"]
  ]:[
@@ -3051,7 +3051,7 @@ var TR_HEAD={
  economy:{e:"La guía",t:"Economía y progresión",d:"Dos monedas, una colección de cartas, logros que pagan, y temporadas que no te quitan nada."},
  pets:{e:"Pokemax",t:"El sistema Pokemax",d:"Captura animales salvajes por toda Valestia, súbelos a nivel 50 con dos evoluciones y pelea 3 contra 3. Todo un juego de monstruos dentro del RPG, sin compartir ninguna de sus reglas de combate."},
  lab:{e:"Pokemax",t:"Laboratorio Pokemax",d:"Cada especie por nombre — su tipo, rol, stats exactos a cualquier nivel y tirada de genes, su línea evolutiva y su movepool completo. Las mismas fórmulas del bot."},
- species:{e:"Pokemax",t:"Especies y evolución",d:"120 especies en 40 familias. Cada familia es un animal con tres etapas; nueve regiones crían un tipo cada una, y tres expediciones suman cuatro líneas cada una."},
+ species:{e:"Pokemax",t:"Especies y evolución",d:"129 especies comunes en 43 familias. Cada familia es un animal con tres etapas; nueve regiones crían un tipo cada una, y tres expediciones suman cuatro líneas cada una."},
  genes:{e:"Pokemax",t:"Genes y Esencia",d:"Cuatro números ocultos que se tiran al capturar un Pokemax, y la única moneda capaz de moverlos."},
  petbattle:{e:"Pokemax",t:"Combates Pokemax",d:"Ocho tipos, 71 movimientos, seis estados alterados, y multiplicadores que se acumulan tanto como para terminar una pelea de un golpe."},
  catching:{e:"Pokemax",t:"Captura",d:"El Safari, las OILballs, y la fórmula que decide si lo que acabas de pelear es tuyo."},
@@ -3078,7 +3078,7 @@ var TR_HEAD={
  "nyxhaven":{e:"Expediciones",t:"La Corte sin Luna de Nyxhaven",d:"El tercer destino de expedición — una corte insular helada donde el Moonwell copia a cada guerrero, así que tus cazas se enfrentan a Echoes de jugadores reales de tu nivel."}
 };
 
-var edition=window.GuardiansEdition({L:L,PAGES:PAGES,TR_HEAD:TR_HEAD,FAQ:FAQ,NAV:NAV});
+var edition=window.GuardiansEdition({L:L,PAGES:PAGES,TR_HEAD:TR_HEAD,FAQ:FAQ,NAV:NAV,COUNTS:COUNTS,PLACES:PLACES,ROADS:ROADS,FAUNA:FAUNA,PET_DB:PET_DB,DTR:DTR});
 function renderNav(){
  edition.header();
  document.getElementById("nav").innerHTML=NAV.map(function(g){
@@ -3418,7 +3418,7 @@ function initLab(){
  });
 
  var REG={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
-  rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",ravencraft:"Ravencraft",
+  rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",greywood:"Greywood",ravencraft:"Ravencraft",
   mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum",
   sunken_fang_archipelago:"Sunken Fang Archipelago",hollowstar_crater:"Hollowstar Crater",nyxhaven:"Nyxhaven"};
  var TEMO={fire:"🔥",water:"💧",grass:"🌿",ice:"❄️",rock:"🪨",flying:"🦅",ghost:"👻",dark:"🌑",neutral:"⚪"};
@@ -3535,7 +3535,7 @@ function initLab(){
     '<span class="mv__t">'+(TEMO[M.type]||"")+" "+E(M.type)+'</span></div>'+
     '<div class="mv__s">'+(M.power?L("pow","pod")+" "+M.power:L("status","estado"))+" · "+L("acc","prec")+" "+(M.acc>100?"—":M.acc)+" · "+M.pp+" PP"+
     (M.pri?" · "+L("priority","prioridad")+" +"+M.pri:"")+(stab?" · STAB ×1.5":"")+'</div>'+
-    (M.eff?'<div class="mv__e">'+E(M.eff)+"</div>":"")+"</div>";
+    (M.eff?'<div class="mv__e">'+E(L(M.eff,DTR[M.eff]))+"</div>":"")+"</div>";
   }).join("");
 
   document.getElementById("labLearn").innerHTML=S[id].learn.map(function(p){
@@ -3546,7 +3546,7 @@ function initLab(){
     '<span class="lrn__n">'+E(M.name)+'</span>'+
     '<span class="lrn__t">'+(TEMO[M.type]||"")+" "+E(M.type)+(stab?" · STAB":"")+'</span>'+
     '<span class="lrn__m">'+(M.power?L("pow","pod")+" "+M.power:L("status","estado"))+" · "+M.pp+" PP"+(M.pri?" · pri +"+M.pri:"")+'</span>'+
-    (M.eff?'<span class="lrn__e">'+E(M.eff)+"</span>":"")+"</div>";
+    (M.eff?'<span class="lrn__e">'+E(L(M.eff,DTR[M.eff]))+"</span>":"")+"</div>";
   }).join("");
 
   var next=null;
@@ -3608,7 +3608,7 @@ function initMap(){
   h+='<div class="dos__r"><p class="dos__x">'+E(L(p.d,DTR[p.d]))+"</p></div>";
   if(p.m){
    h+='<div class="dos__r"><p class="dos__k">'+L("Signature material","Material distintivo")+'</p><p class="dos__m">'+E(p.m)+'</p>'+
-      '<p class="dos__x" style="margin-top:.3rem">'+L("Only drops here. Feeds this region's gear and one weapon recipe.","Solo cae aquí. Alimenta el gear de esta región y una receta de arma.")+'</p></div>';
+      '<p class="dos__x" style="margin-top:.3rem">'+L("Regional hunt material. Check the Forge for the recipes and enhancements that use it.","Solo cae aquí. Alimenta el gear de esta región y una receta de arma.")+'</p></div>';
   }
   if(FAUNA[id]){
    h+='<div class="dos__r"><p class="dos__k">'+L("Species — tier 1 → 7","Especies — nivel 1 → 7")+'</p>';
@@ -3620,6 +3620,7 @@ function initMap(){
   var links=ROADS.filter(function(r){return r[0]===id||r[1]===id;})
     .map(function(r){var o=r[0]===id?r[1]:r[0];return PLACES[o]?PLACES[o].n:null;}).filter(Boolean);
   if(links.length) h+='<div class="dos__r"><p class="dos__k">'+L("Connects to","Conecta con")+'</p><p class="dos__x">'+links.join(" · ")+"</p></div>";
+  if(id==="greywood") h+='<div class="dos__r"><a href="'+L("/greywood/","/es/greywood/")+'">'+L("Full Greywood guide","Gu?a completa de Greywood")+" ?</a></div>";
   dos.innerHTML=h;
  }
  /* <button> already fires on Enter/Space, so click alone covers the keyboard */

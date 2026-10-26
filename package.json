@@ -7,7 +7,10 @@
     "test": "node scripts/check-edition.cjs",
     "test:combat": "node scripts/check-combat-guide.cjs",
     "test:hero": "node scripts/check-hero-motion.cjs",
-    "test:cape": "node scripts/check-cape-motion.cjs"
+    "test:cape": "node scripts/check-cape-motion.cjs",
+    "test:content": "node scripts/check-current-content.cjs"
   },
-  "devDependencies": {"playwright": "1.63.0"}
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
 }
