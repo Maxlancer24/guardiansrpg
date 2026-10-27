@@ -2,6 +2,7 @@
 window.GuardiansWorldGuide = function(ctx, greywoodGuide) {
   'use strict';
   const {L,PAGES,TR_HEAD,PLACES,DTR}=ctx, D=window.GuardiansCurrentData;
+  window.GuardiansGrandAtlas(ctx);
   const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
   const mapId=id=>id==='stormbay_docks'?'stormbay':id;
   const name=id=>D.territories[id]?.name||PLACES[mapId(id)]?.n||id;
@@ -34,7 +35,7 @@ window.GuardiansWorldGuide = function(ctx, greywoodGuide) {
   }
   PAGES.valestia={t:'Map of Valestia',e:'The world',d:'Explore eleven hunting regions: travel links, enemy families, materials, Pokemax and clan territory.',h:()=>`
     ${p('Choose a place on the map to see its connections. Open a regional dossier for its hunts, materials and Pokemax. Explore all eleven hunting regions of the mainland below.','Elige un lugar del mapa para ver sus conexiones. Abre su ficha regional para consultar cacerías, materiales y Pokemax. Explora abajo las once regiones de caza del continente.')}
-    <section id="valestia-map" aria-label="${L('Interactive map','Mapa interactivo')}"><div class="atlas"><div class="atlas__m" id="map"></div><aside class="atlas__s"><div class="dos" id="dos" aria-live="polite"></div></aside></div></section>
+    <section id="valestia-map" aria-label="${L('Interactive map','Mapa interactivo')}">${window.GuardiansAtlasToolbar()}<div class="atlas atlas--grand"><div class="atlas__m" id="map" tabindex="0" role="region" aria-label="${L('Scrollable map of Valestia','Mapa desplazable de Valestia')}"></div><aside class="atlas__s"><div class="dos" id="dos" aria-live="polite"></div></aside></div></section>
     <div class="callout">${p('Ravennor is a travel and expedition harbor; Cape Greyveil leads to the Mecha portal. Story locations are also shown on the map, but not every marker is a hunting region. Travel follows the connected routes and the access conditions shown in the game.','Ravennor es un puerto de viajes y expediciones; Cape Greyveil lleva al portal Mecha. El mapa también muestra lugares de historia: no todos sus marcadores son regiones de caza. Viaja por las rutas conectadas y consulta los requisitos de acceso en el juego.')}</div>
     <section id="valestia-regions"><p class="ed-label">${L('REGIONAL ATLAS','ATLAS REGIONAL')}</p><h2 class="s">${L('Eleven regions. One world.','Once regiones. Un mismo mundo.')}</h2>
     ${p('Every dossier follows the same format. Clan passives show their initial values and only apply when their territorial conditions are met.','Todas las fichas siguen el mismo formato. Las pasivas de clan muestran su valor inicial y solo se aplican cuando se cumplen sus condiciones territoriales.')}

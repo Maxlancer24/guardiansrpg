@@ -1,0 +1,22 @@
+{
+  "es": {
+    "source": "design/valestia-atlas/valestia-grand-atlas-v1.png",
+    "source_sha256": "fa5e1dbbbb7f4e6ed16a1da67b5a1a3438240ed28b39eb458d605b33729e30e3",
+    "size": [
+      1697,
+      927
+    ],
+    "webp_bytes": 807160,
+    "jpg_bytes": 1312780
+  },
+  "en": {
+    "source": "design/valestia-atlas/valestia-grand-atlas-en-v1.png",
+    "source_sha256": "ecbca060dc30d3bc61bb7d306dd83463350f10f0d8b0f48e43427032c4c96112",
+    "size": [
+      1697,
+      927
+    ],
+    "webp_bytes": 620834,
+    "jpg_bytes": 1043706
+  }
+}

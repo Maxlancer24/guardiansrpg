@@ -309,7 +309,6 @@ var DTR={
 };
 
 /* Swapped at build time: a data URI for the artifact, a file path for the site. */
-var MAP_SRC="/assets/valestia-map.webp";
 var IMG_JESSIE="/assets/char-jessie.webp";
 var IMG_GARRICK="/assets/char-garrick.webp";
 var IMG_ZOE="/assets/char-zoe.webp";
@@ -3595,7 +3594,7 @@ function initLab(){
 function initMap(){
  /* The painted map is the real artwork; markers are positioned over it in
     percentages, so they track the image at every width. */
- var s='<div class="mapwrap"><img class="mapimg" src="'+MAP_SRC+'" alt="'+L("Map of Valestia","Mapa de Valestia")+'" width="1485" height="810" decoding="async">';
+ var s='<div class="mapwrap"><img class="mapimg" src="'+window.GuardiansAtlasSource()+'" alt="'+L("The Grand Atlas: Valestia, Willowcross and four expedition charts","El Gran Atlas: Valestia, Willowcross y cuatro cartas de expedición")+'" width="1697" height="927" decoding="async">';
  Object.keys(PLACES).forEach(function(id){
   var p=PLACES[id]; if(p.t==="geo") return;
   s+='<button class="pin '+(p.t==="hunt"?"hunt":"")+(p.t==="seal"?" seal":"")+'" data-n="'+id+'"'+
@@ -3611,8 +3610,8 @@ function initMap(){
   if(!p) return;
   document.querySelectorAll(".pin").forEach(function(n){n.classList.toggle("on",n.dataset.n===id);n.setAttribute("aria-pressed",String(n.dataset.n===id));});
   var kind=LANG==="es"
-    ?({hunt:"Región de caza",story:"Locación de historia",side:"Historia secundaria",seal:"Sitio de sello",portal:"Región de portal"}[p.t]||"Locación")
-    :({hunt:"Huntable region",story:"Story location",side:"Side story",seal:"Seal site",portal:"Portal region"}[p.t]||"Location");
+    ?({hunt:"Región de caza",story:"Locación de historia",side:"Historia secundaria",seal:"Sitio de sello",portal:"Región de portal",expedition:"Expedición desde Ravennor"}[p.t]||"Locación")
+    :({hunt:"Huntable region",story:"Story location",side:"Side story",seal:"Seal site",portal:"Portal region",expedition:"Expedition from Ravennor"}[p.t]||"Location");
   var h='<p class="dos__e">'+kind.toUpperCase()+'</p><h3>'+E(p.n)+"</h3>";
   h+='<div class="dos__r"><p class="dos__x">'+E(L(p.d,DTR[p.d]))+"</p></div>";
   if(p.m){
@@ -3635,10 +3634,13 @@ function initMap(){
    h+='<div class="dos__r"><a href="#region-'+regionId+'">'+L("Open regional dossier","Abrir ficha regional")+' ↗</a></div>';
    if(fromMap||location.hash==="#region-"+regionId)dossier.open=true;
   }
+  if(p.guide)h+='<div class="dos__r"><a href="'+L('/','/es/')+p.guide+'/">'+L('Expedition guide','Guía de expediciones')+' ↗</a><p class="dos__x">'+L('Check the current Ravennor schedule for boarding and availability.','Consulta el calendario actual de Ravennor para el embarque y la disponibilidad.')+'</p></div>';
+  var picker=document.getElementById('atlas-place');if(picker)picker.value=id;
   if(fromMap)history.replaceState({},"",location.pathname+(dossier?"#region-"+regionId:"#valestia-map"));
   dos.innerHTML=h;
  }
  window.GuardiansSelectRegion=sel;
+ window.GuardiansAtlasMount(sel);
  /* <button> already fires on Enter/Space, so click alone covers the keyboard */
  document.getElementById("map").addEventListener("click",function(e){
   var n=e.target.closest("[data-n]"); if(n) sel(n.dataset.n,true);
