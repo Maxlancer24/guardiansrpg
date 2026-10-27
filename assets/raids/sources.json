@@ -1,0 +1,192 @@
+{
+  "centinel-arena": {
+    "source": "assets/boss-raids/first-sentinel/arena.png",
+    "source_sha256": "eb8ef44ba9c72b6a23183acafeda392d2d778c28af5d2506e5d00be1bfad3f63",
+    "cell": null,
+    "size": [
+      1400,
+      700
+    ],
+    "output_sha256": "e4494a88210bcd7237f3abfb1f60c21929b1d8b5be72050a0c1f79f4a2d68b88"
+  },
+  "centinel-1": {
+    "source": "assets/boss-raids/first-sentinel/boss-1-idle.png",
+    "source_sha256": "7f81438d826b6fe4a68b81383fa2b041b84324812710f2ea8be728b404045793",
+    "cell": [
+      768,
+      768
+    ],
+    "size": [
+      378,
+      415
+    ],
+    "output_sha256": "918456c986426cf437bf1994a85bb6f20389e735b8fbc2bd5c170c10e2ebcef8"
+  },
+  "centinel-2": {
+    "source": "assets/boss-raids/first-sentinel/boss-2-idle.png",
+    "source_sha256": "645d3292044fde11b7924e980b07e2a92ba94ad569addd5fa6b44f12f320428f",
+    "cell": [
+      768,
+      768
+    ],
+    "size": [
+      381,
+      417
+    ],
+    "output_sha256": "db550bee8b7848a0fb90ee26d4a286b8b28600a89ee99cb35aeaccce3736e6e0"
+  },
+  "gilded-1": {
+    "source": "assets/boss-raids/first-sentinel/gilded-boss-1-idle.png",
+    "source_sha256": "bf174a41cfbbd02c03fd85b991a597c8d50a505d503004113d2ff11a372d07a4",
+    "cell": [
+      768,
+      768
+    ],
+    "size": [
+      378,
+      415
+    ],
+    "output_sha256": "dfd60769030f92730786ad75294a09976e10fe31a8f715f578a408c1d409078f"
+  },
+  "gilded-2": {
+    "source": "assets/boss-raids/first-sentinel/gilded-boss-2-idle.png",
+    "source_sha256": "6a40b76daf90ecd9f83269755382434cf4ae5f297d53b0dbfb808d445d68b52d",
+    "cell": [
+      768,
+      768
+    ],
+    "size": [
+      381,
+      417
+    ],
+    "output_sha256": "9876b80ae54d83c379e3e0c5ea9584e7ed251ce35b8eddeb3095a2629eebd35a"
+  },
+  "vareth-arena": {
+    "source": "assets/boss-raids/vareth/arena.png",
+    "source_sha256": "fd9cf0e1f59f1ca3432171d3c325545e345c805141312facc60461b0a8c4c7c9",
+    "cell": null,
+    "size": [
+      1400,
+      700
+    ],
+    "output_sha256": "9d6e24e0cdbeb9efd70f2a945ddf118625728df63011d31ca6ba4d41b199a76c"
+  },
+  "vareth-1": {
+    "source": "assets/boss-raids/vareth/idle-1-v35.png",
+    "source_sha256": "1fb7f0fcf59c8ecab93ea8035c54cdfaf75aefb690400fe3750ba6eadd259b77",
+    "cell": [
+      512,
+      512
+    ],
+    "size": [
+      464,
+      437
+    ],
+    "output_sha256": "0e65c3b672fdfd912e3d9e885e20b82ed900521d1482fb6948dff885b47b918e"
+  },
+  "vareth-2": {
+    "source": "assets/boss-raids/vareth/idle-2-v35.png",
+    "source_sha256": "a98d23c5fcec3473257601347ca3e1e35bb7c5aacc313bb7b90a4cc96db4edd0",
+    "cell": [
+      512,
+      512
+    ],
+    "size": [
+      454,
+      440
+    ],
+    "output_sha256": "126bef223e34587a88fb49e518837ba7cf77e1c432085243bb830357546c2400"
+  },
+  "jade-arena": {
+    "source": "assets/boss-raids/jade-regent/arena-1.png",
+    "source_sha256": "18f67ebba929b9b443c616ff532f4c6a002bf1962606f92da55296003a7b4611",
+    "cell": null,
+    "size": [
+      1400,
+      788
+    ],
+    "output_sha256": "8af7476f6956b8d7d3cfe99fd26c9cb8b981f3e7d1806e1796066d03d5320743"
+  },
+  "jade-1": {
+    "source": "assets/boss-raids/jade-regent/idle-guard-1-v3.webp",
+    "source_sha256": "1e06f195ba31122633559b2883826e38662467ccfe7dcb1a669fc14cf623d8bb",
+    "cell": [
+      896,
+      640
+    ],
+    "size": [
+      449,
+      403
+    ],
+    "output_sha256": "e31082a6867a28ea2c1bf09556d3db2882dbbb1e759a54a293f59042ad8d9fbf"
+  },
+  "jade-2": {
+    "source": "assets/boss-raids/jade-regent/idle-guard-2-v3.webp",
+    "source_sha256": "a8badc5a533bb18b14473a09ca014e04980d7cdbbb34e161ef8676e356e5f723",
+    "cell": [
+      896,
+      640
+    ],
+    "size": [
+      466,
+      406
+    ],
+    "output_sha256": "a74c34f91dfb0d1c91bb83c884904316a9150daaf454be3c76dee836c7a0032d"
+  },
+  "crimson-arena": {
+    "source": "assets/boss-raids/jade-regent/crimson-arena-1.png",
+    "source_sha256": "a4055fe3906edd133a5b84dddd1efe9f24e7d7635edffc8a15ae92ba451c299d",
+    "cell": null,
+    "size": [
+      1400,
+      788
+    ],
+    "output_sha256": "64970c005d59c08623ae77055fac0f3882b1e1a6aa05278054e8fc33d1f65a33"
+  },
+  "crimson-1": {
+    "source": "assets/boss-raids/jade-regent/crimson-idle-guard-1-v3.webp",
+    "source_sha256": "921c0bfed43deb2c3c31e78fb92cfda3a6edb9a233a7749306be2e00ad157b95",
+    "cell": [
+      896,
+      640
+    ],
+    "size": [
+      449,
+      403
+    ],
+    "output_sha256": "9c33a98cec411930cc6c353a94c5d9fa56549af9852d7bf8e6a1d7b7eaf1cfb0"
+  },
+  "crimson-2": {
+    "source": "assets/boss-raids/jade-regent/crimson-idle-guard-2-v3.webp",
+    "source_sha256": "3a527a4dea58726871d9284c39ff108c9444733a1a70cd68b90ca18c036edabb",
+    "cell": [
+      896,
+      640
+    ],
+    "size": [
+      466,
+      406
+    ],
+    "output_sha256": "f093e03a757ba0a307d054ee5227833b2db44d9b7c6dbc010a24ed5c0a4c3bd8"
+  },
+  "jade-arena-2": {
+    "source": "assets/boss-raids/jade-regent/arena-2.png",
+    "source_sha256": "c3aa7654c2708bf959ff8a097495ec838cc5919f910b48590600948817c7d95b",
+    "cell": null,
+    "size": [
+      1400,
+      788
+    ],
+    "output_sha256": "d5fa5c68a38198864d12422832231da6d70f83e25f9156bbb17317013d261537"
+  },
+  "crimson-arena-2": {
+    "source": "assets/boss-raids/jade-regent/crimson-arena-2.png",
+    "source_sha256": "02edb28007ba50967ad2ff07b6b2d56fb26f4d386bbf5d56bf99cdf0b225f20d",
+    "cell": null,
+    "size": [
+      1400,
+      788
+    ],
+    "output_sha256": "da11eb7ed849228ca01d8766e6addb4a76b44b029c00cc1da3c9c8a770c8440e"
+  }
+}

@@ -3114,7 +3114,7 @@ function setLang(l){
  var id=(typeof currentId==="function")?currentId():"home";
  LANG=l; try{ localStorage.setItem("glang",l); }catch(e){}
  /* on the site, the language IS the URL — move to the same page's other-language URL */
- if(SITE_MODE){ history.pushState({},"",(l==="es"?"/es/":"/")+(id==="home"?"":id+"/")); }
+ if(SITE_MODE){ history.pushState({},"",(l==="es"?"/es/":"/")+(id==="home"?"":id+"/")+location.hash); }
  built={}; renderNav(); renderMain(); route(); syncLang();
 }
 document.getElementById("langsw").addEventListener("click",function(e){
@@ -3236,8 +3236,15 @@ function route(){
  revealIn(id);
  closeRail();
  var anchor=location.hash.slice(1);
+ if(id==="valestia"&&anchor.indexOf("region-")===0&&window.GuardiansSelectRegion){
+  var regionId=anchor.slice(7);
+  window.GuardiansSelectRegion(regionId==="stormbay_docks"?"stormbay":regionId);
+ }
  var target=anchor&&document.getElementById(anchor);
- if(target&&document.querySelector(".page.is-on").contains(target)) { target.scrollIntoView(); }
+ if(target&&document.querySelector(".page.is-on").contains(target)) {
+  var parent=target;while(parent&&parent!==document.querySelector(".page.is-on")){if(parent.tagName==="DETAILS")parent.open=true;parent=parent.parentElement;}
+  target.scrollIntoView();
+ }
  else window.scrollTo(0,0);
  /* GoatCounter: one pageview per section. Async-safe — if count.js is not loaded
     yet, stash it and its onload flushes __gcInit. No-op in the artifact. */
@@ -3258,6 +3265,7 @@ if(SITE_MODE){
   route();
  });
  addEventListener("popstate",route);
+ addEventListener("hashchange",route);
 } else {
  addEventListener("hashchange",route);
 }
@@ -3587,7 +3595,7 @@ function initLab(){
 function initMap(){
  /* The painted map is the real artwork; markers are positioned over it in
     percentages, so they track the image at every width. */
- var s='<div class="mapwrap"><img class="mapimg" src="'+MAP_SRC+'" alt="Map of Valestia" width="1485" height="810" loading="lazy" decoding="async">';
+ var s='<div class="mapwrap"><img class="mapimg" src="'+MAP_SRC+'" alt="'+L("Map of Valestia","Mapa de Valestia")+'" width="1485" height="810" decoding="async">';
  Object.keys(PLACES).forEach(function(id){
   var p=PLACES[id]; if(p.t==="geo") return;
   s+='<button class="pin '+(p.t==="hunt"?"hunt":"")+(p.t==="seal"?" seal":"")+'" data-n="'+id+'"'+
@@ -3598,9 +3606,10 @@ function initMap(){
  document.getElementById("map").innerHTML=s;
 
  var dos=document.getElementById("dos");
- function sel(id){
+  function sel(id,fromMap){
   var p=PLACES[id];
-  document.querySelectorAll(".pin").forEach(function(n){n.classList.toggle("on",n.dataset.n===id);});
+  if(!p) return;
+  document.querySelectorAll(".pin").forEach(function(n){n.classList.toggle("on",n.dataset.n===id);n.setAttribute("aria-pressed",String(n.dataset.n===id));});
   var kind=LANG==="es"
     ?({hunt:"Región de caza",story:"Locación de historia",side:"Historia secundaria",seal:"Sitio de sello",portal:"Región de portal"}[p.t]||"Locación")
     :({hunt:"Huntable region",story:"Story location",side:"Side story",seal:"Seal site",portal:"Portal region"}[p.t]||"Location");
@@ -3608,7 +3617,7 @@ function initMap(){
   h+='<div class="dos__r"><p class="dos__x">'+E(L(p.d,DTR[p.d]))+"</p></div>";
   if(p.m){
    h+='<div class="dos__r"><p class="dos__k">'+L("Signature material","Material distintivo")+'</p><p class="dos__m">'+E(p.m)+'</p>'+
-      '<p class="dos__x" style="margin-top:.3rem">'+L("Regional hunt material. Check the Forge for the recipes and enhancements that use it.","Solo cae aquí. Alimenta el gear de esta región y una receta de arma.")+'</p></div>';
+      '<p class="dos__x" style="margin-top:.3rem">'+L("Regional hunt material. Check the Forge for the recipes and enhancements that use it.","Material de cacería regional. Consulta en la Forja las recetas y mejoras que lo utilizan.")+'</p></div>';
   }
   if(FAUNA[id]){
    h+='<div class="dos__r"><p class="dos__k">'+L("Species — tier 1 → 7","Especies — nivel 1 → 7")+'</p>';
@@ -3620,12 +3629,19 @@ function initMap(){
   var links=ROADS.filter(function(r){return r[0]===id||r[1]===id;})
     .map(function(r){var o=r[0]===id?r[1]:r[0];return PLACES[o]?PLACES[o].n:null;}).filter(Boolean);
   if(links.length) h+='<div class="dos__r"><p class="dos__k">'+L("Connects to","Conecta con")+'</p><p class="dos__x">'+links.join(" · ")+"</p></div>";
-  if(id==="greywood") h+='<div class="dos__r"><a href="'+L("/greywood/","/es/greywood/")+'">'+L("Full Greywood guide","Gu?a completa de Greywood")+" ?</a></div>";
+  var regionId=id==="stormbay"?"stormbay_docks":id;
+  var dossier=document.getElementById("region-"+regionId);
+  if(dossier){
+   h+='<div class="dos__r"><a href="#region-'+regionId+'">'+L("Open regional dossier","Abrir ficha regional")+' ↗</a></div>';
+   if(fromMap||location.hash==="#region-"+regionId)dossier.open=true;
+  }
+  if(fromMap)history.replaceState({},"",location.pathname+(dossier?"#region-"+regionId:"#valestia-map"));
   dos.innerHTML=h;
  }
+ window.GuardiansSelectRegion=sel;
  /* <button> already fires on Enter/Space, so click alone covers the keyboard */
  document.getElementById("map").addEventListener("click",function(e){
-  var n=e.target.closest("[data-n]"); if(n) sel(n.dataset.n);
+  var n=e.target.closest("[data-n]"); if(n) sel(n.dataset.n,true);
  });
  sel("stormbay");
 }
