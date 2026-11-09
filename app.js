@@ -3427,7 +3427,7 @@ function initLab(){
  var REG={starter_ruins:"Starter Ruins",crimson_plain:"Crimson Plain",stormbay_docks:"Stormbay Docks",
   rocky_chill_pass:"Rocky Chill Pass",black_lotus_wood:"Black Lotus Wood",greywood:"Greywood",ravencraft:"Ravencraft",
   mist_forest:"The Mist Forest",bandit_caves:"Bandit Caves",dark_knight_sanctum:"Dark Knight's Sanctum",
-  sunken_fang_archipelago:"Sunken Fang Archipelago",hollowstar_crater:"Hollowstar Crater",nyxhaven:"Nyxhaven"};
+  sunken_fang_archipelago:"Sunken Fang Archipelago",hollowstar_crater:"Hollowstar Crater",nyxhaven:"Nyxhaven",harrowmere:"Harrowmere"};
  var TEMO={fire:"🔥",water:"💧",grass:"🌿",ice:"❄️",rock:"🪨",flying:"🦅",ghost:"👻",dark:"🌑",neutral:"⚪"};
 
  /* engine formulas, verbatim */
@@ -3463,7 +3463,7 @@ function initLab(){
   return '<option value="'+id+'">'+E(S[id].emoji+" "+S[id].name)+" — "+L("stage","etapa")+" "+S[id].stage+"</option>";
  }
  function sortLine(a,b){ return S[a].stage-S[b].stage || S[a].name.localeCompare(S[b].name); }
- var EXP_REGIONS={sunken_fang_archipelago:1,hollowstar_crater:1,nyxhaven:1};
+ var EXP_REGIONS={sunken_fang_archipelago:1,hollowstar_crater:1,nyxhaven:1,harrowmere:1};
  var main=Object.keys(REG).map(function(rg){
   if(EXP_REGIONS[rg]) return "";  /* expeditions rendered as their own optgroups below */
   var list=(groups[rg]||[]).slice().sort(sortLine);
@@ -3487,7 +3487,9 @@ function initLab(){
   expGroup(L("Hollowstar · Base 🌑","Hollowstar · Base 🌑"),HS_BASE)+
   expGroup(L("Hollowstar · Starfall ☄️","Hollowstar · Starfall ☄️"),HS_STAR)+
   expGroup(L("Nyxhaven · Every phase 🌑","Nyxhaven · Todas las fases 🌑"),NX_BASE)+
-  expGroup(L("Nyxhaven · Full Moon 🌕","Nyxhaven · Luna llena 🌕"),NX_FULL);
+  expGroup(L("Nyxhaven · Full Moon 🌕","Nyxhaven · Luna llena 🌕"),NX_FULL)+
+  expGroup(L("Harrowmere · Vigil + Procession","Harrowmere · Vigilia + Procesión"),["wicklet","gourdling","hollowgourd","strawchick","rookstitch","gallowsrook"])+
+  expGroup(L("Harrowmere · Procession only","Harrowmere · Solo Procesión"),["cinderpup","ashmaw","pyrehound","glimfawn","veilhart","wickerhart"]);
  sel.value=st.sp;
 
  /* gene sliders */
@@ -3514,7 +3516,7 @@ function initLab(){
   GK.forEach(function(g){ document.querySelector('[data-gv="'+g[0]+'"]').textContent=st.g[g[0]]; });
 
   document.getElementById("labId").innerHTML=
-   '<img class="lab__thumb" src="/assets/pokemax/'+id+'.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()" style="width:72px;height:72px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 3px 7px rgba(0,0,0,.35))">'+
+   '<img class="lab__thumb" src="/assets/'+(s.region==='harrowmere'?'updates-20261109':'pokemax')+'/'+id+'.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()" style="width:72px;height:72px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 3px 7px rgba(0,0,0,.35))">'+
    '<span class="lab__emo">'+s.emoji+'</span><div><div class="lab__nm">'+E(s.name)+'</div>'+
    '<div class="lab__meta">'+E(REG[s.region])+' · '+L("stage","etapa")+' '+s.stage+' '+L("of","de")+' '+line.length+'</div></div>'+
    '<div class="lab__badges"><span class="lab__bd lab__bd--t">'+TEMO[s.type]+" "+E(s.type)+'</span>'+
@@ -3634,7 +3636,7 @@ function initMap(){
    h+='<div class="dos__r"><a href="#region-'+regionId+'">'+L("Open regional dossier","Abrir ficha regional")+' ↗</a></div>';
    if(fromMap||location.hash==="#region-"+regionId)dossier.open=true;
   }
-  if(p.guide)h+='<div class="dos__r"><a href="'+L('/','/es/')+p.guide+'/">'+L('Expedition guide','Guía de expediciones')+' ↗</a><p class="dos__x">'+L('Check the current Ravennor schedule for boarding and availability.','Consulta el calendario actual de Ravennor para el embarque y la disponibilidad.')+'</p></div>';
+  if(p.guide)h+='<div class="dos__r"><a href="'+L('/','/es/')+p.guide+'/'+(id==='harrowmere'?'#harrowmere':'')+'">'+L('Expedition guide','Guía de expediciones')+' ↗</a><p class="dos__x">'+L('Check the current Ravennor schedule for boarding and availability.','Consulta el calendario actual de Ravennor para el embarque y la disponibilidad.')+'</p></div>';
   var picker=document.getElementById('atlas-place');if(picker)picker.value=id;
   if(fromMap)history.replaceState({},"",location.pathname+(dossier?"#region-"+regionId:"#valestia-map"));
   dos.innerHTML=h;

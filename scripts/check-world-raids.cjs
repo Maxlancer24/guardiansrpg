@@ -15,7 +15,7 @@ const {createServer,root}=require('./preview.cjs');
   for(const lang of ['en','es'])for(const width of [1440,390,320]){
    const prefix=lang==='es'?'/es/':'/';
    await page.setViewportSize({width,height:1000});await page.goto(base+prefix+'raids/');
-   assert.equal(await page.locator('.page.is-on .raid-boss').count(),3);
+   assert.equal(await page.locator('.page.is-on .raid-boss').count(),4);
    assert.equal(await page.locator('.page.is-on .raid-scene').count(),9);
    await page.locator('.page.is-on img').evaluateAll(imgs=>Promise.all(imgs.map(i=>{i.loading='eager';return i.decode();})));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`raids overflow ${lang} ${width}`);
@@ -26,7 +26,7 @@ const {createServer,root}=require('./preview.cjs');
     assert.ok(await page.locator('#raid-'+id).isVisible());
    }
    if(lang==='es'&&width!==320){await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:path.join(out,`raids-${width}.png`),fullPage:true});}
-   checks.push(`${lang} raids ${width}: three bosses, nine scenes, decoded art, anchor navigation, no overflow`);
+   checks.push(`${lang} raids ${width}: three established bosses plus Severin preview, nine established scenes, decoded art, anchor navigation, no overflow`);
    await page.goto(base+prefix+'valestia/');
    await page.locator('.mapimg').evaluate(i=>i.decode());
    assert.equal(await page.locator('.region-dossier').count(),11);
@@ -61,7 +61,7 @@ const {createServer,root}=require('./preview.cjs');
   checks.push('Both legacy Greywood routes redirect to the atlas');
   const nojs=await browser.newPage({javaScriptEnabled:false});
   for(const prefix of ['/','/es/']){
-   await nojs.goto(base+prefix+'raids/');assert.equal(await nojs.locator('.raid-boss').count(),3);assert.ok((await nojs.locator('main').innerText()).includes('Unbroken Oath'));
+   await nojs.goto(base+prefix+'raids/');assert.equal(await nojs.locator('.raid-boss').count(),4);assert.ok((await nojs.locator('main').innerText()).includes('Unbroken Oath'));
    await nojs.goto(base+prefix+'valestia/');assert.equal(await nojs.locator('.region-dossier').count(),11);
    await nojs.locator('#region-greywood>summary').click();assert.ok((await nojs.locator('#region-greywood').innerText()).includes('Pale Amber'));
   }

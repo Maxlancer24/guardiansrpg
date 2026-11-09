@@ -30,7 +30,7 @@ const {createServer,root}=require('./preview.cjs');
   assert.ok(mapText.includes('Pale Amber')&&mapText.includes('Hollowbark')&&mapText.includes('Ravennor')&&mapText.includes('Starter Ruins'));
   assert.ok(!mapText.includes('Millhaven'));await page.locator('#dos a').click();assert.ok(page.url().endsWith('/es/valestia/#region-greywood'));checks.push('Greywood map marker opens its atlas dossier');
   await page.goto(base+'/es/lab/');
-  assert.equal(await page.locator('#labSp option').count(),129);
+  assert.equal(await page.locator('#labSp option').count(),141);
   const greywood=Object.values(data.species).filter(s=>s.region==='greywood');
   for(const s of greywood){await page.selectOption('#labSp',s.id);assert.ok((await page.locator('#labId').innerText()).includes('Greywood'));}
   await page.selectOption('#labSp','oakenfort');await page.locator('#labPerfect').click();
@@ -41,7 +41,7 @@ const {createServer,root}=require('./preview.cjs');
   assert.ok((await page.locator('#labMoves').innerText()).includes('Bark Renewal'));
   await page.locator('#labLv').fill('15');await page.locator('#labLv').dispatchEvent('input');assert.ok((await page.locator('#labId').innerText()).includes('Barkbud'));
   await page.locator('#labLv').fill('16');await page.locator('#labLv').dispatchEvent('input');assert.ok((await page.locator('#labId').innerText()).includes('Knothold'));
-  checks.push('Lab: all 129 species, nine Greywood options, actual base stats and evolution thresholds');
+  checks.push('Lab: all 141 species, nine Greywood options, actual base stats and evolution thresholds');
   const nojs=await browser.newPage({javaScriptEnabled:false});
   for(const id of ['valestia','jadewind','primordial']){
    await nojs.goto(base+'/es/'+id+'/');assert.equal(await nojs.locator('h1').count(),1);

@@ -1,0 +1,357 @@
+{
+  "harrowmere-presentation": {
+    "source": "assets/expeditions/harrowmere-presentation.png",
+    "source_sha256": "ad02e0e3e3f993c705bb2d92f0549e0db9bbc0a46f4127b9a2c38d1f5690235e",
+    "original_size": [
+      1672,
+      941
+    ],
+    "crop": null,
+    "size": [
+      1400,
+      788
+    ],
+    "alpha": false,
+    "output_sha256": "06b6550381b49272cbdbdd7f991ba2edbf3cc9f06857099000d004200285f717"
+  },
+  "harrowmere-vigil": {
+    "source": "assets/pokemax/backgrounds/harrowmere_vigil.png",
+    "source_sha256": "7a897e836e8798fd1fc5ee147eff3d8c9ba61c97abcf5ef0594a4eaf3654365c",
+    "original_size": [
+      1672,
+      941
+    ],
+    "crop": null,
+    "size": [
+      1400,
+      788
+    ],
+    "alpha": false,
+    "output_sha256": "98c46afa9a7d1df746ac27c257873d6d8d9551bf5bf80ae7f937f0e0e52ca163"
+  },
+  "harrowmere-procession": {
+    "source": "assets/pokemax/backgrounds/harrowmere_procession.png",
+    "source_sha256": "eb5d023cbea9dec0b705f4d5a8ae6cf58ce51f4287d7ae7c9053f23a4b834d80",
+    "original_size": [
+      1672,
+      941
+    ],
+    "crop": null,
+    "size": [
+      1400,
+      788
+    ],
+    "alpha": false,
+    "output_sha256": "7ea750135cf6645ae4a8d3dc739090ce59d19e5dfb012a9c39d99587dff21d5d"
+  },
+  "severin-arena-1": {
+    "source": "assets/boss-raids/severin/arena-vigil.png",
+    "source_sha256": "fb0ebbf492ea8d3e9db87d54e8e2aa7e6220ef9ca4490672745ce6778bb4d374",
+    "original_size": [
+      1672,
+      941
+    ],
+    "crop": null,
+    "size": [
+      1400,
+      788
+    ],
+    "alpha": false,
+    "output_sha256": "80c251cfebbdf6eee069789bb3a01c363be16927b7197377a5b7f300743a42a3"
+  },
+  "severin-arena-2": {
+    "source": "assets/boss-raids/severin/arena-procession.png",
+    "source_sha256": "9ac23d617ee0a73f7e9a3193836a48dca27517eec7b4cf3aa5a0ffca4b6b8423",
+    "original_size": [
+      1672,
+      941
+    ],
+    "crop": null,
+    "size": [
+      1400,
+      788
+    ],
+    "alpha": false,
+    "output_sha256": "4f99f29370b61d56abd1af9c6fcd77ba6dcf49db3c2858ed2cb6f563bd220da9"
+  },
+  "severin-1": {
+    "source": "assets/boss-raids/severin/p1-idle-v2.png",
+    "source_sha256": "1765f08345d4bf36dc7fdca305abb7ed72765030a231ceda59e5b70332106e84",
+    "original_size": [
+      1536,
+      1024
+    ],
+    "crop": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "size": [
+      485,
+      498
+    ],
+    "alpha": true,
+    "output_sha256": "4a4e7d5baf0592ab660c862321cfdd503c6c2420c9202f61a89e8ff784ee6f63"
+  },
+  "severin-2": {
+    "source": "assets/boss-raids/severin/p2-idle.png",
+    "source_sha256": "ccc5d4e2672bd3944204d34223951fb5d44aa25f4df296610996895f42716aa4",
+    "original_size": [
+      1536,
+      1024
+    ],
+    "crop": [
+      0,
+      0,
+      512,
+      512
+    ],
+    "size": [
+      512,
+      508
+    ],
+    "alpha": true,
+    "output_sha256": "9d4fc1683ce22952e7a9684d59db98ccf5df033d44c23c4e8d6b0dceb38d202b"
+  },
+  "hollowgourd": {
+    "source": "assets/pokemax/pilot/hollowgourd.png",
+    "source_sha256": "74a47c821801ed12ee1f4dc0e7f7efd28448f4d9242017ec616ce985530997ef",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      600,
+      585
+    ],
+    "alpha": true,
+    "output_sha256": "2d4525d71c3ac7e77d1b7b70cb8b537e70b3c27546161b8d9acbf7b4a2ccc878"
+  },
+  "gallowsrook": {
+    "source": "assets/pokemax/pilot/gallowsrook.png",
+    "source_sha256": "51cf5e297f308f4e8d10bdbc253d67d347eebb232627cf784d3ae733cb92cb8f",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      600,
+      591
+    ],
+    "alpha": true,
+    "output_sha256": "126a1a57946e73b0b559412ce5f3f48f38415e0ff32d5c9ef3761d273f7f9173"
+  },
+  "pyrehound": {
+    "source": "assets/pokemax/pilot/pyrehound.png",
+    "source_sha256": "26657050150470d4bb074c907fc9ec793ff1096f830d76eb1b924f1adb4c4c6a",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      600,
+      585
+    ],
+    "alpha": true,
+    "output_sha256": "0b3ae910c879c6e761d2a9c1a6df9b24556e1285f246ace2ef73c0b48057afc6"
+  },
+  "wickerhart": {
+    "source": "assets/pokemax/pilot/wickerhart.png",
+    "source_sha256": "0d4c1736e9a7d5fc7b0a1dee5b8f36d1a0e3e134eb3bb3211ce9c8b7c6707d34",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      591,
+      600
+    ],
+    "alpha": true,
+    "output_sha256": "2b6dd1b030f21e2f3f83690fed7865db3128d852d09b827c0d400a16e64058a5"
+  },
+  "last-vigil-lantern": {
+    "source": "assets/harrowmere/items/last_vigil_lantern.png",
+    "source_sha256": "19a756d133569e4b9b2ab39cde88ea775b119b447d722b0cb913296732886c1c",
+    "original_size": [
+      1024,
+      1536
+    ],
+    "crop": null,
+    "size": [
+      317,
+      480
+    ],
+    "alpha": true,
+    "output_sha256": "c6e697812446e0b395732b2d4916af1c7cef53e733d1b35d6f3361eedc3ad345"
+  },
+  "tithe-scythe": {
+    "source": "assets/harrowmere/items/tithe_scythe.png",
+    "source_sha256": "56c80eaa4432276fc954e1982fd4e276744aa06963496a7f909dc770372da34e",
+    "original_size": [
+      1086,
+      1448
+    ],
+    "crop": null,
+    "size": [
+      357,
+      480
+    ],
+    "alpha": true,
+    "output_sha256": "fee21d687a1ba030a2b576486fe0f84c6c74f8ce33b82108f2f7d72096703a60"
+  },
+  "last-light-insignia": {
+    "source": "assets/harrowmere/items/last_light_insignia.png",
+    "source_sha256": "d0b5b23a6a37d52bc397ea92859344728df29dcf71dbe870e8b039bd27ddf298",
+    "original_size": [
+      1223,
+      1286
+    ],
+    "crop": null,
+    "size": [
+      459,
+      480
+    ],
+    "alpha": true,
+    "output_sha256": "007140a08c870a741c9bcc458e13b8ec88e5fb3e33e63ebbbc99a808ac2d97f7"
+  },
+  "harrow-obol": {
+    "source": "assets/harrowmere/items/harrow_obol.png",
+    "source_sha256": "6b584d2024cce1d84bb296c02e19f11382bc29c45191001d6e8f206651bb6ecc",
+    "original_size": [
+      1312,
+      1199
+    ],
+    "crop": null,
+    "size": [
+      480,
+      431
+    ],
+    "alpha": true,
+    "output_sha256": "9878f5aeaf146aa5b663cb69246e735afbb51c0c4be3a4f791ddee8778a628fc"
+  },
+  "wicklet": {
+    "source": "assets/pokemax/pilot/wicklet.png",
+    "source_sha256": "983f668d9ffc2d43a051cbbb2ff2afd7e6f8044ee14497f31877f9d06da83d54",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      396,
+      400
+    ],
+    "alpha": true,
+    "output_sha256": "adc6a1fe82d3d6f16aa762864092fd7f37823d718b88066568002b6e02c5c31a"
+  },
+  "gourdling": {
+    "source": "assets/pokemax/pilot/gourdling.png",
+    "source_sha256": "20b5f80babc4976fdc44eb7ef67c5c372da42aeac76a4e62bbb4a1f138feebb6",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      398,
+      400
+    ],
+    "alpha": true,
+    "output_sha256": "7a740af03ec2883b60028707a6b38357dcf75f7645f1a1be783e9771ccc49136"
+  },
+  "strawchick": {
+    "source": "assets/pokemax/pilot/strawchick.png",
+    "source_sha256": "ff9209e1cd05369a185f9d3969a0abae6ad399cf35fd287b035fad29b31875df",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      396,
+      400
+    ],
+    "alpha": true,
+    "output_sha256": "77d9e54bdc7d35d82769d2533639361d8e2d55e9c6eb8f355cd2d48d2f03ac82"
+  },
+  "rookstitch": {
+    "source": "assets/pokemax/pilot/rookstitch.png",
+    "source_sha256": "72b7a5b42d1cc7bcdc4715fb9c2550c83a60945bd23ca1ea5304e91d8c9ad726",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      392,
+      400
+    ],
+    "alpha": true,
+    "output_sha256": "4ebbd5d25c3aa512c42ccd57632a5a4a794c910416e9e7325718a22d5608f900"
+  },
+  "cinderpup": {
+    "source": "assets/pokemax/pilot/cinderpup.png",
+    "source_sha256": "42c6d79f0359c7afe32f7d6d554cf0b1a61126b661accd819bd7f20b12d9d7af",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      400,
+      395
+    ],
+    "alpha": true,
+    "output_sha256": "566461313d4ac53792bb37574dee0a06202e1a69d45444ca8ab5115c07309de5"
+  },
+  "ashmaw": {
+    "source": "assets/pokemax/pilot/ashmaw.png",
+    "source_sha256": "e629e8c6aa0a791a94e021b0ab51452ca4c52430ba148b513d86eebecc36a94b",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      397,
+      400
+    ],
+    "alpha": true,
+    "output_sha256": "61df6b1926409fec875d59e5141ff8da20bf926cf977724ba25e1f6fd2b0ab14"
+  },
+  "glimfawn": {
+    "source": "assets/pokemax/pilot/glimfawn.png",
+    "source_sha256": "da3903157ee1a6dcecd357409bbaa46d7fd296c18a62214ef8972539d5c2fa9a",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      392,
+      400
+    ],
+    "alpha": true,
+    "output_sha256": "f071e8ebf085f828cb35128e00678cb7557483f1e68d011308a5b7c4b0f2f51d"
+  },
+  "veilhart": {
+    "source": "assets/pokemax/pilot/veilhart.png",
+    "source_sha256": "ab5f9cefc49c565c0b9ddd904562da4f15e86389e8ea0eb6640f50b68da92b93",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "crop": null,
+    "size": [
+      396,
+      400
+    ],
+    "alpha": true,
+    "output_sha256": "a3e6868076270f8ce197834446a0514cbbc31b370f67192062e18930c40348cc"
+  }
+}
