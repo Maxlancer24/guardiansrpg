@@ -3084,7 +3084,7 @@ function renderNav(){
   var acc=GACC[g[0]]||"var(--verdigris)";
   return '<details class="navgrp"><summary class="navgrp__t" style="color:'+acc+'">'+E(L(g[0],g[2]))+'</summary><div class="nav">'+
    g[1].map(function(p){
-    return '<a href="#'+p[0]+'" data-p="'+p[0]+'" style="--accent:'+(PACC[p[0]]||"var(--brass)")+'">'+L(p[1],p[2])+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
+    return '<a href="#'+p[0]+'" data-p="'+p[0]+'" style="--accent:'+(PACC[p[0]]||"var(--brass)")+'">'+window.GuardiansNavIcon(p[0])+L(p[1],p[2])+(COUNTS[p[0]]?"<i>"+COUNTS[p[0]]+"</i>":"")+"</a>";
    }).join("")+"</div></details>";
  }).join("");
 }
@@ -3096,8 +3096,8 @@ function renderMain(){
  document.getElementById("main").innerHTML=Object.keys(PAGES).map(function(k){
   var p=PAGES[k], acc=PACC[k]||"var(--brass)", th=(TR_HEAD[k]||{});
   if(p.nohead) return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'">'+p.h()+'</section>';
-  return '<section class="page" id="pg-'+k+'" style="--accent:'+acc+'"><div class="ph"><div class="ph__e">'+L(p.e,th.e)+'</div><h1>'+L(p.t,th.t)+'</h1>'+
-   (p.d?'<p class="ph__d">'+L(p.d,th.d)+"</p>":"")+"</div>"+p.h()+
+  var pageHeader=window.GuardiansPageHeader(k,p,th)||'<div class="ph"><div class="ph__e">'+L(p.e,th.e)+'</div><h1>'+L(p.t,th.t)+'</h1>'+(p.d?'<p class="ph__d">'+L(p.d,th.d)+"</p>":"")+"</div>";
+  return '<section class="page" id="pg-'+k+'" data-tone="'+window.GuardiansPageTone(k)+'" style="--accent:'+acc+'">'+pageHeader+p.h()+
    '<div class="foot"><p>'+foot+'</p></div></section>';
  }).join("");
 }
@@ -3127,7 +3127,7 @@ function _effectiveTheme(){
  if(t==="dark"||t==="light") return t;
  return "dark";
 }
-function syncThemeBtn(){ var b=document.getElementById("themesw"); if(b) b.textContent=(_effectiveTheme()==="dark"?"☀️":"🌙"); }
+function syncThemeBtn(){ var b=document.getElementById("themesw"); if(b){b.innerHTML=window.GuardiansIcon(_effectiveTheme()==="dark"?"sun":"moon");b.setAttribute('aria-label',_effectiveTheme()==="dark"?L('Use light theme','Usar tema claro'):L('Use dark theme','Usar tema oscuro'));} }
 function initTheme(){
  var t=null; try{t=localStorage.getItem("gtheme");}catch(e){}
  if(t==="dark"||t==="light") document.documentElement.setAttribute("data-theme",t);
@@ -3639,7 +3639,8 @@ function initMap(){
   if(p.guide)h+='<div class="dos__r"><a href="'+L('/','/es/')+p.guide+'/'+(id==='harrowmere'?'#harrowmere':'')+'">'+L('Expedition guide','Guía de expediciones')+' ↗</a><p class="dos__x">'+L('Check the current Ravennor schedule for boarding and availability.','Consulta el calendario actual de Ravennor para el embarque y la disponibilidad.')+'</p></div>';
   var picker=document.getElementById('atlas-place');if(picker)picker.value=id;
   if(fromMap)history.replaceState({},"",location.pathname+(dossier?"#region-"+regionId:"#valestia-map"));
-  dos.innerHTML=h;
+  dos.innerHTML=window.GuardiansDossierArt(id)+h;
+  window.GuardiansDossierSelected(id,fromMap);
  }
  window.GuardiansSelectRegion=sel;
  window.GuardiansAtlasMount(sel);

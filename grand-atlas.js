@@ -54,5 +54,6 @@ window.GuardiansGrandAtlas=function(ctx){
   document.getElementById('atlas-markers').addEventListener('click',function(){
    const show=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',String(show));wrap.classList.toggle('hide-pins',!show);
   });
+  window.GuardiansAtlasDesignMount();
  };
 };

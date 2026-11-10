@@ -1,0 +1,564 @@
+{
+  "lancer": {
+    "source": "assets/practice-gif/lancer.png",
+    "source_sha256": "16d587c6d6d602fcab869d185b1c79224b4976eb85df6c2edbe683475a299358",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      206,
+      268
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/lancer.webp",
+    "output_sha256": "d18e3b5743c1186842d9705e3d0c92b0e78056873343d2b22582abbfb7263484"
+  },
+  "explorer": {
+    "source": "assets/practice-gif/explorer.png",
+    "source_sha256": "0c2e85f2b8958198e6f68f4c270441f089a83307587f1dc3974fede704b64ecd",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      192,
+      234
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/explorer.webp",
+    "output_sha256": "fcbde1898ff008e50cb7de8bfe668466807f579e4d1af97e7365dd498b1b80b1"
+  },
+  "duelist": {
+    "source": "assets/practice-gif/duelist.png",
+    "source_sha256": "969f807312491c649b5d50290bf6eb853b34f07d359831078c876300721fdd83",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      216,
+      242
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/duelist.webp",
+    "output_sha256": "015d2f9021f1adc0c04c14fa9e15ab1c607f66897974ee46adf3bd1cbeafff4f"
+  },
+  "sentinel": {
+    "source": "assets/practice-gif/sentinel.png",
+    "source_sha256": "c661f3d368523fd251712b334c1539bd5d461e551f6b939565c024162c373f9b",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      210,
+      236
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/sentinel.webp",
+    "output_sha256": "dad9ea964cfadd9502079e8f19aad999ef296bc1bc6f887c886102297011e96b"
+  },
+  "vanguard": {
+    "source": "assets/practice-gif/vanguard.png",
+    "source_sha256": "ce4670a4eb3f390486b0295ae03c68583dcdbbfdec20b54212b6df0e4ab3ba01",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      216,
+      245
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/vanguard.webp",
+    "output_sha256": "10fc8b57f09a9b4e7c2381fdbe8e00c3bfff29abdc700f3f33d6b89e48d25e13"
+  },
+  "arcanist": {
+    "source": "assets/practice-gif/arcanist.png",
+    "source_sha256": "8d3c2b2af24f870917b23a4317834783296f06cec6477ed0e970c955c1af5fb1",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      136,
+      243
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/arcanist.webp",
+    "output_sha256": "21f4097ee09906b3cdb343a83465ea39f835786e766667c79fb0bd51160be7d7"
+  },
+  "pugilist": {
+    "source": "assets/practice-gif/pugilist.png",
+    "source_sha256": "735559f13197e4874ca240736d7bea861febef7213a657b15e9837dcee4bc109",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      176,
+      239
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/pugilist.webp",
+    "output_sha256": "1050248380228b2456f9ca974d3738c336956e7c24824527d12232dc53c41170"
+  },
+  "tracker": {
+    "source": "assets/practice-gif/tracker.png",
+    "source_sha256": "762a22f35a905d1dbf8f1c46d1e8ccd07738047e599ad1bb2d85cd360342f60b",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      155,
+      235
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/tracker.webp",
+    "output_sha256": "9de869a1b0797a174cd37db9c28bdd85ef8ba4f78a32a034146719939749faa8"
+  },
+  "custodian": {
+    "source": "assets/practice-gif/custodian.png",
+    "source_sha256": "ebc3ed53dfdc7897344f2e81fe3089cceddf258a12e017099f43b93c6216cdcb",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      205,
+      240
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/custodian.webp",
+    "output_sha256": "dcb7185b9175e7d930f2b2d97f68a27cb772f16a6da0f4dddc12ba2ebaf15542"
+  },
+  "wanderer": {
+    "source": "assets/practice-gif/wanderer.png",
+    "source_sha256": "a62b832c83077ec2d2cd23e8bc91d5083248a944b2a242c97e28a57f87b87d90",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      159,
+      236
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/wanderer.webp",
+    "output_sha256": "77679de7e73b6fd3ae4785c26c9eb5593f36d047021f9219c24940ba19566e85"
+  },
+  "alchemist": {
+    "source": "assets/practice-gif/alchemist.png",
+    "source_sha256": "d1945384065afa9e4591f8a32e93eb81e018269c3116e150b1858f5a12b474a5",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      134,
+      236
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/alchemist.webp",
+    "output_sha256": "b16120daea65ab0fb21fe7040b7fc58fea7b6a9016c9993532d855a5dba67624"
+  },
+  "jadewind": {
+    "source": "assets/practice-gif/jadewind.png",
+    "source_sha256": "2d18fef4bc109a95f3e876dac1970e3c1675f77220b3c77400d6f7f60c49443c",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      193,
+      236
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/jadewind.webp",
+    "output_sha256": "a3a456827686a15ac60d6ec7c20b1a7265e529f0e4d93e793f96d2f825713b4e"
+  },
+  "guardian": {
+    "source": "assets/practice-gif/guardian.png",
+    "source_sha256": "a35f41ee53342962e8668c2a99b00c5d3c82261bb13ab3d9409fac59a7c7aa9c",
+    "original_size": [
+      2100,
+      300
+    ],
+    "crop": [
+      0,
+      0,
+      300,
+      300
+    ],
+    "size": [
+      154,
+      238
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/guardian.webp",
+    "output_sha256": "847b13b03acc88e7b60c8d7cc6c6b396afcd44441eee86eba3dc1a41cd6ac049"
+  },
+  "fallen-squire": {
+    "source": "assets/hunt-live/starter_ruins-fallen-squire.webp",
+    "source_sha256": "4fb09217927ab252cfbd67bddaab92a8e3708bb79538501725efcc83b32c33ba",
+    "original_size": [
+      1600,
+      340
+    ],
+    "crop": [
+      0,
+      0,
+      320,
+      340
+    ],
+    "size": [
+      260,
+      288
+    ],
+    "alpha": true,
+    "output": "guardians-website-current/assets/design-20261110/fallen-squire.webp",
+    "output_sha256": "3692a3ce5b80e1f6c827a99afe984f3088aed94b6a75fb53d3f8b1be9ef6f86b"
+  },
+  "combat-arena": {
+    "source": "assets/hunt-live/starter_ruins-background.jpg",
+    "source_sha256": "8ddf325204f00689ad4c2d09a693d69a7914d0eab784d77444da213bb1ccecbc",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      1280,
+      640
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/combat-arena.webp",
+    "output_sha256": "74662b8da4a3b29f9d3e4ccb3f6f4b01004ca6c2fd5400224ce2af3620ed99e0"
+  },
+  "mastery-sanctuary": {
+    "source": "assets/portal-v2/mastery-sanctuary-v1.png",
+    "source_sha256": "8627789267e15570f2587a2500a05e25f5b4976c7245d09dbbae542577513424",
+    "original_size": [
+      1536,
+      1024
+    ],
+    "crop": null,
+    "size": [
+      1400,
+      933
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/mastery-sanctuary.webp",
+    "output_sha256": "b6526a2c33714e6b604f5df75e4f339c57a078bfc255e1a99aae97d59e351df8"
+  },
+  "equipment-workshop": {
+    "source": "assets/portal-v2/equipment-workshop-v1.png",
+    "source_sha256": "c43a94f5edb631127b1329e0eb15a1c79128f7a909c536a0e484e20cc1c3cadb",
+    "original_size": [
+      1536,
+      1024
+    ],
+    "crop": null,
+    "size": [
+      1400,
+      933
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/equipment-workshop.webp",
+    "output_sha256": "f10ec519ff5122a295ce06d0e4e81f2fa7bc7efcf2c9d9d54d4ab44282306e53"
+  },
+  "reuse-adventure-trail-v1": {
+    "source": "assets/portal-v2/adventure-trail-v1.webp",
+    "source_sha256": "fe1b5022f7d9d82adf9fef171307132a2e93d8e605adeb058f6b8a75454f3844",
+    "output": "guardians-website-current/assets/editorial/adventure-trail-v1.webp",
+    "output_sha256": "fe1b5022f7d9d82adf9fef171307132a2e93d8e605adeb058f6b8a75454f3844",
+    "reused": true,
+    "size": [
+      1536,
+      1024
+    ]
+  },
+  "reuse-pokemax-companions-v1": {
+    "source": "assets/portal-v2/pokemax-companions-v1.webp",
+    "source_sha256": "7eac2360ebcf378ce530d5c3b4377a66e945fa9825863c6d5e59eaf2536a6c63",
+    "output": "guardians-website-current/assets/editorial/pokemax-companions-v1.webp",
+    "output_sha256": "7eac2360ebcf378ce530d5c3b4377a66e945fa9825863c6d5e59eaf2536a6c63",
+    "reused": true,
+    "size": [
+      1774,
+      887
+    ]
+  },
+  "region-starter_ruins": {
+    "source": "assets/hunt-live/starter_ruins-background.jpg",
+    "source_sha256": "8ddf325204f00689ad4c2d09a693d69a7914d0eab784d77444da213bb1ccecbc",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-starter_ruins.webp",
+    "output_sha256": "fbda495f85ac072e86d8da3bec1a682d9b9849197b011ab99872377f9aed817e",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-stormbay_docks": {
+    "source": "assets/hunt-live/stormbay_docks-background.jpg",
+    "source_sha256": "75eea6a468182bada9ca312bf9c81cff398220f74834270a372339e44c1f386d",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-stormbay_docks.webp",
+    "output_sha256": "87f6a57fcb357e24c658e785f780cde8cdfefdcdac6023260e05ac67b37f8437",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-black_lotus_wood": {
+    "source": "assets/hunt-live/black_lotus_wood-background.jpg",
+    "source_sha256": "0d58aa3447d54749388585d89cdada45d4378a25b164b0549ac54b1cf9102eff",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-black_lotus_wood.webp",
+    "output_sha256": "bb38fea4b3ea32fd9808e8478d3771724494587a1fb5c07d17a4172201dabe62",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-merchant_crossroads": {
+    "source": "assets/hunt-live/merchant_crossroads-background.jpg",
+    "source_sha256": "76604e5376f791a8a0fed894b3d372934648d9351a8f81b3ee34ddb2fe1c7a10",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-merchant_crossroads.webp",
+    "output_sha256": "4e29092a6cb665897a542e7e970a5d937ecfb06ebf49a964e57547af523cd6c8",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-ravencraft": {
+    "source": "assets/hunt-live/ravencraft-background.jpg",
+    "source_sha256": "c7f8458c0d44f2934e79f282e8f2798bd961b1f07f65d4145862969a3422382e",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-ravencraft.webp",
+    "output_sha256": "7f83633b6e1062aa4dc4494e658feda20fdac997e8cc97b95a61446ed4efb583",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-mist_forest": {
+    "source": "assets/hunt-live/mist_forest-background.jpg",
+    "source_sha256": "7b5197a751e45600bb13f8b457a868875a46cd48f0918721473f41b2539c36cb",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-mist_forest.webp",
+    "output_sha256": "62dfbf6d5a5c1f5ec9365439d46bd040c217010917466b82c7c59ae5a7e95092",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-rocky_chill_pass": {
+    "source": "assets/hunt-live/rocky_chill_pass-background.jpg",
+    "source_sha256": "22cb811e42a49d855a435306a4fb4202d6ae6ebf51a98798de28c9869ddf60a0",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-rocky_chill_pass.webp",
+    "output_sha256": "1b836cd8dd719843526ee99acac52c5b0aeab04b25bdfb67d44939d937ee37de",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-crimson_plain": {
+    "source": "assets/hunt-live/crimson_plain-background.jpg",
+    "source_sha256": "a002e318281057e5c544ac495bb85e1cfbba43bad93f2de9a08a454159f66fe6",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-crimson_plain.webp",
+    "output_sha256": "c7619bb28bf5b3f8528eb07ffb9fed3edccdbaa2c3ca400a4fb98dfeae7c84e1",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-bandit_caves": {
+    "source": "assets/hunt-live/bandit_caves-background.jpg",
+    "source_sha256": "56215dfdb4e9c4c525407186aa15fe1ecbf2a2d4d412a98ff85feb775f8461be",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-bandit_caves.webp",
+    "output_sha256": "88055cab0e5daec6af6bd1e5ef2bed242833004ed7f9b2ad852118b1f542d110",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-dark_knight_sanctum": {
+    "source": "assets/hunt-live/dark_knight_sanctum-background.jpg",
+    "source_sha256": "09667018d5cda0bbb251aacc5d2c76fbf89b90eee3937887c5b2d6e8c98258f0",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-dark_knight_sanctum.webp",
+    "output_sha256": "86cd3d5f7bb67678ab050b93db86ff363484bbe7ee66f2997a87b07f78c4535c",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  },
+  "region-greywood": {
+    "source": "assets/hunt-live/greywood-background.jpg",
+    "source_sha256": "7b4ec0b1b3f90c455eac232175c885369c79f5e46c4a9c577638014fbe35352a",
+    "original_size": [
+      1280,
+      640
+    ],
+    "crop": null,
+    "size": [
+      900,
+      450
+    ],
+    "alpha": false,
+    "output": "guardians-website-current/assets/design-20261110/region-greywood.webp",
+    "output_sha256": "97a9bc59acd6d55d094e9d267f28643d2b2d8810e0fdb51827c4c2ad6fe37798",
+    "region_assignment_source": "assets/hunt-live/catalog.json",
+    "region_assignment_source_sha256": "8b30aea752c844b6fcabc7cddb390a73172b5403fc356f80e5af8dfb3457fe45"
+  }
+}

@@ -92,6 +92,7 @@ window.GuardiansEdition = function (ctx) {
     ['Activities & clans',[...pick(['modes']),['raids','Boss raids','Raids de jefes'],...pick(['battle-royale','war-campaign','abyss','clans','diplomacy','sabotage'])],'Actividades y clanes']);
   window.GuardiansCombatGuide(ctx);
   window.GuardiansCurrentContent(ctx);
+  window.GuardiansVisual(ctx);
   function header(){
     let el=document.querySelector('.ed-header');
     if(!el){el=document.createElement('header');el.className='ed-header';document.body.prepend(el);}
@@ -102,8 +103,10 @@ window.GuardiansEdition = function (ctx) {
     if(!close){close=document.createElement('button');close.type='button';close.className='ed-close-menu';rail.prepend(close);}
     close.textContent=L('Close guide ×','Cerrar guía ×');
     close.onclick=()=>{document.getElementById('burger').click();document.querySelector('.ed-menu').focus();};
+    window.GuardiansDesignHeader(el);
   }
   function route(id){
+    window.GuardiansVisualRoute(id);
     window.GuardiansHeroMotion?.route(id,L);
     document.body.classList.toggle('ed-home',id==='home');
     const lang=document.querySelector('.ed-language');

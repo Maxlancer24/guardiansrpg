@@ -10,6 +10,7 @@
     "test:cape": "node scripts/check-cape-motion.cjs",
     "test:content": "node scripts/check-current-content.cjs",
     "test:field": "node scripts/check-field-guide.cjs",
+    "test:visual": "node scripts/check-visual-design.cjs",
     "test:sources": "python scripts/check-source-hashes.py"
   },
   "devDependencies": {
