@@ -11,6 +11,8 @@
     "test:content": "node scripts/check-current-content.cjs",
     "test:field": "node scripts/check-field-guide.cjs",
     "test:visual": "node scripts/check-visual-design.cjs",
+    "test:tutorial:rules": "node scripts/check-tutorial-rules.cjs",
+    "test:tutorial": "node scripts/check-interactive-tutorial.cjs",
     "test:sources": "python scripts/check-source-hashes.py"
   },
   "devDependencies": {

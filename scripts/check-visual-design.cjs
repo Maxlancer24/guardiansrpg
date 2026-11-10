@@ -19,16 +19,8 @@ const {createServer,root}=require('./preview.cjs');
    await page.locator('.nv-search').click();assert.equal(await page.locator('#q').evaluate(e=>e===document.activeElement),true);
    if(await page.locator('.rail.is-open').count())await page.locator('.ed-close-menu').click();
    await page.goto(base+pre+'combat-guide/');await page.locator('.page.is-on .nv-hero').waitFor();await fit('combat '+width);
-   const bars=page.locator('#combat-visual [role=progressbar]');
-   assert.equal(await bars.nth(0).getAttribute('aria-valuenow'),'100');
-   for(const [hp,other,focus] of [[150,350,true],[150,250,false],[150,210,false]]){
-    await page.locator('[data-lesson-next]').click();assert.equal(await bars.nth(0).getAttribute('aria-valuenow'),String(hp));assert.equal(await bars.nth(1).getAttribute('aria-valuenow'),String(other));assert.equal(await page.locator('.nv-status .is-charged').count(),focus?1:0);
-   }
-   assert.ok(await page.locator('[data-lesson-next]').isDisabled());
-   await page.locator('[data-lesson-prev]').click();assert.equal(await bars.nth(1).getAttribute('aria-valuenow'),'250');
-   await page.locator('[data-lesson-step="0"]').focus();await page.keyboard.press('Enter');assert.equal(await bars.nth(0).getAttribute('aria-valuenow'),'100');
-   await page.selectOption('[data-lesson-select]','support');await page.locator('[data-lesson-next]').click();await page.locator('[data-lesson-next]').click();
-   assert.equal(await bars.nth(1).getAttribute('aria-valuenow'),'120');assert.equal(await page.locator('.nv-status .is-charged').count(),1);
+   assert.equal(await page.locator('[data-start-tutorial]').count(),1);
+   assert.equal(await page.locator('.it-frame').count(),0);
    await page.goto(base+pre+'mastery/');assert.equal(await page.locator('.nv-roster img').count(),12);
    for(const card of await page.locator('.fg-mastery').all()){
     await card.evaluate(e=>e.open=true);assert.equal(await card.locator('.fg-stage').count(),6);assert.equal(await card.locator('.nv-branch').count(),4);await card.locator('img').evaluateAll(imgs=>Promise.all(imgs.map(i=>{i.loading='eager';return i.decode();})));await fit('mastery expanded '+width);await card.evaluate(e=>e.open=false);
@@ -58,17 +50,16 @@ const {createServer,root}=require('./preview.cjs');
     await page.goto(base+'/es/'+id);await page.evaluate(()=>document.fonts.ready);
     if(id==='mastery/')await page.locator('[data-open-mastery=alchemist]').click();
     if(id==='valestia/'){await page.locator('[data-atlas-expand]').click();await page.selectOption('#atlas-place','greywood');}
-    if(id==='combat-guide/')await page.locator('[data-lesson-next]').click();
     await page.locator('.page.is-on img').evaluateAll(imgs=>Promise.all(imgs.map(i=>{i.loading='eager';return i.decode().catch(()=>{});})));await page.screenshot({path:path.join(out,(id.replace('/','')||'home')+'-'+width+'.png'),fullPage:!['mastery/','valestia/'].includes(id)});
     if(id==='combat-guide/'){
      await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(out,'combat-header-'+width+'.png')});
-     await page.locator('.nv-lesson').screenshot({path:path.join(out,'combat-lesson-'+width+'.png')});
+     await page.locator('.it-tutorial').screenshot({path:path.join(out,'combat-lesson-'+width+'.png')});
     }
    }
    await page.goto(base+'/es/mastery/');await page.evaluate(()=>document.documentElement.dataset.theme='light');await page.locator('[data-open-mastery=jadewind]').click();await fit('light');await page.screenshot({path:path.join(out,'light-'+width+'.png')});
   }
   const staticPage=await browser.newPage({javaScriptEnabled:false});await staticPage.goto(base+'/es/mastery/');assert.equal(await staticPage.locator('.nv-roster a').count(),12);assert.equal(await staticPage.locator('.nv-hero').count(),1);await staticPage.close();
   assert.deepEqual(errors,[]);assert.deepEqual([...new Set(missing)],[]);
-  fs.writeFileSync(path.join(out,'visual-checks.json'),JSON.stringify({checks,errors,missing},null,2));console.log(JSON.stringify({passed:checks.length,checks:'home/search, tutorial numbers, 12 mastery branches, map dialog/zoom/region/escape/focus/navigation, imagery, static HTML, light theme',out}));
+  fs.writeFileSync(path.join(out,'visual-checks.json'),JSON.stringify({checks,errors,missing},null,2));console.log(JSON.stringify({passed:checks.length,checks:'home/search, tutorial entry, 12 mastery branches, map dialog/zoom/region/escape/focus/navigation, imagery, static HTML, light theme',out}));
  }finally{await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exit(1);});

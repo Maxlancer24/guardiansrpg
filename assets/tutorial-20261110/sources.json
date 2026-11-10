@@ -1,0 +1,489 @@
+{
+  "description": "Format-only WebP derivatives of current combat atlases. Dimensions, alpha and frame coordinates unchanged.",
+  "encoding": {
+    "quality": 88,
+    "alpha_quality": 100,
+    "method": 6,
+    "exact": true
+  },
+  "url_map": {
+    "/guardian-duel/assets/guardian-v1/idle-v2.png": "/assets/tutorial-20261110/guardian-idle.webp",
+    "/guardian-duel/assets/guardian-v1/attack.png": "/assets/tutorial-20261110/guardian-attack.webp",
+    "/guardian-duel/assets/guardian-v1/attack-b-identity-v5.png": "/assets/tutorial-20261110/guardian-attack2.webp",
+    "/guardian-duel/assets/guardian-v1/guard.png": "/assets/tutorial-20261110/guardian-guard.webp",
+    "/guardian-duel/assets/guardian-v1/hurt.png": "/assets/tutorial-20261110/guardian-hurt.webp",
+    "/guardian-duel/assets/guardian-v1/rest.png": "/assets/tutorial-20261110/guardian-rest.webp",
+    "/guardian-duel/assets/guardian-v1/motion-v2.png": "/assets/tutorial-20261110/guardian-motion.webp",
+    "/guardian-duel/assets/guardian-v1/activation.png": "/assets/tutorial-20261110/guardian-activation.webp",
+    "/guardian-duel/assets/guardian-v1/victory.png": "/assets/tutorial-20261110/guardian-victory.webp",
+    "/guardian-duel/assets/guardian-v1/defeat.png": "/assets/tutorial-20261110/guardian-defeat.webp",
+    "/guardian-duel/assets/alchemist-v1/idle.png": "/assets/tutorial-20261110/alchemist-idle.webp",
+    "/guardian-duel/assets/alchemist-v1/attack.png": "/assets/tutorial-20261110/alchemist-attack.webp",
+    "/guardian-duel/assets/alchemist-v1/guard.png": "/assets/tutorial-20261110/alchemist-guard.webp",
+    "/guardian-duel/assets/alchemist-v1/hurt.png": "/assets/tutorial-20261110/alchemist-hurt.webp",
+    "/guardian-duel/assets/alchemist-v1/rest.png": "/assets/tutorial-20261110/alchemist-rest.webp",
+    "/guardian-duel/assets/alchemist-v1/motion.png": "/assets/tutorial-20261110/alchemist-motion.webp",
+    "/guardian-duel/assets/alchemist-v1/activation-v2.png": "/assets/tutorial-20261110/alchemist-activation.webp",
+    "/guardian-duel/assets/alchemist-v1/victory.png": "/assets/tutorial-20261110/alchemist-victory.webp",
+    "/guardian-duel/assets/alchemist-v1/defeat-v2.png": "/assets/tutorial-20261110/alchemist-defeat.webp",
+    "/assets/demo-battle/ambient-loops-v1/warden-0.png": "/assets/tutorial-20261110/hollow-idle-0.webp",
+    "/assets/demo-battle/ambient-loops-v1/warden-1.png": "/assets/tutorial-20261110/hollow-idle-1.webp",
+    "/assets/demo-battle/ambient-loops-v1/warden-2.png": "/assets/tutorial-20261110/hollow-idle-2.webp",
+    "/assets/demo-battle/ambient-loops-v1/warden-3.png": "/assets/tutorial-20261110/hollow-idle-3.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-0.png": "/assets/tutorial-20261110/hollow-attack-0.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-1.png": "/assets/tutorial-20261110/hollow-attack-1.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-2.png": "/assets/tutorial-20261110/hollow-attack-2.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-3.png": "/assets/tutorial-20261110/hollow-attack-3.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-4.png": "/assets/tutorial-20261110/hollow-attack-4.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-5.png": "/assets/tutorial-20261110/hollow-attack-5.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-6.png": "/assets/tutorial-20261110/hollow-attack-6.webp",
+    "/assets/demo-battle/combat-reactions-v1/warden-7.png": "/assets/tutorial-20261110/hollow-attack-7.webp",
+    "/assets/demo-battle/warden-feedback-v1/hurt.png": "/assets/tutorial-20261110/hollow-hurt.webp",
+    "/assets/demo-battle/warden-feedback-v1/kneel.png": "/assets/tutorial-20261110/hollow-kneel.webp",
+    "/assets/demo-battle/warden-feedback-v1/fallen.png": "/assets/tutorial-20261110/hollow-fallen.webp"
+  },
+  "assets": [
+    {
+      "source": "guardian-duel/assets/guardian-v1/idle-v2.png",
+      "source_sha256": "7284e0b78398c9ce43a9d62477fa1b28263fc3c92b3d16615afcbe811a1da167",
+      "url": "/assets/tutorial-20261110/guardian-idle.webp",
+      "output_sha256": "56ec5ccb64856c1c03d0029325374e079d9994e73d24ccf203f93341dfcdafef",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1969996,
+      "output_bytes": 260402,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/attack.png",
+      "source_sha256": "90be992de7360f44974a217ada5bfc7ac9028a9b98557fd60fa291582af2940e",
+      "url": "/assets/tutorial-20261110/guardian-attack.webp",
+      "output_sha256": "f6759386f92dcb4f36c2ecaa7c49805d6b946e26ae662a6fa015753e64a3e23e",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 2042642,
+      "output_bytes": 278576,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/attack-b-identity-v5.png",
+      "source_sha256": "a168382a547e4112c963924d4e0b972dbff3e7b508e96080208728a74904e6cc",
+      "url": "/assets/tutorial-20261110/guardian-attack2.webp",
+      "output_sha256": "8dd0d537e05d8bed571a7d808a5aeb4d5e17cfc22ba69a7220c50379c93a433b",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1967039,
+      "output_bytes": 250704,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/guard.png",
+      "source_sha256": "d4805ff6ccd1b326fc3f810ee1b6602be23d1e59bbbe050254c505160d9c2d07",
+      "url": "/assets/tutorial-20261110/guardian-guard.webp",
+      "output_sha256": "1fe662b86a97e33b9508009afcaa8cc904e29f60c721d91db07a5fdb31c4fd1b",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 2012410,
+      "output_bytes": 258640,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/hurt.png",
+      "source_sha256": "7051df1f1e417627194c5d98ba7b7e14455aee28813f7aedb1f85d87829ad2cd",
+      "url": "/assets/tutorial-20261110/guardian-hurt.webp",
+      "output_sha256": "64fb81d0555fce8e5a8b849d3c496de44de030d9903e8fbb7345bf35e613a232",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1997510,
+      "output_bytes": 261456,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/rest.png",
+      "source_sha256": "b0f41171a336d2a43f5b836820c774056570707e995c247f51e7314d39db91ca",
+      "url": "/assets/tutorial-20261110/guardian-rest.webp",
+      "output_sha256": "492ea611477369beb7b134a60ce5f3829d18808175f66eee6ab16ca961ed2191",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1962132,
+      "output_bytes": 257606,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/motion-v2.png",
+      "source_sha256": "8a2e4915dfd0a62b3f66d15ad3e7e7b77f402f6ca9e257941f60d80f2753ed83",
+      "url": "/assets/tutorial-20261110/guardian-motion.webp",
+      "output_sha256": "845d6ae8ffd79ff0c80e610996ec0e86455b2ba5ade3c01f922e435ea4ee7758",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 2010766,
+      "output_bytes": 266374,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/activation.png",
+      "source_sha256": "4b1ca0b7e735ea81ba9aa1fcc6272a310880f28510b78bdbbb92af5f4568d456",
+      "url": "/assets/tutorial-20261110/guardian-activation.webp",
+      "output_sha256": "14816ebc5d94364e40858f3f283b737f3ea57ac0dbc06f436a509d9a66ebe6fa",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1937369,
+      "output_bytes": 248018,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/victory.png",
+      "source_sha256": "64fd0fea08cddc1348300a3ab910d212cdfce5700c7c4077c794db486aa46d73",
+      "url": "/assets/tutorial-20261110/guardian-victory.webp",
+      "output_sha256": "e355102565f61e172fb1e2a9a7dc3b44cfffb621ebb2ac09fe4124a4b0d545aa",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1985474,
+      "output_bytes": 260104,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/guardian-v1/defeat.png",
+      "source_sha256": "351b127ed5fb1206ed2df48013b6619c4336a24c32888d86ccd873d9975f3d63",
+      "url": "/assets/tutorial-20261110/guardian-defeat.webp",
+      "output_sha256": "0e3f0a0396dcad98d73deda04853f64bac58c2d6b43ba42a5be6f2928f938cad",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1867908,
+      "output_bytes": 227638,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/idle.png",
+      "source_sha256": "eed157d289a02440e668b4ba2f3abe43b90da2ef8ecf7c2b15ec624476311f94",
+      "url": "/assets/tutorial-20261110/alchemist-idle.webp",
+      "output_sha256": "bf4d25f4c981238f18834a480e0a270e3e560f73392e5ff2d1f5022e50b47a92",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1850411,
+      "output_bytes": 223572,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/attack.png",
+      "source_sha256": "c99bf56daea27d8af5d8ae03dcb64905b64b483f9cfe501a51df6ca6374684a7",
+      "url": "/assets/tutorial-20261110/alchemist-attack.webp",
+      "output_sha256": "607dc03d576e5505114691f4a0da7d39317b8719c304223dfed7819d656ca24c",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1930614,
+      "output_bytes": 242336,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/guard.png",
+      "source_sha256": "b82adb8f28420a542d242d1169b79fa4fb18ac507bbb04f8fd468375f3913883",
+      "url": "/assets/tutorial-20261110/alchemist-guard.webp",
+      "output_sha256": "d3cf9d95bdfda2b22392087760b5599e4f29eacc4f2175b989942261bdc59371",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1889860,
+      "output_bytes": 223068,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/hurt.png",
+      "source_sha256": "fd76deb41be880182c44abf828f1f4ee2f1ea3875e407e51028a324bb779e609",
+      "url": "/assets/tutorial-20261110/alchemist-hurt.webp",
+      "output_sha256": "9a43aff5fcdb8dd68108f2b31cfefcef99ab3f21ae31acc65d5e43bf1605d120",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1882320,
+      "output_bytes": 228396,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/rest.png",
+      "source_sha256": "ebc06d23247673f719a935dad9b69ec9670c4b2da77bfefac9846231f3149510",
+      "url": "/assets/tutorial-20261110/alchemist-rest.webp",
+      "output_sha256": "e649060b491dd381783248da0cae13a3e2c15656ab2f08fbcbd565f08735b403",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1878408,
+      "output_bytes": 227104,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/motion.png",
+      "source_sha256": "8a34f8e1b552e8c30643d15592afc4e2aeee92e798dc6cc3349796c9565905a1",
+      "url": "/assets/tutorial-20261110/alchemist-motion.webp",
+      "output_sha256": "73ddaa0d02e1a61a887a98b792b397ef484e01bd6848681e904ab071fac7b795",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1938847,
+      "output_bytes": 241574,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/activation-v2.png",
+      "source_sha256": "aaa04e3e4aa28cbdf4c4a34e3f5b7682999c2e59f5320df977320801ee881371",
+      "url": "/assets/tutorial-20261110/alchemist-activation.webp",
+      "output_sha256": "2856e31b4864f7bfe6d71a6517abc66d06925f36a890604cdf64fa02d5bc8765",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1850337,
+      "output_bytes": 221992,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/victory.png",
+      "source_sha256": "3e869738a6e5cbe2e4e9c2b50f38d53675af1f6d5ba78141b5f0e393cd31a747",
+      "url": "/assets/tutorial-20261110/alchemist-victory.webp",
+      "output_sha256": "67a068126f0d62c23395c8e34848957fd0a55c32db4ae874bd78dc4f58cd530e",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1853512,
+      "output_bytes": 220036,
+      "alpha_exact": true
+    },
+    {
+      "source": "guardian-duel/assets/alchemist-v1/defeat-v2.png",
+      "source_sha256": "74c4ed3050c84ff7109cfa7e0c747feee283fd6743705a35496e1c96a8d15f09",
+      "url": "/assets/tutorial-20261110/alchemist-defeat.webp",
+      "output_sha256": "cfc115b10edd68e48770703d50232b9d345ed9c151592652dcebda5a2d8bf0ce",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "source_bytes": 1830826,
+      "output_bytes": 206060,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/ambient-loops-v1/warden-0.png",
+      "source_sha256": "9e99534d8968210de6d30d1e7c021d2ad2cbaa6e279926f056d7dff2b99057ea",
+      "url": "/assets/tutorial-20261110/hollow-idle-0.webp",
+      "output_sha256": "dc2fab2c88be6f8b55cd4f766393523842a5cbea5e60c9e5c14d458f04655334",
+      "dimensions": [
+        1441,
+        1092
+      ],
+      "source_bytes": 1185087,
+      "output_bytes": 173914,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/ambient-loops-v1/warden-1.png",
+      "source_sha256": "32f11d9bdeecb240d5483fe740ca804fe892567b74ae370fbf8e87ef5dbaba83",
+      "url": "/assets/tutorial-20261110/hollow-idle-1.webp",
+      "output_sha256": "107b4bd8b0bde202ad1986b4f115192cdb78aaecda9593752c355cb88137460e",
+      "dimensions": [
+        1441,
+        1092
+      ],
+      "source_bytes": 1197466,
+      "output_bytes": 175780,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/ambient-loops-v1/warden-2.png",
+      "source_sha256": "137cda14dfc0d382a3330dc9ae6db8bb3a57361f72cb22b3a00314a838f09635",
+      "url": "/assets/tutorial-20261110/hollow-idle-2.webp",
+      "output_sha256": "edaf19ded27082f51e1b6fe787022c25cdb40a5c861f92e20aefdd4879a66d94",
+      "dimensions": [
+        1441,
+        1092
+      ],
+      "source_bytes": 1243416,
+      "output_bytes": 182916,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/ambient-loops-v1/warden-3.png",
+      "source_sha256": "fc2cafdc7da4bb069fb806ea591c71eda7b73b44af5ace54dcbd8cc18e7e5a5b",
+      "url": "/assets/tutorial-20261110/hollow-idle-3.webp",
+      "output_sha256": "ff573de835bf32ca06c51db130e1e52a09bf358f74536ced6d612a17194a0b28",
+      "dimensions": [
+        1441,
+        1092
+      ],
+      "source_bytes": 1205789,
+      "output_bytes": 177786,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-0.png",
+      "source_sha256": "c4ff9b0ba1e53ca3377ee5889cab5a97a2bdbeffc664cc4bf9b51bc31259c2b3",
+      "url": "/assets/tutorial-20261110/hollow-attack-0.webp",
+      "output_sha256": "bf9987fbbfa48abbc1a22987376885968b4b202866103688209775a029e06af0",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 1122385,
+      "output_bytes": 172232,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-1.png",
+      "source_sha256": "622efc9e5a5b907c84d65234aad511e533beb8ee8bed5106e7d312e1f49f9ce4",
+      "url": "/assets/tutorial-20261110/hollow-attack-1.webp",
+      "output_sha256": "25f061f429157aa2c643c524f3e82f64753f60e7f73526470a522509b582102b",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 1104104,
+      "output_bytes": 167836,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-2.png",
+      "source_sha256": "690def049681d5821baee39e19b4adebc29fcf616529de059f55dee0003f2e25",
+      "url": "/assets/tutorial-20261110/hollow-attack-2.webp",
+      "output_sha256": "29ce903efcd533de06a3379c91fd5874d709761965d18987dced864cc1c20db8",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 996047,
+      "output_bytes": 144662,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-3.png",
+      "source_sha256": "aaa175e6b314326a0c23cc66a4e1d08f0794aae3322f3c6f718834b327e0a38a",
+      "url": "/assets/tutorial-20261110/hollow-attack-3.webp",
+      "output_sha256": "d00e57564ae6131bbe541e950984606a931684e321b7d1c9873c0de7656468d4",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 1103737,
+      "output_bytes": 172870,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-4.png",
+      "source_sha256": "16fc46f5bc3bb6abdf9be0385b4005931b664060933001c33f87020c186ba9a2",
+      "url": "/assets/tutorial-20261110/hollow-attack-4.webp",
+      "output_sha256": "08e3f6b61cb5fac1cb0508fc53b15a2dfd33855e12e72740501b8eb9800c82ff",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 972600,
+      "output_bytes": 160378,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-5.png",
+      "source_sha256": "7fb0cac85167c7f2e9ea321c2133a4cb833f3cd6d27b6b54bf2966b50f977a3a",
+      "url": "/assets/tutorial-20261110/hollow-attack-5.webp",
+      "output_sha256": "a06ba5e1f6c0be7733e01405a98c68092c16b2ae6cb31ae38f9b677b8a9154c9",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 999403,
+      "output_bytes": 158056,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-6.png",
+      "source_sha256": "0066899aa45184dd34697385984d1071fff0a2de3f3c2367131ebb98620d33ec",
+      "url": "/assets/tutorial-20261110/hollow-attack-6.webp",
+      "output_sha256": "5719716930b720596e8641d62034ebb6f830272424edde5c8e158fe2ec25ff69",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 909488,
+      "output_bytes": 146878,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/combat-reactions-v1/warden-7.png",
+      "source_sha256": "f8393b2dd5b75e9c42f5652054b82ff6be77231fad95ffc9ecfc31f4c0484790",
+      "url": "/assets/tutorial-20261110/hollow-attack-7.webp",
+      "output_sha256": "83f5a2a6bacd227928db50db6c1fe13003cb12c1b4a14550e965987db445b403",
+      "dimensions": [
+        1441,
+        1280
+      ],
+      "source_bytes": 1072891,
+      "output_bytes": 164094,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/warden-feedback-v1/hurt.png",
+      "source_sha256": "0f36b62aae33a0f133243dda0a8d9d5eca3748f069a35a5fda266c51383ba128",
+      "url": "/assets/tutorial-20261110/hollow-hurt.webp",
+      "output_sha256": "67d84e3af6d82ce24f5b3fc09acdb6e3655fa9c43fc4f7c883a40201deadbf9c",
+      "dimensions": [
+        1441,
+        1092
+      ],
+      "source_bytes": 1237507,
+      "output_bytes": 180508,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/warden-feedback-v1/kneel.png",
+      "source_sha256": "56b2d4d59ca1c4b0c29f11eb6c93d0f866ba505458bc624586adbcee6fc8f4ca",
+      "url": "/assets/tutorial-20261110/hollow-kneel.webp",
+      "output_sha256": "03dfee587427eb212111ae9b46267012e22e4a3a01e4c1e06615a77c69f56299",
+      "dimensions": [
+        1441,
+        1092
+      ],
+      "source_bytes": 922663,
+      "output_bytes": 121130,
+      "alpha_exact": true
+    },
+    {
+      "source": "assets/demo-battle/warden-feedback-v1/fallen.png",
+      "source_sha256": "42189021ad809f6d847a2c52a78fb9acd479f663678ea624e44b481aff1859b0",
+      "url": "/assets/tutorial-20261110/hollow-fallen.webp",
+      "output_sha256": "6f83025ed98190d636350c122f8f9d842151d1d89cfea989b0b0750e74bb6848",
+      "dimensions": [
+        1441,
+        1092
+      ],
+      "source_bytes": 618966,
+      "output_bytes": 86524,
+      "alpha_exact": true
+    }
+  ]
+}
