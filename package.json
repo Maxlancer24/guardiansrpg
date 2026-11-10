@@ -13,6 +13,7 @@
     "test:visual": "node scripts/check-visual-design.cjs",
     "test:tutorial:rules": "node scripts/check-tutorial-rules.cjs",
     "test:tutorial": "node scripts/check-interactive-tutorial.cjs",
+    "test:tutorial:intro": "node scripts/check-combat-orientation.cjs",
     "test:sources": "python scripts/check-source-hashes.py"
   },
   "devDependencies": {

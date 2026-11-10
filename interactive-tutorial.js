@@ -7,7 +7,7 @@ window.GuardiansBattleTutorialMarkup=({L})=>`<section class="it-tutorial" id="co
  document.addEventListener('click',e=>{
   const button=e.target.closest('[data-start-tutorial]');if(!button)return;
   const section=button.closest('.it-tutorial'),en=!location.pathname.startsWith('/es/');
-  observer?.disconnect();frame=document.createElement('iframe');frame.title=en?'Playable combat tutorial':'Tutorial de combate jugable';frame.src='/battle-tutorial/?embed=1&lang='+(en?'en':'es');frame.className='it-frame';frame.height='1100';frame.allow='autoplay';
+  observer?.disconnect();frame=document.createElement('iframe');frame.title=en?'Playable combat tutorial':'Tutorial de combate jugable';frame.src='/battle-tutorial/?embed=1&v=20261110c&lang='+(en?'en':'es');frame.className='it-frame';frame.height='1100';frame.allow='autoplay';
   frame.onload=()=>{notify();frame.focus({preventScroll:true});};
   section.querySelector('.it-frame-host').replaceChildren(frame);section.querySelector('.it-poster').hidden=true;
   observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;notify();},{rootMargin:'200px'});observer.observe(frame);

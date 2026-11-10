@@ -10,7 +10,8 @@ const {createServer,root}=require('./preview.cjs');
   const page=await browser.newPage({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400)missing.push(r.url());});
   await page.route('**/gc.zgo.at/**',r=>r.abort());await page.route('**/*.goatcounter.com/**',r=>r.abort());
-  const ready=async frame=>frame.waitForFunction(()=>window.tutorialSnapshot?.().loaded&&!tutorialSnapshot().busy);
+  // These tests exercise freely chosen battles; the guided path has its own suite.
+  const ready=async frame=>{await frame.waitForFunction(()=>window.tutorialSnapshot?.().loaded&&!tutorialSnapshot().busy);if(await frame.evaluate(()=>tutorialSnapshot().orientation.active))await frame.locator('#orientation-skip').click();};
   const turn=async(frame,action)=>{await frame.locator('[data-action="'+action+'"]').click();await frame.locator('#confirm').click();await ready(frame);};
   for(const lang of ['en','es'])for(const width of [1440,768,390,320]){
    await page.setViewportSize({width,height:1100});await page.goto(base+(lang==='es'?'/es/':'/')+'combat-guide/');

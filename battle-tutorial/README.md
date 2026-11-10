@@ -5,6 +5,20 @@ the combat guide. Four lessons: basic decisions, equipped Health Potion,
 stage-one Alchemist, and free practice. All three main actions remain available;
 wrong decisions can cause a real defeat within the local training battle.
 
+The basic lesson now starts with a contextual introduction before asking for an
+action. Twelve steps highlight the actual health bars, STR/CON/AGI cards, round
+order, three action buttons, Focus, enemy intent and confirmation. Selecting each
+action is practiced without resolving it. Only the final confirmation starts a
+round. The guided follow-up then explains the successful Rest, Parry/counter and
+Focus attack with their actual HP outcomes before releasing the remaining fight.
+
+The introduction uses short bilingual explanations placed next to the highlighted
+control, including on mobile. Reading has no time limit and changes no combat
+state. Skip returns to free choice; restart reopens the basic introduction; Explain
+the screen provides a read-only review without spending or clearing a pending
+action. Other lessons remain directly playable. The stat cards display the current
+fighter's values, not a separate set of example numbers.
+
 `rules.js` wraps the existing `battle-practice/rules.js` event resolver. Both
 fighters use STR 10 / AGI 0 / CON 10, with a fixed base roll of 10. This deliberately
 removes critical and dodge randomness (the old demo combines their curves, while
@@ -49,6 +63,9 @@ Checks:
 - `npm run test:tutorial`: both languages at 1440/768/390/320 px, complete basic
   battles, keyboard input, potion/dose selection, defeat/retry, animated attack,
   pause/resume, route suspension, free practice, loading failure recovery.
+- `npm run test:tutorial:intro`: both languages at 1440/390/320 px, all 12 real
+  targets, no mutation before confirmation, action-selection gates, keyboard
+  input, guided round outcomes, victory, skip/restart/review and lesson switching.
 - `npm run test:combat` and `npm run test:visual`: surrounding guide regressions.
 
 Local QA screenshots are stored outside the published checkout in

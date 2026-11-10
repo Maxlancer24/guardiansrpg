@@ -3,9 +3,16 @@
  const T=(es,english)=>en?english:es,copy=x=>structuredClone(x),actionName=a=>({ATTACK:'Attack',DEFEND:'Parry',REST:'Rest'}[a]);
  let battle,display,busy=true,choice=null,aux=null,mode='basics',loaded=false,lastResult=null,roundChoice=null;
  const scene=new TutorialScene($('arena'),onEvent,onEnd,T);
+ const orientation=new CombatOrientation(T,()=>({display}),reason=>{
+  if(reason==='step'&&orientation.interactive&&orientation.steps[orientation.index].action)choice=null;
+  if((reason==='skip'||reason==='finish')&&orientation.interactive)choice=null;
+  ui();
+  if(reason==='skip'||reason==='finish')$('actions').scrollIntoView({block:'start',behavior:'auto'});
+ });
  document.documentElement.lang=en?'en':'es';document.documentElement.classList.toggle('embedded',embedded);document.title=T('Combate tutorial','Battle tutorial')+' · The Guardians';
  const texts={eyebrow:['CAMPO DE ENTRENAMIENTO','TRAINING GROUND'],title:['Aprende luchando.','Learn by fighting.'],'guide-link':['Volver a la guía ↗','Back to the guide ↗'],'lesson-label':['Tu entrenamiento','Your training'],restart:['Reiniciar','Restart'],retry:['Reintentar','Retry'],'actions-title':['1 · Elige tu acción','1 · Choose your action'],'attack-desc':['Ataca al rival','Strike your opponent'],'parry-desc':['Bloquea y responde','Block and counter'],'rest-desc':['Recupera HP y Focus','Recover HP and Focus'],'aux-title':['Uso auxiliar · opcional','Auxiliary use · optional'],'aux-help':['Se resuelve antes de tu acción. Solo uno por ronda.','Resolves before your action. Only one per round.'],potion:['Health Potion · +50 HP','Health Potion · +50 HP'],dose:['Dosis para ti · +40 HP','Dose for yourself · +40 HP'],'sound-label':['Sonido','Sound'],'motion-label':['Animaciones','Animations'],'speed-label':['Velocidad','Speed'],'log-title':['Registro del combate','Battle log'],'conditions-title':['Qué estamos practicando','What we are practicing'],'next-lesson':['Siguiente lección →','Next lesson →'],again:['Volver a intentar','Try again']};
  for(const [id,pair] of Object.entries(texts))$(id).textContent=T(...pair);
+ for(const [id,pair] of Object.entries({'orientation-label':['Aprende la pantalla, después toma tu decisión.','Learn the screen, then make your choice.'],explain:['Explicar la pantalla','Explain the screen'],'stats-label':['Tus estadísticas','Your stats'],'str-label':['Fuerza','Strength'],'con-label':['Constitución','Constitution'],'agi-label':['Agilidad','Agility'],'str-hint':['Potencia de ataque','Attack power'],'con-hint':['Vida y defensa','Health and defense'],'agi-hint':['Iniciativa y probabilidades','Initiative and chances']}))$(id).textContent=T(...pair);
  $('guide-link').href=(en?'/':'/es/')+'combat-guide/';
  const lessonNames=[['01 · Attack, Parry y Rest','01 · Attack, Parry and Rest'],['02 · Consumible + acción','02 · Consumable + action'],['03 · La dosis del Alquimista','03 · The Alchemist’s dose'],['04 · Práctica libre','04 · Free practice']];
  [...$('lesson').options].forEach((o,i)=>o.textContent=T(...lessonNames[i]));
@@ -30,18 +37,20 @@
    $(prefix+'-status').textContent=a.ultra?'ULTRA FOCUS':a.focus?T('Focus listo · ×2','Focus ready · ×2'):T('Sin Focus','No Focus');
   }
   $('hero-name').textContent=name(0);$('round').textContent=T('Ronda ','Round ')+display.round;
+  for(const key of ['str','con','agi'])$(key+'-value').textContent=display.actors[0][key];
   $('initiative').textContent=T('Actúa primero: ','Acts first: ')+name(display.order[0]);
   $('intent-label').textContent=finished?T('Resultado','Result'):T('Hollow prepara','Hollow prepares');
   $('intent').textContent=finished?(lastResult.winner===0?T('Victoria','Victory'):T('Derrota','Defeat')):busy?T('Resolviendo…','Resolving…'):actionName(battle.intent());
   $('intent-detail').textContent=busy?T('Las acciones se resuelven por iniciativa.','Actions resolve in initiative order.'):finished?'':T('En este entrenamiento puedes ver su intención.','This training reveals its intent.');
-  document.querySelectorAll('[data-action]').forEach(b=>{b.disabled=busy||finished;b.setAttribute('aria-pressed',String(choice===b.dataset.action));b.dataset.suggested=String(!busy&&!finished&&mode!=='practice'&&b.dataset.action===suggested());});
+  document.querySelectorAll('[data-action]').forEach(b=>{b.disabled=busy||finished||!orientation.allow(b.dataset.action);b.setAttribute('aria-pressed',String(choice===b.dataset.action));b.dataset.suggested=String(!orientation.active&&!busy&&!finished&&mode!=='practice'&&b.dataset.action===suggested());});
   $('potion').hidden=!['potion','alchemist'].includes(mode);$('dose').hidden=mode!=='alchemist';$('auxiliary').hidden=finished||!['potion','alchemist'].includes(mode);
-  $('potion').disabled=busy||finished||!display.resources.potions;$('dose').disabled=busy||finished||!display.resources.doses;
+  $('potion').disabled=busy||finished||orientation.active||!display.resources.potions;$('dose').disabled=busy||finished||orientation.active||!display.resources.doses;
   for(const kind of ['potion','dose'])$(kind).setAttribute('aria-pressed',String(aux===kind));
   $('resources').textContent=T('Pociones restantes: ','Potions remaining: ')+display.resources.potions+(mode==='alchemist'?T(' · Dosis guardadas: ',' · Stored doses: ')+display.resources.doses+'/1'+T(' · Creadas: ',' · Created: ')+display.resources.created+'/2':'');
-  $('confirm').disabled=busy||finished||!choice;$('confirm').textContent=busy?T('Resolviendo la ronda…','Resolving the round…'):T('Confirmar ronda →','Confirm round →');
+  $('confirm').disabled=busy||finished||!choice||!orientation.canConfirm();$('confirm').textContent=busy?T('Resolviendo la ronda…','Resolving the round…'):T('Confirmar ronda →','Confirm round →');
   $('selection-help').textContent=busy?T('Mira cómo se resuelve tu decisión. Puedes pausar la animación.','Watch your decision resolve. You can pause the animation.'):finished?'':choice?(aux?T(aux==='potion'?'Poción preparada + ':'Dosis preparada + ',aux==='potion'?'Potion prepared + ':'Dose prepared + '):'')+actionName(choice)+'. '+({ATTACK:T('Gastas tu Focus si lo tienes.','Spends your Focus if ready.'),DEFEND:T('No consume tu Focus.','Keeps your Focus.'),REST:T('Solo cura y genera Focus si nadie te ataca.','Only heals and gains Focus if nobody attacks you.')}[choice]):T('Selecciona una acción; después confirma. Los botones no gastan nada hasta confirmar.','Choose an action, then confirm. Buttons spend nothing until you confirm.');
   $('restart').disabled=busy;$('lesson').disabled=busy;
+  $('explain').disabled=busy||finished;$('coach').hidden=orientation.active;$('goals').hidden=orientation.active;
   $('pause').textContent=scene.paused?T('Continuar animación','Resume animation'):T('Pausar animación','Pause animation');
   $('goals').replaceChildren(...battle.objectiveKeys().map(key=>{const el=document.createElement('span');const done=display.goals[key];el.className=done?'complete':'';el.textContent=(done?'✓ ':'○ ')+T(...goalNames[key]);return el;}));
   $('result').hidden=!finished;
@@ -72,22 +81,26 @@
    $('next-lesson').hidden=!battle.complete()||mode==='practice';
    $('coach').textContent=$('result-copy').textContent;log($('result-title').textContent);
   }
-  ui();if(result.finished){$('result-title').tabIndex=-1;$('result-title').focus({preventScroll:true});}
+  ui();if(result.finished){orientation.session=false;$('result-title').tabIndex=-1;$('result-title').focus({preventScroll:true});}
+  else if(orientation.session)orientation.afterRound(display.round);
  }
  async function start(){
   if(busy&&loaded)return;
+  if(orientation.active)orientation.close('reset');orientation.session=false;
   busy=true;loaded=false;mode=$('lesson').value;choice=null;aux=null;lastResult=null;scene.stopSounds();scene.queue=[];scene.current=null;
   $('load-panel').hidden=false;$('battle').hidden=true;$('retry').hidden=true;$('load-text').textContent=T('Cargando las animaciones del combate…','Loading battle animations…');$('lesson').disabled=true;$('restart').disabled=true;
   try{
    await scene.load(mode==='alchemist'?'alchemist':'guardian');
    battle=new GuardiansTutorialRules.TutorialBattle(mode);display=battle.snapshot();scene.reset(display);busy=false;loaded=true;
    $('load-panel').hidden=true;$('battle').hidden=false;$('log').replaceChildren();$('scene-label').textContent='';$('coach').textContent=hint();ui();scene.draw();
+   if(mode==='basics')orientation.begin(true);
   }catch(error){busy=false;$('load-text').textContent=T('No se pudieron cargar todas las animaciones. Reintenta cuando tengas conexión.','Some animations could not load. Retry when connected.');$('retry').hidden=false;$('lesson').disabled=false;$('restart').disabled=false;}
  }
- document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{if(busy||lastResult?.finished)return;choice=b.dataset.action;ui();}));
- for(const kind of ['potion','dose'])$(kind).onclick=()=>{if(busy||lastResult?.finished)return;aux=aux===kind?null:kind;ui();};
+ document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{if(busy||lastResult?.finished||!orientation.allow(b.dataset.action))return;choice=b.dataset.action;orientation.chose(choice);ui();}));
+ for(const kind of ['potion','dose'])$(kind).onclick=()=>{if(busy||lastResult?.finished||orientation.active)return;aux=aux===kind?null:kind;ui();};
  $('confirm').onclick=()=>{
-  if(busy||!choice||lastResult?.finished)return;
+  if(busy||!choice||lastResult?.finished||!orientation.canConfirm())return;
+  if(orientation.active)orientation.close('confirm');
   const selected=choice,queued=aux;let result;try{result=battle.resolve(selected,queued);}catch(error){$('coach').textContent=T('Revisa tu acción y el recurso disponible antes de confirmar.','Check your action and available resource before confirming.');return;}
   roundChoice=selected;busy=true;lastResult=null;scene.paused=false;
   log(T('Ronda ','Round ')+display.round+' · '+name(0)+': '+actionName(selected)+(queued?' + '+queued:'')+' · Hollow: '+actionName(result.actions[1]));
@@ -95,6 +108,7 @@
   $('battle').scrollIntoView({block:'start',behavior:'auto'});scene.play(result);
  };
  $('restart').onclick=start;$('retry').onclick=start;$('again').onclick=start;$('lesson').onchange=start;
+ $('explain').onclick=()=>{if(!busy&&!lastResult?.finished)orientation.begin(false);};
  $('next-lesson').onclick=()=>{const i=GuardiansTutorialRules.modes.indexOf(mode);$('lesson').value=GuardiansTutorialRules.modes[Math.min(i+1,3)];start();};
  $('pause').onclick=()=>{scene.paused=!scene.paused;scene.stopSounds();ui();};
  $('sound').onchange=()=>{scene.sound=$('sound').checked;if(!scene.sound)scene.stopSounds();};
@@ -103,6 +117,6 @@
  window.addEventListener('message',e=>{if(e.source!==parent||e.origin!==location.origin||e.data?.type!=='guardians-tutorial-visibility')return;scene.suspended=!e.data.visible;scene.last=0;if(scene.suspended)scene.stopSounds();});
  if(embedded){let lastHeight=0;new ResizeObserver(()=>{const height=Math.ceil($('tutorial').getBoundingClientRect().height);if(height!==lastHeight){lastHeight=height;parent.postMessage({type:'guardians-tutorial-height',height},location.origin);}}).observe($('tutorial'));}
  // Read-only diagnostics used by browser regression checks; actions still use UI.
- window.tutorialSnapshot=()=>({mode,busy,loaded,choice,aux,display:copy(display),state:battle?.snapshot(),complete:battle?.complete(),scene:{paused:scene.paused,suspended:scene.suspended,time:scene.time,modes:copy(scene.modes)}});
+ window.tutorialSnapshot=()=>({mode,busy,loaded,choice,aux,orientation:orientation.snapshot(),display:copy(display),state:battle?.snapshot(),complete:battle?.complete(),scene:{paused:scene.paused,suspended:scene.suspended,time:scene.time,modes:copy(scene.modes)}});
  start();
 })();
